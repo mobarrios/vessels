@@ -15,10 +15,26 @@ class UsersController extends Controller
 
         $this->repo     = $repo;
         $this->route    = $route;
-        $this->data['searchRoute'] = 'configs.users';
+
+        //routes
+        $this->data['indexRoute']   = 'configs.users.index';
+        $this->data['storeRoute']   = 'configs.users.store';
+        $this->data['createRoute']  = 'configs.users.create';
+        $this->data['showRoute']    = 'configs.users.show';
+        $this->data['editRoute']    = 'configs.users.edit';
+        $this->data['updateRoute']  = 'configs.users.update';
+        $this->data['destroyRoute'] = 'configs.users.destroy';
+
+        $this->indexRoute           = 'configs.users.index';
+
+        //views
+        $this->storeView   = 'configs.users.form';
+
+        //section name
         $this->data['section']     = 'Usuarios';
 
-        $this->indexRoute =  'configs.users.index';
+
+        //data paginate
         $this->paginate = 50;
     }
 

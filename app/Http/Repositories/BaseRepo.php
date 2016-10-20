@@ -9,6 +9,8 @@
 namespace App\Http\Repositories;
 
 
+use Illuminate\Http\Request;
+
 abstract class BaseRepo {
 
     protected $model;
@@ -25,42 +27,38 @@ abstract class BaseRepo {
         return $this->model->findOrFail($id);
     }
 
-    public function create($datos)
+    public function create($request)
     {
-
-        //return $this->model->create($datos->request->all());
-
         $model = new $this->model();
-        $model->fill($datos->all());
+        $model->fill($request);
         $model->save();
-
-        //$this->createCustom($datos);
 
         return $model;
-
     }
 
-    public function edit($id, $datos)
+    public function edit($id, Request $request)
     {
-
         $model = $this->model->find($id);
-        $model->fill($datos->all());
+        $model->fill($request->all());
         $model->save();
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $this->model->find($id)->delete();
     }
 
     public function ListAll()
     {
-        $qry = $this->model->get();
-        return $qry;
+       return $this->model;
     }
 
+
+
+    // search
     public function search($textSearch){
 
+        //get column to search in model repo
         $columns = $this->getColumnSearch();
 
         $q = $this->model->where('id','like','%'.$textSearch.'%');
@@ -74,10 +72,12 @@ abstract class BaseRepo {
                         $q->where($col ,'like','%'.$textSearch.'%');
                     });
                 }
-            else
+            else{
                 $q->orWhere($column ,'like','%'.$textSearch.'%');
+            }
         }
 
+        //no hago get pq lo hace en el controller para paginar
         return $q;
     }
 

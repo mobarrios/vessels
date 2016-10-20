@@ -42,10 +42,10 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="#"><i class="fa fa-caret-right"></i> Roles</a></li>
-                            <li><a href="{{route('configs.permissions')}}"><i class="fa fa-caret-right"></i> Permisos</a></li>
+                            <li><a href="{{route('configs.permissions.index')}}"><i class="fa fa-caret-right"></i> Permisos</a></li>
 
                             @permission('list.users')
-                                <li><a href="{{route("configs.users")}}"><i class="fa fa-caret-right"></i> Usuarios</a></li>
+                                <li><a href="{{route("configs.users.index")}}"><i class="fa fa-caret-right"></i> Usuarios</a></li>
                             @endpermission
 
                         </ul>

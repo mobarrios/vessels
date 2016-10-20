@@ -15,12 +15,7 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::get('home',['as'=>'home','uses'=>'HomeController@index']);
 
-    Route::group(['prefix'=>'configs'],function(){
-        Route::get('users/{search?}',['middleware'=>'permission:list.users','as'=>'configs.users','uses'=>'Configs\UsersController@getIndex']);
-        Route::get('permissions/{search?}',['middleware'=>'permission:list.users','as'=>'configs.permissions','uses'=>'Configs\PermissionsController@getIndex']);
-
-    });
-
+    require( __DIR__ .'/Routes/configsRoute.php');
 });
 
 Route::group(['prefix'=>'auth'],function(){

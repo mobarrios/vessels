@@ -15,11 +15,6 @@ class UsersRepo extends BaseRepo {
         return ['name','email'];
     }
 
-    public function listAll(){
-        return $this->model;
-    }
-
-
     public function searchByEmail($email, $password){
         return $this->model->where('email',$email)->where('password',$password)->first();
     }
