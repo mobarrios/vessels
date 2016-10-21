@@ -24,8 +24,9 @@ abstract class Controller extends BaseController
      */
     public function index(Request $request)
     {
+    
         if($request->search)
-            $model = $this->repo->search($request->search);
+            $model = $this->repo->search($request);
         else
             $model  = $this->repo->listAll();
 
@@ -98,7 +99,7 @@ abstract class Controller extends BaseController
      */
     public function destroy($id)
     {
-        //
+        $this->repo->destroy($id);
     }
 
 

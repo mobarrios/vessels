@@ -17,7 +17,7 @@ class PermissionsRepo extends BaseRepo {
 
     public function getColumnSearch(){
 
-        return ['name','slug'];
+        return ['Nombre'=>'name','Slug'=>'slug','Descripción'=>'description'];
     }
 
 

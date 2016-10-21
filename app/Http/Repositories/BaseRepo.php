@@ -56,26 +56,32 @@ abstract class BaseRepo {
 
 
     // search
-    public function search($textSearch){
+    public function search($request){
+
 
         //get column to search in model repo
-        $columns = $this->getColumnSearch();
+        //$columns = $this->getColumnSearch();
+        $columns = $request->filter;
 
-        $q = $this->model->where('id','like','%'.$textSearch.'%');
+        $q = $this->model->where('id','like','%'.$request->search.'%');
 
-        foreach ($columns as $column){
+            foreach ($columns as $column => $k){
 
-            if(is_array($column))
-                foreach ($column as $relation => $col){
+                if(is_array($k)){
 
-                    $q->orWhereHas($relation, function($q) use ($col , $textSearch){
-                        $q->where($col ,'like','%'.$textSearch.'%');
-                    });
+                    foreach ($k as $relation => $col){
+
+                        $q->orWhereHas($relation, function($q) use ($col , $request){
+                            $q->where($col ,'like','%'.$request->search.'%');
+                        });
+                    }
+                } else {
+
+                    $q->orWhere($k ,'like','%'.$request->search.'%');
                 }
-            else{
-                $q->orWhere($column ,'like','%'.$textSearch.'%');
             }
-        }
+        
+
 
         //no hago get pq lo hace en el controller para paginar
         return $q;

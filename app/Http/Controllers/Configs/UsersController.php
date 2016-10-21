@@ -10,7 +10,6 @@ use Illuminate\Routing\Route;
 
 class UsersController extends Controller
 {
-
     public function  __construct(UsersRepo $repo, Route $route){
 
         $this->repo     = $repo;
@@ -27,12 +26,17 @@ class UsersController extends Controller
 
         $this->indexRoute           = 'configs.users.index';
 
+        //url
+        $this->data['destroyUrl'] = 'configs/users/destroy/';
+
         //views
         $this->storeView   = 'configs.users.form';
 
         //section name
         $this->data['section']     = 'Usuarios';
 
+        //filter options
+        $this->data['filters']       = $this->repo->getColumnSearch();
 
         //data paginate
         $this->paginate = 50;

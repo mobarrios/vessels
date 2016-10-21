@@ -12,7 +12,7 @@ class UsersRepo extends BaseRepo {
     }
 
     public function getColumnSearch(){
-        return ['name','email'];
+        return ['Nombre'=>'name','Email'=>'email'];
     }
 
     public function searchByEmail($email, $password){
