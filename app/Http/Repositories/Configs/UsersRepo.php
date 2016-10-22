@@ -11,11 +11,38 @@ class UsersRepo extends BaseRepo {
         return new User;
     }
 
-    public function getColumnSearch(){
-        return ['Nombre'=>'name','Email'=>'email'];
+    public function getColumnSearch()
+    {
+        return ['Nombre'=>'name','Apellido'=>'last_name' ,'Email'=>'email'];
     }
 
-    public function searchByEmail($email, $password){
+    public function searchByEmail($email, $password)
+    {
         return $this->model->where('email',$email)->where('password',$password)->first();
+    }
+
+    public function getConfig(){
+
+        return [
+            //nombre de la seccion
+            'sectionName' => 'Usuarios',
+
+            //routes
+            'indexRoute'    => 'configs.users.index',
+            'storeRoute'    => 'configs.users.store',
+            'createRoute'   => 'configs.users.create',
+            'showRoute'     => 'configs.users.show',
+            'editRoute'     => 'configs.users.edit',
+            'updateRoute'   => 'configs.users.update',
+            'destroyRoute'  => 'configs.users.destroy',
+
+            //urls
+            'destroyUrl' => 'configs/users/destroy/',
+
+            //views
+            'storeView' =>  'configs.users.form',
+            'editView'  =>  'configs.users.form',
+
+        ];
     }
 }

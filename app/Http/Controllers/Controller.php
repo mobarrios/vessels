@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -15,6 +16,7 @@ abstract class Controller extends BaseController
     protected $repo;
     protected $route;
     protected $data;
+    protected $config;
 
 
     /**
@@ -24,7 +26,7 @@ abstract class Controller extends BaseController
      */
     public function index(Request $request)
     {
-    
+
         if($request->search)
             $model = $this->repo->search($request);
         else
@@ -33,7 +35,7 @@ abstract class Controller extends BaseController
 
         $this->data['models'] = $model->paginate($this->paginate);
 
-        return view($this->indexRoute)->with($this->data);
+        return view($this->config->indexRoute)->with($this->data);
     }
 
     /**
@@ -43,7 +45,7 @@ abstract class Controller extends BaseController
      */
     public function create()
     {
-        return view($this->storeView)->with($this->data);
+        return view($this->config->storeView)->with($this->data);
     }
 
     /**
@@ -55,7 +57,7 @@ abstract class Controller extends BaseController
     {
         $this->repo->create($request->all());
 
-        return redirect()->route($this->indexRoute)->withErrors(['Regitro Agregado Correctamente']);
+        return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Agregado Correctamente']);
     }
 
     /**
@@ -75,9 +77,12 @@ abstract class Controller extends BaseController
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $id = $this->route->getParameter('id');
+
+        $this->data['models'] = $this->repo->find($id);
+        return view($this->config->editView)->with($this->data);
     }
 
     /**
@@ -86,9 +91,14 @@ abstract class Controller extends BaseController
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request)
     {
-        //
+        $id = $this->route->getParameter('id');
+
+        $this->repo->udpate($id,$request);
+
+        return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Editado Correctamente']);
+
     }
 
     /**

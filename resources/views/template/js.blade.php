@@ -45,9 +45,19 @@
 
     // edit button
     $('#edit_btn').on('click',function () {
-       $('.id_destroy:checked').each(function () {
+        var route = $(this).attr('route_edit');
 
-       });
+        //valida q haya solo 1 solo elemento seleccionado
+        if($('.id_destroy:checked').length != 1) {
+            alert('Seleccionar 1(uno) elemento para editar');
+            return false;
+        }else{
+
+            //redireccion a la ruta de edicion con el id
+            window.location.href = route +'/'+$('.id_destroy:checked').val();
+
+        }
+
     });
 
 </script>

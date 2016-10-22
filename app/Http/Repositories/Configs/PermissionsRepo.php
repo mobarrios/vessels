@@ -21,6 +21,29 @@ class PermissionsRepo extends BaseRepo {
     }
 
 
+    public function getConfig(){
 
+        return [
+            //nombre de la seccion
+            'sectionName' => 'Permisos',
+
+            //routes
+            'indexRoute'    => 'configs.permissions.index',
+            'storeRoute'    => 'configs.permissions.store',
+            'createRoute'   => 'configs.permissions.create',
+            'showRoute'     => 'configs.permissions.show',
+            'editRoute'     => 'configs.permissions.edit',
+            'updateRoute'   => 'configs.permissions.update',
+            'destroyRoute'  => 'configs.permissions.destroy',
+
+            //urls
+            'destroyUrl' => 'configs/permissions/destroy/',
+
+            //views
+            'storeView' =>  'configs.permissions.form',
+            'editView'  =>  'configs.permissions.form',
+
+        ];
+    }
 
 }

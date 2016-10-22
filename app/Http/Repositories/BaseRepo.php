@@ -36,7 +36,7 @@ abstract class BaseRepo {
         return $model;
     }
 
-    public function edit($id, Request $request)
+    public function udpate($id,$request)
     {
         $model = $this->model->find($id);
         $model->fill($request->all());
@@ -80,7 +80,7 @@ abstract class BaseRepo {
                     $q->orWhere($k ,'like','%'.$request->search.'%');
                 }
             }
-        
+
 
 
         //no hago get pq lo hace en el controller para paginar

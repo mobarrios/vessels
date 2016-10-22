@@ -4,7 +4,7 @@
         <!-- Default box -->
         <div class="col-xs-12">
             <div class="box">
-                {!! Form::open(['route'=> $storeRoute]) !!}
+
                 <div class="box-header with-border">
                     <h3 class="box-title">@yield('form_title')</h3>
                 </div>
