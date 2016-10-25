@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Configs;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Configs\UsersRepo;
+use App\Http\Repositories\Configs\RolesRepo;
+use App\Http\Repositories\Configs\UsersRepo as Repo;
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +14,7 @@ use Illuminate\Support\Collection as Collection;
 
 class UsersController extends Controller
 {
-    public function  __construct(UsersRepo $repo, Route $route){
+    public function  __construct(Repo $repo, Route $route , RolesRepo $roles){
 
         $this->repo     = $repo;
         $this->route    = $route;
@@ -25,6 +27,10 @@ class UsersController extends Controller
 
         //data paginate
         $this->paginate = 50;
+
+        //data select
+        $this->data['roles']    = $roles->listsAll();
+
     }
 
 
@@ -38,7 +44,7 @@ class UsersController extends Controller
             $request['password'] = Hash::make($request->password);
 
         $this->repo->udpate($id,$request);
-
+        
         return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Editado Correctamente']);
 
     }

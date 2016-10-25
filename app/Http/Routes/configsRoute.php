@@ -30,8 +30,22 @@ Route::group(['prefix'=>'configs'],function(){
 
     });
 
+    Route::group(['prefix'=>'roles'],function(){
+
+        Route::get('/destroy/{id?}',   ['as'=>'configs.roles.destroy','uses'=>'Configs\RolesController@destroy']);
+        Route::get('/edit/{id?}',      ['as'=>'configs.roles.edit','uses'=>'Configs\RolesController@edit']);
+        Route::post('/update/{id?}',   ['as'=>'configs.roles.update','uses'=>'Configs\RolesController@update']);
+
+        Route::get('/create',    ['as'=>'configs.roles.create','uses'=>'Configs\RolesController@create']);
+        Route::post('/store',    ['as'=>'configs.roles.store','uses'=>'Configs\RolesController@store']);
+        Route::get('/show',      ['as'=>'configs.roles.show','uses'=>'Configs\RolesController@show']);
+        Route::get('/index/{search?}',['middleware'=>'permission:list.users','as'=>'configs.roles.index','uses'=>'Configs\RolesController@index']);
+
+    });
 
 
     Route::get('permissions/{search?}',['middleware'=>'permission:list.users','as'=>'configs.permissions.index','uses'=>'Configs\PermissionsController@index']);
 
+
+ 
 });

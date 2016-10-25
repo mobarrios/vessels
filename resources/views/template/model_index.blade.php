@@ -14,8 +14,8 @@
                                 <button id="edit_btn" route_edit="{{route($routes->editRoute)}}" class="btn btn-default" title="Editar" ><i class="fa fa-edit"></i></button>
                             </div>
                             <div class="btn-group btn-group-sm">
-                                <a href="" class="btn btn-default" title="Exportar Excel"><i class="fa fa-file-excel-o"></i></a>
-                                <a href="" class="btn btn-default" title="Exportar PDF"><i class="fa fa-file-pdf-o"></i></a>
+                                <a href="{{route('utilities.exportToExcel')}}" class="btn btn-default" title="Exportar Excel"><i class="fa bg-success fa-file-excel-o"></i></a>
+                                <a href="{{route('utilities.exportToPdf')}}" target="_blank" class="btn btn-default" title="Exportar PDF"><i class="fa bg-danger fa-file-pdf-o"></i></a>
                             </div>
                         </div>
                     </div>

@@ -72,12 +72,12 @@ class AuthController extends Controller
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember))
            // if(empty($user) || is_null($user))
-                return redirect()->back()->withErrors(['Usuario Inválido!']);
+                return redirect()->back()->withInput()->withErrors(['Usuario Inválido!']);
            // else
                 // Login de usuario
              //   Auth::login($user, false);
 
-        return redirect()->route('home');
+        return redirect()->intended('home');
 
 
 

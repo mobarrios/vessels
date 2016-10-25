@@ -4,7 +4,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
-            <li>
+            <li class="active">
                 <a href="{{route('home')}}">
                     <i class="fa fa-home"></i> <span>HOME</span>
                     <span class="pull-right-container">
@@ -13,46 +13,44 @@
                 </a>
             </li>
 
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-gear"></i> <span>Configuración</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="#"><i class="fa fa-caret-right"></i> Empresa
-                        <span class="pull-right-container">
-                              <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Datos</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Sucursales</a></li>
-
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-caret-right"></i> Accesos
+            @permission('configs.access')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-gear"></i> <span>Configuración</span>
                             <span class="pull-right-container">
                               <i class="fa fa-angle-left pull-right"></i>
                             </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Roles</a></li>
-                            <li><a href="{{route('configs.permissions.index')}}"><i class="fa fa-caret-right"></i> Permisos</a></li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-caret-right"></i> Empresa
+                            <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="#"><i class="fa fa-caret-right"></i> Datos</a></li>
+                                <li><a href="#"><i class="fa fa-caret-right"></i> Sucursales</a></li>
 
-                            @permission('list.users')
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-caret-right"></i> Accesos
+                                <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{route('configs.roles.index')}}"><i class="fa fa-caret-right"></i> Roles</a></li>
+                                <li><a href="{{route('configs.permissions.index')}}"><i class="fa fa-caret-right"></i> Permisos</a></li>
                                 <li><a href="{{route("configs.users.index")}}"><i class="fa fa-caret-right"></i> Usuarios</a></li>
-                            @endpermission
+                            </ul>
+                        </li>
+                        <li><a href="#"><i class="fa fa-caret-right"></i>Sistema</a></li>
+                    </ul>
+                </li>
+            @endpermission
 
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i>Sistema</a></li>
-                </ul>
-            </li>
 
 
         </ul>

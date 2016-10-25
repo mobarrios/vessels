@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Session;
+
 
 
 abstract class Controller extends BaseController
@@ -32,6 +34,7 @@ abstract class Controller extends BaseController
         else
             $model  = $this->repo->listAll();
 
+        Session::put('export',$model->get());
 
         $this->data['models'] = $model->paginate($this->paginate);
 

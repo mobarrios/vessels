@@ -10,15 +10,12 @@ class PermissionsRepo extends BaseRepo {
         return new Permission();
     }
 
-    public function listAll(){
-
-      return $this->model;
-    }
 
     public function getColumnSearch(){
 
         return ['Nombre'=>'name','Slug'=>'slug','Descripción'=>'description'];
     }
+
 
 
     public function getConfig(){

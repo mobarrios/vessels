@@ -16,26 +16,28 @@
               {!! Form::text('name', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-                {!! Form::label('Apellido') !!}
-                {!! Form::text('last_name', null, ['class'=>'form-control']) !!}
+                {!! Form::label('Slug') !!}
+                {!! Form::text('slug', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-                {!! Form::label('Email') !!}
-                {!! Form::email('email', null, ['class'=>'form-control']) !!}
+                {!! Form::label('Descripción') !!}
+                {!! Form::text('description', null, ['class'=>'form-control']) !!}
+            </div>
+            <div class="col-xs-6 form-group">
+                {!! Form::label('Nivel') !!}
+                {!! Form::text('level', null, ['class'=>'form-control']) !!}
             </div>
 
             <div class="col-xs-6 form-group">
-                {!! Form::label('Pasword') !!}
-                {!! Form::password('password', ['class'=>'form-control']) !!}
+                {!! Form::label('Permisos') !!}
+
+                @foreach($permissions as $permission)
+                        <input type="checkbox"  name="permissions_checkbox[]"  value="{{$permission->id}}">
+                        {{$permission->name}}
+                    <br>
+                @endforeach
+
             </div>
 
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Roles') !!}
-                    @if(isset($models))
-                        {!! Form::select('roles_id',$roles, $models->roles->first()->id, ['class'=>'form-control']) !!}
-                    @else
-                        {!! Form::select('roles_id',$roles, null, ['class'=>'form-control']) !!}
-                @endif
-            </div>
     @endsection
 

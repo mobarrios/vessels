@@ -2,6 +2,7 @@
 
 namespace App\Entities\Configs;
 
+use Bican\Roles\Models\Role;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -41,5 +42,10 @@ class User extends Model implements AuthenticatableContract,  CanResetPasswordCo
     public function getFullNameAttribute(){
 
         return $this->attributes['last_name'] .' '.$this->attributes['name'] ;
+    }
+
+    public function Roles()
+    {
+        return $this->belongsToMany(Role::class,'role_user');
     }
 }

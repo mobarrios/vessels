@@ -16,6 +16,12 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('home',['as'=>'home','uses'=>'HomeController@index']);
 
     require( __DIR__ .'/Routes/configsRoute.php');
+
+    //export to excel
+    Route::get('/excel',['as' => 'utilities.exportToExcel', 'uses'=>'Utilities\UtilitiesController@exportToExcel']);
+
+    //export to pdf
+    Route::get('/pdf',['as' => 'utilities.exportToPdf', 'uses'=>'Utilities\UtilitiesController@exportToPdf']);
 });
 
 Route::group(['prefix'=>'auth'],function(){

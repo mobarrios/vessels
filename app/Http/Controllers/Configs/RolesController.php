@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Configs;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Configs\PermissionsRepo as Repo;
+use App\Http\Repositories\Configs\PermissionsRepo;
+use App\Http\Repositories\Configs\RolesRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
 
-class PermissionsController extends Controller
+class RolesController extends Controller
 {
-    public function  __construct(Repo $repo, Route $route){
+    public function  __construct(Repo $repo, Route $route, PermissionsRepo $permission){
 
         $this->repo     = $repo;
         $this->route    = $route;
@@ -23,6 +24,9 @@ class PermissionsController extends Controller
 
         //data paginate
         $this->paginate = 50;
+
+        //data select
+        $this->data['permissions']    = $permission->ListAll()->get();
     }
 
     

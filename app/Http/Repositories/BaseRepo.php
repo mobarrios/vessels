@@ -32,8 +32,7 @@ abstract class BaseRepo {
         $model = new $this->model();
         $model->fill($request);
         $model->save();
-
-        return $model;
+        
     }
 
     public function udpate($id,$request)
@@ -80,9 +79,7 @@ abstract class BaseRepo {
                     $q->orWhere($k ,'like','%'.$request->search.'%');
                 }
             }
-
-
-
+        
         //no hago get pq lo hace en el controller para paginar
         return $q;
     }
