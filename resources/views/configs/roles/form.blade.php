@@ -31,13 +31,30 @@
             <div class="col-xs-6 form-group">
                 {!! Form::label('Permisos') !!}
 
-                @foreach($permissions as $permission)
-                        <input type="checkbox"  name="permissions_checkbox[]"  value="{{$permission->id}}">
-                        {{$permission->name}}
-                    <br>
+                <table class="table ">
+
+                        @foreach($permissions as $permission)
+                        <tr>
+                            <td>
+                        @if(isset($models))
+                            @if($permission->getPermissonsByRoles($models->slug) == 0 )
+                                <input type="checkbox" name="permissions_checkbox[]"   value="{{$permission->id}}">
+                            @else
+                                <input type="checkbox"  name="permissions_checkbox[]"  checked value="{{$permission->id}}">
+                            @endif
+                        @else
+                                <input type="checkbox"  name="permissions_checkbox[]"   value="{{$permission->id}}">
+                        @endif
+
+
+
+
+                   </td>
+                   <td> {{$permission->name}} </td>
+                </tr>
                 @endforeach
+                </table>
+                </div>
 
-            </div>
-
-    @endsection
+@endsection
 

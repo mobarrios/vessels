@@ -58,7 +58,7 @@ abstract class Controller extends BaseController
      */
     public function store(Request $request)
     {
-        $this->repo->create($request->all());
+        $this->repo->create($request);
 
         return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Agregado Correctamente']);
     }

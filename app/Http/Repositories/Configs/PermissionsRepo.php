@@ -16,6 +16,10 @@ class PermissionsRepo extends BaseRepo {
         return ['Nombre'=>'name','Slug'=>'slug','Descripción'=>'description'];
     }
 
+    public function getPermissonsByRoles(){
+
+        return $this->attributes['created_at'];
+    }
 
 
     public function getConfig(){

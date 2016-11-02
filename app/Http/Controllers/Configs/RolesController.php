@@ -27,6 +27,8 @@ class RolesController extends Controller
 
         //data select
         $this->data['permissions']    = $permission->ListAll()->get();
+
+        $this->data['permissionsRepo'] = $permission;
     }
 
     

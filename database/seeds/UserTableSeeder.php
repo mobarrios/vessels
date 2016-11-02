@@ -15,13 +15,13 @@ class UserTableSeeder extends Seeder
             [
                 'id'    => 1,
                 'name'=>'root',
-                'email'=>'root@base.com',
+                'email'=>'root@admin.com',
                 'password'=> \Illuminate\Support\Facades\Hash::make('yuna'),
 
             ],[
                 'id'    => 2,
                 'name'=>'admin',
-                'email'=>'admin@base.com',
+                'email'=>'admin@admin.com',
                 'password'=> \Illuminate\Support\Facades\Hash::make('1234'),
 
             ]]);

@@ -2,6 +2,7 @@
 
 namespace App\Entities\Configs;
 
+use App\Entities\Entity;
 use Bican\Roles\Models\Role;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
 
-class User extends Model implements AuthenticatableContract,  CanResetPasswordContract, HasRoleAndPermissionContract
+class User extends Entity implements AuthenticatableContract,  CanResetPasswordContract, HasRoleAndPermissionContract
 {
     use Authenticatable, CanResetPassword, HasRoleAndPermission;
 
@@ -39,8 +40,8 @@ class User extends Model implements AuthenticatableContract,  CanResetPasswordCo
     protected $hidden = ['password', 'remember_token'];
 
 
-    public function getFullNameAttribute(){
-
+    public function getFullNameAttribute()
+    {
         return $this->attributes['last_name'] .' '.$this->attributes['name'] ;
     }
 
@@ -48,4 +49,6 @@ class User extends Model implements AuthenticatableContract,  CanResetPasswordCo
     {
         return $this->belongsToMany(Role::class,'role_user');
     }
+
+
 }

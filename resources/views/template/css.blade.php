@@ -13,3 +13,12 @@
 <link rel="stylesheet" href="vendors/LTE/plugins/iCheck/square/blue.css">
 
 <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+
+
+
+<style>
+    body{
+
+        font-size:12px !important;
+    }
+</style>

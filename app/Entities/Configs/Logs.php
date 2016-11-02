@@ -1,0 +1,18 @@
+<?php
+namespace App\Entities\Configs;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Logs extends Model
+{
+    protected $fillable = ['user_id','log'];
+
+    public function logueable(){
+
+        return $this->morphTo();
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+}

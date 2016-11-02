@@ -9,15 +9,20 @@
 namespace App\Http\Repositories;
 
 
+use App\Http\Helpers\ImagesHelper;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 abstract class BaseRepo {
 
     protected $model;
+    protected $image;
 
-    public function __construct()
+    public function __construct(ImagesHelper $imagesHelper)
     {
         $this->model = $this->getModel();
+        $this->image = $imagesHelper;
     }
 
     public abstract function getModel();
@@ -30,9 +35,22 @@ abstract class BaseRepo {
     public function create($request)
     {
         $model = new $this->model();
-        $model->fill($request);
+        $model->fill($request->all());
         $model->save();
-        
+
+        //guarda log
+        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Create Record.']);
+
+        //guarda imagenes
+        if(isset($request->image))
+            if($request->image != '') {
+                $time = new DateTime();
+                $name = $time.$request->image->getClientOriginalName();
+
+                $this->image->upload( $name , $request->file('image'), $this->getConfig()['imagesPath']);
+                $model->images()->create(['path' => $this->getConfig()['imagesPath'] . $name]);
+            }
+
     }
 
     public function udpate($id,$request)
@@ -40,11 +58,23 @@ abstract class BaseRepo {
         $model = $this->model->find($id);
         $model->fill($request->all());
         $model->save();
+
+        //guarda log
+        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Update Record.']);
+
     }
 
     public function destroy($id)
     {
-        $this->model->find($id)->delete();
+        $model = $this->model->find($id);
+        $model->delete();
+
+        //guarda log
+        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Deleted Record.']);
+
+        //elimina images
+        $model->images()->delete();
+
     }
 
     public function ListAll()
@@ -56,7 +86,6 @@ abstract class BaseRepo {
 
     // search
     public function search($request){
-
 
         //get column to search in model repo
         //$columns = $this->getColumnSearch();

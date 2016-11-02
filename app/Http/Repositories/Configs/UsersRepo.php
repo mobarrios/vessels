@@ -2,7 +2,10 @@
 namespace App\Http\Repositories\Configs;
 
 use App\Entities\Configs\User;
+use App\Helpers\ImagesHelper;
 use App\Http\Repositories\BaseRepo;
+use Faker\Provider\DateTime;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersRepo extends BaseRepo {
@@ -23,12 +26,38 @@ class UsersRepo extends BaseRepo {
         $model->save();
 
         $model->Roles()->sync([$request->roles_id]);
+        
+        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Updated Record.']);
+
+        if(isset($request->image))
+            if($request->image != '') {
+                $this->image->upload($request->image->getClientOriginalName(), $request->file('image'), $this->getConfig()['imagesPath']);
+
+                $model->images();
+                $model->images()->create(['path' => $this->getConfig()['imagesPath'] . $request->image->getClientOriginalName()]);
+            }
+
     }
 
     public function create($request)
     {
-        $this->model->create($request)->roles()->attach($request['roles_id']);
 
+        $model = new $this->model();
+        $model->fill($request->all());
+        $model->save();
+
+        $model->roles()->attach($request['roles_id']);
+        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Create Record.']);
+
+
+        if(isset($request->image))
+            if($request->image != '') {
+                $time = new DateTime();
+                $name = $time.$request->image->getClientOriginalName();
+
+                $this->image->upload($name, $request->file('image'), $this->getConfig()['imagesPath']);
+                $model->images()->create(['path' => $this->getConfig()['imagesPath'] . $request->image->getClientOriginalName()]);
+            }
     }
 
 
@@ -58,6 +87,10 @@ class UsersRepo extends BaseRepo {
             //views
             'storeView' =>  'configs.users.form',
             'editView'  =>  'configs.users.form',
+
+            //images
+            'imagesPath' =>  'uploads/users/img/',
+
 
         ];
     }

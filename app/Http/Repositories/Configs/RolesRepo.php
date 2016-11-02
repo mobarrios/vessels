@@ -21,6 +21,34 @@ class RolesRepo extends BaseRepo {
     }
 
 
+    public function create($request)
+    {
+        $model = new $this->model();
+        $model->fill($request);
+        $model->save();
+
+        if(isset($request->permissions_checkbox))
+            foreach ($request->permissions_checkbox as $item) {
+                $model->attachPermission($item);
+            }
+    }
+
+    public function udpate($id,$request)
+    {
+        $model = $this->model->find($id);
+        $model->fill($request->all());
+        $model->save();
+
+        $model->detachAllPermissions();
+
+        if(isset($request->permissions_checkbox))
+            foreach ($request->permissions_checkbox as $item) {
+                $model->attachPermission($item);
+            }
+    }
+
+
+    //----- configs
     public function getColumnSearch(){
 
         return ['Nombre'=>'name','Slug'=>'slug','Descripción'=>'description','Nivel'=>'level'];

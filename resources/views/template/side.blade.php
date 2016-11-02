@@ -13,7 +13,7 @@
                 </a>
             </li>
 
-            @permission('configs.access')
+            @permission('list.configs')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gear"></i> <span>Configuración</span>
@@ -46,6 +46,7 @@
                                 <li><a href="{{route("configs.users.index")}}"><i class="fa fa-caret-right"></i> Usuarios</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{route('configs.logs.index')}}"><i class="fa fa-caret-right"></i>Logs</a></li>
                         <li><a href="#"><i class="fa fa-caret-right"></i>Sistema</a></li>
                     </ul>
                 </li>

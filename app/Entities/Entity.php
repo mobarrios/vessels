@@ -8,21 +8,26 @@
 
 namespace App\Entities;
 
+use App\Entities\Configs\Logs;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class Entity extends Model {
 
+    use SoftDeletes;
+
 
     public function __construct()
     {
+        /*
         if(Auth::check()){
-
             DB::setDefaultConnection('mysql');
             Config::set('database.connections.mysql.database', Auth::user()->db);
         }
+        */
     }
 
     public static function getClass(){
@@ -30,7 +35,7 @@ class Entity extends Model {
         return get_class(new static);
     }
 
-
+    /*
     public function getImagesAttribute(){
 
         $id      = $this->attributes['id'];
@@ -41,10 +46,20 @@ class Entity extends Model {
         if(!is_null($image)){
             return $image;
         }
-
-
     }
+ */
 
+
+        //Polymorph
+        public function logs()
+        {
+            return $this->morphMany('App\Entities\Configs\Logs','logeable');
+        }
+
+        public function images()
+        {
+            return $this->morphMany('App\Entities\Configs\Images','imageable');
+        }
 
 
 }

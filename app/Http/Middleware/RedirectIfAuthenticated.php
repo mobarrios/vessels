@@ -35,7 +35,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         if ($this->auth->check()) {
-            return intended('home');
+            return redirect()->intended('home');
         }
 
         return $next($request);
