@@ -2,18 +2,21 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{$section or ''}}
-            <small>Bienvenido!</small>
-
+            {{$config->sectionName or ''}}
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            <li class="active">Mailbox</li>
-        </ol>
+
     </section>
     <!-- Main content -->
     <section class="content">
-
+        <ol class="breadcrumb " style="background-color: white">
+            <li>
+                <a href="{{route('home')}}">Home</a>
+            </li>
+            <li>
+                <a href="{{route($config->indexRoute)}}">{{$config->sectionName}}</a>
+            </li>
+            <li class="active">{{$activeBread}}</li>
+        </ol>
         @include('template.messages')
 
 

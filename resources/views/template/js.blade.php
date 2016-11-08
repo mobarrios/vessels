@@ -31,16 +31,19 @@
     // table list checkbox to destroy
     $('.destroy_btn').on('click',function(){
 
-        var url = $(this).attr('url_destroy');
+        if(confirm('Eliminar Registro?')){
+            var url = $(this).attr('url_destroy');
 
-        $("input:checkbox:checked").each(function() {
-            var id = $(this).val();
+            $("input:checkbox:checked").each(function() {
+                var id = $(this).val();
 
-            $.ajax(url + id);
+                $.ajax(url + id);
 
-            location.reload();
-        });
-
+                location.reload();
+            });
+        }else{
+            return false;
+        }
     });
 
     // edit button

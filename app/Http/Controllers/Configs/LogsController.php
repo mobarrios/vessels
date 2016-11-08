@@ -11,8 +11,9 @@ use Illuminate\Routing\Route;
 
 class LogsController extends Controller
 {
-    public function  __construct(Repo $repo, Route $route, PermissionsRepo $permission){
+    public function  __construct(Repo $repo, Route $route, PermissionsRepo $permission, Request $request){
 
+        $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
 

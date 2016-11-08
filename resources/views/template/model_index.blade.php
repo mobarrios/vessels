@@ -9,9 +9,9 @@
                         <div class="row pull-left box-tools ">
                             <button id="check_all" type="button" class="btn btn-sm btn-default" data-toggle="button" aria-pressed="false"><i class="fa fa-check-square-o"></i></button>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{route($routes->createRoute)}}" class="btn btn-default" title="Nuevo"><i class="fa fa-plus-square-o"></i></a>
-                                <button class="destroy_btn btn btn-default" url_destroy="{{$routes->destroyUrl}}" title="Borrar"><i class="fa fa-minus-square-o"></i></button>
-                                <button id="edit_btn" route_edit="{{route($routes->editRoute)}}" class="btn btn-default" title="Editar" ><i class="fa fa-edit"></i></button>
+                                <a href="{{route($config->createRoute)}}" class="btn btn-default" title="Nuevo"><i class="fa fa-plus-square-o"></i></a>
+                                <button class="destroy_btn btn btn-default" url_destroy="{{$config->destroyUrl}}" title="Borrar"><i class="fa fa-minus-square-o"></i></button>
+                                <button id="edit_btn" route_edit="{{route($config->editRoute)}}" class="btn btn-default" title="Editar" ><i class="fa fa-edit"></i></button>
                             </div>
                             <div class="btn-group btn-group-sm">
                                 <a href="{{route('utilities.exportToExcel')}}" class="btn btn-default" title="Exportar Excel"><i class="fa bg-success fa-file-excel-o"></i></a>
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 ">
-                        {!! Form::open(['route'=>$routes->indexRoute,'method'=>'GET']) !!}
+                        {!! Form::open(['route'=>$config->indexRoute,'method'=>'GET']) !!}
 
                         <div class="input-group input-group-sm" >
                             <input type="text" name="search" class="form-control pull-right" placeholder="Search">

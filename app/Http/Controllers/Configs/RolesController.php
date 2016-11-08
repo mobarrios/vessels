@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Configs;
 
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\PermissionsRepo;
 use App\Http\Repositories\Configs\RolesRepo as Repo;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+
 
 
 class RolesController extends Controller
 {
-    public function  __construct(Repo $repo, Route $route, PermissionsRepo $permission){
+    public function  __construct(Repo $repo, Route $route, PermissionsRepo $permission, Request $request){
 
+        $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
 

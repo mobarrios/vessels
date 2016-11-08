@@ -59,6 +59,20 @@ Route::group(['middleware'=>'permission:list.configs','prefix'=>'configs'],funct
     });
 
 
+    Route::group(['prefix'=>'branches'],function(){
+
+        Route::get('/destroy/{id?}',   ['as'=>'configs.branches.destroy','uses'=>'Configs\BranchesController@destroy']);
+        Route::get('/edit/{id?}',      ['as'=>'configs.branches.edit','uses'=>'Configs\BranchesController@edit']);
+        Route::post('/update/{id?}',   ['as'=>'configs.branches.update','uses'=>'Configs\BranchesController@update']);
+
+        Route::get('/create',           ['as'=>'configs.branches.create','uses'=>'Configs\BranchesController@create']);
+        Route::post('/store',           ['as'=>'configs.branches.store','uses'=>'Configs\BranchesController@store']);
+        Route::get('/show',             ['as'=>'configs.branches.show','uses'=>'Configs\BranchesController@show']);
+        Route::get('/index/{search?}',  ['as'=>'configs.branches.index','uses'=>'Configs\BranchesController@index']);
+
+    });
+
+
     Route::get('permissions/{search?}',['as'=>'configs.permissions.index','uses'=>'Configs\PermissionsController@index']);
 
 

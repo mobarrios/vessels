@@ -23,31 +23,31 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="#"><i class="fa fa-caret-right"></i> Empresa
-                            <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-caret-right"></i> Datos</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i> Sucursales</a></li>
-
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-caret-right"></i> Accesos
+                            <a href="#"><span>Empresa</span>
                                 <span class="pull-right-container">
                                   <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="{{route('configs.roles.index')}}"><i class="fa fa-caret-right"></i> Roles</a></li>
-                                <li><a href="{{route('configs.permissions.index')}}"><i class="fa fa-caret-right"></i> Permisos</a></li>
-                                <li><a href="{{route("configs.users.index")}}"><i class="fa fa-caret-right"></i> Usuarios</a></li>
+                                <li><a href="#"><span>Datos</span> </a></li>
+                                <li><a href="{{route('configs.branches.index')}}"><span> Sucursales</span></a></li>
+
                             </ul>
                         </li>
-                        <li><a href="{{route('configs.logs.index')}}"><i class="fa fa-caret-right"></i>Logs</a></li>
-                        <li><a href="#"><i class="fa fa-caret-right"></i>Sistema</a></li>
+                        <li>
+                            <a href="#"><span> Accesos </span>
+                                <span class="pull-right-container">
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{route('configs.roles.index')}}"><span>Roles</span> </a></li>
+                                <li><a href="{{route('configs.permissions.index')}}"><span> Permisos</span> </a></li>
+                                <li><a href="{{route("configs.users.index")}}"><span> Usuarios</span> </a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
+                        <li><a href="#"><span>Sistema</span></a></li>
                     </ul>
                 </li>
             @endpermission

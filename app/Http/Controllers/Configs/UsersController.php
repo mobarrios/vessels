@@ -10,43 +10,67 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Hash;
 
-use Illuminate\Support\Collection as Collection;
-
 class UsersController extends Controller
 {
-    public function  __construct(Repo $repo, Route $route , RolesRepo $roles){
 
+    public function  __construct(Repo $repo, Route $route , RolesRepo $rolesRepo , Request $request)
+    {
+        $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
+        $this->rolesRepo = $rolesRepo;
 
-        $this->config = (object)$repo->getConfig();
-        $this->data['routes'] = $this->config;
 
         //filter options
-        $this->data['filters']       = $this->repo->getColumnSearch();
+        $this->data['filters']   = $this->getColumnSearch();
 
         //data paginate
         $this->paginate = 50;
 
         //data select
-        $this->data['roles']    = $roles->listsAll();
+        $this->data['roles']    = $rolesRepo->listsAll();
+
+        //configs
+        $this->data['config']  =  $this->getConfig();
 
     }
 
 
-    public function update(Request $request)
+        //----- configs
+        public function getColumnSearch()
+        {
+            return ['Nombre'=>'name','Apellido'=>'last_name' ,'Email'=>'email'];
+        }
+
+        public function configs()
+        {
+            $config['section']      = 'Usuarios';
+            $config['routes']       = 'configs.users';
+            $config['views']        = 'configs.users';
+            $config['urlDestroy']   = 'configs/users/destroy/';
+            $config['imagesPath']   = 'uploads/users/images/';
+
+            return (object)$config;
+        }
+
+
+
+/*
+
+    public function update()
     {
         $id = $this->route->getParameter('id');
-        
-        if(empty($request->password))
-            $request->offsetUnset('password');
-        else
-            $request['password'] = Hash::make($request->password);
 
-        $this->repo->udpate($id,$request);
-        
+        if(empty($this->request->password))
+            $this->request->offsetUnset('password');
+        else
+            $this->request['password'] = Hash::make($this->request->password);
+
+        $this->repo->udpate($id,$this->request);
+
         return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Editado Correctamente']);
 
     }
-    
+*/
+
 }

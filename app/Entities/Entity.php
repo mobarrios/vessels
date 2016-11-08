@@ -61,5 +61,10 @@ class Entity extends Model {
             return $this->morphMany('App\Entities\Configs\Images','imageable');
         }
 
+        public function brancheables()
+        {
+            return $this->morphMany('App\Entities\Configs\Brancheables','entities');
+        }
+
 
 }

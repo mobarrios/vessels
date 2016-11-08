@@ -10,8 +10,9 @@ use Illuminate\Routing\Route;
 
 class PermissionsController extends Controller
 {
-    public function  __construct(Repo $repo, Route $route){
+    public function  __construct(Repo $repo, Route $route, PermissionsRepo $permission, Request $request){
 
+        $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
 

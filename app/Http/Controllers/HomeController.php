@@ -4,20 +4,15 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Repositories\Configs\UsersRepo;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-
 
 class HomeController extends Controller
 {
 
-
-
-    public function index(Request $request)
+    public function index()
     {
+        $this->data['config'] = (object)['sectionName'=>'Home'];
 
-        return view('home');
+        return view('home')->with($this->data);
     }
-    
+
 }

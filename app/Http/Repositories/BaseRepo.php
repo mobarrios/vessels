@@ -9,89 +9,84 @@
 namespace App\Http\Repositories;
 
 
-use App\Http\Helpers\ImagesHelper;
-
-use Illuminate\Http\Request;
+use App\Entities\Configs\Brancheables;
+use App\Entities\Configs\Logs;
 use Illuminate\Support\Facades\Auth;
 
 abstract class BaseRepo {
 
     protected $model;
-    protected $image;
 
-    public function __construct(ImagesHelper $imagesHelper)
+    public function __construct()
     {
         $this->model = $this->getModel();
-        $this->image = $imagesHelper;
     }
 
     public abstract function getModel();
 
-    public function find($id)
-    {
-        return $this->model->findOrFail($id);
-    }
-
-    public function create($request)
+    public function create($data)
     {
         $model = new $this->model();
-        $model->fill($request->all());
+        $model->fill($data->all());
         $model->save();
 
+      
         //guarda log
-        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Create Record.']);
-
-        //guarda imagenes
-        if(isset($request->image))
-            if($request->image != '') {
-                $time = new DateTime();
-                $name = $time.$request->image->getClientOriginalName();
-
-                $this->image->upload( $name , $request->file('image'), $this->getConfig()['imagesPath']);
-                $model->images()->create(['path' => $this->getConfig()['imagesPath'] . $name]);
-            }
-
+        if($this->is_logueable)
+            $this->createLog($model, 1);
+        
+        return $model;
     }
 
-    public function udpate($id,$request)
+
+    public function update($id,$data)
     {
         $model = $this->model->find($id);
-        $model->fill($request->all());
+        $model->fill($data->all());
         $model->save();
 
         //guarda log
-        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Update Record.']);
+        $this->createLog($model, 3);
 
+        return $model;
     }
+
 
     public function destroy($id)
     {
         $model = $this->model->find($id);
         $model->delete();
 
-        //guarda log
-        $model->logs()->create(['user_id'=> Auth::user()->id ,'log'=>'Deleted Record.']);
-
         //elimina images
         $model->images()->delete();
 
+        //guarda log
+        $this->createLog($model, 2);
+
+        return $model;
     }
+
+
 
     public function ListAll()
     {
        return $this->model;
     }
 
+    public function find($id)
+    {
+        return $this->model->findOrFail($id);
+    }
 
 
     // search
-    public function search($request){
-
+    public function search($data)
+    {
         //get column to search in model repo
         //$columns = $this->getColumnSearch();
-        $columns = $request->filter;
+        $columns = $data->filter;
 
-        $q = $this->model->where('id','like','%'.$request->search.'%');
+        $q = $this->model->where('id','like','%'.$data->search.'%');
 
             foreach ($columns as $column => $k){
 
@@ -99,13 +94,13 @@ abstract class BaseRepo {
 
                     foreach ($k as $relation => $col){
 
-                        $q->orWhereHas($relation, function($q) use ($col , $request){
-                            $q->where($col ,'like','%'.$request->search.'%');
+                        $q->orWhereHas($relation, function($q) use ($col , $data){
+                            $q->where($col ,'like','%'.$data->search.'%');
                         });
                     }
                 } else {
 
-                    $q->orWhere($k ,'like','%'.$request->search.'%');
+                    $q->orWhere($k ,'like','%'.$data->search.'%');
                 }
             }
         
@@ -113,6 +108,28 @@ abstract class BaseRepo {
         return $q;
     }
 
+
+    public function createLog($model , $log)
+    {
+        $logData = config('logs.'.$log);
+
+        $log            = new Logs();
+        $log->user_id   = Auth::user()->id ;
+        $log->log       = $logData;
+        $log->save();
+
+        $model->logs()->save($log);
+    }
+
+
+    public function createBrancheables( $model , $branches_id)
+    {
+        $brancheable =  new Brancheables(['branches_id' => $branches_id]);
+
+        $model->brancheables()->create($brancheable);
+    }
+
+    
 
 
 }

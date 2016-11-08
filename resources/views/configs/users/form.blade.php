@@ -6,9 +6,9 @@
 
     @section('form_inputs')
         @if(isset($models))
-            {!! Form::model($models,['route'=> [$routes->updateRoute,$models->id] , 'files' =>'true']) !!}
+            {!! Form::model($models,['route'=> [$config->updateRoute,$models->id] , 'files' =>'true']) !!}
         @else
-            {!! Form::open(['route'=> $routes->storeRoute , 'files' =>'true']) !!}
+            {!! Form::open(['route'=> $config->storeRoute , 'files' =>'true']) !!}
         @endif
 
             <div class="col-xs-6 form-group">

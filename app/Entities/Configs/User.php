@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use Bican\Roles\Traits\HasRoleAndPermission;
 use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Entity implements AuthenticatableContract,  CanResetPasswordContract, HasRoleAndPermissionContract
 {
@@ -50,5 +51,11 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
         return $this->belongsToMany(Role::class,'role_user');
     }
 
+
+    public function setPasswordAttribute($pass){
+
+        $this->attributes['password'] = Hash::make($pass);
+    }
+    
 
 }
