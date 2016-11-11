@@ -4,9 +4,6 @@ namespace App\Http\Repositories\Configs;
 use App\Entities\Configs\User;
 use App\Helpers\ImagesHelper;
 use App\Http\Repositories\BaseRepo;
-use Faker\Provider\DateTime;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 
 class UsersRepo extends BaseRepo {
@@ -27,8 +24,6 @@ class UsersRepo extends BaseRepo {
 
         $model->Roles()->attach($data->request->all()['roles_id']);
 
-        $this->createBrancheables($model, $data->request->all()['branches_id']);
-
         return $model;
     }
 
@@ -38,9 +33,7 @@ class UsersRepo extends BaseRepo {
        $model = parent::update($id, $data);
 
        $model->Roles()->sync([$data->request->all()['roles_id']]);
-
-       $this->createBrancheables($model, $data->request->all()['branches_id']);
-
+       
        return $model;
    }
 

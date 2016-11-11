@@ -34,7 +34,12 @@ abstract class BaseRepo {
         //guarda log
         if($this->is_logueable)
             $this->createLog($model, 1);
-        
+
+        //si va a una sucursal
+        if($this->is_brancheable)
+            $this->createBrancheables($model, $data->request->all()['branches_id']);
+
+
         return $model;
     }
 
@@ -46,7 +51,12 @@ abstract class BaseRepo {
         $model->save();
 
         //guarda log
-        $this->createLog($model, 3);
+        if($this->is_logueable)
+            $this->createLog($model, 3);
+
+        //si va a una sucursal
+        if($this->is_brancheable)
+            $this->createBrancheables($model, $data->request->all()['branches_id']);
 
         return $model;
     }
@@ -74,7 +84,7 @@ abstract class BaseRepo {
 
     public function ListsData($data, $id)
     {
-        return $this->model->lists($data, $id);
+        return $this->model->lists($data, $id)->prepend('Seleccionar...');
     }
 
     public function find($id)
@@ -128,8 +138,10 @@ abstract class BaseRepo {
 
     public function createBrancheables( $model , $branches_id)
     {
-        $model->brancheables()->create([$branches_id]);
+        $model->brancheables()->delete();
+        $model->brancheables()->create(['branches_id' => $branches_id] );
     }
+
 
 
     

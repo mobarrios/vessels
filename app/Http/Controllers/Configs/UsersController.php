@@ -29,7 +29,7 @@ class UsersController extends Controller
         $this->paginate = 50;
 
         //data select
-        $this->data['roles']    = $rolesRepo->listsAll();
+        $this->data['roles']    = $rolesRepo->listsData('name','id');
         $this->data['branches'] = $branchesRepo->listsData('name', 'id');
 
         //configs

@@ -32,24 +32,23 @@
             <div class="col-xs-6 form-group">
                 {!! Form::label('Roles') !!}
                     @if(isset($models))
-                    {!! Form::select('roles_id',$roles, $models->roles->first()->id, ['class'=>'form-control']) !!}
+                    {!! Form::select('roles_id',$roles, $models->roles->first()->id, ['class'=>'select2 form-control']) !!}
                     @else
-                        {!! Form::select('roles_id',$roles, null, ['class'=>'form-control']) !!}
+                        {!! Form::select('roles_id',$roles, null, ['class'=>'select2 form-control']) !!}
                 @endif
             </div>
             <div class="col-xs-6 form-group">
                 {!! Form::label('Sucursal') !!}
-                @if(isset($models))
-                    {{$models->brancheables}}
-                    {!! Form::select('branches_id',$branches, $models->brancheables, ['class'=>'form-control']) !!}
+                @if(isset($models) && !is_null($models->brancheables) )
+                    {!! Form::select('branches_id',$branches, $models->brancheables->branches_id, ['class'=>'select2 form-control']) !!}
                 @else
-                    {!! Form::select('branches_id',$branches, null, ['class'=>'form-control']) !!}
+                    {!! Form::select('branches_id',$branches, null, ['class'=>'select2 form-control']) !!}
                 @endif
             </div>
 
             <div class="col-xs-6 form-group">
                 {!! Form::label('Imagen') !!}
-                {!! Form::file('image',['class'=>'form-control']) !!}
+                {!! Form::file('image') !!}
             </div>
     @endsection
 

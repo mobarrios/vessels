@@ -11,9 +11,14 @@
 <link rel="stylesheet" href="vendors/LTE/dist/css/skins/_all-skins.min.css">
 <!-- iCheck -->
 <link rel="stylesheet" href="vendors/LTE/plugins/iCheck/square/blue.css">
-
+<!--font-->
 <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+<!-- select2 -->
+<link rel="stylesheet" href="vendors/LTE/plugins/select2/select2.min.css">
+<!-- daterange picker -->
+<link rel="stylesheet" href="vendors/LTE/plugins/daterangepicker/daterangepicker.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="vendors/LTE/plugins/datepicker/datepicker3.css">
 
 
 <style>

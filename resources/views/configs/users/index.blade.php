@@ -12,6 +12,7 @@
                 <td>{{$model->id}}</td>
                 <td>{{$model->fullName }}</td>
                 <td>{{$model->email}}</td>
+
                 <td>
                     @foreach($model->Roles as $rol)
                         {{$rol->name}}

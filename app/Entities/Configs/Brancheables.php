@@ -2,12 +2,10 @@
  namespace App\Entities\Configs;
 
 
- use App\Entities\Entity;
+ use Illuminate\Database\Eloquent\Model;
 
- class Brancheables extends Entity
+ class Brancheables extends Model
  {
-
-     protected $table       = 'brancheables';
      protected $fillable    = ['branches_id'];
 
      public function entities(){

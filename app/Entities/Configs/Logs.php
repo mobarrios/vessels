@@ -7,7 +7,7 @@ class Logs extends Model
 {
     protected $fillable = ['user_id','log'];
 
-    public function logueable(){
+    public function logeable(){
 
         return $this->morphTo();
     }
