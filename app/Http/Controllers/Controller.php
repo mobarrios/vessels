@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Configs\Images;
 use App\Http\Helpers\ImagesHelper;
+
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -49,24 +50,8 @@ abstract class Controller extends BaseController
         //breadcrumb activo
         $this->data['activeBread'] = 'Nuevo';
 
-
         return view($this->getConfig()->storeView)->with($this->data);
     }
-
-
-    public function store()
-    {
-        //crea a traves del repo con el request
-         $model = $this->repo->create($this->request);
-
-
-        //guarda imagenes
-        if($this->getConfig()->is_imageable)
-            $this->createImage($model, $this->request);
-
-        return redirect()->route($this->getConfig()->indexRoute)->withErrors(['Regitro Agregado Correctamente']);
-    }
-
 
     public function edit()
     {
@@ -83,8 +68,31 @@ abstract class Controller extends BaseController
     }
 
 
+    // post de create
+    public function store()
+    {
+        //validar los campos
+        $this->validate($this->request,$this->getValidation('store'));
+
+        //crea a traves del repo con el request
+        $model = $this->repo->create($this->request);
+
+
+        //guarda imagenes
+        if($this->getConfig()->is_imageable)
+            $this->createImage($model, $this->request);
+
+        return redirect()->route($this->getConfig()->indexRoute)->withErrors(['Regitro Agregado Correctamente']);
+    }
+
+    //post de editar
     public function update()
     {
+        //validar los campos
+        $this->getValidation();
+
+        $this->validate($this->request,$this->getValidation());
+
         $id = $this->route->getParameter('id');
 
         //edita a traves del repo
@@ -153,14 +161,8 @@ abstract class Controller extends BaseController
         {
                 $time = time();
                 $name = $time.$data->image->getClientOriginalName();
-
                 $image->upload( $name , $data->file('image'), $this->getConfig()->imagesPath);
-
-                $img = new Images();
-                $img->path = $this->getConfig()->imagesPath . $name ;
-                $img->save();
-
-                $model->images()->save($img);
+                $this->repo->createImageables($model, $this->getConfig()->imagesPath . $name);
         }
     }
 

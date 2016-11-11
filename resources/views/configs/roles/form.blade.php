@@ -1,14 +1,14 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Nuevo Usuario
+        Nuevo Rol
     @endsection
 
     @section('form_inputs')
         @if(isset($models))
-            {!! Form::model($models,['route'=> [$routes->updateRoute,$models->id]]) !!}
+            {!! Form::model($models,['route'=> [$config->updateRoute,$models->id] , 'files' =>'true']) !!}
         @else
-            {!! Form::open(['route'=> $routes->storeRoute]) !!}
+            {!! Form::open(['route'=> $config->storeRoute , 'files' =>'true']) !!}
         @endif
 
             <div class="col-xs-6 form-group">
@@ -31,28 +31,8 @@
             <div class="col-xs-6 form-group">
                 {!! Form::label('Permisos') !!}
 
-                <table class="table ">
+                {!! Form::select('permissions_id',$permissions,null, ['class'=>'selectMulti form-control']) !!}
 
-                        @foreach($permissions as $permission)
-                        <tr>
-                            <td>
-                        @if(isset($models))
-                            @if($permission->getPermissonsByRoles($models->slug) == 0 )
-                                <input type="checkbox" name="permissions_checkbox[]"   value="{{$permission->id}}">
-                            @else
-                                <input type="checkbox"  name="permissions_checkbox[]"  checked value="{{$permission->id}}">
-                            @endif
-                        @else
-                                <input type="checkbox"  name="permissions_checkbox[]"   value="{{$permission->id}}">
-                        @endif
-
-
-
-
-                   </td>
-                   <td> {{$permission->name}} </td>
-                </tr>
-                @endforeach
                 </table>
                 </div>
 

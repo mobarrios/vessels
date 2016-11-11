@@ -84,7 +84,7 @@ abstract class BaseRepo {
 
     public function ListsData($data, $id)
     {
-        return $this->model->lists($data, $id)->prepend('Seleccionar...');
+        return $this->model->lists($data, $id)->prepend('Seleccionar...','');
     }
 
     public function find($id)
@@ -143,8 +143,10 @@ abstract class BaseRepo {
     }
 
 
-
-    
-
+    public function createImageables( $model , $image)
+    {
+        $model->images()->delete();
+        $model->images()->create(['path' => $image]);
+    }
 
 }

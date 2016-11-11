@@ -30,41 +30,26 @@ class Entity extends Model {
         */
     }
 
-    public static function getClass(){
-
+    public static function getClass()
+    {
         return get_class(new static);
     }
 
-    /*
-    public function getImagesAttribute(){
-
-        $id      = $this->attributes['id'];
-        $entity  = $this->getTable();
-
-        $image   = Images::where('entity',$entity)->where('entity_id',$id)->get();
-
-        if(!is_null($image)){
-            return $image;
-        }
+    //Polymorph
+    public function logs()
+    {
+        return $this->morphMany('App\Entities\Configs\Logs','logeable');
     }
- */
 
+    public function images()
+    {
+        return $this->morphMany('App\Entities\Configs\Images','imageable');
+    }
 
-        //Polymorph
-        public function logs()
-        {
-            return $this->morphMany('App\Entities\Configs\Logs','logeable');
-        }
-
-        public function images()
-        {
-            return $this->morphMany('App\Entities\Configs\Images','imageable');
-        }
-
-        public function brancheables()
-        {
-            return $this->morphOne('App\Entities\Configs\Brancheables','entities');
-        }
+    public function brancheables()
+    {
+        return $this->morphOne('App\Entities\Configs\Brancheables','entities');
+    }
 
 
 }

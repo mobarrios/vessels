@@ -37,7 +37,6 @@ class UsersController extends Controller
 
     }
 
-
         //----- configs
         public function getColumnSearch()
         {
@@ -55,24 +54,28 @@ class UsersController extends Controller
             return (object)$config;
         }
 
-
-
-    /*
-
-        public function update()
+        public function getValidation($type = null)
         {
-            $id = $this->route->getParameter('id');
-
-            if(empty($this->request->password))
-                $this->request->offsetUnset('password');
+            if($type == 'store')
+                // validacion para crear
+                  return
+                      [
+                        'email'     =>'required|unique:users,email|email',
+                        'name'      =>'required',
+                        'last_name' =>'required',
+                        'password'  => 'required',
+                        'roles_id'  => 'required',
+                        'branches_id' => 'required',
+                     ];
             else
-                $this->request['password'] = Hash::make($this->request->password);
-
-            $this->repo->udpate($id,$this->request);
-
-            return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Editado Correctamente']);
+                // validacion para editar
+                return
+                    [
+                        'name'      =>'required',
+                        'last_name' =>'required',
+                        'roles_id'  => 'required',
+                        'branches_id' => 'required',
+                    ];
 
         }
-    */
-
 }

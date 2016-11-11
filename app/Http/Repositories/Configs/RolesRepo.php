@@ -6,78 +6,36 @@ use Bican\Roles\Models\Role;
 
 class RolesRepo extends BaseRepo {
 
+    protected $is_brancheable   =  false;
+    protected $is_imageable     =  false;
+    protected $is_logueable     =  true;
+
     public function getModel(){
         return new Role();
     }
 
-    public function listAll(){
 
-      return $this->model;
+    public function create($data)
+    {
+        $model =  parent::create($data);
+
+        $model->attachPermission([$data->request->all()['permissions_checkbox']]);
+
+        return $model;
     }
 
-    public function listsAll()
+
+    public function update($id, $data)
     {
-        return $this->model->lists('name','id');
-    }
-
-
-    public function create($request)
-    {
-        $model = new $this->model();
-        $model->fill($request);
-        $model->save();
-
-        if(isset($request->permissions_checkbox))
-            foreach ($request->permissions_checkbox as $item) {
-                $model->attachPermission($item);
-            }
-    }
-
-    public function udpate($id,$request)
-    {
-        $model = $this->model->find($id);
-        $model->fill($request->all());
-        $model->save();
+        $model = parent::update($id, $data);
 
         $model->detachAllPermissions();
 
-        if(isset($request->permissions_checkbox))
-            foreach ($request->permissions_checkbox as $item) {
-                $model->attachPermission($item);
-            }
+        $model->attachPermission([$data->request->all()['permissions_checkbox']]);
+
+        return $model;
     }
 
 
-    //----- configs
-    public function getColumnSearch(){
-
-        return ['Nombre'=>'name','Slug'=>'slug','Descripción'=>'description','Nivel'=>'level'];
-    }
-
-
-    public function getConfig(){
-
-        return [
-            //nombre de la seccion
-            'sectionName' => 'Roles',
-
-            //routes
-            'indexRoute'    => 'configs.roles.index',
-            'storeRoute'    => 'configs.roles.store',
-            'createRoute'   => 'configs.roles.create',
-            'showRoute'     => 'configs.roles.show',
-            'editRoute'     => 'configs.roles.edit',
-            'updateRoute'   => 'configs.roles.update',
-            'destroyRoute'  => 'configs.roles.destroy',
-
-            //urls
-            'destroyUrl' => 'configs/roles/destroy/',
-
-            //views
-            'storeView' =>  'configs.roles.form',
-            'editView'  =>  'configs.roles.form',
-
-        ];
-    }
 
 }
