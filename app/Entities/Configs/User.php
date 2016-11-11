@@ -54,7 +54,10 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
 
     public function setPasswordAttribute($pass){
 
-        $this->attributes['password'] = Hash::make($pass);
+        if(!empty($pass))
+            $this->attributes['password'] = Hash::make($pass);
+        else
+            $this->attributes['password']  = $this->attributes['password'] ;
     }
     
 

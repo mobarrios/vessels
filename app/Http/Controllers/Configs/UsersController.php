@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Configs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Configs\RolesRepo;
 use App\Http\Repositories\Configs\UsersRepo as Repo;
 
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class UsersController extends Controller
 {
 
-    public function  __construct(Repo $repo, Route $route , RolesRepo $rolesRepo , Request $request)
+    public function  __construct(Repo $repo, Route $route , RolesRepo $rolesRepo , Request $request, BranchesRepo $branchesRepo)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -29,6 +30,7 @@ class UsersController extends Controller
 
         //data select
         $this->data['roles']    = $rolesRepo->listsAll();
+        $this->data['branches'] = $branchesRepo->listsData('name', 'id');
 
         //configs
         $this->data['config']  =  $this->getConfig();
@@ -55,22 +57,22 @@ class UsersController extends Controller
 
 
 
-/*
+    /*
 
-    public function update()
-    {
-        $id = $this->route->getParameter('id');
+        public function update()
+        {
+            $id = $this->route->getParameter('id');
 
-        if(empty($this->request->password))
-            $this->request->offsetUnset('password');
-        else
-            $this->request['password'] = Hash::make($this->request->password);
+            if(empty($this->request->password))
+                $this->request->offsetUnset('password');
+            else
+                $this->request['password'] = Hash::make($this->request->password);
 
-        $this->repo->udpate($id,$this->request);
+            $this->repo->udpate($id,$this->request);
 
-        return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Editado Correctamente']);
+            return redirect()->route($this->config->indexRoute)->withErrors(['Regitro Editado Correctamente']);
 
-    }
-*/
+        }
+    */
 
 }

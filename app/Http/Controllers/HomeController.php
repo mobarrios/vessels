@@ -10,7 +10,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $this->data['config'] = (object)['sectionName'=>'Home'];
+        $this->data['activeBread'] = '';
+        $this->data['config'] = (object)['sectionName'=>'Home', 'indexRoute'=>'home'];
 
         return view('home')->with($this->data);
     }

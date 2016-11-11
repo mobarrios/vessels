@@ -30,13 +30,6 @@
                 <table class="table ">
                     @foreach($users as $user)
                         <tr>
-                            <td>
-                                @if(isset($models))
-                                     <input type="checkbox"  name="users_id_checkbox[]"  checked value="{{$user->id}}">
-                                @else
-                                     <input type="checkbox"  name="users_id_checkbox[]"   value="{{$user->id}}">
-                                @endif
-                            </td>
                             <td> {{$user->fullName}} </td>
                         </tr>
                     @endforeach

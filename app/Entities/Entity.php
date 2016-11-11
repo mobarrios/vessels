@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class Entity extends Model {
 
     use SoftDeletes;
-
+    protected $dates = ['deleted_at'];
 
     public function __construct()
     {
@@ -63,7 +63,7 @@ class Entity extends Model {
 
         public function brancheables()
         {
-            return $this->morphMany('App\Entities\Configs\Brancheables','entities');
+            return $this->morphOne('App\Entities\Configs\Brancheables','entities');
         }
 
 

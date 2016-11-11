@@ -67,10 +67,14 @@ abstract class BaseRepo {
     }
 
 
-
     public function ListAll()
     {
        return $this->model;
+    }
+
+    public function ListsData($data, $id)
+    {
+        return $this->model->lists($data, $id);
     }
 
     public function find($id)
@@ -124,10 +128,9 @@ abstract class BaseRepo {
 
     public function createBrancheables( $model , $branches_id)
     {
-        $brancheable =  new Brancheables(['branches_id' => $branches_id]);
-
-        $model->brancheables()->create($brancheable);
+        $model->brancheables()->create([$branches_id]);
     }
+
 
     
 

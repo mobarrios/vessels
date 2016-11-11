@@ -37,6 +37,15 @@
                         {!! Form::select('roles_id',$roles, null, ['class'=>'form-control']) !!}
                 @endif
             </div>
+            <div class="col-xs-6 form-group">
+                {!! Form::label('Sucursal') !!}
+                @if(isset($models))
+                    {{$models->brancheables}}
+                    {!! Form::select('branches_id',$branches, $models->brancheables, ['class'=>'form-control']) !!}
+                @else
+                    {!! Form::select('branches_id',$branches, null, ['class'=>'form-control']) !!}
+                @endif
+            </div>
 
             <div class="col-xs-6 form-group">
                 {!! Form::label('Imagen') !!}

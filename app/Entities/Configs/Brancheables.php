@@ -10,8 +10,7 @@
      protected $table       = 'brancheables';
      protected $fillable    = ['branches_id'];
 
-
-     public function enities(){
+     public function entities(){
 
          return $this->morphTo();
      }

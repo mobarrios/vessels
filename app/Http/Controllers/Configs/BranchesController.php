@@ -53,28 +53,6 @@ class BranchesController extends Controller
 
         return (object)$config;
     }
-
-
-    public function store()
-    {
-        $model = $this->repo->create($this->request);
-
-        //crea usuarios brancheables
-        //$this->userRepo->createBrancheables($model->id);
-
-        if(!is_null($this->request->users_id_checkbox))
-        {
-            foreach ($this->request->users_id_checkbox  as $users_id)
-            {
-                $user = $this->userRepo->find($users_id);
-
-                $this->userRepo->createBrancheables($user, $model->id);
-            }
-        }
-
-
-
-        return redirect()->route($this->getConfig()->indexRoute)->withErrors(['Regitro Agregado Correctamente']);
-    }
+    
 
 }
