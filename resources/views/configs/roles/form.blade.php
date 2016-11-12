@@ -30,11 +30,9 @@
 
             <div class="col-xs-6 form-group">
                 {!! Form::label('Permisos') !!}
+                {!! Form::select('permissions_id[]',$permissions,null, ['class'=>'selectMulti form-control' ,'multiple']) !!}
 
-                {!! Form::select('permissions_id',$permissions,null, ['class'=>'selectMulti form-control']) !!}
-
-                </table>
-                </div>
+            </div>
 
 @endsection
 

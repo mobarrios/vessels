@@ -126,13 +126,7 @@ abstract class BaseRepo {
     public function createLog($model , $log)
     {
         $logData = config('logs.'.$log);
-
-        $log            = new Logs();
-        $log->user_id   = Auth::user()->id ;
-        $log->log       = $logData;
-        $log->save();
-
-        $model->logs()->save($log);
+        $model->logs()->create(['user_id'=> Auth::user()->id, 'log'=> $logData]);
     }
 
 

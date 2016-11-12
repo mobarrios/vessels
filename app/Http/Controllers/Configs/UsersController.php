@@ -9,7 +9,6 @@ use App\Http\Repositories\Configs\UsersRepo as Repo;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {

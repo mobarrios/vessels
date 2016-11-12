@@ -17,11 +17,10 @@ class LogsController extends Controller
         $this->repo     = $repo;
         $this->route    = $route;
 
-        $this->config = (object)$repo->getConfig();
         $this->data['routes'] = $this->config;
 
         //filter options
-        $this->data['filters']       = $this->repo->getColumnSearch();
+        $this->data['filters']       = $this->getColumnSearch();
 
         //data paginate
         $this->paginate = 50;
@@ -30,6 +29,46 @@ class LogsController extends Controller
         $this->data['permissions']    = $permission->ListAll()->get();
 
         $this->data['permissionsRepo'] = $permission;
+
+        //configs
+        $this->data['config']  =  $this->getConfig();
+
+    }
+
+    //----- configs
+    public function getColumnSearch()
+    {
+        return ['Nombre'=>'log'];
+    }
+
+    public function configs()
+    {
+        $config['section']      = 'Logs';
+        $config['routes']       = 'configs.logs';
+        $config['views']        = 'configs.logs';
+        $config['urlDestroy']   = 'configs/logs/destroy/';
+        $config['imagesPath']   = 'uploads/logs/images/';
+
+        return (object)$config;
+    }
+
+    public function getValidation($type = null)
+    {
+        if($type == 'store')
+            // validacion para crear
+            return
+                [
+                    'email'     =>'required|unique:users,email|email',
+
+                ];
+        else
+            // validacion para editar
+            return
+                [
+                    'name'      =>'required',
+
+                ];
+
     }
 
     

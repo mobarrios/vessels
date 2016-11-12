@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Configs\Images;
 use App\Http\Helpers\ImagesHelper;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;

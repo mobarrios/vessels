@@ -4,6 +4,7 @@ namespace App\Http\Repositories\Configs;
 use App\Http\Repositories\BaseRepo;
 use Bican\Roles\Models\Role;
 
+
 class RolesRepo extends BaseRepo {
 
     protected $is_brancheable   =  false;
@@ -19,7 +20,7 @@ class RolesRepo extends BaseRepo {
     {
         $model =  parent::create($data);
 
-        $model->attachPermission([$data->request->all()['permissions_checkbox']]);
+        $model->attachPermission($data->request->all()['permissions_id']);
 
         return $model;
     }
@@ -31,11 +32,11 @@ class RolesRepo extends BaseRepo {
 
         $model->detachAllPermissions();
 
-        $model->attachPermission([$data->request->all()['permissions_checkbox']]);
+        $model->attachPermission($data->request->all()['permissions_id']);
 
         return $model;
     }
-
+    
 
 
 }
