@@ -8,7 +8,6 @@
                 <td>{{$model->log}}</td>
                 <td>{{$model->logeable_type}} : {{$model->logeable_id}}</td>
                 <td>{{ $model->User->fullName }}</td>
-
             </tr>
         @endforeach
     @endsection

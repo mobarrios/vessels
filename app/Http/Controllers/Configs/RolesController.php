@@ -18,7 +18,6 @@ class RolesController extends Controller
         $this->repo     = $repo;
         $this->route    = $route;
 
-
         //filter options
         $this->data['filters']   = $this->getColumnSearch();
 
@@ -39,7 +38,7 @@ class RolesController extends Controller
     //----- configs
     public function getColumnSearch()
     {
-        return ['Nombre'=>'name','Apellido'=>'last_name' ,'Email'=>'email'];
+        return ['Nombre'=>'name','Slug'=>'slug' ];
     }
 
     public function configs()
@@ -60,6 +59,7 @@ class RolesController extends Controller
             return
                 [
                     'name'      =>'required',
+                    'slug'      =>'required|unique:roles,slug',
                     'permissions_id' => 'required',
                 ];
         else

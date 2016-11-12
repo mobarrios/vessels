@@ -7,12 +7,13 @@ class Logs extends Model
 {
     protected $fillable = ['user_id','log'];
 
-    public function logeable(){
-
+    public function logeable()
+    {
         return $this->morphTo();
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
