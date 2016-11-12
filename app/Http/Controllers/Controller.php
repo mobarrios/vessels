@@ -108,7 +108,10 @@ abstract class Controller extends BaseController
 
     public function destroy($id)
     {
-        $this->repo->destroy($id);
+        if($this->repo->destroy($id))
+            return "ok";
+        else
+            return "error";
     }
 
 

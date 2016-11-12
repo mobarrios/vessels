@@ -48,7 +48,7 @@ class UsersController extends Controller
             $config['section']      = 'Usuarios';
             $config['routes']       = 'configs.users';
             $config['views']        = 'configs.users';
-            $config['urlDestroy']   = 'configs/users/destroy/';
+            $config['urlDestroy']   = route("configs.users.destroy");
             $config['imagesPath']   = 'uploads/users/images/';
 
             return (object)$config;

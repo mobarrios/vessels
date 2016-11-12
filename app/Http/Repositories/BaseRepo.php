@@ -19,7 +19,7 @@ abstract class BaseRepo {
 
     public function __construct()
     {
-        $this->model = $this->getModel();
+        $this->model = $this->getModel()->whereNull("deleted_at");
     }
 
     public abstract function getModel();

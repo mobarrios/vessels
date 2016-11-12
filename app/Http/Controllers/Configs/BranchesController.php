@@ -47,7 +47,7 @@ class BranchesController extends Controller
         $config['section']      = 'Sucursales';
         $config['routes']       = 'configs.branches';
         $config['views']        = 'configs.branches';
-        $config['urlDestroy']   = 'configs/branches/destroy/';
+        $config['urlDestroy']   = route("configs.branches.destroy");
         $config['imagesPath']   = 'uploads/branches/images/';
 
 

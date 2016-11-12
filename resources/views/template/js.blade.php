@@ -25,7 +25,7 @@
     $('.datePicker').datepicker();
 
     //dateRange
-    $('.dateRange').daterangepicker();
+        $('.dateRange').daterangepicker();
 
     //select2
     $('.select2').select2();
@@ -49,16 +49,25 @@
 
     // table list checkbox to destroy
     $('.destroy_btn').on('click',function(){
-
+        var btn = $(this);
+        $(btn).prop("disabled",true);
         if(confirm('Eliminar Registro?')){
             var url = $(this).attr('url_destroy');
 
             $("input:checkbox:checked").each(function() {
                 var id = $(this).val();
-
-                $.ajax(url + id);
-
-                location.reload();
+                $.ajax({
+                    'url': url+"/"+id,
+                    'method': 'get',
+                    'success': function (data) {
+                        if(data == "ok"){
+                            location.href = "{!! route($config->indexRoute) !!}";
+                        }else{
+                            $(btn).prop("disabled",false);
+                            alert("Error al querer borrar el registro")
+                        }
+                    }
+                });
             });
         }else{
             return false;
