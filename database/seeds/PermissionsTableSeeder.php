@@ -35,6 +35,30 @@ class PermissionsTableSeeder extends Seeder
                 'name' => 'Delete Users',
                 'slug' => 'delete.users',
                 'model' => 'App\Configs\User',
+            ],
+            [
+                'id'    => 5,
+                'name' => 'List Configs',
+                'slug' => 'list.configs',
+                'model' => 'App\Configs\Configs'
+            ],
+            [
+                'id'    => 6,
+                'name' => 'Edit Configs',
+                'slug' => 'edit.configs',
+                'model' => 'App\Configs\Configs'
+            ],
+            [
+                'id'    => 7,
+                'name' => 'Store Configs',
+                'slug' => 'store.configs',
+                'model' => 'App\Configs\Configs'
+            ],
+            [
+                'id'    => 8,
+                'name' => 'Delete Configs',
+                'slug' => 'delete.configs',
+                'model' => 'App\Configs\Configs'
             ]
         ]);
     }

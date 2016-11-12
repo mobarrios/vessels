@@ -53,6 +53,26 @@ class BranchesController extends Controller
 
         return (object)$config;
     }
-    
+
+    public function getValidation($type = null)
+    {
+        if($type == 'store')
+            // validacion para crear
+            return
+                [
+                    'name'      =>'required',
+                    'address' =>'required',
+                    'phone'  => 'numeric'
+                ];
+        else
+            // validacion para editar
+            return
+                [
+                    'name'      =>'required',
+                    'address' =>'required',
+                    'phone'  => 'numeric'
+                ];
+
+    }
 
 }
