@@ -18,10 +18,13 @@ use Illuminate\Support\Facades\DB;
 class Entity extends Model {
 
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+    protected $dates        = ['deleted_at'];
+
 
     public function __construct()
     {
+        parent::__construct();
+
         /*
         if(Auth::check()){
             DB::setDefaultConnection('mysql');
