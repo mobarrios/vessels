@@ -26,8 +26,10 @@ abstract class BaseRepo {
 
     public function create($data)
     {
-        $model = $this->model->create($data->all());
-
+        $model = new $this->model();
+        $model->fill($data->all());
+        $model->save();
+        
         return $model;
     }
 
@@ -50,8 +52,7 @@ abstract class BaseRepo {
         //elimina images
         $model->images()->delete();
 
-        //guarda log
-        $this->createLog($model, 2);
+
 
         return $model;
     }

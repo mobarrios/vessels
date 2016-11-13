@@ -34,7 +34,7 @@ abstract class Controller extends BaseController
 
             if(is_null($model) || $model->count() == 0)
               $model = $this->repo->listAll();
-            
+
         }else{
             $model  = $this->repo->listAll();
         }
@@ -117,7 +117,7 @@ abstract class Controller extends BaseController
 
                 //guarda log
                 if(config('models.'.$this->section.'.is_logueable'))
-                    $this->repo->createLog($model, 1);
+                    $this->repo->createLog($model, 3);
 
                 //si va a una sucursal
                 if(config('models.'.$this->section.'.is_brancheable'))
@@ -130,9 +130,14 @@ abstract class Controller extends BaseController
 
     public function destroy($id)
     {
-        if($this->repo->destroy($id))
+        $model = $this->repo->destroy($id);
+
+        if($model){
+            //guarda log
+            $this->repo->reateLog($model, 2);
             return "ok";
-        else
+
+        }else
             return "error";
     }
 
