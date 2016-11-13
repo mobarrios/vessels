@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            {{$config->sectionName or ''}}
+            {{config('models.'.$section.'.sectionName')}}
         </h1>
 
     </section>
@@ -13,7 +13,7 @@
                 <a href="{{route('home')}}">Home</a>
             </li>
             <li>
-                <a href="{{route($config->indexRoute)}}">{{$config->sectionName}}</a>
+                <a href="{{route(config('models.'.$section.'.indexRoute'))}}">{{config('models.'.$section.'.sectionName')}}</a>
             </li>
             <li class="active">{{$activeBread}}</li>
         </ol>

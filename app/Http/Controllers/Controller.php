@@ -19,6 +19,7 @@ abstract class Controller extends BaseController
     protected $route;
     protected $config;
     protected $data;
+    protected $section;
 
 
     public function index()
@@ -27,20 +28,24 @@ abstract class Controller extends BaseController
         $this->data['activeBread'] = 'Listar';
 
         //si request de busqueda
-        if(isset($this->request->search))
+        if( isset($this->request->search) && !is_null($this->request->filter))
+        {
             $model = $this->repo->search($this->request);
-        else
+
+            if(is_null($model) || $model->count() == 0)
+              $model = $this->repo->listAll();
+        }else
             $model  = $this->repo->listAll();
 
 
         //guarda en session lo que se busco para exportar
         Session::put('export',$model->get());
 
-
         //pagina el query
-        $this->data['models'] = $model->paginate($this->paginate);
+        $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
 
-        return view($this->getConfig()->indexRoute)->with($this->data);
+        //return view($this->getConfig()->indexRoute)->with($this->data);
+        return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
     }
 
 
@@ -49,7 +54,7 @@ abstract class Controller extends BaseController
         //breadcrumb activo
         $this->data['activeBread'] = 'Nuevo';
 
-        return view($this->getConfig()->storeView)->with($this->data);
+        return view(config('models.'.$this->section.'.storeView'))->with($this->data);
     }
 
     public function edit()
@@ -63,7 +68,7 @@ abstract class Controller extends BaseController
 
         $this->data['models'] = $this->repo->find($id);
 
-        return view($this->getConfig()->editView)->with($this->data);
+        return view(config('models.'.$this->section.'.editView'))->with($this->data);
     }
 
 
@@ -71,26 +76,24 @@ abstract class Controller extends BaseController
     public function store()
     {
         //validar los campos
-        $this->validate($this->request,$this->getValidation('store'));
+        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
 
         //guarda imagenes
-        if($this->getConfig()->is_imageable)
+        if(config('models.'.$this->section.'.is_imageable'))
             $this->createImage($model, $this->request);
 
-        return redirect()->route($this->getConfig()->indexRoute)->withErrors(['Regitro Agregado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.indexRoute'))->withErrors(['Regitro Agregado Correctamente']);
     }
 
     //post de editar
     public function update()
     {
         //validar los campos
-        $this->getValidation();
-
-        $this->validate($this->request,$this->getValidation());
+        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
 
         $id = $this->route->getParameter('id');
 
@@ -98,57 +101,16 @@ abstract class Controller extends BaseController
         $model = $this->repo->update($id,$this->request);
 
         //guarda imagenes
-        if($this->getConfig()->is_imageable)
+        if(config('models.'.$this->section.'.is_imageable'))
             $this->createImage($model, $this->request);
 
-        return redirect()->route($this->getConfig()->indexRoute)->withErrors(['Regitro Editado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.indexRoute'))->withErrors(['Regitro Editado Correctamente']);
     }
 
 
     public function destroy($id)
     {
         $this->repo->destroy($id);
-    }
-
-
-    //model configurations
-
-    public function getConfig(){
-
-        //configuracion particular de cada modelo
-        $modelConfig = $this->configs();
-
-        $data =  [
-
-            //nombre de la seccion
-            'sectionName'   => $modelConfig->section,
-
-            //routes
-            'indexRoute'    => $modelConfig->routes.'.index',
-            'storeRoute'    => $modelConfig->routes.'.store',
-            'createRoute'   => $modelConfig->routes.'.create',
-            'showRoute'     => $modelConfig->routes.'.show',
-            'editRoute'     => $modelConfig->routes.'.edit',
-            'updateRoute'   => $modelConfig->routes.'.update',
-            'destroyRoute'  => $modelConfig->routes.'.destroy',
-
-            //urls
-            'destroyUrl' => $modelConfig->urlDestroy,
-
-            //views
-            'storeView' =>  $modelConfig->routes.'.form',
-            'editView'  =>  $modelConfig->routes.'.form',
-
-            //path
-            'imagesPath' => $modelConfig->imagesPath,
-
-            //polymorphic
-            'is_logueable'      => true,
-            'is_imageable'      => true,
-            'is_brancheable'    => true,
-        ];
-
-        return (object)$data;
     }
 
 
@@ -160,8 +122,9 @@ abstract class Controller extends BaseController
         {
                 $time = time();
                 $name = $time.$data->image->getClientOriginalName();
-                $image->upload( $name , $data->file('image'), $this->getConfig()->imagesPath);
-                $this->repo->createImageables($model, $this->getConfig()->imagesPath . $name);
+
+                $image->upload( $name , $data->file('image'), config('models.'.$this->section.'.imagesPath'));
+                $this->repo->createImageables($model, config('models.'.$this->section.'.imagesPath') . $name);
         }
     }
 
