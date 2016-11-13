@@ -18,8 +18,12 @@
                         {{$rol->name}}
                     @endforeach
                 </td>
-
-                <td><span class="label label-success">Activo</span></td>
+                <td>
+                    {{$model->brancheables->Branches->name or  ''}}
+                </td>
+                <td>
+                    <span class="label label-success">Activo</span>
+                </td>
             </tr>
         @endforeach
     @endsection

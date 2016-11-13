@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 
 class BranchesRepo extends BaseRepo {
-
-    protected $is_brancheable   =  false;
-    protected $is_imageable     =  true;
-    protected $is_logueable     =  true;
-
+    
     public function getModel()
     {
         return new Branches();

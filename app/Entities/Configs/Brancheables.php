@@ -13,6 +13,10 @@
          return $this->morphTo();
      }
 
+     public function Branches()
+     {
+         return $this->belongsTo(Branches::class);
+     }
  }
 
 

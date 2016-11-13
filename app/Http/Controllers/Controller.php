@@ -34,9 +34,10 @@ abstract class Controller extends BaseController
 
             if(is_null($model) || $model->count() == 0)
               $model = $this->repo->listAll();
-        }else
+            
+        }else{
             $model  = $this->repo->listAll();
-
+        }
 
         //guarda en session lo que se busco para exportar
         Session::put('export',$model->get());
@@ -82,9 +83,19 @@ abstract class Controller extends BaseController
         $model = $this->repo->create($this->request);
 
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
+                //guarda imagenes
+                if(config('models.'.$this->section.'.is_imageable'))
+                    $this->createImage($model, $this->request);
+
+                //guarda log
+                if(config('models.'.$this->section.'.is_logueable'))
+                    $this->repo->createLog($model, 1);
+
+                //si va a una sucursal
+                if(config('models.'.$this->section.'.is_brancheable'))
+                    $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
+
+
 
         return redirect()->route(config('models.'.$this->section.'.indexRoute'))->withErrors(['Regitro Agregado Correctamente']);
     }
@@ -100,9 +111,18 @@ abstract class Controller extends BaseController
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request);
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
+                //guarda imagenes
+                if(config('models.'.$this->section.'.is_imageable'))
+                    $this->createImage($model, $this->request);
+
+                //guarda log
+                if(config('models.'.$this->section.'.is_logueable'))
+                    $this->repo->createLog($model, 1);
+
+                //si va a una sucursal
+                if(config('models.'.$this->section.'.is_brancheable'))
+                    $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
+
 
         return redirect()->route(config('models.'.$this->section.'.indexRoute'))->withErrors(['Regitro Editado Correctamente']);
     }
@@ -110,7 +130,10 @@ abstract class Controller extends BaseController
 
     public function destroy($id)
     {
-        $this->repo->destroy($id);
+        if($this->repo->destroy($id))
+            return "ok";
+        else
+            return "error";
     }
 
 

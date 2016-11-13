@@ -29,4 +29,5 @@ class UsersController extends Controller
         $this->data['section'] = $this->section;
 
     }
+
 }

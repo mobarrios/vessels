@@ -14,45 +14,19 @@ class BranchesController extends Controller
 {
     protected $userRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, UsersRepo $usersRepo){
+    public function  __construct(Request $request, Repo $repo, Route $route, UsersRepo $usersRepo)
+    {
 
         $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
         $this->userRepo = $usersRepo;
-        
-        //filter options
-        $this->data['filters']  = $this->getColumnSearch();
 
-        //data paginate
-        $this->paginate         = 50;
+        $this->section          = 'branches';
+        $this->data['section']  = $this->section;
 
-        //data select
-        $this->data['users']    = $usersRepo->ListAll()->get();
 
-        //configs
-        $this->data['config']  =  $this->getConfig();
+        $this->data['users']    = $usersRepo->listAll()->get();
     }
-
-
-
-    //----- configs
-    public function getColumnSearch(){
-
-        return ['Nombre'=>'name','Dirección'=>'address','Telefono'=>'Phone','Tipo'=>'type'];
-    }
-
-    public function configs()
-    {
-        $config['section']      = 'Sucursales';
-        $config['routes']       = 'configs.branches';
-        $config['views']        = 'configs.branches';
-        $config['urlDestroy']   = 'configs/branches/destroy/';
-        $config['imagesPath']   = 'uploads/branches/images/';
-
-
-        return (object)$config;
-    }
-    
 
 }

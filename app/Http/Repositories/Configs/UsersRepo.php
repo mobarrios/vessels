@@ -6,11 +6,7 @@ use App\Http\Repositories\BaseRepo;
 
 
 class UsersRepo extends BaseRepo {
-
-    protected $is_brancheable   =  true;
-    protected $is_imageable     =  true;
-    protected $is_logueable     =  true;
-
+    
     public function getModel()
     {
         return new User;

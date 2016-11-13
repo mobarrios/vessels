@@ -26,19 +26,7 @@ abstract class BaseRepo {
 
     public function create($data)
     {
-        $model = new $this->model();
-        $model->fill($data->all());
-        $model->save();
-
-      
-        //guarda log
-        if($this->is_logueable)
-            $this->createLog($model, 1);
-
-        //si va a una sucursal
-        if($this->is_brancheable)
-            $this->createBrancheables($model, $data->request->all()['branches_id']);
-
+        $model = $this->model->create($data->all());
 
         return $model;
     }
@@ -49,14 +37,6 @@ abstract class BaseRepo {
         $model = $this->model->find($id);
         $model->fill($data->all());
         $model->save();
-
-        //guarda log
-        if($this->is_logueable)
-            $this->createLog($model, 3);
-
-        //si va a una sucursal
-        if($this->is_brancheable)
-            $this->createBrancheables($model, $data->request->all()['branches_id']);
 
         return $model;
     }

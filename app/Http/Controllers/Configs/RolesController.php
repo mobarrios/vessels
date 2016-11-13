@@ -46,7 +46,7 @@ class RolesController extends Controller
         $config['section']      = 'Roles';
         $config['routes']       = 'configs.roles';
         $config['views']        = 'configs.roles';
-        $config['urlDestroy']   = 'configs/roles/destroy/';
+        $config['urlDestroy']   = route("configs.roles.destroy");;
         $config['imagesPath']   = 'uploads/roles/images/';
 
         return (object)$config;
