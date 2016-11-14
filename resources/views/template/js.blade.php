@@ -19,6 +19,7 @@
 <!-- bootstrap datepicker -->
 <script src="vendors/LTE/plugins/datepicker/bootstrap-datepicker.js"></script>
 
+@if(Auth::user())
 <script>
 
     //datePicker
@@ -57,7 +58,7 @@
             $("input:checkbox:checked").each(function() {
                 var id = $(this).val();
                 $.ajax({
-                    'url': url+"/"+id,
+                    'url': url+id,
                     'method': 'get',
                     'success': function (data) {
                         if(data == "ok"){
@@ -92,3 +93,4 @@
     });
 
 </script>
+@endif
