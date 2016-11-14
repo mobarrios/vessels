@@ -29,7 +29,7 @@ abstract class BaseRepo {
         $model = new $this->model();
         $model->fill($data->all());
         $model->save();
-        
+
         return $model;
     }
 
@@ -47,12 +47,11 @@ abstract class BaseRepo {
     public function destroy($id)
     {
         $model = $this->model->find($id);
+
         $model->delete();
 
         //elimina images
         $model->images()->delete();
-
-
 
         return $model;
     }

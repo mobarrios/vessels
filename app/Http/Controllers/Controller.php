@@ -134,9 +134,8 @@ abstract class Controller extends BaseController
 
         if($model){
             //guarda log
-            $this->repo->reateLog($model, 2);
+            $this->repo->createLog($model, 2);
             return "ok";
-
         }else
             return "error";
     }
