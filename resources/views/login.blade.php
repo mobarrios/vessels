@@ -35,7 +35,6 @@
                 </div>
             {!! Form::close() !!}
 
-
         </div>
         <hr>
         @include('template.messages')
