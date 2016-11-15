@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModelsTable extends Migration
+class CreateColorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,16 @@ class CreateModelsTable extends Migration
      */
     public function up()
     {
-        //
+
+        Schema::create('colors', function (Blueprint $table) {
+
+            $table->increments('id')->unsigned();
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->string('name');
+
+        });
     }
 
     /**
@@ -22,6 +31,7 @@ class CreateModelsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('colors');
+
     }
 }

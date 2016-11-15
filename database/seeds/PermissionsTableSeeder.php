@@ -13,6 +13,7 @@ class PermissionsTableSeeder extends Seeder
     {
         DB::table('permissions')->insert(
             [
+                //USERS
             [
                 'id'    => 1,
                 'name' => 'List Users',
@@ -34,7 +35,7 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => 4,
                 'name' => 'Delete Users',
-                'slug' => 'users.desroy',
+                'slug' => 'users.destroy',
                 'model' => 'App\Configs\User',
             ],
             [
@@ -43,6 +44,7 @@ class PermissionsTableSeeder extends Seeder
                 'slug' => 'users.show',
                 'model' => 'App\Configs\User',
             ],
+                //ROLES
             [
                 'id'    => 6,
                 'name' => 'List Roles',
@@ -67,7 +69,7 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => 9,
                 'name' => 'Delete Roles',
-                'slug' => 'roles.desroy',
+                'slug' => 'roles.destroy',
                 'model' => '',
 
             ],
@@ -78,6 +80,7 @@ class PermissionsTableSeeder extends Seeder
                 'model' => '',
 
             ],
+                //PERMISSIONS
             [
                 'id'    => 11,
                 'name' => 'Permisos Roles',
@@ -102,7 +105,7 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => 14,
                 'name' => 'Permisos Roles',
-                'slug' => 'permissions.desroy',
+                'slug' => 'permissions.destroy',
                 'model' => '',
 
             ],
@@ -113,13 +116,169 @@ class PermissionsTableSeeder extends Seeder
                 'model' => '',
 
             ],
+                //LOGS
             [
                 'id'    => 16,
                 'name' => 'Logs List',
                 'slug' => 'logs.list',
                 'model' => '',
 
-            ]
+            ],
+                //BRANDS
+            [
+                'id'    => 17,
+                'name' => 'List Brands',
+                'slug' => 'brands.list',
+                'model' => '',
+            ],
+            [
+                'id'    => 18,
+                'name' => 'Crear Brands',
+                'slug' => 'brands.create',
+                'model' => '',
+            ],
+            [
+                'id'    => 19,
+                'name' => 'Edit Brands',
+                'slug' => 'brands.edit',
+                'model' => '',
+            ],
+            [
+                'id'    => 20,
+                'name' => 'Delete Brands',
+                'slug' => 'brands.destroy',
+                'model' => '',
+            ],
+            [
+                'id'    => 21,
+                'name' => 'Show Brands',
+                'slug' => 'brands.show',
+                'model' => '',
+            ],
+            //CATEGORIES
+            [
+                'id'    => 22,
+                'name' => 'List Categories',
+                'slug' => 'categories.list',
+                'model' => '',
+            ],
+            [
+                'id'    => 23,
+                'name' => 'Crear Categories',
+                'slug' => 'categories.create',
+                'model' => '',
+            ],
+            [
+                'id'    => 24,
+                'name' => 'Edit Categories',
+                'slug' => 'categories.edit',
+                'model' => '',
+            ],
+            [
+                'id'    => 25,
+                'name' => 'Delete Categories',
+                'slug' => 'categories.destroy',
+                'model' => '',
+            ],
+            [
+                'id'    => 26,
+                'name' => 'Show Categories',
+                'slug' => 'categories.show',
+                'model' => '',
+            ],
+                //COLORS
+            [
+                'id'    => 27,
+                'name' => 'List Colors',
+                'slug' => 'colors.list',
+                'model' => '',
+            ],
+            [
+                'id'    => 28,
+                'name' => 'Crear Colors',
+                'slug' => 'colors.create',
+                'model' => '',
+            ],
+            [
+                'id'    => 29,
+                'name' => 'Edit Colors',
+                'slug' => 'colors.edit',
+                'model' => '',
+            ],
+            [
+                'id'    => 30,
+                'name' => 'Delete Colors',
+                'slug' => 'colors.destroy',
+                'model' => '',
+            ],
+            [
+                'id'    => 31,
+                'name' => 'Show Colors',
+                'slug' => 'colors.show',
+                'model' => '',
+            ],
+                //ITEMS
+                [
+                    'id'    => 32,
+                    'name' => 'List Items',
+                    'slug' => 'items.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 33,
+                    'name' => 'Crear Items',
+                    'slug' => 'items.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 34,
+                    'name' => 'Edit Items',
+                    'slug' => 'items.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 35,
+                    'name' => 'Delete Items',
+                    'slug' => 'items.destroy',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 36,
+                    'name' => 'Show Items',
+                    'slug' => 'items.show',
+                    'model' => '',
+                ],
+                //MODELS
+                [
+                    'id'    => 37,
+                    'name' => 'List Models',
+                    'slug' => 'models.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 38,
+                    'name' => 'Crear Models',
+                    'slug' => 'models.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 39,
+                    'name' => 'Edit Models',
+                    'slug' => 'models.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 40,
+                    'name' => 'Delete Models',
+                    'slug' => 'models.destroy',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 41,
+                    'name' => 'Show Models',
+                    'slug' => 'models.show',
+                    'model' => '',
+                ]
         ]);
     }
 }

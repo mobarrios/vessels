@@ -21,6 +21,18 @@ Route::group(['middleware'=>'auth'],function(){
 
         require( __DIR__ .'/Routes/configsRoute.php');
 
+    Route::group(['prefix'=>'moto'],function() {
+
+        require(__DIR__ . '/Routes/Moto/itemsRoute.php');
+        require(__DIR__ . '/Routes/Moto/brandsRoute.php');
+        require(__DIR__ . '/Routes/Moto/categoriesRoute.php');
+        require(__DIR__ . '/Routes/Moto/colorsRoute.php');
+        require(__DIR__ . '/Routes/Moto/modelsRoute.php');
+
+    });
+
+
+
     //export to excel
     Route::get('/excel',['as' => 'utilities.exportToExcel', 'uses'=>'Utilities\UtilitiesController@exportToExcel']);
 

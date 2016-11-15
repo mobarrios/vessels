@@ -7,7 +7,6 @@
                     <div class="image">
                         <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
                     </div>
-
                 </td>
                 <td>{{$model->id}}</td>
                 <td>{{$model->fullName }}</td>
