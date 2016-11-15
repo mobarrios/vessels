@@ -50,29 +50,38 @@
 
     // table list checkbox to destroy
     $('.destroy_btn').on('click',function(){
-        var btn = $(this);
-        $(btn).prop("disabled",true);
-        if(confirm('Eliminar Registro?')){
-            var url = $(this).attr('url_destroy');
 
-            $("input:checkbox:checked").each(function() {
-                var id = $(this).val();
-                $.ajax({
-                    'url': url+id,
-                    'method': 'get',
-                    'success': function (data) {
-                        if(data == "ok"){
-                            location.href = "{!! route(config('models.'.$section.'.indexRoute')) !!}";
-                        }else{
-                            $(btn).prop("disabled",false);
-                            alert("Error al querer borrar el registro")
+        @permission($section.'.destroy')
+
+            var btn = $(this);
+            $(btn).prop("disabled",true);
+            if(confirm('Eliminar Registro?')){
+                var url = $(this).attr('url_destroy');
+
+                $("input:checkbox:checked").each(function() {
+                    var id = $(this).val();
+                    $.ajax({
+                        'url': url+id,
+                        'method': 'get',
+                        'success': function (data) {
+                            if(data == "ok"){
+                                location.href = "{!! route(config('models.'.$section.'.indexRoute')) !!}";
+                            }else{
+                                $(btn).prop("disabled",false);
+                                alert("Error al querer borrar el registro")
+                            }
                         }
-                    }
+                    });
                 });
-            });
-        }else{
-            return false;
-        }
+            }else{
+                return false;
+            }
+
+        @else
+            alert('No Tiene Permiso para realizar esta acción.');
+
+        @endpermission
+
     });
 
     // edit button

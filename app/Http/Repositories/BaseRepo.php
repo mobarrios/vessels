@@ -49,10 +49,7 @@ abstract class BaseRepo {
         $model = $this->model->find($id);
 
         $model->delete();
-
-        //elimina images
-        $model->images()->delete();
-
+        
         return $model;
     }
 

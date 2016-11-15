@@ -131,6 +131,10 @@ abstract class Controller extends BaseController
     public function destroy($id)
     {
         $model = $this->repo->destroy($id);
+        
+        //elimina images
+        if(config('models.'.$this->section.'.is_imageable'))
+            $model->images()->delete();
 
         if($model){
             //guarda log

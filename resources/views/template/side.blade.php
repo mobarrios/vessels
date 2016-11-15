@@ -13,8 +13,10 @@
                 </a>
             </li>
 
-            @permission('list.configs')
-                <li class="treeview">
+            @permission('configs.list')
+            @endpermission
+
+            <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gear"></i> <span>Configuración</span>
                             <span class="pull-right-container">
@@ -50,7 +52,6 @@
                         <li><a href="#"><span>Sistema</span></a></li>
                     </ul>
                 </li>
-            @endpermission
 
 
 

@@ -1,16 +1,15 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Nuevo Usuario
+        Nuevo Permiso
     @endsection
 
     @section('form_inputs')
             @if(isset($models))
-                {!! Form::model($models,['route'=> [$config->updateRoute,$models->id] , 'files' =>'true']) !!}
+                {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'),$models->id]]) !!}
             @else
-                {!! Form::open(['route'=> $config->storeRoute , 'files' =>'true']) !!}
+                {!! Form::open(['route'=>config('models.'.$section.'.storeRoute')]) !!}
             @endif
-
             <div class="col-xs-6 form-group">
               {!! Form::label('Nombre') !!}
               {!! Form::text('name', null, ['class'=>'form-control']) !!}
@@ -23,5 +22,6 @@
                 {!! Form::label('Descripción') !!}
                 {!! Form::text('description', null, ['class'=>'form-control']) !!}
             </div>
+
     @endsection
 
