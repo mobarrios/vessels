@@ -13,7 +13,7 @@ class RoleUserPruebaSeeders extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for($i = 5; $i < 50; $i++){
+        for($i = 5; $i < 15; $i++){
 
             DB::table('role_user')->insert([
                 "id" => $i,

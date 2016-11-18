@@ -13,7 +13,7 @@ class BranchPruebaSeeders extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for($i = 1; $i < 20; $i++){
+        for($i = 3; $i < 500; $i++){
 
             DB::table('branches')->insert([
                 "id" => $i,
