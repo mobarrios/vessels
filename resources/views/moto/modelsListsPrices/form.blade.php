@@ -38,17 +38,7 @@
                 </thead>
                 <tbody>
 
-                @if(\Illuminate\Support\Facades\Session::has('items'))
-
-                    @foreach(\Illuminate\Support\Facades\Session::get('items') as $item)
-                        <tr>
-                            <td></td>
-                            <td>{{$item}}</td>
-                            <td>{{$item}}</td>
-                            <td>{{$item}}</td>
-                    </tr>
-                    @endforeach
-                @endif
+                
 
                 </tbody>
             </table>
