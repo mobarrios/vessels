@@ -27,7 +27,12 @@
          return $this->Categories()->lists('categories_id')->toArray();
      }
 
-
+     public function activeListPrice()
+     {
+            return $this->hasOne(ModelsListsPricesItems::class)->whereHas('ModelsListsPrices', function($q){
+                $q->where('status',1);
+            });
+     }
  }
 
 

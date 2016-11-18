@@ -11,6 +11,10 @@
                 </td>
                 <td>{{$model->Brands->name }}</td>
                 <td>{{$model->name}}</td>
+
+                <td>Lista : $ {{$model->activeListPrice->price_list or ''}}</td>
+                <td>Costo : $ {{$model->activeListPrice->price_net or ''}}</td>
+
             </tr>
         @endforeach
     @endsection
