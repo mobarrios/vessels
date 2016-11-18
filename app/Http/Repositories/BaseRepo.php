@@ -61,7 +61,8 @@ abstract class BaseRepo {
 
     public function ListsData($data, $id)
     {
-        return $this->model->lists($data, $id)->prepend('Seleccionar...','');
+       // para agregar un campo adelatnte return $this->model->lists($data, $id)->prepend('Seleccionar...','');
+        return $this->model->lists($data, $id);
     }
 
     public function find($id)

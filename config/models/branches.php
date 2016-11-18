@@ -39,7 +39,7 @@ return [
         
             'Nombre'    => 'name',
             'Direccion'  => 'address' ,
-            'Email'     => 'email'
+            //'Email'     => 'email',
     ],
 
     'validationsStore' => [

@@ -18,21 +18,40 @@
 <script src="vendors/LTE/plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="vendors/LTE/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="vendors/LTE/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+
+<!-- bootstrap color picker -->
+<script src="vendors/LTE/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
 
 @if(Auth::user())
 <script>
 
+    //color picker with addon
+    $(".colorpicker").colorpicker();
+
     //datePicker
-    $('.datePicker').datepicker();
+    $('.datePicker').datepicker({
+        format: 'dd-mm-yyyy',
+        language: 'es',
+    });
 
     //dateRange
-        $('.dateRange').daterangepicker();
+    $('.dateRange').daterangepicker({
+        format: 'dd-mm-yyyy',
+        language: 'es',
+    });
 
     //select2
-    $('.select2').select2();
+    $('.select2').select2({
+        placeholder: "Seleccionar..."
+    });
 
     //selectMult
-    $('.selectMulti').attr('multiple','multiple').select2();
+    $('.selectMulti').attr('multiple','multiple').select2({
+        placeholder: "Seleccionar..."
+
+    });
 
     //check all items
     $('#check_all').on('click',function(){

@@ -22,8 +22,10 @@ class CreateCertificatesTable extends Migration
             $table->date('date');
             $table->string('status');
             $table->string('tecnic_model');
+            $table->enum('type',['Digital','Papel']);
             
-
+            $table->integer('items_id')->unsigned()->index();
+            $table->foreign('items_id')->references('id')->on('items')->onDelete('cascade');
         });
     }
 

@@ -22,7 +22,7 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('moto.items.index')}}"><span> Artiulos</span></a></li>
+                    <li><a href="{{route('moto.items.index')}}"><span>Artiulos</span></a></li>
                     <li><a href="{{route('moto.brands.index')}}"><span> Marcas</span></a></li>
                     <li><a href="{{route('moto.categories.index')}}"><span> Categorias</span></a></li>
                     <li><a href="{{route('moto.models.index')}}"><span> Modelos</span></a></li>

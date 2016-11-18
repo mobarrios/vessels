@@ -15,10 +15,5 @@
               {!! Form::label('Color') !!}
               {!! Form::text('name', null, ['class'=>'form-control']) !!}
             </div>
-
-
-
-
-
 @endsection
 

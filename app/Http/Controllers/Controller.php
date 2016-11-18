@@ -65,8 +65,7 @@ abstract class Controller extends BaseController
 
         // id desde route
         $id = $this->route->getParameter('id');
-
-
+        
         $this->data['models'] = $this->repo->find($id);
 
         return view(config('models.'.$this->section.'.editView'))->with($this->data);

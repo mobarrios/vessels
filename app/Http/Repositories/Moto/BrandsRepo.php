@@ -11,6 +11,9 @@ class BrandsRepo extends BaseRepo {
     {
         return new Brands();
     }
-    
+
+    public function getAllWithModels(){
+        return $this->model->with('Models')->get();
+    }
 
 }

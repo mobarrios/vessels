@@ -19,7 +19,8 @@
 <link rel="stylesheet" href="vendors/LTE/plugins/daterangepicker/daterangepicker.css">
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="vendors/LTE/plugins/datepicker/datepicker3.css">
-
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="vendors/LTE/plugins/colorpicker/bootstrap-colorpicker.min.css">
 
 <style>
     body{

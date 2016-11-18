@@ -27,9 +27,7 @@ class CreateItemsTable extends Migration
             $table->integer('models_id')->unsigned()->index();
             $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
 
-            $table->integer('certificates_id')->unsigned()->index();
-            $table->foreign('certificates_id')->references('id')->on('certificates')->onDelete('cascade');
-
+           
             $table->integer('colors_id')->unsigned()->index();
             $table->foreign('colors_id')->references('id')->on('colors')->onDelete('cascade');
             
