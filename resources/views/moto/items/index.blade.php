@@ -11,9 +11,11 @@
                     Cuadro:  <strong >{{$model->n_cuadro}}</strong></td>
                 <td>
 
-                    {{$model->Certificates->number or '' }}
-
-                    <a href="{{route('moto.certificates.create',$model->id)}}" class="btn btn-sm btn-default" title="certificados"><span class="fa fa-certificate"></span></a>
+                    @if(!is_null($model->Certificates) && $model->Certificates->count() != 0)
+                         <a href="{{route('moto.certificates.edit',$model->id)}}" class="btn btn-sm btn-success" title="certificados"><span class="fa fa-certificate"></span></a>
+                    @else
+                        <a href="{{route('moto.certificates.create',$model->id)}}" class="btn btn-sm btn-default" title="certificados"><span class="fa fa-certificate"></span></a>
+                    @endif
                 </td>
             </tr>
         @endforeach

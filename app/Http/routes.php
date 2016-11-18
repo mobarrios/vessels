@@ -28,6 +28,9 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Moto/categoriesRoute.php');
         require(__DIR__ . '/Routes/Moto/colorsRoute.php');
         require(__DIR__ . '/Routes/Moto/modelsRoute.php');
+        require(__DIR__ . '/Routes/Moto/providersRoute.php');
+        require(__DIR__ . '/Routes/Moto/modelsListsPricesRoute.php');
+
 
     });
 

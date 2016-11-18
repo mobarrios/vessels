@@ -27,6 +27,8 @@
 @if(Auth::user())
 <script>
 
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+
     //color picker with addon
     $(".colorpicker").colorpicker();
 

@@ -27,6 +27,10 @@
                     <li><a href="{{route('moto.categories.index')}}"><span> Categorias</span></a></li>
                     <li><a href="{{route('moto.models.index')}}"><span> Modelos</span></a></li>
                     <li><a href="{{route('moto.colors.index')}}"><span> Colores</span></a></li>
+                    <li><a href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
+                    <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios</span></a></li>
+
+
                 </ul>
             </li>
 

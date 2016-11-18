@@ -11,7 +11,6 @@
             {!! Form::open(['route'=>config('models.'.$section.'.storeRoute')]) !!}
         @endif
 
-
         {!! Form::hidden('items_id', $items_id) !!}
         <div class="row">
             <div class="col-xs-6 form-group">

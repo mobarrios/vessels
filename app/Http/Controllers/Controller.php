@@ -21,12 +21,7 @@ abstract class Controller extends BaseController
     protected $config;
     protected $data;
     protected $section;
-
-    public function __construct()
-    {
-        $this->data['actual'] = $this->section or "home";
-    }
-
+    
     public function index()
     {
         //breadcrumb activo
