@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
 
 
@@ -21,6 +22,10 @@ abstract class Controller extends BaseController
     protected $data;
     protected $section;
 
+    public function __construct()
+    {
+        $this->data['actual'] = $this->section or "home";
+    }
 
     public function index()
     {

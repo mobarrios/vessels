@@ -14,7 +14,7 @@
                 </a>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ Request::segment(1) == "moto" ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-motorcycle "></i> <span>Articulos</span>
                         <span class="pull-right-container">
@@ -33,7 +33,7 @@
             @permission('configs.list')
             @endpermission
 
-            <li class="treeview">
+            <li class="treeview {{ Request::segment(1) == "configs" ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-gear"></i> <span>Configuración</span>
                         <span class="pull-right-container">
@@ -41,7 +41,7 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li class="{{ Request::segment(2) == "branches" ? 'active' : '' }}">
                         <a href="#"><span>Empresa</span>
                             <span class="pull-right-container">
                               <i class="fa fa-angle-left pull-right"></i>
@@ -53,7 +53,7 @@
 
                         </ul>
                     </li>
-                    <li>
+                    <li class="{{ (Request::segment(2) == "roles" || Request::segment(2) == "permissions" || Request::segment(2) == "users")  ? 'active' : '' }}">
                         <a href="#"><span> Accesos </span>
                             <span class="pull-right-container">
                               <i class="fa fa-angle-left pull-right"></i>

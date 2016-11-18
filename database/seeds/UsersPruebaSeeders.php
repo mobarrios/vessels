@@ -13,7 +13,7 @@ class UsersPruebaSeeders extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for($i = 5; $i < 50; $i++){
+        for($i = 5; $i < 500; $i++){
 
             DB::table('users')->insert([
                 "id" => $i,
