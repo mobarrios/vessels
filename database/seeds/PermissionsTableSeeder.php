@@ -278,7 +278,32 @@ class PermissionsTableSeeder extends Seeder
                     'name' => 'Show Models',
                     'slug' => 'models.show',
                     'model' => '',
-                ]
+                ],
+                //MODELSLISTPRICE
+                [
+                    'id'    => 42,
+                    'name' => 'List Models',
+                    'slug' => 'modelslistsprices.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 43,
+                    'name' => 'Crear Models',
+                    'slug' => 'modelslistsprices.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 44,
+                    'name' => 'Edit Models',
+                    'slug' => 'modelslistsprices.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 45,
+                    'name' => 'Delete Models',
+                    'slug' => 'modelslistsprices.destroy',
+                    'model' => '',
+                ],
         ]);
     }
 }

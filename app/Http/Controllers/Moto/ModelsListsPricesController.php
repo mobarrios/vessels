@@ -35,34 +35,98 @@ class ModelsListsPricesController extends Controller
     public function addItems()
     {
         $data   = $this->request;
-        $model  = $this->modelsRepo->find($data->models_id);
+        if(empty($data))
+            return ["error" => "Debes completar los campos"];
 
-        $arr[] =  Session::get('items');
+        else{
 
-        $newItem[] =
-        [
-           'models_id' => $data->models_id,
-            'models_name' => $model->name,
-            'brands_name'  => $model->Brands->name,
-            'price_list' => $data->price_list,
-            'price_net' => $data->price_net,
-            'max_discount' => $data->max_discount,
-            'obs'=> $data->obs
+            $model  = $this->modelsRepo->find($data->models_id);
 
-        ];
+            $arr =  session()->has('items') ? session('items') : [];
 
-        array_push($arr, $newItem);
+            $newItem =
+            [
+                'models_id' => $data->models_id,
+                'price_list' => $data->price_list,
+                'price_net' => $data->price_net,
+                'max_discount' => $data->max_discount,
+                'obs'=> $data->obs
+            ];
 
+            array_push($arr, $newItem);
 
-        Session::put('items',$arr);
+            session()->put('items',$arr);
 
-        //Session::flush();
-
-        return redirect()->back()->withErrors(['Item Agregado Correctamente']);
+            return [
+                    'error' => 'Se agregó correctamente el item',
+                    'success' => [
+                        'models_name' => $model->name,
+                        'models_id' => $model->id,
+                        'price_list' => $data->price_list,
+                        'price_net' => $data->price_net,
+                        'max_discount' => $data->max_discount
+                    ]
+            ];
+        }
     }
 
-    public function removeItems()
+    public function editItems()
     {
+        $data   = $this->request;
+        if(empty($data))
+            return ["error" => "Debes completar los campos"];
 
+        else{
+
+            $model  = $this->modelsRepo->find($data->models_id);
+
+            $arr =  session()->has('items') ? session('items') : [];
+
+            $newItem =
+            [
+                'models_id' => $data->models_id,
+                'price_list' => $data->price_list,
+                'price_net' => $data->price_net,
+                'max_discount' => $data->max_discount,
+                'obs'=> $data->obs
+            ];
+
+//            array_push($arr, $newItem);
+
+            foreach($arr as $ind => $val){
+                if($val["models_id"] == $data->id){
+                    $arr[$ind] = $newItem;
+                }
+            }
+
+            session()->put('items',$arr);
+
+            return [
+                    'error' => 'Se editó correctamente el item',
+                    'success' => [
+                        'models_name' => $model->name,
+                        'models_id' => $model->id,
+                        'price_list' => $data->price_list,
+                        'price_net' => $data->price_net,
+                        'max_discount' => $data->max_discount
+                    ]
+            ];
+        }
+    }
+
+    public function deleteItems()
+    {
+        $data   = $this->request;
+        $arr =  session()->has('items') ? session('items') : [];
+
+        foreach($arr as $ind => $val){
+            if($val["models_id"] == $data->id){
+                unset($arr[$ind]);
+            }
+        }
+
+        session()->put('items',$arr);
+
+        return "Se eliminó correctamente el item";
     }
 }

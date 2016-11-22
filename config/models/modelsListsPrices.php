@@ -38,10 +38,7 @@ return [
     'search' => [
 
         'Nombre' => 'name',
-        'Direccion' => 'address',
-        'Email' => 'email',
-        'Cuit' => 'cuit',
-        'Tel.' => 'phone',
+        'Direccion' => 'address'
 
 
     ],
@@ -49,9 +46,7 @@ return [
     'validationsStore' => [
 
         'name' => 'required',
-        'address' => 'required',
-        'email' => 'required',
-        'phone' => 'required',
+        'providers_id' => 'required'
 
 
     ],

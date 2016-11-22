@@ -1,5 +1,5 @@
 @if($errors->any())
-    <div class="alert bg-gray  alert-dismissible">
+    <div class="alert bg-gray  alert-dismissible" id="messages">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 
         @foreach($errors->all() as $error)
