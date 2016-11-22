@@ -14,6 +14,17 @@
                 </a>
             </li>
 
+            <li class="treeview {{ Request::segment(1) == "clients" ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-group "></i> <span>Clientes</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('moto.clients.index')}}"><span>Lista de Clientes</span></a></li>
+                </ul>
+            </li>
             <li class="treeview {{ Request::segment(1) == "moto" ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-motorcycle "></i> <span>Articulos</span>
@@ -29,6 +40,9 @@
                     <li><a href="{{route('moto.colors.index')}}"><span> Colores</span></a></li>
                     <li><a href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
                     <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios</span></a></li>
+                    <li><a href="{{route('moto.purchasesOrders.index')}}"><span> Ordenes de Compra</span></a></li>
+
+                    <li><a href="{{route('moto.dispatches.index')}}"><span>Remitos</span></a></li>
 
 
                 </ul>

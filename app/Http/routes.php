@@ -23,15 +23,17 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::group(['prefix'=>'moto'],function() {
 
-        require(__DIR__ . '/Routes/Moto/itemsRoute.php');
         require(__DIR__ . '/Routes/Moto/brandsRoute.php');
+        require(__DIR__ . '/Routes/Moto/clientsRoute.php');
         require(__DIR__ . '/Routes/Moto/categoriesRoute.php');
         require(__DIR__ . '/Routes/Moto/colorsRoute.php');
+        require(__DIR__ . '/Routes/Moto/dispatchesRoute.php');
+        require(__DIR__ . '/Routes/Moto/itemsRoute.php');
         require(__DIR__ . '/Routes/Moto/modelsRoute.php');
-        require(__DIR__ . '/Routes/Moto/providersRoute.php');
         require(__DIR__ . '/Routes/Moto/modelsListsPricesRoute.php');
-
-
+        require(__DIR__ . '/Routes/Moto/purchasesOrdersRoute.php');
+        require(__DIR__ . '/Routes/Moto/providersRoute.php');
+        
     });
 
 
