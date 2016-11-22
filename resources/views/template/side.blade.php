@@ -38,18 +38,26 @@
                     <li><a href="{{route('moto.categories.index')}}"><span> Categorias</span></a></li>
                     <li><a href="{{route('moto.models.index')}}"><span> Modelos</span></a></li>
                     <li><a href="{{route('moto.colors.index')}}"><span> Colores</span></a></li>
-                    <li><a href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
-                    <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios</span></a></li>
-                    <li><a href="{{route('moto.purchasesOrders.index')}}"><span> Ordenes de Compra</span></a></li>
-
-                    <li><a href="{{route('moto.dispatches.index')}}"><span>Remitos</span></a></li>
-
-
                 </ul>
             </li>
 
+            <li class="treeview {{ Request::segment(1) == "moto.providers" ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-shopping-bag "></i> <span>Compras</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
+                    <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios</span></a></li>
+                    <li><a href="{{route('moto.purchasesOrders.index')}}"><span> Ordenes de Compra</span></a></li>
+                    <li><a href="{{route('moto.dispatches.index')}}"><span>Remitos</span></a></li>
+                </ul>
+            </li>
             @permission('configs.list')
             @endpermission
+
 
             <li class="treeview {{ Request::segment(1) == "configs" ? 'active' : '' }}">
                 <a href="#">

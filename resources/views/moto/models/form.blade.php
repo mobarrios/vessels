@@ -19,19 +19,21 @@
             {!! Form::label('Marca') !!}
             {!! Form::select('brands_id', $brands , null ,['class'=>'select2 form-control ']) !!}
         </div>
-        <div class="col-xs-6 form-group">
+        <div class="col-xs-4 form-group">
             {!! Form::label('Categorias') !!}
             {!! Form::select('categories_id[]', $categories , null ,['class'=>'selectMulti form-control' ,'multiple'=>'']) !!}
         </div>
+        <div class="col-xs-2 form-group">
+            {!! Form::label('Estado') !!}
+            {!! Form::select('stauts', [''=>'Activo'],null, ['class'=>'form-control']) !!}
+        </div>
 
         <div class="col-xs-6 form-group">
-             {!! Form::label('Estado') !!}
-             {!! Form::select('stauts', [''=>'Activo'],null, ['class'=>'form-control']) !!}
+            {!! Form::label('Imagen') !!}
+            {!! Form::file('image') !!}
         </div>
-        <div class="col-xs-6 form-group">
-             {!! Form::label('Imagen') !!}
-             {!! Form::file('image') !!}
-        </div>
+
+
 
 @endsection
 

@@ -304,6 +304,106 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'modelslistsprices.destroy',
                     'model' => '',
                 ],
+                //CLIENTS
+                [
+                    'id'    => 46,
+                    'name' => 'List Clients',
+                    'slug' => 'clients.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 47,
+                    'name' => 'Crear Clients',
+                    'slug' => 'clients.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 48,
+                    'name' => 'Edit Clients',
+                    'slug' => 'clients.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 49,
+                    'name' => 'Delete Clients',
+                    'slug' => 'clients.destroy',
+                    'model' => '',
+                ],
+                //PROVIDERS
+                [
+                    'id'    => 50,
+                    'name' => 'List Poveedores',
+                    'slug' => 'providers.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 51,
+                    'name' => 'Crear Poveedores',
+                    'slug' => 'providers.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 52,
+                    'name' => 'Edit Poveedores',
+                    'slug' => 'providers.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 53,
+                    'name' => 'Delete Poveedores',
+                    'slug' => 'providers.destroy',
+                    'model' => '',
+                ],
+                //ORDENES DE COMPRA
+                [
+                    'id'    => 54,
+                    'name' => 'List Ordenes de Compra',
+                    'slug' => 'purchasesorders.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 55,
+                    'name' => 'Crear Ordenes de Compra',
+                    'slug' => 'purchasesorders.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 56,
+                    'name' => 'Edit Ordenes de Compra',
+                    'slug' => 'purchasesorders.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 57,
+                    'name' => 'Delete Ordenes de Compra',
+                    'slug' => 'purchasesorders.destroy',
+                    'model' => '',
+                ],
+                //REMITOS
+                [
+                    'id'    => 58,
+                    'name' => 'List Remitos',
+                    'slug' => 'dispatches.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 59,
+                    'name' => 'Crear Remitos',
+                    'slug' => 'dispatches.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 60,
+                    'name' => 'Edit Remitos',
+                    'slug' => 'dispatches.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 61,
+                    'name' => 'Delete Remitos',
+                    'slug' => 'dispatches.destroy',
+                    'model' => '',
+                ],
         ]);
     }
 }

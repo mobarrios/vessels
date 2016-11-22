@@ -45,17 +45,16 @@ return [
 
     'validationsStore' => [
 
-        'name' => 'required',
-        'providers_id' => 'required'
+        'number' => 'required',
+        //'providers_id' => 'required'
 
 
     ],
 
     'validationsUpdate' => [
-        'name' => 'required',
-        'address' => 'required',
-        'email' => 'required',
-        'phone' => 'required'
+        'number' => 'required',
+       //'providers_id' => 'required'
+
 
     ],
 

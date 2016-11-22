@@ -37,7 +37,6 @@ class ModelsListsPricesController extends Controller
         $data   = $this->request;
         if(empty($data))
             return ["error" => "Debes completar los campos"];
-
         else{
 
             $model  = $this->modelsRepo->find($data->models_id);

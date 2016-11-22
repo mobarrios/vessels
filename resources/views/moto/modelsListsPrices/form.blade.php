@@ -13,14 +13,21 @@
 
         <div class="col-xs-6 form-group">
             {!! Form::label('Nombre Lista de Precio') !!}
-            {!! Form::text('name', null, ['class'=>'form-control']) !!}
+            {!! Form::text('number', null, ['class'=>'form-control']) !!}
         </div>
-        <div class="col-xs-4 form-group">
+        {{--
+        <div class="col-xs-3 form-group">
             {!! Form::label('Proveedor') !!}
             {!! Form::select('providers_id', $providers,null, ['class'=>'select2 form-control']) !!}
         </div>
+        --}}
+        <div class="col-xs-2 form-group">
+            {!! Form::label('Estado') !!}
+            {!! Form::select('status', ['1'=> 'Activa', '0'=> 'Inactiva' ] ,null, ['class'=>'select2 form-control']) !!}
+        </div>
 
-        <div class="col-xs-2 form-group" style="padding-top: 2%">
+
+        <div class="col-xs-1 form-group" style="padding-top: 2%">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
                 <span class="fa fa-plus"></span>
             </button>
@@ -42,6 +49,26 @@
                 <tbody id="tbody">
                     {{--{!! dd(session('items')) !!}--}}
                             {{--{!! session()->forget('items') !!}--}}
+
+                    @if(isset($models))
+                        @forelse($models->ModelsListsPricesItems as $model)
+                            <tr>
+                                <td>{!! \App\Entities\Moto\Models::find($model['models_id'])->name !!}</td>
+                                <td>{!! $model['price_list'] !!}</td>
+                                <td>{!! $model['price_net'] !!}</td>
+                                <td>{!! $model['max_discount'] !!}</td>
+                                <td>
+                                    <div class="btn-group actions">
+                                        <button class="btn btn-xs btn-success edit" data-id="{!! $model['models_id'] !!}"><i class="fa fa-edit"></i></button>
+                                        <button class="btn btn-xs btn-danger trash" data-id="{!! $model['models_id'] !!}"><i class="fa fa-trash-o"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+
+                        @endforelse
+                    @endif
+
                     @if(session()->has('items'))
                         @foreach(session('items') as $item)
                             <tr>

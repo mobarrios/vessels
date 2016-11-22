@@ -21,8 +21,8 @@ class CreateModelsListsPrices extends Migration
             $table->string('number');
             $table->boolean('status');
             
-            $table->integer('providers_id')->unsigned()->index();
-            $table->foreign('providers_id')->references('id')->on('providers')->onDelete('cascade');
+           // $table->integer('providers_id')->unsigned()->index();
+           // $table->foreign('providers_id')->references('id')->on('providers')->onDelete('cascade');
         });
     }
 

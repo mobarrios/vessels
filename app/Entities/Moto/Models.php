@@ -29,9 +29,9 @@
 
      public function activeListPrice()
      {
-            return $this->hasOne(ModelsListsPricesItems::class)->whereHas('ModelsListsPrices', function($q){
-                $q->where('status',1);
-            });
+         return $this->hasOne(ModelsListsPricesItems::class)->with('ModelsListsPrices')->orderBy('updated_at','DESC');
+
+
      }
  }
 

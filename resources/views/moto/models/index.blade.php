@@ -9,11 +9,21 @@
                         <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
                     </div>
                 </td>
-                <td>{{$model->Brands->name }}</td>
-                <td>{{$model->name}}</td>
+                <td>
+                    {{$model->Brands->name }} :
+                <strong>{{$model->name}}</strong>
+                </td>
 
-                <td>Lista : $ {{$model->activeListPrice->price_list or ''}}</td>
-                <td>Costo : $ {{$model->activeListPrice->price_net or ''}}</td>
+                <td>
+                   <strong class="text-danger"> {{$model->activeListPrice->ModelsListsPrices->number }}</strong><br>
+                    Lista : <strong class="text-success">$ {{$model->activeListPrice->price_list or ''}}</strong><br>
+                    Costo : <strong  >$ {{$model->activeListPrice->price_net or ''}}</strong>
+                </td>
+                <td>
+                    <label class="label label-success">activo</label>
+                    <label class="label label-success">stock</label>
+
+                </td>
 
             </tr>
         @endforeach
