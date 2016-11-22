@@ -11,7 +11,9 @@
 
      protected $fillable = ['number','status','providers_id'];
 
-
+    public function ModelsListsPricesItems(){
+        return $this->hasMany(ModelsListsPricesItems::class);
+    }
  }
 
 

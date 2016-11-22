@@ -15,5 +15,9 @@ Route::group(['prefix'=>'modelsListsPrices'],function(){
 
         Route::post('/addItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.modelsListsPricesAddItems','uses'=>'Moto\ModelsListsPricesController@addItems']);
 
+        Route::post('/editItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.modelsListsPricesEditItems','uses'=>'Moto\ModelsListsPricesController@editItems']);
+
+        Route::post('/deleteItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.modelsListsPricesDeleteItems','uses'=>'Moto\ModelsListsPricesController@deleteItems']);
+
 
 });
