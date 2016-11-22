@@ -35,26 +35,14 @@
         </div>
 
 
+        @include('moto.partials.tablaItems')
 
-        <!-- Modal -->
-        <div class="modal  bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Agregar Item</h4>
-                    </div>
-                    <div class="modal-body row">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-default">Aceptar</button>
-                    </div>
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
 
 
     @endsection
 
+@include('moto.partials.modalItems')
+
+@section('js')
+    @include('moto.partials.jsItems')
+@endsection

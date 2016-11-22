@@ -18,6 +18,13 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
+    //addItems
+    'addItemsRoute'  => 'moto.'.$model.'.addItems',
+    'editItemsRoute'  => 'moto.'.$model.'.editItems',
+    'deleteItemsRoute'  => 'moto.'.$model.'.deleteItems',
+
+
+
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
 

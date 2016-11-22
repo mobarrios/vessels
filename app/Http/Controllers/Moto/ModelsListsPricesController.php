@@ -42,7 +42,7 @@ class ModelsListsPricesController extends Controller
 
             $model  = $this->modelsRepo->find($data->models_id);
 
-            $arr =  session()->has('items') ? session('items') : [];
+            $arr =  session()->has($this->section.'Items') ? session($this->section.'Items') : [];
 
             $newItem =
             [
@@ -55,7 +55,7 @@ class ModelsListsPricesController extends Controller
 
             array_push($arr, $newItem);
 
-            session()->put('items',$arr);
+            session()->put($this->section.'Items',$arr);
 
             return [
                     'error' => 'Se agregó correctamente el item',
@@ -80,7 +80,7 @@ class ModelsListsPricesController extends Controller
 
             $model  = $this->modelsRepo->find($data->models_id);
 
-            $arr =  session()->has('items') ? session('items') : [];
+            $arr =  session()->has($this->section.'Items') ? session($this->section.'Items') : [];
 
             $newItem =
             [
@@ -99,7 +99,7 @@ class ModelsListsPricesController extends Controller
                 }
             }
 
-            session()->put('items',$arr);
+            session()->put($this->section.'Items',$arr);
 
             return [
                     'error' => 'Se editó correctamente el item',
@@ -117,7 +117,7 @@ class ModelsListsPricesController extends Controller
     public function deleteItems()
     {
         $data   = $this->request;
-        $arr =  session()->has('items') ? session('items') : [];
+        $arr =  session()->has($this->section.'Items') ? session($this->section.'Items') : [];
 
         foreach($arr as $ind => $val){
             if($val["models_id"] == $data->id){
@@ -125,7 +125,7 @@ class ModelsListsPricesController extends Controller
             }
         }
 
-        session()->put('items',$arr);
+        session()->put($this->section.'Items',$arr);
 
         return "Se eliminó correctamente el item";
     }
