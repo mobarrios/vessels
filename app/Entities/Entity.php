@@ -51,8 +51,12 @@ class Entity extends Model {
 
     public function brancheables()
     {
-        return $this->morphOne('App\Entities\Configs\Brancheables','entities');
+        return $this->morphMany('App\Entities\Configs\Brancheables','entities');
     }
 
+    public function getBranchesIdAttribute()
+    {
+        return $this->Brancheables()->lists('branches_id')->toArray();
+    }
 
 }

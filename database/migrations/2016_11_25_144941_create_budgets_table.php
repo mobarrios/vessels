@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModelsListsPrices extends Migration
+class CreateBudgetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,17 @@ class CreateModelsListsPrices extends Migration
      */
     public function up()
     {
-        Schema::create('models_lists_prices', function (Blueprint $table) {
+        Schema::create('budgets', function (Blueprint $table) {
 
             $table->increments('id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
+            $table->date('date');
             $table->string('number');
-            $table->boolean('status');
-            
-            $table->integer('providers_id')->unsigned()->index();
-            $table->foreign('providers_id')->references('id')->on('providers')->onDelete('cascade');
+
+            $table->integer('purchases_orders_id')->unsigned()->nulleable();
+            $table->foreign('purchases_orders_id')->references('id')->on('purchases_orders')->onDelete('cascade');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateModelsListsPrices extends Migration
      */
     public function down()
     {
-        Schema::drop('models_lists_prices');
+        Schema::drop('budgets');
     }
 }

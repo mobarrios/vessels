@@ -15,4 +15,9 @@ Route::group(['prefix'=>'dispatches'],function(){
 
 
 
+        Route::post('/addItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.dispatches.addItems','uses'=>'Moto\DispatchesController@addItems']);
+
+        Route::post('/editItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.dispatches.editItems','uses'=>'Moto\DispatchesController@editItems']);
+
+        Route::post('/deleteItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.dispatches.deleteItems','uses'=>'Moto\DispatchesController@deleteItems']);
 });

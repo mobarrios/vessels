@@ -10,9 +10,8 @@
                         <img src="{{$model->images()->first()['path']}}" class="img-rounded" alt="Imagen" width="60px" >
                     </div>
                 </td>
-                <td>{{$model->name }}</td>
-                <td>{{$model->address}}</td>
-                <td>{{$model->type}}</td>
+                <td>{{$model->date }}</td>
+                <td>{{$model->number}}</td>
             </tr>
         @endforeach
     @endsection

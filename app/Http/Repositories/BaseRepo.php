@@ -54,9 +54,19 @@ abstract class BaseRepo {
     }
 
 
-    public function ListAll()
+    public function ListAll($section = null)
     {
-       return $this->model;
+        if(config('models.'.$section.'.is_brancheable'))
+        {
+            return $this->model->whereHas('Brancheables',function($q){
+
+                    $q->whereIn('branches_id',Auth::user()->branches_id );
+            });
+
+        }else
+        {
+             return $this->model;
+        }
     }
 
     public function ListsData($data, $id)
@@ -111,7 +121,11 @@ abstract class BaseRepo {
     public function createBrancheables( $model , $branches_id)
     {
         $model->brancheables()->delete();
-        $model->brancheables()->create(['branches_id' => $branches_id] );
+
+        foreach ($branches_id as $id) {
+             $model->brancheables()->create(['branches_id' => $id] );
+        }
+
     }
 
 

@@ -18,6 +18,9 @@ return [
     'updateRoute'   => 'configs.'.$model.'.update',
     'destroyRoute'  => 'configs.'.$model.'.destroy',
 
+    'postStoreRoute'  => 'moto.'.$model.'.index',
+    'postUpdateRoute' => 'moto.'.$model.'.index',
+    
     //urls
     'destroyUrl' => 'configs/'.$model.'/destroy/',
 

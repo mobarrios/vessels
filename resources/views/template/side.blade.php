@@ -14,17 +14,21 @@
                 </a>
             </li>
 
-            <li class="treeview {{ Request::segment(1) == "clients" ? 'active' : '' }}">
-                <a href="#">
-                    <i class="fa fa-group "></i> <span>Clientes</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('moto.clients.index')}}"><span>Lista de Clientes</span></a></li>
-                </ul>
-            </li>
+            @permission('clients.list')
+                <li class="treeview {{ Request::segment(1) == "clients" ? 'active' : '' }}">
+                    <a href="#">
+                        <i class="fa fa-group "></i> <span>Clientes</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('moto.clients.index')}}"><span>Lista de Clientes</span></a></li>
+                    </ul>
+                </li>
+            @endpermission
+
+
             <li class="treeview {{ Request::segment(1) == "moto" ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-motorcycle "></i> <span>Articulos</span>
@@ -33,11 +37,24 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('moto.items.index')}}"><span>Artiulos</span></a></li>
-                    <li><a href="{{route('moto.brands.index')}}"><span> Marcas</span></a></li>
-                    <li><a href="{{route('moto.categories.index')}}"><span> Categorias</span></a></li>
-                    <li><a href="{{route('moto.models.index')}}"><span> Modelos</span></a></li>
-                    <li><a href="{{route('moto.colors.index')}}"><span> Colores</span></a></li>
+                    @permission('items.list')
+                        <li><a href="{{route('moto.items.index')}}"><span>Artiulos</span></a></li>
+                    @endpermission
+                    @permission('modelslistsprices.list')
+                        <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios Venta</span></a></li>
+                    @endpermission
+                    @permission('brands.list')
+                        <li><a href="{{route('moto.brands.index')}}"><span> Marcas</span></a></li>
+                    @endpermission
+                    @permission('categories.list')
+                        <li><a href="{{route('moto.categories.index')}}"><span> Categorias</span></a></li>
+                    @endpermission
+                    @permission('models.list')
+                        <li><a href="{{route('moto.models.index')}}"><span> Modelos</span></a></li>
+                    @endpermission
+                    @permission('colors.list')
+                        <li><a href="{{route('moto.colors.index')}}"><span> Colores</span></a></li>
+                    @endpermission
                 </ul>
             </li>
 
@@ -49,10 +66,19 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
-                    <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios</span></a></li>
-                    <li><a href="{{route('moto.purchasesOrders.index')}}"><span> Ordenes de Compra</span></a></li>
-                    <li><a href="{{route('moto.dispatches.index')}}"><span>Remitos</span></a></li>
+                    @permission('providers.list')
+                        <li><a href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
+                    @endpermission
+                    @permission('modelslistsprices.list')
+                        <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios Compra</span></a></li>
+                    @endpermission
+                    @permission('purchasesorders.list')
+                        <li><a href="{{route('moto.purchasesOrders.index')}}"><span> Ordenes de Compra</span></a></li>
+                    @endpermission
+                    @permission('dispatches.list')
+                        <li><a href="{{route('moto.dispatches.index')}}"><span>Remitos</span></a></li>
+                    @endpermission
+
                 </ul>
             </li>
             @permission('configs.list')
@@ -86,12 +112,22 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{route('configs.roles.index')}}"><span>Roles</span> </a></li>
-                            <li><a href="{{route('configs.permissions.index')}}"><span> Permisos</span> </a></li>
-                            <li><a href="{{route("configs.users.index")}}"><span> Usuarios</span> </a></li>
+                            @permission('roles.list')
+                                <li><a href="{{route('configs.roles.index')}}"><span>Roles</span> </a></li>
+                            @endpermission
+                            @permission('permissions.list')
+                                <li><a href="{{route('configs.permissions.index')}}"><span> Permisos</span> </a></li>
+                            @endpermission
+                            @permission('users.list')
+                                <li><a href="{{route("configs.users.index")}}"><span> Usuarios</span> </a></li>
+                            @endpermission
+
                         </ul>
                     </li>
-                    <li><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
+                    @permission('logs.list')
+                        <li><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
+                    @endpermission
+
                     <li><a href="#"><span>Sistema</span></a></li>
                 </ul>
             </li>

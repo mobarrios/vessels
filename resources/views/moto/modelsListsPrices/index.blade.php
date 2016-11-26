@@ -6,6 +6,8 @@
                 <td>{{$model->id}}</td>
                 <td>{{$model->updated_at }}</td>
                 <td>{{$model->number }}</td>
+                <td>{{$model->number }}</td>
+
             </tr>
         @endforeach
     @endsection

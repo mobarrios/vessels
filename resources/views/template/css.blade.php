@@ -1,3 +1,4 @@
+
 <!-- select2 -->
 <link rel="stylesheet" href="vendors/LTE/plugins/select2/select2.min.css">
 <!-- Font Awesome -->
@@ -5,7 +6,7 @@
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <!-- iCheck -->
-<link rel="stylesheet" href="vendors/LTE/plugins/iCheck/square/blue.css">
+<link rel="stylesheet" href="vendors/LTE/plugins/iCheck/minimal/blue.css">
 <!--font-->
 <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 <!-- daterange picker -->
@@ -22,6 +23,7 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="vendors/LTE/dist/css/skins/_all-skins.min.css">
+
 
 <style>
     body{

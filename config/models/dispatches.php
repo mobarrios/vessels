@@ -18,6 +18,11 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
+    //addItems
+    'addItemsRoute'  => 'moto.'.$model.'.addItems',
+    'editItemsRoute'  => 'moto.'.$model.'.editItems',
+    'deleteItemsRoute'  => 'moto.'.$model.'.deleteItems',
+
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
 
@@ -37,22 +42,22 @@ return [
     //column search
     'search' => [
         
-            'Nombre'    => 'name',
-            'Direccion'  => 'address' ,
+            'Numero'    => 'number',
+            //'Direccion'  => 'address' ,
             //'Email'     => 'email',
     ],
 
     'validationsStore' => [
 
-            'name'          => 'required',
-            'address'     => 'required',
+            'number'          => 'required',
+            'date'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'name'          => 'required',
-            'address'     => 'required',
+            'number'          => 'required',
+            'date'     => 'required',
 
     ],
 

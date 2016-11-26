@@ -15,7 +15,7 @@
                 </td>
 
                 <td>
-                   <strong class="text-danger"> {{$model->activeListPrice->ModelsListsPrices->number }}</strong><br>
+                   <strong class="text-danger"> {{$model->activeListPrice->ModelsListsPrices->number  or ''}}</strong><br>
                     Lista : <strong class="text-success">$ {{$model->activeListPrice->price_list or ''}}</strong><br>
                     Costo : <strong  >$ {{$model->activeListPrice->price_net or ''}}</strong>
                 </td>

@@ -33,10 +33,11 @@ abstract class Controller extends BaseController
             $model = $this->repo->search($this->request);
 
             if(is_null($model) || $model->count() == 0)
-              $model = $this->repo->listAll();
+                //si paso la seccion
+                $model = $this->repo->listAll($this->section);
 
         }else{
-            $model  = $this->repo->listAll();
+            $model  = $this->repo->listAll($this->section);
         }
 
         //guarda en session lo que se busco para exportar
@@ -95,8 +96,7 @@ abstract class Controller extends BaseController
                     $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
 
 
-
-        return redirect()->route(config('models.'.$this->section.'.indexRoute'))->withErrors(['Regitro Agregado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
 
     //post de editar
@@ -123,7 +123,7 @@ abstract class Controller extends BaseController
                     $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
 
 
-        return redirect()->route(config('models.'.$this->section.'.indexRoute'))->withErrors(['Regitro Editado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
     }
 
 

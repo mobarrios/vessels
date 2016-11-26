@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Listas de Precios',
+    'sectionName'   => 'Precios Ventas',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',
@@ -17,6 +17,17 @@ return [
     'editRoute'     => 'moto.'.$model.'.edit',
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
+
+    'postStoreRoute'  => 'moto.'.$model.'.edit',
+    'postUpdateRoute' => 'moto.'.$model.'.edit',
+    
+
+    //addItems
+    'addItemsRoute'  => 'moto.'.$model.'.addItems',
+    'editItemsRoute'  => 'moto.'.$model.'.editItems',
+    'deleteItemsRoute'  => 'moto.'.$model.'.deleteItems',
+
+
 
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',

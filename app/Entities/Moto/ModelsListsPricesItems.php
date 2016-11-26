@@ -16,6 +16,11 @@
         return $this->belongsTo(ModelsListsPrices::class);
      }
 
+     public function Models()
+     {
+         return $this->belongsTo(Models::class);
+     }
+
 
  }
 

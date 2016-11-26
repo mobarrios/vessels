@@ -44,30 +44,7 @@
             </div>
         </div>
 
-        <hr>
 
-        <h4>Certificados</h4>
-
-        <div class="row">
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Número Certificado') !!}
-                {!! Form::text('number', null, ['class'=>'form-control']) !!}
-            </div>
-
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Fecha') !!}
-                {!! Form::text('date', null, ['class'=>'datePicker form-control']) !!}
-            </div>
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Modelo Técnico') !!}
-                {!! Form::text('tecnic_model', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Tipo') !!}
-                {!! Form::select('type', ['Digital'=>'Digital', 'Papel'=> 'Papel'], null, ['class'=>'select2 form-control']) !!}
-            </div>
-
-        </div>
 
 @endsection
 

@@ -57,6 +57,7 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
         else
             $this->attributes['password']  = $this->attributes['password'] ;
     }
+
     
 
 }

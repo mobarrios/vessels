@@ -282,25 +282,25 @@ class PermissionsTableSeeder extends Seeder
                 //MODELSLISTPRICE
                 [
                     'id'    => 42,
-                    'name' => 'List Models',
+                    'name' => 'List Models Lists Prices',
                     'slug' => 'modelslistsprices.list',
                     'model' => '',
                 ],
                 [
                     'id'    => 43,
-                    'name' => 'Crear Models',
+                    'name' => 'Crear Models Lists Prices',
                     'slug' => 'modelslistsprices.create',
                     'model' => '',
                 ],
                 [
                     'id'    => 44,
-                    'name' => 'Edit Models',
+                    'name' => 'Edit Models Lists Prices',
                     'slug' => 'modelslistsprices.edit',
                     'model' => '',
                 ],
                 [
                     'id'    => 45,
-                    'name' => 'Delete Models',
+                    'name' => 'Delete Models Lists Prices',
                     'slug' => 'modelslistsprices.destroy',
                     'model' => '',
                 ],

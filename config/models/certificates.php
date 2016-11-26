@@ -19,6 +19,9 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
+    'postStoreRoute'  => 'moto.'.$model.'.index',
+    'postUpdateRoute' => 'moto.'.$model.'.index',
+
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
 

@@ -11,6 +11,5 @@ class DispatchesRepo extends BaseRepo {
     {
         return new Dispatches();
     }
-    
 
 }

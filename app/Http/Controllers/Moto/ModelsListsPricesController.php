@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Moto;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Moto\ModelsListsPricesItemsRepo;
 use App\Http\Repositories\Moto\ModelsListsPricesRepo as Repo;
 use App\Http\Repositories\Moto\ModelsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
@@ -32,6 +33,22 @@ class ModelsListsPricesController extends Controller
         $this->modelsRepo =  $modelsRepo;
     }
 
+
+    public function addItems(ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
+    {
+        $modelsListsPricesItemsRepo->create($this->request);
+
+        return redirect()->route('moto.modelsListsPrices.edit',$this->request->models_lists_prices_id);
+    }
+
+    public function deleteItems(ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
+    {
+        $modelsListsPricesItemsRepo->destroy($this->route->getParameter('id'));
+
+        return redirect()->route('moto.modelsListsPrices.edit',$this->route->getParameter('model'));
+    }
+
+    /*
     public function addItems()
     {
         $data   = $this->request;
@@ -41,7 +58,7 @@ class ModelsListsPricesController extends Controller
 
             $model  = $this->modelsRepo->find($data->models_id);
 
-            $arr =  session()->has('items') ? session('items') : [];
+            $arr =  session()->has($this->section.'Items') ? session($this->section.'Items') : [];
 
             $newItem =
             [
@@ -54,7 +71,7 @@ class ModelsListsPricesController extends Controller
 
             array_push($arr, $newItem);
 
-            session()->put('items',$arr);
+            session()->put($this->section.'Items',$arr);
 
             return [
                     'error' => 'Se agregó correctamente el item',
@@ -79,7 +96,7 @@ class ModelsListsPricesController extends Controller
 
             $model  = $this->modelsRepo->find($data->models_id);
 
-            $arr =  session()->has('items') ? session('items') : [];
+            $arr =  session()->has($this->section.'Items') ? session($this->section.'Items') : [];
 
             $newItem =
             [
@@ -98,7 +115,7 @@ class ModelsListsPricesController extends Controller
                 }
             }
 
-            session()->put('items',$arr);
+            session()->put($this->section.'Items',$arr);
 
             return [
                     'error' => 'Se editó correctamente el item',
@@ -116,7 +133,7 @@ class ModelsListsPricesController extends Controller
     public function deleteItems()
     {
         $data   = $this->request;
-        $arr =  session()->has('items') ? session('items') : [];
+        $arr =  session()->has($this->section.'Items') ? session($this->section.'Items') : [];
 
         foreach($arr as $ind => $val){
             if($val["models_id"] == $data->id){
@@ -124,8 +141,9 @@ class ModelsListsPricesController extends Controller
             }
         }
 
-        session()->put('items',$arr);
+        session()->put($this->section.'Items',$arr);
 
         return "Se eliminó correctamente el item";
     }
+    */
 }
