@@ -58,6 +58,15 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
             $this->attributes['password']  = $this->attributes['password'] ;
     }
 
-    
+    public function getBranchName()
+    {
+
+        foreach($this->brancheables as $branch)
+        {
+            $arr[$branch->branches->id]  =  $branch->branches->name;
+        }
+
+        return $arr ;
+    }
 
 }

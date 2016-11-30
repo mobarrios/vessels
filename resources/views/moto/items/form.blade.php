@@ -11,8 +11,18 @@
             {!! Form::open(['route'=>config('models.'.$section.'.storeRoute')]) !!}
         @endif
 
+
         <div class="row">
-            <div class="col-xs-12 form-group">
+
+            @if(config('models.'.$section.'.is_brancheable'))
+                <div class="col-xs-6 form-group">
+                    {!! Form::label('Sucursal') !!}
+                    {!! Form::select('branches_id[]',\Illuminate\Support\Facades\Auth::user()->getBranchName() , null, ['class'=>' select2  form-control']) !!}
+                </div>
+            @endif
+
+
+            <div class="col-xs-6  form-group">
                 {!! Form::label('Modelo') !!}
                 <select name='models_id' class=" select2 form-control">
                     @foreach($brands as $br)

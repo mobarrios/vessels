@@ -10,7 +10,8 @@
      protected $table = 'branches';
 
      protected $fillable = ['name', 'phone','address','type'];
-     
+
+    
  }
 
 
