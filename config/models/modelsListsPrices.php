@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Precios Ventas',
+    'sectionName'   => 'Lista de Precios',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',

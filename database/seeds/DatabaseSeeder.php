@@ -14,18 +14,20 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-         $this->call(UserTableSeeder::class);
-//         $this->call(UsersPruebaSeeders::class);
-         $this->call(RoleTableSeeder::class);
-         $this->call(PermissionsTableSeeder::class);
-         $this->call(PermissionsRolesTableSeeder::class);
-         $this->call(RoleUserTableSeeder::class);
-//         $this->call(RoleUserPruebaSeeders::class);
+        //production
+        $this->call(UserTableSeeder::class);
+        $this->call(RoleTableSeeder::class);
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(PermissionsRolesTableSeeder::class);
+        $this->call(RoleUserTableSeeder::class);
         $this->call(BranchSeeders::class);
         $this->call(BrancheablesSeeders::class);
 
-//        $this->call(BranchPruebaSeeders::class);
-        //$this->call(ProvidersTableSeeder::class);
+        //testing
+       // $this->call(BranchPruebaSeeders::class);
+       // $this->call(UsersPruebaSeeders::class);
+       // $this->call(RoleUserPruebaSeeders::class);
+
 
         Model::reguard();
     }

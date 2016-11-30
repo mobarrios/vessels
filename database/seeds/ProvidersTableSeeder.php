@@ -13,7 +13,7 @@ class ProvidersTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for($i = 1; $i < 501; $i++){
+        for($i = 1; $i < 5; $i++){
 
             DB::table('providers')->insert([
                 "id" => $i,

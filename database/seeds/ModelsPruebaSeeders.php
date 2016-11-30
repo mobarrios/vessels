@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class BranchPruebaSeeders extends Seeder
+class ModelsPruebaSeeders extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,11 +13,11 @@ class BranchPruebaSeeders extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for($i = 3; $i < 500; $i++){
+        for($i = 0; $i < 5; $i++){
 
-            DB::table('branches')->insert([
+            DB::table('models')->insert([
                 "id" => $i,
-                "name" => $faker->company(),
+                "status" => $faker->company(),
                 "address" => $faker->address(),
                 "phone" => $faker->phoneNumber(),
                 "type" => ""

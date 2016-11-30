@@ -4,6 +4,7 @@
 <script src="vendors/LTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="vendors/LTE/bootstrap/js/bootstrap.min.js"></script>
+
 <!-- SlimScroll -->
 <script src="vendors/LTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -14,8 +15,7 @@
 <script src="vendors/LTE/dist/js/demo.js"></script>
 <!-- Select2 -->
 <script src="vendors/LTE/plugins/select2/select2.full.min.js"></script>
-<!-- iCheck 1.0.1 -->
-<script src="vendors/LTE/plugins/iCheck/icheck.min.js"></script>
+
 
 <!-- date-range-picker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
@@ -31,7 +31,6 @@
 @if(Auth::user())
 <script>
 
-    $("input:checkbox").iCheck();
 
     $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 

@@ -41,7 +41,7 @@
                         <li><a href="{{route('moto.items.index')}}"><span>Artiulos</span></a></li>
                     @endpermission
                     @permission('modelslistsprices.list')
-                        <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios Venta</span></a></li>
+                        <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios </span></a></li>
                     @endpermission
                     @permission('brands.list')
                         <li><a href="{{route('moto.brands.index')}}"><span> Marcas</span></a></li>
@@ -70,10 +70,13 @@
                         <li><a href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
                     @endpermission
                     @permission('modelslistsprices.list')
-                        <li><a href="{{route('moto.modelsListsPrices.index')}}"><span> Listas de Precios Compra</span></a></li>
+                        <li><a href="{{route('moto.purchasesListsPrices.index')}}"><span> Listas de Precios Compra</span></a></li>
                     @endpermission
                     @permission('purchasesorders.list')
-                        <li><a href="{{route('moto.purchasesOrders.index')}}"><span> Ordenes de Compra</span></a></li>
+                        <li><a href="{{route('moto.purchasesOrders.index')}}"><span>Perdidos de Mercaderias</span></a></li>
+                    @endpermission
+                    @permission('purchasesorders.list')
+                        <li><a href="{{route('moto.purchasesOrders.index')}}"><span>Notas de Pedidos</span></a></li>
                     @endpermission
                     @permission('dispatches.list')
                         <li><a href="{{route('moto.dispatches.index')}}"><span>Remitos</span></a></li>

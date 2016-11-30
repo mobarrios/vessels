@@ -1,13 +1,13 @@
 <?php
 
-$model = 'purchasesOrders';
+$model = 'purchasesListsPrices';
 
 return [
 
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Notas de Pedidos',
+    'sectionName'   => 'Lista de Precios Compra',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',
@@ -18,8 +18,16 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
-    'postStoreRoute'  => 'moto.'.$model.'.index',
-    'postUpdateRoute' => 'moto.'.$model.'.index',
+    'postStoreRoute'  => 'moto.'.$model.'.edit',
+    'postUpdateRoute' => 'moto.'.$model.'.edit',
+    
+
+    //addItems
+    'addItemsRoute'  => 'moto.'.$model.'.addItems',
+    'editItemsRoute'  => 'moto.'.$model.'.editItems',
+    'deleteItemsRoute'  => 'moto.'.$model.'.deleteItems',
+
+
 
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
@@ -34,33 +42,30 @@ return [
     //polymorphic
     'is_logueable'      => true,
     'is_imageable'      => false,
-    'is_brancheable'    => true,
+    'is_brancheable'    => false,
     
 
     //column search
     'search' => [
-        
-            'Numero'    => 'id',
-            //'Direccion'  => 'address' ,
-            //'Email'     => 'email',
+
+        'Nombre' => 'name',
+        'Direccion' => 'address'
+
+
     ],
 
     'validationsStore' => [
 
-        'date' => 'required',
-        'providers_id' => 'required',
-        'quantity' => 'required',
-        'models_id' => 'required',
-        'price' => 'required',
+        'number' => 'required',
+        //'providers_id' => 'required'
+
+
     ],
 
     'validationsUpdate' => [
+        'number' => 'required',
+       //'providers_id' => 'required'
 
-        'date' => 'required',
-        'providers_id' => 'required',
-        'quantity' => 'required',
-        'models_id' => 'required',
-        'price' => 'required',
 
     ],
 

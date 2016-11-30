@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModelsListsPricesItems extends Migration
+class CreatePurchasesListsPricesItems extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateModelsListsPricesItems extends Migration
      */
     public function up()
     {
-        Schema::create('models_lists_prices_items', function (Blueprint $table) {
+        Schema::create('purchases_lists_prices_items', function (Blueprint $table) {
 
             $table->increments('id')->unsigned();
             $table->timestamps();
@@ -20,16 +20,14 @@ class CreateModelsListsPricesItems extends Migration
 
             $table->double('price_list',10.2);
             $table->double('price_net',10.2);
-            $table->double('price_public',10.2);
             $table->integer('max_discount');
             $table->text('obs');
-
 
             $table->integer('models_id')->unsigned()->index();
             $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
 
-            $table->integer('models_lists_prices_id')->unsigned()->index();
-            $table->foreign('models_lists_prices_id')->references('id')->on('models_lists_prices')->onDelete('cascade');
+            $table->integer('purchases_lists_prices_id')->unsigned()->index();
+            $table->foreign('purchases_lists_prices_id')->references('id')->on('purchases_lists_prices')->onDelete('cascade');
         });
     }
 
@@ -40,6 +38,6 @@ class CreateModelsListsPricesItems extends Migration
      */
     public function down()
     {
-        Schema::drop('models_lists_prices_items');
+        Schema::drop('purchases_lists_prices_items');
     }
 }
