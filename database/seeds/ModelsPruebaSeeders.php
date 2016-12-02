@@ -18,7 +18,6 @@ class ModelsPruebaSeeders extends Seeder
             DB::table('models')->insert([
                 "id" => $i,
                 "status" => $faker->company(),
-                "address" => $faker->address(),
                 "phone" => $faker->phoneNumber(),
                 "type" => ""
             ]);

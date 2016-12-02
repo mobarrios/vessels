@@ -12,12 +12,12 @@
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
 
-        <div class="col-xs-6 form-group">
+        <div class="col-xs-12 col-lg-5 form-group">
             {!! Form::label('Nombre Lista de Precio') !!}
             {!! Form::text('number', null, ['class'=>'form-control']) !!}
         </div>
 
-        <div class="col-xs-3 form-group">
+        <div class="col-xs-12 col-lg-3 form-group">
             {!! Form::label('Proveedor') !!}
             {!! Form::select('providers_id', $providers,null, ['class'=>'select2 form-control']) !!}
         </div>
@@ -33,50 +33,32 @@
         </div>
                @include('moto.partials.tablaItems')--}}
 
-            <div class="col-xs-1 form-group" style="padding-top: 2%">
+            <div class="col-xs-12 col-lg-4  form-group" style="padding-top: 2%">
                 <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                @if(isset($models))
+                    <button href="#" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                @endif
             </div>
 
             {!! Form::close() !!}
 
-        @if(isset($models))
-                {!! Form::open(['route'=> ['moto.modelsListsPrices.addItems' ], 'files' =>'true']) !!}
 
-                {!! Form::hidden('models_lists_prices_id',$models->id) !!}
-                    <div class="col-xs-3 form-group">
-                        {!! Form::label('Modelo') !!}
-                        {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Precio de Lista') !!}
-                        {!! Form::text('price_list', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Precio de Contado') !!}
-                        {!! Form::text('price_net', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Dto. Máximo') !!}
-                        {!! Form::text('max_discount', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Observaciones') !!}
-                        {!! Form::text('obs', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-1 form-group" style="padding-top: 2%">
-                        <button type="submit" class="btn btn-default"><span class="fa fa-plus"></span></button>
-                    </div>
-                 {!! Form::close() !!}
+
+        @if(isset($models))
                 <div class="col-xs-12">
                     <table class="table">
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>$ Lista</th>
-                        <th>$ Contado</th>
-                        <th>Dto. Max</th>
-                        <th>Obs.</th>
-                        <tbody>
+                        <tr>
+
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>$ Lista</th>
+                            <th>$ Contado</th>
+                            <th>Dto. Max</th>
+                            <th>Obs.</th>
+                        </tr>
+
                         @foreach($models->ModelsListsPricesItems as $item)
+                        <tbody>
                             <tr>
                                 <td>{{$item->Models->Brands->name}}</td>
                                 <td>{{$item->Models->name}}</td>
@@ -95,3 +77,36 @@
 
     @endsection
 
+    @section('formAside')
+        @include('moto.partials.asideOpenForm')
+                <!-- .control-sidebar-menu -->
+                {!! Form::open(['route'=> ['moto.modelsListsPrices.addItems' ], 'files' =>'true']) !!}
+
+                {!! Form::hidden('models_lists_prices_id',$models->id) !!}
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('Modelo') !!}
+                    {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
+                </div>
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('Precio de Lista') !!}
+                    {!! Form::text('price_list', null, ['class'=>'form-control']) !!}
+                </div>
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('Precio de Contado') !!}
+                    {!! Form::text('price_net', null, ['class'=>'form-control']) !!}
+                </div>
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('Dto. Máximo') !!}
+                    {!! Form::text('max_discount', null, ['class'=>'form-control']) !!}
+                </div>
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('Observaciones') !!}
+                    {!! Form::text('obs', null, ['class'=>'form-control']) !!}
+                </div>
+                <div class="col-xs-12 form-group" style="padding-top: 2%">
+                    <button type="submit" class="btn btn-success btn-block">Agregar</button>
+                </div>
+                {!! Form::close() !!}
+                <!-- /.control-sidebar-menu -->
+        @include('moto.partials.asideCloseForm')
+    @endsection

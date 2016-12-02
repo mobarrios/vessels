@@ -22,6 +22,7 @@
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="vendors/LTE/dist/css/skins/_all-skins.min.css">
 
+<link rel="stylesheet" href="styles.css">
 
 <style>
     body{

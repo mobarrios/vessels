@@ -38,6 +38,8 @@
     </div>
     <!-- ./wrapper -->
 
+    @yield('formAside')
+
     @include('template.js')
 
     <!-- para js extras en cada seccion -->

@@ -1,0 +1,9 @@
+
+.scrollable{
+    height:100%;
+    overflow-y: auto;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+}

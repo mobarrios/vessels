@@ -12,7 +12,7 @@
 <!-- AdminLTE App -->
 <script src="vendors/LTE/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="vendors/LTE/dist/js/demo.js"></script>
+{{--<script src="vendors/LTE/dist/js/demo.js"></script>--}}
 <!-- Select2 -->
 <script src="vendors/LTE/plugins/select2/select2.full.min.js"></script>
 
