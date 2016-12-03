@@ -7,6 +7,7 @@ use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
+use App\Http\Repositories\Moto\PurchasesOrdersItemsRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -29,6 +30,20 @@ class PurchasesOrdersController extends Controller
         $this->data['providers'] = $providersRepo->ListsData('name', 'id');
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
 
+    }
+
+    public function addItems(PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo)
+    {
+        $purchasesOrdersItemsRepo->create($this->request);
+
+        return redirect()->route('moto.purchasesOrders.edit',$this->request->purchases_orders_id);
+    }
+
+    public function deleteItems(PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo)
+    {
+        $purchasesOrdersItemsRepo->destroy($this->route->getParameter('id'));
+
+        return redirect()->route('moto.purchasesOrders.edit',$this->route->getParameter('model'));
     }
 
 }

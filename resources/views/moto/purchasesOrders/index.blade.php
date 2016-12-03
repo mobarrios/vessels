@@ -6,13 +6,10 @@
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 <td>{{$model->id}}</td>
                 <td>{{$model->date }}</td>
-                <td>{{$model->quantity }}</td>
-                <td>{{$model->Models->Brands->name }} : {{$model->Models->name }}</td>
-                <td>$ {{$model->price}}</td>
-                <td>$ {{$model->price * $model->quantity }}</td>
-                <td>% {{$model->discount}}</td>
-                <td>$ {{( ($model->price * $model->quantity) - (($model->price * $model->quantity) *  $model->discount ) / 100)   }}</td>
-
+                <td>{{$model->Providers->name }}</td>
+                <td>{{$model->Branches->name }}</td>
+                <td>{{$model->Users->fullName }}</td>
+                <td>Items : <label class="label label-default">{{$model->PurchasesOrdersItems->count() }}</label></td>
             </tr>
         @endforeach
     @endsection

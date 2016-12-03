@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Notas de Pedidos',
+    'sectionName'   => 'Pedidos de Mercadería',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',
@@ -49,18 +49,18 @@ return [
 
         'date' => 'required',
         'providers_id' => 'required',
-        'quantity' => 'required',
-        'models_id' => 'required',
-        'price' => 'required',
+        //'quantity' => 'required',
+        //'models_id' => 'required',
+        //'price' => 'required',
     ],
 
     'validationsUpdate' => [
 
         'date' => 'required',
         'providers_id' => 'required',
-        'quantity' => 'required',
-        'models_id' => 'required',
-        'price' => 'required',
+        //'quantity' => 'required',
+        //'models_id' => 'required',
+        //'price' => 'required',
 
     ],
 

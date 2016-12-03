@@ -13,9 +13,9 @@ Route::group(['prefix'=>'purchasesListsPrices'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.purchasesListsPrices.show','uses'=>'Moto\PurchasesListsPricesController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.purchasesListsPrices.index','uses'=>'Moto\PurchasesListsPricesController@index']);
 
-        Route::post('/addItem/{id?}',           ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesListsPrices.addItems','uses'=>'Moto\PurchasesListsPricesController@addItems']);
-        Route::post('/editItem/{id?}',          ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesListsPrices.editItems','uses'=>'Moto\PurchasesListsPricesController@editItems']);
-        Route::get('/deleteItem/{id?}/{model?}',         ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.purchasesListsPrices.deleteItems','uses'=>'Moto\PurchasesListsPricesController@deleteItems']);
+        Route::post('/addItem/{id?}',                   ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesListsPrices.addItems','uses'=>'Moto\PurchasesListsPricesController@addItems']);
+        Route::post('/editItem/{id?}',                  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesListsPrices.editItems','uses'=>'Moto\PurchasesListsPricesController@editItems']);
+        Route::get('/deleteItem/{id?}/{model?}',        ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.purchasesListsPrices.deleteItems','uses'=>'Moto\PurchasesListsPricesController@deleteItems']);
 
 
 });

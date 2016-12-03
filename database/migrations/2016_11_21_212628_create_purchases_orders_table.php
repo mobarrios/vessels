@@ -18,19 +18,14 @@ class CreatePurchasesOrdersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->date('date');
-            $table->integer('quantity');
-            $table->double('price');
-            $table->string('discount');
-
-            $table->integer('models_id')->unsigned()->index();
-            $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
+            $table->date('date');;
+            $table->string('name');
 
             $table->integer('providers_id')->unsigned()->index();
-            $table->foreign('providers_id')->references('id')->on('providers')->onDelete('cascade');
+            $table->foreign('providers_id')->references('id')->on('providers');
 
-            $table->integer('colors_id')->unsigned()->index();
-            $table->foreign('colors_id')->references('id')->on('colors')->onDelete('cascade');
+            $table->integer('users_id')->unsigned()->index();
+            $table->foreign('users_id')->references('id')->on('users');
             
         });
     }

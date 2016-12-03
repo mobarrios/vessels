@@ -2,6 +2,8 @@
  namespace App\Entities\Moto;
 
 
+ use App\Entities\Configs\Branches;
+ use App\Entities\Configs\User;
  use App\Entities\Entity;
  use Carbon\Carbon;
 
@@ -10,7 +12,7 @@
 
      protected $table = 'purchases_orders';
 
-     protected $fillable = ['date','models_id','colors_id','quantity','price','discount','providers_id'];
+     protected $fillable = ['date','models_id','colors_id','quantity','price','discount','providers_id','users_id'];
 
      public function Models()
      {
@@ -26,6 +28,24 @@
      public function setDateAttribute($value)
      {
          $this->attributes['date'] = date('Y-m-d',strtotime($value));
+     }
+
+     public function PurchasesOrdersItems()
+     {
+        return $this->hasMany(PurchasesOrdersItems::class);
+     }
+
+     public function Providers()
+     {
+         return $this->belongsTo(Providers::class);
+     }
+     public function Branches()
+     {
+         return $this->belongsTo(Branches::class);
+     }
+     public function Users()
+     {
+         return $this->belongsTo(User::class);
      }
 
  }

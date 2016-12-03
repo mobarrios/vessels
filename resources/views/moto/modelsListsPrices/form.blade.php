@@ -79,6 +79,8 @@
 
     @section('formAside')
         @include('moto.partials.asideOpenForm')
+            @if(isset($models))
+
                 <!-- .control-sidebar-menu -->
                 {!! Form::open(['route'=> ['moto.modelsListsPrices.addItems' ], 'files' =>'true']) !!}
 
@@ -108,5 +110,6 @@
                 </div>
                 {!! Form::close() !!}
                 <!-- /.control-sidebar-menu -->
+            @endif
         @include('moto.partials.asideCloseForm')
     @endsection

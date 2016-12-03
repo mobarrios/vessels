@@ -13,6 +13,9 @@ Route::group(['prefix'=>'purchasesOrders'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.purchasesOrders.show','uses'=>'Moto\PurchasesOrdersController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.purchasesOrders.index','uses'=>'Moto\PurchasesOrdersController@index']);
 
+        Route::post('/addItem/{id?}',                   ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesOrders.addItems','uses'=>'Moto\PurchasesOrdersController@addItems']);
+        Route::post('/editItem/{id?}',                  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesOrders.editItems','uses'=>'Moto\PurchasesOrdersController@editItems']);
+        Route::get('/deleteItem/{id?}/{model?}',        ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.purchasesOrders.deleteItems','uses'=>'Moto\PurchasesOrdersController@deleteItems']);
 
 
 });
