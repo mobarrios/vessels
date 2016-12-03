@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="es">
 <head>
     <base href="{{asset('')}}">
@@ -44,5 +44,19 @@
 
     <!-- para js extras en cada seccion -->
     @yield('js')
+
+    <script>
+        $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
+
+        $("a[data-toggle='control-sidebar']").on("click",function (ev) {
+            console.log($(".control-sidebar").hasClass("control-sidebar-open"));
+            if($(".control-sidebar").hasClass("control-sidebar-open")){
+                $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
+            }else{
+                $(".control-sidebar").css("right","0");
+            }
+        })
+
+    </script>
 </body>
 </html>
