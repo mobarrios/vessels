@@ -36,7 +36,7 @@
             <div class="col-xs-12 col-lg-4  form-group" style="padding-top: 2%">
                 <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
                 @if(isset($models))
-                    <button href="#" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></button>
+                    <a href="#" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
                 @endif
             </div>
 
@@ -67,6 +67,7 @@
                                 <td>{{$item->max_discount}}</td>
                                 <td>{{$item->obs}}</td>
                                 <td><a href="{{route('moto.modelsListsPrices.deleteItems',[$item->id, $models->id])}}"><span class="text-danger fa fa-trash"></span></a></td>
+                                <td><a href="{{route('moto.modelsListsPrices.editItems',[$item->id, $models->id])}}"><span class="text-success fa fa-edit"></span></a></td>
 
                             </tr>
                         @endforeach
@@ -77,12 +78,18 @@
 
     @endsection
 
+
+
     @section('formAside')
         @include('moto.partials.asideOpenForm')
             @if(isset($models))
 
                 <!-- .control-sidebar-menu -->
+        @if(isset($modelItems))
+                {!! Form::model($modelItems,['route'=> ['moto.modelsListsPrices.updadteItems' ], 'files' =>'true']) !!}
+        @else
                 {!! Form::open(['route'=> ['moto.modelsListsPrices.addItems' ], 'files' =>'true']) !!}
+        @endif
 
                 {!! Form::hidden('models_lists_prices_id',$models->id) !!}
                 <div class="col-xs-12 form-group">
@@ -105,11 +112,13 @@
                     {!! Form::label('Observaciones') !!}
                     {!! Form::text('obs', null, ['class'=>'form-control']) !!}
                 </div>
-                <div class="col-xs-12 form-group" style="padding-top: 2%">
-                    <button type="submit" class="btn btn-success btn-block">Agregar</button>
+                <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
+                    <a type="submit" class="btn btn-primary">Agregar</a>
+                    <a type="submit" data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
                 </div>
                 {!! Form::close() !!}
                 <!-- /.control-sidebar-menu -->
             @endif
         @include('moto.partials.asideCloseForm')
     @endsection
+

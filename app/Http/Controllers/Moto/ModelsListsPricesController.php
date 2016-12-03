@@ -41,6 +41,14 @@ class ModelsListsPricesController extends Controller
         return redirect()->route('moto.modelsListsPrices.edit',$this->request->models_lists_prices_id);
     }
 
+    public function editItems(ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
+    {
+        $this->data['modelItems'] = $modelsListsPricesItemsRepo->find($this->route->getParameter('id'));
+
+
+        return redirect()->back()->with($this->data);
+    }
+
     public function deleteItems(ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
     {
         $modelsListsPricesItemsRepo->destroy($this->route->getParameter('id'));
