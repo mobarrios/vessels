@@ -36,27 +36,27 @@ return [
     'is_logueable'      => true,
     'is_imageable'      => false,
     'is_brancheable'    => false,
-    
+
 
     //column search
     'search' => [
-        
-            'Nombre'    => 'name',
-            //'Direccion'  => 'address' ,
-            //'Email'     => 'email'
+
+        'Nombre' => 'name',
+        //'Direccion'  => 'address' ,
+        //'Email'     => 'email'
     ],
 
     'validationsStore' => [
 
-            'number'          => 'required',
-            'type'     => 'required',
+        'number' => 'required',
+        'type' => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'number'          => 'required',
-            'type'     => 'required',
+        'number' => 'required',
+        'type' => 'required',
 
     ],
 
