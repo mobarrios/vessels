@@ -20,7 +20,7 @@
             {!! Form::text('date', null, ['class'=>'datePicker form-control']) !!}
         </div>
         <div class="col-xs-4 form-group">
-            {!! Form::label('Orden de Compra') !!}
+            {!! Form::label('Nota de Pedido') !!}
             {!! Form::select('purchases_orders_id', $purchasesOrders, null, ['class'=>'select2 form-control']) !!}
         </div>
 

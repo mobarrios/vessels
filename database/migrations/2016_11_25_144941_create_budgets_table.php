@@ -19,10 +19,10 @@ class CreateBudgetsTable extends Migration
             $table->softDeletes();
 
             $table->date('date');
-            $table->string('number');
+            
+            $table->integer('clients_id')->unsigned()->nulleable();
+            $table->foreign('clients_id')->references('id')->on('clients');
 
-            $table->integer('purchases_orders_id')->unsigned()->nulleable();
-            $table->foreign('purchases_orders_id')->references('id')->on('purchases_orders')->onDelete('cascade');
         });
     }
 
