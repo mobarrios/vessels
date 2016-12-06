@@ -56,7 +56,7 @@
                 $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
             }else{
                 $(".control-sidebar form").attr('action',$(self).attr('data-action'));
-                $(".control-sidebar input").val('');
+                $(".control-sidebar input[type!='hidden']").val('');
                 $(".control-sidebar").css("right","0");
 
             }
