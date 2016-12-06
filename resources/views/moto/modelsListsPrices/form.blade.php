@@ -24,7 +24,7 @@
     <div class="col-xs-12 col-lg-4  form-group" style="padding-top: 2%">
         <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
         @if(isset($models))
-            <a href="#" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+            <a href="#" data-action="{!! route("moto.modelsListsPrices.addItems") !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
         @endif
     </div>
 
@@ -51,11 +51,11 @@
                         <td>{{$item->max_discount}}</td>
                         <td>{{$item->obs}}</td>
                         <td>
-                            <a href="{{route('moto.modelsListsPrices.deleteItems',[$item->id, $models->id])}}"><span
+                            <a href="{{route('moto.modelsListsPrices.deleteItems',[$item->id,$models->id])}}"><span
                                         class="text-danger fa fa-trash"></span></a>
                         </td>
                         <td>
-                            <a href="{{route('moto.modelsListsPrices.edit',[$item->id, $models->id])}}"><span
+                            <a href="{{route('moto.modelsListsPrices.editItems',[$item->id,$models->id])}}"><span
                                         class="text-success fa fa-edit"></span></a>
                         </td>
                     </tr>
@@ -75,7 +75,7 @@
                 <!-- .control-sidebar-menu -->
 
         @if(isset($modelItems))
-            {!! Form::model($modelItems,['route'=> ['moto.modelsListsPrices.updadteItems' ], 'files' =>'true']) !!}
+            {!! Form::model($modelItems,['route'=> ['moto.modelsListsPrices.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
         @else
             {!! Form::open(['route'=> ['moto.modelsListsPrices.addItems' ], 'files' =>'true']) !!}
         @endif
@@ -102,8 +102,8 @@
             {!! Form::text('obs', null, ['class'=>'form-control']) !!}
         </div>
         <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
-            <a type="submit" class="btn btn-primary">Agregar</a>
-            <a type="submit" data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
         </div>
         {!! Form::close() !!}
                 <!-- /.control-sidebar-menu -->

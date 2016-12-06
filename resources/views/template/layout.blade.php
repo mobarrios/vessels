@@ -49,13 +49,22 @@
         $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
 
         $("a[data-toggle='control-sidebar']").on("click",function (ev) {
-            console.log($(".control-sidebar").hasClass("control-sidebar-open"));
+            var self = $(this);
+            console.log($(self).attr('data-action'));
+
             if($(".control-sidebar").hasClass("control-sidebar-open")){
                 $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
             }else{
+                $(".control-sidebar form").attr('action',$(self).attr('data-action'));
+                $(".control-sidebar input").val('');
                 $(".control-sidebar").css("right","0");
+
             }
         })
+
+        if($(".control-sidebar").hasClass("control-sidebar-open")){
+            $(".control-sidebar").css("right",0);
+        }
 
     </script>
 </body>
