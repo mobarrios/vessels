@@ -23,6 +23,8 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::group(['prefix'=>'moto'],function() {
 
+        require(__DIR__ . '/Routes/Moto/ajaxRoute.php');
+        
         require(__DIR__ . '/Routes/Moto/budgetsRoute.php');
         require(__DIR__ . '/Routes/Moto/brandsRoute.php');
         require(__DIR__ . '/Routes/Moto/clientsRoute.php');

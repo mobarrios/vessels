@@ -36,4 +36,15 @@ class ModelsRepo extends BaseRepo {
 
     }
 
+
+    public function allToBudgets()
+    {
+        return $this->getModel()
+            ->where('status',1)
+            ->with('Brands')
+            ->with('activeListPrice')
+            ->orderBy('brands_id','ASC')->orderBy('name','ASC')
+            ->get();
+    }
+
 }
