@@ -28,6 +28,16 @@
             {!! Form::select('stauts', [''=>'Activo'],null, ['class'=>'form-control']) !!}
         </div>
 
+        <div class="col-xs-3 form-group">
+            {!! Form::label('Patentamiento') !!}
+            {!! Form::text('patentamiento', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3 form-group">
+            {!! Form::label('Pack Service') !!}
+            {!! Form::text('pack_service', null, ['class'=>'form-control']) !!}
+        </div>
+
+
         <div class="col-xs-6 form-group">
             {!! Form::label('Imagen') !!}
             {!! Form::file('image') !!}

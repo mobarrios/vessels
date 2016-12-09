@@ -5,24 +5,20 @@
 @endsection
 
 @section('form_inputs')
-    @if(isset($models))
-        {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
-    @else
-        {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
-    @endif
+
 
     <div class="modal-body">
         <div ng-app="myApp">
             <div ng-controller="myCtrl">
 
                 <div class="input-group">
-                    <input ng-model="q"  type="text" class="form-control"
+                    <input ng-model="q" type="text" class="form-control"
                            placeholder="Buscar...">
-                                    <span class="input-group-btn">
-                                        <button  type="button"
-                                                class="btn btn-default"><span class="fa fa-search"></span>
-                                        </button>
-                                </span>
+                        <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-default"><span class="fa fa-search"></span>
+                        </button>
+                        </span>
                 </div>
                 <hr>
                 <div class="table-responsive">
@@ -48,12 +44,53 @@
                                 <label class="label label-default"> Ahora 18</label>
                             </td>
                             <td>
-                               <button><span class="fa fa-share"></span></button>
+                              <button ng-click="add(models)" class="btn btn-sm">=)</button>
                             </td>
                         </tr>
                     </table>
                 </div>
 
+                <div class="col-xs-2 form-group">
+                    <label>SubTotal</label>
+                    <input ng-model="sTotal" type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Patentamiento</label>
+                    <input ng-model="patentamiento"  type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Pack Service</label>
+                    <input ng-model="packService" type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Seguro</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Flete</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Formularios</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Total</label>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label>Entrega</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Total a Financiar</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label>Cant. Cuotas</label>
+                    <input type="text" class="form-control">
+                </div>
             </div>
         </div>
     </div>
@@ -73,6 +110,12 @@
                     {
                         $scope.data = response.data;
                     });
+
+            $scope.add = function(models){
+                $scope.sTotal = models.active_list_price.price_net ;
+                $scope.patentamiento = models.patentamiento;
+                $scope.packService = models.pack_service;
+            };
         });
     </script>
 @endsection

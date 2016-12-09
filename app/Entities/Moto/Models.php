@@ -9,7 +9,7 @@
 
      protected $table = 'models';
 
-     protected $fillable = ['name','status','brands_id','providers_id'];
+     protected $fillable = ['name','status','brands_id','providers_id','patentamiento','pack_service'];
 
 
      public function Brands()

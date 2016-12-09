@@ -20,8 +20,9 @@ class CreateModelsTable extends Migration
 
             $table->string('name');
             $table->string('status');
-
-
+            $table->double('patentamiento',10.2);
+            $table->double('pack_service',10.2);
+            
 
 
             $table->integer('brands_id')->unsigned()->index();
