@@ -11,6 +11,25 @@ class ProvidersTableSeeder extends Seeder
      */
     public function run()
     {
+
+
+        DB::table('providers')->insert([
+                [
+                    'id'    => 1,
+                    'name'=>'Honda Argentina',
+                    'address'=>'San Juan 255',
+                    'cuit'=> 123133322,
+                    'email'=> 'ventas@hondaargetina.com.ar',
+                ],[
+                    'id'    => 2,
+                    'name'=>'Yamaha Argentina',
+                    'address'=>'AV. Cerrito 2245',
+                    'cuit'=> 12313333322,
+                    'email'=> 'ventas@yamahaargentina.com.ar',
+                ]]
+        );
+
+        /*
         $faker = Faker\Factory::create();
 
         for($i = 1; $i < 5; $i++){
@@ -25,5 +44,6 @@ class ProvidersTableSeeder extends Seeder
             ]);
 
         }
+        */
     }
 }

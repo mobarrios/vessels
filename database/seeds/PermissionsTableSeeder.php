@@ -404,6 +404,56 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'dispatches.destroy',
                     'model' => '',
                 ],
+                //LISTA DE PRECIO COMPRA
+                [
+                    'id'    => 62,
+                    'name' => 'List Precio de Compra',
+                    'slug' => 'purchaseslistsprices.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 63,
+                    'name' => 'Crear Precio de Compra',
+                    'slug' => 'purchaseslistsprices.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 64,
+                    'name' => 'Edit Precio de Compra',
+                    'slug' => 'purchaseslistsprices.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 65,
+                    'name' => 'Delete Precio de Compra',
+                    'slug' => 'purchaseslistsprices.destroy',
+                    'model' => '',
+                ],
+                //PRESUPUESTOS
+                [
+                    'id'    => 66,
+                    'name' => 'List Presupuestos',
+                    'slug' => 'budgets.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 67,
+                    'name' => 'Crear Presupuestos',
+                    'slug' => 'budgets.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 68,
+                    'name' => 'Edit Presupuestos',
+                    'slug' => 'budgets.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 69,
+                    'name' => 'Delete Presupuestos',
+                    'slug' => 'budgets.destroy',
+                    'model' => '',
+                ],
         ]);
     }
 }

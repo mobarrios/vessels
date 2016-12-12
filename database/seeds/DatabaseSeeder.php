@@ -22,15 +22,20 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleUserTableSeeder::class);
         $this->call(BranchSeeders::class);
         $this->call(BrancheablesSeeders::class);
-//        $this->call(ModelsPruebaSeeders::class);
+
         $this->call(ProvidersTableSeeder::class);
         $this->call(UsersPruebaSeeders::class);
         $this->call(RoleUserPruebaSeeders::class);
 
         //testing
-       // $this->call(BranchPruebaSeeders::class);
-       // $this->call(UsersPruebaSeeders::class);
-       // $this->call(RoleUserPruebaSeeders::class);
+        // $this->call(BranchPruebaSeeders::class);
+        // $this->call(UsersPruebaSeeders::class);
+        // $this->call(RoleUserPruebaSeeders::class);
+        $this->call(BrandsSeeders::class);
+        $this->call(CategoriesSeeders::class);
+        $this->call(ColorsSeeders::class);
+        $this->call(ModelsPruebaSeeders::class);
+        $this->call(ClientsSeeders::class);
 
 
         Model::reguard();
