@@ -12,86 +12,104 @@
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
 
-        <div class="col-xs-6 form-group">
-            {!! Form::label('Nombre Lista de Precio Compra') !!}
+        <div class="col-xs-12 col-lg-5 form-group">
+            {!! Form::label('Nombre Lista de Precio') !!}
             {!! Form::text('number', null, ['class'=>'form-control']) !!}
         </div>
 
-        <div class="col-xs-3 form-group">
+        <div class="col-xs-12 col-lg-3 form-group">
             {!! Form::label('Proveedor') !!}
             {!! Form::select('providers_id', $providers,null, ['class'=>'select2 form-control']) !!}
         </div>
-        {{--
-            <div class="col-xs-2 form-group">
-                {!! Form::label('Estado') !!}
-                {!! Form::select('status', ['1'=> 'Activa', '0'=> 'Inactiva' ] ,null, ['class'=>'select2 form-control']) !!}
-            </div>
-             <div class="col-xs-1 form-group" style="padding-top: 2%">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-                <span class="fa fa-save"></span>
-            </button>
+        <div class="col-xs-12 col-lg-4  form-group" style="padding-top: 2%">
+            <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+            @if(isset($models))
+                <a href="#" data-action="{!! route("moto.purchasesListsPrices.addItems") !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+            @endif
         </div>
-               @include('moto.partials.tablaItems')--}}
 
-            <div class="col-xs-1 form-group" style="padding-top: 2%">
-                <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
-            </div>
-
-            {!! Form::close() !!}
+        {!! Form::close() !!}
 
         @if(isset($models))
-                {!! Form::open(['route'=> ['moto.purchasesListsPrices.addItems' ], 'files' =>'true']) !!}
-
-                {!! Form::hidden('purchases_lists_prices_id',$models->id) !!}
-                    <div class="col-xs-3 form-group">
-                        {!! Form::label('Modelo') !!}
-                        {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Precio de Lista') !!}
-                        {!! Form::text('price_list', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Precio Neto') !!}
-                        {!! Form::text('price_net', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Dto. Máximo') !!}
-                        {!! Form::text('max_discount', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        {!! Form::label('Observaciones') !!}
-                        {!! Form::text('obs', null, ['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-xs-1 form-group" style="padding-top: 2%">
-                        <button type="submit" class="btn btn-default"><span class="fa fa-plus"></span></button>
-                    </div>
-                 {!! Form::close() !!}
-                <div class="col-xs-12">
-                    <table class="table">
+            <div class="col-xs-12">
+                <table class="table">
+                    <tr>
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>$ Lista</th>
                         <th>$ Contado</th>
                         <th>Dto. Max</th>
                         <th>Obs.</th>
+                    </tr>
+                    @foreach($models->PurchasesListsPricesItems as $item)
                         <tbody>
-                        @foreach($models->PurchasesListsPricesItems as $item)
-                            <tr>
-                                <td>{{$item->Models->Brands->name}}</td>
-                                <td>{{$item->Models->name}}</td>
-                                <td>{{$item->price_list}}</td>
-                                <td>{{$item->price_net}}</td>
-                                <td>{{$item->max_discount}}</td>
-                                <td>{{$item->obs}}</td>
-                                <td><a href="{{route('moto.purchasesListsPrices.deleteItems',[$item->id, $models->id])}}"><span class="text-danger fa fa-trash"></span></a></td>
-
-                            </tr>
+                        <tr>
+                            <td>{{$item->Models->Brands->name}}</td>
+                            <td>{{$item->Models->name}}</td>
+                            <td>{{$item->price_list}}</td>
+                            <td>{{$item->price_net}}</td>
+                            <td>{{$item->max_discount}}</td>
+                            <td>{{$item->obs}}</td>
+                            <td>
+                                <a href="{{route('moto.purchasesListsPrices.deleteItems',[$item->id,$models->id])}}"><span
+                                            class="text-danger fa fa-trash"></span></a>
+                            </td>
+                            <td>
+                                <a href="{{route('moto.purchasesListsPrices.editItems',[$item->id,$models->id])}}"><span
+                                            class="text-success fa fa-edit"></span></a>
+                            </td>
+                        </tr>
                         @endforeach
                         </tbody>
-                    </table>
-                </div>
+                </table>
+            </div>
         @endif
+
+    @endsection
+
+
+@section('formAside')
+    @include('moto.partials.asideOpenForm')
+    @if(isset($models))
+
+        <!-- .control-sidebar-menu -->
+
+        @if(isset($modelItems))
+            {!! Form::model($modelItems,['route'=> ['moto.purchasesListsPrices.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
+        @else
+            {!! Form::open(['route'=> ['moto.purchasesListsPrices.addItems' ], 'files' =>'true']) !!}
+        @endif
+
+        {!! Form::hidden('purchases_lists_prices_id',$models->id) !!}
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Modelo') !!}
+            {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
+        </div>
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Precio de Lista') !!}
+            {!! Form::text('price_list', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Precio de Contado') !!}
+            {!! Form::text('price_net', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Dto. Máximo') !!}
+            {!! Form::text('max_discount', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Observaciones') !!}
+            {!! Form::text('obs', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
+        </div>
+        {!! Form::close() !!}
+        <!-- /.control-sidebar-menu -->
+    @endif
+    @include('moto.partials.asideCloseForm')
+    
 
     @endsection
 

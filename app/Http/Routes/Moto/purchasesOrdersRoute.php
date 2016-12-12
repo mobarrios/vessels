@@ -2,7 +2,7 @@
 
 Route::group(['prefix'=>'purchasesOrders'],function(){
 
-        $section =  'purchasesorders';
+            $section =  'purchasesorders';
 
         Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.purchasesOrders.destroy','uses'=>'Moto\PurchasesOrdersController@destroy']);
         Route::get('/edit/{id?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesOrders.edit','uses'=>'Moto\PurchasesOrdersController@edit']);
