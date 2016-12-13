@@ -50,6 +50,7 @@
                     </table>
                 </div>
 
+                <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
                 <div class="col-xs-2 form-group">
                     <label>SubTotal</label>
                     <input ng-model="sTotal" type="number" class="form-control" ng-change="calcular()" value="0">
@@ -74,19 +75,23 @@
                     <label>Formularios</label>
                     <input ng-model="formularios "type="number" class="form-control" ng-change="calcular()">
                 </div>
+                <div class="col-xs-2 form-group">
+                    <label>Gastos Administrativos</label>
+                    <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
+                </div>
 
-                <div class="col-xs-12 form-group">
+                <div class="col-xs-10 form-group">
                     <label>Total</label>
                     <input ng-model="total" type="text" class="form-control">
                 </div>
 
                 <div class="col-xs-2 form-group">
-                    <label>Entrega</label>
-                    <input type="text" class="form-control" ng-model="entrega" ng-change="financiar()">
+                    <label>Anticipo</label>
+                    <input type="number" class="form-control" ng-model="entrega" ng-change="financiar()">
                 </div>
                 <div class="col-xs-2 form-group">
                     <label>Total a Financiar</label>
-                    <input ng-model="aFinanciar" type="text" class="form-control">
+                    <input ng-model="aFinanciar" type="number" class="form-control">
                 </div>
 
                 <div class="col-xs-2 form-group">
@@ -106,7 +111,7 @@
 
                 <div class="col-xs-2 form-group">
                     <label>Importe Cuota</label>
-                    <input ng-model="importeCuota" type="text" class="form-control">
+                    <input ng-model="importeCuota" type="number" class="form-control">
                 </div>
             </div>
         </div>
@@ -126,7 +131,9 @@
                         $scope.data = response.data;
                     });
 
-            $scope.add = function (models) {
+            $scope.add = function (models)
+            {
+                $scope.modelName =  models.brands.name +' '+models.name;
                 $scope.sTotal = models.active_list_price.price_net;
                 $scope.patentamiento = models.patentamiento;
                 $scope.packService = models.pack_service;
