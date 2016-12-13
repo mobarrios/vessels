@@ -48,6 +48,13 @@
          return $this->belongsTo(User::class);
      }
 
+
+
+     public function Colors()
+     {
+         return $this->hasOne(Colors::class);
+     }
+
  }
 
 
