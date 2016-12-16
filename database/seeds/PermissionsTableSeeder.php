@@ -454,6 +454,31 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'budgets.destroy',
                     'model' => '',
                 ],
+                //FINANCIAMIENTOS
+                [
+                    'id'    => 70,
+                    'name' => 'List Financiamientos',
+                    'slug' => 'financials.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 71,
+                    'name' => 'Crear Financiamientos',
+                    'slug' => 'financials.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 72,
+                    'name' => 'Edit Financiamientos',
+                    'slug' => 'financials.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 73,
+                    'name' => 'Delete Financiamientos',
+                    'slug' => 'financials.destroy',
+                    'model' => '',
+                ],
         ]);
     }
 }
