@@ -8,12 +8,12 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-
     @include('template.css')
 
         <!-- para css extras en cada seccion -->
         @yield('css')
 
+    <link rel="stylesheet" href="vendors/LTE/plugins/iCheck/all.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -66,6 +66,15 @@
             $(".control-sidebar").css("right",0);
         }
 
+    </script>
+    <script src="vendors/LTE/plugins/iCheck/icheck.js"></script>
+    <script>
+        $(document).ready(function(){
+           $("input[type='checkbox']").iCheck({
+               checkboxClass: 'icheckbox_flat-blue',
+               radioClass: 'iradio_flat-blue'
+           });
+        });
     </script>
 </body>
 </html>
