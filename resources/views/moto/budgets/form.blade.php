@@ -159,6 +159,8 @@
             $scope.calcular = function()
             {
              $scope.total =  $scope.sTotal + $scope.patentamiento + $scope.packService + $scope.seguro + $scope.flete + $scope.formularios;
+                console.log($scope.total);
+                
             };
 
             $scope.financiar = function()
