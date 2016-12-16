@@ -20,6 +20,8 @@ class CreateFinancialsDuesTable extends Migration
 
             $table->integer('due');
             $table->double('coef', 10.10);
+            $table->integer('porcent');
+
             $table->string('type');
 
             $table->integer('financials_id')->unsigned()->nulleable();

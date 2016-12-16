@@ -128,6 +128,8 @@
                         <li class={{ Request::segment(2) == "logs" ? 'active' : '' }}><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
                     @endpermission
 
+                    <li><a href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
+
                     <li><a href="#"><span>Sistema</span></a></li>
                 </ul>
             </li>

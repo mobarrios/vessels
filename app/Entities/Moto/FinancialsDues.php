@@ -9,7 +9,7 @@
 
      protected $table = 'financials_dues';
 
-     protected $fillable = ['due','coef','financials_id'];
+     protected $fillable = ['due','coef','porcent','financials_id'];
 
      public function Financials()
      {

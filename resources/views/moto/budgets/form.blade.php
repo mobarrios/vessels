@@ -80,7 +80,11 @@
                     <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
                 </div>
 
-                <div class="col-xs-10 form-group">
+                <div class="col-xs-2 form-group">
+                    <label>Descuento</label>
+                    <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
+                </div>
+                <div class="col-xs-8 form-group">
                     <label>Total</label>
                     <input ng-model="total" type="text" class="form-control">
                 </div>
