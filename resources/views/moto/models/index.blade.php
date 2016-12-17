@@ -27,7 +27,7 @@
 
                 </td>
                 <td>
-                    <label class="label label-success">activo</label>
+                    <label class="label label-success">{{$model->status}}</label>
                     <label class="label label-success">stock</label>
 
                 </td>

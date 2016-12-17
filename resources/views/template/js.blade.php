@@ -29,6 +29,12 @@
 <!-- bootstrap color picker -->
 <script src="vendors/LTE/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 
+<!-- sweet alert 2 -->
+
+<script src="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.min.js"></script>
+
+
+
 
 @if(Auth::user())
 <script>
@@ -83,6 +89,20 @@
 
             var btn = $(this);
             $(btn).prop("disabled",true);
+
+
+        swal({
+            title: 'Desea Borrar este Registro?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, delete it!'
+        }).then(function () {
+            swal(
+                    'Borrado!',
+                    'Su Registro ha sido elimiando correctamento.',
+                    'success'
+            )
+        })
             if(confirm('Eliminar Registro?')){
                 var url = $(this).attr('url_destroy');
 

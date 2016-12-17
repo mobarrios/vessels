@@ -18,8 +18,10 @@ class CreatePurchasesOrdersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->date('date');;
+            $table->date('date');
             $table->string('name');
+            $table->integer('status');
+
 
             $table->integer('providers_id')->unsigned()->index();
             $table->foreign('providers_id')->references('id')->on('providers');

@@ -24,6 +24,8 @@
 
 <link rel="stylesheet" href="styles.css">
 
+<!-- Theme style -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.min.css">
 <style>
     body{
 

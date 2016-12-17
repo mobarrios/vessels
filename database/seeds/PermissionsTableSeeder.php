@@ -454,6 +454,7 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'budgets.destroy',
                     'model' => '',
                 ],
+
                 //FINANCIAMIENTOS
                 [
                     'id'    => 70,
@@ -477,6 +478,13 @@ class PermissionsTableSeeder extends Seeder
                     'id'    => 73,
                     'name' => 'Delete Financiamientos',
                     'slug' => 'financials.destroy',
+                    'model' => '',
+                ],
+                //orden de compra envio a proveedores
+                [
+                    'id'    => 74,
+                    'name' => 'Enviar Ordenes de Compra',
+                    'slug' => 'purchasesorders.sendtoproviders',
                     'model' => '',
                 ],
         ]);

@@ -12,7 +12,7 @@
 
      protected $table = 'purchases_orders';
 
-     protected $fillable = ['date','models_id','colors_id','quantity','price','discount','providers_id','users_id'];
+     protected $fillable = ['date','models_id','colors_id','quantity','price','discount','providers_id','users_id','status'];
 
      public function Models()
      {
@@ -53,6 +53,12 @@
      public function Colors()
      {
          return $this->hasOne(Colors::class);
+     }
+
+
+     public function getStatusNameAttribute()
+     {
+         return config('status.purchases_orders.'. $this->attributes['status']);
      }
 
  }

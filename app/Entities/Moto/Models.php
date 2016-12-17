@@ -30,8 +30,11 @@
      public function activeListPrice()
      {
          return $this->hasOne(ModelsListsPricesItems::class)->with('ModelsListsPrices')->orderBy('updated_at','DESC');
+     }
 
-
+     public function getStatusAttribute()
+     {
+         return config('status.models.'.$this->attributes['status']);
      }
  }
 

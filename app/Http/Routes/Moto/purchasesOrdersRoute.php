@@ -19,5 +19,6 @@ Route::group(['prefix'=>'purchasesOrders'],function(){
     Route::get('/deleteItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.purchasesOrders.deleteItems', 'uses' => 'Moto\PurchasesOrdersController@deleteItems']);
 
 
+    Route::get('/sendPurchaseOrder/{id?}', ['middleware' => 'permission:' . $section . '.sendtoproviders', 'as' => 'moto.purchasesOrders.sendToProviders', 'uses' => 'Moto\PurchasesOrdersController@sendToProviders']);
 
 });
