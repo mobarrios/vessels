@@ -48,7 +48,7 @@ class UtilitiesController extends Controller
 
         $model = $model->find($id);
 
-        $pdf->loadView(config('models.'.$request->segment(2).'.exportPdfRoute'),compact('model'));
+        $pdf->setPaper('a5', 'portrait')->loadView(config('models.'.$request->segment(2).'.exportPdfRoute'),compact('model'));
 
         return $pdf->stream();
     }

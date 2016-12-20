@@ -10,7 +10,10 @@
     <style>
         *{
             font-family: Arial, Verdana, sans-serif;
-
+            margin: 0 !important;
+            padding: 0 !important;
+            position: relative;
+            font-size: 80%;
         }
 
         table {
@@ -19,7 +22,9 @@
 
         body{
             border-top: 5px solid #eb1f37;
+
         }
+
 
         header{
             border-top: 30px solid #0187cd;
@@ -63,12 +68,18 @@
         }
 
         header table{
-            margin-top: -30px;
+            margin-top: -50px !important;
+            height: 50px !important;
+            padding: 25px !important;
+        }
+
+        header table tr{
+            margin-top: -80px;
         }
 
         .inline{
             display: inline-block !important;
-            width: 351px;
+            width: 200px;
             margin: 0 3px;
         }
 
@@ -82,6 +93,11 @@
             background-color: #0187cd;
             color: rgb(255,255,255) !important;
             text-align: center;
+            position: absolute;
+            bottom:0;
+            left:0;
+            width: 100%;
+            padding: 10px !important;
         }
 
         .container{
@@ -91,6 +107,18 @@
         .container b{
             color: rgb(0,0,0);
         }
+
+        .padding{
+            display: block;
+            width:100%;
+            height: 1px;
+            border-top: 1px dashed #4f4f4f;
+        }
+
+        .container>div{
+            padding: 8px 25px !important;
+        }
+
 
     </style>
 
@@ -136,7 +164,7 @@
             <p><b>Contado: </b> $14500</p>
         </div>
 
-        <hr>
+        <span class="padding"></span>
 
         <div>
             <p><b>Producto: </b> T110 Crypton Base sin Disco</p>
@@ -160,7 +188,7 @@
             <p><b>Contado: </b> $14500</p>
         </div>
 
-        <hr>
+        <span class="padding"></span>
 
         <div class="inline">
             <p><b>Alarma: </b> $14500</p>
@@ -181,7 +209,7 @@
             <p><b>Seguro RC + Robo: </b> $14500</p>
         </div>
 
-        <hr>
+        <span class="padding"></span>
 
 
         <div class="inline">
