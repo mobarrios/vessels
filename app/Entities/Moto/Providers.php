@@ -12,6 +12,12 @@
      protected $fillable = ['name','cuit','address','phone','email'];
 
 
+     public function PurchasesOrders()
+     {
+         return $this->hasMany(PurchasesOrders::class);
+     }
+
+
  }
 
 

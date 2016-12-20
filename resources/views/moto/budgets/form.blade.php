@@ -6,7 +6,6 @@
 
 @section('form_inputs')
 
-
     <div class="modal-body">
         <div ng-app="myApp">
             <div ng-controller="myCtrl">

@@ -20,5 +20,7 @@ Route::group(['prefix'=>'purchasesOrders'],function(){
 
 
     Route::get('/sendPurchaseOrder/{id?}', ['middleware' => 'permission:' . $section . '.sendtoproviders', 'as' => 'moto.purchasesOrders.sendToProviders', 'uses' => 'Moto\PurchasesOrdersController@sendToProviders']);
+    Route::get('/confirm/{id?}', ['middleware' => 'permission:' . $section . '.confirm', 'as' => 'moto.purchasesOrders.confirm', 'uses' => 'Moto\PurchasesOrdersController@confirm']);
+    
 
 });

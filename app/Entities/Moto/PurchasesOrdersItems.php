@@ -21,11 +21,11 @@
          return $this->belongsTo(Models::class);
      }
 
-
      public function Colors()
      {
          return $this->belongsTo(Colors::class);
      }
+
 
  }
 

@@ -24,17 +24,5 @@
                 {!! Form::text('phone', null, ['class'=>'form-control']) !!}
             </div>
 
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Usuarios') !!}
-
-                <table class="table ">
-                    @foreach($users as $user)
-                        <tr>
-                            <td> {{$user->fullName}} </td>
-                        </tr>
-                    @endforeach
-                </table>
-                </div>
-
 @endsection
 

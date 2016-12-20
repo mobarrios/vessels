@@ -7,6 +7,7 @@ use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\DispatchesRepo as Repo;
 use App\Http\Repositories\Moto\ModelsRepo;
+use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -14,7 +15,7 @@ use Illuminate\Routing\Route;
 
 class DispatchesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, ProvidersRepo $providersRepo)
     {
 
         $this->request  = $request;
@@ -30,7 +31,8 @@ class DispatchesController extends Controller
         $this->data['models_lists'] = $modelsRepo->ListsData('name','id');
         $this->data['colors']       = $colorsRepo->ListsData('name','id');
 
-        $this->data['brands']   = $brandsRepo->getAllWithModels();
+        $this->data['brands']       = $brandsRepo->getAllWithModels();
+        $this->data['providers']    = $providersRepo->getModel()->all();
 
         $this->modelsRepo =  $modelsRepo;
 
