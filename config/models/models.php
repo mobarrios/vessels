@@ -48,14 +48,14 @@ return [
     'validationsStore' => [
 
             'name'          => 'required',
-           // 'address'     => 'required',
+            'categories_id'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
             'name'          => 'required',
-            //'address'     => 'required',
+            'categories_id'     => 'required',
 
     ],
 

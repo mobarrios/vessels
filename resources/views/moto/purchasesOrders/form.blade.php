@@ -10,115 +10,122 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Pedido de Mercaderia</h3>
                 </div>
-                <div class="box-body">
+                @if(isset($models) && $models->status == 3)
+                        @include('moto.purchasesOrders.detail')
+                @else
+                    <div class="box-body">
 
-                    @if(isset($models))
-                        {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
-                        <h4> Pedido # <strong class="text-blue">{{$models->id}}</strong></h4>
-                    @else
-                        {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
-                    @endif
-
-                    {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
-
-                    <div class="col-xs-3 form-group">
-                        {!! Form::label('Fecha') !!}
-                        {!! Form::text('date', null, ['class'=>'datePicker form-control']) !!}
-                    </div>
-
-                    <div class="col-xs-3 form-group">
-                        {!! Form::label('Proveedor') !!}
-                        {!! Form::select('providers_id', $providers, null, ['class'=>'select2 form-control']) !!}
-                    </div>
-                    <div class="col-xs-3 form-group">
-                        {!! Form::label('Sucursal') !!}
-                        {!! Form::select('branches_id[]',\Illuminate\Support\Facades\Auth::user()->getBranchName() , null, ['class'=>' select2  form-control']) !!}
-                    </div>
-                    <div class="col-xs-3 form-group" style="padding-top: 2%">
-                        <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
                         @if(isset($models))
-                            <a href="#" data-action="{!! route("moto.purchasesOrders.addItems") !!}"
-                               data-toggle="control-sidebar" class="btn btn-default"><span
-                                        class="fa fa-plus"></span></a>
+                            {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
+                            <h4> Pedido # <strong class="text-blue">{{$models->id}}</strong></h4>
+                        @else
+                            {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
                         @endif
-                    </div>
 
-                    {!! Form::close() !!}
+                        {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
+
+                        <div class="col-xs-3 form-group">
+                            {!! Form::label('Fecha') !!}
+                            {!! Form::text('date', null, ['class'=>'datePicker form-control']) !!}
+                        </div>
+
+                        <div class="col-xs-3 form-group">
+                            {!! Form::label('Proveedor') !!}
+                            {!! Form::select('providers_id', $providers, null, ['class'=>'select2 form-control']) !!}
+                        </div>
+                        <div class="col-xs-3 form-group">
+                            {!! Form::label('Sucursal') !!}
+                            {!! Form::select('branches_id[]',\Illuminate\Support\Facades\Auth::user()->getBranchName() , null, ['class'=>' select2  form-control']) !!}
+                        </div>
+                        <div class="col-xs-3 form-group" style="padding-top: 2%">
+                            <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                            @if(isset($models))
+                                <a href="#" data-action="{!! route("moto.purchasesOrders.addItems") !!}"
+                                   data-toggle="control-sidebar" class="btn btn-default"><span
+                                            class="fa fa-plus"></span></a>
+                            @endif
+                        </div>
+
+                        {!! Form::close() !!}
 
 
-                    @if(isset($models))
-                        <div class="col-xs-12">
-                            <table class="table">
-                                <thead>
-                                <th>Marca</th>
-                                <th>Modelo</th>
-                                <th>Cantidad</th>
-                                <th>$ Lista</th>
-                                <th>% Dto.</th>
-                                <th>Color</th>
-                                <th>S.Total Neto</th>
-                                <th>Total Dto.</th>
-                                <th>S.Total</th>
+                        @if(isset($models))
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <thead>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Cantidad</th>
+                                    <th>$ Lista</th>
+                                    <th>% Dto.</th>
+                                    <th>Color</th>
+                                    <th>S.Total Neto</th>
+                                    <th>Total Dto.</th>
+                                    <th>S.Total</th>
 
 
-                                </thead>
-                                <tbody>
-                                <?php $t = 0;?>
-                                @foreach($models->PurchasesOrdersItems as $item)
+                                    </thead>
+                                    <tbody>
+                                    <?php $t = 0;?>
+                                    @foreach($models->PurchasesOrdersItems as $item)
 
-                                    <tr>
-                                        <td>{{$item->Models->Brands->name}}</td>
-                                        <td>{{$item->Models->name}}</td>
-                                        <td>{{$item->quantity}}</td>
-                                        <td>$ {{number_format($item->price,2)}}</td>
-                                        <td>% {{$item->discount}}</td>
-                                        <td>{{$item->colors->name}}</td>
-                                        <td>$ {{number_format($item->quantity * $item->price, 2)  }}</td>
-                                        <td>
-                                            $ {{number_format(((($item->quantity * $item->price) * $item->discount)/100),2 )}}</td>
-                                        <td class="text-danger">
-                                            $ {{number_format(($item->quantity * $item->price)  - ((($item->quantity * $item->price) * $item->discount)/100),2) }}</td>
-                                        <?php $t += ($item->quantity * $item->price) - ((($item->quantity * $item->price) * $item->discount) / 100);?>
+                                        <tr>
+                                            <td>{{$item->Models->Brands->name}}</td>
+                                            <td>{{$item->Models->name}}</td>
+                                            <td>{{$item->quantity}}</td>
+                                            <td>$ {{number_format($item->price,2)}}</td>
+                                            <td>% {{$item->discount}}</td>
+                                            <td>{{$item->colors->name}}</td>
+                                            <td>$ {{number_format($item->quantity * $item->price, 2)  }}</td>
+                                            <td>
+                                                $ {{number_format(((($item->quantity * $item->price) * $item->discount)/100),2 )}}</td>
+                                            <td class="text-danger">
+                                                $ {{number_format(($item->quantity * $item->price)  - ((($item->quantity * $item->price) * $item->discount)/100),2) }}</td>
+                                            <?php $t += ($item->quantity * $item->price) - ((($item->quantity * $item->price) * $item->discount) / 100);?>
 
-                                        <td>
-                                            <a class="btn btn-xs btn-default"
-                                               href="{{route('moto.purchasesOrders.deleteItems',[$item->id,$models->id])}}"><span
-                                                        class="text-danger fa fa-trash"></span></a>
-                                            <a class="btn btn-xs btn-default"
-                                               href="{{route('moto.purchasesOrders.editItems',[$item->id,$models->id])}}"><span
-                                                        class="text-success fa fa-edit"></span></a>
-                                        </td>
+                                            <td>
+                                                <a class="btn btn-xs btn-default"
+                                                   href="{{route('moto.purchasesOrders.deleteItems',[$item->id,$models->id])}}"><span
+                                                            class="text-danger fa fa-trash"></span></a>
+                                                <a class="btn btn-xs btn-default"
+                                                   href="{{route('moto.purchasesOrders.editItems',[$item->id,$models->id])}}"><span
+                                                            class="text-success fa fa-edit"></span></a>
+                                            </td>
 
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
 
                                 <div class="col-xs-12">
                                     <span class="pull-right">Total : <strong
                                                 class="text-danger">$ {{number_format($t,2)}}</strong></span>
                                 </div>
-                        </div>
-                    @endif
-
-
-                </div>
-                <div class="box-footer clearfix">
-                    @if(isset($models))
-                        @if($models->status != 2 )
-                        <a href="{{route('moto.purchasesOrders.sendToProviders',$models->id)}}" type="button"
-                           class="btn btn-default">Enviar</a>
+                            </div>
                         @endif
-                        <span class="pull-right">Pedido por : <strong
-                                    class="text"> {{$models->Users->fullName}}</strong>
+
+
+                    </div>
+                    <div class="box-footer clearfix">
+                        @if(isset($models))
+                            @if($models->status != 2 )
+                                <a href="{{route('moto.purchasesOrders.sendToProviders',$models->id)}}" type="button"
+                                   class="btn btn-default">Enviar</a>
+                            @elseif($models->status == 2)
+                                <a href="{{route('moto.purchasesOrders.confirm',$models->id)}}" type="button"
+                                   class="btn btn-default">Confirmar</a>
+                            @endif
+                            <span class="pull-right">Pedido por : <strong
+                                        class="text"> {{$models->Users->fullName}}</strong>
                             |
                         <b class="text-muted">{{$models->created_at}}</b>
                         </span>
 
-                    @endif
-                </div>
-                {!! Form::close() !!}
+                        @endif
+                    </div>
+                    {!! Form::close() !!}
             </div>
+            @endif
         </div>
     </div>
     @endsection

@@ -17,12 +17,12 @@
                 <td>
                     <div class="col-xs-6">
                        <strong class="text-danger"> {{$model->activeListPrice->ModelsListsPrices->number  or ''}}</strong><br>
-                        Lista : <strong class="text-success">$ {{$model->activeListPrice->price_list or ''}}</strong><br>
-                        Costo : <strong  >$ {{$model->activeListPrice->price_net or ''}}</strong>
+                        Lista : <strong class="text-success">$ {{number_format($model->activeListPrice->price_list ,2 )}}</strong><br>
+                        Costo : <strong  >$ {{ number_format($model->activeListPrice->price_net ,2)}}</strong>
                     </div>
                     <div class="col-xs-6">
-                        Pack : <strong  >$ {{$model->pack_service or ''}}</strong><br>
-                        Patentamiento : <strong  >$ {{$model->patentamiento or ''}}</strong>
+                        Pack : <strong  >$ {{number_format($model->pack_service , 2)}}</strong><br>
+                        Patentamiento : <strong  >$ {{number_format($model->patentamiento ,2 )}}</strong>
                     </div>
 
                 </td>

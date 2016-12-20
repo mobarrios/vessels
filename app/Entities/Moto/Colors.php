@@ -10,6 +10,8 @@
      protected $table = 'colors';
 
      protected $fillable = ['name'];
+
+     
      
  }
 

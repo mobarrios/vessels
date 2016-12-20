@@ -75,9 +75,11 @@
                     @permission('purchasesorders.list')
                         <li class={{ Request::segment(2) == "purchasesOrders" ? 'active' : '' }}><a href="{{route('moto.purchasesOrders.index')}}"><span>Perdidos de Mercaderias</span></a></li>
                     @endpermission
+                    {{--
                     @permission('purchasesorders.list')
                         <li class={{ Request::segment(2) == '' ? 'active' : '' }}><a href=""><span>Notas de Pedidos</span></a></li>
                     @endpermission
+                     --}}
                     @permission('dispatches.list')
                         <li class={{ Request::segment(2) == "dispatches" ? 'active' : '' }}><a href="{{route('moto.dispatches.index')}}"><span>Remitos</span></a></li>
                     @endpermission

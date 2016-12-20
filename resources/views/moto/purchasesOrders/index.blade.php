@@ -11,7 +11,6 @@
             <td>{{$model->Users->fullName }}</td>
             <td>Items : <label class="label label-default">{{$model->PurchasesOrdersItems->count() }}</label></td>
 
-            <td><label class="label label-warning">{{$model->statusName}}</label></td>
-        </tr>
+            <td><label class="label label-warning">{{$model->statusName}}</label></td></tr>
     @endforeach
 @endsection
