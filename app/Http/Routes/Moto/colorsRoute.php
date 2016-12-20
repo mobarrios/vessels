@@ -13,6 +13,6 @@ Route::group(['prefix'=>'colors'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.colors.show','uses'=>'Moto\ColorsController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.colors.index','uses'=>'Moto\ColorsController@index']);
 
-
+    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.colors.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
 });

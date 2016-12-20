@@ -13,6 +13,7 @@ Route::group(['prefix'=>'dispatches'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.dispatches.show','uses'=>'Moto\DispatchesController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.dispatches.index','uses'=>'Moto\DispatchesController@index']);
 
+    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.dispatches.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
 
         Route::post('/addItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.dispatches.addItems','uses'=>'Moto\DispatchesController@addItems']);

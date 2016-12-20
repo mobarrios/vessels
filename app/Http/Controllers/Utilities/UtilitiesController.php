@@ -30,11 +30,25 @@ class UtilitiesController extends Controller
     }
 
 
-    public function exportToPdf(Route $route , PDF $pdf){
+    public function exportListToPdf(Route $route , PDF $pdf){
 
-        $model = Session::get('export') ;
+        $model = Session::get('export');
 
-        $pdf->loadHTML($model);
+        $pdf->loadView('template.listExport',$model);
+
+        return $pdf->stream();
+    }
+
+
+    public function exportToPdf($id,Request $request,Route $route , PDF $pdf){
+
+        $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
+
+        $model = new $entidad;
+
+        $model = $model->find($id);
+
+        $pdf->loadView(config('models.'.$request->segment(2).'.exportPdfRoute'),compact('model'));
 
         return $pdf->stream();
     }

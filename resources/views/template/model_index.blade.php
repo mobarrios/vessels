@@ -16,7 +16,7 @@
                             </div>
                             <div class="btn-group btn-group-sm">
                                 <a href="{{route('utilities.exportToExcel')}}" class="btn btn-default" title="Exportar Excel"><i class="fa bg-success fa-file-excel-o"></i></a>
-                                <a href="{{route('utilities.exportToPdf')}}" target="_blank" class="btn btn-default" title="Exportar PDF"><i class="fa bg-danger fa-file-pdf-o"></i></a>
+                                <a href="{{ \Illuminate\Support\Facades\Request::segment(1) == 'moto' ? route('moto.'.$section.'.pdf') : route('configs.'.$section.'.pdf')}}" target="_blank" class="btn btn-default" title="Exportar PDF"><i class="fa bg-danger fa-file-pdf-o"></i></a>
                             </div>
                         </div>
                     </div>

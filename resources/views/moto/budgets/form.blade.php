@@ -122,6 +122,17 @@
     </div>
 
 
+    <div class="row">
+        <div class="container">
+            <div class="col-xs-12">
+                <a href="{{route('moto.'.$section.'.pdf',1)}}" target="_blank" class="btn btn-default" title="Exportar PDF">
+                    <i class="fa bg-danger fa-file-pdf-o"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
 
 @endsection
 

@@ -14,5 +14,6 @@ Route::group(['prefix'=>'clients'],function(){
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.clients.index','uses'=>'Moto\ClientsController@index']);
 
 
+        Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.clients.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
 });

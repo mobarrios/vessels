@@ -13,5 +13,7 @@ Route::group(['prefix'=>'budgets'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.budgets.show','uses'=>'Moto\BudgetsController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.index','uses'=>'Moto\BudgetsController@index']);
 
+
+        Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
         
 });

@@ -18,6 +18,7 @@ Route::group(['prefix'=>'purchasesOrders'],function(){
     Route::post('/editItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.purchasesOrders.updateItems', 'uses' => 'Moto\PurchasesOrdersController@updateItems']);
     Route::get('/deleteItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.purchasesOrders.deleteItems', 'uses' => 'Moto\PurchasesOrdersController@deleteItems']);
 
+    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.purchasesOrders.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
     Route::get('/sendPurchaseOrder/{id?}', ['middleware' => 'permission:' . $section . '.sendtoproviders', 'as' => 'moto.purchasesOrders.sendToProviders', 'uses' => 'Moto\PurchasesOrdersController@sendToProviders']);
 

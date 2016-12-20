@@ -21,6 +21,8 @@ return [
     'postStoreRoute'  => 'moto.'.$model.'.index',
     'postUpdateRoute' => 'moto.'.$model.'.index',
 
+    'exportPdfRoute' => 'moto.'.$model.'.pdf',
+
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
 
@@ -58,5 +60,7 @@ return [
             'address'     => 'required',
 
     ],
+
+
 
 ];

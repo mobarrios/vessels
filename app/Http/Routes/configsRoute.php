@@ -15,6 +15,8 @@ Route::group(['prefix'=>'configs'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'configs.users.show','uses'=>'Configs\UsersController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.users.index','uses'=>'Configs\UsersController@index']);
 
+
+        Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.users.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
     });
 
 
@@ -31,6 +33,8 @@ Route::group(['prefix'=>'configs'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'configs.permissions.show','uses'=>'Configs\PermissionsController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.permissions.index','uses'=>'Configs\PermissionsController@index']);
 
+
+        Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.permissions.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
     });
 
     Route::group(['prefix'=>'roles'],function(){
@@ -46,6 +50,8 @@ Route::group(['prefix'=>'configs'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'configs.roles.show','uses'=>'Configs\RolesController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.roles.index','uses'=>'Configs\RolesController@index']);
 
+
+        Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.roles.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
     });
 
 
@@ -63,6 +69,8 @@ Route::group(['prefix'=>'configs'],function(){
         Route::get('/show',             ['as'=>'configs.logs.show','uses'=>'Configs\LogsController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.logs.index','uses'=>'Configs\LogsController@index']);
 
+
+        Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'configs.logs.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
     });
 
 
@@ -77,6 +85,8 @@ Route::group(['prefix'=>'configs'],function(){
         Route::get('/show',             ['as'=>'configs.branches.show','uses'=>'Configs\BranchesController@show']);
         Route::get('/index/{search?}',  ['as'=>'configs.branches.index','uses'=>'Configs\BranchesController@index']);
 
+
+        Route::get('/pdf',  ['as'=>'configs.branches.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
     });
 
 

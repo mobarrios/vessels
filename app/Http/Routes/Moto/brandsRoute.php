@@ -13,6 +13,6 @@ Route::group(['prefix'=>'brands'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.brands.show','uses'=>'Moto\BrandsController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.brands.index','uses'=>'Moto\BrandsController@index']);
 
-
+    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.brands.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
 });

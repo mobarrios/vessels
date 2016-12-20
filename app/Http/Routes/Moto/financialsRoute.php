@@ -20,4 +20,5 @@ Route::group(['prefix'=>'financials'],function(){
         Route::post('/editDue/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.financials.updateDue', 'uses' => 'Moto\FinancialsController@updateDue']);
         Route::get('/deleteDue/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.financials.deleteDue', 'uses' => 'Moto\FinancialsController@deleteDue']);
 
+    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.financials.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 });

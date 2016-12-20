@@ -13,6 +13,8 @@ Route::group(['prefix'=>'purchasesListsPrices'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.purchasesListsPrices.show','uses'=>'Moto\PurchasesListsPricesController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.purchasesListsPrices.index','uses'=>'Moto\PurchasesListsPricesController@index']);
 
+    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.purchasesListsPrices.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+
         Route::post('/addItem/{item?}',                   ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesListsPrices.addItems','uses'=>'Moto\PurchasesListsPricesController@addItems']);
         Route::get('/editItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.purchasesListsPrices.editItems', 'uses' => 'Moto\PurchasesListsPricesController@editItems']);
         Route::post('/editItem/{item?}/{id?}', ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.purchasesListsPrices.updateItems','uses'=>'Moto\PurchasesListsPricesController@updateItems']);
