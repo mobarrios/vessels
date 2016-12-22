@@ -24,7 +24,15 @@ class AjaxController extends Controller
     public function modelsLists()
     {
 
-        $data =$this->repo->allToBudgets() ;
+        $data = $this->repo->allToBudgets() ;
+
+        return response()->json($data);
+    }
+
+    public function modelLists($id)
+    {
+
+        $data = $this->repo->oneToBudgets($id) ;
 
         return response()->json($data);
     }

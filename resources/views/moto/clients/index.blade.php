@@ -15,7 +15,7 @@
                 <td>tel. {{$model->phone1}} <br> tel. {{$model->phone2}}</td>
                 <td>{{$model->email}}</td>
 
-                <td><a href="{{route('moto.budgets.create')}}" class="btn btn-default"><span class="fa fa-bookmark"></span></a></td>
+                <td><a href="{{route('moto.budgets.index',$model->id)}}" class="btn btn-default"><span class="fa fa-bookmark"></span></a></td>
 
 
         @endforeach

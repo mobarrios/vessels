@@ -12,6 +12,14 @@
      protected $fillable = ['name','last_name','email','dni','sexo','marital_status','dob','nacionality','phone1','phone2','address', 'city','location','province','obs'];
 
 
+     public function Budgets()
+     {
+         return $this->hasMany(Budgets::class);
+     }
+
+     public function getFullNameAttribute(){
+         return $this->attributes['name'].' '.$this->attributes['last_name'];
+     }
  }
 
 

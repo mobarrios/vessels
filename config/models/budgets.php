@@ -18,7 +18,7 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
-    'postStoreRoute'  => 'moto.'.$model.'.index',
+    'postStoreRoute'  => 'moto.'.$model.'.create',
     'postUpdateRoute' => 'moto.'.$model.'.index',
 
     'exportPdfRoute' => 'moto.'.$model.'.pdf',
@@ -49,15 +49,13 @@ return [
 
     'validationsStore' => [
 
-            'name'          => 'required',
-            'address'     => 'required',
+            'clients_id'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'name'          => 'required',
-            'address'     => 'required',
+        'clients_id'     => 'required',
 
     ],
 

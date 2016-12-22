@@ -9,7 +9,7 @@
 
      protected $table = 'budgets';
 
-     protected $fillable = ['data', 'clientes_id'];
+     protected $fillable = ['date', 'clients_id'];
 
      public function Models()
      {
@@ -18,9 +18,17 @@
 
      public function Clients()
      {
-         return $this->hasMany(Clients::class);
+         return $this->belongsTo(Clients::class);
      }
-     
+
+     public function allItems(){
+         return $this->belongsToMany(Models::class,'budgets_items')->withPivot(['price_actual','price_budget','id']);
+     }
+
+     public function getDateAttribute(){
+         return date("d-m-Y",strtotime($this->attributes['date']));
+     }
+
  }
 
 

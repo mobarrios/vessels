@@ -10,9 +10,9 @@
                         <div class="row pull-left box-tools ">
                             <button id="check_all" type="button" class="btn btn-sm btn-default" data-toggle="button" aria-pressed="false"><i class="fa fa-check-square-o"></i></button>
                             <div class="btn-group btn-group-sm">
-                                <a href="{{route(config('models.'.$section.'.createRoute'))}}" class="btn btn-default" title="Nuevo"><i class="fa fa-plus-square-o"></i></a>
-                                <button class="destroy_btn btn btn-default" url_destroy = "{!!config('models.'.$section.'.destroyUrl') !!}" title="Borrar"><i class="fa fa-minus-square-o"></i></button>
-                                <button id="edit_btn" route_edit="{{route(config('models.'.$section.'.editRoute'))}}" class="btn btn-default" title="Editar" ><i class="fa fa-edit"></i></button>
+                                <a href="{{ \Illuminate\Support\Facades\Request::segment(2) == 'budgets' ? route(config('models.'.$section.'.createRoute'),\Illuminate\Support\Facades\Request::segment(4)) : route(config('models.'.$section.'.createRoute'))}}" class="btn btn-default" title="Nuevo"><i class="fa fa-plus-square-o"></i></a>
+                                <button class="destroy_btn btn btn-default" url_destroy = "{{ \Illuminate\Support\Facades\Request::segment(2) == 'budgets' ? route(config('models.'.$section.'.destroyRoute')) : route(config('models.'.$section.'.destroyRoute'))}}" title="Borrar"><i class="fa fa-minus-square-o"></i></button>
+                                <button id="edit_btn" route_edit="{{ \Illuminate\Support\Facades\Request::segment(2) == 'budgets' ? route(config('models.'.$section.'.editRoute'),\Illuminate\Support\Facades\Request::segment(4)) : route(config('models.'.$section.'.editRoute'))}}" class="btn btn-default" title="Editar" ><i class="fa fa-edit"></i></button>
                             </div>
                             <div class="btn-group btn-group-sm">
                                 <a href="{{route('utilities.exportToExcel')}}" class="btn btn-default" title="Exportar Excel"><i class="fa bg-success fa-file-excel-o"></i></a>

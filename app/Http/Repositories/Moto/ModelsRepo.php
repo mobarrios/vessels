@@ -47,4 +47,14 @@ class ModelsRepo extends BaseRepo {
             ->get();
     }
 
+    public function oneToBudgets($id)
+    {
+        return $this->getModel()
+            ->where('status', 1)
+            ->with('Brands')
+            ->with('activeListPrice')
+            ->orderBy('brands_id', 'ASC')->orderBy('name', 'ASC')
+            ->find($id);
+//            ->get());
+    }
 }

@@ -102,52 +102,48 @@
                     'Su Registro ha sido elimiando correctamento.',
                     'success'
             )
-        })
-            if(confirm('Eliminar Registro?')){
-                var url = $(this).attr('url_destroy');
+            var url = $(btn).attr('url_destroy');
 
-                $("input:checkbox:checked").each(function() {
-                    var id = $(this).val();
-                    $.ajax({
-                        'url': url+id,
-                        'method': 'get',
-                        'success': function (data) {
-                            if(data == "ok"){
-                                location.href = "{!! route(config('models.'.$section.'.indexRoute')) !!}";
-                            }else{
-                                $(btn).prop("disabled",false);
-                                alert("Error al querer borrar el registro")
-                            }
+            $("input:checkbox:checked").each(function() {
+                var id = $(this).val();
+                $.ajax({
+                    'url': url+'/'+id,
+                    'method': 'get',
+                    'success': function (data) {
+                        if(data == "ok"){
+
+                            location.href = "{!!  \Illuminate\Support\Facades\Request::segment(2) == 'budgets' ? route(config('models.'.$section.'.indexRoute'),\Illuminate\Support\Facades\Request::segment(4)) : route(config('models.'.$section.'.indexRoute')) !!}";
+                        }else{
+                            $(btn).prop("disabled",false);
+                            alert("Error al querer borrar el registro")
                         }
-                    });
+                    }
                 });
-            }else{
-                return false;
-            }
+            });
+        })
+@else
+alert('No Tiene Permiso para realizar esta acción.');
 
-        @else
-            alert('No Tiene Permiso para realizar esta acción.');
+@endpermission
 
-        @endpermission
+});
 
-    });
+// edit button
+$('#edit_btn').on('click',function () {
+var route = $(this).attr('route_edit');
 
-    // edit button
-    $('#edit_btn').on('click',function () {
-        var route = $(this).attr('route_edit');
+//valida q haya solo 1 solo elemento seleccionado
+if($('.id_destroy:checked').length != 1) {
+alert('Seleccionar 1(uno) elemento para editar');
+return false;
+}else{
 
-        //valida q haya solo 1 solo elemento seleccionado
-        if($('.id_destroy:checked').length != 1) {
-            alert('Seleccionar 1(uno) elemento para editar');
-            return false;
-        }else{
+//redireccion a la ruta de edicion con el id
+window.location.href = route +'/'+$('.id_destroy:checked').val();
 
-            //redireccion a la ruta de edicion con el id
-            window.location.href = route +'/'+$('.id_destroy:checked').val();
+}
 
-        }
-
-    });
+});
 
 </script>
 @endif
