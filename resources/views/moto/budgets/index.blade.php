@@ -15,7 +15,7 @@
                 <td>
                     <ul>
                         @forelse($model->allItems as $item)
-                            <li> $item->name</li>
+                            <li> {!! $item->name !!}</li>
                         @empty
 
                         @endforelse

@@ -26,6 +26,11 @@
          return $this->belongsTo(Colors::class);
      }
 
+     public function DispatchesItems()
+     {
+         return $this->hasMany(DispatchesItems::class);
+     }
+
 
  }
 
