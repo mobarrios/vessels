@@ -12,6 +12,8 @@
                 </td>
                 <td>{{$model->date }}</td>
                 <td>{{$model->number}}</td>
+                <td>{{$model->Brancheables->first()->Branches->name}}</td>
+
             </tr>
         @endforeach
     @endsection

@@ -11,11 +11,12 @@
 
      protected $fillable = ['name','n_motor','n_cuadro','year','models_id','colors_id'];
 
+
      public function Certificates()
      {
          return $this->hasOne(Certificates::class);
      }
-
+     
      public function Models()
      {
          return $this->belongsTo(Models::class);

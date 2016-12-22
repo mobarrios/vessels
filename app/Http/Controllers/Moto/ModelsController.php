@@ -25,6 +25,9 @@ class ModelsController extends Controller
         // data
         $this->data['brands'] = $brandsRepo->ListsData('name','id');
         $this->data['categories'] = $categoriesRepo->ListsData('name','id');
+        $this->data['status'] = config('status.models');
+
+
 
     }
 

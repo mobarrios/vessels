@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Moto;
 
 use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\DispatchesItemsRepo;
@@ -18,7 +19,9 @@ use Illuminate\Routing\Route;
 
 class DispatchesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,ModelsRepo $modelsRepo, ColorsRepo $colorsRepo ,  BrandsRepo $brandsRepo, ProvidersRepo $providersRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
+                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo , BrandsRepo $brandsRepo, ProvidersRepo $providersRepo,
+                                 BranchesRepo $branchesRepo)
     {
 
         $this->request  = $request;
@@ -35,6 +38,8 @@ class DispatchesController extends Controller
         $this->data['colors']       = $colorsRepo->ListsData('name','id');
 
         $this->data['brands']       = $brandsRepo->getAllWithModels();
+        $this->data['branches']     = $branchesRepo->ListsData('name','id');
+
         $this->data['providers']    = $providersRepo->getModel()->all();
 
         $this->modelsRepo =  $modelsRepo;
@@ -48,6 +53,9 @@ class DispatchesController extends Controller
         $item = new Items();
         $item->fill($item_data);
         $item->save();
+
+        // AGREGA BRANCHEABLES
+        $item->brancheables()->create(['branches_id' => $this->request->branches_id]);
 
         $this->request['items_id'] =  $item->id;
 

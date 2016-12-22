@@ -122,9 +122,16 @@ abstract class BaseRepo {
     {
         $model->brancheables()->delete();
 
-        foreach ($branches_id as $id) {
-             $model->brancheables()->create(['branches_id' => $id] );
+        if(!is_array($branches_id)){
+            $model->brancheables()->create(['branches_id' => $branches_id] );
         }
+        else{
+            foreach ($branches_id as $id) {
+                $model->brancheables()->create(['branches_id' => $id] );
+            }
+        }
+
+
 
     }
 

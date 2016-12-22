@@ -21,7 +21,7 @@
         {!! Form::text('number', null, ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-2 form-group">
         {!! Form::label('Imagen Remito') !!}
         {!! Form::file('image',['class'=>'form-control']) !!}
     </div>
@@ -40,6 +40,12 @@
             @endforeach
         </select>
     </div>
+
+    <div class="col-xs-2 form-group">
+        {!! Form::label('Sucursal') !!}
+        {!! Form::select('branches_id',$branches ,null, ['class'=>'select2 form-control']) !!}
+    </div>
+
     <div class="col-xs-2 form-group" style="padding-top: 2%">
         <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
         @if(isset($models))
@@ -49,9 +55,6 @@
     </div>
 
     {!! Form::close() !!}
-
-
-
 
     @if(isset($models))
         <div class=" panel-default col-xs-6">
@@ -90,10 +93,6 @@
                         <td>{{$item->Items->n_motor}}</td>
                         <td>{{$item->Items->n_cuadro}}</td>
 
-
-
-
-
                         <td>
                             <a href="{{route('moto.dispatches.deleteItems',[$item->id,$models->id])}}"><span
                                         class="text-danger fa fa-trash"></span></a>
@@ -127,6 +126,8 @@
         @endif
 
         {!! Form::hidden('dispatches_id',$models->id) !!}
+        {!! Form::hidden('branches_id',$models->Brancheables->first()->Branches->id) !!}
+
         <div class="col-xs-12 form-group">
             {!! Form::label('Modelo') !!}
             {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
