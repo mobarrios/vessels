@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Moto;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
+use App\Http\Repositories\Moto\DispatchesItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersItemsRepo;
@@ -41,15 +42,15 @@ class PurchasesOrdersController extends Controller
 
 
     //find with items
-    public function find(PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo)
+    public function find()
     {
-        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')-> with('PurchasesOrdersItems.Colors')->find($this->route->getParameter('id'));
+        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.DispatchesItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')-> with('PurchasesOrdersItems.Colors')->find($this->route->getParameter('id'));
 
         return response()->json($data);
     }
 
     //confirma la lista de pedidos
-    public function confirm()
+    public function confirm(DispatchesItemsRepo $dispatchesItemsRepo)
     {
         $id = $this->route->getParameter('id');
 
@@ -57,7 +58,19 @@ class PurchasesOrdersController extends Controller
         $repo->status = 3;
         $repo->save();
 
-        //envia mail al proveedor
+
+        //crear la cantidad de productos pedidos en la tabla de remitos items
+        foreach ( $repo->PurchasesOrdersItems as $item) {
+            $q =  $item->quantity;
+
+            for($i=1;$i <= $q; $i++)
+            {
+                $new = ['purchases_orders_items_id'=> $item->id ];
+                $dispatchesItems = $dispatchesItemsRepo->create($new);
+            }
+
+        }
+
 
         return redirect()->route('moto.purchasesOrders.index')->withErrors(['Pedido de Mercadería Confirmado.']);
     }

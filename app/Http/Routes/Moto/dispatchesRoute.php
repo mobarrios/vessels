@@ -15,10 +15,9 @@ Route::group(['prefix'=>'dispatches'],function(){
 
     Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.dispatches.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
+    Route::post('/addItem/{item?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.dispatches.addItems', 'uses' => 'Moto\DispatchesController@addItems']);
+    Route::get('/editItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.dispatches.editItems', 'uses' => 'Moto\DispatchesController@editItems']);
+    Route::post('/editItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.dispatches.updateItems', 'uses' => 'Moto\DispatchesController@updateItems']);
+    Route::get('/deleteItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.dispatches.deleteItems', 'uses' => 'Moto\DispatchesController@deleteItems']);
 
-        Route::post('/addItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.dispatches.addItems','uses'=>'Moto\DispatchesController@addItems']);
-
-        Route::post('/editItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.dispatches.editItems','uses'=>'Moto\DispatchesController@editItems']);
-
-        Route::post('/deleteItem/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.dispatches.deleteItems','uses'=>'Moto\DispatchesController@deleteItems']);
 });

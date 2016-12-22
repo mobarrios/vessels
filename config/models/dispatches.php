@@ -18,6 +18,9 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
+    'postStoreRoute'  => 'moto.'.$model.'.edit',
+    'postUpdateRoute' => 'moto.'.$model.'.edit',
+
     //addItems
     'addItemsRoute'  => 'moto.'.$model.'.addItems',
     'editItemsRoute'  => 'moto.'.$model.'.editItems',

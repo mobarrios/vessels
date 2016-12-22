@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
+use App\Http\Repositories\Moto\DispatchesItemsRepo;
 use App\Http\Repositories\Moto\DispatchesRepo as Repo;
+use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo;
@@ -38,8 +41,43 @@ class DispatchesController extends Controller
 
     }
 
-    
+    public function addItems(DispatchesItemsRepo $dispatchesItemsRepo, ItemsRepo $itemsRepo)
+    {
+        $item_data = ['models_id'=> $this->request->models_id, 'n_motor' => $this->request->n_motor , 'n_cuadro'=> $this->request->n_cuadro , 'colors_id' => $this->request->colors_id ] ;
 
+        $item = new Items();
+        $item->fill($item_data);
+        $item->save();
+
+        $this->request['items_id'] =  $item->id;
+
+        $dispatchesItemsRepo->create($this->request);
+
+        return redirect()->route('moto.dispatches.edit', $this->request->dispatches_id);
+    }
+
+    public function editItems(DispatchesItemsRepo $dispatchesItemsRepo)
+    {
+        $this->data['modelItems'] = $dispatchesItemsRepo->find($this->route->getParameter('item'));
+
+        return parent::edit();
+    }
+
+    public function updateItems(DispatchesItemsRepo $dispatchesItemsRepo, $id)
+    {
+        $dispatchesItemsRepo->update($id, $this->request);
+
+        return parent::edit();
+    }
+
+    public function deleteItems(DispatchesItemsRepo $dispatchesItemsRepo)
+    {
+        $dispatchesItemsRepo->destroy($this->route->getParameter('item'));
+
+        return parent::edit();
+    }
+
+    /*
     public function addItems()
     {
         $data   = $this->request;
@@ -137,5 +175,6 @@ class DispatchesController extends Controller
 
         return "Se eliminó correctamente el item";
     }
+    */
 
 }

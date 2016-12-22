@@ -1,16 +1,16 @@
 <?php
 namespace App\Http\Repositories\Moto;
 
-use App\Entities\Moto\Dispatches;
+use App\Entities\Moto\DispatchesItems;
 use App\Http\Repositories\BaseRepo;
 
 
-class DispatchesRepo extends BaseRepo {
+class DispatchesItemsRepo extends BaseRepo {
     
     public function getModel()
     {
-        return new Dispatches();
+        return new DispatchesItems();
     }
 
-   
+    
 }
