@@ -36,5 +36,11 @@ class ItemsController extends Controller
        // $this->certificatesRepo = $certificatesRepo;
     }
 
-    
+    public function itemsByModels()
+    {
+        $id = $this->route->getParameter('id');
+
+        $data = $this->repo->ItemsByModels($id);
+        return response()->json($data);
+    }
 }

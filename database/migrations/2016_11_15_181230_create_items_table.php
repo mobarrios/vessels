@@ -22,8 +22,8 @@ class CreateItemsTable extends Migration
             $table->string('n_motor');
             $table->string('n_cuadro');
             $table->string('year');
-
-
+            $table->integer('status');
+            
             $table->integer('models_id')->unsigned()->index();
             $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
 

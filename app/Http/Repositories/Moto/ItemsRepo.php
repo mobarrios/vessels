@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Repositories\Moto;
 
+use App\Entities\Configs\Brancheables;
 use App\Entities\Moto\Certificates;
 use App\Entities\Moto\Items;
 use App\Http\Repositories\BaseRepo;
@@ -13,5 +14,41 @@ class ItemsRepo extends BaseRepo {
         return new Items();
     }
 
+
+    public function ItemsByModels($id)
+    {
+        $data = $this->model->with('Branches')->where('models_id',$id)->get();
+        return $data;
+    }
+
+    public function asignItem($models_id, $branches_id)
+    {
+
+        //busca items con estatus ingresado
+        $items = Items::where('status',1)->where('models_id', $models_id)->get()->lists('id');
+
+        // valida si el producto esta en la sucursal de destino
+        $qBranch = Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->where('branches_id',$branches_id)->first();
+
+        if(!is_null($qBranch))
+            $item =   $qBranch->entities_id;
+
+        // si no esta en la sucursal de destino envia la mas antigua
+        $item =  Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->first()->entities_id;
+
+        // cambia el estado a reservado
+        $this->changeStatus($item , 2);
+
+        return $item;
+    }
+
+
+    public function changeStatus($id ,  $status )
+    {
+        $item = $this->find($id);
+        $item->status =  $status;
+        $item->save();
+
+    }
     
 }

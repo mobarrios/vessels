@@ -59,4 +59,9 @@ class Entity extends Model {
         return $this->Brancheables()->lists('branches_id')->toArray();
     }
 
+    public function getBranchesNameAttribute()
+    {
+        return $this->Brancheables()->with('Branches')->get()->lists('Branches.name','Branches.id');
+    }
+
 }

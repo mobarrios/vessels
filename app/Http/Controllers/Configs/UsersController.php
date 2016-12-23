@@ -9,6 +9,7 @@ use App\Http\Repositories\Configs\UsersRepo as Repo;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -30,4 +31,13 @@ class UsersController extends Controller
 
     }
 
+
+    public function changeBranchesActive()
+    {
+        $user = $this->repo->find(Auth::user()->id);
+        $user->branches_active_id = $this->route->getParameter('branches_id');
+        $user->save();
+
+        return redirect()->route('home');
+    }
 }
