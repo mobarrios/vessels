@@ -1,13 +1,13 @@
 <?php
 
-$model = 'dispatches';
+$model = 'sales';
 
 return [
 
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Remitos',
+    'sectionName'   => 'Ventas',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',
@@ -52,15 +52,15 @@ return [
 
     'validationsStore' => [
 
-            'number'          => 'required',
-            'date'     => 'required',
+            //'number'          => 'required',
+            'date_confirm'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'number'          => 'required',
-            'date'     => 'required',
+            //'number'          => 'required',
+            'date_confirm'     => 'required',
 
     ],
 

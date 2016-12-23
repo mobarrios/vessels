@@ -32,7 +32,6 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -40,6 +39,21 @@
                         <span class="hidden-xs">{{\Illuminate\Support\Facades\Auth::user()->email}}</span>
                     </a>
                 </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+
+                        {{\Illuminate\Support\Facades\Auth::user()->BranchesActive->name}}  . <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach(\Illuminate\Support\Facades\Auth::user()->branches_name as $branch => $a )
+
+                            <li role="presentation"><a  class="text-sm" role="menuitem" tabindex="-1" href="{{route('configs.users.changeBranch',$branch)}}"> {{$a}} </a></li>
+                        @endforeach
+                    </ul>
+                </li>
+
+
+
                 <!-- Control Sidebar Toggle Button -->
                 <li>
                     <a href="{{route('logout')}}"><i class="fa fa-sign-out"></i></a>

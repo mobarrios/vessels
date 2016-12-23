@@ -28,7 +28,7 @@
                     @foreach($brands as $br)
                         <optgroup label="{{$br->name}}">
                             @foreach($br->Models as $m)
-                                <option value="{{$m->id}}" @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                                    <option value="{{$m->id}}" @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
                             @endforeach
                         </optgroup>
                     @endforeach

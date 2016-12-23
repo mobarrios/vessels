@@ -6,6 +6,8 @@ Route::group(['prefix'=>'configs'],function(){
 
         $section =  'users';
 
+        Route::get('/changeBranchesActive/{branches_id?}', ['middleware'=>'permission:'.$section.'.edit','as'=>'configs.users.changeBranch','uses'=>'Configs\UsersController@changeBranchesActive']);
+
         Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'configs.users.destroy','uses'=>'Configs\UsersController@destroy']);
         Route::get('/edit/{id?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'configs.users.edit','uses'=>'Configs\UsersController@edit']);
         Route::post('/update/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'configs.users.update','uses'=>'Configs\UsersController@update']);

@@ -87,6 +87,20 @@
                 </ul>
             </li>
 
+            <li class="treeview {{ in_array(Request::segment(2), ["sales"]) ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-shopping-bag "></i> <span>Ventas</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    @permission('sales.list')
+                         <li class={{ Request::segment(2) == "sales" ? 'active' : '' }}><a href="{{route('moto.sales.index')}}"><span>Ventas</span></a></li>
+                    @endpermission
+                </ul>
+            </li>
+
             <li class="treeview {{ in_array(Request::segment(2), ["branches","roles","permissions","users","logs"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-gear"></i> <span>Configuración</span>

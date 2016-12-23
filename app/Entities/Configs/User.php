@@ -29,7 +29,7 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
      *
      * @var array
      */
-    protected $fillable = ['name', 'last_name','email', 'password'];
+    protected $fillable = ['name', 'last_name','email', 'password','branches_active_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -38,6 +38,11 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
      */
     protected $hidden = ['password', 'remember_token'];
 
+
+    public function BranchesActive()
+    {
+        return $this->belongsTo(Branches::class,'branches_active_id');
+    }
 
     public function getFullNameAttribute()
     {

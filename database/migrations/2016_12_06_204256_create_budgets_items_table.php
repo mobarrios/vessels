@@ -18,8 +18,8 @@ class CreateBudgetsItemsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->double('price_actual');
-            $table->double('price_budget');
+            $table->double('price_actual',10.2);
+            $table->double('price_budget',10.2);
 
 
             $table->integer('budgets_id')->unsigned()->nulleable();
