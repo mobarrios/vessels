@@ -5,6 +5,8 @@
 
     Route::get('/modelLists/{id}','Moto\AjaxController@modelLists');
 
+    Route::get('/budgetsItems/{id}','Moto\AjaxController@budgetsItems');
+
     //buscar purchasesorders
     Route::get('/purchasesOrdersFind/{id?}', 'Moto\PurchasesOrdersController@find' );
 

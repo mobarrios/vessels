@@ -71,9 +71,11 @@
 
 
                 <div class="col-xs-12 col-lg-4 form-group" style="padding-top: 2%;">
+                    @if(!isset($budget))
                     {!! Form::open(['route'=> [config('models.'.$section.'.storeRoute')],  'title' =>"Crear presupuesto"]) !!}
                         {!! Form::hidden('clients_id', $client->id) !!}
                         <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                    @endif
 
                         @if(isset($budget))
                             <a href="#" data-action="{!! route("moto.".$section.".addItem", $client->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
@@ -87,107 +89,104 @@
 
             <span class="clearfix"></span>
             <hr>
+            <div ng-app="myApp">
+                <div ng-controller="myCtrl">
 
-            @if(isset($budget))
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <td>Marca</td>
-                            <td>Modelo</td>
-                            <td>$ Presupuestado</td>
-                            <td>$ Lista</td>
-                            <td>Acciones</td>
-
-                        </tr>
-                        @forelse($budget->allItems as $item)
+                    <div class="table-responsive">
+                        <table class="table">
                             <tr>
-                                <td>{!! $item->brands->name !!}</td>
-                                <td>{!! $item->name !!}</td>
-                                <td class="text-danger">$ {!! $item->pivot->price_budget !!}</td>
-                                <td class="text-danger">$ {!! $item->pivot->price_actual !!}</td>
+                                <td>Marca</td>
+                                <td>Modelo</td>
+                                <td>$ Presupuestado</td>
+                                <td>$ Lista</td>
+                                <td>Acciones</td>
+
+                            </tr>
+                            <tr ng-repeat="models in data" >
+                                <td>@{{ models.brands.name }}</td>
+                                <td>@{{ models.name }}</td>
+                                <td class="text-danger">$ @{{ models.pivot.price_budget }}</td>
+                                <td class="text-danger">$ @{{ models.pivot.price_actual }}</td>
                                 <td>
-                                    <a href="{{route('moto.'.$section.'.deleteItem',[$client->id,$budget->id,$item->pivot->id])}}"><span
-                                                class="text-danger fa fa-trash"></span></a>
+                                    <a href="moto/budgets/deleteItem/{{ $client->id }}/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
                                 </td>
                                 <td>
-                                    <a href="{{route('moto.'.$section.'.editItem',[$client->id,$budget->id,$item->pivot->id])}}"><span
-                                                class="text-success fa fa-edit"></span></a>
+                                    <a href="moto/budgets/editItem/{{ $client->id }}/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
                                 </td>
                             </tr>
-                        @empty
 
-                        @endforelse
-                    </table>
-                </div>
-            @endif
+                        </table>
+                    </div>
 
 
-            <span class="clearfix"></span>
-            <hr>
 
-            <div>
-                <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
-                <div class="col-xs-2 form-group">
-                    <label>Seguro</label>
-                    <input ng-model="seguro" type="number" class="form-control" ng-change="calcular()">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Flete</label>
-                    <input ng-model="flete" type="number" class="form-control" ng-change="calcular()">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Formularios</label>
-                    <input ng-model="formularios "type="number" class="form-control" ng-change="calcular()">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Gastos Administrativos</label>
-                    <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
-                </div>
+                    <span class="clearfix"></span>
+                    <hr>
 
-                <div class="col-xs-2 form-group">
-                    <label>Descuento</label>
-                    <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Total</label>
-                    <input ng-model="total" type="text" class="form-control">
-                </div>
 
-                <div class="col-xs-2 form-group">
-                    <label>Anticipo</label>
-                    <input type="number" class="form-control" ng-model="entrega" ng-change="financiar()">
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label>Total a Financiar</label>
-                    <input ng-model="aFinanciar" type="number" class="form-control">
-                </div>
+                    <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
+                    <div class="col-xs-2 form-group">
+                        <label>Seguro</label>
+                        <input ng-model="seguro" type="number" class="form-control" ng-change="calcular()">
+                    </div>
+                    <div class="col-xs-2 form-group">
+                        <label>Flete</label>
+                        <input ng-model="flete" type="number" class="form-control" ng-change="calcular()">
+                    </div>
+                    <div class="col-xs-2 form-group">
+                        <label>Formularios</label>
+                        <input ng-model="formularios "type="number" class="form-control" ng-change="calcular()">
+                    </div>
+                    <div class="col-xs-2 form-group">
+                        <label>Gastos Administrativos</label>
+                        <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
+                    </div>
 
-                <div class="col-xs-2 form-group">
-                    <label>Total a Financiar</label>
-                    <select class="form-control" ng-model="itemSelected">
-                        @foreach($financials as $financial)
-                            <optgroup label="{{$financial->name}}">
-                                @foreach($financial->FinancialsDues as $dues)
-                                    <option ng-click="onCategoryChange($event)" value="{{$dues->coef}}"
-                                            due="{{$dues->due}}">{{$dues->due}} cuota/s
-                                    </option>
-                                @endforeach
-                            </optgroup>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="col-xs-2 form-group">
+                        <label>Descuento</label>
+                        <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
+                    </div>
+                    <div class="col-xs-2 form-group">
+                        <label>Total</label>
+                        <input ng-model="Stotal" type="text" class="form-control">
+                    </div>
 
-                <div class="col-xs-2 form-group">
-                    <label>Importe Cuota</label>
-                    <input ng-model="importeCuota" type="number" class="form-control">
-                </div>
+                    <div class="col-xs-2 form-group">
+                        <label>Anticipo</label>
+                        <input type="number" class="form-control" ng-model="entrega" ng-change="financiar()">
+                    </div>
+                    <div class="col-xs-2 form-group">
+                        <label>Total a Financiar</label>
+                        <input ng-model="aFinanciar" type="number" class="form-control">
+                    </div>
 
-                <div class="col-xs-2 form-group" style="padding-top: 2%">
-                    @if(isset($budget))
-                        <a href="{{route('moto.'.$section.'.pdf', $budget->id)}}" target="_blank" class="btn btn-default" title="Exportar PDF">
-                            <i class="fa bg-danger fa-file-pdf-o"></i>
-                        </a>
-                    @endif
+                    <div class="col-xs-2 form-group">
+                        <label>Total a Financiar</label>
+                        <select class="form-control" ng-model="itemSelected">
+                            @foreach($financials as $financial)
+                                <optgroup label="{{$financial->name}}">
+                                    @foreach($financial->FinancialsDues as $dues)
+                                        <option ng-click="onCategoryChange($event)" value="{{$dues->coef}}"
+                                                due="{{$dues->due}}">{{$dues->due}} cuota/s
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-xs-2 form-group">
+                        <label>Importe Cuota</label>
+                        <input ng-model="importeCuota" type="number" class="form-control">
+                    </div>
+
+                    <div class="col-xs-2 form-group" style="padding-top: 2%">
+                        @if(isset($budget))
+                            <a href="{{route('moto.'.$section.'.pdf', $budget->id)}}" target="_blank" class="btn btn-default" title="Exportar PDF">
+                                <i class="fa bg-danger fa-file-pdf-o"></i>
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </div>
 
@@ -277,6 +276,53 @@
                }
            })
         });
+
+
+    @if(isset($budget))
+        var app = angular.module("myApp", []);
+
+        app.controller("myCtrl", function ($scope, $http) {
+            $http.get("moto/budgetsItems/{!! $budget->id !!}")
+                    .then(function (response) {
+                        $scope.data = response.data;
+                    });
+
+            $scope.add = function (models)
+            {
+                $scope.modelName =  models.brands.name +' '+models.name;
+                $scope.patentamiento = models.patentamiento;
+                $scope.packService = models.pack_service;
+                $scope.seguro = 0;
+                $scope.flete = 0;
+                $scope.formularios = 0;
+                $scope.calcular();
+            };
+
+
+
+            $scope.onCategoryChange = function (event) {
+                var coef = event.currentTarget.getAttribute('value');
+                var dues = event.currentTarget.getAttribute('due');
+                var aFinanciar = $scope.aFinanciar;
+
+                $scope.importeCuota = ( aFinanciar * coef ) / dues;
+            };
+
+            $scope.calcular = function()
+            {
+                $scope.total =  $scope.sTotal + $scope.patentamiento + $scope.packService + $scope.seguro + $scope.flete + $scope.formularios;
+                console.log($scope.total);
+
+            };
+
+            $scope.financiar = function()
+            {
+                $scope.aFinanciar = $scope.total -  $scope.entrega ;
+            };
+        });
+
+
+    @endif
     </script>
 @endsection
 
