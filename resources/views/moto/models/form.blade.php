@@ -51,12 +51,14 @@
     <div class="col-xs-12">
         <h4>Stock Actual</h4>
         <table class="table">
-            @foreach($models->StockByBranches as $branch)
-                <tr>
-                    <td> {{$branch->first()->Branches->name}}</td>
-                    <td>  <span class="label label-primary">{{$branch->count()}}</span></td>
-                </tr>
-            @endforeach
+            @if(isset($models))
+                @foreach($models->StockByBranches as $branch)
+                    <tr>
+                        <td> {{$branch->first()->Branches->name}}</td>
+                        <td><span class="label label-primary">{{$branch->count()}}</span></td>
+                    </tr>
+                @endforeach
+            @endif
         </table>
     </div>
 

@@ -15,6 +15,7 @@ use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 class DispatchesController extends Controller
@@ -55,7 +56,7 @@ class DispatchesController extends Controller
         $item->save();
 
         // AGREGA BRANCHEABLES
-        $item->brancheables()->create(['branches_id' => $this->request->branches_id]);
+        $item->brancheables()->create(['branches_id' => Auth::user()->branches_active_id]);
 
         $this->request['items_id'] =  $item->id;
 

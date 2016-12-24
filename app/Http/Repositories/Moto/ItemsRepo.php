@@ -5,9 +5,19 @@ use App\Entities\Configs\Brancheables;
 use App\Entities\Moto\Certificates;
 use App\Entities\Moto\Items;
 use App\Http\Repositories\BaseRepo;
+use Illuminate\Support\Facades\Auth;
 
 
 class ItemsRepo extends BaseRepo {
+
+    protected $itemsRequestRepo;
+
+    public function __construct(ItemsRequestRepo $itemsRequestRepo)
+    {
+        $this->itemsRequestRepo =  $itemsRequestRepo;
+
+        parent::__construct();
+    }
 
     public function getModel()
     {
@@ -21,7 +31,7 @@ class ItemsRepo extends BaseRepo {
         return $data;
     }
 
-    public function asignItem($models_id, $branches_id)
+    public function asignItem($models_id, $branches_id, $sales_id = null)
     {
 
         //busca items con estatus ingresado
@@ -31,17 +41,32 @@ class ItemsRepo extends BaseRepo {
         $qBranch = Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->where('branches_id',$branches_id)->first();
 
         if(!is_null($qBranch))
-            $item =   $qBranch->entities_id;
+        {
+            $item =   $qBranch;
 
-        // si no esta en la sucursal de destino envia la mas antigua
-        $item =  Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->first()->entities_id;
+        }else{
+
+            // si no esta en la sucursal de destino envia la mas antigua
+            $item =  Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->first();
+
+            //pide a logistica el envio del item sucA a sucB
+            $this->itemsRequest($item->entities_id, $item->branches_id, $branches_id , $sales_id);
+        }
 
         // cambia el estado a reservado
-        $this->changeStatus($item , 2);
+        $this->changeStatus($item->entities_id , 2);
 
-        return $item;
+        return $item->entities_id;
     }
 
+
+
+    public function itemsRequest( $items_id , $branches_id_from , $branches_id_to, $sales_id = null )
+    {
+        $data = ['items_id'=> $items_id, 'branches_from_id' => $branches_id_from, 'branches_to_id'=> $branches_id_to , 'status'=> 1 , 'sales_id' => $sales_id];
+
+        $this->itemsRequestRepo->create($data);
+    }
 
     public function changeStatus($id ,  $status )
     {

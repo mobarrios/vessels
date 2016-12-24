@@ -18,7 +18,7 @@
      }
 
      public function getFullNameAttribute(){
-         return $this->attributes['name'].' '.$this->attributes['last_name'];
+         return $this->attributes['last_name'].' '.$this->attributes['name'];
      }
  }
 

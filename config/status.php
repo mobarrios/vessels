@@ -21,4 +21,11 @@ return [
             2 => 'Reservado',
             3 => 'Vendido',
         ],
+
+        'items_request' => [
+
+                1 => 'Solicitado',
+                2 => 'En Proceso',
+                3 => 'Entregado'
+        ],
 ];

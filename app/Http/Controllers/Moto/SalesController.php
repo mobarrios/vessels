@@ -42,7 +42,7 @@ class SalesController extends Controller
         $this->data['branches']     = $branchesRepo->ListsData('name','id');
 
 
-        $this->data['clients']      = $clientsRepo->ListsData('name', 'id');
+        $this->data['clients']      = $clientsRepo->getModel()->get()->lists('fullName', 'id');
 
         $this->modelsRepo =  $modelsRepo;
 
@@ -51,9 +51,11 @@ class SalesController extends Controller
     public function addItems(SalesItemsRepo $salesItemsRepo, ItemsRepo $itemsRepo)
     {
 
-        $item  =  $itemsRepo->asignItem($this->request->models_id , $this->request->branches_confirm_id);
+        // asigna items a la venta
+        $item  =  $itemsRepo->asignItem($this->request->models_id , $this->request->branches_confirm_id , $this->request->sales_id);
 
         $this->request['items_id'] = $item ;
+
         $salesItemsRepo->create($this->request);
 
         return redirect()->route('moto.sales.edit',$this->request->sales_id);

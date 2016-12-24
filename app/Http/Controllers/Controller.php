@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
@@ -93,7 +94,7 @@ abstract class Controller extends BaseController
 
                 //si va a una sucursal
                 if(config('models.'.$this->section.'.is_brancheable'))
-                    $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
+                    $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
@@ -120,7 +121,7 @@ abstract class Controller extends BaseController
 
                 //si va a una sucursal
                 if(config('models.'.$this->section.'.is_brancheable'))
-                    $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
+                    $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);

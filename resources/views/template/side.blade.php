@@ -29,7 +29,7 @@
                 </li>
             @endpermission
 
-            <li class="treeview {{ in_array(Request::segment(2), ["items","modelsListsPrices","brands","categories","models","colors"]) ? 'active' : '' }}">
+            <li class="treeview {{ in_array(Request::segment(2), ["items","itemsRequest","modelsListsPrices","brands","categories","models","colors"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-motorcycle "></i> <span>Articulos</span>
                         <span class="pull-right-container">
@@ -54,6 +54,9 @@
                     @endpermission
                     @permission('colors.list')
                         <li class={{ Request::segment(2) == "colors" ? 'active' : '' }}><a href="{{route('moto.colors.index')}}"><span> Colores</span></a></li>
+                    @endpermission
+                    @permission('itemsrequest.list')
+                    <li class={{ Request::segment(2) == "itemsRequest" ? 'active' : '' }}><a href="{{route('moto.itemsRequest.index')}}"><span>Pedidos de Articulos</span> </a></li>
                     @endpermission
                 </ul>
             </li>

@@ -41,13 +41,12 @@
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-
+                        <span class="fa fa-map-marker"></span>
                         {{\Illuminate\Support\Facades\Auth::user()->BranchesActive->name}}  . <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        @foreach(\Illuminate\Support\Facades\Auth::user()->branches_name as $branch => $a )
-
-                            <li role="presentation"><a  class="text-sm" role="menuitem" tabindex="-1" href="{{route('configs.users.changeBranch',$branch)}}"> {{$a}} </a></li>
+                        @foreach(\Illuminate\Support\Facades\Auth::user()->Brancheables as $branch)
+                            <li role="presentation"><a  class="text-sm" role="menuitem" tabindex="-1" href="{{route('configs.users.changeBranch',$branch->Branches->id)}}"> {{$branch->Branches->name}} </a></li>
                         @endforeach
                     </ul>
                 </li>

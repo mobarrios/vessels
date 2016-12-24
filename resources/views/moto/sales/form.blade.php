@@ -11,15 +11,7 @@
         {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
     @endif
 
-        {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
-
-    @if(\Illuminate\Support\Facades\Auth::user()->Brancheables->count() >= 1)
-        <div class="col-xs-2 form-group">
-            {!! Form::label('Tu Sucursal') !!}
-            {!! Form::select('branches_id',\Illuminate\Support\Facades\Auth::user()->branches_name ,null, ['class'=>'select2 form-control']) !!}
-        </div>
-    @endif
-
+    {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
 
     <div class="col-xs-2  form-group">
         {!! Form::label('Fecha Pactada') !!}
@@ -28,7 +20,7 @@
 
     <div class="col-xs-3 form-group">
         {!! Form::label('Cliente') !!}
-        {!! Form::select('clients_id',$clients ,null, ['class'=>'select2 form-control']) !!}
+        {!! Form::select('clients_id', $clients ,null, ['class'=>'select2 form-control']) !!}
     </div>
 
     <div class="col-xs-3 form-group">
@@ -50,6 +42,8 @@
         <div class="col-xs-12">
             <table class="table">
                 <tr>
+                    <th>Cod.</th>
+
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Color</th>
@@ -65,6 +59,8 @@
                 @foreach($models->SalesItems as $item)
 
                     <tr>
+                        <td>{{$item->items_id}}</td>
+
                         <td>{{$item->Items->Models->Brands->name}}</td>
                         <td><a href="{{route('moto.items.edit',$item->Items->id)}}">{{$item->Items->Models->name}}</a></td>
                         <td>{{$item->Items->Colors->name}}</td>
@@ -118,7 +114,7 @@
         @endif
 
         {!! Form::hidden('sales_id',$models->id) !!}
-        {!! Form::hidden('branches_id',$models->Brancheables->first()->Branches->id) !!}
+        {!! Form::hidden('branches_confirm_id',$models->branches_confirm_id) !!}
 
 
         <div class="col-xs-12  form-group">

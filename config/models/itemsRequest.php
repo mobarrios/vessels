@@ -1,13 +1,13 @@
 <?php
 
-$model = 'sales';
+$model = 'itemsRequest';
 
 return [
 
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Ventas',
+    'sectionName'   => 'Pedidos de Articulos',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',
@@ -18,13 +18,8 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
-    'postStoreRoute'  => 'moto.'.$model.'.edit',
-    'postUpdateRoute' => 'moto.'.$model.'.edit',
-
-    //addItems
-    'addItemsRoute'  => 'moto.'.$model.'.addItems',
-    'editItemsRoute'  => 'moto.'.$model.'.editItems',
-    'deleteItemsRoute'  => 'moto.'.$model.'.deleteItems',
+    'postStoreRoute'  => 'moto.'.$model.'.index',
+    'postUpdateRoute' => 'moto.'.$model.'.index',
 
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
@@ -45,22 +40,22 @@ return [
     //column search
     'search' => [
         
-            'Numero'    => 'number',
+            'Nombre'    => 'name',
             //'Direccion'  => 'address' ,
-            //'Email'     => 'email',
+            //'Email'     => 'email'
     ],
 
     'validationsStore' => [
 
-            //'number'          => 'required',
-            'date_confirm'     => 'required',
+            'models_id'          => 'required',
+           // 'address'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            //'number'          => 'required',
-            'date_confirm'     => 'required',
+            'models_id'          => 'required',
+            //'address'     => 'required',
 
     ],
 

@@ -38,6 +38,6 @@ class UsersController extends Controller
         $user->branches_active_id = $this->route->getParameter('branches_id');
         $user->save();
 
-        return redirect()->route('home');
+        return redirect()->back()->withErrors(['Sucursal Cambiada Correctamente.']);
     }
 }
