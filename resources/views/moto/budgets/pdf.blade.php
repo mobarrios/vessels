@@ -28,7 +28,7 @@
 
         header{
             border-top: 30px solid #0187cd;
-            border-bottom: 3px solid #ddd;
+            /*border-bottom: 3px solid #ddd;*/
             display: inline-block;
             height: 140px;
         }
@@ -79,8 +79,8 @@
 
         .inline{
             display: inline-block !important;
-            width: 200px;
             margin: 0 3px;
+            width: 200px;
         }
 
         .espacio{
@@ -119,6 +119,21 @@
             padding: 8px 25px !important;
         }
 
+        .col-4{
+            width: 120px;
+            display: inline-block !important;
+            margin: 0 3px !important;
+        }
+
+        .col-4 p{
+            margin: -20px 0!important;
+            display: inline-block;
+        }
+
+        .inline p{
+            margin: -5px 0!important;
+            display: inline-block;
+        }
 
     </style>
 
@@ -142,6 +157,44 @@
     </header>
 
     <div class="container">
+        <div class="col-4">
+            <p><b>Cliente: </b> Juan Perez</p>
+        </div>
+
+        <div class="col-4">
+            <p><b>DNI: </b> 2790999087</p>
+        </div>
+
+        <div class="col-4">
+            <p><b>Sexo: </b> Masculino</p>
+        </div>
+
+        <div class="espacio"></div>
+
+        <div class="col-4">
+            <p><b>Mail: </b> jp@hotmail.com</p>
+        </div>
+
+        <div class="col-4">
+            <p><b>Nacionalidad: </b> Argentino</p>
+        </div>
+
+        <div class="col-4">
+            <p><b>Teléfono: </b> 1158874522</p>
+        </div>
+
+        <div class="espacio"></div>
+
+        <div class="inline">
+            <p><b>Dirección: </b> Cordoba 2255</p>
+        </div>
+
+        <div class="inline">
+            <p><b>Ciudad: </b> Rodriguez, Buenos Aires</p>
+        </div>
+
+        <hr>
+
         <div>
             <p><b>Producto: </b> T110 Crypton Base sin Disco</p>
         </div>
@@ -208,6 +261,18 @@
         <div class="inline">
             <p><b>Seguro RC + Robo: </b> $14500</p>
         </div>
+
+        <span class="padding"></span>
+
+
+        <div class="inline">
+            <p><b>Patentamiento: </b> $14500</p>
+        </div>
+
+        <div class="inline">
+            <p><b>Formulario: </b> $16000</p>
+        </div>
+
 
         <span class="padding"></span>
 
