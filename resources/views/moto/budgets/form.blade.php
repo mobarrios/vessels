@@ -105,7 +105,7 @@
                             <tr ng-repeat="models in data" >
                                 <td>@{{ models.brands.name }}</td>
                                 <td>@{{ models.name }}</td>
-                                <td class="text-danger">$ @{{ models.pivot.price_budget }}</td>
+                                <td class="text-danger" class="priceBudget">$ @{{ models.pivot.price_budget }}</td>
                                 <td class="text-danger">$ @{{ models.pivot.price_actual }}</td>
                                 <td>
                                     <a href="moto/budgets/deleteItem/{{ $client->id }}/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
@@ -125,6 +125,17 @@
 
 
                     <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
+
+                    <div class="col-xs-2 form-group">
+                        <label>Patentamiento</label>
+                        <input ng-model="patentamiento" type="number" class="form-control" ng-change="calcular()">
+                    </div>
+
+                    <div class="col-xs-2 form-group">
+                        <label>Pack Service</label>
+                        <input ng-model="packService" type="number" class="form-control" ng-change="calcular()">
+                    </div>
+
                     <div class="col-xs-2 form-group">
                         <label>Seguro</label>
                         <input ng-model="seguro" type="number" class="form-control" ng-change="calcular()">
@@ -139,21 +150,17 @@
                     </div>
                     <div class="col-xs-2 form-group">
                         <label>Gastos Administrativos</label>
-                        <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
+                        <input ng-model="gastosAdministrativos" type="number" class="form-control" ng-change="calcular()">
                     </div>
 
                     <div class="col-xs-2 form-group">
                         <label>Descuento</label>
-                        <input ng-model="gastos "type="number" class="form-control" ng-change="calcular()">
-                    </div>
-                    <div class="col-xs-2 form-group">
-                        <label>Total</label>
-                        <input ng-model="Stotal" type="text" class="form-control">
+                        <input ng-model="descuento"type="number" class="form-control" ng-change="calcular()">
                     </div>
 
                     <div class="col-xs-2 form-group">
                         <label>Anticipo</label>
-                        <input type="number" class="form-control" ng-model="entrega" ng-change="financiar()">
+                        <input type="number" class="form-control" ng-model="anticipo" ng-change="financiar()">
                     </div>
                     <div class="col-xs-2 form-group">
                         <label>Total a Financiar</label>
@@ -180,12 +187,23 @@
                         <input ng-model="importeCuota" type="number" class="form-control">
                     </div>
 
-                    <div class="col-xs-2 form-group" style="padding-top: 2%">
-                        @if(isset($budget))
-                            <a href="{{route('moto.'.$section.'.pdf', $budget->id)}}" target="_blank" class="btn btn-default" title="Exportar PDF">
-                                <i class="fa bg-danger fa-file-pdf-o"></i>
-                            </a>
-                        @endif
+
+
+                    <div class="col-xs-2 form-group">
+                        <label>Total</label>
+                        <div class="col-xs-12 input-group">
+                            <input ng-model="total" type="text" class="form-control">
+                            @if(isset($budget))
+                                <a href="{{route('moto.'.$section.'.pdf', $budget->id)}}" target="_blank" class="input-group-btn" title="Exportar PDF">
+                                    <span class="btn btn-default">
+                                        <i class="fa bg-danger fa-file-pdf-o"></i>
+                                    </span>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+
+
                     </div>
                 </div>
             </div>
@@ -209,7 +227,6 @@
 
         {!! Form::hidden('budgets_id',$budget->id) !!}
         {!! Form::hidden('price_actual',null,['class' => 'price_actual']) !!}
-
 
         <div class="col-xs-12 form-group">
             {!! Form::label('Modelo') !!}
@@ -284,23 +301,24 @@
         app.controller("myCtrl", function ($scope, $http) {
             $http.get("moto/budgetsItems/{!! $budget->id !!}")
                     .then(function (response) {
-                        $scope.data = response.data;
+                        $scope.total = parseFloat(response.data[0]['price']);
+                        $scope.stotal = parseFloat(response.data[0]['price']);
+                        $scope.patentamiento = parseFloat(response.data[0]['patentamiento']);
+                        $scope.packService = parseFloat(response.data[0]['pack_service']);
+                        $scope.data = response.data[1];
+                        $scope.seguro = 0;
+                        $scope.flete = 0;
+                        $scope.formularios = 0;
+                        $scope.gastosAdministrativos = 0;
+                        $scope.descuento = 0;
+                        $scope.anticipo = 0;
+                        $scope.aFinanciar = 0;
+                        $scope.calcular();
                     });
-
-            $scope.add = function (models)
-            {
-                $scope.modelName =  models.brands.name +' '+models.name;
-                $scope.patentamiento = models.patentamiento;
-                $scope.packService = models.pack_service;
-                $scope.seguro = 0;
-                $scope.flete = 0;
-                $scope.formularios = 0;
-                $scope.calcular();
-            };
-
 
 
             $scope.onCategoryChange = function (event) {
+                console.log(event);
                 var coef = event.currentTarget.getAttribute('value');
                 var dues = event.currentTarget.getAttribute('due');
                 var aFinanciar = $scope.aFinanciar;
@@ -310,17 +328,18 @@
 
             $scope.calcular = function()
             {
-                $scope.total =  $scope.sTotal + $scope.patentamiento + $scope.packService + $scope.seguro + $scope.flete + $scope.formularios;
-                console.log($scope.total);
+                if( $scope.descuento != null && $scope.descuento != 0)
+                    $scope.total =  ($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) * $scope.descuento / 100 ;
+                else
+                    $scope.total =  $scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos;
 
             };
 
             $scope.financiar = function()
             {
-                $scope.aFinanciar = $scope.total -  $scope.entrega ;
+                $scope.aFinanciar = $scope.total -  $scope.anticipo ;
             };
         });
-
 
     @endif
     </script>
