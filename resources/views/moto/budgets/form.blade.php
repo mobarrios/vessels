@@ -88,6 +88,7 @@
             </div>
 
             <span class="clearfix"></span>
+            @if(isset($budget))
             <hr>
             <div ng-app="myApp">
                 <div ng-controller="myCtrl">
@@ -206,6 +207,7 @@
 
                     </div>
                 </div>
+            @endif
             </div>
 
         </div>
