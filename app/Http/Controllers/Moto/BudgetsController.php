@@ -44,6 +44,17 @@ class BudgetsController extends Controller
         return parent::index();
     }
 
+
+    public function findByClients()
+    {
+        $clients_id = $this->route->getParameter('id');
+
+        $data = $this->repo->findByClients($clients_id);
+        
+        return response()->json($data);
+    }
+
+
     public function create($cliente = null, $id = null)
     {
         if($id){

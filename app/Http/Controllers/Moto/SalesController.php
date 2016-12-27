@@ -42,7 +42,7 @@ class SalesController extends Controller
         $this->data['branches']     = $branchesRepo->ListsData('name','id');
 
 
-        $this->data['clients']      = $clientsRepo->getModel()->get()->lists('fullName', 'id');
+        $this->data['clients']      = $clientsRepo->ListAll()->orderBy('last_name','ASC')->get();
 
         $this->modelsRepo =  $modelsRepo;
 

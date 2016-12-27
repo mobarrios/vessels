@@ -18,17 +18,40 @@
         {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-4 form-group">
         {!! Form::label('Cliente') !!}
-        {!! Form::select('clients_id', $clients ,null, ['class'=>'select2 form-control']) !!}
+        <select id="clients_id" name="clients_id" class="form-control select2">
+            @foreach($clients  as $client)
+                <option value="{{$client->id}}">
+                    {{$client->fullName}}
+                    |<strong> {{$client->email}}</strong>
+                    | {{$client->dni}}
+                </option>
+            @endforeach
+        </select>
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-1 form-group" style="padding-top: 2%">
+        <a href="{{route("moto.clients.create")}}" target="_blank" class="btn btn-default"><span
+                    class="fa fa-plus"></span></a>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        {!! Form::label('Presupuestos ') !!}
+        <select id="budgets_id" name="budgets_id" class="form-control select2">
+        </select>
+    </div>
+
+    <div class="col-xs-1 form-group" style="padding-top: 2%">
+        <button type="button" id="show_budget"  class="btn btn-default"><span class="fa fa-eye"></span></button>
+    </div>
+
+    <div class="col-xs-2 form-group">
         {!! Form::label('Sucursal de Entrega') !!}
         {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>'select2 form-control']) !!}
     </div>
 
-    <div class="col-xs-2 form-group" style="padding-top: 2%">
+    <div class="col-xs-1 form-group" style="padding-top: 2%">
         <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
         @if(isset($models))
             <a href="#" data-action="{!! route("moto.sales.addItems") !!}" data-toggle="control-sidebar"
@@ -62,7 +85,8 @@
                         <td>{{$item->items_id}}</td>
 
                         <td>{{$item->Items->Models->Brands->name}}</td>
-                        <td><a href="{{route('moto.items.edit',$item->Items->id)}}">{{$item->Items->Models->name}}</a></td>
+                        <td><a href="{{route('moto.items.edit',$item->Items->id)}}">{{$item->Items->Models->name}}</a>
+                        </td>
                         <td>{{$item->Items->Colors->name}}</td>
                         <td>{{$item->Items->n_motor}}</td>
                         <td>{{$item->Items->n_cuadro}}</td>
@@ -79,14 +103,16 @@
                             $ {{number_format(($item->price_actual +$item->patentamiento+$item->pack_service),2)}}
                         </td>
                         <td>
-                            <a  class="btn btn-xs btn-default" href="{{route('moto.sales.deleteItems',[$item->id,$models->id])}}"><span
+                            <a class="btn btn-xs btn-default"
+                               href="{{route('moto.sales.deleteItems',[$item->id,$models->id])}}"><span
                                         class="text-danger fa fa-trash"></span></a>
-                            <a class="btn btn-xs btn-default" href="{{route('moto.sales.editItems',[$item->id,$models->id])}}"><span
+                            <a class="btn btn-xs btn-default"
+                               href="{{route('moto.sales.editItems',[$item->id,$models->id])}}"><span
                                         class="text-success fa fa-edit"></span></a>
                         </td>
                     </tr>
-                    <?php $total +=  $item->price_actual +$item->patentamiento+$item->pack_service ; ?>
-                    @endforeach
+                    <?php $total += $item->price_actual + $item->patentamiento + $item->pack_service; ?>
+                @endforeach
                 </tbody>
             </table>
 
@@ -124,7 +150,8 @@
                     <optgroup label="{{$br->name}}">
                         @foreach($br->Models as $m)
                             @if($m->stock >= 1)
-                                <option value="{{$m->id}}" @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                                <option value="{{$m->id}}"
+                                        @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
                             @endif
                         @endforeach
                     </optgroup>
@@ -147,8 +174,6 @@
             {!! Form::number('pack_service', null, ['class'=>'form-control packService']) !!}
         </div>
 
-
-
         <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
             <button type="submit" class="btn btn-primary">Agregar</button>
             <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
@@ -164,22 +189,45 @@
 
 @section('js')
     <script>
-        $('#select_model').on('change',function(){
-           var id = $(this).val();
-
+        $('#select_model').on('change', function () {
+            var id = $(this).val();
             $.ajax({
                 method: 'GET',
-                url: 'moto/modelLists/'+id,
-                success: function(data){
-                   // $.each(data, function(i , v){
-                        $('.price').val(data.active_list_price.price_list);
-                        $('.patentamiento').val(data.patentamiento);
-                        $('.packService').val(data.pack_service);
-
-
+                url: 'moto/modelLists/' + id,
+                success: function (data) {
+                    // $.each(data, function(i , v){
+                    $('.price').val(data.active_list_price.price_list);
+                    $('.patentamiento').val(data.patentamiento);
+                    $('.packService').val(data.pack_service);
                     //});
                 }
             })
+        });
+
+
+        $('#clients_id').on('change', function () {
+            var id = $(this).val();
+            $.ajax({
+                method: 'GET',
+                url: 'moto/budgetsByClients/' + id,
+                success: function (data) {
+
+                    console.log(data);
+                    $.each(data, function (i, y) {
+
+                        $('#budgets_id').append("<option value="+y.id+">#"+y.id+" | "+ y.created_at + "</option>")
+                    });
+                }
+            })
+        });
+
+        $("#show_budget").on('click',function(){
+
+           var id =  $('#budgets_id').val();
+            window.open('moto/budgets/pdf/'+ id, '_blank');
+
+
+
         });
 
     </script>

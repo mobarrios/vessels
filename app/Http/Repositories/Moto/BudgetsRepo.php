@@ -12,5 +12,10 @@ class BudgetsRepo extends BaseRepo {
         return new Budgets();
     }
 
+
+    public function findByClients($clients_id)
+    {
+        return $this->getModel()->with('Brancheables')->where('clients_id',$clients_id)->get();
+    }
    
 }

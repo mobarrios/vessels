@@ -13,6 +13,11 @@
 
     Route::get('/itemsByModels/{id?}', 'Moto\ItemsController@itemsByModels');
 
+    //buscar presupuestos x clientes
+    Route::get('/budgetsByClients/{id?}', 'Moto\BudgetsController@findByClients' );
+
+
+
 
 
 
