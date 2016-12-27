@@ -21,8 +21,11 @@ class UpdateBudgetsTable extends Migration
             $table->double('anticipo',10,2)->nullable();
             $table->double('importeCuota',10,2)->nullable();
             $table->double('a_financiar',10,2)->nullable();
-            $table->double('modo_financiamiento',10,2)->nullable();
+            $table->double('modo_financiamiento',10,4)->nullable();
             $table->double('total',10,2)->nullable();
+            $table->int('users_id')->nullable();
+
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 
