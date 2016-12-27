@@ -23,6 +23,15 @@ class CreateBudgetsTable extends Migration
             $table->integer('clients_id')->unsigned()->nulleable();
             $table->foreign('clients_id')->references('id')->on('clients');
 
+            $table->int('seguro')->nullable();
+            $table->int('flete')->nullable();
+            $table->int('formularios')->nullable();
+            $table->int('gastosAdministrativos')->nullable();
+            $table->int('descuento')->nullable();
+            $table->int('anticipo')->nullable();
+            $table->int('importeCuota')->nullable();
+            $table->int('aFinanciar')->nullable();
+            $table->int('total')->nullable();
         });
     }
 

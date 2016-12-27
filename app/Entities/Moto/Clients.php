@@ -20,6 +20,10 @@
      public function getFullNameAttribute(){
          return $this->attributes['last_name'].' '.$this->attributes['name'];
      }
+
+     public function getLocalidadAttribute(){
+         return ucfirst(strtolower($this->attributes['city'])).', '.ucfirst(strtolower($this->attributes['location'])).', '.ucfirst(strtolower($this->attributes['province']));
+     }
  }
 
 

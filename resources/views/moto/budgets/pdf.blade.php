@@ -158,138 +158,105 @@
 
     <div class="container">
         <div class="col-4">
-            <p><b>Cliente: </b> Juan Perez</p>
+            <p><b>Cliente: </b> {!! $model->Clients->fullName !!}</p>
         </div>
 
         <div class="col-4">
-            <p><b>DNI: </b> 2790999087</p>
+            <p><b>DNI: </b> {!! $model->Clients->dni !!}</p>
         </div>
 
         <div class="col-4">
-            <p><b>Sexo: </b> Masculino</p>
+            <p><b>Sexo: </b> {!! $model->Clients->sexo !!}</p>
         </div>
 
         <div class="espacio"></div>
 
         <div class="col-4">
-            <p><b>Mail: </b> jp@hotmail.com</p>
+            <p><b>Mail: </b> {!! $model->Clients->email !!}</p>
         </div>
 
         <div class="col-4">
-            <p><b>Nacionalidad: </b> Argentino</p>
+            <p><b>Nacionalidad: </b> {!! $model->Clients->nacionality !!}</p>
         </div>
 
         <div class="col-4">
-            <p><b>Teléfono: </b> 1158874522</p>
+            <p><b>Teléfono: </b> {!! $model->Clients->phone1 !!}</p>
         </div>
 
         <div class="espacio"></div>
 
         <div class="inline">
-            <p><b>Dirección: </b> Cordoba 2255</p>
+            <p><b>Dirección: </b> {!! $model->Clients->address !!}</p>
         </div>
 
         <div class="inline">
-            <p><b>Ciudad: </b> Rodriguez, Buenos Aires</p>
+            <p><b>Ciudad: </b> {!! $model->Clients->localidad !!}</p>
         </div>
 
         <hr>
 
-        <div>
-            <p><b>Producto: </b> T110 Crypton Base sin Disco</p>
-        </div>
+        @foreach($model->allItems as $item)
+            <div>
+                <p><b>Producto: </b> {!! $item->name !!}</p>
+            </div>
+
+            <div class="inline">
+                <p><b>Marca: </b> {!! $item->brands->name !!}</p>
+            </div>
+
+            <div class="espacio"></div>
+
+            <div class="inline">
+                <p><b>Precio de lista: </b> {!! $item->activeListPrice->price_list or '' !!}</p>
+            </div>
+
+            <div class="inline">
+                <p><b>Contado: </b> {!! $item->activeListPrice->price_net or '' !!}</p>
+            </div>
+
+            <div class="espacio"></div>
+
+            <div class="inline">
+                <p><b>Patentamiento: </b> {!! '$'.$item->patentamiento or '' !!}</p></p>
+            </div>
+
+            <div class="inline">
+                <p><b>Pack Service: </b> {!! '$'.$item->pack_service or '' !!}</p></p>
+            </div>
+
+        @endforeach
+        <span class="padding"></span>
+
 
         <div class="inline">
-            <p><b>Marca: </b> Yamaha</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Modelo: </b> T110 Crypton Base</p>
+            <p><b>Seguro: </b> {!! '$'.$model->seguro or '' !!}</p>
         </div>
 
         <div class="espacio"></div>
 
         <div class="inline">
-            <p><b>Precio de lista: </b> $16000</p>
+            <p><b>Flete: </b> {!! '$'.$model->flete or '' !!}</p>
         </div>
 
         <div class="inline">
-            <p><b>Contado: </b> $14500</p>
+            <p><b>Formularios: </b> {!! '$'.$model->formularios or '' !!}</p>
         </div>
 
         <span class="padding"></span>
-
-        <div>
-            <p><b>Producto: </b> T110 Crypton Base sin Disco</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Marca: </b> Yamaha</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Modelo: </b> T110 Crypton Base</p>
-        </div>
-
-        <div class="espacio"></div>
-
-        <div class="inline">
-            <p><b>Precio de lista: </b> $16000</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Contado: </b> $14500</p>
-        </div>
-
-        <span class="padding"></span>
-
-        <div class="inline">
-            <p><b>Alarma: </b> $14500</p>
-        </div>
-
-
-        <div class="inline">
-            <p><b>Alta de seguro: </b> $16000</p>
-        </div>
-
-        <div class="espacio"></div>
-
-        <div class="inline">
-            <p><b>Seguro RC: </b> $16000</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Seguro RC + Robo: </b> $14500</p>
-        </div>
-
-        <span class="padding"></span>
-
-
-        <div class="inline">
-            <p><b>Patentamiento: </b> $14500</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Formulario: </b> $16000</p>
-        </div>
-
-
-        <span class="padding"></span>
-
-
-        <div class="inline">
-            <p><b>Patentamiento: </b> $14500</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Formulario: </b> $16000</p>
-        </div>
 
 
         <div class="footer">
 
             <div class="inline">
-                <p><b>Total Final: </b> $161000</p>
+                <p><b>Total Final: </b> {!! '$'.$model->total or '' !!}</p>
+            </div>
+
+            <div class="inline">
+                <p><b>Anticipo: </b> {!! '$'.$model->anticipo or '' !!}</p>
+            </div>
+
+            <div class="inline">
+                <p><b>A financiar: </b> {!! '$'.$model->a_financiar or '' !!}</p>
             </div>
 
             <div class="inline">

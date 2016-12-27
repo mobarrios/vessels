@@ -105,7 +105,39 @@ class BudgetsController extends Controller
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),[$this->request->get('clients_id'),$model->id])->withErrors(['Registro Agregado Correctamente']);
     }
 
+    public function update()
+    {
+        //validar los campos
+        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
 
+        if($this->route->getParameter('id'))
+            $id = $this->route->getParameter('id');
+        else
+            $id = $this->request->get('id');
+
+
+        //edita a traves del repo
+        $model = $this->repo->update($id,$this->request);
+
+        //guarda imagenes
+        if(config('models.'.$this->section.'.is_imageable'))
+            $this->createImage($model, $this->request);
+
+        //guarda log
+        if(config('models.'.$this->section.'.is_logueable'))
+            $this->repo->createLog($model, 3);
+
+        //si va a una sucursal
+        if(config('models.'.$this->section.'.is_brancheable'))
+            $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
+
+        if($this->route->getParameter('id'))
+            return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
+        else
+//            return redirect()->back();
+            return redirect()->route('moto.'.$this->section.'.pdf',$model->id)->with($model);
+
+    }
 
 
 

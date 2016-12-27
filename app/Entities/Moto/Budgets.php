@@ -9,7 +9,7 @@
 
      protected $table = 'budgets';
 
-     protected $fillable = ['date', 'clients_id'];
+     protected $fillable = ['date', 'clients_id','seguro','flete','formularios','gastos_administrativos','descuento','anticipo','importe_cuota','a_financiar','total'];
 
      public function Models()
      {
