@@ -135,7 +135,7 @@ class BudgetsController extends Controller
             return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
         else
 //            return redirect()->back();
-            return redirect()->route('moto.'.$this->section.'.pdf',$model->id)->with($model);
+            return redirect()->route('moto.'.$this->section.'.pdf',$model->id);
 
     }
 

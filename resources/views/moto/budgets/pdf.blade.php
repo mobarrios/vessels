@@ -254,7 +254,7 @@
             <div class="inline">
                 <p><b>Anticipo: </b> {!! '$'.$model->anticipo or '' !!}</p>
             </div>
-
+            <div class="espacio"></div>
             <div class="inline">
                 <p><b>A financiar: </b> {!! '$'.$model->a_financiar or '' !!}</p>
             </div>

@@ -51,6 +51,7 @@ class ModelsRepo extends BaseRepo {
     {
         return $this->getModel()
             ->where('status', 1)
+            ->whereNull('deleted_at')
             ->with('Brands')
             ->with('activeListPrice')
             ->orderBy('brands_id', 'ASC')->orderBy('name', 'ASC')
