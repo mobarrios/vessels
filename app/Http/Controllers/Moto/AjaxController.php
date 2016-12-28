@@ -23,6 +23,15 @@ class AjaxController extends Controller
         $this->data['section']  = $this->section;
     }
 
+
+    public function modelAvailables()
+    {
+        $id =  $this->route->getParameter('id');
+        $data = $this->repo->stockByColors($id);
+
+        return response()->json($data);
+    }
+
     public function modelsLists()
     {
 

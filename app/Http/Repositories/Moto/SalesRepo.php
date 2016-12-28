@@ -26,11 +26,10 @@ class SalesRepo extends BaseRepo
 
             $budgetsItems = $budgetsItemsRepo->getModel()->where('budgets_id', $data->budgets_id)->get();
 
-        
+            foreach ($budgetsItems as $budgetItem) {
 
-            foreach ($budgetsItems as $budgetIttem) {
 
-                $item = $itemsRepo->asignItem($budgetIttem->models_id, $this->request->branches_confirm_id, $this->request->sales_id);
+                $item = $itemsRepo->asignItem($budgetItem->models_id, $this->request->branches_confirm_id, $this->request->sales_id);
 
                 $salesItemsRepo->create([
                     'sales_id' => $sales->id,

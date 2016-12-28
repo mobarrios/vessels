@@ -31,11 +31,11 @@ class ItemsRepo extends BaseRepo {
         return $data;
     }
 
-    public function asignItem($models_id, $branches_id, $sales_id = null)
+    public function asignItem($models_id, $branches_id, $sales_id = null, $colors_id)
     {
 
         //busca items con estatus ingresado
-        $items = Items::where('status',1)->where('models_id', $models_id)->get()->lists('id');
+        $items = Items::where('status',1)->where('models_id', $models_id)->where('colors_id',$colors_id)->get()->lists('id');
 
         // valida si el producto esta en la sucursal de destino
         $qBranch = Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->where('branches_id',$branches_id)->first();

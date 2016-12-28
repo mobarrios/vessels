@@ -2,6 +2,7 @@
  namespace App\Entities\Configs;
 
 
+ use App\Entities\Moto\Items;
  use Illuminate\Database\Eloquent\Model;
 
  class Brancheables extends Model
@@ -16,6 +17,11 @@
      public function Branches()
      {
          return $this->belongsTo(Branches::class);
+     }
+
+     public function Items()
+     {
+         return $this->belongsTo(Items::class, 'entities_id');
      }
  }
 

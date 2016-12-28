@@ -8,6 +8,7 @@ use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\ClientsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
+use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\SalesItemsRepo;
 use App\Http\Repositories\Moto\SalesRepo as Repo;
 use App\Http\Repositories\Moto\ItemsRepo;
@@ -20,31 +21,34 @@ use Illuminate\Routing\Route;
 
 class SalesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
-                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo , BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
-                                 BranchesRepo $branchesRepo)
+    public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
+                                ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
+                                BranchesRepo $branchesRepo, FinancialsRepo $financialsRepo)
     {
 
-        $this->request  = $request;
-        $this->repo     = $repo;
-        $this->route    = $route;
+        $this->request = $request;
+        $this->repo = $repo;
+        $this->route = $route;
 
-        $this->section          = 'sales';
-        $this->data['section']  = $this->section;
+        $this->section = 'sales';
+        $this->data['section'] = $this->section;
 
-        $this->data['purchasesOrders'] = $purchasesOrdersRepo->ListsData('id','id');
+        $this->data['purchasesOrders'] = $purchasesOrdersRepo->ListsData('id', 'id');
 
-        $this->data['models_types'] = $modelsRepo->ListsData('name','id');
-        $this->data['models_lists'] = $modelsRepo->ListsData('name','id');
-        $this->data['colors']       = $colorsRepo->ListsData('name','id');
-
-        $this->data['brands']       = $brandsRepo->getAllWithModels();
-        $this->data['branches']     = $branchesRepo->ListsData('name','id');
+        $this->data['models_types'] = $modelsRepo->ListsData('name', 'id');
+        $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
+        $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
+        $this->data['financials']   = $financialsRepo->getAllWithDues() ;
 
 
-        $this->data['clients']      = $clientsRepo->ListAll()->orderBy('last_name','ASC')->get();
 
-        $this->modelsRepo =  $modelsRepo;
+        $this->data['brands'] = $brandsRepo->getAllWithModels();
+        $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
+
+
+        $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
+
+        $this->modelsRepo = $modelsRepo;
 
     }
 
@@ -52,13 +56,13 @@ class SalesController extends Controller
     {
 
         // asigna items a la venta
-        $item  =  $itemsRepo->asignItem($this->request->models_id , $this->request->branches_confirm_id , $this->request->sales_id);
+        $item = $itemsRepo->asignItem($this->request->models_id, $this->request->branches_confirm_id, $this->request->sales_id, $this->request->colors_id);
 
-        $this->request['items_id'] = $item ;
+        $this->request['items_id'] = $item;
 
         $salesItemsRepo->create($this->request);
 
-        return redirect()->route('moto.sales.edit',$this->request->sales_id);
+        return redirect()->route('moto.sales.edit', $this->request->sales_id);
     }
 
     public function editItems(SalesItemsRepo $salesItemsRepo)
@@ -68,9 +72,9 @@ class SalesController extends Controller
         return parent::edit();
     }
 
-    public function updateItems(SalesItemsRepo $salesItemsRepo,$id)
+    public function updateItems(SalesItemsRepo $salesItemsRepo, $id)
     {
-        $salesItemsRepo->update($id,$this->request);
+        $salesItemsRepo->update($id, $this->request);
 
         return parent::edit();
     }

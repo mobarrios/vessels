@@ -13,6 +13,11 @@ class Models extends Entity
     protected $fillable = ['name', 'status', 'brands_id', 'providers_id', 'patentamiento', 'pack_service', 'min_stock'];
 
 
+    public function Items()
+    {
+        return $this->hasMany(Items::class)->with('Colors');
+    }
+
     public function Brands()
     {
         return $this->belongsTo(Brands::class);
@@ -53,8 +58,13 @@ class Models extends Entity
         $q = Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->get()->groupBy('branches_id');
 
         return $q;
-
     }
+
+    public function getStockByColorsAttribute()
+    {
+        return $this->Items->groupBy('colors_id');
+    }
+    
 }
 
 

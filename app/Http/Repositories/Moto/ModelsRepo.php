@@ -58,4 +58,16 @@ class ModelsRepo extends BaseRepo {
             ->find($id);
 //            ->get());
     }
+
+    public function stockByColors($id)
+    {
+        $models = $this->find($id);
+
+        $data = $models->StockByColors;
+
+
+        return $data->toArray();
+    }
+
+
 }
