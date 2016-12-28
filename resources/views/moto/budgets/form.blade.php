@@ -245,6 +245,7 @@
         <div class="col-xs-12  form-group">
             {!! Form::label('Modelo') !!}
             <select id="select_model" name='models_id' class=" select2 form-control">
+                <option>Seleccione modelo</option>
                 @foreach($brands as $br)
                     <optgroup label="{{$br->name}}">
                         @foreach($br->Models as $m)
@@ -260,7 +261,7 @@
 
         <div class="col-xs-12 form-group">
             {!! Form::label('Color') !!}
-            {!! Form::select('colors_id', [],null, ['class'=>'form-control select2', "placeholder" => "Seleccione color"]) !!}
+            {!! Form::select('colors_id', [],null, ['class'=>'form-control select2', "placeholder" => "Seleccione color","id" => "colors"]) !!}
         </div>
 
 
@@ -309,6 +310,7 @@
 @section('js')
     <script>
         $("select[name='models_id']").on('change', function(ev){
+            $("#select_model>option").remove();
             var id = $(this).val();
 
             var parent = $(this).parent().parent();
@@ -317,10 +319,34 @@
                method: 'GET',
                url: 'moto/modelLists/'+id,
                success: function(data){
+                   $.ajax({
+                       method: 'GET',
+                       url: 'moto/modelAvailables/'+id,
+                       success: function(data){
+                           $.each(data, function (x, y) {
+
+                               $.each(y, function (a, b) {
+
+                                   color_id = b.colors_id;
+                                   color = b.colors.name;
+                                   q = y.length;
+                               });
+
+                               $('#colors option').remove();
+                               $('#colors').append('<option value=' + color_id + ' >' + color + ' ( ' + q + ' ) </option>');
+
+                            });
+
+                       }
+                   })
+
                    $(".sTotal").val(data.active_list_price.price_net);
                    $(".price_actual").val(data.active_list_price.price_net);
                    $(".patentamiento").val(data.patentamiento);
                    $(".packService").val(data.pack_service);
+
+
+
                }
            })
         });
