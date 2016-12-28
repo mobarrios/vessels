@@ -242,10 +242,23 @@
         {!! Form::hidden('budgets_id',$budget->id) !!}
         {!! Form::hidden('price_actual',null,['class' => 'price_actual']) !!}
 
-        <div class="col-xs-12 form-group">
+        <div class="col-xs-12  form-group">
             {!! Form::label('Modelo') !!}
-            {!! Form::select('models_id', $items,null, ['class'=>'form-control select2', "placeholder" => "Seleccione modelo"]) !!}
+            <select id="select_model" name='models_id' class=" select2 form-control">
+                @foreach($brands as $br)
+                    <optgroup label="{{$br->name}}">
+                        @foreach($br->Models as $m)
+                            @if($m->stock >= 1)
+                                <option value="{{$m->id}}"
+                                        @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                @endforeach
+            </select>
         </div>
+
+
 
         <div class="col-xs-12 col-lg-6 form-group">
             {!! Form::label('Subtotal') !!}

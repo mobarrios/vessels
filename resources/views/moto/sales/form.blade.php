@@ -207,15 +207,18 @@
 
         $('#clients_id').on('change', function () {
             var id = $(this).val();
+            var budgets = $('#budgets_id');
+
+            budgets.html("");
+
             $.ajax({
                 method: 'GET',
                 url: 'moto/budgetsByClients/' + id,
                 success: function (data) {
 
-                    console.log(data);
-                    $.each(data, function (i, y) {
-
-                        $('#budgets_id').append("<option value="+y.id+">#"+y.id+" | "+ y.created_at + "</option>")
+                    $.each(data, function (i, y)
+                    {
+                        budgets.append("<option value="+y.id+">#"+y.id+" | "+ y.created_at + "</option>")
                     });
                 }
             })

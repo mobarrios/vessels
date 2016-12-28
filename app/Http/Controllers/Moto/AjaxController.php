@@ -36,6 +36,8 @@ class AjaxController extends Controller
 
         $data = $this->repo->oneToBudgets($id) ;
 
+   
+
         return response()->json($data);
     }
 

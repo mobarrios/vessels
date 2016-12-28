@@ -31,8 +31,8 @@ class BudgetsController extends Controller
         $this->section          = 'budgets';
         $this->data['section']  = $this->section;
 
-        $this->data['brands']   = $brandsRepo->getAllWithModels();
-        $this->data['financials'] = $financialsRepo->getAllWithDues() ;
+        $this->data['brands']       = $brandsRepo->getAllWithModels();
+        $this->data['financials']   = $financialsRepo->getAllWithDues() ;
 
         $this->clients = $clients;
         $this->models = $models;
