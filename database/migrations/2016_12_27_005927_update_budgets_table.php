@@ -19,11 +19,11 @@ class UpdateBudgetsTable extends Migration
             $table->double('gastos_administrativos',10,2)->nullable();
             $table->double('descuento',10,2)->nullable();
             $table->double('anticipo',10,2)->nullable();
-            $table->double('importeCuota',10,2)->nullable();
+            $table->double('importe_cuota',10,2)->nullable();
             $table->double('a_financiar',10,2)->nullable();
             $table->double('modo_financiamiento',10,4)->nullable();
             $table->double('total',10,2)->nullable();
-            $table->int('users_id')->nullable();
+            $table->integer('users_id')->nullable();
 
             $table->foreign('users_id')->references('id')->on('users');
         });
