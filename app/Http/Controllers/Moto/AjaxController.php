@@ -34,7 +34,7 @@ class AjaxController extends Controller
     public function modelLists($id)
     {
 
-        $data = $this->repo->oneToBudgets($id) ;
+        $data = $this->repo->oneToBudgets($id);
 
         return response()->json($data);
     }
