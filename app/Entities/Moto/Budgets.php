@@ -22,7 +22,7 @@
      }
 
      public function allItems(){
-         return $this->belongsToMany(Models::class,'budgets_items')->withPivot(['price_actual','price_budget','id']);
+         return $this->belongsToMany(Models::class,'budgets_items')->whereNull('budgets_items.deleted_at')->withPivot(['price_actual','price_budget','id']);
      }
 
      public function getDateAttribute(){

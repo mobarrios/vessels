@@ -353,14 +353,14 @@
                         $scope.patentamiento = parseFloat(response.data[0]['patentamiento'])
                         $scope.packService = parseFloat(response.data[0]['pack_service'])
                         $scope.data = response.data[1]
-                        $scope.seguro = {!! $budget->seguro !!}
-                        $scope.flete = {!! $budget->flete !!}
-                        $scope.formularios = {!! $budget->formularios !!}
-                        $scope.gastosAdministrativos = {!! $budget->gastros_administrativos !!}
-                        $scope.descuento = {!! $budget->descuento !!}
-                        $scope.anticipo = {!! $budget->anticipo !!}
-                        $scope.importeCuota = {!! $budget->importe_cuota !!}
-                        $scope.aFinanciar = {!! $budget->a_financiar !!}
+                        $scope.seguro = {!! $budget->seguro or '0' !!}
+                        $scope.flete = {!! $budget->flete or '0' !!}
+                        $scope.formularios = {!! $budget->formularios or '0' !!}
+                        $scope.gastosAdministrativos = {!! $budget->gastros_administrativos or '0' !!}
+                        $scope.descuento = {!! $budget->descuento or '0' !!}
+                        $scope.anticipo = {!! $budget->anticipo or '0' !!}
+                        $scope.importeCuota = {!! $budget->importe_cuota or '0' !!}
+                        $scope.aFinanciar = {!! $budget->a_financiar or '0' !!}
                         $scope.calcular();
 
                     });

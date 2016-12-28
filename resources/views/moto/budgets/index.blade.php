@@ -21,6 +21,9 @@
                         @endforelse
                     </ul>
                 </td>
+                <td>
+                    <a href="{{route('moto.budgets.pdf',$model->id)}}" target="_blank" class="btn btn-danger"><i class="fa fa-file-pdf-o"></i></a>
+                </td>
             </tr>
         @endforeach
     @endsection
