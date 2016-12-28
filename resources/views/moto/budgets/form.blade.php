@@ -181,10 +181,10 @@
                                 <label>Total a Financiar</label>
 
                                 <select name="modo_financiamiento" class="form-control" id="financials">
-                                    @foreach($financials as $financial)
+                                    @foreach($financials as $i => $financial)
                                         <optgroup label="{{$financial->name}}">
-                                            @foreach($financial->FinancialsDues as $dues)
-                                                <option value="{{$dues->coef}}" due="{{$dues->due}}">
+                                            @foreach($financial->FinancialsDues as $ind => $dues)
+                                                <option value="{{$dues->coef}}" data-id="due{!! $i.$ind !!}" due="{{$dues->due}}">
                                                     {{$dues->due}} cuota/s
                                                 </option>
                                             @endforeach
@@ -258,6 +258,10 @@
             </select>
         </div>
 
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Color') !!}
+            {!! Form::select('colors_id', [],null, ['class'=>'form-control select2', "placeholder" => "Seleccione color"]) !!}
+        </div>
 
 
         <div class="col-xs-12 col-lg-6 form-group">
@@ -333,28 +337,35 @@
         var coef;
 
         $("#financials option").each(function(ind, val){
-            if($(val).val() == "{!! $budget->modo_financiamiento !!}")
+            if($(val).val() == "{!! $budget->modo_financiamiento !!}"){
                 $(val).attr('selected','selected')
-                coef = $(val).val();
+                coef = $(val);
+            }
         });
 
-        $("#financials").on('change',function(ev){
-            coef = $(this).val();
-            var option = $(this).find("option[value='"+coef+"']");
-            var dues = $(this).find("option[value='"+coef+"']").attr('due');
-            var aFinanciar = $('#aFinanciar').val();
 
-            $("#financials option").each(function(ind, val){
-                if($(val).val() == coef)
-                    $(val).attr('selected',false)
+        $("#financials").on('click',function(ev){
+            coef = $(this).find('option:selected');
 
+        })
+
+            $("#financials").on('change',function(ev){
+
+                var option = $(this).find("option[data-id='"+$(coef).attr('data-id')+"']");
+                var dues = $(this).find("option[data-id='"+$(coef).attr('data-id')+"']").attr('due');
+                var aFinanciar = $('#aFinanciar').val();
+
+                $("#financials option").each(function(ind, val){
+                    if($(val).attr('data-id') == $(coef).attr('data-id'))
+                        $(val).attr('selected',false);
+
+                });
+
+//                $(option).attr("selected","selected");
+
+                var importeCuota = ( aFinanciar * $(option).val() ) / dues;
+                $('#importeCuota').val(parseFloat(importeCuota).toFixed(2));
             });
-
-            $(option).attr("selected","selected");
-
-            var importeCuota = ( aFinanciar * coef ) / dues;
-            $('#importeCuota').val(parseFloat(importeCuota).toFixed(2));
-        });
 
         var app = angular.module("myApp", []);
 
@@ -378,14 +389,6 @@
 
                     });
 
-//            $("#financials").on('change',function(ev){
-//                var coef = $(this).val();
-//                var dues = $(this).find("option[value='"+coef+"']").attr('due');
-//                var aFinanciar = $scope.aFinanciar;
-//
-//                var importeCuota = ( aFinanciar * coef ) / dues;
-//                $scope.importeCuota = parseFloat(importeCuota).toFixed(2);
-//            });
 
             $scope.calcular = function()
             {

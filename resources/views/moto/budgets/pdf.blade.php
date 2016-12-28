@@ -149,7 +149,7 @@
                     <h2 align="center">PRESUPUESTO</h2>
                 </td>
                 <th class="fecha">
-                    <span>19</span><span>12</span><span>2016</span>
+                    <span>{!! date('d',strtotime($model->date)) !!}</span><span>{!! date('m',strtotime($model->date)) !!}</span><span>{!! date('Y',strtotime($model->date)) !!}</span>
                 </th>
             </tr>
         </table>
@@ -207,39 +207,39 @@
             <div class="espacio"></div>
 
             <div class="inline">
-                <p><b>Precio de lista: </b> {!! $item->activeListPrice->price_list or '' !!}</p>
+                <p><b>Precio de lista: </b> ${!! $item->activeListPrice->price_list or '0' !!}</p>
             </div>
 
             <div class="inline">
-                <p><b>Contado: </b> {!! $item->activeListPrice->price_net or '' !!}</p>
+                <p><b>Contado: </b> ${!! $item->activeListPrice->price_net or '0' !!}</p>
             </div>
 
             <div class="espacio"></div>
-
             <div class="inline">
-                <p><b>Patentamiento: </b> {!! '$'.$item->patentamiento or '' !!}</p></p>
+                <p><b>Patentamiento: </b> ${!! $item->patentamiento or '0' !!}</p></p>
             </div>
 
             <div class="inline">
-                <p><b>Pack Service: </b> {!! '$'.$item->pack_service or '' !!}</p></p>
+                <p><b>Pack Service: </b> ${!! $item->pack_service or '0' !!}</p></p>
             </div>
 
         @endforeach
-        <span class="padding"></span>
+
+       <span class="padding"></span>
 
 
         <div class="inline">
-            <p><b>Seguro: </b> {!! '$'.$model->seguro or '' !!}</p>
+            <p><b>Seguro: </b> ${!! $model->seguro or '0' !!}</p>
         </div>
 
         <div class="espacio"></div>
 
         <div class="inline">
-            <p><b>Flete: </b> {!! '$'.$model->flete or '' !!}</p>
+            <p><b>Flete: </b> ${!! $model->flete or '0' !!}</p>
         </div>
 
         <div class="inline">
-            <p><b>Formularios: </b> {!! '$'.$model->formularios or '' !!}</p>
+            <p><b>Formularios: </b> ${!! $model->formularios or '0' !!}</p>
         </div>
 
         <span class="padding"></span>
@@ -248,15 +248,15 @@
         <div class="footer">
 
             <div class="inline">
-                <p><b>Total Final: </b> {!! '$'.$model->total or '' !!}</p>
+                <p><b>Total Final: </b> ${!! $model->total or '0' !!}</p>
             </div>
 
             <div class="inline">
-                <p><b>Anticipo: </b> {!! '$'.$model->anticipo or '' !!}</p>
+                <p><b>Anticipo: </b> ${!! $model->anticipo or '0' !!}</p>
             </div>
             <div class="espacio"></div>
             <div class="inline">
-                <p><b>A financiar: </b> {!! '$'.$model->a_financiar or '' !!}</p>
+                <p><b>A financiar: </b> ${!! $model->a_financiar or '0' !!}</p>
             </div>
 
             <div class="inline">
