@@ -130,7 +130,7 @@
                         @endforeach
                         </tbody>
                         <tfoot>
-                        <td colspan="11">TOTAL $ <b class="text-danger">{{number_format($total,2)}}</b></td>
+                            <td colspan="11" align="right">TOTAL ADEUDADO : $ <b class="text-primary">{{number_format($total,2)}}</b></td>
                         </tfoot>
                     </table>
 

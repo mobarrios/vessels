@@ -5,20 +5,27 @@
         </div>
 
         <div class="panel-body">
-            {!! Form::open() !!}
+            @if(isset($models))
+                {!! Form::model($models,['route'=> ['moto.sales.addPayment', $models->id] , 'files' =>'true']) !!}
+                {!! Form::hidden('sales_id',$models->id) !!}
+                {!! Form::hidden('date', Date('Y-m-d')) !!}
+
+            @else
+                {!! Form::open(['route'=> 'moto.sales.editPayment' , 'files' =>'true']) !!}
+            @endif
 
             <div class="col-xs-2 form-group">
                 {!! Form::label('Monto') !!}
-                {!! Form::number('monto' ,null, ['class'=>' form-control']) !!}
+                {!! Form::number('amount' ,null, ['class'=>' form-control']) !!}
             </div>
 
             <div class="col-xs-4 form-group">
                 {!! Form::label('Forma de Pago') !!}
-                <select name="modo_financiamiento" class="form-control" id="financials">
+                <select name="financials_id" class="form-control" id="financials">
                     @foreach($financials as $financial)
                         <optgroup label="{{$financial->name}}">
                             @foreach($financial->FinancialsDues as $dues)
-                                <option value="{{$dues->coef}}" due="{{$dues->due}}">
+                                <option value="{{$financial->id}}" due="{{$dues->due}}">
                                     {{$dues->due}} cuota/s
                                 </option>
                             @endforeach
@@ -28,19 +35,19 @@
             </div>
             <div class="col-xs-3 form-group">
                 {!! Form::label('Nro . Tarjeta') !!}
-                {!! Form::text('tarjeta_id', null, ['class'=>' form-control']) !!}
+                {!! Form::text('ccn', null, ['class'=>' form-control']) !!}
             </div>
             <div class="col-xs-1 form-group">
                 {!! Form::label('Cod. Seg.') !!}
-                {!! Form::text('cod_seg', null, ['class'=>' form-control']) !!}
+                {!! Form::text('ccc', null, ['class'=>' form-control']) !!}
             </div>
             <div class="col-xs-1 form-group">
                 {!! Form::label('Vto.') !!}
-                {!! Form::text('vto', null, ['class'=>' form-control']) !!}
+                {!! Form::text('cce', null, ['class'=>' form-control']) !!}
             </div>
             <div class="col-xs-1 form-group" style="padding-top: 1.5%">
-                <a href="{{route("moto.clients.create")}}" target="_blank" class="btn btn-default"><span
-                            class="fa fa-plus"></span></a>
+                <button type="submit" class="btn btn-default"><span
+                            class="fa fa-plus"></span></button>
             </div>
 
 
@@ -55,10 +62,22 @@
                         <th> $ Monto</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>dasdas</td>
-                        </tr>
+                    <?php $pago = 0 ?>
+                    @if(isset($models->SalesPayments))
+
+                        @foreach($models->SalesPayments as $payment)
+                            <tr>
+                                <td>{{$payment->date}}</td>
+                                <td>{{$payment->financials_id}}</td>
+                                <td> $ {{number_format($payment->amount, 2)}}</td>
+                                <?php  $pago += $payment->amount ;?>
+                            </tr>
+                        @endforeach
+                    @endif
                     </tbody>
+                        <tfoot>
+                             <td colspan="3" align="right">TOTAL PAGO :  <b class="text-danger"> $ {{number_format($pago,2)}}</b> </td>
+                        </tfoot>
                 </table>
             </div>
 

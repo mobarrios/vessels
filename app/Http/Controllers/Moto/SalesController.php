@@ -10,6 +10,8 @@ use App\Http\Repositories\Moto\ClientsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\SalesItemsRepo;
+use App\Http\Repositories\Moto\SalesPaymentsRepo;
+
 use App\Http\Repositories\Moto\SalesRepo as Repo;
 use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
@@ -52,6 +54,9 @@ class SalesController extends Controller
 
     }
 
+
+    // items
+
     public function addItems(SalesItemsRepo $salesItemsRepo, ItemsRepo $itemsRepo)
     {
 
@@ -85,6 +90,40 @@ class SalesController extends Controller
 
         return parent::edit();
     }
+
+
+
+    //payemnts
+
+    public function addPayment(SalesPaymentsRepo $salesPaymentsRepo)
+    {
+        $salesPaymentsRepo->create($this->request);
+
+        return redirect()->route('moto.sales.edit', $this->request->sales_id);
+    }
+
+    public function editPayment(SalesPaymentsRepo $salesPaymentsRepo)
+    {
+        $this->data['modelItems'] = $salesPaymentsRepo->find($this->route->getParameter('item'));
+
+        return parent::edit();
+    }
+
+    public function updatePayment(SalesPaymentsRepo $salesPaymentsRepo, $id)
+    {
+        $salesPaymentsRepo->update($id, $this->request);
+
+        return parent::edit();
+    }
+
+    public function deletePayment(SalesPaymentsRepo $salesPaymentsRepo)
+    {
+        $salesPaymentsRepo->destroy($this->route->getParameter('item'));
+
+        return parent::edit();
+    }
+
+
 
 
 }

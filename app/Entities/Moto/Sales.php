@@ -44,7 +44,12 @@
 
      public function setDateConfirmAttribute($value)
      {
-         $this->attributes['date_confirm'] = date('Y-m-d',strtotime($value));
+          $this->attributes['date_confirm'] = date('Y-m-d',strtotime($value));
+     }
+
+     public function SalesPayments()
+     {
+         return $this->hasMany(SalesPayments::class);
      }
 
 
