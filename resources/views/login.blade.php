@@ -1,12 +1,20 @@
-@extends('template.layout')
+@extends('template.loginLayout')
 
     @section('mainContent')
     <div class="login-box">
-            <div class="login-logo">
-                <a href=""><b>Admin</b></a>
-            </div>
+
+        <div class="login-logo">
+            <a href=""> <span class="fa-stack ">
+                <i class="fa fa-shekel fa-stack-2x"></i>
+            </span></a>
+        </div>
         <div class="login-box-body">
-            <p class="login-box-msg">Iniciar Session</p>
+
+            <div class="login-logo">
+                    <b>Sistema de Gestión</b>
+            </div>
+            <hr>
+            <p class="login-box-msg">Por Favor , coloque sus credenciales.</p>
 
             {!! Form::open(['route'=>'auth.validate']) !!}
                 <div class="form-group has-feedback">
@@ -20,24 +28,23 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
-                    <div class="col-xs-8">
-                        <div class=" icheck">
-                            <label>
-                                {!! Form::checkbox('remember') !!} Recordarme
-                            </label>
-                        </div>
-                    </div>
+
                     <!-- /.col -->
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-block"> Ingresar </button>
                     </div>
                     <!-- /.col -->
                 </div>
+            <hr>
+
+            <div class="icheck">
+                {!! Form::checkbox('remember') !!} Recordarme
+            </div>
+            @include('template.messages')
+
             {!! Form::close() !!}
 
         </div>
-        <hr>
-        @include('template.messages')
 
     </div>
 
