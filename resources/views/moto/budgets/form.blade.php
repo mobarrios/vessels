@@ -332,8 +332,8 @@
                success: function(data){
                    $.ajax({
                        method: 'GET',
-                       url: 'moto/modelAvailables/'+id,
-                       success: function(data){
+                       url: 'moto/modelAvailables/' + id,
+                       success: function (data) {
                            $.each(data, function (x, y) {
 
                                $.each(y, function (a, b) {
@@ -343,11 +343,8 @@
                                    q = y.length;
                                });
 
-                               $('#colors option').remove();
                                $('#colors').append('<option value=' + color_id + ' >' + color + ' ( ' + q + ' ) </option>');
-
-                            });
-
+                           });
                        }
                    })
 
