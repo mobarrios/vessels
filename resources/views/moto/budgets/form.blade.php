@@ -265,7 +265,7 @@
                 <select name="colors_id" id="colors" class="form-control select2">
                     @foreach($colors as $cant => $color)
                         @foreach($color as $col)
-                            <option value=' {!! $col->colors_id  !!} ' @if($col->colors_id == $modelItems->colors_id) selected = "selected" @endif> {!! $col->colors->name !!} ( {!! $cant !!} ) </option>
+                            <option value=' {!! $col->colors_id  !!} ' @if($col->colors_id == $modelItems->colors_id) selected = "selected" @endif> {!! $col->colors->name !!} ( {!! $color->count() !!} ) </option>
                         @endforeach
                     @endforeach
                 </select>
