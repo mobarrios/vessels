@@ -11,6 +11,15 @@ class SalesItemsRepo extends BaseRepo {
     {
         return new SalesItems();
     }
-  
+
+    public function create($data)
+    {
+        $model = new $this->model();
+        $model->fill($data);
+        $model->save();
+
+        return $model;
+    }
+
 
 }

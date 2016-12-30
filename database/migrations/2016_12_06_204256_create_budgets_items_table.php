@@ -28,6 +28,9 @@ class CreateBudgetsItemsTable extends Migration
             $table->integer('models_id')->unsigned()->nulleable();
             $table->foreign('models_id')->references('id')->on('models');
 
+            $table->integer('colors_id')->unsigned()->nulleable();
+            $table->foreign('colors_id')->references('id')->on('colors');
+
         });
     }
 

@@ -9,7 +9,7 @@
 
      protected $table = 'budgets_items';
 
-     protected $fillable = ['price_actual', 'price_budget', 'budgets_id','models_id'];
+     protected $fillable = ['price_actual', 'price_budget', 'budgets_id','models_id','colors_id'];
 
      public function Budgets()
      {

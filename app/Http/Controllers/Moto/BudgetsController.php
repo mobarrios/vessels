@@ -107,7 +107,6 @@ class BudgetsController extends Controller
 
     public function update()
     {
-        dd($this->request->get('modo_financiamiento'));
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
 

@@ -40,8 +40,7 @@ class SalesController extends Controller
         $this->data['models_types'] = $modelsRepo->ListsData('name', 'id');
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
         $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
-        $this->data['financials']   = $financialsRepo->getAllWithDues() ;
-
+        $this->data['financials'] = $financialsRepo->getAllWithDues();
 
 
         $this->data['brands'] = $brandsRepo->getAllWithModels();
@@ -63,11 +62,17 @@ class SalesController extends Controller
         // asigna items a la venta
         $item = $itemsRepo->asignItem($this->request->models_id, $this->request->branches_confirm_id, $this->request->sales_id, $this->request->colors_id);
 
-        $this->request['items_id'] = $item;
+        if ($item != false) {
 
-        $salesItemsRepo->create($this->request);
+            $this->request['items_id'] = $item;
 
-        return redirect()->route('moto.sales.edit', $this->request->sales_id);
+            $salesItemsRepo->create($this->request->all());
+
+            return redirect()->route('moto.sales.edit', $this->request->sales_id);
+        }
+
+
+
     }
 
     public function editItems(SalesItemsRepo $salesItemsRepo)
@@ -90,7 +95,6 @@ class SalesController extends Controller
 
         return parent::edit();
     }
-
 
 
     //payemnts
@@ -122,8 +126,6 @@ class SalesController extends Controller
 
         return parent::edit();
     }
-
-
 
 
 }
