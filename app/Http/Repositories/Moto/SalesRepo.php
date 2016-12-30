@@ -2,6 +2,7 @@
 namespace App\Http\Repositories\Moto;
 
 use App\Entities\Moto\Sales;
+use App\Entities\Moto\SalesItems;
 use App\Http\Repositories\BaseRepo;
 
 
@@ -29,14 +30,13 @@ class SalesRepo extends BaseRepo
             {
                 $item = $itemsRepo->asignItem($budgetItem->models_id, $data->branches_confirm_id,$sales->id, $budgetItem->colors_id);
 
-                dd($item);
                 if($item != false)
                 {
-                    $salesItemsRepo->create([
-                        'sales_id' => $sales->id,
-                        'item_id' => $item,
-                        'price_actual' => $budgetItem->price_actual,
-                    ]);
+                    $new = new SalesItems();
+                    $new->sales_id = $sales->id;
+                    $new->items_id = $item;
+                    $new->price_actual = $budgetItem->price_actual;
+                    $new->save();
                 }
             }
 

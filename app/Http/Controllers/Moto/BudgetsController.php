@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Moto;
 use App\Entities\Moto\Budgets;
 use App\Entities\Moto\BudgetsItems;
 use App\Entities\Moto\Clients;
+use App\Entities\Moto\Colors;
 use App\Entities\Moto\Models;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Moto\BrandsRepo;
@@ -148,15 +149,16 @@ class BudgetsController extends Controller
         return redirect()->route('moto.'.$this->section.'.edit',[$this->route->getParameter('cliente'),$this->request->budgets_id]);
     }
 
-    public function editItems($cliente = null,$item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo)
+    public function editItems($cliente = null,$item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo, Colors $colors)
     {
         $this->data['modelItems'] = $budgetsItemsRepo->find($id);
         $this->data['activeBread'] = 'Editar';
         $this->data['budget'] = $this->repo->find($item);
 
         $this->data['items'] = $this->models->lists('name','id');
+        $this->data['colors'] = $this->data['modelItems']->models->StockByColors;
 
-
+//        dd($this->data['colors']);
         $this->data['client'] = $this->clients->find($cliente);
 
         return view(config('models.'.$this->section.'.editView'))->with($this->data);
