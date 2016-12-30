@@ -68,7 +68,7 @@
                         @foreach($models->SalesPayments as $payment)
                             <tr>
                                 <td>{{$payment->date}}</td>
-                                <td>{{$payment->financials_id}}</td>
+                                <td>{{$payment->Financials}}</td>
                                 <td> $ {{number_format($payment->amount, 2)}}</td>
                                 <?php  $pago += $payment->amount ;?>
                             </tr>

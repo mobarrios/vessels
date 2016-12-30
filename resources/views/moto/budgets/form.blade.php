@@ -244,8 +244,8 @@
 
         <div class="col-xs-12  form-group">
             {!! Form::label('Modelo') !!}
-            <select id="select_model" name='models_id' class=" select2 form-control">
-                <option>Seleccione modelo</option>
+            <select id="select_model" name='models_id' class=" select2 form-control" placeholder="Seleccione un modelo">
+                <option>Seleccionar...</option>
                 @foreach($brands as $br)
                     <optgroup label="{{$br->name}}">
                         @foreach($br->Models as $m)

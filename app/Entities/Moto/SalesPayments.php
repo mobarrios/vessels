@@ -26,6 +26,11 @@
          $this->attributes['date'] = date('Y-m-d',strtotime($value));
      }
 
+     public function Financials()
+     {
+         return $this->hasMany(FinancialsDues::class , 'financials_id');
+     }
+
     
  }
 

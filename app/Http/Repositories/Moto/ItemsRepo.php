@@ -10,14 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemsRepo extends BaseRepo {
 
-    protected $itemsRequestRepo;
-
-    public function __construct(ItemsRequestRepo $itemsRequestRepo)
-    {
-        $this->itemsRequestRepo =  $itemsRequestRepo;
-
-        parent::__construct();
-    }
 
     public function getModel()
     {
@@ -63,9 +55,11 @@ class ItemsRepo extends BaseRepo {
 
     public function itemsRequest( $items_id , $branches_id_from , $branches_id_to, $sales_id = null )
     {
+        $itemsRequestRepo = new ItemsRequestRepo();
+        
         $data = ['items_id'=> $items_id, 'branches_from_id' => $branches_id_from, 'branches_to_id'=> $branches_id_to , 'status'=> 1 , 'sales_id' => $sales_id];
 
-        $this->itemsRequestRepo->create($data);
+        $itemsRequestRepo->create($data);
     }
 
     public function changeStatus($id ,  $status )
