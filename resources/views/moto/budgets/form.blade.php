@@ -251,7 +251,7 @@
                         @foreach($br->Models as $m)
                             @if($m->stock >= 1)
                                 <option value="{{$m->id}}"
-                                        @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                                        @if(isset($modelItems) && ($modelItems->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
                             @endif
                         @endforeach
                     </optgroup>
@@ -261,7 +261,18 @@
 
         <div class="col-xs-12 form-group">
             {!! Form::label('Color') !!}
-            {!! Form::select('colors_id', [],null, ['class'=>'form-control select2', "placeholder" => "Seleccione color","id" => "colors"]) !!}
+            @if(isset($modelItems))
+                <select name="colors_id" id="colors" class="form-control select2">
+                    @foreach($colors as $cant => $color)
+                        @foreach($color as $col)
+                            <option value=' {!! $col->colors_id  !!} ' @if($col->colors_id == $modelItems->colors_id) selected = "selected" @endif> {!! $col->colors->name !!} ( {!! $cant !!} ) </option>
+                        @endforeach
+                    @endforeach
+                </select>
+{{--                {!! Form::select('colors_id', $colors,null, ['class'=>'form-control select2',"id" => "colors"]) !!}--}}
+            @else
+                {!! Form::select('colors_id', [],null, ['class'=>'form-control select2',"id" => "colors"]) !!}
+            @endif
         </div>
 
 
