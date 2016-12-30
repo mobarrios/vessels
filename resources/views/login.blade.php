@@ -11,7 +11,7 @@
         <div class="login-box-body">
 
             <div class="login-logo">
-                    <b>Sistema de Gestión</b>
+                    SISTEMA DE GESTIÓN
             </div>
             <hr>
             <p class="login-box-msg">Por Favor , coloque sus credenciales.</p>

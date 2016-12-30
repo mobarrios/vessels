@@ -20,6 +20,37 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+
+    <style>
+        .login-page{
+            background: rgba(255,175,75,1);
+            background: -moz-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,175,75,1)), color-stop(100%, rgba(255,146,10,1)));
+            background: -webkit-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+            background: -o-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+            background: -ms-linear-gradient(left, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+            background: linear-gradient(to right, rgba(255,175,75,1) 0%, rgba(255,146,10,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
+        }
+
+        .login-box-body{
+            -webkit-box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.7);
+            -moz-box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.7);
+            box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.7);
+        }
+
+        .login-logo .fa-shekel{
+            color: white !important;
+            text-shadow: -3px 3px 5px rgba(0, 0, 0, 0.21)
+        }
+
+        .login-logo{
+            font-size: 26px;
+        }
+
+    </style>
 </head>
 <body class="hold-transition login-page ">
 
