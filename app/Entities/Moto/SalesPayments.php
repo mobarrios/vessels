@@ -28,7 +28,7 @@
 
      public function Financials()
      {
-         return $this->hasMany(FinancialsDues::class , 'financials_id');
+         return $this->belongsTo(Financials::class);
      }
 
     

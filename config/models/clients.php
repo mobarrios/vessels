@@ -48,18 +48,28 @@ return [
 
     'validationsStore' => [
 
-        'dni' => 'unique:clients,dni|required',
+        'dni' => 'unique:clients,dni',
         'name' => 'required',
-        'address' => 'required',
+        'last_name' => 'required',
+        'phone1' => 'required',
+        'email' => 'unique:clients,email|required',
+
+
+        //'address' => 'required',
 
 
     ],
 
     'validationsUpdate' => [
 
-        'dni' => 'required',
+       // 'dni' => 'required',
         'name' => 'required',
-        'address' => 'required',
+        'last_name' => 'required',
+        'phone1' => 'required',
+        'email' => 'required',
+
+
+        //'address' => 'required',
 
     ],
 

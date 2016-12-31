@@ -40,7 +40,7 @@ class SalesController extends Controller
         $this->data['models_types'] = $modelsRepo->ListsData('name', 'id');
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
         $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
-        $this->data['financials'] = $financialsRepo->getAllWithDues();
+        $this->data['financials'] = $financialsRepo->ListsData('name','id');
 
 
         $this->data['brands'] = $brandsRepo->getAllWithModels();

@@ -13,6 +13,11 @@
 
     {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
 
+    <div class="col-xs-12">
+        <h2 class="text-center"><span>Venta </span> <strong class="text-blue">
+                # {{ (  isset($models) ? $models->id : '')}} </strong></h1>
+    </div>
+
     <div class="col-xs-2  form-group">
         {!! Form::label('Fecha Pactada') !!}
         {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
@@ -20,15 +25,22 @@
 
     <div class="col-xs-6 form-group">
         {!! Form::label('Cliente') !!}
-        <select id="clients_id" name="clients_id" class="form-control select2">
-            @foreach($clients  as $client)
-                <option value="{{$client->id}}">
-                    {{$client->fullName}}
-                    |<strong> {{$client->email}}</strong>
-                    | {{$client->dni}}
-                </option>
-            @endforeach
-        </select>
+
+        @if(isset($models))
+            <input type="text" disabled value="{{$models->Clients->fullName}}" class="form-control">
+        @else
+
+            <select id="clients_id" name="clients_id" class="select2 form-control ">
+                @foreach($clients  as $client)
+                    <option value="{{$client->id}}">
+                        {{$client->fullName}}
+                        |<strong> {{$client->email}}</strong>
+                        | {{$client->dni}}
+                    </option>
+                @endforeach
+            </select>
+
+        @endif
     </div>
 
     <div class="col-xs-1 form-group" style="padding-top: 1.5%">
@@ -37,9 +49,16 @@
     </div>
 
     <div class="col-xs-2 form-group">
+
         {!! Form::label('Presupuestos ') !!}
-        <select id="budgets_id" name="budgets_id" class="form-control select2">
-        </select>
+        @if(isset($models))
+            <input  type="text" disabled value=" # {{$models->budgets_id}}" class="form-control">
+        @else
+            <select id="budgets_id" name="budgets_id" class="form-control select2">
+            </select>
+
+
+        @endif
     </div>
 
     <div class="col-xs-1 form-group" style="padding-top: 1.5%">
@@ -48,7 +67,12 @@
 
     <div class="col-xs-2 form-group">
         {!! Form::label('Sucursal de Entrega') !!}
-        {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>'select2 form-control']) !!}
+        {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','placeholder'=>'Seleccionar...']) !!}
+    </div>
+
+    <div class="col-xs-2 form-group">
+        {!! Form::label('Tipo de Operación') !!}
+        {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
     </div>
 
     <div class="col-xs-1 form-group" style="padding-top: 1.5%">
@@ -130,7 +154,8 @@
                         @endforeach
                         </tbody>
                         <tfoot>
-                            <td colspan="11" align="right">TOTAL ADEUDADO : $ <b class="text-primary">{{number_format($total,2)}}</b></td>
+                        <td colspan="11" align="right">TOTAL ADEUDADO : $ <b
+                                    class="text-primary">{{number_format($total,2)}}</b></td>
                         </tfoot>
                     </table>
 
@@ -140,7 +165,9 @@
         </div>
     </div>
 
-    @include('moto.sales.formPagos')
+    @if(isset($models))
+        @include('moto.sales.formPagos')
+    @endif
 
 @endsection
 
@@ -149,108 +176,108 @@
 
     @include('moto.partials.asideOpenForm')
 
-        @if(isset($models))
-            @if(isset($modelItems))
-                {!! Form::model($modelItems,['route'=> ['moto.sales.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
-            @else
-                {!! Form::open(['route'=> ['moto.sales.addItems' ], 'files' =>'true']) !!}
-            @endif
+    @if(isset($models))
+        @if(isset($modelItems))
+            {!! Form::model($modelItems,['route'=> ['moto.sales.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
+        @else
+            {!! Form::open(['route'=> ['moto.sales.addItems' ], 'files' =>'true']) !!}
+        @endif
 
-            {!! Form::hidden('sales_id',$models->id) !!}
-            {!! Form::hidden('branches_confirm_id',$models->branches_confirm_id) !!}
+        {!! Form::hidden('sales_id',$models->id) !!}
+        {!! Form::hidden('branches_confirm_id',$models->branches_confirm_id) !!}
 
 
-            <div class="col-xs-12  form-group">
-                {!! Form::label('Modelo') !!}
-                <select id="select_model" name='models_id' class=" select2 form-control">
-                    @foreach($brands as $br)
-                        <optgroup label="{{$br->name}}">
-                            @foreach($br->Models as $m)
-                                @if($m->stock >= 1)
-                                    <option value="{{$m->id}}"
-                                            @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
-                    @endforeach
+        <div class="col-xs-12  form-group">
+            {!! Form::label('Modelo') !!}
+            <select id="select_model" name='models_id' class=" select2 form-control">
+                @foreach($brands as $br)
+                    <optgroup label="{{$br->name}}">
+                        @foreach($br->Models as $m)
+                            @if($m->stock >= 1)
+                                <option value="{{$m->id}}"
+                                        @if(isset($model) && ($model->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Colores Disponibles') !!}
+            <div>
+                <select name="colors_id" class=" form-control select2" id="disponibles">
                 </select>
             </div>
+        </div>
 
-            <div class="col-xs-12 form-group">
-                {!! Form::label('Colores Disponibles') !!}
-                <div>
-                    <select name="colors_id" class=" form-control select2" id="disponibles">
-                    </select>
-                </div>
-            </div>
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Precio Unidad') !!}
+            {!! Form::number('price_actual', null, ['class'=>'form-control price']) !!}
+        </div>
 
-            <div class="col-xs-12 form-group">
-                {!! Form::label('Precio Unidad') !!}
-                {!! Form::number('price_actual', null, ['class'=>'form-control price']) !!}
-            </div>
+        <div class="col-xs-6 form-group">
+            {!! Form::label('Patentamiento') !!}
+            {!! Form::number('patentamiento', null, ['class'=>'form-control patentamiento']) !!}
+        </div>
 
-            <div class="col-xs-6 form-group">
-                {!! Form::label('Patentamiento') !!}
-                {!! Form::number('patentamiento', null, ['class'=>'form-control patentamiento']) !!}
-            </div>
+        <div class="col-xs-6  form-group">
+            {!! Form::label('Pack Service') !!}
+            {!! Form::number('pack_service', null, ['class'=>'form-control packService']) !!}
+        </div>
 
-            <div class="col-xs-6  form-group">
-                {!! Form::label('Pack Service') !!}
-                {!! Form::number('pack_service', null, ['class'=>'form-control packService']) !!}
-            </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Cédula') !!}
+            {!! Form::number('cedula', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Alta Pat.') !!}
+            {!! Form::number('alta_patente', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Ad. Suc.') !!}
+            {!! Form::number('ad_suc', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('LoJack') !!}
+            {!! Form::number('lojack', null, ['class'=>'form-control']) !!}
+        </div>
 
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Cédula') !!}
-                {!! Form::number('cedula', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Alta Pat.') !!}
-                {!! Form::number('alta_patente', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Ad. Suc.') !!}
-                {!! Form::number('ad_suc', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-3  form-group">
-                {!! Form::label('LoJack') !!}
-                {!! Form::number('lojack', null, ['class'=>'form-control']) !!}
-            </div>
-
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Alta Seguro') !!}
-                {!! Form::number('alta_seguro', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Repuestos') !!}
-                {!! Form::number('repuestos', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Larga Distancia') !!}
-                {!! Form::number('larga_distancia', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Formularios') !!}
-                {!! Form::number('formularios', null, ['class'=>'form-control']) !!}
-            </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Alta Seguro') !!}
+            {!! Form::number('alta_seguro', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Repuestos') !!}
+            {!! Form::number('repuestos', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Larga Distancia') !!}
+            {!! Form::number('larga_distancia', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Formularios') !!}
+            {!! Form::number('formularios', null, ['class'=>'form-control']) !!}
+        </div>
 
 
-            <div class="col-xs-12  form-group">
-                {!! Form::label('Aseguradora') !!}
-                {!! Form::number('formularios', null, ['class'=>'form-control']) !!}
-            </div>
-            <div class="col-xs-3  form-group">
-                {!! Form::label('Tipo Seguro') !!}
-                {!! Form::select('seguro_tipo', ['rc'=>'RC' ,'rcr'=> 'RCR' ],null, ['class'=>'form-control']) !!}
-            </div>
+        <div class="col-xs-12  form-group">
+            {!! Form::label('Aseguradora') !!}
+            {!! Form::number('formularios', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-3  form-group">
+            {!! Form::label('Tipo Seguro') !!}
+            {!! Form::select('seguro_tipo', ['rc'=>'RC' ,'rcr'=> 'RCR' ],null, ['class'=>'form-control']) !!}
+        </div>
 
 
-            <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
-                <button type="submit" class="btn btn-primary">Agregar</button>
-                <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
-            </div>
-            {!! Form::close() !!}
-                    <!-- /.control-sidebar-menu -->
-        @endif
+        <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
+        </div>
+        {!! Form::close() !!}
+                <!-- /.control-sidebar-menu -->
+    @endif
 
     @include('moto.partials.asideCloseForm')
 

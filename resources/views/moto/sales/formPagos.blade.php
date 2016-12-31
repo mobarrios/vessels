@@ -21,17 +21,9 @@
 
             <div class="col-xs-4 form-group">
                 {!! Form::label('Forma de Pago') !!}
-                <select name="financials_id" class="form-control" id="financials">
-                    @foreach($financials as $financial)
-                        <optgroup label="{{$financial->name}}">
-                            @foreach($financial->FinancialsDues as $dues)
-                                <option value="{{$financial->id}}" due="{{$dues->due}}">
-                                    {{$dues->due}} cuota/s
-                                </option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
-                </select>
+
+                {!! Form::select('financials_id',$financials ,null, ['class'=> 'select2 form-control']) !!}
+
             </div>
             <div class="col-xs-3 form-group">
                 {!! Form::label('Nro . Tarjeta') !!}
@@ -57,6 +49,7 @@
             <div class="col-xs-12">
                 <table class="table table-bordered">
                     <thead>
+                         <th>#</th>
                         <th>Fecha</th>
                         <th>Forma de Pago</th>
                         <th> $ Monto</th>
@@ -67,8 +60,9 @@
 
                         @foreach($models->SalesPayments as $payment)
                             <tr>
+                                <td>{{$payment->id}}</td>
                                 <td>{{$payment->date}}</td>
-                                <td>{{$payment->Financials}}</td>
+                                <td>{{$payment->Financials->name}}</td>
                                 <td> $ {{number_format($payment->amount, 2)}}</td>
                                 <?php  $pago += $payment->amount ;?>
                             </tr>
@@ -76,9 +70,12 @@
                     @endif
                     </tbody>
                         <tfoot>
-                             <td colspan="3" align="right">TOTAL PAGO :  <b class="text-danger"> $ {{number_format($pago,2)}}</b> </td>
+                             <td colspan="4" align="right">TOTAL ABONADO :  <b class="text-success"> $ {{number_format($pago,2)}}</b> </td>
                         </tfoot>
                 </table>
+
+                <h5 class="pull-right">TOTAL A PAGAR :  <b class="text-danger"> $ {{number_format(($total - $pago),2)}}</b>
+                </h5>
             </div>
 
         </div>

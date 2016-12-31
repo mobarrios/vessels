@@ -25,7 +25,7 @@ class CreateSalesTable extends Migration
 
 
             $table->integer('users_id')->unsigned()->nulleable();
-            $table->foreign('users_id')->references('id')->on('clients');
+            $table->foreign('users_id')->references('id')->on('users');
 
             $table->integer('clients_id')->unsigned()->nulleable();
             $table->foreign('clients_id')->references('id')->on('clients');

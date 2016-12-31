@@ -37,6 +37,7 @@ class SalesRepo extends BaseRepo
                     $new->items_id = $item;
                     $new->price_actual = $budgetItem->price_actual;
                     $new->save();
+
                 }
             }
 
