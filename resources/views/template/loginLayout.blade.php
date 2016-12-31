@@ -35,11 +35,6 @@
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#ff920a', GradientType=1 );
         }
 
-        .login-box-body{
-            -webkit-box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.7);
-            -moz-box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.7);
-            box-shadow: 0px 0px 4px 2px rgba(255, 255, 255, 0.7);
-        }
 
         .login-logo .fa-shekel{
             color: white !important;
