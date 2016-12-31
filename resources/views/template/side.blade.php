@@ -29,6 +29,8 @@
                 </li>
             @endpermission
 
+
+            @permission(['items.list|modelslistsprices.list|brands.list|categories.list|models.list|colors.list|itemsrequest.list'])
             <li class="treeview {{ in_array(Request::segment(2), ["items","itemsRequest","modelsListsPrices","brands","categories","models","colors"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-motorcycle "></i> <span>Articulos</span>
@@ -60,7 +62,9 @@
                     @endpermission
                 </ul>
             </li>
+            @endpermission
 
+            @permission(['providers.list|modelslistsprices.list|purchasesorders.list|dispatches.list'])
             <li class="treeview {{ in_array(Request::segment(2), ["providers","purchasesListsPrices","purchasesOrders","purchasesOrders","dispatches"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-shopping-bag "></i> <span>Compras</span>
@@ -89,7 +93,10 @@
 
                 </ul>
             </li>
+            @endpermission
 
+
+            @permission('sales.list')
             <li class="treeview {{ in_array(Request::segment(2), ["sales"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-shopping-bag "></i> <span>Ventas</span>
@@ -98,12 +105,13 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    @permission('sales.list')
-                         <li class={{ Request::segment(2) == "sales" ? 'active' : '' }}><a href="{{route('moto.sales.index')}}"><span>Ventas</span></a></li>
-                    @endpermission
+                    <li class={{ Request::segment(2) == "sales" ? 'active' : '' }}><a href="{{route('moto.sales.index')}}"><span>Ventas</span></a></li>
+
                 </ul>
             </li>
+            @endpermission
 
+            @permission('roles.list|permissions.list|users.list|logs.list')
             <li class="treeview {{ in_array(Request::segment(2), ["branches","roles","permissions","users","logs"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-gear"></i> <span>Configuración</span>
@@ -152,7 +160,7 @@
                     <li><a href="#"><span>Sistema</span></a></li>
                 </ul>
             </li>
-
+            @endpermission
 
         </ul>
     </section>
