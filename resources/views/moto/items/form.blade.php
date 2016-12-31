@@ -11,6 +11,7 @@
             {!! Form::open(['route'=>config('models.'.$section.'.storeRoute')]) !!}
         @endif
 
+        {!! Form::hidden('status','1') !!}
 
         <div class="row">
 
