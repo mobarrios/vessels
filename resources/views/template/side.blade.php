@@ -30,7 +30,7 @@
             @endpermission
 
 
-            @permission(['items.list|modelslistsprices.list|brands.list|categories.list|models.list|colors.list|itemsrequest.list'])
+            @permission('items.list|modelslistsprices.list|brands.list|categories.list|models.list|colors.list|itemsrequest.list')
             <li class="treeview {{ in_array(Request::segment(2), ["items","itemsRequest","modelsListsPrices","brands","categories","models","colors"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-motorcycle "></i> <span>Articulos</span>
@@ -64,7 +64,7 @@
             </li>
             @endpermission
 
-            @permission(['providers.list|modelslistsprices.list|purchasesorders.list|dispatches.list'])
+            @permission('providers.list|modelslistsprices.list|purchasesorders.list|dispatches.list')
             <li class="treeview {{ in_array(Request::segment(2), ["providers","purchasesListsPrices","purchasesOrders","purchasesOrders","dispatches"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-shopping-bag "></i> <span>Compras</span>
@@ -155,7 +155,9 @@
                         <li class={{ Request::segment(2) == "logs" ? 'active' : '' }}><a href="{{route('configs.logs.index')}}"><span>Logs</span></a></li>
                     @endpermission
 
-                    <li><a href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
+                    @permission('financials.list')
+                        <li><a href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
+                    @endpermission
 
                     <li><a href="#"><span>Sistema</span></a></li>
                 </ul>
