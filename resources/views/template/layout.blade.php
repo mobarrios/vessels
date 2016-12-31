@@ -13,6 +13,27 @@
         <!-- para css extras en cada seccion -->
         @yield('css')
 
+    <style>
+        .skin-purple-light .main-header .navbar,.skin-purple-light .main-header .logo,.skin-purple-light .main-header .logo:hover  {
+            background: rgba(255,175,75,1);
+        }
+
+        .skin-purple-light .main-header .logo{
+            color: rgb(0,0,0);
+        }
+
+        .skin-purple-light .main-header .navbar .sidebar-toggle:hover{
+            background: rgba(0,0,0,0.1);
+        }
+
+        .skin-purple-light .main-header .logo-lg, .skin-purple-light .main-header .logo-mini{
+            color: white !important;
+            text-shadow: -3px 3px 5px rgba(0, 0, 0, 0.21)
+        }
+
+
+    </style>
+
     <link rel="stylesheet" href="vendors/LTE/plugins/iCheck/all.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

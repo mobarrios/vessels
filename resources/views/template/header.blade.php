@@ -16,7 +16,7 @@
                 <i class="fa fa-square-o fa-stack-2x"></i>
                 <i class="fa fa-shekel fa-stack-1x "></i>
             </span>
-            Admin
+
         </span>
 
     </a>
