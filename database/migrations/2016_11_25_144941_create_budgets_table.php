@@ -19,19 +19,22 @@ class CreateBudgetsTable extends Migration
             $table->softDeletes();
 
             $table->date('date');
+
+            $table->integer('users_id')->nullable();
+            //$table->foreign('users_id')->references('id')->on('users');
             
             $table->integer('clients_id')->unsigned()->nulleable();
             $table->foreign('clients_id')->references('id')->on('clients');
 
-            $table->int('seguro')->nullable();
-            $table->int('flete')->nullable();
-            $table->int('formularios')->nullable();
-            $table->int('gastosAdministrativos')->nullable();
-            $table->int('descuento')->nullable();
-            $table->int('anticipo')->nullable();
-            $table->int('importeCuota')->nullable();
-            $table->int('aFinanciar')->nullable();
-            $table->int('total')->nullable();
+            $table->integer('seguro')->nullable();
+            $table->integer('flete')->nullable();
+            $table->integer('formularios')->nullable();
+            $table->integer('gastosAdministrativos')->nullable();
+            $table->integer('descuento')->nullable();
+            $table->integer('anticipo')->nullable();
+            $table->integer('importeCuota')->nullable();
+            $table->integer('aFinanciar')->nullable();
+            $table->integer('total')->nullable();
         });
     }
 
