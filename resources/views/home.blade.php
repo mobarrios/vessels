@@ -3,7 +3,7 @@
 @section('sectionContent')
     <div class="row">
         <!-- Default box -->
-        <div class="col-xs-3">
+        <div class="col-xs-6">
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="../public/vendors/LTE/dist/img/avatar5.png" alt="User profile picture">
@@ -15,12 +15,13 @@
                             | {{$rol->slug}} |
                         @endforeach
                     </p>
+                    <span class="pull-right">
                       @foreach(\Illuminate\Support\Facades\Auth::user()->brancheables as $branch)
-                        <label class="label label-default">{{$branch->branches->name}}</label>
+                        <label class=" label label-default">{{$branch->branches->name}}</label>
                       @endforeach
+                    </span>
                 </div>
 
-                <!-- /.box-body -->
             </div>
         </div>
     </div>

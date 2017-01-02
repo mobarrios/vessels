@@ -13,10 +13,10 @@
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
             <span class="fa-stack fa-lg">
-                <i class="fa fa-square-o fa-stack-2x"></i>
-                <i class="fa fa-shekel fa-stack-1x "></i>
+                <i class="fa  fa-square-o fa-stack-2x"></i>
+                <i class="fa  fa-shekel fa-stack-1x "></i>
             </span>
-
+            Gestión
         </span>
 
     </a>
