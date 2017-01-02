@@ -16,13 +16,16 @@ class UserTableSeeder extends Seeder
                 'id'    => 1,
                 'name'=>'root',
                 'email'=>'root@admin.com',
-                'password'=> \Illuminate\Support\Facades\Hash::make('yuna')
+                'password'=> \Illuminate\Support\Facades\Hash::make('yuna'),
+                'branches_active_id' => 1
 
             ],[
                 'id'    => 2,
                 'name'=>'admin',
                 'email'=>'admin@admin.com',
-                'password'=> \Illuminate\Support\Facades\Hash::make('1234')
+                'password'=> \Illuminate\Support\Facades\Hash::make('1234'),
+                'branches_active_id' => 1
+
 
             ]]);
     }

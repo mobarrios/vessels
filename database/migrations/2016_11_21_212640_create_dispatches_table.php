@@ -22,7 +22,7 @@ class CreateDispatchesTable extends Migration
             $table->string('number');
 
             $table->integer('purchases_orders_id')->unsigned()->nulleable();
-            $table->foreign('purchases_orders_id')->references('id')->on('purchases_orders')->onDelete('cascade');
+            $table->foreign('purchases_orders_id')->references('id')->on('purchases_orders');
         });
     }
 

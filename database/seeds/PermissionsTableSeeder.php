@@ -487,6 +487,33 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'purchasesorders.sendtoproviders',
                     'model' => '',
                 ],
+
+                //VENTAS
+                [
+                    'id'    => 75,
+                    'name' => 'Listar Ventas',
+                    'slug' => 'sales.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 76,
+                    'name' => 'Crear Ventas',
+                    'slug' => 'sales.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 77,
+                    'name' => 'Editar Ventas',
+                    'slug' => 'sales.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 78,
+                    'name' => 'Borrar Ventas',
+                    'slug' => 'sales.destroy',
+                    'model' => '',
+                ],
+
         ]);
     }
 }
