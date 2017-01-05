@@ -38,6 +38,12 @@ class Models extends Entity
         return $this->hasOne(ModelsListsPricesItems::class)->with('ModelsListsPrices')->orderBy('updated_at', 'DESC');
     }
 
+    public function activeCostPrice()
+    {
+        return $this->hasOne(PurchasesListsPricesItems::class)->with('PurchasesListsPrices')->orderBy('updated_at', 'DESC');
+    }
+
+
     public function getStatusNameAttribute()
     {
         return config('status.models.' . $this->attributes['status']);
