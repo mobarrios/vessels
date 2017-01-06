@@ -149,7 +149,7 @@
     </div>
     <div class="col-xs-12 form-group">
         {!! Form::label('Precio') !!}
-        {!! Form::text('price', null, ['class'=>'form-control']) !!}
+        {!! Form::text('price', null, ['class'=>'form-control' , 'id' => 'actualPrice']) !!}
     </div>
     <div class="col-xs-12 form-group">
         {!! Form::label('Cantidad') !!}
@@ -175,3 +175,27 @@
 
 @endsection
 
+@section('js')
+    <script>
+
+        $("select[name='models_id']").on('change', function(ev){
+
+            $("#select_model>option").remove();
+
+            var id = $(this).val();
+
+            var parent = $(this).parent().parent();
+
+            $.ajax({
+                method: 'GET',
+                url: 'moto/modelActualCost/'+id,
+
+                success: function(data)
+                {
+                    $('#actualPrice').val(data.price_list);
+                }
+            })
+        });
+
+    </script>
+@endsection

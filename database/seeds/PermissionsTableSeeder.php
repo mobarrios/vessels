@@ -514,6 +514,14 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //orden de compra confirma
+                [
+                    'id'    => 79,
+                    'name' => 'Confirma Ordenes de Compra',
+                    'slug' => 'purchasesorders.confirm',
+                    'model' => '',
+                ],
+
         ]);
     }
 }

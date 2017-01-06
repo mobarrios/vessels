@@ -4,6 +4,8 @@
 Route::get('/modelsLists', 'Moto\AjaxController@modelsLists');
 Route::get('/modelLists/{id?}', 'Moto\AjaxController@modelLists');
 Route::get('/modelAvailables/{id?}', 'Moto\AjaxController@modelAvailables');
+Route::get('/modelActualCost/{id?}', 'Moto\AjaxController@modelActualCost');
+
 
 
 Route::get('/budgetsItems/{id}', 'Moto\AjaxController@budgetsItems');

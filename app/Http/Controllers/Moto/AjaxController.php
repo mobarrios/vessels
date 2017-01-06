@@ -34,7 +34,6 @@ class AjaxController extends Controller
 
     public function modelsLists()
     {
-
         $data = $this->repo->allToBudgets() ;
 
         return response()->json($data);
@@ -42,12 +41,14 @@ class AjaxController extends Controller
 
     public function modelLists($id)
     {
-
         $data = $this->repo->oneToBudgets($id);
-
-   
-
         return response()->json($data);
+    }
+
+
+    public function modelActualCost()
+    {
+        return $this->repo->actualPriceCost($this->route->getParameter('id'));
     }
 
 
