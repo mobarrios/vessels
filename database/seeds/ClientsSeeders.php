@@ -21,6 +21,7 @@ class ClientsSeeders extends Seeder
                 'sexo' => 'masculino',
                 'dob' => '1980-23-02',
                 'address' => 'Debussy 2282',
+                'prospecto' => 1,
             ], [
                 'id' => 2,
                 'name' => 'Juana',
@@ -30,6 +31,7 @@ class ClientsSeeders extends Seeder
                 'sexo' => 'femenino',
                 'dob' => '19770-01-05',
                 'address' => 'Larrea 2234',
+                'prospecto' => 1,
             ],
             [
                 'id' => 3,
@@ -40,6 +42,7 @@ class ClientsSeeders extends Seeder
                 'sexo' => 'masculino',
                 'dob' => '1988-15-06',
                 'address' => 'Av. San Juan 1980',
+                'prospecto' => 1,
             ],
             [
                 'id' => 4,
@@ -50,6 +53,7 @@ class ClientsSeeders extends Seeder
                 'sexo' => 'masculino',
                 'dob' => '1970-09-22',
                 'address' => 'Av. San Pedrito 190',
+                'prospecto' => 1,
             ]
 
         ]);

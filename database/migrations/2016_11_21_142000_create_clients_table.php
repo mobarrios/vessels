@@ -36,6 +36,8 @@ class CreateClientsTable extends Migration
             $table->string('province');
             
             $table->text('obs');
+
+            $table->boolean('prospecto')->default(1);
         });
     }
 

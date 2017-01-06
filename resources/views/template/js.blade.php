@@ -1,6 +1,17 @@
 <!-- angular -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>--}}
+{{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>--}}
+{{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>--}}
+{{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>--}}
+{{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>--}}
+{{--<script src="js/material.js"></script>--}}
+{{--<script src="js/autocomplete.js"></script>--}}
+{{--<script src="js/docs.js"></script>--}}
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 <!-- jQuery 2.2.3 -->
 <script src="vendors/LTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -16,7 +27,8 @@
 <!-- AdminLTE for demo purposes -->
 {{--<script src="vendors/LTE/dist/js/demo.js"></script>--}}
 <!-- Select2 -->
-<script src="vendors/LTE/plugins/select2/select2.full.min.js"></script>
+{{--<script src="vendors/LTE/plugins/select2/select2.full.min.js"></script>--}}
+<script src="vendors/LTE/plugins/select2/select2-buscador.js"></script>
 
 
 <!-- date-range-picker -->
@@ -59,7 +71,8 @@
 
     //select2
     $('.select2').select2({
-        placeholder: "Seleccionar..."
+        placeholder: "Seleccionar...",
+        language: "es"
     });
 
     //selectMult

@@ -56,14 +56,17 @@ class BudgetsController extends Controller
     }
 
 
-    public function create($cliente = null, $id = null)
+    public function create($id = null)
     {
         if($id){
             $this->data['budget'] = $this->repo->find($id);
             $this->data['items'] = $this->models->lists('name','id');
+            $this->data['client'] = $this->data['budget']->clients;
         }
 
-        $this->data['client'] = $this->clients->find($cliente);
+
+
+        $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
 
         return parent::create();
     }
@@ -145,8 +148,9 @@ class BudgetsController extends Controller
     public function addItems(BudgetsItemsRepo $budgetsItemsRepo)
     {
         $budgetsItemsRepo->create($this->request);
+        $this->data['client'] = $this->repo->find($this->route->getParameter('id'))->clients;
 
-        return redirect()->route('moto.'.$this->section.'.edit',[$this->route->getParameter('cliente'),$this->request->budgets_id]);
+        return redirect()->route('moto.'.$this->section.'.create',$this->route->getParameter('id'));
     }
 
     public function editItems($cliente = null,$item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo, Colors $colors)
@@ -159,7 +163,7 @@ class BudgetsController extends Controller
         $this->data['colors'] = $this->data['modelItems']->models->StockByColors;
 
 //        dd($this->data['colors']);
-        $this->data['client'] = $this->clients->find($cliente);
+        $this->data['client'] = $this->data['budget']->clients;
 
         return view(config('models.'.$this->section.'.editView'))->with($this->data);
     }

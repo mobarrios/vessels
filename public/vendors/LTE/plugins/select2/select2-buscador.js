@@ -1558,8 +1558,10 @@ S2.define('select2/selection/single',[
 
     var $rendered = this.$selection.find('.select2-selection__rendered');
     var formatted = this.display(selection, $rendered);
+    var nombre = selection.text.trim().split("~")[0];
+    // $rendered.empty().append(selection.text.trim().replace(/ *~ */g,", "));
+    $rendered.empty().append(nombre);
 
-    $rendered.empty().append(formatted);
     $rendered.prop('title', selection.title || selection.text);
   };
 
@@ -4498,10 +4500,10 @@ S2.define('select2/i18n/en',[],function () {
       return message;
     },
     noResults: function () {
-      return 'No results found';
+      return 'No hubo resultados';
     },
     searching: function () {
-      return 'Searching…';
+      return 'Buscando…';
     }
   };
 });

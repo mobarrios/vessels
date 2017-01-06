@@ -25,6 +25,8 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('moto.clients.index')}}"><span>Lista de Clientes</span></a></li>
+                        <li><a href="{{route('moto.clients.index')}}"><span>Lista de Prospectos</span></a></li>
+                        <li><a href="{{route('moto.budgets.create')}}"><span>Nuevo Presupuesto</span></a></li>
                     </ul>
                 </li>
             @endpermission

@@ -1,5 +1,60 @@
 @extends('template.model_form')
 
+@section('css')
+    <style>
+        .autocompletedemoCustomTemplate .autocomplete-custom-template li {
+            border-bottom: 1px solid #ccc;
+            height: auto;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            white-space: normal; }
+
+        .autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {
+            border-bottom-width: 0; }
+
+        .autocompletedemoCustomTemplate .autocomplete-custom-template .item-title,
+        .autocompletedemoCustomTemplate .autocomplete-custom-template .item-metadata {
+            display: block;
+            line-height: 2; }
+
+        .autocompletedemoCustomTemplate .autocomplete-custom-template .item-title md-icon {
+            height: 18px;
+            width: 18px; }
+
+        .search{
+            color: rgba(0,0,0,0.87);
+            background-color: rgb(250,250,250);
+            padding: 16px;
+
+        }
+
+        .select2-template-title{
+            font-size: 12px;
+            font-weight: bold;
+            display: block;
+            width:100%;
+        }
+
+        .select2-template-text{
+            font-size: 12px;
+            display: block;
+            width:100%;
+            padding-left:5px;
+        }
+
+        .select2-template-container{
+            border-bottom: 1px solid #ddd;
+        }
+
+        .select2-container--default .select2-results__option[aria-selected=true]{
+            background-color: rgba(162,162,162,0.21);
+
+        }
+
+    </style>
+@endsection
+
+
 @section('form_title')
     Nuevo Presupuesto
 @endsection
@@ -8,84 +63,115 @@
 
     <div class="modal-body">
         <div>
-            <div>
+            <div ng-app="buscador">
+                <div class="search" ng-controller="buscadorController" >
 
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('name', "NOMBRE") !!}
-                    {!! Form::text('name', $client->fullName, ['class'=>'form-control','disabled']) !!}
-                </div>
+                    <p>Antes de crear un prospecto, busque si ya existe.</p>
+                    <select id="search" class="select2 form-control">
+                        @forelse($prospectos as $prospecto)
+                            <option value="{!! $prospecto->id !!}">
+                                {!! $prospecto->fullname !!} ~ {!! $prospecto->dni !!} ~ {!! $prospecto->email !!} ~ {!! $prospecto->phone !!}
 
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('name', "DNI") !!}
-                    {!! Form::text('email', $client->dni, ['class'=>'form-control','disabled']) !!}
-                </div>
+                            </option>
+                        @empty
 
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('name', "SEXO") !!}
-                    {!! Form::text('sexo', $client->sexo, ['class'=>'form-control','disabled']) !!}
-                </div>
-
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('name', "EMAIL") !!}
-                    {!! Form::text('dni', $client->email, ['class'=>'form-control','disabled']) !!}
+                        @endforelse
+                    </select>
                 </div>
 
 
-
-
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('nacionality', "NACIONALIDAD") !!}
-                    {!! Form::text('nacionality', $client->nacionality ? $client->nacionality : "SIN DATO", ['class'=>'form-control','disabled']) !!}
-                </div>
-
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('phone1', "TELÉFONO") !!}
-                    {!! Form::text('phone1', $client->phone1 ? $client->phone1 : "SIN DATO", ['class'=>'form-control','disabled']) !!}
-                </div>
-
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('address', "DIRECCIÓN") !!}
-                    {!! Form::text('address', $client->address ? $client->address : "SIN DATO", ['class'=>'form-control','disabled']) !!}
-                </div>
-
-                <div class="col-xs-12 col-lg-3 form-group">
-                    {!! Form::label('city', "CIUDAD") !!}
-                    {!! Form::text('city', $client->city ? $client->city : "SIN DATO", ['class'=>'form-control','disabled']) !!}
-                </div>
-
-
-
-                <div class="col-xs-12 col-lg-4 form-group">
-                    {!! Form::label('location', "LOCALIDAD") !!}
-                    {!! Form::text('location', $client->location ? $client->location : "SIN DATO", ['class'=>'form-control','disabled']) !!}
-                </div>
-
-
-
-
-                <div class="col-xs-12 col-lg-4 form-group">
-                    {!! Form::label('province', "PROVINCIA") !!}
-                    {!! Form::text('province', $client->province ? $client->province : "SIN DATO", ['class'=>'form-control','disabled']) !!}
-                </div>
-
-
-
-                <div class="col-xs-12 col-lg-4 form-group" style="padding-top: 2%;">
-                    @if(!isset($budget))
-                    {!! Form::open(['route'=> [config('models.'.$section.'.storeRoute')],  'title' =>"Crear presupuesto"]) !!}
-                        {!! Form::hidden('clients_id', $client->id) !!}
-                        <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                <div>
+                    @if(isset($client))
+                        {!! Form::model($client,['route'=> [config('models.clients.updateRoute')],  'title' =>"Crear prospecto",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
+                    @else
+                        {!! Form::open(['route'=> [config('models.clients.storeRoute')],  'title' =>"Crear prospecto",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
                     @endif
 
-                        @if(isset($budget))
-                            <a href="#" data-action="{!! route("moto.".$section.".addItem", $client->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+                    {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
+                    {!! Form::hidden('budgets',true) !!}
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('last_name', "APELLIDO") !!}
+                        {!! Form::text('last_name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'last_name']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('name', "NOMBRE") !!}
+                        {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('dni', "DNI") !!}
+                        {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('sexo', "SEXO") !!}
+                        {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],null, ['class'=>'form-control','ng-model' => 'sexo']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('email', "EMAIL") !!}
+                        {!! Form::text('email', null, ['class'=>'form-control','ng-model' => 'email']) !!}
+                    </div>
+
+
+
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('nacionality', "NACIONALIDAD") !!}
+                        {!! Form::text('nacionality', null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('phone1', "TELÉFONO") !!}
+                        {!! Form::text('phone1', null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('address', "DIRECCIÓN") !!}
+                        {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('city', "CIUDAD") !!}
+                        {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
+                    </div>
+
+
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('location', "LOCALIDAD") !!}
+                        {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
+                    </div>
+
+
+
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('province', "PROVINCIA") !!}
+                        {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
+                    </div>
+
+
+
+                    <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
+                        @if(!isset($budget))
+    {{--                        {!! Form::hidden('clients_id', $client->id) !!}--}}
+                            <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                            <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span></button>
                         @endif
-                    {!! Form::close() !!}
+
+                            @if(isset($budget))
+                                <a href="#" data-action="{!! route("moto.".$section.".addItem", $client->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+                            @endif
+                        {!! Form::close() !!}
 
 
 
+                    </div>
                 </div>
-            </div>
+
 
             <span class="clearfix"></span>
             @if(isset($budget))
@@ -98,7 +184,7 @@
                     {!! Form::hidden('id',$budget->id) !!}
                     {!! Form::hidden('branches_id',Auth::user()->branches_active_id) !!}
 
-                    <div ng-app="myApp">
+                    <div>
                         <div ng-controller="myCtrl">
 
                             <div class="table-responsive">
@@ -214,7 +300,7 @@
                             </div>
 
 
-                            </div>
+                        </div>
                     </div>
 
                 {!! Form::close() !!}
@@ -319,44 +405,97 @@
 
 
 @section('js')
+
     <script>
+        var routeBase = window.location.href.split('moto/')[0]
+
+        $("#reset").on('click', function () {
+            $('#modelId').val("")
+            $('#formClient').attr('action',routeBase+'moto/clients/store')
+        })
+
+        var app = angular.module("buscador", []);
+
+
+        app.controller("buscadorController", function ($scope, $http) {
+            
+
+            $('#search').on('change',function(ev){
+                var select = $(this);
+                var option = select.find('option:selected');
+
+                $('#modelId').val(option.val());
+
+                $http.get("moto/clients/"+option.val())
+                        .then(function (response) {
+                            $('#formClient').attr('action',routeBase+'moto/clients/update/'+option.val())
+                            $scope.model = option.val()
+                            $scope.last_name = response.data['last_name']
+                            $scope.name = response.data['name']
+                            $scope.dni = response.data['dni']
+                            $scope.email = response.data['email']
+                            $scope.sexo = response.data['sexo']
+                            $scope.nacionality = response.data['nacionality']
+                            $scope.phone1 = response.data['phone1']
+                            $scope.address = response.data['address']
+                            $scope.city = response.data['city']
+                            $scope.location = response.data['location']
+                            $scope.province = response.data['province']
+                        });
+
+            });
+
+
+//            $scope.onCategoryChange = function (event) {
+//
+//
+//                var id = event.currentTarget.getAttribute('value');
+//                find(id);
+//                console.log(id)
+//            };
+
+
+        });
+
+
+
         $("select[name='models_id']").on('change', function(ev){
             $("#select_model>option").remove();
             var id = $(this).val();
 
             var parent = $(this).parent().parent();
 
-           $.ajax({
-               method: 'GET',
-               url: 'moto/modelLists/'+id,
-               success: function(data){
-                   $.ajax({
-                       method: 'GET',
-                       url: 'moto/modelAvailables/' + id,
-                       success: function (data) {
-                           $.each(data, function (x, y) {
+            $.ajax({
+                method: 'GET',
+                url: 'moto/modelLists/'+id,
+                success: function(data){
+                    $.ajax({
+                        method: 'GET',
+                        url: 'moto/modelAvailables/' + id,
+                        success: function (data) {
+                            $.each(data, function (x, y) {
 
-                               $.each(y, function (a, b) {
+                                $.each(y, function (a, b) {
 
-                                   color_id = b.colors_id;
-                                   color = b.colors.name;
-                                   q = y.length;
-                               });
+                                    color_id = b.colors_id;
+                                    color = b.colors.name;
+                                    q = y.length;
+                                });
 
-                               $('#colors').append('<option value=' + color_id + ' >' + color + ' ( ' + q + ' ) </option>');
-                           });
-                       }
-                   })
+                                $('#colors').append('<option value=' + color_id + ' >' + color + ' ( ' + q + ' ) </option>');
+                            });
+                        }
+                    })
 
-                   $(".sTotal").val(data.active_list_price.price_net);
-                   $(".price_actual").val(data.active_list_price.price_net);
-                   $(".patentamiento").val(data.patentamiento);
-                   $(".packService").val(data.pack_service);
+                    $(".sTotal").val(data.active_list_price.price_net);
+                    $(".price_actual").val(data.active_list_price.price_net);
+                    $(".patentamiento").val(data.patentamiento);
+                    $(".packService").val(data.pack_service);
 
 
 
-               }
-           })
+                }
+            })
         });
 
 
@@ -367,7 +506,7 @@
         })
 
 
-    @if(isset($budget))
+                @if(isset($budget))
         var coef;
 
         $("#financials option").each(function(ind, val){
@@ -383,25 +522,25 @@
 
         })
 
-            $("#financials").on('change',function(ev){
+        $("#financials").on('change',function(ev){
 
-                var option = $(this).find("option[data-id='"+$(coef).attr('data-id')+"']");
-                var dues = $(this).find("option[data-id='"+$(coef).attr('data-id')+"']").attr('due');
-                var aFinanciar = $('#aFinanciar').val();
+            var option = $(this).find("option[data-id='"+$(coef).attr('data-id')+"']");
+            var dues = $(this).find("option[data-id='"+$(coef).attr('data-id')+"']").attr('due');
+            var aFinanciar = $('#aFinanciar').val();
 
-                $("#financials option").each(function(ind, val){
-                    if($(val).attr('data-id') == $(coef).attr('data-id'))
-                        $(val).attr('selected',false);
+            $("#financials option").each(function(ind, val){
+                if($(val).attr('data-id') == $(coef).attr('data-id'))
+                    $(val).attr('selected',false);
 
-                });
+            });
 
 //                $(option).attr("selected","selected");
 
-                var importeCuota = ( aFinanciar * $(option).val() ) / dues;
-                $('#importeCuota').val(parseFloat(importeCuota).toFixed(2));
-            });
+            var importeCuota = ( aFinanciar * $(option).val() ) / dues;
+            $('#importeCuota').val(parseFloat(importeCuota).toFixed(2));
+        });
 
-        var app = angular.module("myApp", []);
+//        var app = angular.module("myApp", []);
 
         app.controller("myCtrl", function ($scope, $http) {
             $http.get("moto/budgetsItems/{!! $budget->id !!}")
@@ -412,13 +551,13 @@
                         $scope.packService = parseFloat(response.data[0]['pack_service'])
                         $scope.data = response.data[1]
                         $scope.seguro = {!! $budget->seguro or '0' !!}
-                        $scope.flete = {!! $budget->flete or '0' !!}
-                        $scope.formularios = {!! $budget->formularios or '0' !!}
-                        $scope.gastosAdministrativos = {!! $budget->gastros_administrativos or '0' !!}
-                        $scope.descuento = {!! $budget->descuento or '0' !!}
-                        $scope.anticipo = {!! $budget->anticipo or '0' !!}
-                        $scope.importeCuota = {!! $budget->importe_cuota or '0' !!}
-                        $scope.aFinanciar = {!! $budget->a_financiar or '0' !!}
+                                $scope.flete = {!! $budget->flete or '0' !!}
+                                $scope.formularios = {!! $budget->formularios or '0' !!}
+                                $scope.gastosAdministrativos = {!! $budget->gastros_administrativos or '0' !!}
+                                $scope.descuento = {!! $budget->descuento or '0' !!}
+                                $scope.anticipo = {!! $budget->anticipo or '0' !!}
+                                $scope.importeCuota = {!! $budget->importe_cuota or '0' !!}
+                                $scope.aFinanciar = {!! $budget->a_financiar or '0' !!}
                         $scope.calcular();
 
                     });
@@ -442,7 +581,170 @@
             };
         });
 
-    @endif
+        @endif
+
+
+
+
+        function formatState (state) {
+
+            var datos = state.text.split("~");
+
+            if (!state.id) { return state.text; }
+            var span;
+            for(var i = 1;i < datos.length; i++) {
+                if(i==1)
+                    span = '<span class="select2-template-text">' + datos[i] + '</span>';
+                else
+                    span += '<span class="select2-template-text">' + datos[i] + '</span>';
+            }
+
+
+            var $state = $(
+                    '<span class="select2-template-container">' +
+                        '<span class="select2-template-title">' +
+                            datos[0]
+                        + '</span>' +
+
+                            span
+
+                    +'</span>'
+            );
+            return $state;
+        };
+
+        $("#search").select2({
+            templateResult: formatState
+        });
+    </script>
+
+
+    <script>
+//        angular.module('ng').filter('tel', function (){});
+
+        var app2 = angular.module('myApp2',['ngRoute','ngMaterial', 'ngMessages']);
+        app2.controller('DemoCtrl', function ($timeout, $q, $log) {
+            var self = this;
+
+            self.simulateQuery = false;
+            self.isDisabled    = false;
+
+            self.repos         = loadAll();
+            self.querySearch   = querySearch;
+            self.selectedItemChange = selectedItemChange;
+            self.searchTextChange   = searchTextChange;
+
+            // ******************************
+            // Internal methods
+            // ******************************
+
+            /**
+             * Search for repos... use $timeout to simulate
+             * remote dataservice call.
+             */
+            function querySearch (query) {
+                var results = query ? self.repos.filter( createFilterFor(query) ) : self.repos,
+                        deferred;
+                if (self.simulateQuery) {
+                    deferred = $q.defer();
+                    $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+                    return deferred.promise;
+                } else {
+                    return results;
+                }
+            }
+
+            function searchTextChange(text) {
+//                $log.info('Text changed to ' + text);
+            }
+//
+            function selectedItemChange(item) {
+//                $log.info('Item changed to ' + JSON.stringify(item));
+            }
+
+            /**
+             * Build `components` list of key/value pairs
+             */
+            function loadAll() {
+                var repos = [
+                    {
+                        'name'      : 'Angular 1',
+                        'url'       : 'https://github.com/angular/angular.js',
+                        'watchers'  : '3,623',
+                        'forks'     : '16,175',
+                    },
+                    {
+                        'name'      : 'Angular 2 Material',
+                        'url'       : 'https://github.com/angular/angular',
+                        'watchers'  : '469',
+                        'forks'     : '760',
+                    },
+                    {
+                        'name'      : 'Angular Material',
+                        'url'       : 'https://github.com/angular/material',
+                        'watchers'  : '727',
+                        'forks'     : '1,241',
+                    },
+                    {
+                        'name'      : 'Bower Material',
+                        'url'       : 'https://github.com/angular/bower-material',
+                        'watchers'  : '42',
+                        'forks'     : '84',
+                    },
+                    {
+                        'name'      : 'Material Start',
+                        'url'       : 'https://github.com/angular/material-start',
+                        'watchers'  : '81',
+                        'forks'     : '303',
+                    }
+                ];
+                return repos.map( function (repo) {
+                    repo.value = repo.name.toLowerCase();
+                    return repo;
+                });
+            }
+
+            /**
+             * Create filter function for a query string
+             */
+            function createFilterFor(query) {
+                console.log(query)
+                console.log(query)
+                var lowercaseQuery = angular.lowercase(query);
+
+                return function filterFn(item) {
+                    return (item.value.indexOf(lowercaseQuery) === 0);
+                };
+
+            }
+        });
+
+
+
+
+
+//        function usuariosController($scope,$http) {
+//
+//            $scope.cargausuarios = function(){
+//                $http({url: "moto/clientsAvailables/",
+//                    method: "GET",
+//                    params: {value: $scope.usuario}
+//                }).success(function(usuarios) {$scope.usuarios = usuarios;});
+//
+//            }
+//
+//            //Cuando eliges un usuario lo reemplaza en el campo de texto
+//            $scope.cambiausuario = function(usuario){
+//                $scope.usuario = usuario;
+//                $scope.usuarios = null;
+//            }
+//        }
+    </script>
+
+    <script>
+
+
+
     </script>
 @endsection
 
