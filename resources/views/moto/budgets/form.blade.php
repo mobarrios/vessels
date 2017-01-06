@@ -203,10 +203,10 @@
                                         <td class="text-danger" class="priceBudget">$ @{{ models.pivot.price_budget }}</td>
                                         <td class="text-danger">$ @{{ models.pivot.price_actual }}</td>
                                         <td>
-                                            <a href="moto/budgets/deleteItem/{{ $client->id }}/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
+                                            <a href="moto/budgets/deleteItem/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
                                         </td>
                                         <td>
-                                            <a href="moto/budgets/editItem/{{ $client->id }}/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
+                                            <a href="moto/budgets/editItem/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
                                         </td>
                                     </tr>
 
@@ -320,9 +320,9 @@
     @if(isset($budget))
 
         @if(isset($modelItems))
-            {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $client->id, $budget->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
+            {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $budget->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
         @else
-            {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $client->id], 'files' =>'true']) !!}
+            {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $budget->id], 'files' =>'true']) !!}
         @endif
 
         {!! Form::hidden('budgets_id',$budget->id) !!}

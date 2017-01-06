@@ -153,7 +153,7 @@ class BudgetsController extends Controller
         return redirect()->route('moto.'.$this->section.'.create',$this->route->getParameter('id'));
     }
 
-    public function editItems($cliente = null,$item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo, Colors $colors)
+    public function editItems($item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo, Colors $colors)
     {
         $this->data['modelItems'] = $budgetsItemsRepo->find($id);
         $this->data['activeBread'] = 'Editar';
@@ -164,20 +164,17 @@ class BudgetsController extends Controller
 
 //        dd($this->data['colors']);
         $this->data['client'] = $this->data['budget']->clients;
+        $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
 
         return view(config('models.'.$this->section.'.editView'))->with($this->data);
     }
 
-    public function updateItems($cliente = null,$item = null,$id,BudgetsItemsRepo $budgetsItemsRepo)
+    public function updateItems($item = null,$id,BudgetsItemsRepo $budgetsItemsRepo)
     {
-//        $budgetsItemsRepo->update($id,$this->request);
-
-//        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
-
-        $id = $this->route->getParameter('id');
 
         //edita a traves del repo
-        $model = $budgetsItemsRepo->update($id,$this->request);
+        $model = $budgetsItemsRepo->find($id);
+        $model->update($this->request->all());
 
         //guarda imagenes
         if(config('models.'.$this->section.'.is_imageable'))
@@ -196,13 +193,12 @@ class BudgetsController extends Controller
 
         $this->data['items'] = $this->models->lists('name','id');
 
+        $this->data['client'] = $this->repo->find($item)->clients;
 
-        $this->data['client'] = $this->clients->find($cliente);
-
-        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),[$cliente,$item])->withErrors(['Registro modificado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$item)->withErrors(['Registro modificado Correctamente']);
     }
 
-    public function deleteItems($cliente = null,$item = null,$id,BudgetsItemsRepo $budgetsItemsRepo)
+    public function deleteItems($item = null,$id,BudgetsItemsRepo $budgetsItemsRepo)
     {
         $budgetsItemsRepo->destroy($id);
 
@@ -210,10 +206,9 @@ class BudgetsController extends Controller
 
         $this->data['items'] = $this->models->lists('name','id');
 
+        $this->data['client'] = $this->repo->find($item)->clients;
 
-        $this->data['client'] = $this->clients->find($cliente);
-
-        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),[$cliente,$item])->withErrors(['Registro modificado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$item)->withErrors(['Registro eliminado Correctamente']);
     }
 
 }
