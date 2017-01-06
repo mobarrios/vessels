@@ -178,7 +178,7 @@
 
                 <hr>
 
-                {!! Form::model($budget,["route" => ['moto.'.$section.'.update'], 'method' => 'POST', 'id' => 'formPresupuesto']) !!}
+                {!! Form::model($budget,["route" => 'moto.'.$section.'.update', 'method' => 'POST', 'id' => 'formPresupuesto']) !!}
 
                     {!! Form::hidden('clients_id',$client->id) !!}
                     {!! Form::hidden('id',$budget->id) !!}
@@ -426,7 +426,7 @@
 
                 $('#modelId').val(option.val());
 
-                $http.get("moto/clientsSearch/"+option.val())
+                $http.get("moto/clients/"+option.val())
                         .then(function (response) {
                             $('#formClient').attr('action',routeBase+'moto/clients/update/'+option.val())
                             $scope.model = option.val()
