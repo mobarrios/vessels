@@ -418,7 +418,7 @@
 
 
         app.controller("buscadorController", function ($scope, $http) {
-            
+
 
             $('#search').on('change',function(ev){
                 var select = $(this);
@@ -426,7 +426,7 @@
 
                 $('#modelId').val(option.val());
 
-                $http.get("moto/clients/"+option.val())
+                $http.get("moto/clientsSearch/"+option.val())
                         .then(function (response) {
                             $('#formClient').attr('action',routeBase+'moto/clients/update/'+option.val())
                             $scope.model = option.val()

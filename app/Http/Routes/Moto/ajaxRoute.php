@@ -20,7 +20,7 @@ Route::get('/budgetsByClients/{id?}', 'Moto\BudgetsController@findByClients');
 
 
 //buscar clientes
-Route::get('/clients/{id?}', 'Moto\ClientsController@show');
+Route::get('/clientsSearch/{id?}', 'Moto\ClientsController@show');
 
 
 

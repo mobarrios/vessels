@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Moto;
 
 use App\Entities\Moto\Budgets;
+use App\Entities\Moto\Clients;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo as Repo;
@@ -24,6 +25,7 @@ class ClientsController extends Controller
         $this->data['section']  = $this->section;
 
     }
+
 
     public function store()
     {
