@@ -29,9 +29,9 @@
 
 @if(Request::segment(2) == 'budgets')
 <!-- Select2 -->
-{{--<script src="vendors/LTE/plugins/select2/select2.full.min.js"></script>--}}
 <script src="vendors/LTE/plugins/select2/select2-buscador.js"></script>
 @else
+<script src="vendors/LTE/plugins/select2/select2.full.min.js"></script>
 
 @endif
 
