@@ -9,7 +9,8 @@ use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-
+use Illuminate\Support\Facades\Request as RequestFacade;
+use Illuminate\Support\Facades\Session;
 
 class ClientsController extends Controller
 {
@@ -23,6 +24,52 @@ class ClientsController extends Controller
 
         $this->section          = 'clients';
         $this->data['section']  = $this->section;
+
+    }
+
+    public function index()
+    {
+
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Listar';
+
+        //si request de busqueda
+        if( isset($this->request->search) && !is_null($this->request->filter))
+        {
+            if(RequestFacade::segment(2) == $this->section)
+                $model = $this->repo->searchWhere($this->request,['prospecto' => 0]);
+            else
+                $model = $this->repo->searchWhere($this->request,['prospecto' => 1]);
+
+            if(is_null($model) || $model->count() == 0){
+
+                //si paso la seccion
+                if(RequestFacade::segment(2) == $this->section)
+                    $model = $this->repo->listAllWhere($this->section,['prospecto' => 0]);
+                else
+                    $model = $this->repo->listAllWhere($this->section,['prospecto' => 1]);
+
+            }
+
+        }else{
+            if(RequestFacade::segment(2) == $this->section)
+                $model = $this->repo->listAllWhere($this->section,['prospecto' => 0]);
+            else
+                $model = $this->repo->listAllWhere($this->section,['prospecto' => 1]);
+        }
+
+        //guarda en session lo que se busco para exportar
+        Session::put('export',$model->get());
+
+        //pagina el query
+        $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
+
+        if(RequestFacade::segment(2) == $this->section){
+            //return view($this->getConfig()->indexRoute)->with($this->data);
+            return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
+
+        }else
+            return view('moto.clients.prospectosIndex')->with($this->data);
 
     }
 

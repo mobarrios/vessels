@@ -69,10 +69,42 @@ abstract class BaseRepo {
         }
     }
 
+    public function ListAllWhere($section = null,$columnAndValue = [])
+    {
+        $model = $this->model;
+
+        foreach ($columnAndValue as $colum => $value)
+            $model = $model->where($colum, $value);
+
+
+        if(config('models.'.$section.'.is_brancheable'))
+        {
+            return $model->whereHas('Brancheables',function($q){
+
+                    $q->whereIn('branches_id',Auth::user()->branches_id );
+            });
+
+        }else
+        {
+             return $model;
+        }
+    }
+
     public function ListsData($data, $id)
     {
        // para agregar un campo adelatnte return $this->model->lists($data, $id)->prepend('Seleccionar...','');
         return $this->model->lists($data, $id);
+    }
+
+    public function ListsDataWhere($data, $id, $columnAndValue = [])
+    {
+        $model = $this->model;
+
+        foreach ($columnAndValue as $colum => $value)
+            $model = $model->where($colum, $value);
+
+       // para agregar un campo adelatnte return $this->model->lists($data, $id)->prepend('Seleccionar...','');
+        return $model->lists($data, $id);
     }
 
     public function find($id)
@@ -106,6 +138,43 @@ abstract class BaseRepo {
                 }
             }
         
+        //no hago get pq lo hace en el controller para paginar
+        return $q;
+    }
+
+    // searchWhere
+    public function searchWhere($data,$columnAndValue = [])
+    {
+
+        $q = $this->model;
+
+        foreach ($columnAndValue as $colum => $value)
+            $q = $q->where($colum, $value);
+
+
+
+        //get column to search in model repo
+        //$columns = $this->getColumnSearch();
+        $columns = $data->filter;
+
+        $q->where('id','like','%'.$data->search.'%');
+
+            foreach ($columns as $column => $k){
+
+                if(is_array($k)){
+
+                    foreach ($k as $relation => $col){
+
+                        $q->orWhereHas($relation, function($q) use ($col , $data){
+                            $q->where($col ,'like','%'.$data->search.'%');
+                        });
+                    }
+                } else {
+
+                    $q->orWhere($k ,'like','%'.$data->search.'%');
+                }
+            }
+
         //no hago get pq lo hace en el controller para paginar
         return $q;
     }

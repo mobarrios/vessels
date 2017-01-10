@@ -1,6 +1,6 @@
 @extends('template.model_index')
     @section('table')
-        @foreach($models as $model)
+        @foreach($budgets as $model)
             <tr>
 
                 <td style="width: 1%">

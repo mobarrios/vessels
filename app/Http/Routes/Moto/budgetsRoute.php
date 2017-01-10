@@ -11,7 +11,8 @@ Route::group(['prefix'=>'budgets'],function(){
         Route::get('/create/{id?}',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.budgets.create','uses'=>'Moto\BudgetsController@create']);
         Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.budgets.store','uses'=>'Moto\BudgetsController@store']);
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.budgets.show','uses'=>'Moto\BudgetsController@show']);
-        Route::get('/index/{id}/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.index','uses'=>'Moto\BudgetsController@index']);
+        Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.index','uses'=>'Moto\BudgetsController@index']);
+        Route::get('/prospectos/{id}/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.indexProspectos','uses'=>'Moto\BudgetsController@indexProspectos']);
 
          Route::post('/addItem/{id}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.addItem','uses'=>'Moto\BudgetsController@addItems']);
          Route::get('/editItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.editItem','uses'=>'Moto\BudgetsController@editItems']);

@@ -14,6 +14,7 @@ use App\Http\Repositories\Moto\BudgetsRepo as Repo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Session;
 
 
 class BudgetsController extends Controller
@@ -39,11 +40,33 @@ class BudgetsController extends Controller
         $this->models = $models;
     }
 
-    public function index($id = null){
+    public function indexProspectos($id = null){
         $this->data['budgets'] = $this->clients->find($id)->budgets;
 
-        return parent::index();
-    }
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Listar';
+
+        //si request de busqueda
+        if( isset($this->request->search) && !is_null($this->request->filter))
+        {
+            $model = $this->repo->search($this->request);
+
+            if(is_null($model) || $model->count() == 0)
+                //si paso la seccion
+                $model = $this->repo->listAll($this->section);
+
+        }else{
+            $model  = $this->repo->listAll($this->section);
+        }
+
+        //guarda en session lo que se busco para exportar
+        Session::put('export',$model->get());
+
+        //pagina el query
+        $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
+
+        //return view($this->getConfig()->indexRoute)->with($this->data);
+        return view('moto.budgets.indexProspectos')->with($this->data);    }
 
 
     public function findByClients()

@@ -68,6 +68,7 @@
 
                     <p>Antes de crear un prospecto, busque si ya existe.</p>
                     <select id="search" class="select2 form-control">
+                        <option value="seleccione">Seleccione...</option>
                         @forelse($prospectos as $prospecto)
                             <option value="{!! $prospecto->id !!}">
                                 {!! $prospecto->fullname !!} ~ {!! $prospecto->dni !!} ~ {!! $prospecto->email !!} ~ {!! $prospecto->phone !!}
@@ -421,12 +422,13 @@
 
 
             $('#search').on('change',function(ev){
+                $("#search>option[value='seleccione']").remove();
                 var select = $(this);
                 var option = select.find('option:selected');
 
                 $('#modelId').val(option.val());
 
-                $http.get("moto/clients/"+option.val())
+                $http.get("moto/clientsSearch/"+option.val())
                         .then(function (response) {
                             $('#formClient').attr('action',routeBase+'moto/clients/update/'+option.val())
                             $scope.model = option.val()

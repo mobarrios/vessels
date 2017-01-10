@@ -26,10 +26,14 @@
 <script src="vendors/LTE/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 {{--<script src="vendors/LTE/dist/js/demo.js"></script>--}}
+
+@if(Request::segment(2) == 'budgets')
 <!-- Select2 -->
 {{--<script src="vendors/LTE/plugins/select2/select2.full.min.js"></script>--}}
 <script src="vendors/LTE/plugins/select2/select2-buscador.js"></script>
+@else
 
+@endif
 
 <!-- date-range-picker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
