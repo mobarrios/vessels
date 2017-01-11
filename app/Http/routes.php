@@ -40,7 +40,8 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Moto/purchasesOrdersRoute.php');
         require(__DIR__ . '/Routes/Moto/providersRoute.php');
         require(__DIR__ . '/Routes/Moto/salesRoute.php');
-        
+
+        require(__DIR__ . '/Routes/Moto/profilesRoute.php');
     });
 
 

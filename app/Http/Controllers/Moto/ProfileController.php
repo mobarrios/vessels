@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Configs;
+namespace App\Http\Controllers\Moto;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 
-class UsersController extends Controller
+class ProfileController extends Controller
 {
 
     public function  __construct(Repo $repo, Route $route , RolesRepo $rolesRepo , Request $request, BranchesRepo $branchesRepo)
@@ -21,7 +21,7 @@ class UsersController extends Controller
         $this->repo         = $repo;
         $this->route        = $route;
         $this->rolesRepo    = $rolesRepo;
-        $this->section      = 'users';
+        $this->section      = 'profiles';
 
         //data select
         $this->data['roles']    = $rolesRepo->listsData('name','id');
@@ -31,14 +31,16 @@ class UsersController extends Controller
 
     }
 
-
-
-    public function changeBranchesActive()
+    public function index()
     {
-        $user = $this->repo->find(Auth::user()->id);
-        $user->branches_active_id = $this->route->getParameter('branches_id');
-        $user->save();
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Perfil';
 
-        return redirect()->back()->withErrors(['Sucursal Cambiada Correctamente.']);
+        $this->data['model'] = Auth::user();
+
+        $this->data['avatares'] = config('models.'.$this->section.'.avatares');
+
+        return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
     }
+
 }

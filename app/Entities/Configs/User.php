@@ -39,6 +39,12 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
     protected $hidden = ['password', 'remember_token'];
 
 
+    public function images()
+    {
+        return $this->morphOne(Images::class,'imageable');
+    }
+
+
     public function BranchesActive()
     {
         return $this->belongsTo(Branches::class,'branches_active_id');
