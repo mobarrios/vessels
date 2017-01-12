@@ -12,7 +12,18 @@ Route::get('/budgetsItems/{id}', 'Moto\AjaxController@budgetsItems');
 //buscar purchasesorders
 Route::get('/purchasesOrdersFind/{id?}', 'Moto\PurchasesOrdersController@find');
 
+//items
 Route::get('/itemsByModels/{id?}', 'Moto\ItemsController@itemsByModels');
+//items by motor
+Route::get('/items/findMotor/{nMotor?}', 'Moto\ItemsController@itemsByMotor');
+//items by cuadro
+Route::get('/items/findCuadro/{nCuadro?}', 'Moto\ItemsController@itemsByCuadro');
+
+//items add item
+Route::post('/items/addNew', 'Moto\ItemsController@addNew');
+
+
+
 
 //buscar presupuestos x clientes
 Route::get('/budgetsByClients/{id?}', 'Moto\BudgetsController@findByClients');

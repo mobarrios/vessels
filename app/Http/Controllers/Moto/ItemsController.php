@@ -43,4 +43,40 @@ class ItemsController extends Controller
         $data = $this->repo->ItemsByModels($id);
         return response()->json($data);
     }
+
+    //busca nro motor
+    public function itemsByMotor()
+    {
+        // busca si el numero de motor existe devuelvo bool
+
+        $nMotor = $this->route->getParameter('nMotor');
+        $res = $this->repo->getModel()->where('n_motor', $nMotor)->get();
+
+        if($res->count() == '1')
+            return response()->json(true);
+        else
+            return response()->json(false);
+    }
+
+
+    //busca nro cuadro
+    public function itemsByCuadro()
+    {
+        // busca si el numero de motor existe devuelvo bool
+
+        $nCuadro = $this->route->getParameter('nCuadro');
+        $res = $this->repo->getModel()->where('n_cuadro', $nCuadro)->get();
+
+        if($res->count() == '1')
+            return response()->json(true);
+        else
+            return response()->json(false);
+    }
+
+   public function addNew()
+   {
+       $f = $this->request->foo;
+
+       return response()->json($f);
+   }
 }

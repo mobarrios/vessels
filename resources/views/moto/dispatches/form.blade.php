@@ -75,10 +75,14 @@
                         <td>@{{ purchase.purchases_orders_items.models.brands.name }}</td>
                         <td>@{{ purchase.purchases_orders_items.models.name }}</td>
                         <td>@{{ purchase.purchases_orders_items.colors.name }}</td>
-                        <td><input class="form-control input-sm n_motor_@{{ purchase.id }}" type="text"
-                                   placeholder="N Motor"></td>
-                        <td><input class="form-control input-sm n_chasis_@{{ purchase.id }}" type="text"
-                                   placeholder="N Chasis"></td>
+                        <td>
+                            <input class="form-control input-sm n_motor_@{{ purchase.id }}" type="text" placeholder="N Motor">
+                            <small class="error_n_motor_@{{ purchase.id }} text-danger "></small>
+                        </td>
+                        <td>
+                            <input class="form-control input-sm n_cuadro_@{{ purchase.id }}" type="text" placeholder="N Cuadro">
+                            <small class="error_n_cuadro_@{{ purchase.id }} text-danger"></small>
+                        </td>
                         <td>
                             <button class="btn" ng-click="addITem(purchase)"><span class="fa fa-share"></span></button>
                         </td>
@@ -109,6 +113,7 @@
                                 <td>
                                     <a href="{{route('moto.dispatches.deleteItems',[$item->id,$models->id])}}"><span
                                                 class="text-danger fa fa-trash"></span></a>
+
                                 </td>
                                 <td>
                                     <a href="{{route('moto.dispatches.editItems',[$item->id,$models->id])}}"><span
@@ -138,7 +143,7 @@
                     {!! Form::open(['route'=> ['moto.dispatches.addItems' ], 'files' =>'true']) !!}
                 @endif
 
-                {!! Form::hidden('dispatches_id',$models->id) !!}
+                {!! Form::hidden('dispatches_id',$models->id ) !!}
                 {!! Form::hidden('branches_id',$models->Brancheables->first()->Branches->id) !!}
 
                 <div class="col-xs-12 form-group">
@@ -192,10 +197,56 @@
             $scope.addITem = function (purchase) {
 
                 var n_motor  = $('.n_motor_' + purchase.id).val();
-                var n_chasis = $('.n_motor_' + purchase.id).val();
+                var n_cuadro = $('.n_cuadro_' + purchase.id).val();
 
-                if(n_motor == "")
-                        n_motor = "c";
+
+                if(n_motor == '' || n_cuadro == '')
+                {
+                    if (!n_motor == "") {
+
+                        //valida nmotor unique
+                        $http.get("moto/items/findMotor/" + n_motor)
+                                .then(function (response) {
+                                    if (response.data)
+                                        $('.error_n_motor_' + purchase.id).text('El Nro. de MOTOR ya se encuentra ingresado');
+                                });
+
+                    } else {
+                        $('.error_n_motor_' + purchase.id).text('* Requerido');
+
+                    }
+
+                    if (!n_cuadro == "")
+                    {
+                        //valida nmotor unique
+                        $http.get("moto/items/findCuadro/" + n_cuadro)
+                                .then(function (response) {
+                                    if (response.data)
+                                        $('.error_n_cuadro_' + purchase.id).text('El Nro. de CUADRO ya se encuentra ingresado');
+                                });
+                    }
+                    else
+                    {
+                        $('.error_n_cuadro_' + purchase.id).text('* Requerido');
+                    }
+                }
+                else
+                {
+
+                    $http.post("moto/items/addNew", {
+                        foo: "FOO",
+                        bar: "BAR"
+                    }).success(function (data) {
+                        console.log(data);
+                    });
+                    console.log(n_motor);
+                    console.log(n_cuadro);
+                    console.log(purchase.purchases_orders_items.models_id);
+                    console.log(purchase.purchases_orders_items.colors_id);
+
+                }
+
+
 
 
             };

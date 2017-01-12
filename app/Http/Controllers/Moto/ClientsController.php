@@ -85,7 +85,6 @@ class ClientsController extends Controller
             //crea a traves del repo con el request
             $model = $this->repo->create($this->request);
 
-
             //guarda imagenes
             if(config('models.'.$this->section.'.is_imageable'))
                 $this->createImage($model, $this->request);

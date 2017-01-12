@@ -10,7 +10,7 @@
     <section class="content">
         <ol class="breadcrumb " style="background-color: white">
             <li>
-                <a href="{{route('home')}}">Home</a>
+                <a href="{{route('home')}}"><span class="fa fa-home"></span></a>
             </li>
             <li>
                 <a href="{{route(config('models.'.$section.'.indexRoute'))}}">{{config('models.'.$section.'.sectionName')}}</a>
