@@ -12,5 +12,32 @@ class ClientsRepo extends BaseRepo {
         return new Clients();
     }
 
+    public function create($data)
+    {
+        $model = new $this->model();
 
+        if(!$data->get('prospectos'))
+            $data['prospectos'] = 0;
+
+        $model->fill($data->all());
+
+        $model->save();
+
+        return $model;
+    }
+
+
+    public function update($id,$data)
+    {
+        $model = $this->model->find($id);
+
+        if(!$data->get('prospectos'))
+            $data['prospectos'] = 0;
+
+        $model->fill($data->all());
+
+        $model->save();
+
+        return $model;
+    }
 }

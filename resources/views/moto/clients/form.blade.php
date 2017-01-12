@@ -11,6 +11,11 @@
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
 
+
+        @if($section == 'prospectos')
+            {!! Form::hidden('prospectos',true) !!}
+        @endif
+
         <div class="col-xs-3 form-group">
             {!! Form::label('DNI') !!}
             {!! Form::text('dni', null, ['class'=>'form-control']) !!}

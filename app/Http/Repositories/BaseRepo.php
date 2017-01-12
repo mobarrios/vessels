@@ -11,6 +11,7 @@ namespace App\Http\Repositories;
 
 use App\Entities\Configs\Brancheables;
 use App\Entities\Configs\Logs;
+use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 
 abstract class BaseRepo {
