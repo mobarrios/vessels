@@ -56,14 +56,28 @@ class DispatchesController extends Controller
         $item->fill($item_data);
         $item->save();
 
-        // AGREGA BRANCHEABLES
-        $item->brancheables()->create(['branches_id' => Auth::user()->branches_active_id]);
+            // AGREGA BRANCHEABLES
+            $item->brancheables()->create(['branches_id' => Auth::user()->branches_active_id]);
 
-        $this->request['items_id'] =  $item->id;
+            $this->request['items_id'] =  $item->id;
 
-        $dispatchesItemsRepo->create($this->request);
 
-        return redirect()->route('moto.dispatches.edit', $this->request->dispatches_id);
+            if($this->request->ajax)
+            {
+
+                $dItems = $dispatchesItemsRepo->find($this->request->dispatches_items_id);
+                $dItems->dispatches_id = $this->request->dispatches_id;
+                $dItems->items_id = $item->id;
+                $dItems->save();
+
+                return response()->json($dItems);
+            }
+            else
+            {
+               // $dispatchesItemsRepo->create($this->request);
+
+                return redirect()->route('moto.dispatches.edit', $this->request->dispatches_id);
+            }
     }
 
     public function editItems(DispatchesItemsRepo $dispatchesItemsRepo)
@@ -92,7 +106,17 @@ class DispatchesController extends Controller
     {
         // dispatches items where dispatches items is not asigned
         
-            $items = $dispatchesItemsRepo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')->with('PurchasesOrdersItems.Colors')->where('purchases_orders_items_id',$purchasesOrdersItemsId)->where('dispatches_id',0)->get();
+            $items = $dispatchesItemsRepo->getModel()
+                ->whereHas('PurchasesOrdersItems',function($q) use ($purchasesOrdersItemsId){
+                    $q->where('purchases_orders_id',$purchasesOrdersItemsId);
+                })
+                ->with('PurchasesOrdersItems')
+                ->with('PurchasesOrdersItems.DispatchesItems')
+                ->with('PurchasesOrdersItems.Models')
+                ->with('PurchasesOrdersItems.Models.Brands')
+                ->with('PurchasesOrdersItems.Colors')
+                ->where('dispatches_id',0)
+                ->get();
 
             return response()->json($items);
     }

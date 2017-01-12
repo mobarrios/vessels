@@ -19,8 +19,8 @@ Route::get('/items/findMotor/{nMotor?}', 'Moto\ItemsController@itemsByMotor');
 //items by cuadro
 Route::get('/items/findCuadro/{nCuadro?}', 'Moto\ItemsController@itemsByCuadro');
 
-//items add item
-Route::post('/items/addNew', 'Moto\ItemsController@addNew');
+//dispathces add item
+Route::post('/dispatches/addNew', 'Moto\DispatchesController@addItems');
 
 
 

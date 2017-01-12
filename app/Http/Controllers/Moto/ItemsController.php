@@ -73,10 +73,4 @@ class ItemsController extends Controller
             return response()->json(false);
     }
 
-   public function addNew()
-   {
-       $f = $this->request->foo;
-
-       return response()->json($f);
-   }
 }

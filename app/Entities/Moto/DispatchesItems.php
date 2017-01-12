@@ -20,6 +20,12 @@
      {
          return $this->belongsTo(PurchasesOrdersItems::class);
      }
+
+     public function DispatchesItems()
+     {
+         return $this->belongsTo(DispatchesItems::class);
+     }
+
     
  }
 
