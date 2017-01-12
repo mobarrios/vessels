@@ -178,7 +178,11 @@
                                     <div class="col-xs-6 form-group">
                                         {!! Form::label('Ávatar') !!}
                                         <br>
-                                        {!! Form::select('image',$avatares,null,['class' => 'form-control select2', 'id' => 'avatares']) !!}
+                                        <select name="image" id="avatares" class="form-control select2">
+                                            @foreach($avatares as $ind => $path)
+                                                <option value="{!! $ind !!}" @if($model->images && $model->images->path == 'images/avatares/'.$path.'.png') selected = "selected" @endif>{!! $path !!}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="col-xs-6 form-group">

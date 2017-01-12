@@ -38,18 +38,18 @@ return [
     'is_brancheable'    => false,
 
     'avatares' => [
-        '1' => 'avatar-1',
-        '2' => 'avatar-2',
-        '3' => 'avatar-3',
-        '4' => 'avatar-4',
-        '5' => 'avatar-5',
-        '6' => 'avatar-6',
-        '7' => 'avatar-7',
-        '8' => 'avatar-8',
-        '9' => 'avatar-9',
-        '10' => 'avatar-10',
-        '11' => 'avatar-11',
-        '12' => 'avatar-12'
+        '0' => 'avatar-1',
+        '1' => 'avatar-2',
+        '2' => 'avatar-3',
+        '3' => 'avatar-4',
+        '4' => 'avatar-5',
+        '5' => 'avatar-6',
+        '6' => 'avatar-7',
+        '7' => 'avatar-8',
+        '8' => 'avatar-9',
+        '9' => 'avatar-10',
+        '10' => 'avatar-11',
+        '11' => 'avatar-12'
     ],
 
     //column search
@@ -76,7 +76,7 @@ return [
             'name'          => 'required',
             'last_name'     => 'required',
             'email'     => 'required',
-            'password_old'     => 'exist:password',
+//            'password_old'     => 'exist:password',
 //            'password'     => 'required_if:password_old,'.Auth::user()->password
     ],
 

@@ -43,4 +43,41 @@ class ProfileController extends Controller
         return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
     }
 
+    public function update()
+    {
+        //validar los campos
+
+        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
+
+        if($this->request->get('password_old') != null){
+            if(!password_verify($this->request->get('password_old'),Auth::user()->password)){
+                return redirect()->back()->withInput()->withErrors('La clave vieja no coincide con la actual');
+            }
+
+            if(!$this->request->get('password')){
+                return redirect()->back()->withInput()->withErrors('La clave es obligatoria si va a cambiarla');
+            }
+        }
+
+        $id = $this->route->getParameter('id');
+
+        //edita a traves del repo
+        $model = $this->repo->update($id,$this->request);
+
+        //guarda imagenes
+        if(config('models.'.$this->section.'.is_imageable'))
+            $this->repo->createImageables($model, "images/avatares/".config('models.'.$this->section.'.avatares')[$this->request->get('image')].'.png');
+
+        //guarda log
+        if(config('models.'.$this->section.'.is_logueable'))
+            $this->repo->createLog($model, 3);
+
+        //si va a una sucursal
+        if(config('models.'.$this->section.'.is_brancheable'))
+            $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
+
+
+        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
+    }
+
 }
