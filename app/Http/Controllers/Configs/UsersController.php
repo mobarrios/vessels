@@ -32,6 +32,7 @@ class UsersController extends Controller
     }
 
 
+
     public function changeBranchesActive()
     {
         $user = $this->repo->find(Auth::user()->id);
@@ -39,5 +40,70 @@ class UsersController extends Controller
         $user->save();
 
         return redirect()->back()->withErrors(['Sucursal Cambiada Correctamente.']);
+    }
+
+
+    // post de create
+    public function store()
+    {
+        //validar los campos
+        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+
+
+        //comienza ACTIVO en la primer sucursal q selecciona
+        $this->request['branches_active_id'] =  $this->request->branches_id[0];
+
+        //crea a traves del repo con el request
+        $model = $this->repo->create($this->request);
+
+
+        //guarda imagenes
+        if(config('models.'.$this->section.'.is_imageable'))
+            $this->createImage($model, $this->request);
+
+        //guarda log
+        if(config('models.'.$this->section.'.is_logueable'))
+            $this->repo->createLog($model, 1);
+
+        //si va a una sucursal
+
+            $this->repo->createBrancheables($model,$this->request->branches_id);
+
+
+        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
+    }
+
+
+
+
+
+    //post de editar
+    public function update()
+    {
+        //validar los campos
+        $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
+
+        $id = $this->route->getParameter('id');
+
+        //comienza ACTIVO en la primer sucursal q selecciona
+        $this->request['branches_active_id'] =  $this->request->branches_id[0];
+
+        //edita a traves del repo
+        $model = $this->repo->update($id,$this->request);
+
+        //guarda imagenes
+        if(config('models.'.$this->section.'.is_imageable'))
+            $this->createImage($model, $this->request);
+
+        //guarda log
+        if(config('models.'.$this->section.'.is_logueable'))
+            $this->repo->createLog($model, 3);
+
+        //si va a una sucursal
+
+        $this->repo->createBrancheables($model, $this->request->branches_id);
+
+
+        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
     }
 }

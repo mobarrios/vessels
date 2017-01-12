@@ -77,7 +77,7 @@ class AuthController extends Controller
                 // Login de usuario
              //   Auth::login($user, false);
 
-        return redirect()->intended('home');
+        return redirect()->route('home');
 
 
 

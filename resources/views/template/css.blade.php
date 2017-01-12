@@ -25,7 +25,7 @@
 
 <link rel="stylesheet" href="styles.css">
 
-<link rel="stylesheet" href="css/docs.css">
+{{--<link rel="stylesheet" href="css/docs.css">--}}
 <!-- Theme style -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.min.css">
 <style>

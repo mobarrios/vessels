@@ -34,7 +34,7 @@
             <ul class="nav navbar-nav">
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a class="dropdown-toggle" href="{!! route('moto.profiles.index') !!}">
                         <span class="fa fa-user"></span>
                         <span class="hidden-xs">{{\Illuminate\Support\Facades\Auth::user()->email}}</span>
                     </a>
