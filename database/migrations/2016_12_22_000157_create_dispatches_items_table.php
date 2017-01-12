@@ -18,14 +18,14 @@ class CreateDispatchesItemsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->integer('dispatches_id')->unsigned()->nulleable();
-            $table->foreign('dispatches_id')->references('id')->on('dispatches');
+            $table->integer('dispatches_id')->nulleable()->unsigned();
+            //$table->foreign('dispatches_id')->references('id')->on('dispatches');
 
-            $table->integer('items_id')->unsigned()->nulleable();
-            $table->foreign('items_id')->references('id')->on('items');
+            $table->integer('items_id')->nulleable()->unsigned();
+           // $table->foreign('items_id')->references('id')->on('items');
 
-            $table->integer('purchases_orders_items_id')->unsigned()->nulleable();
-            $table->foreign('purchases_orders_items_id')->references('id')->on('purchases_orders_items');
+            $table->integer('purchases_orders_items_id')->nulleable()->unsigned();
+            //$table->foreign('purchases_orders_items_id')->references('id')->on('purchases_orders_items');
         });
     }
 

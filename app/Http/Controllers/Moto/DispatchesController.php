@@ -32,7 +32,7 @@ class DispatchesController extends Controller
         $this->section          = 'dispatches';
         $this->data['section']  = $this->section;
 
-        $this->data['purchasesOrders'] = $purchasesOrdersRepo->ListsData('id','id');
+        //$this->data['purchasesOrders'] = $purchasesOrdersRepo->ListsData('id','name');
 
         $this->data['models_types'] = $modelsRepo->ListsData('name','id');
         $this->data['models_lists'] = $modelsRepo->ListsData('name','id');
@@ -41,7 +41,7 @@ class DispatchesController extends Controller
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['branches']     = $branchesRepo->ListsData('name','id');
 
-        $this->data['providers']    = $providersRepo->getModel()->all();
+        $this->data['providers']    = $providersRepo->getModel()->with('PurchasesOrdersConfirmed')->get();
 
         $this->modelsRepo =  $modelsRepo;
 
@@ -85,6 +85,16 @@ class DispatchesController extends Controller
         $dispatchesItemsRepo->destroy($this->route->getParameter('item'));
 
         return parent::edit();
+    }
+
+
+    public function findItems($purchasesOrdersItemsId, DispatchesItemsRepo $dispatchesItemsRepo)
+    {
+        // dispatches items where dispatches items is not asigned
+        
+            $items = $dispatchesItemsRepo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')->with('PurchasesOrdersItems.Colors')->where('purchases_orders_items_id',$purchasesOrdersItemsId)->where('dispatches_id',0)->get();
+
+            return response()->json($items);
     }
 
     /*

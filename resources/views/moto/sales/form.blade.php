@@ -15,7 +15,7 @@
 
     <div class="col-xs-12">
         <h2 class="text-center"><span>Venta </span> <strong class="text-blue">
-                # {{ (  isset($models) ? $models->id : '')}} </strong></h1>
+                # {{ (  isset($models) ? $models->id : '')}} </strong></h2>
     </div>
 
     <div class="col-xs-2  form-group">

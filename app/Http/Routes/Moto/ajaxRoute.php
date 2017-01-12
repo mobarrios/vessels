@@ -7,7 +7,6 @@ Route::get('/modelAvailables/{id?}', 'Moto\AjaxController@modelAvailables');
 Route::get('/modelActualCost/{id?}', 'Moto\AjaxController@modelActualCost');
 
 
-
 Route::get('/budgetsItems/{id}', 'Moto\AjaxController@budgetsItems');
 
 //buscar purchasesorders
@@ -21,6 +20,12 @@ Route::get('/budgetsByClients/{id?}', 'Moto\BudgetsController@findByClients');
 
 //buscar clientes
 Route::get('/clientsSearch/{id?}', 'Moto\ClientsController@show');
+
+
+//dispatches items
+Route::get('/dispatchesItems/{id?}', 'Moto\DispatchesController@findItems');
+
+
 
 
 

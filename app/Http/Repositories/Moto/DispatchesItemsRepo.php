@@ -11,6 +11,5 @@ class DispatchesItemsRepo extends BaseRepo {
     {
         return new DispatchesItems();
     }
-
     
 }

@@ -21,6 +21,8 @@ class CreatePurchasesOrdersItems extends Migration
             $table->integer('quantity');
             $table->double('price',10.2);
             $table->integer('discount');
+            $table->integer('status');
+
 
             $table->integer('purchases_orders_id')->unsigned()->index();
             $table->foreign('purchases_orders_id')->references('id')->on('purchases_orders');

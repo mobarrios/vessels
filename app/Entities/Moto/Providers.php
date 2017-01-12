@@ -17,6 +17,10 @@
          return $this->hasMany(PurchasesOrders::class);
      }
 
+     public function PurchasesOrdersConfirmed()
+     {
+         return $this->hasMany(PurchasesOrders::class)->where('status',3);
+     }
 
  }
 

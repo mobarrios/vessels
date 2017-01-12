@@ -16,6 +16,10 @@
          return $this->belongsTo(Items::class);
      }
 
+     public function PurchasesOrdersItems()
+     {
+         return $this->belongsTo(PurchasesOrdersItems::class);
+     }
     
  }
 

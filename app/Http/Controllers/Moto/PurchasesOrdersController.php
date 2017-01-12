@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Moto\DispatchesItems;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
@@ -60,13 +61,20 @@ class PurchasesOrdersController extends Controller
 
 
         //crear la cantidad de productos pedidos en la tabla de remitos items
+
         foreach ( $repo->PurchasesOrdersItems as $item) {
             $q =  $item->quantity;
 
             for($i=1;$i <= $q; $i++)
             {
                 $new = ['purchases_orders_items_id'=> $item->id ];
-                $dispatchesItems = $dispatchesItemsRepo->create($new);
+
+                $newDispathcesItems = new DispatchesItems();
+                $newDispathcesItems->fill($new);
+                $newDispathcesItems->save();
+
+
+                //$dispatchesItems = $dispatchesItemsRepo->create($new);
             }
 
         }
