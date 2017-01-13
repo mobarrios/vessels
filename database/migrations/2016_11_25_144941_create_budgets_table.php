@@ -29,11 +29,11 @@ class CreateBudgetsTable extends Migration
             $table->integer('seguro')->nullable();
             $table->integer('flete')->nullable();
             $table->integer('formularios')->nullable();
-            $table->integer('gastosAdministrativos')->nullable();
+            $table->integer('gastos_administrativos')->nullable();
             $table->integer('descuento')->nullable();
             $table->integer('anticipo')->nullable();
-            $table->integer('importeCuota')->nullable();
-            $table->integer('aFinanciar')->nullable();
+            $table->integer('importe_cuota')->nullable();
+            $table->integer('a_financiar')->nullable();
             $table->integer('total')->nullable();
         });
     }

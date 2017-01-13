@@ -146,7 +146,7 @@
                     <img src="images/branches/logo.png" alt="Logo" width="200">
                 </td>
                 <td>
-                    <h2 align="center">PRESUPUESTO</h2>
+                    <h2 align="center">PRESUPUESTO #  {!!  $model->id !!}</h2>
                 </td>
                 <th class="fecha">
                     <span>{!! date('d',strtotime($model->date)) !!}</span><span>{!! date('m',strtotime($model->date)) !!}</span><span>{!! date('Y',strtotime($model->date)) !!}</span>
@@ -244,6 +244,13 @@
 
         <span class="padding"></span>
 
+        <div class="inline">
+            {!!  DNS1D::getBarcodeHTML($model->id, "EAN13") !!}
+        </div>
+
+        <div class="inline">
+            {!!  DNS2D::getBarcodeHTML($model->id, "QRCODE") !!}
+        </div>
 
         <div class="footer">
 
@@ -262,6 +269,9 @@
             <div class="inline">
                 <p><b>Atendido por:</b> Manuel Barrios</p>
             </div>
+
+
+
 
         </div>
 
