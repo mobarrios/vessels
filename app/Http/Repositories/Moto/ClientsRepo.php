@@ -12,12 +12,16 @@ class ClientsRepo extends BaseRepo {
         return new Clients();
     }
 
-    public function create($data)
+    public function create($data,$prospecto = null)
     {
         $model = new $this->model();
 
-        if(!$data->get('prospectos'))
-            $data['prospectos'] = 0;
+
+         if($prospecto == 1)
+             $data['prospecto'] = 1;
+         else
+             $data['prospecto'] = 0;
+
 
         $model->fill($data->all());
 
@@ -30,9 +34,6 @@ class ClientsRepo extends BaseRepo {
     public function update($id,$data)
     {
         $model = $this->model->find($id);
-
-        if(!$data->get('prospectos'))
-            $data['prospectos'] = 0;
 
         $model->fill($data->all());
 

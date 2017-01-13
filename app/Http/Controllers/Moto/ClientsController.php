@@ -80,13 +80,14 @@ class ClientsController extends Controller
 
     public function store()
     {
-
         if(!$this->request->get('budgets')) {
             //validar los campos
             $this->validate($this->request, config('models.' . $this->data['section'] . '.validationsStore'));
-
             //crea a traves del repo con el request
-            $model = $this->repo->create($this->request);
+            if($this->data['section'] == 'prospectos')
+                $model = $this->repo->create($this->request,1);
+            else
+                $model = $this->repo->create($this->request,0);
 
 
             //guarda imagenes
@@ -104,11 +105,12 @@ class ClientsController extends Controller
 
             return redirect()->route(config('models.' . $this->data['section'] . '.postStoreRoute'), $model->id)->withErrors(['Regitro Agregado Correctamente']);
         }else{
+
             //validar los campos
             $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
             //crea a traves del repo con el request
-            $model = $this->repo->create($this->request);
+            $model = $this->repo->create($this->request,1);
 
             //guarda imagenes
             if(config('models.'.$this->section.'.is_imageable'))
