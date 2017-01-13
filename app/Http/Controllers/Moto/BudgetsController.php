@@ -87,8 +87,6 @@ class BudgetsController extends Controller
             $this->data['client'] = $this->data['budget']->clients;
         }
 
-
-
         $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
 
         return parent::create();

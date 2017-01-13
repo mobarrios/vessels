@@ -123,7 +123,7 @@ class ClientsController extends Controller
             if(config('models.'.$this->section.'.is_brancheable'))
                 $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
-            $budget = $this->budgetsRepo->create(['clients_id' => $this->request->get('model')]);
+            $budget = $this->budgetsRepo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $model->id]));
 
             return redirect()->route(config('models.budgets.createRoute'),$budget->id);
         }
