@@ -23,6 +23,7 @@
                         <label class=" label label-default">{{$branch->branches->name}}</label>
                       @endforeach
                     </span>
+                    
                 </div>
 
             </div>

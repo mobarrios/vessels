@@ -160,8 +160,8 @@ return [
         //pdf
         Barryvdh\DomPDF\ServiceProvider::class,
 
-
-
+        // barCode
+        Milon\Barcode\BarcodeServiceProvider::class,
 
 
 
@@ -227,6 +227,10 @@ return [
 
         //PDF
         'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        //barcode
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
 
 
