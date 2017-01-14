@@ -521,6 +521,56 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'purchasesorders.confirm',
                     'model' => '',
                 ],
+                //certificados
+                [
+                    'id'    => 80,
+                    'name' => 'Listar Certificados',
+                    'slug' => 'certificates.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 81,
+                    'name' => 'Crear Certificados',
+                    'slug' => 'certificates.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 82,
+                    'name' => 'Editar Certificados',
+                    'slug' => 'certificates.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 83,
+                    'name' => 'Borrar Certificados',
+                    'slug' => 'certificates.destroy',
+                    'model' => '',
+                ],
+                //pedidos de articulos
+                [
+                    'id'    => 84,
+                    'name' => 'Listar Pedidos de Articulos',
+                    'slug' => 'itemsrequest.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 85,
+                    'name' => 'Crear Pedidos de Articulos',
+                    'slug' => 'itemsrequest.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 86,
+                    'name' => 'Editar Pedidos de Articulos',
+                    'slug' => 'itemsrequest.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 87,
+                    'name' => 'Borrar Pedidos de Articulos',
+                    'slug' => 'itemsrequest.destroy',
+                    'model' => '',
+                ],
 
         ]);
     }

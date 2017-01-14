@@ -32,18 +32,22 @@
 
         @if(isset($models))
         <div class="col-xs-12">
-            <table class="table">
-                <tr>
+            <table class="table table-striped  table-hover">
+                <thead>
+                    <th>#</th>
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>$ Lista</th>
                     <th>$ Contado</th>
                     <th>Dto. Max</th>
                     <th>Obs.</th>
-                </tr>
+                    <th></th>
+                </thead>
+                <tbody>
+
                 @foreach($models->ModelsListsPricesItems as $item)
-                    <tbody>
                     <tr>
+                        <td>{{$item->Models->id}}</td>
                         <td>{{$item->Models->Brands->name}}</td>
                         <td>{{$item->Models->name}}</td>
                         <td>{{$item->price_list}}</td>
@@ -51,11 +55,9 @@
                         <td>{{$item->max_discount}}</td>
                         <td>{{$item->obs}}</td>
                         <td>
-                            <a href="{{route('moto.modelsListsPrices.deleteItems',[$item->id,$models->id])}}"><span
+                            <a class="btn btn-xs btn-default" href="{{route('moto.modelsListsPrices.deleteItems',[$item->id,$models->id])}}"><span
                                         class="text-danger fa fa-trash"></span></a>
-                        </td>
-                        <td>
-                            <a href="{{route('moto.modelsListsPrices.editItems',[$item->id,$models->id])}}"><span
+                            <a class="btn btn-xs btn-default" href="{{route('moto.modelsListsPrices.editItems',[$item->id,$models->id])}}"><span
                                         class="text-success fa fa-edit"></span></a>
                         </td>
                     </tr>

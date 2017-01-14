@@ -56,6 +56,8 @@
 <script>
 
 
+    $('.table').addClass('table-striped  table-hover');
+
     $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
     //color picker with addon

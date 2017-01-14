@@ -41,4 +41,13 @@ class ClientsRepo extends BaseRepo {
 
         return $model;
     }
+
+
+    public function prospectoToClient($id)
+    {
+        $model = $this->model->find($id);
+        $model->prospecto = 0;
+        $model->save();
+        
+    }
 }
