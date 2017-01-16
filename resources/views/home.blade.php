@@ -3,7 +3,7 @@
 @section('sectionContent')
     <div class="row">
 
-        
+
 
         <!-- Default box -->
         <div class="col-xs-3">
