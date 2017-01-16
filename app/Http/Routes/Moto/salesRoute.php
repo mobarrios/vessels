@@ -26,4 +26,6 @@ Route::group(['prefix'=>'sales'],function(){
     Route::post('/editPayment/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.sales.updatePayment', 'uses' => 'Moto\SalesController@updatePayment']);
     Route::get('/deletePayment/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.sales.deletePayment', 'uses' => 'Moto\SalesController@deletePayment']);
 
+
+    Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
 });
