@@ -12,7 +12,8 @@
 
  <style>
    *{
-      font-size: 70%;
+      font-size: 60%;
+       line-height: 61%;
    }
 
   .margin-0{
@@ -42,7 +43,14 @@
      border-radius: 5px;
      padding: 5px;
      margin:auto;
+      line-height:30px;
   }
+
+   .contenedor-dato-cliente{
+       font-size: 10px !important;
+       line-height: 13px !important;
+       padding-botom: 5px !important;
+   }
 
   .datosHeader{
      line-height: 2px !important;
@@ -56,11 +64,14 @@
   }
 
   .border{
-     border-bottom: 1px solid rgb(0,0,0);
      padding-top: 5px !important;
      padding-bottom: 5px !important;
   }
 
+  .border-bottom{
+     border-bottom: 1px solid rgb(190, 190, 190);
+
+  }
 
 
   .datos-cliente .border{
@@ -69,9 +80,14 @@
 
   .leyendaTabla{
      font-size: 55%;
-     line-height: 57%;
+     line-height: 59%;
      text-align: center;
   }
+
+     .separador.border span{
+         line-height: 20px !important;
+     }
+
 
  </style>
 
@@ -110,7 +126,7 @@
 
     </div>
 
-    <div class="separador border"></div>
+    <div class="separador border-bottom"></div>
 
     <div class="datos-cliente">
 
@@ -174,7 +190,7 @@
                  <tr>
                     <td>1</td>
                     <td>HFHGFH5453</td>
-                    <td>
+                    <td class="descripcion">
                         <p>Motocicleta</p>
                         <p>Modelo Honda XR 150</p>
                         <p>Motor N²: ASD3423</p>
@@ -198,7 +214,7 @@
 
                  <tr>
                      <td colspan="3">
-                          {!!  DNS1D::getBarcodeHTML(1, "EAN13",4.4,20) !!}
+                          <p class="text-center">{!!  DNS1D::getBarcodeHTML(1, "EAN13") !!}</p>
                      </td>
                  </tr>
              </tfoot>
