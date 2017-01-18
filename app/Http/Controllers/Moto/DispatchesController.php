@@ -41,7 +41,8 @@ class DispatchesController extends Controller
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['branches']     = $branchesRepo->ListsData('name','id');
 
-        $this->data['providers']    = $providersRepo->getModel()->with('PurchasesOrdersConfirmed')->get();
+        //$this->data['providers']    = $providersRepo->getModel()->with('PurchasesOrdersConfirmed')->get();
+        $this->data['providers']    = $providersRepo->ListsData('name','id');
 
         $this->modelsRepo =  $modelsRepo;
 

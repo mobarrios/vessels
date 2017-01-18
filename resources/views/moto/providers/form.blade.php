@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
     @section('form_title')
-        Nuevo Artículo
+       {{ isset($models) ?  $models->name : 'Nuevo Proveedor'}}
     @endsection
 
     @section('form_inputs')
@@ -30,6 +30,10 @@
         <div class="col-xs-6 form-group">
             {!! Form::label('Telefono') !!}
             {!! Form::text('phone', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="col-xs-6 form-group">
+            {!! Form::label('Tipo de Pago') !!}
+            {!! Form::select ('providers_payments_id', $providersPayments ,null, ['class'=>'select2 form-control', 'placeholder'=>'Seleccionar...']) !!}
         </div>
         <div class="col-xs-6 form-group">
             {!! Form::label('Imagen') !!}

@@ -15,9 +15,9 @@ class PayMethodRepo extends BaseRepo {
     public function getMethods()
     {
         $methods = [
-                1 =>'Todo Pago',
-                2 =>'Mercado Pago',
-                3 =>'Transefrencia',
+                1 => 'Todo Pago',
+                2 => 'Mercado Pago',
+                3 => 'Transefrencia',
                 4 => 'Efectivo',
         ];
 

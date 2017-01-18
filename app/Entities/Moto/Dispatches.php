@@ -9,7 +9,7 @@
 
      protected $table = 'dispatches';
 
-     protected $fillable = ['purchases_orders_id','date','number'];
+     protected $fillable = ['purchases_orders_id','date','number','providers_id'];
 
      public function Models()
      {

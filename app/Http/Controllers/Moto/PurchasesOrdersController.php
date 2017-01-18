@@ -45,10 +45,19 @@ class PurchasesOrdersController extends Controller
     //find with items
     public function find()
     {
-        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.DispatchesItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')-> with('PurchasesOrdersItems.Colors')->find($this->route->getParameter('id'));
+        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.DispatchesItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')->with('PurchasesOrdersItems.Colors')->find($this->route->getParameter('id'));
 
         return response()->json($data);
     }
+
+    //find by provider
+    public function findByProviders()
+    {
+        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.DispatchesItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')->with('PurchasesOrdersItems.Colors')->where('providers_id', $this->route->getParameter('id'))->get();
+
+        return response()->json($data);
+    }
+
 
     //confirma la lista de pedidos
     public function confirm(DispatchesItemsRepo $dispatchesItemsRepo)
@@ -62,12 +71,11 @@ class PurchasesOrdersController extends Controller
 
         //crear la cantidad de productos pedidos en la tabla de remitos items
 
-        foreach ( $repo->PurchasesOrdersItems as $item) {
-            $q =  $item->quantity;
+        foreach ($repo->PurchasesOrdersItems as $item) {
+            $q = $item->quantity;
 
-            for($i=1;$i <= $q; $i++)
-            {
-                $new = ['purchases_orders_items_id'=> $item->id ];
+            for ($i = 1; $i <= $q; $i++) {
+                $new = ['purchases_orders_items_id' => $item->id];
 
                 $newDispathcesItems = new DispatchesItems();
                 $newDispathcesItems->fill($new);
@@ -92,14 +100,14 @@ class PurchasesOrdersController extends Controller
         $repo = $this->repo->find($id);
         $repo->status = 2;
         $repo->save();
-        
+
         //envia mail al proveedor
 
         return redirect()->route('moto.purchasesOrders.index')->withErrors(['Pedido de Mercadería Enviado al Proveedor.']);
     }
 
     //items
-    
+
     public function addItems(PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo)
     {
         $purchasesOrdersItemsRepo->create($this->request);

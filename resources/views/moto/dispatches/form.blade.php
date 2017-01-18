@@ -1,189 +1,219 @@
-@extends('template.model_form')
+@extends('template')
 
-@section('form_title')
-    @if(isset($models))
-        <strong>Remito : # {{$models->id}}</strong>
-    @else
-        Nuevo Remito
-    @endif
+@section('sectionContent')
+    <div class="row">
+        <!-- Default box -->
+        <div class="col-xs-12">
+            <div class="box">
 
-@endsection
+                <div class="box-header with-border text-center">
+                    <h3 class="box-title">
+                        <strong>{!! isset($models) ? "Remito # ". $models->id :  'Nuevo Remito' !!}</strong></h3>
+                </div>
+                <div class="box-body">
 
-@section('form_inputs')
-    <div ng-app="myApp">
-        <div ng-controller="myCtrl">
-            @if(isset($models))
-                {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
-            @else
-                {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
-            @endif
+                    <div ng-app="myApp">
+                        <div ng-controller="myCtrl">
+                            @if(isset($models))
+                                {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
+                            @else
+                                {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
+                            @endif
 
-            <div class="col-xs-2  form-group">
-                {!! Form::label('Fecha Remito') !!}
-                {!! Form::text('date', null, ['class'=>'datePicker form-control']) !!}
+                            <div class="col-xs-2  form-group">
+                                {!! Form::label('Fecha Remito') !!}
+                                {!! Form::text('date', null, ['class'=>'datePicker form-control']) !!}
+                            </div>
+
+                            <div class="col-xs-3 form-group">
+                                {!! Form::label('Nro. Remito') !!}
+                                {!! Form::text('number', null, ['class'=>'form-control']) !!}
+                            </div>
+
+                            <div class="col-xs-3 form-group">
+                                {!! Form::label('Proveedor') !!}
+                                {!! Form::select('providers_id', $providers, null, ['class'=>'provider select2 form-control']) !!}
+                            </div>
+
+                            <div class="col-xs-2 form-group">
+                                {!! Form::label('Imagen Remito') !!}
+                                {!! Form::file('image',['class'=>'form-control']) !!}
+                            </div>
+
+                            {!! Form::hidden('branches_id', \Illuminate\Support\Facades\Auth::user()->BranchesActive->id ) !!}
+
+                            <div class="col-xs-2 form-group" style="padding-top: 2%">
+                                <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                                @if(isset($models))
+                                    <a href="#" data-action="{!! route("moto.dispatches.addItems") !!}"
+                                       data-toggle="control-sidebar"
+                                       class="btn btn-default"><span class="fa fa-plus"></span></a>
+                                @endif
+                            </div>
+
+                            {!! Form::close() !!}
+
+                            <div class=" col-xs-12 form-group">
+                                {!! Form::label('Pedido de Mercaderia') !!}
+                                <select class="form-control">
+                                    <option>Seleccionar...</option>
+
+                                        <option ng-repeat="a in data" ng-click="onCategoryChange(a.id)">
+                                            # @{{ a.id }}</option>
+
+                                </select>
+                            </div>
+
+                            <div ng-show="purchases" class="col-xs-12 ">
+                                <table class="table ">
+                                    <thead>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Color</th>
+                                    <th>N Motor</th>
+                                    <th>N Cuadro</th>
+                                    <th></th>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr ng-repeat="purchase in purchases ">
+                                        <td>@{{ purchase.id }}</td>
+                                        <td>@{{ purchase.purchases_orders_items.models.brands.name }}</td>
+                                        <td>@{{ purchase.purchases_orders_items.models.name }}</td>
+                                        <td>@{{ purchase.purchases_orders_items.colors.name }}</td>
+
+                                        <td>
+                                            <input class="form-control input-sm n_motor_@{{ purchase.id }}" type="text"
+                                                   placeholder="N Motor">
+                                            <small class="error_n_motor_@{{ purchase.id }} text-danger "></small>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm n_cuadro_@{{ purchase.id }}" type="text"
+                                                   placeholder="N Cuadro">
+                                            <small class="error_n_cuadro_@{{ purchase.id }} text-danger"></small>
+                                        </td>
+                                        <td>
+                                            <button class="btn" ng-click="addITem(purchase)"><span
+                                                        class="fa fa-share"></span></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <!-- Button trigger modal -->
+
+
+                            @if(isset($models))
+
+                                <div class="col-xs-12">
+                                    <hr>
+                                    <label>Articulos en el Remito</label>
+
+                                    <table class="table">
+                                        <thead>
+                                        <th><input type="checkbox"></th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Color</th>
+                                        <th>N Motor</th>
+                                        <th>N Cuadro</th>
+                                        <th></th>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($models->DispatchesItems as $item)
+                                            <tr>
+                                                <td><input class='invoice' type="checkbox" value="{{$item->Items->id}}"
+                                                           name="dispatchesInvoiced[{{$item->Items->id}}]"></td>
+                                                <td>{{$item->Items->Models->Brands->name}}</td>
+                                                <td>{{$item->Items->Models->name}}</td>
+                                                <td>{{$item->Items->Colors->name}}</td>
+                                                <td>{{$item->Items->n_motor}}</td>
+                                                <td>{{$item->Items->n_cuadro}}</td>
+                                                <td>
+                                                    <a class="btn btn-xs btn-default"
+                                                       href="{{route('moto.dispatches.deleteItems',[$item->id,$models->id])}}">
+                                                        <span class="text-danger fa fa-trash"></span></a>
+                                                    <a class="btn btn-xs btn-default"
+                                                       href="{{route('moto.dispatches.editItems',[$item->id,$models->id])}}">
+                                                        <span class="text-success fa fa-edit"></span></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+
+                                    <button class="btn btn-block" ng-click="asignarFactura()">Asignar Factura de
+                                        Compra
+                                    </button>
+
+                                </div>
+                                @endif
+
+                                @endsection
+
+
+                                @section('formAside')
+
+                                @include('moto.partials.asideOpenForm')
+
+                                @if(isset($models))
+
+                                        <!-- .control-sidebar-menu -->
+
+                                @if(isset($modelItems))
+                                    {!! Form::model($modelItems,['route'=> ['moto.dispatches.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
+                                @else
+                                    {!! Form::open(['route'=> ['moto.dispatches.addItems' ], 'files' =>'true']) !!}
+                                @endif
+
+                                {!! Form::hidden('dispatches_id',$models->id ,['class'=>'dispatches_id']) !!}
+                                {!! Form::hidden('branches_id',$models->Brancheables->first()->Branches->id) !!}
+
+                                <div class="col-xs-12 form-group">
+                                    {!! Form::label('Modelo') !!}
+                                    {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
+                                </div>
+                                <div class="col-xs-12 form-group">
+                                    {!! Form::label('Color') !!}
+                                    {!! Form::select('colors_id', $colors, null, ['class'=>'form-control select2']) !!}
+                                </div>
+
+                                <div class="col-xs-12 form-group">
+                                    {!! Form::label('N Motor') !!}
+                                    {!! Form::text('n_motor', null, ['class'=>'form-control']) !!}
+                                </div>
+                                <div class="col-xs-12 form-group">
+                                    {!! Form::label('N Cuadro') !!}
+                                    {!! Form::text('n_cuadro', null, ['class'=>'form-control']) !!}
+                                </div>
+
+                                <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
+                                    <button type="submit" class="btn btn-primary">Agregar</button>
+                                    <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
+                                </div>
+                                {!! Form::close() !!}
+                                        <!-- /.control-sidebar-menu -->
+                            @endif
+                            @include('moto.partials.asideCloseForm')
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="col-xs-2 form-group">
-                {!! Form::label('Nro. Remito') !!}
-                {!! Form::text('number', null, ['class'=>'form-control']) !!}
+            <div class="box-footer clearfix">
+                <button type="submit" class="btn btn-default">Guardar</button>
             </div>
-
-            <div class="col-xs-4 form-group">
-                {!! Form::label('Imagen Remito') !!}
-                {!! Form::file('image',['class'=>'form-control']) !!}
-            </div>
-
-            <div class="col-xs-2 form-group">
-                {!! Form::label('Sucursal') !!}
-                {!! Form::select('branches_id',$branches ,null, ['class'=>'select2 form-control']) !!}
-            </div>
-
-            <div class="col-xs-2 form-group" style="padding-top: 2%">
-                <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
-                @if(isset($models))
-                    <a href="#" data-action="{!! route("moto.dispatches.addItems") !!}" data-toggle="control-sidebar"
-                       class="btn btn-default"><span class="fa fa-plus"></span></a>
-                @endif
-            </div>
-
             {!! Form::close() !!}
-
-            <div class="col-xs-2 form-group">
-                {!! Form::label('Pedido de Mercaderia') !!}
-
-
-                <select class="form-control">
-                    <option>Seleccionar...</option>
-                    <optgroup ng-repeat="x in datos" label="@{{ x.name }}">
-                        <option ng-repeat="a in x.purchases_orders_confirmed" ng-click="onCategoryChange(a.id)">
-                            # @{{ a.id }}</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="col-xs-12 ">
-                <table class="table ">
-                    <thead>
-                    <th>#</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Color</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    </thead>
-                    <tbody>
-
-                    <tr ng-repeat="purchase in purchases ">
-                        <td>@{{ purchase.id }}</td>
-                        <td>@{{ purchase.purchases_orders_items.models.brands.name }}</td>
-                        <td>@{{ purchase.purchases_orders_items.models.name }}</td>
-                        <td>@{{ purchase.purchases_orders_items.colors.name }}</td>
-
-                        <td>
-                            <input class="form-control input-sm n_motor_@{{ purchase.id }}" type="text"
-                                   placeholder="N Motor">
-                            <small class="error_n_motor_@{{ purchase.id }} text-danger "></small>
-                        </td>
-                        <td>
-                            <input class="form-control input-sm n_cuadro_@{{ purchase.id }}" type="text"
-                                   placeholder="N Cuadro">
-                            <small class="error_n_cuadro_@{{ purchase.id }} text-danger"></small>
-                        </td>
-                        <td>
-                            <button class="btn" ng-click="addITem(purchase)"><span class="fa fa-share"></span></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-            @if(isset($models))
-                <div class="col-xs-12">
-                    <table class="table">
-                        <tr>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Color</th>
-                            <th>N Motor</th>
-                            <th>N Cuadro</th>
-                        </tr>
-                        <tbody>
-                        @foreach($models->DispatchesItems as $item)
-                            <tr>
-                                <td>{{$item->Items->Models->Brands->name}}</td>
-                                <td>{{$item->Items->Models->name}}</td>
-                                <td>{{$item->Items->Colors->name}}</td>
-                                <td>{{$item->Items->n_motor}}</td>
-                                <td>{{$item->Items->n_cuadro}}</td>
-                                <td>
-                                    <a href="{{route('moto.dispatches.deleteItems',[$item->id,$models->id])}}"><span
-                                                class="text-danger fa fa-trash"></span></a>
-
-                                </td>
-                                <td>
-                                    <a href="{{route('moto.dispatches.editItems',[$item->id,$models->id])}}"><span
-                                                class="text-success fa fa-edit"></span></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                @endif
-
-                @endsection
-
-
-                @section('formAside')
-
-                @include('moto.partials.asideOpenForm')
-
-                @if(isset($models))
-
-                        <!-- .control-sidebar-menu -->
-
-                @if(isset($modelItems))
-                    {!! Form::model($modelItems,['route'=> ['moto.dispatches.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
-                @else
-                    {!! Form::open(['route'=> ['moto.dispatches.addItems' ], 'files' =>'true']) !!}
-                @endif
-
-                {!! Form::hidden('dispatches_id',$models->id ,['class'=>'dispatches_id']) !!}
-                {!! Form::hidden('branches_id',$models->Brancheables->first()->Branches->id) !!}
-
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('Modelo') !!}
-                    {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
-                </div>
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('Color') !!}
-                    {!! Form::select('colors_id', $colors, null, ['class'=>'form-control select2']) !!}
-                </div>
-
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('N Motor') !!}
-                    {!! Form::text('n_motor', null, ['class'=>'form-control']) !!}
-                </div>
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('N Cuadro') !!}
-                    {!! Form::text('n_cuadro', null, ['class'=>'form-control']) !!}
-                </div>
-
-                <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                    <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
-                </div>
-                {!! Form::close() !!}
-                        <!-- /.control-sidebar-menu -->
-            @endif
-            @include('moto.partials.asideCloseForm')
         </div>
     </div>
     </div>
 
+
+
 @endsection
+
 
 @section('js')
     <script>
@@ -193,7 +223,22 @@
 
         app.controller("myCtrl", function ($scope, $http) {
 
-            $scope.datos = {!!$providers!!};
+
+
+            //$('.provider').on('change',function()
+            //{
+                var id = $('.provider').val();
+                $http.get("moto/purchasesOrdersByProviders/" + id)
+                        .then(function (response) {
+                            $scope.data = response.data;
+
+                            console.table(response.data);
+                        });
+           // });
+
+
+
+
 
             $scope.onCategoryChange = function (id) {
                 $http.get("moto/dispatchesItems/" + id)
@@ -256,6 +301,16 @@
 
             };
 
+            $scope.asignarFactura = function () {
+
+                $("input:checkbox").each(function () {
+
+                    if ($(this).prop('checked'))
+                        console.log($(this).val());
+
+                });
+
+            };
 
         });
     </script>
