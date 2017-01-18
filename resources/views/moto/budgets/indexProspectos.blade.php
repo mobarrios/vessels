@@ -4,9 +4,7 @@
             <tr>
 
                 <td style="width: 1%">
-                    <div class="icheckbox_flat-blue">
-                        <input class="id_destroy" value="{{$model->id}}" type="checkbox">
-                    </div>
+                    <input class="id_destroy" value="{{$model->id}}" type="checkbox">
                 </td>
 
                 <td>{{$model->id}}</td>

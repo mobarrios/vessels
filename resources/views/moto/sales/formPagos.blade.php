@@ -76,6 +76,22 @@
 
                 <h5 class="pull-right">TOTAL A PAGAR :  <b class="text-danger"> $ {{number_format(($total - $pago),2)}}</b>
                 </h5>
+
+                <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="pull-left" title="Exportar PDF">
+                    <span class="btn btn-danger">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </span>
+                </a>
+                <a target="_blank" href="{!! route('moto.'.$section.'.recibo') !!}" class="pull-left" title="Recibo PDF">
+                    <span class="btn btn-success">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </span>
+                </a>
+                <a target="_blank" href="{!! route('moto.'.$section.'.factura') !!}" class="pull-left" title="Factura PDF">
+                    <span class="btn btn-warning">
+                        <i class="fa fa-file-pdf-o"></i>
+                    </span>
+                </a>
             </div>
 
         </div>

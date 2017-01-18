@@ -21,6 +21,8 @@ return [
     'postStoreRoute'  => 'moto.'.$model.'.edit',
     'postUpdateRoute' => 'moto.'.$model.'.edit',
 
+    'exportPdfRoute' => 'moto.'.$model.'.pdf',
+
     //addItems
     'addItemsRoute'  => 'moto.'.$model.'.addItems',
     'editItemsRoute'  => 'moto.'.$model.'.editItems',
