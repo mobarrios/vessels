@@ -2,8 +2,9 @@
     @section('table')
         @foreach($models as $model)
             <tr>
-
-                <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
+                <td style="width: 1%">
+                    <input class="id_destroy" value="{{$model->id}}" type="checkbox">
+                </td>
                 <td>{{$model->dni}}</td>
                 <td class="col-xs-1">
                     <div class="image">

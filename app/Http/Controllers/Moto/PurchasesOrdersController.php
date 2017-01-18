@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Branches;
 use App\Entities\Moto\DispatchesItems;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
@@ -13,6 +14,8 @@ use App\Http\Repositories\Moto\PurchasesOrdersItemsRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class PurchasesOrdersController extends Controller
@@ -87,10 +90,30 @@ class PurchasesOrdersController extends Controller
     //envia mail de la lista de pedidos
     public function sendToProviders()
     {
+
         $id = $this->route->getParameter('id');
 
         $repo = $this->repo->find($id);
         $repo->status = 2;
+
+        $user = Auth::user();
+        $data['from'] = $user->email;
+        $data['nombre'] = $user->fullName;
+
+        $proveedorMail = $repo->providers->email;
+
+
+//        return view('moto.emails.purchasesOrder',compact('repo','user'));
+        Mail::queue('moto.emails.purchasesOrder', ['repo'=>$repo,'user'=>$user] , function($message) use($proveedorMail,$user,$data)
+        {
+            $message->from($data['from']);
+            $message->to($proveedorMail)->subject('Pedido de mercadería MOTONET')
+                ->replyTo($user->email, $data['nombre']);
+        });
+
+//        dd($repo->providers);
+
+
         $repo->save();
         
         //envia mail al proveedor

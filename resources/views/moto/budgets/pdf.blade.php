@@ -83,6 +83,11 @@
             width: 200px;
         }
 
+        .inline-b{
+            display: inline-block !important;
+            margin: 0 3px;
+        }
+
         .espacio{
             width: 100%;
             height: 1px;
@@ -98,6 +103,7 @@
             left:0;
             width: 100%;
             padding: 10px !important;
+            height: 85px;
         }
 
         .container{
@@ -135,133 +141,156 @@
             display: inline-block;
         }
 
+        .text-right{
+            text-align: right;
+        }
+
+        .text-left{
+            text-align: left;
+        }
+
+        .pull-right{
+            float: right;
+        }
+
+        .pull-left{
+            float: left;
+        }
+
+        .absolute{
+            /*position: absolute;*/
+        }
+
+        .bottom{
+            margin-bottom:-100px !important;
+        }
+
     </style>
 
 </head>
 <body>
-    <header>
-        <table width="100%">
-            <tr>
-                <td>
-                    <img src="images/branches/logo.png" alt="Logo" width="200">
-                </td>
-                <td>
-                    <h2 align="center">PRESUPUESTO #  {!!  $model->id !!}</h2>
-                </td>
-                <th class="fecha">
-                    <span>{!! date('d',strtotime($model->date)) !!}</span><span>{!! date('m',strtotime($model->date)) !!}</span><span>{!! date('Y',strtotime($model->date)) !!}</span>
-                </th>
-            </tr>
-        </table>
+<header>
+    <table width="100%">
+        <tr>
+            <td>
+                <img src="images/branches/logo.png" alt="Logo" width="200">
+            </td>
+            <td>
+                <h2 align="center">PRESUPUESTO #  {!!  $model->id !!}</h2>
+            </td>
+            <th class="fecha">
+                <span>{!! date('d',strtotime($model->date)) !!}</span><span>{!! date('m',strtotime($model->date)) !!}</span><span>{!! date('Y',strtotime($model->date)) !!}</span>
+            </th>
+        </tr>
+    </table>
 
-    </header>
+</header>
 
-    <div class="container">
-        <div class="col-4">
-            <p><b>Cliente: </b> {!! $model->Clients->fullName !!}</p>
+<div class="container">
+    <div class="col-4">
+        <p><b>Cliente: </b> {!! $model->Clients->fullName !!}</p>
+    </div>
+
+    <div class="col-4">
+        <p><b>DNI: </b> {!! $model->Clients->dni !!}</p>
+    </div>
+
+    <div class="col-4">
+        <p><b>Sexo: </b> {!! $model->Clients->sexo !!}</p>
+    </div>
+
+    <div class="espacio"></div>
+
+    <div class="col-4">
+        <p><b>Mail: </b> {!! $model->Clients->email !!}</p>
+    </div>
+
+    <div class="col-4">
+        <p><b>Nacionalidad: </b> {!! $model->Clients->nacionality !!}</p>
+    </div>
+
+    <div class="col-4">
+        <p><b>Teléfono: </b> {!! $model->Clients->phone1 !!}</p>
+    </div>
+
+    <div class="espacio"></div>
+
+    <div class="inline">
+        <p><b>Dirección: </b> {!! $model->Clients->address !!}</p>
+    </div>
+
+    <div class="inline">
+        <p><b>Ciudad: </b> {!! $model->Clients->localidad !!}</p>
+    </div>
+
+    <hr>
+
+    @foreach($model->allItems as $item)
+        <div>
+            <p><b>Producto: </b> {!! $item->name !!}</p>
         </div>
 
-        <div class="col-4">
-            <p><b>DNI: </b> {!! $model->Clients->dni !!}</p>
-        </div>
-
-        <div class="col-4">
-            <p><b>Sexo: </b> {!! $model->Clients->sexo !!}</p>
-        </div>
-
-        <div class="espacio"></div>
-
-        <div class="col-4">
-            <p><b>Mail: </b> {!! $model->Clients->email !!}</p>
-        </div>
-
-        <div class="col-4">
-            <p><b>Nacionalidad: </b> {!! $model->Clients->nacionality !!}</p>
-        </div>
-
-        <div class="col-4">
-            <p><b>Teléfono: </b> {!! $model->Clients->phone1 !!}</p>
+        <div class="inline">
+            <p><b>Marca: </b> {!! $item->brands->name !!}</p>
         </div>
 
         <div class="espacio"></div>
 
         <div class="inline">
-            <p><b>Dirección: </b> {!! $model->Clients->address !!}</p>
+            <p><b>Precio de lista: </b> ${!! $item->activeListPrice->price_list or '0' !!}</p>
         </div>
 
         <div class="inline">
-            <p><b>Ciudad: </b> {!! $model->Clients->localidad !!}</p>
+            <p><b>Contado: </b> ${!! $item->activeListPrice->price_net or '0' !!}</p>
         </div>
 
-        <hr>
+        <div class="espacio"></div>
+        <div class="inline">
+            <p><b>Patentamiento: </b> ${!! $item->patentamiento or '0' !!}</p></p>
+        </div>
 
-        @foreach($model->allItems as $item)
+        <div class="inline">
+            <p><b>Pack Service: </b> ${!! $item->pack_service or '0' !!}</p></p>
+        </div>
+
+    @endforeach
+
+    <span class="padding"></span>
+
+
+    <div class="inline">
+        <p><b>Seguro: </b> ${!! $model->seguro or '0' !!}</p>
+    </div>
+
+    <div class="espacio"></div>
+
+    <div class="inline">
+        <p><b>Flete: </b> ${!! $model->flete or '0' !!}</p>
+    </div>
+
+    <div class="inline">
+        <p><b>Formularios: </b> ${!! $model->formularios or '0' !!}</p>
+    </div>
+
+    <span class="padding"></span>
+
+    <div class="footer">
+
+        <div class="bottom">
+
             <div>
-                <p><b>Producto: </b> {!! $item->name !!}</p>
+
+                <div class="inline">
+                    <p><b>Total Final: </b> ${!! $model->total or '0' !!}</p>
+                </div>
+
+                <div class="inline">
+                    <p><b>Anticipo: </b> ${!! $model->anticipo or '0' !!}</p>
+                </div>
+
+                <div class="espacio"></div>
+
             </div>
-
-            <div class="inline">
-                <p><b>Marca: </b> {!! $item->brands->name !!}</p>
-            </div>
-
-            <div class="espacio"></div>
-
-            <div class="inline">
-                <p><b>Precio de lista: </b> ${!! $item->activeListPrice->price_list or '0' !!}</p>
-            </div>
-
-            <div class="inline">
-                <p><b>Contado: </b> ${!! $item->activeListPrice->price_net or '0' !!}</p>
-            </div>
-
-            <div class="espacio"></div>
-            <div class="inline">
-                <p><b>Patentamiento: </b> ${!! $item->patentamiento or '0' !!}</p></p>
-            </div>
-
-            <div class="inline">
-                <p><b>Pack Service: </b> ${!! $item->pack_service or '0' !!}</p></p>
-            </div>
-
-        @endforeach
-
-       <span class="padding"></span>
-
-
-        <div class="inline">
-            <p><b>Seguro: </b> ${!! $model->seguro or '0' !!}</p>
-        </div>
-
-        <div class="espacio"></div>
-
-        <div class="inline">
-            <p><b>Flete: </b> ${!! $model->flete or '0' !!}</p>
-        </div>
-
-        <div class="inline">
-            <p><b>Formularios: </b> ${!! $model->formularios or '0' !!}</p>
-        </div>
-
-        <span class="padding"></span>
-
-        <div class="inline">
-            {!!  DNS1D::getBarcodeHTML($model->id, "EAN13") !!}
-        </div>
-
-        <div class="inline">
-            {!!  DNS2D::getBarcodeHTML($model->id, "QRCODE") !!}
-        </div>
-
-        <div class="footer">
-
-            <div class="inline">
-                <p><b>Total Final: </b> ${!! $model->total or '0' !!}</p>
-            </div>
-
-            <div class="inline">
-                <p><b>Anticipo: </b> ${!! $model->anticipo or '0' !!}</p>
-            </div>
-            <div class="espacio"></div>
             <div class="inline">
                 <p><b>A financiar: </b> ${!! $model->a_financiar or '0' !!}</p>
             </div>
@@ -270,12 +299,20 @@
                 <p><b>Atendido por:</b> Manuel Barrios</p>
             </div>
 
-
-
-
+            {{--<span style="clear: both"></span>--}}
+            <div class="inline-b" style="margin-left: 40px !important;vertical-align: top;">
+                {!!  DNS2D::getBarcodeHTML($model->id, "QRCODE",3.3,3.3,'white') !!}
+            </div>
         </div>
 
 
     </div>
+
+        <div class="inline-b" style="position: absolute;left:150px;bottom:5px">
+            {!!  DNS1D::getBarcodeHTML($model->id, "EAN13",2,33, 'white') !!}
+        </div>
+
+
+</div>
 </body>
 </html>
