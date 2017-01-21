@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\DispatchesItemsRepo;
+use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
+use App\Http\Repositories\Moto\PayMethodsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersItemsRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo as Repo;
@@ -23,7 +25,9 @@ class PurchasesOrdersController extends Controller
     protected $modelsRepo;
     protected $modelsListsPricesRepo;
 
-    public function __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo, ModelsRepo $modelsRepo, PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo, ColorsRepo $colorsRepo, BranchesRepo $branchesRepo)
+    public function __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo,
+                                ModelsRepo $modelsRepo, PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo,
+                                ColorsRepo $colorsRepo, BranchesRepo $branchesRepo, PayMethodsRepo $payMethodsRepo)
     {
 
         $this->request = $request;
@@ -38,6 +42,9 @@ class PurchasesOrdersController extends Controller
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
         $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
+        $this->data['pay_methods'] = $payMethodsRepo->ListsData('name','id');
+
+        $this->data['total'] = 0;
 
         $this->modelsRepo = $modelsRepo;
         $this->purchasesOrdersItemsRepo = $purchasesOrdersItemsRepo;

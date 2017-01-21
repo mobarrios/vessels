@@ -91,6 +91,21 @@ Route::group(['prefix'=>'configs'],function(){
         Route::get('/pdf',  ['as'=>'configs.branches.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
     });
 
+    Route::group(['prefix'=>'company'],function(){
+
+        Route::get('/destroy/{id?}',   ['as'=>'configs.company.destroy','uses'=>'Configs\CompanyController@destroy']);
+        Route::get('/edit/{id?}',      ['as'=>'configs.company.edit','uses'=>'Configs\CompanyController@edit']);
+        Route::post('/update/{id?}',   ['as'=>'configs.company.update','uses'=>'Configs\CompanyController@update']);
+
+        Route::get('/create',           ['as'=>'configs.company.create','uses'=>'Configs\CompanyController@create']);
+        Route::post('/store',           ['as'=>'configs.company.store','uses'=>'Configs\CompanyController@store']);
+        Route::get('/show',             ['as'=>'configs.company.show','uses'=>'Configs\CompanyController@show']);
+        Route::get('/index/{search?}',  ['as'=>'configs.company.index','uses'=>'Configs\CompanyController@index']);
+
+
+        Route::get('/pdf',  ['as'=>'configs.company.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+    });
+
 
     //Route::get('permissions/{search?}',['as'=>'configs.permissions.index','uses'=>'Configs\PermissionsController@index']);
 

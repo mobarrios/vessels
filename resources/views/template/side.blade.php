@@ -129,7 +129,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><span>Datos</span> </a></li>
+                            <li><a href="{{route('configs.company.index')}}"><span>Datos</span> </a></li>
                             <li class={{ Request::segment(2) == "branches" ? 'active' : '' }}><a href="{{route('configs.branches.index')}}"><span> Sucursales</span></a></li>
 
                         </ul>
@@ -160,6 +160,12 @@
                     @permission('financials.list')
                         <li><a href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
                     @endpermission
+
+                    @permission('paymethods.list')
+                    <li><a href="{{route('moto.payMethods.index')}}"><span>Metodos de Pago</span></a></li>
+                    @endpermission
+
+
 
                     <li><a href="#"><span>Sistema</span></a></li>
                 </ul>

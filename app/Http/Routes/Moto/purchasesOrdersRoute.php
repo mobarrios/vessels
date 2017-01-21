@@ -22,6 +22,12 @@ Route::group(['prefix'=>'purchasesOrders'],function(){
 
     Route::get('/sendPurchaseOrder/{id?}', ['middleware' => 'permission:' . $section . '.sendtoproviders', 'as' => 'moto.purchasesOrders.sendToProviders', 'uses' => 'Moto\PurchasesOrdersController@sendToProviders']);
     Route::get('/confirm/{id?}', ['middleware' => 'permission:' . $section . '.confirm', 'as' => 'moto.purchasesOrders.confirm', 'uses' => 'Moto\PurchasesOrdersController@confirm']);
-    
+
+
+    Route::post('/addPayment/{item?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.purchasesOrders.addPayment', 'uses' => 'Moto\PurchasesOrdersController@addPayment']);
+    Route::get('/editPayment{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.purchasesOrders.editPayment', 'uses' => 'Moto\PurchasesOrdersController@editPayment']);
+    Route::post('/editPayment/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.purchasesOrders.updatePayment', 'uses' => 'Moto\PurchasesOrdersController@updatePayment']);
+    Route::get('/deletePayment/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.purchasesOrders.deletePayment', 'uses' => 'Moto\PurchasesOrdersController@deletePayment']);
+
 
 });
