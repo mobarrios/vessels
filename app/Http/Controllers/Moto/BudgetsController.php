@@ -14,6 +14,8 @@ use App\Http\Repositories\Moto\BudgetsRepo as Repo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 
@@ -158,9 +160,17 @@ class BudgetsController extends Controller
 
         if($this->route->getParameter('id'))
             return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
-        else
-//            return redirect()->back();
+        else{
+//            return view('moto.emails.budgets',compact('model'));
+            Mail::queue('moto.emails.budgets', ['model'=>$model] , function($message) use($model)
+            {
+                $message->from('info@motonet.com.ar');
+                $message->to($model->Clients->email)->subject('Presupuesto solicitado')
+                    ->replyTo(Auth::user()->email, Auth::user()->fullname);
+            });
+
             return redirect()->route('moto.'.$this->section.'.pdf',$model->id);
+        }
 
     }
 

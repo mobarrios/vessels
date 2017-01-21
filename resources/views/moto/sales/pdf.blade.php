@@ -114,7 +114,7 @@
          <div class="col-xs-4 text-center">
              <p class="upper">remito</p>
              <p>N: 00001</p>
-             <p>Fecha 16/01/2017</p>
+             <p>Fecha {!! $model->date_confirm !!}</p>
              <br>
              <div class="datosHeader">
                 <p>C.U.I.T: 33-70964580-9</p>
@@ -133,7 +133,7 @@
 
       <div class="col-xs-12 border">
           <div class="contenedor-dato-cliente">
-             <span class="upper"><b>Nombre: </b></span> <span class="upper text-muted">Barrios Osvaldo Manuel</span>
+             <span class="upper"><b>Nombre: </b></span> <span class="upper text-muted">{!! $model->Clients->fullname !!}</span>
           </div>
       </div>
 
@@ -141,7 +141,7 @@
 
       <div class="col-xs-12 border">
           <div class="contenedor-dato-cliente">
-             <span class="upper"><b>Domicilio: </b></span> <span class="upper text-muted">Chacabuco 215</span>
+             <span class="upper"><b>Domicilio: </b></span> <span class="upper text-muted">{!! $model->Clients->address !!}</span>
           </div>
       </div>
 
@@ -149,13 +149,13 @@
 
          <div class="col-xs-6">
               <div class="contenedor-dato-cliente">
-                 <span class="upper"><b>Localidad: </b></span> <span class="upper text-muted">Hurlingham</span>
+                 <span class="upper"><b>Localidad: </b></span> <span class="upper text-muted">{!! $model->Clients->city .', '.$model->Clients->location  !!}</span>
               </div>
           </div>
 
           <div class="col-xs-6">
               <div class="contenedor-dato-cliente">
-                 <span class="upper"><b>Teléfono: </b></span> <span class="upper text-muted">1102154455</span>
+                 <span class="upper"><b>Teléfono: </b></span> <span class="upper text-muted">{!! $model->Clients->phone1 or $model->Clients->phone2  !!}</span>
               </div>
           </div>
       </div>
@@ -166,7 +166,7 @@
 
          <div class="col-xs-6">
             <div class="contenedor-dato-cliente">
-               <span class="upper"><b>CUIT: </b></span> <span class="upper text-muted">20136541253</span>
+               <span class="upper"><b>CUIT: </b></span> <span class="upper text-muted">{!! $model->Clients->dni  !!}</span>
             </div>
          </div>
 
@@ -187,23 +187,25 @@
                     <th>Código</th>
                     <th>Descripción</th>
                  </tr>
-                 <tr>
-                    <td>1</td>
-                    <td>HFHGFH5453</td>
-                    <td class="descripcion">
-                        <p>Motocicleta</p>
-                        <p>Modelo Honda XR 150</p>
-                        <p>Motor N²: ASD3423</p>
-                        <p>Cuadro N²: HFHGFH5453</p>
-                        <p>Año: 2017</p>
-                        <p>Color: Negro</p>
-                    </td>
-                 </tr>
+                 @foreach($model->SalesItems as $salesItem)
+                     <tr>
+                        <td>1</td>
+                        <td>HFHGFH5453</td>
+                        <td class="descripcion">
+                            <p>{!! $salesItem->Items->Models->Categories->first()->name !!}</p>
+                            <p>{!! $salesItem->Items->Models->Brands->name !!} {!! $salesItem->Items->Models->name !!}</p>
+                            <p>Motor N²: {!! $salesItem->Items->n_motor !!}</p>
+                            <p>Cuadro N²: {!! $salesItem->Items->n_cuadro !!}</p>
+                            <p>Año: {!! $salesItem->Items->year !!}</p>
+                            <p>Color: {!! $salesItem->Items->Colors->name !!}</p>
+                        </td>
+                     </tr>
+                 @endforeach
              </tbody>
 
              <tfoot>
                  <tr>
-                     <td colspan="3"><p class="text-center upper">Recibí conforme la suma total de <strong>$21000</strong></p></td>
+                     <td colspan="3"><p class="text-center upper">Recibí conforme la suma total de <strong>${!! $model->SalesPayments->sum('amount') !!}</strong></p></td>
                  </tr>
 
                  <tr>
