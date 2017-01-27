@@ -27,7 +27,7 @@
 <!-- AdminLTE for demo purposes -->
 {{--<script src="vendors/LTE/dist/js/demo.js"></script>--}}
 
-@if(Request::segment(2) == 'budgets')
+@if(in_array(Request::segment(2),['budgets','technicalServices']))
 <!-- Select2 -->
 <script src="vendors/LTE/plugins/select2/select2-buscador.js"></script>
 @else

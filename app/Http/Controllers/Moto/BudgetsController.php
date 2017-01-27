@@ -68,7 +68,8 @@ class BudgetsController extends Controller
         $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
 
         //return view($this->getConfig()->indexRoute)->with($this->data);
-        return view('moto.budgets.indexProspectos')->with($this->data);    }
+        return view('moto.budgets.indexProspectos')->with($this->data);
+    }
 
 
     public function findByClients()

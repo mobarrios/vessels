@@ -50,4 +50,8 @@ class ClientsRepo extends BaseRepo {
         $model->save();
         
     }
+
+    public function salesWithItems($id){
+        return $this->model->with('sales')->find($id);
+    }
 }

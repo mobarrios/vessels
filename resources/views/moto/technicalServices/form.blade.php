@@ -56,7 +56,7 @@
 
 
 @section('form_title')
-    Nuevo Presupuesto
+    Nuevo servicio
 @endsection
 
 @section('form_inputs')
@@ -65,126 +65,148 @@
         <div>
             <div ng-app="buscador">
 
-                @if(!isset($budget))
+                @if(!isset($technicalService))
                     <div class="search" ng-controller="buscadorController" >
 
-                        <p>Antes de crear un prospecto, busque si ya existe.</p>
+                        <p>Antes de ingresar un servicio, busque si existe el cliente.</p>
                         <select id="search" class="select2 form-control">
-                            <option value="seleccione">Seleccione... ~  ~ </option>
-                            @forelse($prospectos as $prospecto)
-                                <option value="{!! $prospecto->id !!}">
-                                    {!! $prospecto->fullname !!} ~ {!! $prospecto->dni !!} ~ {!! $prospecto->email !!} ~ {!! $prospecto->phone !!}
+                            <option value="seleccione">Seleccione... ~ </option>
+                            @forelse($clientes as $cliente)
+                                <option value="{!! $cliente->id !!}">
+                                    {!! $cliente->fullname !!} ~ {!! $cliente->dni !!} ~ {!! $cliente->email !!} ~ {!! $cliente->phone !!}
 
                                 </option>
                             @empty
 
                             @endforelse
                         </select>
+
+                        <div ng-show="sales.length > 0">
+                            <hr>
+                            <table class="table table-responsive">
+                                <tr>
+                                    <th>Fecha compra</th>
+                                    <th>Artículo</th>
+                                </tr>
+                                <tr ng-repeat="sale in sales" >
+                                    <td>@{{ sale.date_confirm }}</td>
+                                    <td>
+                                        <div ng-repeat="item in sale.items">
+                                            <p><b>Modelo:</b> <b class="text-primary">@{{ item.models.name }}, color @{{ item.colors.name }}, año @{{ item.year}}</b></p>
+                                            <p><b>N. motor:</b> @{{ item.n_motor}}</p>
+                                            <p><b>N. cuadro:</b> @{{ item.n_cuadro}}</p>
+                                            <a href="#@{{ item.id }}" class="btn btn-xs btn-success" title="Seleccionar producto"><i class="fa fa-check"></i></a>
+                                            <hr>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
                     </div>
+                    <br>
                 @endif
 
                 <div>
                     @if(isset($client))
-                        {!! Form::model($client,['route'=> [config('models.prospectos.updateRoute')],  'title' =>"Crear prospecto",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
+                        {!! Form::model($client,['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
                     @else
-                        {!! Form::open(['route'=> [config('models.prospectos.storeRoute')],  'title' =>"Crear prospecto",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
+                        {!! Form::open(['route'=> [config('models.clients.storeRoute')],  'title' =>"Crear cliente",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
                     @endif
 
-                    {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
-                    {!! Form::hidden('budgets',true) !!}
+                        {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
+                        {!! Form::hidden('budgets',true) !!}
 
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('last_name', "APELLIDO") !!}
-                        {!! Form::text('last_name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'last_name']) !!}
-                    </div>
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('last_name', "APELLIDO") !!}
+                                {!! Form::text('last_name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'last_name']) !!}
+                            </div>
 
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('name', "NOMBRE") !!}
-                        {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
-                    </div>
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('name', "NOMBRE") !!}
+                                {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
+                            </div>
 
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('dni', "DNI") !!}
-                        {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
-                    </div>
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('dni', "DNI") !!}
+                                {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
+                            </div>
 
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('sexo', "SEXO") !!}
-                        {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],null, ['class'=>'form-control','ng-model' => 'sexo']) !!}
-                    </div>
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('sexo', "SEXO") !!}
+                                {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],null, ['class'=>'form-control','ng-model' => 'sexo']) !!}
+                            </div>
 
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('email', "EMAIL") !!}
-                        {!! Form::text('email', null, ['class'=>'form-control','ng-model' => 'email']) !!}
-                    </div>
-
-
-
-
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('nacionality', "NACIONALIDAD") !!}
-                        {!! Form::text('nacionality', null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
-                    </div>
-
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('phone1', "TELÉFONO") !!}
-                        {!! Form::text('phone1', null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
-                    </div>
-
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('address', "DIRECCIÓN") !!}
-                        {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
-                    </div>
-
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('city', "CIUDAD") !!}
-                        {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
-                    </div>
-
-
-
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('location', "LOCALIDAD") !!}
-                        {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
-                    </div>
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('email', "EMAIL") !!}
+                                {!! Form::text('email', null, ['class'=>'form-control','ng-model' => 'email']) !!}
+                            </div>
 
 
 
 
-                    <div class="col-xs-12 col-lg-3 form-group">
-                        {!! Form::label('province', "PROVINCIA") !!}
-                        {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
-                    </div>
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('nacionality', "NACIONALIDAD") !!}
+                                {!! Form::text('nacionality', null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('phone1', "TELÉFONO") !!}
+                                {!! Form::text('phone1', null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('address', "DIRECCIÓN") !!}
+                                {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('city', "CIUDAD") !!}
+                                {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
+                            </div>
 
 
 
-                    <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
-                        @if(!isset($budget))
-    {{--                        {!! Form::hidden('clients_id', $client->id) !!}--}}
-                            <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
-                            <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span></button>
-                        @endif
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('location', "LOCALIDAD") !!}
+                                {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
+                            </div>
 
-                            @if(isset($budget))
-                                <a href="#" data-action="{!! route("moto.".$section.".addItem", $budget->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
-                            @endif
+
+
+
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('province', "PROVINCIA") !!}
+                                {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
+                            </div>
+
+
+
+                            <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
+                                @if(!isset($technicalService))
+            {{--                        {!! Form::hidden('clients_id', $client->id) !!}--}}
+                                    <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                                    <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+                                @endif
+
+                                    @if(isset($technicalService))
+                                        <a href="#" data-action="{!! route("moto.".$section.".addItem", $technicalService->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+                                    @endif
+                            </div>
                         {!! Form::close() !!}
-
-
-
-                    </div>
                 </div>
 
 
             <span class="clearfix"></span>
-            @if(isset($budget))
+            @if(isset($technicalService))
 
                 <hr>
 
-                {!! Form::model($budget,["route" => 'moto.'.$section.'.update', 'method' => 'POST', 'id' => 'formPresupuesto']) !!}
+                {!! Form::model($technicalService,["route" => 'moto.'.$section.'.update', 'method' => 'POST', 'id' => 'formPresupuesto']) !!}
 
                     {!! Form::hidden('clients_id',$client->id) !!}
-                    {!! Form::hidden('id',$budget->id) !!}
+                    {!! Form::hidden('id',$technicalService->id) !!}
                     {!! Form::hidden('branches_id',Auth::user()->branches_active_id) !!}
 
                     <div>
@@ -206,10 +228,10 @@
                                         <td class="text-danger" class="priceBudget">$ @{{ models.pivot.price_budget }}</td>
                                         <td class="text-danger">$ @{{ models.pivot.price_actual }}</td>
                                         <td>
-                                            <a href="moto/budgets/deleteItem/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
+                                            <a href="moto/technicalServices/deleteItem/{{ $technicalService->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
                                         </td>
                                         <td>
-                                            <a href="moto/budgets/editItem/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
+                                            <a href="moto/technicalServices/editItem/{{ $technicalService->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
                                         </td>
                                     </tr>
 
@@ -266,21 +288,7 @@
                                 {!! Form::text('a_financiar',null,['class' => 'form-control','readonly','ng-model' => 'aFinanciar','ng-change' => 'calcular()','id' => 'aFinanciar']) !!}
                             </div>
 
-                            <div class="col-xs-2 form-group">
-                                <label>Total a Financiar</label>
 
-                                <select name="modo_financiamiento" class="form-control" id="financials">
-                                    @foreach($financials as $i => $financial)
-                                        <optgroup label="{{$financial->name}}">
-                                            @foreach($financial->FinancialsDues as $ind => $dues)
-                                                <option value="{{$dues->coef}}" data-id="due{!! $i.$ind !!}" due="{{$dues->due}}">
-                                                    {{$dues->due}} cuota/s
-                                                </option>
-                                            @endforeach
-                                        </optgroup>
-                                    @endforeach
-                                </select>
-                            </div>
 
                             <div class="col-xs-2 form-group">
                                 <label>Importe Cuota</label>
@@ -320,15 +328,15 @@
 
 @section('formAside')
     @include('moto.partials.asideOpenForm')
-    @if(isset($budget))
+    @if(isset($technicalService))
 
         @if(isset($modelItems))
-            {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $budget->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
+            {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $technicalService->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
         @else
-            {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $budget->id], 'files' =>'true']) !!}
+            {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $technicalService->id], 'files' =>'true']) !!}
         @endif
 
-        {!! Form::hidden('budgets_id',$budget->id) !!}
+        {!! Form::hidden('budgets_id',$technicalService->id) !!}
         {!! Form::hidden('price_actual',null,['class' => 'price_actual']) !!}
 
         <div class="col-xs-12  form-group">
@@ -460,6 +468,11 @@
                             $scope.province = response.data['province']
                         });
 
+                $http.get("moto/salesWithItems/"+option.val())
+                        .then(function (response) {
+                            $scope.sales = response.data.sales;
+                        });
+
             });
 
 
@@ -523,11 +536,11 @@
         })
 
 
-                @if(isset($budget))
+                @if(isset($technicalService))
         var coef;
 
         $("#financials option").each(function(ind, val){
-            if($(val).val() == "{!! $budget->modo_financiamiento !!}"){
+            if($(val).val() == "{!! $technicalService->modo_financiamiento !!}"){
                 $(val).attr('selected','selected')
                 coef = $(val);
             }
@@ -559,44 +572,6 @@
 
 //        var app = angular.module("myApp", []);
 
-        app.controller("myCtrl", function ($scope, $http) {
-            $http.get("moto/budgetsItems/{!! $budget->id !!}")
-                    .then(function (response) {
-                        $scope.total = parseFloat(response.data[0]['price'])
-                        $scope.stotal = parseFloat(response.data[0]['price'])
-                        $scope.patentamiento = parseFloat(response.data[0]['patentamiento'])
-                        $scope.packService = parseFloat(response.data[0]['pack_service'])
-                        $scope.data = response.data[1]
-                        $scope.seguro = {!! $budget->seguro or '0' !!}
-                                $scope.flete = {!! $budget->flete or '0' !!}
-                                $scope.formularios = {!! $budget->formularios or '0' !!}
-                                $scope.gastosAdministrativos = {!! $budget->gastros_administrativos or '0' !!}
-                                $scope.descuento = {!! $budget->descuento or '0' !!}
-                                $scope.anticipo = {!! $budget->anticipo or '0' !!}
-                                $scope.importeCuota = {!! $budget->importe_cuota or '0' !!}
-                                $scope.aFinanciar = {!! $budget->a_financiar or '0' !!}
-                        $scope.calcular();
-
-                    });
-
-
-            $scope.calcular = function()
-            {
-                if( $scope.descuento != null && $scope.descuento != 0) {
-                    var total = parseFloat(($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) * $scope.descuento / 100).toFixed(2);
-                    $scope.total = parseFloat(($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) - total).toFixed(2);
-
-                }else
-                    $scope.total =  parseFloat($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos).toFixed(2);
-
-                $scope.financiar();
-            };
-
-            $scope.financiar = function()
-            {
-                $scope.aFinanciar = parseFloat($scope.total -  $scope.anticipo).toFixed(2) ;
-            };
-        });
 
         @endif
 

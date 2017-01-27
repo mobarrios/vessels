@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Moto;
 
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Moto\BudgetsRepo;
+use App\Http\Repositories\Moto\ClientsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\ModelsRepo as Repo;
 use Illuminate\Http\Request;
@@ -12,13 +13,14 @@ use Illuminate\Routing\Route;
 
 class AjaxController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route)
+    public function  __construct(Request $request, Repo $repo, Route $route, ClientsRepo $clientsRepo)
     {
 
         $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
 
+        $this->clientsRepo = $clientsRepo;
         $this->section          = 'brands';
         $this->data['section']  = $this->section;
     }
@@ -51,6 +53,9 @@ class AjaxController extends Controller
         return $this->repo->actualPriceCost($this->route->getParameter('id'));
     }
 
+    public function salesWithItems($id){
+        return $this->clientsRepo->salesWithItems($id);
+    }
 
     public function budgetsItems(BudgetsRepo $budgetsRepo,FinancialsRepo $financialsRepo,$id)
     {

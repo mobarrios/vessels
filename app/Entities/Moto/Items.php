@@ -3,6 +3,7 @@
 
 
  use App\Entities\Entity;
+ use Illuminate\Database\Eloquent\Model;
 
  class Items extends Entity
  {
@@ -30,6 +31,16 @@
      public function Dispatches()
      {
          return $this->belongsToMany(Dispatches::class,'dispatches_items');
+     }
+
+
+     public function Sales(){
+         return $this->belongsToMany(Sales::class,'sales_items')->withPivot('price_actual','patentamiento','pack_service');
+     }
+
+
+     public function getModelName(){
+         return $this->belongsTo(Model::class)->get()->name;
      }
 
      public function getBranchesAttribute()
