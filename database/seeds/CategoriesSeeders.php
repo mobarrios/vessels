@@ -12,18 +12,26 @@ class CategoriesSeeders extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-        [
-            'id'    => 1,
-            'name'=>'Motos',
-        ],[
-            'id'    => 2,
-            'name'=>'Scooters',
-        ],
-                [
-                    'id'    => 3,
-                    'name'=>'Custom',
-                ]
+            [
+                'id'    => 1,
+                'name'=>'Motos',
+            ],[
+                'id'    => 2,
+                'name'=>'Scooters',
+            ],
+            [
+                'id'    => 3,
+                'name'=>'Custom',
+            ],
+            [
+                'id'    => 4,
+                'name'=>'Accesorios',
+            ],
+            [
+                'id'    => 5,
+                'name'=>'Repuestos',
             ]
-        );
+
+        ]);
     }
 }

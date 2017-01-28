@@ -16,7 +16,7 @@
             </li>
 
             @permission('clients.list')
-                <li class="treeview {{ in_array(Request::segment(2), ["clients","prospectos","budgets"]) ? 'active' : ''  }}">
+                <li class="treeview {{ in_array(Request::segment(2), ["clients","prospectos","budgets","technicalServices"]) ? 'active' : ''  }}">
                     <a href="#">
                         <i class="fa fa-group "></i> <span>Clientes</span>
                             <span class="pull-right-container">
@@ -27,6 +27,7 @@
                         <li class={{ Request::segment(2) == "clients" ? 'active' : '' }}><a href="{{route('moto.clients.index')}}"><span>Lista de Clientes</span></a></li>
                         <li class={{ Request::segment(2) == "prospectos" ? 'active' : '' }}><a href="{{route('moto.prospectos.index')}}"><span>Lista de Prospectos</span></a></li>
                         <li class={{ Request::segment(2) == "budgets" ? 'active' : '' }}><a href="{{route('moto.budgets.create')}}"><span>Nuevo Presupuesto</span></a></li>
+                        <li class={{ Request::segment(2) == "technicalServices" ? 'active' : '' }}><a href="{{route('moto.technicalServices.index')}}"><span>Servcio técnico</span></a></li>
                     </ul>
                 </li>
             @endpermission

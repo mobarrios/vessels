@@ -15,6 +15,7 @@
                 <td>{{$model->cuit}}</td>
                 <td>{{$model->phone}}</td>
                 <td>{{$model->mail}}</td>
+                <td><a href="{{route('moto.providers.cc', $model->id)}}" class="btn btn-xs btn-default"><span class="fa fa-cc"></span> </a></td>
 
 
             </tr>

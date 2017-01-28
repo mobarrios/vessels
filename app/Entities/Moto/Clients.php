@@ -17,6 +17,20 @@
          return $this->hasMany(Budgets::class);
      }
 
+     public function TechnicalServices()
+     {
+         return $this->hasMany(TechnicalServices::class);
+     }
+
+     public function Sales()
+     {
+         return $this->hasMany(Sales::class)->with('Items');
+     }
+
+     public function SalesItems(){
+         return $this->hasManyThrough(SalesItems::class,Sales::class)->with('items');
+     }
+
      public function getFullNameAttribute(){
          return $this->attributes['last_name'].' '.$this->attributes['name'];
      }

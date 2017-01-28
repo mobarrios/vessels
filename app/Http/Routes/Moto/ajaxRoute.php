@@ -8,6 +8,7 @@ Route::get('/modelActualCost/{id?}', 'Moto\AjaxController@modelActualCost');
 
 
 Route::get('/budgetsItems/{id}', 'Moto\AjaxController@budgetsItems');
+Route::get('/salesWithItems/{id}', 'Moto\AjaxController@salesWithItems');
 
 //buscar purchasesorders
 Route::get('/purchasesOrdersFind/{id?}', 'Moto\PurchasesOrdersController@find');

@@ -1,22 +1,23 @@
 <?php
 
-$model = 'budgets';
+$model = 'technicalServices';
 
 return [
 
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Presupuestos',
+    'sectionName'   => 'Servicio técnico',
 
     //routes
-    'indexRoute'    => 'moto.'.$model.'.index',
-    'storeRoute'    => 'moto.'.$model.'.store',
-    'createRoute'   => 'moto.'.$model.'.create',
-    'showRoute'     => 'moto.'.$model.'.show',
-    'editRoute'     => 'moto.'.$model.'.edit',
-    'updateRoute'   => 'moto.'.$model.'.update',
-    'destroyRoute'  => 'moto.'.$model.'.destroy',
+    'indexRoute'         => 'moto.'.$model.'.index',
+    'storeRoute'         => 'moto.'.$model.'.store',
+    'createRoute'        => 'moto.'.$model.'.create',
+    'showRoute'          => 'moto.'.$model.'.show',
+    'editRoute'          => 'moto.'.$model.'.edit',
+    'updateRoute'        => 'moto.'.$model.'.update',
+    'destroyRoute'       => 'moto.'.$model.'.destroy',
+    'serviceOrderRoute'  => 'moto.'.$model.'.serviceOrder',
 
     'postStoreRoute'  => 'moto.'.$model.'.create',
     'postUpdateRoute' => 'moto.'.$model.'.index',
@@ -47,23 +48,23 @@ return [
     //column search
     'search' => [
         
-            'Nombre'    => 'name',
-            'Direccion'  => 'address' ,
+            'Numero'    => 'number',
+            //'Direccion'  => 'address' ,
             //'Email'     => 'email',
     ],
 
     'validationsStore' => [
 
+            //'number'          => 'required',
             'clients_id'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-        'clients_id'     => 'required',
+            //'number'          => 'required',
+            'clients_id'     => 'required',
 
     ],
-
-
 
 ];

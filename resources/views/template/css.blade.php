@@ -22,6 +22,7 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="vendors/LTE/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="vendors/LTE/plugins/iCheck/flat/_all.css">
 
 <link rel="stylesheet" href="styles.css">
 

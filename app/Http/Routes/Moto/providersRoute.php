@@ -13,6 +13,8 @@ Route::group(['prefix'=>'providers'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.providers.show','uses'=>'Moto\ProvidersController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.providers.index','uses'=>'Moto\ProvidersController@index']);
 
-    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.providers.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+        Route::get('/cc/{id?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.providers.cc','uses'=>'Moto\ProvidersController@getCc']);
+
+        Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.providers.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
 });

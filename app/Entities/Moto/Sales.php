@@ -35,8 +35,11 @@
          return $this->hasMany(SalesItems::class);
      }
 
+    public function Items(){
+        return $this->belongsToMany(Items::class,'sales_items')->with('models','colors')->withPivot('price_actual','patentamiento','pack_service');
+    }
 
-     
+
      public function getDateConfirmAttribute($value)
      {
          return date('d-m-Y',strtotime($value));

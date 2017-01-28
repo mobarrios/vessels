@@ -23,4 +23,13 @@ class ProvidersController extends Controller
         $this->data['providersPayments'] =  $providersPaymentsRepo->ListsData('name','id');
     }
 
+
+    public function getCc()
+    {
+        $this->data['activeBread'] = 'Listar';
+
+
+        $this->data['models'] = $this->repo->find(1);
+        return view('moto.providers.cc')->with($this->data);
+    }
 }

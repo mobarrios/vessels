@@ -92,7 +92,7 @@
             <div id="cheques_form" hidden>
                 <div class="col-xs-2 form-group">
                     {!! Form::label('Fecha Cobro') !!}
-                    {!! Form::text('fecha_cobro', null, ['class'=>' form-control']) !!}
+                    {!! Form::text('fecha_cobro', null, ['class'=>'datePicker form-control']) !!}
                 </div>
                 <div class="col-xs-4 form-group">
                     {!! Form::label('Nro . Cheque') !!}
@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-xs-2 form-group">
                     {!! Form::label('Banco') !!}
-                    {!! Form::text('bancos_id', null, ['class'=>' form-control']) !!}
+                    {!! Form::select('bancos_id', [1=> 'Banco Nacion' , 2 => 'Banco Frances'], null, ['class'=>' form-control  ']) !!}
                 </div>
                 <div class="col-xs-3 form-group">
                     {!! Form::label('Tipo ') !!}
@@ -115,7 +115,7 @@
                 </div>
                 <div class="col-xs-2 form-group">
                     {!! Form::label('Banco') !!}
-                    {!! Form::text('bancos_id', null, ['class'=>' form-control']) !!}
+                    {!! Form::select('bancos_id',  [1=> 'Banco Nacion' , 2 => 'Banco Frances'], null, ['class'=>'form-control  ']) !!}
                 </div>
 
             </div>

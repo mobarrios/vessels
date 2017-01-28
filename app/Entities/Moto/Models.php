@@ -43,6 +43,9 @@ class Models extends Entity
         return $this->hasOne(PurchasesListsPricesItems::class)->with('PurchasesListsPrices')->orderBy('updated_at', 'DESC');
     }
 
+    public function getBrandName(){
+        return $this->belongsTo(Brands::class)->get()->name;
+    }
 
     public function getStatusNameAttribute()
     {
