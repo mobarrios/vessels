@@ -98,6 +98,54 @@
             background-color: #ddd;
         }
 
+        input[type='radio']{
+            width: 20px;
+            height: 20px;
+        }
+
+        input[type='radio']:after {
+            width: 20px;
+            height: 20px;
+            border-radius: 15px;
+            top: -2px;
+            left: -1px;
+            position: relative;
+            background-color: #d1d3d1;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 2px solid white;
+        }
+
+        input[type='radio']:checked:after {
+            width: 20px;
+            height: 20px;
+            border-radius: 15px;
+            top: -2px;
+            left: -1px;
+            position: relative;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 2px solid white;
+        }
+
+        input[type='radio']:checked:after {
+            background-color: #595b59;
+        }
+
+        input[type='radio'].radio-green:checked:after {
+            background-color: #f73100;
+            border: 2px solid #d72d00;
+        }
+
+        input[type='radio'].radio-red:checked:after {
+            background-color: #29f100;
+            border: 2px solid #1a9800;
+        }
+
+
+
     </style>
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini">
@@ -112,9 +160,9 @@
                     <div class="box-body">
 
                         @if(isset($model))
-                            {!! Form::model($model,['route'=> [config('models.'.$section.'.updateServiceOrderRoute'), $models->id] , 'files' =>'true']) !!}
+                            {!! Form::model($model,['route'=> [config('models.'.$section.'.postUpdateRoute'), $models->id] , 'files' =>'true']) !!}
                         @else
-                            {!! Form::open(['route'=> config('models.'.$section.'.storeServiceOrderRoute') , 'files' =>'true']) !!}
+                            {!! Form::open(['route'=> config('models.'.$section.'.postStoreRoute') , 'files' =>'true']) !!}
                         @endif
                             <div class="section border">
                                 <div class="row">
@@ -204,7 +252,7 @@
                                                 <b class="text-center">Fluido Frenos</b>
                                                 <hr>
                                                 <div>
-                                                    <label for="fluido_frenos_max">Max. </label>{!! Form::radio('fluido_frenos',3,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_max']) !!}
+                                                    <label for="fluido_frenos_max">Max. </label>{!! Form::radio('fluido_frenos',1,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_max']) !!}
                                                 </div>
 
                                                 <div>
@@ -212,7 +260,7 @@
                                                 </div>
 
                                                 <div>
-                                                    <label for="fluido_frenos_min">Min. </label>{!! Form::radio('fluido_frenos',1,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_min']) !!}
+                                                    <label for="fluido_frenos_min">Min. </label>{!! Form::radio('fluido_frenos',3,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_min']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -223,7 +271,7 @@
                                                 <b class="text-center">Combustible</b>
                                                 <hr>
                                                 <div>
-                                                    <label for="combustible_full">F </label>{!! Form::radio('combustible',3,false,['class' => 'icheckbox_flat-red','id' => 'combustible_full']) !!}
+                                                    <label for="combustible_full">F </label>{!! Form::radio('combustible',1,false,['class' => 'icheckbox_flat-red','id' => 'combustible_full']) !!}
                                                 </div>
 
                                                 <div>
@@ -231,15 +279,15 @@
                                                 </div>
 
                                                 <div>
-                                                    <label for="combustible_1_2">1/2 </label>{!! Form::radio('combustible',2,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_2']) !!}
+                                                    <label for="combustible_1_2">1/2 </label>{!! Form::radio('combustible',3,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_2']) !!}
                                                 </div>
 
                                                 <div>
-                                                    <label for="combustible_1_4">1/4 </label>{!! Form::radio('combustible',2,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_4']) !!}
+                                                    <label for="combustible_1_4">1/4 </label>{!! Form::radio('combustible',4,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_4']) !!}
                                                 </div>
 
                                                 <div>
-                                                    <label for="combustible_r">R </label>{!! Form::radio('combustible',1,false,['class' => 'icheckbox_flat-red','id' => 'combustible_r']) !!}
+                                                    <label for="combustible_r">R </label>{!! Form::radio('combustible',5,false,['class' => 'icheckbox_flat-red','id' => 'combustible_r']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -253,7 +301,7 @@
                                                 <br>
                                                 <br>
                                                 <div>
-                                                    <label for="nivel_aceite_max">Max. </label>{!! Form::radio('nivel_aceite',3,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_max']) !!}
+                                                    <label for="nivel_aceite_max">Max. </label>{!! Form::radio('nivel_aceite',1,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_max']) !!}
                                                 </div>
 
                                                 <div>
@@ -261,7 +309,7 @@
                                                 </div>
 
                                                 <div>
-                                                    <label for="nivel_aceite_min">Min. </label>{!! Form::radio('nivel_aceite',1,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_min']) !!}
+                                                    <label for="nivel_aceite_min">Min. </label>{!! Form::radio('nivel_aceite',3,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_min']) !!}
                                                 </div>
                                                 <img src="images/aceite.png" alt="">
                                             </div>
@@ -324,6 +372,10 @@
                                         <div class="titulo">
                                             <b>INSPECCIÓN DE 24 ITEMS (CON LA PRESENCIA DEL CLIENTE)</b>
                                         </div>
+                                        <div class="col-xs-12 text-center">
+                                            <input type="radio" class="radio-red" checked> <b style="vertical-align: top; line-height: 25px; margin-right: 10px;">OK</b>
+                                            <input type="radio" class="radio-green" checked><b style="vertical-align: top; line-height: 25px;; margin-left: 10px;">Recomendación de reemplazo</b>
+                                        </div>
 
                                         <div class="col-xs-12">
                                             <div class="col-xs-12 col-md-6 mt15">
@@ -331,8 +383,8 @@
                                                     <label for="luces_tablero">
                                                         Luces tablero (Iluminación, neutro, etc)
                                                         <div class="doble-check">
-                                                            {!! Form::radio('luces_tablero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('luces_tablero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('luces_tablero',1,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('luces_tablero',0,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -340,8 +392,8 @@
                                                     <label for="bocina">
                                                         Bocina
                                                         <div class="doble-check">
-                                                            {!! Form::radio('bocina',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('bocina',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('bocina',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('bocina',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -349,8 +401,8 @@
                                                     <label for="giros">
                                                         Giros
                                                         <div class="doble-check">
-                                                            {!! Form::radio('giros',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('giros',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('giros',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('giros',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -358,8 +410,8 @@
                                                     <label>
                                                         Puños
                                                         <div class="doble-check">
-                                                            {!! Form::radio('punios',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('punios',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('punios',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('punios',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -368,8 +420,8 @@
                                                     <label>
                                                         Luz Baja / Alta
                                                         <div class="doble-check">
-                                                            {!! Form::radio('luz_baja_alta',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('luz_baja_alta',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('luz_baja_alta',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('luz_baja_alta',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -377,8 +429,8 @@
                                                     <label>
                                                         Palanca de embrague
                                                         <div class="doble-check">
-                                                            {!! Form::radio('palanca_de_embrague',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('palanca_de_embrague',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('palanca_de_embrague',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('palanca_de_embrague',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -386,8 +438,8 @@
                                                     <label>
                                                         Cable de embrague
                                                         <div class="doble-check">
-                                                            {!! Form::radio('cable_de_embrague',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('cable_de_embrague',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('cable_de_embrague',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('cable_de_embrague',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -395,8 +447,8 @@
                                                     <label>
                                                         Palanca de freno
                                                         <div class="doble-check">
-                                                            {!! Form::radio('palanca_de_freno',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('palanca_de_freno',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('palanca_de_freno',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('palanca_de_freno',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -405,18 +457,18 @@
                                                     <label>
                                                         Cable de freno
                                                         <div class="doble-check">
-                                                            {!! Form::radio('cable_de_freno',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('cable_de_freno',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('cable_de_freno',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('cable_de_freno',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
 
                                                 <div class="relative">
                                                     <label>
-                                                        Luz de freno (Palanca: {!! Form::radio('luz_freno',1,false,['class' => 'ml5 icheckbox_flat-red']) !!} / Pedal: {!! Form::radio('luz_freno',2,false,['class' => 'ml5 icheckbox_flat-red']) !!})
+                                                        Luz de freno (Palanca: {!! Form::radio('luz_freno',0,false,['class' => 'ml5 icheckbox_flat-red']) !!} / Pedal: {!! Form::radio('luz_freno',1,false,['class' => 'ml5 icheckbox_flat-red']) !!})
                                                         <div class="doble-check">
-                                                            {!! Form::radio('luz_freno_opcion',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('luz_freno_opcion',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('luz_freno_opcion',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('luz_freno_opcion',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -424,8 +476,8 @@
                                                     <label>
                                                         Cable de acelerador
                                                         <div class="doble-check">
-                                                            {!! Form::radio('cable_de_acelerador',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('cable_de_acelerador',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('cable_de_acelerador',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('cable_de_acelerador',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -433,21 +485,21 @@
                                                     <label>
                                                         Espejos retrovisores
                                                         <div class="doble-check">
-                                                            {!! Form::radio('espejos_retrovisores',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('espejos_retrovisores',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('espejos_retrovisores',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('espejos_retrovisores',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
                                             </div>
 
 
-                                            <div class="col-xs-12 col-md-6 mt15">
+                                            <div class="col-xs-01 col-md-6 mt05">
                                                 <div class="relative">
                                                     <label for="luces_tablero">
                                                         Amortiguadores delanteros
                                                         <div class="doble-check">
-                                                            {!! Form::radio('amortiguadores_delanteros',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('amortiguadores_delanteros',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('amortiguadores_delanteros',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('amortiguadores_delanteros',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -455,8 +507,8 @@
                                                     <label for="bocina">
                                                         Cinta o pastilla freno delantero
                                                         <div class="doble-check">
-                                                            {!! Form::radio('cinta_o_pastilla_freno_delantero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('cinta_o_pastilla_freno_delantero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('cinta_o_pastilla_freno_delantero',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('cinta_o_pastilla_freno_delantero',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -464,8 +516,8 @@
                                                     <label for="giros">
                                                         Disco/s freno delantero
                                                         <div class="doble-check">
-                                                            {!! Form::radio('disco_freno_delantero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('disco_freno_delantero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('disco_freno_delantero',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('disco_freno_delantero',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -473,8 +525,8 @@
                                                     <label>
                                                         Neumático delantero
                                                         <div class="doble-check">
-                                                            {!! Form::radio('neumatico_delantero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('neumatico_delantero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('neumatico_delantero',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('neumatico_delantero',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -482,8 +534,8 @@
                                                     <label>
                                                         Pedal freno trasero
                                                         <div class="doble-check">
-                                                            {!! Form::radio('pedal_freno_trasero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('pedal_freno_trasero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('pedal_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('pedal_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -491,8 +543,8 @@
                                                     <label>
                                                         Amortiguadores traseros
                                                         <div class="doble-check">
-                                                            {!! Form::radio('amortiguadores_traseros',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('amortiguadores_traseros',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('amortiguadores_traseros',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('amortiguadores_traseros',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -500,8 +552,8 @@
                                                     <label>
                                                         Cinta o pastilla freno trasero
                                                         <div class="doble-check">
-                                                            {!! Form::radio('cinta_o_pastilla_freno_trasero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('cinta_o_pastilla_freno_trasero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('cinta_o_pastilla_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('cinta_o_pastilla_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -509,8 +561,8 @@
                                                     <label>
                                                         Disco/s freno trasero
                                                         <div class="doble-check">
-                                                            {!! Form::radio('disco_freno_trasero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('disco_freno_trasero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('disco_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('disco_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -518,8 +570,8 @@
                                                     <label>
                                                         Neumático trasero
                                                         <div class="doble-check">
-                                                            {!! Form::radio('neumatico_trasero',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('neumatico_trasero',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('neumatico_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('neumatico_trasero',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -527,8 +579,8 @@
                                                     <label>
                                                         Sistema de transmisión
                                                         <div class="doble-check">
-                                                            {!! Form::radio('sistema_de_transmision',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('sistema_de_transmision',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('sistema_de_transmision',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('sistema_de_transmision',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -536,8 +588,8 @@
                                                     <label>
                                                         Pedal de cambios
                                                         <div class="doble-check">
-                                                            {!! Form::radio('pedal_de_cambios',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('pedal_de_cambios',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('pedal_de_cambios',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('pedal_de_cambios',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -546,8 +598,8 @@
                                                     <label>
                                                         Sostén lateral /Caballete/ Pedalines
                                                         <div class="doble-check">
-                                                            {!! Form::radio('sosten_lateral_caballete_pedalines',1,false,['class' => 'ml5 icheckbox_flat-red']) !!}
-                                                            {!! Form::radio('sosten_lateral_caballete_pedalines',2,false,['class' => 'ml5 icheckbox_flat-red']) !!}
+                                                            {!! Form::radio('sosten_lateral_caballete_pedalines',0,false,['class' => 'ml5 radio-red']) !!}
+                                                            {!! Form::radio('sosten_lateral_caballete_pedalines',1,false,['class' => 'ml5 radio-green']) !!}
                                                         </div>
                                                     </label>
                                                 </div>
@@ -573,16 +625,16 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item1',null,['class' => 'form-control']) !!}</td>
-                                                        <td colspan="2">{!! Form::text('descripcion_item1',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('entrega_item1',null,['class' => 'form-control']) !!}</td>
+                                                        <td colspan="2">{!! Form::text('entrega_descripcion_item1',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item2',null,['class' => 'form-control']) !!}</td>
-                                                        <td colspan="2">{!! Form::text('descripcion_item2',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('entrega_item2',null,['class' => 'form-control']) !!}</td>
+                                                        <td colspan="2">{!! Form::text('entrega_descripcion_item2',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item3',null,['class' => 'form-control']) !!}</td>
-                                                        <td colspan="2">{!! Form::text('descripcion_item3',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('entrega_item3',null,['class' => 'form-control']) !!}</td>
+                                                        <td colspan="2">{!! Form::text('entrega_descripcion_item3',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -620,16 +672,16 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item1',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('diagnostico_item3',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('diagnostico_item1',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('diagnostico_descripcion_item1',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item2',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('diagnostico_item3',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('diagnostico_item2',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('diagnostico_descripcion_item2',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item3',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('diagnostico_item3',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('diagnostico_item3',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('diagnostico_descripcion_item3',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -645,18 +697,18 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item1',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('repuesto_item1',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('instrumento_usado_item1',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('repuestos_cantidad1',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('repuestos_descripcion1',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('instrumento_de_medicion1',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item2',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('repuesto_item2',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('instrumento_usado_item2',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('repuestos_cantidad2',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('repuestos_descripcion2',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('instrumento_de_medicion2',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="col-xs-1">{!! Form::text('item3',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('repuesto_item2',null,['class' => 'form-control']) !!}</td>
+                                                        <td class="col-xs-1">{!! Form::text('repuestos_cantidad3',null,['class' => 'form-control']) !!}</td>
+                                                        <td>{!! Form::text('repuestos_descripcion3',null,['class' => 'form-control']) !!}</td>
                                                         <td>TIEMPO MANO DE OBRA: {!! Form::text('tiempo_mano_de_obra',null,['class' => 'form-control']) !!}</td>
                                                     </tr>
                                                 </tbody>

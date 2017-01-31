@@ -47,7 +47,7 @@ return [
 
     //column search
     'search' => [
-        
+
             'Numero'    => 'number',
             //'Direccion'  => 'address' ,
             //'Email'     => 'email',
@@ -55,7 +55,6 @@ return [
 
     'validationsStore' => [
 
-            //'number'          => 'required',
             'clients_id'     => 'required',
 
     ],

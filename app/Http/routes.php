@@ -41,6 +41,7 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Moto/providersRoute.php');
         require(__DIR__ . '/Routes/Moto/salesRoute.php');
         require(__DIR__ . '/Routes/Moto/technicalServicesRoute.php');
+        require(__DIR__ . '/Routes/Moto/serviceOrdersRoute.php');
 
         require(__DIR__ . '/Routes/Moto/profilesRoute.php');
     });
