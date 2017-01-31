@@ -571,6 +571,56 @@ class PermissionsTableSeeder extends Seeder
                     'slug' => 'itemsrequest.destroy',
                     'model' => '',
                 ],
+                //servicio técnico
+                [
+                    'id'    => 88,
+                    'name' => 'Listar Servicios Técnicos',
+                    'slug' => 'technicalServices.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 89,
+                    'name' => 'Crear Servicios Técnicos',
+                    'slug' => 'technicalServices.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 90,
+                    'name' => 'Editar Servicios Técnicos',
+                    'slug' => 'technicalServices.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 91,
+                    'name' => 'Borrar Servicios Técnicos',
+                    'slug' => 'technicalServices.destroy',
+                    'model' => '',
+                ],
+                //ordenes de servicio
+                [
+                    'id'    => 92,
+                    'name' => 'Listar Ordenes de Servicio',
+                    'slug' => 'serviceOrders.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 93,
+                    'name' => 'Crear Ordenes de Servicio',
+                    'slug' => 'serviceOrders.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 94,
+                    'name' => 'Editar Ordenes de Servicio',
+                    'slug' => 'serviceOrders.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 95,
+                    'name' => 'Borrar Ordenes de Servicio',
+                    'slug' => 'serviceOrders.destroy',
+                    'model' => '',
+                ],
 
                 //medios de pago
                 [
