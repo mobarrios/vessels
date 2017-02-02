@@ -65,7 +65,7 @@
         <div>
             <div ng-app="buscador">
 
-                @if(!isset($models))
+                @if(!isset($budget))
                     <div class="search" ng-controller="buscadorController" >
 
                         <p>Antes de crear un prospecto, busque si ya existe.</p>
@@ -159,14 +159,14 @@
 
 
                     <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
-                        @if(!isset($models))
+                        @if(!isset($budget))
     {{--                        {!! Form::hidden('clients_id', $client->id) !!}--}}
                             <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
                             <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span></button>
                         @endif
 
-                            @if(isset($models))
-                                <a href="#" data-action="{!! route("moto.".$section.".addItem", $models->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+                            @if(isset($budget))
+                                <a href="#" data-action="{!! route("moto.".$section.".addItem", $budget->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
                             @endif
                         {!! Form::close() !!}
 
@@ -177,14 +177,14 @@
 
 
             <span class="clearfix"></span>
-            @if(isset($models))
+            @if(isset($budget))
 
                 <hr>
 
-                {!! Form::model($models,["route" => 'moto.'.$section.'.update', 'method' => 'POST', 'id' => 'formPresupuesto']) !!}
+                {!! Form::model($budget,["route" => 'moto.'.$section.'.update', 'method' => 'POST', 'id' => 'formPresupuesto']) !!}
 
                     {!! Form::hidden('clients_id',$client->id) !!}
-                    {!! Form::hidden('id',$models->id) !!}
+                    {!! Form::hidden('id',$budget->id) !!}
                     {!! Form::hidden('branches_id',Auth::user()->branches_active_id) !!}
 
                     <div>
@@ -206,10 +206,10 @@
                                         <td class="text-danger" class="priceBudget">$ @{{ models.pivot.price_budget }}</td>
                                         <td class="text-danger">$ @{{ models.pivot.price_actual }}</td>
                                         <td>
-                                            <a href="moto/budgets/deleteItem/{{ $models->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
+                                            <a href="moto/budgets/deleteItem/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
                                         </td>
                                         <td>
-                                            <a href="moto/budgets/editItem/{{ $models->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
+                                            <a href="moto/budgets/editItem/{{ $budget->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
                                         </td>
                                     </tr>
 
@@ -318,23 +318,76 @@
 
 @endsection
 
-
 @section('formAside')
     @include('moto.partials.asideOpenForm')
-    @if(isset($models))
+    @if(isset($budget))
 
         @if(isset($modelItems))
-            {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
+            {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $budget->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
         @else
-            {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $models->id], 'files' =>'true']) !!}
+            {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $budget->id], 'files' =>'true']) !!}
         @endif
 
-        @include('moto.aside.items', $hidden = ['budgets_id' => $models->id,'price_actual' => null])
+        {!! Form::hidden('budgets_id',$budget->id) !!}
+        {!! Form::hidden('price_actual',null,['class' => 'price_actual']) !!}
 
+        <div class="col-xs-12  form-group">
+            {!! Form::label('Modelo') !!}
+            <select id="select_model" name='models_id' class=" select2 form-control" placeholder="Seleccione un modelo">
+                <option>Seleccionar...</option>
+                @foreach($brands as $br)
+                    <optgroup label="{{$br->name}}">
+                        @foreach($br->Models as $m)
+                            @if($m->stock >= 1)
+                                <option value="{{$m->id}}"
+                                        @if(isset($modelItems) && ($modelItems->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Color') !!}
+            @if(isset($modelItems))
+                <select name="colors_id" id="colors" class="form-control select2">
+                    @foreach($colors as $cant => $color)
+                        @foreach($color as $col)
+                            <option value=' {!! $col->colors_id  !!} ' @if($col->colors_id == $modelItems->colors_id) selected = "selected" @endif> {!! $col->colors->name !!} ( {!! $color->count() !!} ) </option>
+                        @endforeach
+                    @endforeach
+                </select>
+{{--                {!! Form::select('colors_id', $colors,null, ['class'=>'form-control select2',"id" => "colors"]) !!}--}}
+            @else
+                {!! Form::select('colors_id', [],null, ['class'=>'form-control select2',"id" => "colors"]) !!}
+            @endif
+        </div>
+
+
+        <div class="col-xs-12 col-lg-6 form-group">
+            {!! Form::label('Subtotal') !!}
+            {!! Form::number('price_budget', null, ['class'=>'form-control sTotal']) !!}
+        </div>
+
+        <div class="col-xs-12 col-lg-6 form-group">
+            {!! Form::label('Patentamiento') !!}
+            {!! Form::number(null, null, ['class'=>'form-control patentamiento', 'disabled' => 'disabled']) !!}
+        </div>
+
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Pack service') !!}
+            {!! Form::number(null, null, ['class'=>'form-control packService', 'disabled' => 'disabled']) !!}
+        </div>
+
+        <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
+        </div>
         {!! Form::close() !!}
         <!-- /.control-sidebar-menu -->
     @endif
-    {{--@include('moto.partials.asideCloseForm',$hidden = ['budgets_id' => $models->id,])--}}
+    @include('moto.partials.asideCloseForm')
 @endsection
 
 
@@ -436,7 +489,7 @@
                     })
 
                     $(".sTotal").val(data.active_list_price.price_net);
-                    $("input[name=price_actual]").val(data.active_list_price.price_net);
+                    $(".price_actual").val(data.active_list_price.price_net);
                     $(".patentamiento").val(data.patentamiento);
                     $(".packService").val(data.pack_service);
 
@@ -454,11 +507,11 @@
         })
 
 
-                @if(isset($models))
+                @if(isset($budget))
         var coef;
 
         $("#financials option").each(function(ind, val){
-            if($(val).val() == "{!! $models->modo_financiamiento !!}"){
+            if($(val).val() == "{!! $budget->modo_financiamiento !!}"){
                 $(val).attr('selected','selected')
                 coef = $(val);
             }
@@ -491,21 +544,21 @@
 //        var app = angular.module("myApp", []);
 
         app.controller("myCtrl", function ($scope, $http) {
-            $http.get("moto/budgetsItems/{!! $models->id !!}")
+            $http.get("moto/budgetsItems/{!! $budget->id !!}")
                     .then(function (response) {
                         $scope.total = parseFloat(response.data[0]['price'])
                         $scope.stotal = parseFloat(response.data[0]['price'])
                         $scope.patentamiento = parseFloat(response.data[0]['patentamiento'])
                         $scope.packService = parseFloat(response.data[0]['pack_service'])
                         $scope.data = response.data[1]
-                        $scope.seguro = {!! $models->seguro or '0' !!}
-                                $scope.flete = {!! $models->flete or '0' !!}
-                                $scope.formularios = {!! $models->formularios or '0' !!}
-                                $scope.gastosAdministrativos = {!! $models->gastros_administrativos or '0' !!}
-                                $scope.descuento = {!! $models->descuento or '0' !!}
-                                $scope.anticipo = {!! $models->anticipo or '0' !!}
-                                $scope.importeCuota = {!! $models->importe_cuota or '0' !!}
-                                $scope.aFinanciar = {!! $models->a_financiar or '0' !!}
+                        $scope.seguro = {!! $budget->seguro or '0' !!}
+                                $scope.flete = {!! $budget->flete or '0' !!}
+                                $scope.formularios = {!! $budget->formularios or '0' !!}
+                                $scope.gastosAdministrativos = {!! $budget->gastros_administrativos or '0' !!}
+                                $scope.descuento = {!! $budget->descuento or '0' !!}
+                                $scope.anticipo = {!! $budget->anticipo or '0' !!}
+                                $scope.importeCuota = {!! $budget->importe_cuota or '0' !!}
+                                $scope.aFinanciar = {!! $budget->a_financiar or '0' !!}
                         $scope.calcular();
 
                     });

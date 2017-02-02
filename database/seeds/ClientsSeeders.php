@@ -11,51 +11,29 @@ class ClientsSeeders extends Seeder
      */
     public function run()
     {
-        DB::table('clients')->insert([
-            [
-                'id' => 1,
-                'name' => 'Juan',
-                'last_name' => 'Perez',
-                'email' => 'jp@hotmail.com',
-                'dni' => '2790999887',
-                'sexo' => 'masculino',
-                'dob' => '1980-23-02',
-                'address' => 'Debussy 2282',
-                'prospecto' => 1,
-            ], [
-                'id' => 2,
-                'name' => 'Juana',
-                'last_name' => 'Rodriguez',
-                'email' => 'jp@hotmail.com',
-                'dni' => '2790999087',
-                'sexo' => 'femenino',
-                'dob' => '19770-01-05',
-                'address' => 'Larrea 2234',
-                'prospecto' => 1,
-            ],
-            [
-                'id' => 3,
-                'name' => 'Carlos',
-                'last_name' => 'Juarez',
-                'email' => 'cj@hotmail.com',
-                'dni' => '279092887',
-                'sexo' => 'masculino',
-                'dob' => '1988-15-06',
-                'address' => 'Av. San Juan 1980',
-                'prospecto' => 1,
-            ],
-            [
-                'id' => 4,
-                'name' => 'Enrique',
-                'last_name' => 'Sanchez',
-                'email' => 'es@gmail.com',
-                'dni' => '279092587',
-                'sexo' => 'masculino',
-                'dob' => '1970-09-22',
-                'address' => 'Av. San Pedrito 190',
-                'prospecto' => 1,
-            ]
+        $faker = Faker\Factory::create('es_AR');
 
-        ]);
+        for ($i = 1; $i < 65; $i++){
+            DB::table('clients')->insert([
+                [
+                    'id' => $i,
+                    'name' => $faker->firstName,
+                    'last_name' => $faker->lastName,
+                    'email' => $faker->freeEmail,
+                    'dni' => Faker\Provider\es_Es\Person::dni(),
+                    'sexo' => $faker->randomElement(['masculino','femenino']),
+                    'dob' => $faker->dateTimeThisCentury->format('Y-m-d'),
+                    'address' => $faker->address,
+                    'prospecto' => $faker->boolean,
+                    'phone1' => $faker->phoneNumber,
+                    'nacionality' => Faker\Provider\es_Ar\Address::country(),
+                    'city' => $faker->city,
+                    'location' => Faker\Provider\es_Ar\Address::community(),
+                    'province' => Faker\Provider\es_Ar\Address::state(),
+
+                ]
+
+            ]);
+        }
     }
 }

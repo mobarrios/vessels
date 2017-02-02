@@ -66,4 +66,26 @@ return [
 
     ],
 
+    //asides
+    'items' => true,
+    'pay' => false,
+
+
+    'asideInputs' => [
+                        'models_id' => null,
+                        'colors_id' => null,
+                        'price_actual' => null,
+                        'patentamiento' => null,
+                        'pack_service' => null,
+                        'cedula' => null,
+                        'alta_patente' => null,
+                        'ad_suc' => null,
+                        'lojack' => null,
+                        'alta_seguro' => null,
+                        'repuestos' => null,
+                        'larga_distancia' => null,
+                        'formularios' => null,
+                        'seguro_tipo' => null,
+                     ],
+
 ];

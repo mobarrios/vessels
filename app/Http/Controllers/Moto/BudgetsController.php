@@ -85,9 +85,9 @@ class BudgetsController extends Controller
     public function create($id = null)
     {
         if($id){
-            $this->data['budget'] = $this->repo->find($id);
+            $this->data['models'] = $this->repo->find($id);
             $this->data['items'] = $this->models->lists('name','id');
-            $this->data['client'] = $this->data['budget']->clients;
+            $this->data['client'] = $this->data['models']->clients;
         }
 
         $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
@@ -98,7 +98,7 @@ class BudgetsController extends Controller
     public function edit($cliente = null, $id = null)
     {
         if($id){
-            $this->data['budget'] = $this->repo->find($id);
+            $this->data['models'] = $this->repo->find($id);
             $this->data['items'] = $this->models->lists('name','id');
         }
 
@@ -189,14 +189,16 @@ class BudgetsController extends Controller
     {
         $this->data['modelItems'] = $budgetsItemsRepo->find($id);
         $this->data['activeBread'] = 'Editar';
-        $this->data['budget'] = $this->repo->find($item);
+        $this->data['models'] = $this->repo->find($item);
 
         $this->data['items'] = $this->models->lists('name','id');
         $this->data['colors'] = $this->data['modelItems']->models->StockByColors;
 
 //        dd($this->data['colors']);
-        $this->data['client'] = $this->data['budget']->clients;
+        $this->data['client'] = $this->data['models']->clients;
         $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
+
+
 
         return view(config('models.'.$this->section.'.editView'))->with($this->data);
     }
