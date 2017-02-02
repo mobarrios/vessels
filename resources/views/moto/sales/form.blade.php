@@ -189,7 +189,7 @@
         {!! Form::close() !!}
         <!-- /.control-sidebar-menu -->
     @endif
-    @include('moto.partials.asideCloseForm',$hidden = ['budgets_id' => $models->id,])
+    @include('moto.partials.asideCloseForm')
 @endsection
 
 
@@ -203,11 +203,13 @@
             var color_id;
             var q;
 
+
             $('#disponibles').html("");
             $.ajax({
                 method: 'GET',
                 url: 'moto/modelLists/' + id,
                 success: function (data) {
+                    console.table(data)
                     // $.each(data, function(i , v){
                     $('.price').val(data.active_list_price.price_list);
                     $('.patentamiento').val(data.patentamiento);
