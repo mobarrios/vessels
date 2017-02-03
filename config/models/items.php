@@ -41,7 +41,7 @@ return [
     'search' => [
         
             'Nombre'    => 'name',
-            //'Direccion'  => 'address' ,
+            'Sucursal'  => ['brancheables'],
             //'Email'     => 'email'
     ],
 

@@ -117,23 +117,27 @@ abstract class BaseRepo {
     // search
     public function search($data)
     {
+
         //get column to search in model repo
         //$columns = $this->getColumnSearch();
         $columns = $data->filter;
+
 
         $q = $this->model->where('id','like','%'.$data->search.'%');
 
             foreach ($columns as $column => $k){
 
-                if(is_array($k)){
+                if(is_array($k))
+                {
 
-                    foreach ($k as $relation => $col){
-
+                    foreach ($k as $relation => $col)
+                    {
                         $q->orWhereHas($relation, function($q) use ($col , $data){
                             $q->where($col ,'like','%'.$data->search.'%');
                         });
                     }
-                } else {
+                } else
+                {
 
                     $q->orWhere($k ,'like','%'.$data->search.'%');
                 }

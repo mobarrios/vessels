@@ -2,7 +2,7 @@
 
 Route::group(['prefix'=>'technicalServices'],function(){
 
-    $section =  'technicalServices';
+    $section =  'technicalservices';
 
     Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.technicalServices.destroy','uses'=>'Moto\technicalServicesController@destroy']);
     Route::get('/edit/{client?}/{id?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.technicalServices.edit','uses'=>'Moto\technicalServicesController@edit']);
