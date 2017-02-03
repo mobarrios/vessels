@@ -31,6 +31,7 @@ class AjaxController extends Controller
         $id =  $this->route->getParameter('id');
         $data = $this->repo->stockByColors($id);
 
+        dd($data);
         return response()->json($data);
     }
 

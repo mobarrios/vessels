@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\URL;
 
 class ClientsController extends Controller
 {
+    protected $technicalServicesRepo;
+
     public function  __construct(Request $request, Repo $repo, Route $route, BudgetsRepo $budgetsRepo,TechnicalServicesRepo $technicalServicesRepo)
     {
 
@@ -198,7 +200,7 @@ class ClientsController extends Controller
 
             }else{
 
-                $budget = $this->budgetsRepo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $this->request->get('model')]));
+                $budget = $this->externalRepo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $this->request->get('model')]));
 
                 return redirect()->route(config('models.budgets.createRoute'),$budget->id);
             }

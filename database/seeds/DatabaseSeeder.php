@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ColorsSeeders::class);
         $this->call(ModelsPruebaSeeders::class);
         $this->call(ClientsSeeders::class);
+        $this->call(ItemsPruebaSeeders::class);
+        $this->call(ModelsCategoriesPruebaSeeders::class);
 
 
         Model::reguard();
