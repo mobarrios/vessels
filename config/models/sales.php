@@ -71,7 +71,8 @@ return [
     'pay' => false,
 
 
-    'asideInputs' => [
+    'asideInputs' =>
+        ['items' =>[
                         'models_id' => null,
                         'colors_id' => null,
                         'price_actual' => null,
@@ -87,5 +88,15 @@ return [
                         'formularios' => null,
                         'seguro_tipo' => null,
                      ],
+        ],
+        ['pay' =>[
+                        'amount' => null,
+                        'financials_id' => null,
+                        'ccn' => null,
+                        'ccc' => null,
+                        'cce' => null,
+                     ],
+        ],
+
 
 ];

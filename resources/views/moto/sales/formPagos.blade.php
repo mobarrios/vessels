@@ -2,48 +2,54 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             Formas de Pago
+            <div class="pull-right">
+                @if(isset($models))
+                    <a href="#" data-action="{!! route("moto.sales.addItems") !!}" data-title="FORMAS DE PAGO" data-toggle="control-sidebar"
+                       class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                @endif
+            </div>
         </div>
 
         <div class="panel-body">
-            @if(isset($models))
-                {!! Form::model($models,['route'=> ['moto.sales.addPayment', $models->id] , 'files' =>'true']) !!}
-                {!! Form::hidden('sales_id',$models->id) !!}
-                {!! Form::hidden('date', Date('Y-m-d')) !!}
+            {{--@if(isset($models))--}}
+                {{--{!! Form::model($models,['route'=> ['moto.sales.addPayment', $models->id] , 'files' =>'true']) !!}--}}
+                {{--{!! Form::hidden('sales_id',$models->id) !!}--}}
+                {{--{!! Form::hidden('date', Date('Y-m-d')) !!}--}}
 
-            @else
-                {!! Form::open(['route'=> 'moto.sales.editPayment' , 'files' =>'true']) !!}
-            @endif
+            {{--@else--}}
+                {{--{!! Form::open(['route'=> 'moto.sales.editPayment' , 'files' =>'true']) !!}--}}
+            {{--@endif--}}
 
-            <div class="col-xs-2 form-group">
-                {!! Form::label('Monto') !!}
-                {!! Form::number('amount' ,null, ['class'=>' form-control']) !!}
-            </div>
+            {{--<div class="col-xs-2 form-group">--}}
+                {{--{!! Form::label('Monto') !!}--}}
+                {{--{!! Form::number('amount' ,null, ['class'=>' form-control']) !!}--}}
+            {{--</div>--}}
 
-            <div class="col-xs-4 form-group">
-                {!! Form::label('Forma de Pago') !!}
+            {{--<div class="col-xs-4 form-group">--}}
+                {{--{!! Form::label('Forma de Pago') !!}--}}
 
-                {!! Form::select('financials_id',$financials ,null, ['class'=> 'select2 form-control']) !!}
+                {{--{!! Form::select('financials_id',$financials ,null, ['class'=> 'select2 form-control']) !!}--}}
 
-            </div>
-            <div class="col-xs-3 form-group">
-                {!! Form::label('Nro . Tarjeta') !!}
-                {!! Form::text('ccn', null, ['class'=>' form-control']) !!}
-            </div>
-            <div class="col-xs-1 form-group">
-                {!! Form::label('Cod. Seg.') !!}
-                {!! Form::text('ccc', null, ['class'=>' form-control']) !!}
-            </div>
-            <div class="col-xs-1 form-group">
-                {!! Form::label('Vto.') !!}
-                {!! Form::text('cce', null, ['class'=>' form-control']) !!}
-            </div>
-            <div class="col-xs-1 form-group" style="padding-top: 1.5%">
-                <button type="submit" class="btn btn-default"><span
-                            class="fa fa-plus"></span></button>
-            </div>
+            {{--</div>--}}
+            {{--<div class="col-xs-3 form-group">--}}
+                {{--{!! Form::label('Nro . Tarjeta') !!}--}}
+                {{--{!! Form::text('ccn', null, ['class'=>' form-control']) !!}--}}
+            {{--</div>--}}
+            {{--<div class="col-xs-1 form-group">--}}
+                {{--{!! Form::label('Cod. Seg.') !!}--}}
+                {{--{!! Form::text('ccc', null, ['class'=>' form-control']) !!}--}}
+            {{--</div>--}}
+            {{--<div class="col-xs-1 form-group">--}}
+                {{--{!! Form::label('Vto.') !!}--}}
+                {{--{!! Form::text('cce', null, ['class'=>' form-control']) !!}--}}
+            {{--</div>--}}
+            {{--<div class="col-xs-1 form-group" style="padding-top: 1.5%">--}}
+                {{--<button type="submit" class="btn btn-default"><span--}}
+                            {{--class="fa fa-plus"></span></button>--}}
+            {{--</div>--}}
 
 
-            {!! Form::close() !!}
+            {{--{!! Form::close() !!}--}}
 
 
             <div class="col-xs-12">

@@ -73,7 +73,24 @@ class Models extends Entity
     {
         return $this->Items->groupBy('colors_id');
     }
-    
+
+    public function getModelsByColorsAttribute()
+    {
+        $colores = $this->Items->groupBy('colors_id');
+
+        $data = [];
+
+        foreach ($colores as $id => $color) {
+            $data[$id] = [
+                        'cantidad' => count($color),
+                        'color' => $color[0]['colors']['name']
+                      ];
+
+        }
+
+        return $data;
+    }
+
 }
 
 

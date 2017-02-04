@@ -66,6 +66,13 @@ class ModelsRepo extends BaseRepo {
         return $data->toArray();
     }
 
+    public function modelsByColors($id)
+    {
+        $models = $this->find($id);
+        $data = $models->ModelsByColors;
+        return $data;
+    }
+
 
     public function actualPriceCost($id)
     {

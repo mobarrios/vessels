@@ -70,11 +70,13 @@ return [
     'pay' => false,
 
     'asideInputs' => [
-        'models_id' => null,
-        'colors_id' => null,
-        'patentamiento' => 'disabled',
-        'price_budget' => null,
-        'pack_service' => 'disabled'
+        'items' => [
+                'models_id' => null,
+                'colors_id' => null,
+                'patentamiento' => 'disabled',
+                'price_budget' => null,
+                'pack_service' => 'disabled'
+            ],
     ],
 
 

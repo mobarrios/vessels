@@ -321,24 +321,31 @@
 
 @section('formAside')
     @include('moto.partials.asideOpenForm')
-    @if(isset($models))
+        @if(array_has(config('models.'.$section.'.asideInputs'),'items'))
+            @if(isset($models))
 
-        @if(isset($modelItems))
-            {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
-        @else
-            {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $models->id], 'files' =>'true']) !!}
+
+                @if(isset($modelItems))
+                    {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
+                @else
+                    {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $models->id], 'files' =>'true']) !!}
+                @endif
+
+                @include('moto.aside.items', $data = ['type' => 'items','hidden' => ['sales_id' => $models->id,'price_actual' => null]])
+
+                {!! Form::close() !!}
+                <!-- /.control-sidebar-menu -->
+            @endif
         @endif
 
-        @include('moto.aside.items', $hidden = ['budgets_id' => $models->id,'price_actual' => null])
 
-        {!! Form::close() !!}
-        <!-- /.control-sidebar-menu -->
-    @endif
+
     @include('moto.partials.asideCloseForm')
 @endsection
 
 
 @section('js')
+    <script src="js/asideModelsColors.js"></script>
 
     <script>
         var routeBase = window.location.href.split('moto/')[0]
@@ -394,56 +401,6 @@
             });
 
 
-//            $scope.onCategoryChange = function (event) {
-//
-//
-//                var id = event.currentTarget.getAttribute('value');
-//                find(id);
-//                console.log(id)
-//            };
-
-
-        });
-
-
-
-        $("select[name='models_id']").on('change', function(ev){
-            $("#select_model>option").remove();
-            var id = $(this).val();
-
-            var parent = $(this).parent().parent();
-
-            $.ajax({
-                method: 'GET',
-                url: 'moto/modelLists/'+id,
-                success: function(data){
-                    $.ajax({
-                        method: 'GET',
-                        url: 'moto/modelAvailables/' + id,
-                        success: function (data) {
-                            $.each(data, function (x, y) {
-
-                                $.each(y, function (a, b) {
-
-                                    color_id = b.colors_id;
-                                    color = b.colors.name;
-                                    q = y.length;
-                                });
-
-                                $('#colors').append('<option value=' + color_id + ' >' + color + ' ( ' + q + ' ) </option>');
-                            });
-                        }
-                    })
-
-                    $(".sTotal").val(data.active_list_price.price_net);
-                    $("input[name=price_actual]").val(data.active_list_price.price_net);
-                    $(".patentamiento").val(data.patentamiento);
-                    $(".packService").val(data.pack_service);
-
-
-
-                }
-            })
         });
 
 

@@ -91,7 +91,7 @@
 
                 <div class="pull-right">
                     @if(isset($models))
-                        <a href="#" data-action="{!! route("moto.sales.addItems") !!}" data-toggle="control-sidebar"
+                        <a href="#" data-action="{!! route("moto.sales.addItems") !!}" data-title="AGREGAR PRODUCTO" data-toggle="control-sidebar"
                            class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                     @endif
                 </div>
@@ -184,58 +184,43 @@
         @endif
 
 
-        @include('moto.aside.items', $hidden = ['sales_id' => $models->id,'branches_confirm_id' => $models->branches_confirm_id])
+        @include('moto.aside.items', $data = ['type' => 'items','hidden' => ['sales_id' => $models->id,'branches_confirm_id' => $models->branches_confirm_id]])
 
         {!! Form::close() !!}
         <!-- /.control-sidebar-menu -->
     @endif
     @include('moto.partials.asideCloseForm')
+
+
+    @include('moto.partials.asideOpenForm')
+    @if(isset($models))
+
+        @if(isset($models))
+            {!! Form::model($models,['route'=> ['moto.sales.addPayment', $models->id] , 'files' =>'true']) !!}
+
+        @else
+            {!! Form::open(['route'=> 'moto.sales.editPayment' , 'files' =>'true']) !!}
+        @endif
+
+
+        @include('moto.aside.items', $data = ['type' => 'items','hidden' => ['sales_id' => $models->id,'date' => Date('Y-m-d')]])
+
+        {!! Form::close() !!}
+        <!-- /.control-sidebar-menu -->
+    @endif
+    @include('moto.partials.asideCloseForm')
+
+
 @endsection
 
 
 
 
 @section('js')
+    <script src="js/asideModelsColors.js"></script>
+
     <script>
-        $('#select_model').on('change', function () {
-            var id = $(this).val();
-            var color;
-            var color_id;
-            var q;
 
-
-            $('#disponibles').html("");
-            $.ajax({
-                method: 'GET',
-                url: 'moto/modelLists/' + id,
-                success: function (data) {
-                    console.table(data)
-                    // $.each(data, function(i , v){
-                    $('.price').val(data.active_list_price.price_list);
-                    $('.patentamiento').val(data.patentamiento);
-                    $('.packService').val(data.pack_service);
-                    //});
-                }
-            }),
-                    $.ajax({
-                        method: 'GET',
-                        url: 'moto/modelAvailables/' + id,
-                        success: function (data) {
-                            $.each(data, function (x, y) {
-
-                                $.each(y, function (a, b) {
-
-                                    color_id = b.colors_id;
-                                    color = b.colors.name;
-                                    q = y.length;
-                                });
-
-                                $('#disponibles').append('<option value=' + color_id + ' >' + color + ' ( ' + q + ' ) </option>');
-                            });
-                        }
-                    })
-
-        });
 
 
         $('#clients_id').on('change', function () {

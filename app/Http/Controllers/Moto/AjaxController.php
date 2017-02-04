@@ -29,9 +29,9 @@ class AjaxController extends Controller
     public function modelAvailables()
     {
         $id =  $this->route->getParameter('id');
-        $data = $this->repo->stockByColors($id);
+        $data = $this->repo->modelsByColors($id);
+//        $data = $this->repo->stockByColors($id);
 
-        dd($data);
         return response()->json($data);
     }
 
@@ -45,6 +45,7 @@ class AjaxController extends Controller
     public function modelLists($id)
     {
         $data = $this->repo->oneToBudgets($id);
+
         return response()->json($data);
     }
 
