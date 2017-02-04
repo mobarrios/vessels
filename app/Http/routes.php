@@ -36,6 +36,7 @@ Route::group(['middleware'=>'auth'],function(){
         require(__DIR__ . '/Routes/Moto/itemsRequestRoute.php');
         require(__DIR__ . '/Routes/Moto/modelsRoute.php');
         require(__DIR__ . '/Routes/Moto/modelsListsPricesRoute.php');
+        require(__DIR__ . '/Routes/Moto/payMethodsRoutes.php');
         require(__DIR__ . '/Routes/Moto/purchasesListsPricesRoute.php');
         require(__DIR__ . '/Routes/Moto/purchasesOrdersRoute.php');
         require(__DIR__ . '/Routes/Moto/providersRoute.php');

@@ -12,6 +12,8 @@ Route::get('/salesWithItems/{id}', 'Moto\AjaxController@salesWithItems');
 
 //buscar purchasesorders
 Route::get('/purchasesOrdersFind/{id?}', 'Moto\PurchasesOrdersController@find');
+//buscar purchasesorders x proveedor
+Route::get('/purchasesOrdersByProviders/{id?}', 'Moto\PurchasesOrdersController@findByProviders');
 
 //items
 Route::get('/itemsByModels/{id?}', 'Moto\ItemsController@itemsByModels');
@@ -25,9 +27,11 @@ Route::post('/dispatches/addNew', 'Moto\DispatchesController@addItems');
 
 
 
-
 //buscar presupuestos x clientes
 Route::get('/budgetsByClients/{id?}', 'Moto\BudgetsController@findByClients');
+
+
+
 
 
 //buscar clientes

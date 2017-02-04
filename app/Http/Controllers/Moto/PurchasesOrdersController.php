@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\DispatchesItemsRepo;
+use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
+use App\Http\Repositories\Moto\PayMethodsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersItemsRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo as Repo;
@@ -23,7 +25,9 @@ class PurchasesOrdersController extends Controller
     protected $modelsRepo;
     protected $modelsListsPricesRepo;
 
-    public function __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo, ModelsRepo $modelsRepo, PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo, ColorsRepo $colorsRepo, BranchesRepo $branchesRepo)
+    public function __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo,
+                                ModelsRepo $modelsRepo, PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo,
+                                ColorsRepo $colorsRepo, BranchesRepo $branchesRepo, PayMethodsRepo $payMethodsRepo)
     {
 
         $this->request = $request;
@@ -38,6 +42,9 @@ class PurchasesOrdersController extends Controller
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
         $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
+        $this->data['pay_methods'] = $payMethodsRepo->ListsData('name','id');
+
+        $this->data['total'] = 0;
 
         $this->modelsRepo = $modelsRepo;
         $this->purchasesOrdersItemsRepo = $purchasesOrdersItemsRepo;
@@ -48,10 +55,19 @@ class PurchasesOrdersController extends Controller
     //find with items
     public function find()
     {
-        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.DispatchesItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')-> with('PurchasesOrdersItems.Colors')->find($this->route->getParameter('id'));
+        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.DispatchesItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')->with('PurchasesOrdersItems.Colors')->find($this->route->getParameter('id'));
 
         return response()->json($data);
     }
+
+    //find by provider
+    public function findByProviders()
+    {
+        $data = $this->repo->getModel()->with('PurchasesOrdersItems')->with('PurchasesOrdersItems.DispatchesItems')->with('PurchasesOrdersItems.Models')->with('PurchasesOrdersItems.Models.Brands')->with('PurchasesOrdersItems.Colors')->where('providers_id', $this->route->getParameter('id'))->get();
+
+        return response()->json($data);
+    }
+
 
     //confirma la lista de pedidos
     public function confirm(DispatchesItemsRepo $dispatchesItemsRepo)
@@ -65,12 +81,11 @@ class PurchasesOrdersController extends Controller
 
         //crear la cantidad de productos pedidos en la tabla de remitos items
 
-        foreach ( $repo->PurchasesOrdersItems as $item) {
-            $q =  $item->quantity;
+        foreach ($repo->PurchasesOrdersItems as $item) {
+            $q = $item->quantity;
 
-            for($i=1;$i <= $q; $i++)
-            {
-                $new = ['purchases_orders_items_id'=> $item->id ];
+            for ($i = 1; $i <= $q; $i++) {
+                $new = ['purchases_orders_items_id' => $item->id];
 
                 $newDispathcesItems = new DispatchesItems();
                 $newDispathcesItems->fill($new);
@@ -115,14 +130,14 @@ class PurchasesOrdersController extends Controller
 
 
         $repo->save();
-        
+
         //envia mail al proveedor
 
         return redirect()->route('moto.purchasesOrders.index')->withErrors(['Pedido de Mercadería Enviado al Proveedor.']);
     }
 
     //items
-    
+
     public function addItems(PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo)
     {
         $purchasesOrdersItemsRepo->create($this->request);

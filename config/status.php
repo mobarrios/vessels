@@ -17,7 +17,7 @@ return [
 
     'items' =>
         [
-            1 => 'Ingresado',
+            1 => 'En Stock',
             2 => 'Reservado',
             3 => 'Vendido',
         ],

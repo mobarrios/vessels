@@ -1,13 +1,13 @@
 <?php
 
-$model = 'items';
+$model = 'payMethods';
 
 return [
 
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Articulos',
+    'sectionName'   => 'Medios de Pago',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',
@@ -34,27 +34,27 @@ return [
     //polymorphic
     'is_logueable'      => true,
     'is_imageable'      => false,
-    'is_brancheable'    => true,
+    'is_brancheable'    => false,
     
 
     //column search
     'search' => [
         
             'Nombre'    => 'name',
-            'Sucursal'  => ['brancheables'],
-            //'Email'     => 'email'
+            //'Direccion'  => 'address' ,
+            //'Email'     => 'email',
     ],
 
     'validationsStore' => [
 
-            'models_id'          => 'required',
-           // 'address'     => 'required',
+            'name'          => 'required',
+            //'address'     => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'models_id'          => 'required',
+            'name'          => 'required',
             //'address'     => 'required',
 
     ],

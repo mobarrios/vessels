@@ -9,7 +9,7 @@
 
      protected $table = 'providers';
 
-     protected $fillable = ['name','cuit','address','phone','email'];
+     protected $fillable = ['name','cuit','address','phone','email','providers_payments_id'];
 
 
      public function PurchasesOrders()

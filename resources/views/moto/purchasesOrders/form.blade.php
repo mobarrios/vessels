@@ -111,6 +111,10 @@
                             @if($models->status != 2 )
                                 <a href="{{route('moto.purchasesOrders.sendToProviders',$models->id)}}" type="button"
                                    class="btn btn-default">Enviar</a>
+
+                                <a href="{{route('moto.purchasesOrders.confirm',$models->id)}}" type="button"
+                                   class="btn btn-default">Confirmar</a>
+
                             @elseif($models->status == 2)
                                 <a href="{{route('moto.purchasesOrders.confirm',$models->id)}}" type="button"
                                    class="btn btn-default">Confirmar</a>

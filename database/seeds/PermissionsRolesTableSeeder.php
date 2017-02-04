@@ -11,7 +11,11 @@ class PermissionsRolesTableSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
+        for($i = 1; $i <= 100; $i++){
+=======
         for($i = 1; $i <= 95; $i++){
+>>>>>>> 6327c8fd4a1a3e08082b1283cad12345d7f70e77
 
             DB::table('permission_role')->insert([
             [

@@ -13,7 +13,7 @@
                     {{$model->Items->Models->name}}
                 </td>
                 <td>
-                    de <b>{{$model->BranchesFrom->name}}</b> a  <b>{{$model->BranchesTo->name}}</b>
+                    de <b>{{$model->Items->Branches}}</b> a  <b>{{$model->BranchesTo->name}}</b>
                 </td>
                 <td>
                    <span class="label label-default">{{$model->statusName}}</span>

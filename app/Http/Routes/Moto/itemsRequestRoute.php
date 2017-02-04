@@ -13,7 +13,10 @@ Route::group(['prefix'=>'itemsRequest'],function(){
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.itemsRequest.show','uses'=>'Moto\ItemsRequestController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.itemsRequest.index','uses'=>'Moto\ItemsRequestController@index']);
 
-    Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.itemsRequest.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+        Route::get('/reasign/{id?}/{newId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.reasign','uses'=>'Moto\ItemsRequestController@reasign']);
+
+
+        Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.itemsRequest.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 });
 
 

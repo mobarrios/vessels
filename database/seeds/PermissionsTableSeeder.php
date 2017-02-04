@@ -622,6 +622,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
-        ]);
+                //medios de pago
+                [
+                    'id'    => 88,
+                    'name' => 'Listar Medios de Pago',
+                    'slug' => 'paymethods.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 89,
+                    'name' => 'Crear Medios de Pagos',
+                    'slug' => 'paymethods.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 90,
+                    'name' => 'Editar Medios de Pago',
+                    'slug' => 'paymethods.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 100,
+                    'name' => 'Borrar Medios de Pago',
+                    'slug' => 'paymethods.destroy',
+                    'model' => '',
+                ],
+
+            ]);
     }
 }
