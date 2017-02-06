@@ -13,6 +13,7 @@
      protected $fillable = ['name','n_motor','n_cuadro','year','models_id','colors_id','status'];
 
 
+
      public function Certificates()
      {
          return $this->hasOne(Certificates::class);

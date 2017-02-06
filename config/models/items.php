@@ -41,8 +41,9 @@ return [
     'search' => [
         
             'Nombre'    => 'name',
-            'Sucursal'  => ['brancheables'],
-            //'Email'     => 'email'
+            'Color'     =>  ['colors','name'] ,
+            'Modelo'     => ['models','name'],
+            'Sucursal'   => ['branches','name'],
     ],
 
     'validationsStore' => [

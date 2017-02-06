@@ -8,6 +8,7 @@
 
 namespace App\Entities;
 
+use App\Entities\Configs\Branches;
 use App\Entities\Configs\Logs;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,6 +20,7 @@ class Entity extends Model {
 
     use SoftDeletes;
     protected $dates        = ['deleted_at'];
+
 
 
     public function __construct()
@@ -63,5 +65,7 @@ class Entity extends Model {
     {
         return $this->Brancheables()->with('Branches')->get()->lists('Branches.name','Branches.id');
     }
+
+
 
 }

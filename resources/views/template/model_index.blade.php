@@ -31,7 +31,12 @@
                                     <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtros <span class="caret"></span></button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         @foreach(config('models.'.$section.'.search') as $filter => $v)
-                                            <li><a ><input name="filter[]" value="{{$v}}"  checked type="checkbox"> {{$filter}}</a></li>
+                                            @if(!is_array($v))
+                                                 <li><a ><input name="filter[]" value="{{$v}}"  checked type="checkbox"> {{$filter}}</a></li>
+                                            @else
+
+                                                <li><a ><input name="filter[]" value="{{$v[0]}},{{$v[1]}}"  checked type="checkbox"> {{$filter}}</a></li>
+                                            @endif
                                         @endforeach
                                     </ul>
 

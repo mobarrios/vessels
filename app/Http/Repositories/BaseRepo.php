@@ -123,12 +123,54 @@ abstract class BaseRepo {
         $columns = $data->filter;
 
 
+
         $q = $this->model->where('id','like','%'.$data->search.'%');
 
-            foreach ($columns as $column => $k){
 
+            foreach ($columns as $column => $k)
+            {
+                $ex = explode(',',$k);
+
+
+                if(isset($ex[1]))
+                {
+                    if($ex[0] == "branches")
+                    {
+                        $q->orWhereHas('Brancheables',function($r) use ($ex , $data)
+                        {
+                            $r->whereHas('Branches',function($b) use ($ex , $data)
+                            {
+                                $b->where($ex[1],'like','%'.$data->search.'%');
+                            });
+                        });
+
+
+                    }else{
+
+
+
+                        $q->orWhereHas($ex[0], function($q) use ($ex , $data)
+                        {
+                            $q->where($ex[1] ,'like','%'.$data->search.'%');
+                        });
+                    }
+                }
+                else
+                {
+
+                        $q->orWhere($ex[0] ,'like','%'.$data->search.'%');
+
+                }
+
+
+
+
+
+
+                /*
                 if(is_array($k))
                 {
+
 
                     foreach ($k as $relation => $col)
                     {
@@ -141,8 +183,14 @@ abstract class BaseRepo {
 
                     $q->orWhere($k ,'like','%'.$data->search.'%');
                 }
+                */
             }
-        
+
+
+       // dd($q->first()->Brancheables()->first()->Branches()->first()->name);
+
+
+
         //no hago get pq lo hace en el controller para paginar
         return $q;
     }

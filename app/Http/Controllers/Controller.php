@@ -28,6 +28,7 @@ abstract class Controller extends BaseController
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
 
+
         //si request de busqueda
         if( isset($this->request->search) && !is_null($this->request->filter))
         {
@@ -37,9 +38,12 @@ abstract class Controller extends BaseController
                 //si paso la seccion
                 $model = $this->repo->listAll($this->section);
 
-        }else{
+        }
+        else
+        {
             $model  = $this->repo->listAll($this->section);
         }
+
 
         //guarda en session lo que se busco para exportar
         Session::put('export',$model->get());
