@@ -37,6 +37,44 @@
 
             </td>
 
+
+
+                <td class="btn-group btn-group-sm">
+                    <button  class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" title="Editar" ><i class="fa fa-truck"></i></button>
+                </td>
+
         </tr>
     @endforeach
+@endsection
+
+@section('modal')
+
+    !-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Solicitar Modelos</h4>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open() !!}
+
+                    {!! Form::label('Cantidad') !!}
+                    {!! Form::number('cantidad',null,['class'=>'form-control']) !!}
+
+                    {!! Form::label('Color') !!}
+                    {!! Form::number('cantidad',null,['class'=>'form-control']) !!}
+
+                    {!! Form::close() !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
