@@ -91,7 +91,7 @@
 
                 <div class="pull-right">
                     @if(isset($models))
-                        <a href="#" id="agregarItem" data-action="{!! route("moto.sales.addItems") !!}"
+                        <a href="#" data-action="{!! route("moto.sales.addItems") !!}" data-title="AGREGAR PRODUCTO" data-toggle="control-sidebar"
                            class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                     @endif
                 </div>
@@ -113,7 +113,7 @@
                         <th>Importe Articulo</th>
                         <th>Patentamiento</th>
                         <th>Pack Service</th>
-                        <th colspan="2" class="text-left">S. Total</th>
+                        <th>S. Total</th>
                         </thead>
                         <tbody>
                         <?php $total = 0; ?>
@@ -145,8 +145,8 @@
                                     <a class="btn btn-xs btn-default"
                                        href="{{route('moto.sales.deleteItems',[$item->id,$models->id])}}"><span
                                                 class="text-danger fa fa-trash"></span></a>
-                                    <a class="btn btn-xs btn-default editItems"
-                                       href="{{route('moto.sales.editItems',[$item->id,$models->id])}}" data-id="{!! $item->id !!}"><span
+                                    <a class="btn btn-xs btn-default"
+                                       href="{{route('moto.sales.editItems',[$item->id,$models->id])}}"><span
                                                 class="text-success fa fa-edit"></span></a>
                                 </td>
                             </tr>
@@ -166,70 +166,49 @@
     </div>
 
     @if(isset($models))
-        <div class="col-xs-12 content">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Formas de Pago
-                    <div class="pull-right">
-                        @if(isset($models))
-                            <a href="#" id="agregarPago" data-action="{!! route("moto.sales.addItems") !!}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
-                        @endif
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="col-xs-12">
-                        <table class="table table-bordered">
-                            <thead>
-                            <th>#</th>
-                            <th>Fecha</th>
-                            <th>Forma de Pago</th>
-                            <th> $ Monto</th>
-                            </thead>
-                            <tbody>
-                            <?php $pago = 0 ?>
-                            @if(isset($models->SalesPayments))
-
-                                @foreach($models->SalesPayments as $payment)
-                                    <tr>
-                                        <td>{{$payment->id}}</td>
-                                        <td>{{$payment->date}}</td>
-                                        <td>{{$payment->Financials->name}}</td>
-                                        <td> $ {{number_format($payment->amount, 2)}}</td>
-                                        <?php  $pago += $payment->amount ;?>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                            <tfoot>
-                            <td colspan="4" align="right">TOTAL ABONADO :  <b class="text-success"> $ {{number_format($pago,2)}}</b> </td>
-                            </tfoot>
-                        </table>
-
-                        <h5 class="pull-right">TOTAL A PAGAR :  <b class="text-danger"> $ {{number_format(($total - $pago),2)}}</b>
-                        </h5>
-
-                        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="pull-left" title="Exportar PDF">
-                    <span class="btn btn-danger">
-                        <i class="fa fa-file-pdf-o"></i>
-                    </span>
-                        </a>
-                        <a target="_blank" href="{!! route('moto.'.$section.'.recibo') !!}" class="pull-left" title="Recibo PDF">
-                    <span class="btn btn-success">
-                        <i class="fa fa-file-pdf-o"></i>
-                    </span>
-                        </a>
-                        <a target="_blank" href="{!! route('moto.'.$section.'.factura') !!}" class="pull-left" title="Factura PDF">
-                    <span class="btn btn-warning">
-                        <i class="fa fa-file-pdf-o"></i>
-                    </span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        @include('moto.sales.formPagos')
     @endif
 
+@endsection
+
+
+
+@section('formAside')
+    @include('moto.partials.asideOpenForm')
+    @if(isset($models))
+
+        @if(isset($modelItems))
+            {!! Form::model($modelItems,['route'=> ['moto.sales.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
+        @else
+            {!! Form::open(['route'=> ['moto.sales.addItems' ], 'files' =>'true']) !!}
+        @endif
+
+
+        @include('moto.aside.items', $data = ['type' => 'items','hidden' => ['sales_id' => $models->id,'branches_confirm_id' => $models->branches_confirm_id]])
+
+        {!! Form::close() !!}
+        <!-- /.control-sidebar-menu -->
+    @endif
+    @include('moto.partials.asideCloseForm')
+
+
+    @include('moto.partials.asideOpenForm')
+    @if(isset($models))
+
+        @if(isset($models))
+            {!! Form::model($models,['route'=> ['moto.sales.addPayment', $models->id] , 'files' =>'true']) !!}
+
+        @else
+            {!! Form::open(['route'=> 'moto.sales.editPayment' , 'files' =>'true']) !!}
+        @endif
+
+
+        @include('moto.aside.pays', $data = ['type' => 'pays','hidden' => ['sales_id' => $models->id,'date' => Date('Y-m-d')]])
+
+        {!! Form::close() !!}
+        <!-- /.control-sidebar-menu -->
+    @endif
+    @include('moto.partials.asideCloseForm')
 
 
 @endsection
@@ -237,44 +216,8 @@
 
 
 
-
-
 @section('js')
-    <script src="js/aside.js"></script>
-    <script>
-
-        $(".editItems").aside({
-            title: 'AGREGAR PRODUCTO',
-            typeForm: 'items',
-            section: "{!! $section !!}",
-            edit: 'items' ,
-            hidden: {
-                sales_id: "{!! $models->id !!}",
-                branches_confirm_id: "{!! $models->branches_confirm_id !!}"
-            }
-        });
-
-        $("#agregarItem").aside({
-            title: 'AGREGAR PRODUCTO',
-            typeForm: 'items',
-            section: "{!! $section !!}",
-            hidden: {
-                sales_id: "{!! $models->id !!}",
-                branches_confirm_id: "{!! $models->branches_confirm_id !!}"
-            }
-        });
-
-        $("#agregarPago").aside({
-            title: 'MÉTODOS DE PAGO',
-            typeForm: 'pays',
-            section: "{!! $section !!}",
-            hidden: {
-                sales_id: "{!! $models->id !!}",
-                date: "{!! Date('Y-m-d') !!}"
-            }
-        });
-
-    </script>
+    <script src="js/asideModelsColors.js"></script>
 
     <script>
 

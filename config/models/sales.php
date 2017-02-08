@@ -67,36 +67,32 @@ return [
     ],
 
     //asides
-    'items' => true,
-    'pay' => false,
+    'asideItems' =>[
+        'models_id' => null,
+        'colors_id' => null,
+        'price_actual' => null,
+        'patentamiento' => null,
+        'pack_service' => null,
+        'cedula' => null,
+        'alta_patente' => null,
+        'ad_suc' => null,
+        'lojack' => null,
+        'alta_seguro' => null,
+        'repuestos' => null,
+        'larga_distancia' => null,
+        'formularios' => null,
+        'seguro_tipo' => null,
+    ],
 
 
-    'asideInputs' =>
-        ['items' =>[
-                        'models_id' => null,
-                        'colors_id' => null,
-                        'price_actual' => null,
-                        'patentamiento' => null,
-                        'pack_service' => null,
-                        'cedula' => null,
-                        'alta_patente' => null,
-                        'ad_suc' => null,
-                        'lojack' => null,
-                        'alta_seguro' => null,
-                        'repuestos' => null,
-                        'larga_distancia' => null,
-                        'formularios' => null,
-                        'seguro_tipo' => null,
-                     ],
-        ],
-        ['pay' =>[
-                        'amount' => null,
-                        'financials_id' => null,
-                        'ccn' => null,
-                        'ccc' => null,
-                        'cce' => null,
-                     ],
-        ],
+    'asidePays' =>[
+        'amount' => null,
+        'financials_id' => null,
+        'ccn' => null,
+        'ccc' => null,
+        'cce' => null,
+    ]
+
 
 
 ];

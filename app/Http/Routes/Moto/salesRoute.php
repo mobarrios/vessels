@@ -30,6 +30,9 @@ Route::group(['prefix'=>'sales'],function(){
     Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
 
 
+    Route::get('/showAside',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.showAside','uses'=>'Moto\SalesController@showAside']);
+
+
 
 
     Route::get('/recibo',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.recibo','uses'=>'Utilities\UtilitiesController@reciboPdf']);

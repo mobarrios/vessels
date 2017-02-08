@@ -166,7 +166,7 @@
                         @endif
 
                             @if(isset($models))
-                                <a href="#" data-action="{!! route("moto.".$section.".addItem", $models->id) !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+                                <a href="#" data-action="{!! route("moto.".$section.".addItem", $models->id) !!}" id="agregarItem" class="btn btn-default"><span class="fa fa-plus"></span></a>
                             @endif
                         {!! Form::close() !!}
 
@@ -209,7 +209,7 @@
                                             <a href="moto/budgets/deleteItem/{{ $models->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
                                         </td>
                                         <td>
-                                            <a href="moto/budgets/editItem/{{ $models->id }}/@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
+                                            <a href="moto/budgets/editItem/{{ $models->id }}/@{{ models.pivot.id }}" class="editItems" data-id="@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
                                         </td>
                                     </tr>
 
@@ -319,34 +319,60 @@
 @endsection
 
 
-@section('formAside')
-    @include('moto.partials.asideOpenForm')
-        @if(array_has(config('models.'.$section.'.asideInputs'),'items'))
-            @if(isset($models))
+{{--@section('formAside')--}}
+    {{--@include('moto.partials.asideOpenForm')--}}
+        {{--@if(array_has(config('models.'.$section.'.asideInputs'),'items'))--}}
+            {{--@if(isset($models))--}}
 
 
-                @if(isset($modelItems))
-                    {!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
-                @else
-                    {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $models->id], 'files' =>'true']) !!}
-                @endif
+                {{--@if(isset($modelItems))--}}
+                    {{--{!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}--}}
+                {{--@else--}}
+                    {{--{!! Form::open(['route'=> ['moto.'.$section.'.addItem', $models->id], 'files' =>'true']) !!}--}}
+                {{--@endif--}}
 
-                @include('moto.aside.items', $data = ['type' => 'items','hidden' => ['sales_id' => $models->id,'price_actual' => null]])
+                {{--@include('moto.aside.items', $data = ['type' => 'items','hidden' => ['sales_id' => $models->id,'price_actual' => null]])--}}
 
-                {!! Form::close() !!}
-                <!-- /.control-sidebar-menu -->
-            @endif
-        @endif
+                {{--{!! Form::close() !!}--}}
+                {{--<!-- /.control-sidebar-menu -->--}}
+            {{--@endif--}}
+        {{--@endif--}}
 
 
 
-    @include('moto.partials.asideCloseForm')
-@endsection
+    {{--@include('moto.partials.asideCloseForm')--}}
+{{--@endsection--}}
 
 
 @section('js')
+    <script src="js/aside.js"></script>
     <script src="js/asideModelsColors.js"></script>
+    @if(isset($models))
+        <script>
+            $(".editItems").aside({
+                title: 'EDITAR PRODUCTO',
+                typeForm: 'items',
+                section: "{!! $section !!}",
+                edit: 'items' ,
+                model: "{!! $models->id !!}",
+                hidden: {
+                    budgets_id: "{!! $models->id !!}",
+                    price_actual: null
+                }
+            });
 
+            $("#agregarItem").aside({
+                title: 'AGREGAR PRODUCTO',
+                typeForm: 'items',
+                section: "{!! $section !!}",
+                model: "{!! $models->id !!}",
+                hidden: {
+                    budgets_id: "{!! $models->id !!}",
+                    price_actual: null
+                }
+            });
+        </script>
+    @endif
     <script>
         var routeBase = window.location.href.split('moto/')[0]
 

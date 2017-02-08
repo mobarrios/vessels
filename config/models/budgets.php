@@ -65,19 +65,14 @@ return [
     ],
 
 
-    //asides
-    'items' => true,
-    'pay' => false,
 
-    'asideInputs' => [
-        'items' => [
+    'asideItems' => [
                 'models_id' => null,
                 'colors_id' => null,
                 'patentamiento' => 'disabled',
                 'price_budget' => null,
                 'pack_service' => 'disabled'
             ],
-    ],
 
 
 ];
