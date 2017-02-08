@@ -21,5 +21,7 @@ Route::group(['prefix'=>'budgets'],function(){
 
 
         Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
-        
+
+        Route::get('/showAside',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.showAside','uses'=>'Moto\BudgetsController@showAside']);
+
 });

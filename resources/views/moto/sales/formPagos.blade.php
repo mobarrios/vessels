@@ -4,8 +4,7 @@
             Formas de Pago
             <div class="pull-right">
                 @if(isset($models))
-                    <a href="#" data-action="{!! route("moto.sales.addItems") !!}" data-title="FORMAS DE PAGO" data-toggle="control-sidebar"
-                       class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                    <a href="#" id="agregarPago" data-action="{!! route("moto.sales.addItems") !!}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                 @endif
             </div>
         </div>

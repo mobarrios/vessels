@@ -67,25 +67,25 @@
     @yield('js')
 
     <script>
-        $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
-
-        $("a[data-toggle='control-sidebar']").on("click",function (ev) {
-            var self = $(this);
-            console.log($(self).attr('data-action'));
-
-            if($(".control-sidebar").hasClass("control-sidebar-open")){
-                $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
-            }else{
-                $(".control-sidebar form").attr('action',$(self).attr('data-action'));
-                $(".control-sidebar input[type!='hidden']").val('');
-                $(".control-sidebar").css("right","0");
-
-            }
-        })
-
-        if($(".control-sidebar").hasClass("control-sidebar-open")){
-            $(".control-sidebar").css("right",0);
-        }
+//        $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
+//
+//        $("a[data-toggle='control-sidebar']").on("click",function (ev) {
+//            var self = $(this);
+//            console.log($(self).attr('data-action'));
+//
+//            if($(".control-sidebar").hasClass("control-sidebar-open")){
+//                $(".control-sidebar").css("right",'-'+$(".control-sidebar").css("width"));
+//            }else{
+//                $(".control-sidebar form").attr('action',$(self).attr('data-action'));
+//                $(".control-sidebar input[type!='hidden']").val('');
+//                $(".control-sidebar").css("right","0");
+//
+//            }
+//        })
+//
+//        if($(".control-sidebar").hasClass("control-sidebar-open")){
+//            $(".control-sidebar").css("right",0);
+//        }
 
     </script>
     <script src="vendors/LTE/plugins/iCheck/icheck.js"></script>

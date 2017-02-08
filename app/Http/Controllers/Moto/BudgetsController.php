@@ -40,6 +40,8 @@ class BudgetsController extends Controller
 
         $this->clients = $clients;
         $this->models = $models;
+
+
     }
 
     public function indexProspectos($id = null){
@@ -180,6 +182,7 @@ class BudgetsController extends Controller
     public function addItems(BudgetsItemsRepo $budgetsItemsRepo)
     {
         $budgetsItemsRepo->create($this->request);
+
         $this->data['client'] = $this->repo->find($this->route->getParameter('id'))->clients;
 
         return redirect()->route('moto.'.$this->section.'.create',$this->route->getParameter('id'));
@@ -243,6 +246,31 @@ class BudgetsController extends Controller
         $this->data['client'] = $this->repo->find($item)->clients;
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$item)->withErrors(['Registro eliminado Correctamente']);
+    }
+
+
+    public function showAside(Request $request,BudgetsItemsRepo $budgetsItemsRepo){
+
+
+        $this->data['routeItems'] = ['moto.'.$this->section.'.addItem', $request->get('model')];
+
+        if($request->get('edit')){
+            foreach ($request->get('edit') as $type => $id){
+                if($type == 'items'){
+                    $this->data['modelItems'] = $budgetsItemsRepo->find($id);
+                    $this->data['colors'] = $this->data['modelItems']->models->StockByColors;
+                }
+            }
+
+            $this->data['routeItems'] = ['moto.'.$this->section.'.editItem', $request->get('model'), $this->data['modelItems']];
+        }
+
+
+        $this->data['hidden'] = $request->hidden;
+        $this->data['type'] = $request->type;
+
+        return view('moto.aside.items')->with($this->data);
+
     }
 
 }

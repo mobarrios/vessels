@@ -70,7 +70,6 @@ class SalesController extends Controller
     // items
     public function addItems(SalesItemsRepo $salesItemsRepo, ItemsRepo $itemsRepo)
     {
-
         // asigna items a la venta
         $item = $itemsRepo->asignItem($this->request->models_id, $this->request->branches_confirm_id, $this->request->sales_id, $this->request->colors_id);
 
@@ -90,6 +89,7 @@ class SalesController extends Controller
     public function editItems(SalesItemsRepo $salesItemsRepo)
     {
         $this->data['modelItems'] = $salesItemsRepo->find($this->route->getParameter('item'));
+        $this->data['route'] = ['moto.sales.updateItems', $this->route->getParameter('item'),$this->route->getParameter('id')];
 
         return parent::edit();
     }
@@ -120,7 +120,8 @@ class SalesController extends Controller
 
     public function editPayment(SalesPaymentsRepo $salesPaymentsRepo)
     {
-        $this->data['modelItems'] = $salesPaymentsRepo->find($this->route->getParameter('item'));
+        $this->data['modelPays'] = $salesPaymentsRepo->find($this->route->getParameter('item'));
+        $this->data['routePays'] = ['moto.sales.addPayment', $this->route->getParameter('item')];
 
         return parent::edit();
     }
@@ -137,6 +138,29 @@ class SalesController extends Controller
         $salesPaymentsRepo->destroy($this->route->getParameter('item'));
 
         return parent::edit();
+    }
+
+    public function showAside(Request $request,SalesItemsRepo $salesItemsRepo,SalesPaymentsRepo $salesPaymentsRepo){
+        $this->data['routeItems'] = 'moto.sales.addItems';
+        $this->data['routePays'] = 'moto.sales.editPayment';
+
+        if($request->get('edit')){
+            foreach ($request->get('edit') as $type => $id){
+                if($type == 'items')
+                    $this->data['modelItems'] = $salesItemsRepo->find($id);
+                elseif($type == 'pays')
+                    $this->data['modelPays'] = $salesPaymentsRepo->find($id);
+            }
+
+            $this->data['routeItems'] = 'moto.sales.updateItems';
+            $this->data['routePays'] = 'moto.sales.addPayment';
+        }
+
+        $this->data['hidden'] = $request->hidden;
+        $this->data['type'] = $request->type;
+
+        return view('moto.aside.items')->with($this->data);
+
     }
 
 
