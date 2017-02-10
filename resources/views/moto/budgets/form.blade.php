@@ -166,7 +166,7 @@
                         @endif
 
                             @if(isset($models))
-                                <a href="#" data-action="{!! route("moto.".$section.".addItem", $models->id) !!}" id="agregarItem" class="btn btn-default"><span class="fa fa-plus"></span></a>
+                                <a href="#" data-toggle="control-sidebar" data-action="{!! route("moto.".$section.".addItem", $models->id) !!}" id="agregarItem" class="btn btn-default"><span class="fa fa-plus"></span></a>
                             @endif
                         {!! Form::close() !!}
 
@@ -319,62 +319,85 @@
 @endsection
 
 
-{{--@section('formAside')--}}
-    {{--@include('moto.partials.asideOpenForm')--}}
-        {{--@if(array_has(config('models.'.$section.'.asideInputs'),'items'))--}}
-            {{--@if(isset($models))--}}
+@if(isset($modelItems))
+@section('formAside')
+    @include('moto.partials.asideOpenForm')
+
+                {!! Form::model($modelItems->models,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
+
+                {!! Form::hidden('budgets_id',$models->id) !!}
+                {!! Form::hidden('price_actual',null,['class' => 'price_actual']) !!}
+
+                <div class="col-xs-6  form-group">
+                    {!! Form::label('Modelo') !!}
+                    <select id="select_model" name='models_id' class=" select2 form-control" placeholder="Seleccione un modelo">
+                        <option>Seleccionar...</option>
+                        @foreach($brands as $br)
+                            <optgroup label="{{$br->name}}">
+                                @foreach($br->Models as $m)
+                                    @if($m->stock >= 1)
+                                        <option value="{{$m->id}}"
+                                                @if(isset($modelItems) && ($modelItems->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
+                                    @endif
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-xs-6 form-group">
+                    {!! Form::label('Color') !!}
+                    @if(isset($modelItems))
+                        @if(is_array($colors))
+                            <select name="colors_id" id="colors" class="form-control select2">
+                                @foreach($colors as $id => $color)
+                                    <option value=' {!! $id  !!} ' @if($id == $modelItems->colors_id) selected = "selected" @endif> {!! $color["color"] !!} ( {!! $color["cantidad"] !!} ) </option>
+                                @endforeach
+                            </select>
+                        @else
+                            {!! Form::select('colors_id', [],null, ['class'=>'form-control select2',"id" => "colors"]) !!}
+                        @endif
+
+                    @else
+                        {!! Form::select('colors_id', [],null, ['class'=>'form-control select2',"id" => "colors"]) !!}
+                    @endif
+                </div>
 
 
-                {{--@if(isset($modelItems))--}}
-                    {{--{!! Form::model($modelItems,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}--}}
-                {{--@else--}}
-                    {{--{!! Form::open(['route'=> ['moto.'.$section.'.addItem', $models->id], 'files' =>'true']) !!}--}}
-                {{--@endif--}}
+                <div class="col-xs-6 col-lg-6 form-group">
+                    {!! Form::label('Patentamiento') !!}
+                    {!! Form::number('patentamiento', null, ['class'=>'form-control patentamiento', 'disabled' => 'disabled']) !!}
+                </div>
 
-                {{--@include('moto.aside.items', $data = ['type' => 'items','hidden' => ['sales_id' => $models->id,'price_actual' => null]])--}}
+                <div class="col-xs-6 col-lg-6 form-group">
+                    {!! Form::label('Subtotal') !!}
+                    {!! Form::number('price_budget', null, ['class'=>'form-control sTotal']) !!}
+                </div>
 
-                {{--{!! Form::close() !!}--}}
-                {{--<!-- /.control-sidebar-menu -->--}}
-            {{--@endif--}}
-        {{--@endif--}}
+                <div class="col-xs-6 form-group">
+                    {!! Form::label('Pack service') !!}
+                    {!! Form::number('pack_service', null, ['class'=>'form-control packService', 'disabled' => 'disabled']) !!}
+                </div>
 
+                <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
+                </div>
+                {!! Form::close() !!}
+                <!-- /.control-sidebar-menu -->
 
-
-    {{--@include('moto.partials.asideCloseForm')--}}
-{{--@endsection--}}
+    @include('moto.partials.asideCloseForm')
+@endsection
+@endif
 
 
 @section('js')
-    <script src="js/aside.js"></script>
+    {{--<script src="js/aside2.js"></script>--}}
     <script src="js/asideModelsColors.js"></script>
-    @if(isset($models))
-        <script>
-            $(".editItems").aside({
-                title: 'EDITAR PRODUCTO',
-                typeForm: 'items',
-                section: "{!! $section !!}",
-                edit: 'items' ,
-                model: "{!! $models->id !!}",
-                hidden: {
-                    budgets_id: "{!! $models->id !!}",
-                    price_actual: null
-                }
-            });
 
-            $("#agregarItem").aside({
-                title: 'AGREGAR PRODUCTO',
-                typeForm: 'items',
-                section: "{!! $section !!}",
-                model: "{!! $models->id !!}",
-                hidden: {
-                    budgets_id: "{!! $models->id !!}",
-                    price_actual: null
-                }
-            });
-        </script>
-    @endif
     <script>
         var routeBase = window.location.href.split('moto/')[0]
+        var rutaEdit;
 
         $("#reset").on('click', function () {
             $('#modelId').val("")
@@ -387,17 +410,17 @@
         app.controller("buscadorController", function ($scope, $http) {
             @if(isset($client))
                     $scope.model = "{!! $client->id !!}"
-                    $scope.last_name = "{!! $client->last_name !!}"
-                    $scope.name = "{!! $client->name !!}"
-                    $scope.dni = "{!! $client->dni !!}"
-                    $scope.email = "{!! $client->email !!}"
-                    $scope.sexo = "{!! $client->sexo !!}"
-                    $scope.nacionality = "{!! $client->nacionality !!}"
-                    $scope.phone1 = "{!! $client->phone1 !!}"
-                    $scope.address = "{!! $client->address !!}"
-                    $scope.city = "{!! $client->city !!}"
-                    $scope.location = "{!! $client->location !!}"
-                    $scope.province = "{!! $client->province !!}"
+            $scope.last_name = "{!! $client->last_name !!}"
+            $scope.name = "{!! $client->name !!}"
+            $scope.dni = "{!! $client->dni !!}"
+            $scope.email = "{!! $client->email !!}"
+            $scope.sexo = "{!! $client->sexo !!}"
+            $scope.nacionality = "{!! $client->nacionality !!}"
+            $scope.phone1 = "{!! $client->phone1 !!}"
+            $scope.address = "{!! $client->address !!}"
+            $scope.city = "{!! $client->city !!}"
+            $scope.location = "{!! $client->location !!}"
+            $scope.province = "{!! $client->province !!}"
             @endif
 
             $('#search').on('change',function(ev){
@@ -471,7 +494,7 @@
             $('#importeCuota').val(parseFloat(importeCuota).toFixed(2));
         });
 
-//        var app = angular.module("myApp", []);
+        //        var app = angular.module("myApp", []);
 
         app.controller("myCtrl", function ($scope, $http) {
             $http.get("moto/budgetsItems/{!! $models->id !!}")
@@ -491,10 +514,26 @@
                                 $scope.aFinanciar = {!! $models->a_financiar or '0' !!}
                         $scope.calcular();
 
+                        {{--$scope.guardarRuta('moto/budgets/editItem/{{ $models->id }}')--}}
                     });
 
+            {{--$scope.guardarRuta = function(ruta){--}}
+                    {{--$(".editItems").aside2({--}}
+                    {{--title: 'EDITAR PRODUCTO',--}}
+                    {{--route: ruta+'/'+$scope.data.pivot.id,--}}
+                    {{--routeAjax: "{!! route('moto.budgets.formItems') !!}",--}}
+                    {{--hidden: {--}}
+                    {{--budgets_id: "{!! $models->id !!}",--}}
+                    {{--price_actual: null--}}
+                    {{--},--}}
+                    {{--state: 'open',--}}
+                    {{--edit: $scope.data.pivot.id--}}
+                    {{--})--}}
+                    {{--}--}}
 
-            $scope.calcular = function()
+
+
+                    $scope.calcular = function()
             {
                 if( $scope.descuento != null && $scope.descuento != 0) {
                     var total = parseFloat(($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) * $scope.descuento / 100).toFixed(2);
@@ -533,11 +572,11 @@
 
             var $state = $(
                     '<span class="select2-template-container">' +
-                        '<span class="select2-template-title">' +
-                            datos[0]
-                        + '</span>' +
+                    '<span class="select2-template-title">' +
+                    datos[0]
+                    + '</span>' +
 
-                            span
+                    span
 
                     +'</span>'
             );
@@ -548,7 +587,19 @@
             templateResult: formatState
         });
     </script>
+    @if(isset($models))
+        <script>
+            {{--$("#agregarItem").aside2({--}}
+            {{--title: 'AGREGAR PRODUCTO',--}}
+            {{--routeAjax: "{!! route('moto.'.$section.'.formItems') !!}",--}}
+            {{--route: "{!! route('moto.budgets.addItem',$models->id) !!}",--}}
+            {{--hidden: {--}}
+            {{--budgets_id: "{!! $models->id !!}",--}}
+            {{--price_actual: null--}}
+            {{--}--}}
+            {{--})--}}
 
+        </script>
+    @endif
 
 @endsection
-

@@ -12,6 +12,7 @@ use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\BudgetsItemsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo as Repo;
 use App\Http\Repositories\Moto\FinancialsRepo;
+use App\Http\Repositories\Moto\ModelsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -188,19 +189,19 @@ class BudgetsController extends Controller
         return redirect()->route('moto.'.$this->section.'.create',$this->route->getParameter('id'));
     }
 
-    public function editItems($item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo, Colors $colors)
+    public function editItems($item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo, Colors $colors,ModelsRepo $modelsRepo)
     {
+
         $this->data['modelItems'] = $budgetsItemsRepo->find($id);
         $this->data['activeBread'] = 'Editar';
         $this->data['models'] = $this->repo->find($item);
 
         $this->data['items'] = $this->models->lists('name','id');
-        $this->data['colors'] = $this->data['modelItems']->models->StockByColors;
+        $this->data['colors'] = $this->data['modelItems']->models->modelsByColors;
 
 //        dd($this->data['colors']);
         $this->data['client'] = $this->data['models']->clients;
         $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
-
 
 
         return view(config('models.'.$this->section.'.editView'))->with($this->data);

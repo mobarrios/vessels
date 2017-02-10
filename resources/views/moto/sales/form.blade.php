@@ -240,38 +240,40 @@
 
 
 @section('js')
-    <script src="js/aside.js"></script>
+    <script src="js/aside2.js"></script>
     <script>
 
-        $(".editItems").aside({
-            title: 'AGREGAR PRODUCTO',
-            typeForm: 'items',
-            section: "{!! $section !!}",
-            edit: 'items' ,
+        $(".editItems").aside2({
+            title: 'EDITAR PRODUCTO',
+            routeAjax: "{!! route('moto.'.$section.'.showAside') !!}",
             hidden: {
                 sales_id: "{!! $models->id !!}",
                 branches_confirm_id: "{!! $models->branches_confirm_id !!}"
-            }
+            },
+            typeForm: "items",
+            edit: true
         });
 
-        $("#agregarItem").aside({
+        $("#agregarItem").aside2({
             title: 'AGREGAR PRODUCTO',
-            typeForm: 'items',
-            section: "{!! $section !!}",
+            routeAjax: "{!! route('moto.'.$section.'.showAside') !!}",
+            route: "{!! route('moto.'.$section.'.addItems',$models->id) !!}",
             hidden: {
                 sales_id: "{!! $models->id !!}",
                 branches_confirm_id: "{!! $models->branches_confirm_id !!}"
-            }
+            },
+            typeForm: "items"
         });
 
-        $("#agregarPago").aside({
-            title: 'MÉTODOS DE PAGO',
-            typeForm: 'pays',
-            section: "{!! $section !!}",
+        $("#agregarPago").aside2({
+            title: 'METODOS DE PAGO',
+            routeAjax: "{!! route('moto.'.$section.'.showAside') !!}",
+            route: "{!! route('moto.'.$section.'.addPayment',$models->id) !!}",
             hidden: {
                 sales_id: "{!! $models->id !!}",
                 date: "{!! Date('Y-m-d') !!}"
-            }
+            },
+            typeForm: "pays"
         });
 
     </script>
