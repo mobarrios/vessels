@@ -5,10 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <base href="{!! asset('') !!}">
     <title>Orden de servicio</title>
 
     @include('template.css')
+    <base href="{!! asset('') !!}">
     <link rel="stylesheet" href="vendors/LTE/plugins/iCheck/all.css">
     <style>
         .titulo{

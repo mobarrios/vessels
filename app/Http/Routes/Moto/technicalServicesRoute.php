@@ -27,4 +27,6 @@ Route::group(['prefix'=>'technicalServices'],function(){
     Route::get('/recibo',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.technicalServices.recibo','uses'=>'Utilities\UtilitiesController@reciboPdf']);
 
     Route::get('/factura',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.technicalServices.factura','uses'=>'Utilities\UtilitiesController@facturaPdf']);
+
+
 });
