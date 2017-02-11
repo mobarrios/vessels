@@ -11,6 +11,24 @@
 |
 */
 
+
+Route::get('/nota', function(\Illuminate\Http\Request $request,\Illuminate\Routing\Route $route , \Barryvdh\DomPDF\PDF $pdf){
+
+    $pdf->setPaper('a5', 'portrait')->loadView('moto.nota');
+
+    return $pdf->stream();
+});
+
+Route::get('/constancia', function(\Illuminate\Http\Request $request,\Illuminate\Routing\Route $route , \Barryvdh\DomPDF\PDF $pdf){
+
+    $pdf->setPaper('a5', 'landscape')->loadView('moto.constancia');
+
+    return $pdf->stream();
+});
+
+
+
+
 Route::get('', function(){
    return redirect() ->intended('home');
 });
