@@ -33,8 +33,7 @@
                         <td>{{$item->Branches}}</td>
                         <td>{{$item->created_at}}</td>
                         <td><label class="label label-info">{{$item->statusName}}</label></td>
-                        <td><a href="{{route('moto.itemsRequest.postAsign', [ $item->id , $branchesTo] )}}" class="reasignar btn btn-xs btn-default"><strong>Asignar</strong></a></td>
-
+                        <td><a href="{{route('moto.itemsRequest.postAsign', [ $item->id , $branchesTo, $myRequestId] )}}" class="reasignar btn btn-xs btn-default"><strong>Asignar</strong></a></td>
                    </tr>
                 @endforeach
                 </tbody>

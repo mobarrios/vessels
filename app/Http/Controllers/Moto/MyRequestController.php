@@ -30,6 +30,6 @@ class MyRequestController extends Controller
 
         $this->data['brands']   = $brandsRepo->getAllWithModels();
     }
-
+    
 
 }

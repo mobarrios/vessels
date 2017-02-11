@@ -1,6 +1,7 @@
 @extends('template.model_index')
 @section('table')
-    @foreach($models as $model)
+
+    @foreach($models->where('status',4) as $model)
         <tr>
             <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
             <td>{{$model->id}}</td>
@@ -20,6 +21,7 @@
             </td>
         </tr>
     @endforeach
+
 @endsection
 
 
@@ -28,38 +30,38 @@
     <div class="col-xs-8">
         <div class="box box-danger">
             <div class="box-header with-border">
-                <span class="text-bold">Artículos SIN ASIGNAR</span>
+                <span class="text-bold">PENDIENTES</span>
             </div>
             <div class="box-body">
                 <table class="table ">
                     <thead>
+                    <th>Pedido #</th>
                     <th>Fecha Solicitud</th>
                     <th>Artículo</th>
                     <th>Sucursal</th>
                     <th>Usuario</th>
-                    <th>Estado</th>
                     <th></th>
 
                     </thead>
                     <tbody>
-                    @foreach($myRequests as $myRequest)
-                        @for($i=0 ; $i < $myRequest->quantity;  $i++)
-                            <tr>
-                                <td>{{date('d-m-Y',strtotime($myRequest->created_at))}}</td>
-                                <td>
-                                    {{$myRequest->Models->Brands->name}}  <span class ="text-success">{{$myRequest->Models->name}}</span>
-                                     | {{$myRequest->Colors->name}}
-                                </td>
-                                <td>
-                                    <strong>{{$myRequest->Brancheables->first()->branches->name}}</strong>
+                    @foreach($models->where('status',1) as $pending)
+                        <tr>
+                            <td>{{$pending->MyRequest->id}}</td>
 
-                                </td>
-                                <td>{{$myRequest->Users->fullname}}</td>
-                                <th><a href="{{route('moto.itemsRequest.asign',[ $myRequest->models_id , $myRequest->Brancheables->first()->branches_id ] )}}" class="btn btn-xs btn-primary"> asignar</a></th>
+                            <td>{{date('d-m-Y',strtotime($pending->created_at))}}</td>
+                            <td><strong>{{$pending->MyRequest->Models->Brands->name}} <span class="text-blue">{{$pending->MyRequest->Models->name}}</span></strong></td>
+                            <td>{{$pending->MyRequest->Brancheables->first()->Branches->name}}</td>
+                            <td>{{$pending->MyRequest->Users->fullName}}</td>
+                            <td>
+                                <a href="{{route('moto.itemsRequest.asign',[ $pending->MyRequest->models_id , $pending->Brancheables->first()->branches_id, $pending->my_request_id ] )}}"
+                                   class="btn btn-xs btn-primary"> Aceptar</a>
+                            </td>
+                            <td>
+                                <a href="{{route('moto.itemsRequest.reject', $pending->id )}}"
+                                   class="reject btn btn-xs btn-danger"> Rechazar</a>
+                            </td>
 
-                            </tr>
-                        @endfor
-
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>

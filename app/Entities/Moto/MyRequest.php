@@ -34,6 +34,11 @@
          return config('status.items_request.' . $this->attributes['actual_status']);
      }
 
+     public function ItemsRequests()
+     {
+         return $this->hasMany(ItemsRequest::class);
+     }
+
  }
 
 

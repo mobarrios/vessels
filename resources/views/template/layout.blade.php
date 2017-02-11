@@ -61,7 +61,6 @@
 
     @yield('formAside')
 
-
     @yield('modal')
 
     @include('template.js')

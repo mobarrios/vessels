@@ -31,8 +31,9 @@ class ItemsRequestController extends Controller
         //$this->data['models_types'] = $modelsRepo->ListsData('name','id');
         //$this->data['colors']       = $colorsRepo->ListsData('name','id');
 
-        $this->data['myRequests'] = $myRequestRepo->getModel()->orderBy('created_at', 'DESC')->get();
+        //$this->data['myRequests'] = $myRequestRepo->getModel()->orderBy('created_at', 'DESC')->get();
 
+        $this->data['pendings'] = $this->repo->getPending();
 
         if (!is_null($route->getParameter('id'))) {
             $itemRequest = $this->repo->find($route->getParameter('id'));
@@ -46,7 +47,6 @@ class ItemsRequestController extends Controller
 
     public function reasign()
     {
-
         $newId = $this->route->getParameter('newId');
         $id = $this->route->getParameter('id');
 
@@ -61,6 +61,8 @@ class ItemsRequestController extends Controller
     {
         $this->data['activeBread'] = 'Asignar';
         $this->data['branchesTo'] = $this->route->getParameter('branchesTo');
+        $this->data['myRequestId'] = $this->route->getParameter('myRequestId');
+
 
         $items = $this->itemsRepo->getModel()->where('models_id', $this->route->getParameter('modelsId'))->get();
 
@@ -76,14 +78,27 @@ class ItemsRequestController extends Controller
         $item = $this->itemsRepo->find($newId);
         $branchesTo = $this->route->getParameter('branchesTo');
         $branchesFrom = $item->Brancheables->first()->branches_id;
+        $myRequestId = $this->route->getParameter('myRequestId');
 
 
-
-        $new = ['items_id' => $newId, 'status' => 1, 'branches_from_id' => $branchesFrom, 'branches_to_id' => $branchesTo];
+        $new = ['items_id' => $newId, 'status' => 4, 'branches_from_id' => $branchesFrom, 'branches_to_id' => $branchesTo, 'my_request_id'=> $myRequestId];
 
         $model = $this->repo->create($new);
 
 
         return redirect()->back()->withErrors('Articulo Asignado correctamente.');
     }
+
+
+    public function reject()
+    {
+        $id = $this->route->getParameter('idItemR');
+
+        $model = $this->repo->find($id);
+        $model->status = 5;
+        $model->save();
+
+        return redirect()->back()->withErrors('Articulo Rechazado .');
+    }
+
 }

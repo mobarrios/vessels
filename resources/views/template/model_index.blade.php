@@ -68,7 +68,6 @@
                 </div>
             </div>
         </div>
-
         @yield('box')
     </div>
 @endsection

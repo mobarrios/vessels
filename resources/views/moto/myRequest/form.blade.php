@@ -43,5 +43,25 @@
         </div>
     </div>
 
-
 @endsection
+
+
+@if(isset($models))
+    @section('box')
+            <div class="box">
+                <div class="box-body">
+                    <table class="table">
+                        <?php $count=0;?>
+                        @foreach($models->ItemsRequests as $itemsRequest)
+                               <tr>
+                                   <td><?php $count++ ?>{{$count}} </td>
+                                   <td>{{$itemsRequest->MyRequest->Models->Brands->name}} {{$itemsRequest->MyRequest->Models->name}}</td>
+                                   <td><label>{{$itemsRequest->MyRequest->Colors->name}}</label> </td>
+                                   <td><label class="label label-default">{{$itemsRequest->statusName}}</label> </td>
+                               </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+    @endsection
+@endif

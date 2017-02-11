@@ -10,40 +10,39 @@
             <span class="box-title"> Artículo Solicitado  </span>
         </div>
 
-        <div class="box-body">
-            <p>
-                <strong>
-                    <span class="text-muted"> Cod. Artículo: </span>
-                    <span class="text-danger">{{$models->items_id}}</span>
-                </strong>
-            </p>
-            <p>
-                <strong>
-                    <span class="text-muted"> Marca / Modelo : </span>
-                    <span class="text-danger">{{$models->Items->Models->Brands->name}}
-                        / {{$models->Items->Models->name}}</span>
-                </strong>
-            </p>
-            <p>
-                <strong>
-                    <span class="text-muted"> # Motor : </span>
-                    <span class="text-danger"> {{$models->Items->n_motor}}</span>
-                </strong>
-            </p>
-            <p>
-                <strong>
-                    <span class="text-muted"> # Cuadro : </span>
-                    <span class="text-danger"> {{$models->Items->n_cuadro}}</span>
-                </strong>
-            </p>
+            <div class="box-body">
+                <p>
+                    <strong>
+                        <span class="text-muted"> Cod. Artículo: </span>
+                        <span class="text-danger">{{$models->items_id}}</span>
+                    </strong>
+                </p>
+                <p>
+                    <strong>
+                        <span class="text-muted"> Marca / Modelo : </span>
+                        <span class="text-danger">{{$models->Items->Models->Brands->name}}
+                            / {{$models->Items->Models->name}}</span>
+                    </strong>
+                </p>
+                <p>
+                    <strong>
+                        <span class="text-muted"> # Motor : </span>
+                        <span class="text-danger"> {{$models->Items->n_motor}}</span>
+                    </strong>
+                </p>
+                <p>
+                    <strong>
+                        <span class="text-muted"> # Cuadro : </span>
+                        <span class="text-danger"> {{$models->Items->n_cuadro}}</span>
+                    </strong>
+                </p>
 
-            <p> Sucursal de ORIGEN : <strong> {{ $models->Items->Branches }}</strong></p>
+                <p> Sucursal de ORIGEN : <strong> {{ $models->Items->Branches or '' }}</strong></p>
 
-            <p> Sucursal de DESTINO : <strong>{{ $models->BranchesTo->name }}s</strong></p>
-            <p> Tipo : <strong>{{ $models->sales->type }}s</strong></p>
+                <p> Sucursal de DESTINO : <strong>{{ $models->BranchesTo->name or '' }}</strong></p>
+                <p> Tipo : <strong>{{ $models->sales->type  or ''}}</strong></p>
+            </div>
 
-
-        </div>
 
     </div>
 

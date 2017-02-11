@@ -15,9 +15,10 @@ Route::group(['prefix'=>'itemsRequest'],function(){
 
         Route::get('/reasign/{id?}/{newId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.reasign','uses'=>'Moto\ItemsRequestController@reasign']);
 
-        Route::get('/asign/{modelsId?}/{branchesTo?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.asign','uses'=>'Moto\ItemsRequestController@asign']);
-        Route::get('/postAsign/{itemId?}/{branchesTo?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.postAsign','uses'=>'Moto\ItemsRequestController@postAsign']);
+        Route::get('/asign/{modelsId?}/{branchesTo?}/{myRequestId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.asign','uses'=>'Moto\ItemsRequestController@asign']);
+        Route::get('/postAsign/{itemId?}/{branchesTo?}/{myRequestId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.postAsign','uses'=>'Moto\ItemsRequestController@postAsign']);
 
+        Route::get('/postReject/{idItemR?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.reject','uses'=>'Moto\ItemsRequestController@Reject']);
 
 
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.itemsRequest.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
