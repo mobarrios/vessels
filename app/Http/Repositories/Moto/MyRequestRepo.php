@@ -24,7 +24,7 @@ class MyRequestRepo extends BaseRepo {
 
         for($i=0; $i < $cant ; $i++)
         {
-            $newIR = ['my_request_id'=> $model->id , 'branches_to_id'=> Auth::user()->branches_active_id ];
+            $newIR = ['my_request_id'=> $model->id , 'branches_to_id'=> Auth::user()->branches_active_id ,'status'=> 1, 'types_id' => 1 ];
             $itemsRequestRepo->create($newIR);
         }
 

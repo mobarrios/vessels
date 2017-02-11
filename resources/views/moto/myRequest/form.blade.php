@@ -22,6 +22,8 @@
         </div>
 
             {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id) !!}
+             {!! Form::hidden('types_id',1) !!}
+
 
         <div class="col-xs-6 form-group">
             {!! Form::label('Modelo') !!}

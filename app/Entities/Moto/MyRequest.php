@@ -10,7 +10,7 @@
 
      protected $table = 'my_request';
 
-     protected $fillable = ['users_id','colors_id','models_id','quantity','actual_status'];
+     protected $fillable = ['users_id','colors_id','models_id','quantity','actual_status','types_id'];
 
 
      public function Models()
@@ -37,6 +37,12 @@
      public function ItemsRequests()
      {
          return $this->hasMany(ItemsRequest::class);
+     }
+
+
+     public function getTypesAttribute()
+     {
+         return config('models.myRequest.types.' . $this->attributes['types_id']);
      }
 
  }

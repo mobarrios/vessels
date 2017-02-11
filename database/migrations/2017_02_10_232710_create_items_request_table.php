@@ -21,7 +21,7 @@ class CreateItemsRequestTable extends Migration
             $table->integer('status');
 
             $table->integer('branches_from_id')->unsigned()->nulleable();
-            $table->foreign('branches_from_id')->references('id')->on('branches');
+            //$table->foreign('branches_from_id')->references('id')->on('branches');
 
             $table->integer('branches_to_id')->unsigned()->nulleable();
             $table->foreign('branches_to_id')->references('id')->on('branches');
@@ -30,7 +30,7 @@ class CreateItemsRequestTable extends Migration
            // $table->foreign('sales_id')->references('id')->on('sales');
 
             $table->integer('items_id')->unsigned()->nulleable();
-            $table->foreign('items_id')->references('id')->on('items');
+            //$table->foreign('items_id')->references('id')->on('items');
 
             $table->integer('my_request_id')->unsigned()->nulleable();
             $table->foreign('my_request__id')->references('id')->on('my_request');

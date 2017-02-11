@@ -30,6 +30,7 @@ return [
             4 => 'Aceptado',
             5 => 'Rechazado',
         ],
-
+        
+     
 
 ];

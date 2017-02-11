@@ -52,7 +52,9 @@
                         <tbody>
                             @yield('table')
                         </tbody>
+
                     </table>
+                    @yield('footTable')
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">

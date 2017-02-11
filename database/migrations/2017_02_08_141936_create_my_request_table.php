@@ -20,6 +20,8 @@ class CreateMyRequestTable extends Migration
 
             $table->integer('actual_status');
             $table->integer('quantity');
+            $table->integer('types_id');
+
 
             $table->integer('models_id')->unsigned()->nulleable();
             $table->foreign('models_id')->references('id')->on('models');
