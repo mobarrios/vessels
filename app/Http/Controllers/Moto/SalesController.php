@@ -70,6 +70,7 @@ class SalesController extends Controller
     // items
     public function addItems(SalesItemsRepo $salesItemsRepo, ItemsRepo $itemsRepo)
     {
+
         // asigna items a la venta
         $item = $itemsRepo->asignItem($this->request->models_id, $this->request->branches_confirm_id, $this->request->sales_id, $this->request->colors_id);
 
@@ -141,25 +142,24 @@ class SalesController extends Controller
     }
 
     public function showAside(Request $request,SalesItemsRepo $salesItemsRepo,SalesPaymentsRepo $salesPaymentsRepo){
-        $this->data['routeItems'] = 'moto.sales.addItems';
-        $this->data['routePays'] = 'moto.sales.editPayment';
+        $this->data['route'] = $request->get('route');
 
-        if($request->get('edit')){
-            foreach ($request->get('edit') as $type => $id){
-                if($type == 'items')
-                    $this->data['modelItems'] = $salesItemsRepo->find($id);
-                elseif($type == 'pays')
-                    $this->data['modelPays'] = $salesPaymentsRepo->find($id);
+        if($request->get('edit') != 'false'){
+            if($request->get('type') == 'items'){
+                $this->data['model'] = $salesItemsRepo->find($request->get('edit'));
             }
 
-            $this->data['routeItems'] = 'moto.sales.updateItems';
-            $this->data['routePays'] = 'moto.sales.addPayment';
+            if($request->get('type') == 'pays'){
+                $this->data['model'] = $salesPaymentsRepo->find($request->get('edit'));
+            }
+
+
         }
 
         $this->data['hidden'] = $request->hidden;
         $this->data['type'] = $request->type;
 
-        return view('moto.aside.items')->with($this->data);
+        return view('moto.sales.aside'.ucfirst($this->data['type']))->with($this->data);
 
     }
 

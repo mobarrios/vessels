@@ -217,7 +217,7 @@
 
 
 @section('js')
-    <script src="js/asideModelsColors.js"></script>
+    {{--<script src="js/asideModelsColors.js"></script>--}}
 
     <script>
 
