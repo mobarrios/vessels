@@ -15,8 +15,6 @@ class ItemsRequestRepo extends BaseRepo {
 
     public function create($data)
     {
-
-
         $model = new $this->model();
         $model->fill($data);
         $model->save();
@@ -24,6 +22,11 @@ class ItemsRequestRepo extends BaseRepo {
         $this->createBrancheables($model, Auth::user()->branches_active_id);
 
         return $model;
+    }
+
+    public function getPending()
+    {
+       return  $this->getModel()->where('status', 1)->get();
     }
 
 }

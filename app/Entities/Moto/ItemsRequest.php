@@ -10,7 +10,7 @@
 
      protected $table = 'items_request';
 
-     protected $fillable = ['items_id','branches_from_id','branches_to_id','sales_id','status'];
+     protected $fillable = ['items_id','branches_from_id','branches_to_id','sales_id','status','my_request_id'];
 
 
      public function Items()
@@ -36,6 +36,11 @@
      public function getStatusNameAttribute()
      {
          return config('status.items_request.'. $this->attributes['status']);
+     }
+
+     public function MyRequest()
+     {
+         return $this->belongsTo(MyRequest::class);
      }
  }
 

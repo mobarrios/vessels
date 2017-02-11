@@ -125,7 +125,10 @@
     @permission('itemsrequest.list')
         <li class={{ Request::segment(2) == "itemsRequest" ? 'active' : '' }}><a href="{{route('moto.itemsRequest.index')}}"><span>Pedidos de Articulos</span> </a></li>
     @endpermission
-</ul>
+
+      <li class={{ Request::segment(2) == "itemsRequest" ? 'active' : '' }}><a href="{{route('moto.myRequest.index')}}"><span>Mis Pedidos</span> </a></li>
+
+  </ul>
 
 
 </li>

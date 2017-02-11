@@ -61,6 +61,8 @@
 
     @yield('formAside')
 
+    @yield('modal')
+
     @include('template.js')
 
     <!-- para js extras en cada seccion -->

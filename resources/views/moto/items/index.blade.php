@@ -1,4 +1,5 @@
 @extends('template.model_index')
+
     @section('table')
         @foreach($models as $model)
             <tr>
@@ -32,4 +33,8 @@
 
             </tr>
         @endforeach
+
+
     @endsection
+
+

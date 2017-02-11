@@ -147,8 +147,6 @@ abstract class BaseRepo {
 
                     }else{
 
-
-
                         $q->orWhereHas($ex[0], function($q) use ($ex , $data)
                         {
                             $q->where($ex[1] ,'like','%'.$data->search.'%');

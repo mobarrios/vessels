@@ -22,10 +22,14 @@ return [
             3 => 'Vendido',
         ],
 
-        'items_request' => [
-
-                1 => 'Solicitado',
-                2 => 'En Proceso',
-                3 => 'Entregado'
+    'items_request' =>
+        [
+            1 => 'Pendiente',
+            2 => 'En Transito',
+            3 => 'Entregado',
+            4 => 'Aceptado',
+            5 => 'Rechazado',
         ],
+
+
 ];
