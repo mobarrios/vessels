@@ -240,9 +240,9 @@
 
 
 @section('js')
+@if(isset($models))
     <script src="js/aside2.js"></script>
     <script>
-
         $(".editItems").aside2({
             title: 'EDITAR PRODUCTO',
             routeAjax: "{!! route('moto.'.$section.'.showAside') !!}",
@@ -277,7 +277,7 @@
         });
 
     </script>
-
+@endif
     <script>
 
 
