@@ -24,7 +24,7 @@ class CreateProvidersTable extends Migration
             $table->string('email');
             $table->string('phone');
 
-            $table->integer('providers_payments_id')->unsigned()->nulleable();
+            $table->integer('providers_payments_id')->nulleable()->unsigned();
             $table->foreign('providers_payments_id')->references('id')->on('providers_payments');
         });
     }

@@ -22,7 +22,7 @@ class CreateDispatchesTable extends Migration
             $table->string('number');
 
             $table->integer('providers_id')->unsigned()->nulleable();
-            $table->foreign('providres_id')->references('id')->on('providers');
+            $table->foreign('providers_id')->references('id')->on('providers');
         });
     }
 

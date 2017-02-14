@@ -95,7 +95,7 @@
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('last_name', "APELLIDO") !!}
-                        {!! Form::text('last_name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'last_name']) !!}
+                        {!! Form::text('last_name', null, ['class'=>'form-control', 'required' => 'required','ng-model' => 'last_name']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
@@ -110,7 +110,7 @@
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('sexo', "SEXO") !!}
-                        {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],null, ['class'=>'form-control','ng-model' => 'sexo']) !!}
+                        {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],'masculino', ['class'=>'form-control','ng-model' => 'sexo']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
@@ -318,7 +318,6 @@
 
 @endsection
 
-
 @if(isset($models))
 @section('formAside')
     @include('moto.partials.asideOpenForm')
@@ -375,7 +374,7 @@
 
                 <div class="col-xs-6 col-lg-6 form-group">
                     {!! Form::label('Subtotal') !!}
-                    {!! Form::number('price_budget', null, ['class'=>'form-control sTotal']) !!}
+                    {!! Form::number('price_budget', isset($modelItems) ? $modelItems->price_budget : null, ['class'=>'form-control sTotal']) !!}
                 </div>
 
                 <div class="col-xs-6 form-group">
@@ -411,20 +410,36 @@
         var app = angular.module("buscador", []);
 
 
+
         app.controller("buscadorController", function ($scope, $http) {
-            @if(isset($client))
-                    $scope.model = "{!! $client->id !!}"
-            $scope.last_name = "{!! $client->last_name !!}"
-            $scope.name = "{!! $client->name !!}"
-            $scope.dni = "{!! $client->dni !!}"
-            $scope.email = "{!! $client->email !!}"
-            $scope.sexo = "{!! $client->sexo !!}"
-            $scope.nacionality = "{!! $client->nacionality !!}"
-            $scope.phone1 = "{!! $client->phone1 !!}"
-            $scope.address = "{!! $client->address !!}"
-            $scope.city = "{!! $client->city !!}"
-            $scope.location = "{!! $client->location !!}"
-            $scope.province = "{!! $client->province !!}"
+            $scope.model = ""
+            $scope.last_name = ""
+            $scope.name = ""
+            $scope.dni = ""
+            $scope.email = ""
+            $scope.sexo = ""
+            $scope.nacionality = ""
+            $scope.phone1 = ""
+            $scope.address = ""
+            $scope.city = ""
+            $scope.location = ""
+            $scope.province = ""
+
+
+
+            @if(isset($client) || $errors->any())
+                    $scope.model = "{!! $client->id or ""!!}"
+                $scope.last_name = "{!! $client->last_name or old('last_name')!!}"
+                $scope.name = "{!! $client->name or old('name') !!}"
+                $scope.dni = "{!! $client->dni or old('dni')!!}"
+                $scope.email = "{!! $client->email or old('email')!!}"
+                $scope.sexo = "{!! $client->sexo or old('sexo')!!}"
+                $scope.nacionality = "{!! $client->nacionality or old('nacionality')!!}"
+                $scope.phone1 = "{!! $client->phone1 or old('phone1')!!}"
+                $scope.address = "{!! $client->address or old('address')!!}"
+                $scope.city = "{!! $client->city or old('city')!!}"
+                $scope.location = "{!! $client->location or old('location')!!}"
+                $scope.province = "{!! $client->province or old('province')!!}"
             @endif
 
             $('#search').on('change',function(ev){
