@@ -30,8 +30,6 @@ class CreateModelsTable extends Migration
             $table->integer('brands_id')->unsigned()->index();
             $table->foreign('brands_id')->references('id')->on('brands')->onDelete('cascade');
 
-            $table->integer('providers_id')->nulleable();
-            //$table->foreign('providers_id')->references('id')->on('providers')->onDelete('cascade');
 
         });
     }

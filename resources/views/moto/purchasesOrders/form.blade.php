@@ -149,7 +149,7 @@
     {!! Form::hidden('purchases_orders_id',$models->id) !!}
     <div class="col-xs-12 form-group">
         {!! Form::label('Modelo') !!}
-        {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
+        {!! Form::select('models_id', $models->providers->models->lists('name','id'), null, ['class'=>'form-control select2']) !!}
     </div>
     <div class="col-xs-12 form-group">
         {!! Form::label('Precio') !!}

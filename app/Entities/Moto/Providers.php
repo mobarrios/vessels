@@ -22,6 +22,11 @@
          return $this->hasMany(PurchasesOrders::class)->where('status',3);
      }
 
+     public function Models()
+     {
+         return $this->belongsToMany(Models::class);
+     }
+
  }
 
 
