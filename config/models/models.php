@@ -49,6 +49,7 @@ return [
 
             'name'          => 'required',
             'categories_id'     => 'required',
+            'providers_id'     => 'required',
 
     ],
 
@@ -56,6 +57,7 @@ return [
 
             'name'          => 'required',
             'categories_id'     => 'required',
+            'providers_id'     => 'required',
 
     ],
 

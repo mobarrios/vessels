@@ -50,7 +50,7 @@ class PurchasesOrdersController extends Controller
         $this->purchasesOrdersItemsRepo = $purchasesOrdersItemsRepo;
 
     }
-    
+
 
 
     //find with items

@@ -15,7 +15,7 @@
         {!! Form::text('name', null, ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-6 form-group">
+    <div class="col-xs-3 form-group">
         {!! Form::label('Marca') !!}
         {!! Form::select('brands_id', $brands , null ,['class'=>'select2 form-control ']) !!}
     </div>
@@ -23,6 +23,17 @@
         {!! Form::label('Categorias') !!}
         {!! Form::select('categories_id[]', $categories , null ,['class'=>'selectMulti form-control' ,'multiple'=>'']) !!}
     </div>
+
+    <div class="col-xs-3 form-group">
+        {!! Form::label('Proveedores') !!}
+
+        @if(isset($models))
+            {!! Form::select('providers_id[]', $providers , $models->providers->lists('id'),['class'=>'select2 form-control','multiple'=>'']) !!}
+        @else
+            {!! Form::select('providers_id[]', $providers , null ,['class'=>'select2 form-control','multiple'=>'']) !!}
+        @endif
+    </div>
+
     <div class="col-xs-2 form-group">
         {!! Form::label('Estado') !!}
         {!! Form::select('status', $status ,null, ['class'=>'select2 form-control']) !!}
