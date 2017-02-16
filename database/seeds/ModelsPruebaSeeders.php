@@ -16,7 +16,7 @@ class ModelsPruebaSeeders extends Seeder
         DB::table('models')->insert([
             [
                 'id' => 1,
-                'name' => 'Biz 125 New',
+                'name' => 'Biz 150 New',
                 'brands_id' => 1,
                 'status' => 1,
                 'patentamiento' => rand(111,999),
@@ -24,7 +24,7 @@ class ModelsPruebaSeeders extends Seeder
 
             ], [
                 'id' => 2,
-                'name' => 'XR 150',
+                'name' => 'XR 250 TORNADO',
                 'brands_id' => 1,
                 'status' => 1,
                 'patentamiento' => rand(111,999),
@@ -32,30 +32,62 @@ class ModelsPruebaSeeders extends Seeder
 
             ], [
                 'id' => 3,
-                'name' => 'CB 190 Repsol',
-                'brands_id' => 1,
+                'name' => 'FZ FI',
+                'brands_id' => 2,
                 'status' => 1,
                 'patentamiento' => rand(111,999),
                 'pack_service' => rand(111,999),
 
             ], [
                 'id' => 4,
-                'name' => 'T110 Crypton Base sin Disco',
-                'brands_id' => 2,
+                'name' => 'ROUSER 200NS',
+                'brands_id' => 3,
                 'status' => 1,
                 'patentamiento' => rand(111,999),
                 'pack_service' => rand(111,999),
             ], [
                 'id' => 5,
-                'name' => 'T110 Crypton Full',
-                'brands_id' => 2,
+                'name' => 'ROUSER 135',
+                'brands_id' => 3,
                 'status' => 1,
                 'patentamiento' => rand(111,999),
                 'pack_service' => rand(111,999),
             ], [
                 'id' => 6,
-                'name' => 'FZ FI',
-                'brands_id' => 2,
+                'name' => 'ZB 110 BASE',
+                'brands_id' => 4,
+                'status' => 1,
+                'patentamiento' => rand(111,999),
+                'pack_service' => rand(111,999),
+
+            ],[
+                'id' => 7,
+                'name' => 'RX 150 G3 E',
+                'brands_id' => 4,
+                'status' => 1,
+                'patentamiento' => rand(111,999),
+                'pack_service' => rand(111,999),
+
+            ],[
+                'id' => 8,
+                'name' => 'ZR 150',
+                'brands_id' => 4,
+                'status' => 1,
+                'patentamiento' => rand(111,999),
+                'pack_service' => rand(111,999),
+
+            ],[
+                'id' => 9,
+                'name' => 'SKUA 150',
+                'brands_id' => 5,
+                'status' => 1,
+                'patentamiento' => rand(111,999),
+                'pack_service' => rand(111,999),
+
+            ],[
+                'id' => 10,
+                'name' => 'CG S2 BASE TUBULUAR',
+                'brands_id' => 5,
                 'status' => 1,
                 'patentamiento' => rand(111,999),
                 'pack_service' => rand(111,999),

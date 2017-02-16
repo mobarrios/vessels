@@ -27,6 +27,11 @@
          return $this->belongsToMany(Models::class);
      }
 
+     public function getModelsByProvidersAttribute()
+     {
+         return $this->Models->lists("name","id");
+     }
+
  }
 
 

@@ -11,14 +11,29 @@ class BrandsSeeders extends Seeder
      */
     public function run()
     {
-        DB::table('brands')->insert([
-        [
-            'id'    => 1,
-            'name'=>'Honda',
-        ],[
-            'id'    => 2,
-            'name'=>'Yamaha',
-        ]]
+        DB::table('brands')->insert(
+            [
+                [
+                    'id'    => 1,
+                    'name'=>'Honda',
+                ],
+                [
+                    'id'    => 2,
+                    'name'=>'Yamaha',
+                ],
+                [
+                    'id'    => 3,
+                    'name'=>'Bajaj',
+                ],
+                [
+                    'id'    => 4,
+                    'name'=>'Zanella',
+                ],
+                [
+                    'id'    => 5,
+                    'name'=>'Motomel',
+                ]
+            ]
         );
     }
 }

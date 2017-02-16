@@ -24,13 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BrancheablesSeeders::class);
 
         $this->call(ProvidersTableSeeder::class);
-       // $this->call(UsersPruebaSeeders::class);
-        //$this->call(RoleUserPruebaSeeders::class);
 
         //testing
-        // $this->call(BranchPruebaSeeders::class);
-        // $this->call(UsersPruebaSeeders::class);
-        // $this->call(RoleUserPruebaSeeders::class);
         $this->call(BrandsSeeders::class);
         $this->call(CategoriesSeeders::class);
         $this->call(ColorsSeeders::class);
@@ -39,6 +34,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ItemsPruebaSeeders::class);
         $this->call(ModelsCategoriesPruebaSeeders::class);
         $this->call(ModelsProvidersPruebaSeeders::class);
+
+
+        $this->call(ModelsListsPricesPruebaSeeders::class);
+        $this->call(ModelsListsPricesItemsPruebaSeeders::class);
 
 
         Model::reguard();

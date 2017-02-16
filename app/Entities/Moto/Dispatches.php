@@ -34,6 +34,11 @@
          return $this->belongsTo(PurchasesOrders::class);
      }
 
+     public function Providers()
+     {
+         return $this->belongsTo(Providers::class);
+     }
+
 
 
      public function getDateAttribute($value)

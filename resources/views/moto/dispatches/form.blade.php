@@ -173,7 +173,7 @@
 
                                 <div class="col-xs-12 form-group">
                                     {!! Form::label('Modelo') !!}
-                                    {!! Form::select('models_id', $models_lists, null, ['class'=>'form-control select2']) !!}
+                                    {!! Form::select('models_id', $models->Providers->ModelsByProviders, null, ['class'=>'form-control select2']) !!}
                                 </div>
                                 <div class="col-xs-12 form-group">
                                     {!! Form::label('Color') !!}
