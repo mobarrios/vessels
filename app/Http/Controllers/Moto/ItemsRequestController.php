@@ -8,6 +8,7 @@ use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ItemsRequestRepo as Repo;
 use App\Http\Repositories\Moto\MyRequestRepo;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
@@ -99,6 +100,13 @@ class ItemsRequestController extends Controller
         $model->save();
 
         return redirect()->back()->withErrors('Articulo Rechazado .');
+    }
+
+
+    public function NotaPedido(PDF $pdf)
+    {
+        $pdf->setPaper('a5', 'portrait')->loadView('moto.itemsRequest.repo.nota');
+        return $pdf->stream();
     }
 
 }

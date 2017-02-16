@@ -24,4 +24,11 @@ Route::group(['prefix'=>'budgets'],function(){
 
         Route::get('/showAside',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.showAside','uses'=>'Moto\BudgetsController@showAside']);
 
+
+
+        // ajax
+    Route::get('/budgetsClients/{id?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.budgetsClients','uses'=>'Moto\BudgetsController@budgetsClients']);
+    Route::get('/budget/{id?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.budget','uses'=>'Moto\BudgetsController@budget']);
+
+
 });

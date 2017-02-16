@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
 @section('form_title')
-    Venta
+    Nueva Venta
 @endsection
 
 @section('form_inputs')
@@ -13,12 +13,17 @@
 
     {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
 
-    <div class="col-xs-2 form-group">
-        {!! Form::label('Tipo de Operación') !!}
-        {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
+    <div class="col-xs-12">
+        <h2 class="text-center"><span>Venta </span> <strong class="text-blue">
+                # {{ (  isset($models) ? $models->id : '')}} </strong></h2>
     </div>
 
-    <div class="col-xs-5 form-group">
+    <div class="col-xs-2  form-group">
+        {!! Form::label('Fecha Pactada') !!}
+        {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
+    </div>
+
+    <div class="col-xs-6 form-group">
         {!! Form::label('Cliente') !!}
 
         @if(isset($models))
@@ -26,7 +31,6 @@
         @else
 
             <select id="clients_id" name="clients_id" class="select2 form-control ">
-                <option value="">Seleccionar</option>
                 @foreach($clients  as $client)
                     <option value="{{$client->id}}">
                         {{$client->fullName}}
@@ -39,56 +43,37 @@
         @endif
     </div>
 
-    {{--
-    <div class="col-xs-12 form-group">
-        {!! Form::label('Presupuestos ') !!}
-        @if(isset($models))
-            <input  type="text" disabled value=" # {{$models->budgets_id}}" class="form-control">
-        @else
-            <select id="budgets_id" name="budgets_id" class="form-control select2">
-                <option value=""></option>
-            </select>
-        @endif
-    </div>
-    --}}
-        <div ng-app="app">
-        <div ng-controller="ctl">
-            <div class="col-xs-4 form-group">
-                {!! Form::label('Presupuestos ') !!}
-                {!! Form::select('budgets_id', $budgets, null, ['class'=>'form-control select2','id'=>'budgets_id']) !!}
-                <button ng-click="ver()" type="button" id="ver">Ver</button>
-            </div>
-            <div class="col-xs-12">
-                <table class="table">
-                        <tr ng-repeat="items in budgets.all_items">
-                            <td>@{{ items.brands.name }} @{{ items.name }}</td>
-                            <td> $ @{{ items.pivot.price_budget }}</td>
-
-                        </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-
-
-    <div class="col-xs-2  form-group">
-        {!! Form::label('Fecha Pactada') !!}
-        {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
-    </div>
-
-
     <div class="col-xs-1 form-group" style="padding-top: 1.5%">
         <a href="{{route("moto.clients.create")}}" target="_blank" class="btn btn-default"><span
                     class="fa fa-plus"></span></a>
     </div>
 
+    <div class="col-xs-2 form-group">
+
+        {!! Form::label('Presupuestos ') !!}
+        @if(isset($models))
+            <input  type="text" disabled value=" # {{$models->budgets_id}}" class="form-control">
+        @else
+            <select id="budgets_id" name="budgets_id" class="form-control select2">
+            </select>
+
+
+        @endif
+    </div>
+
+    <div class="col-xs-1 form-group" style="padding-top: 1.5%">
+        <button type="button" id="show_budget" class="btn btn-default"><span class="fa fa-eye"></span></button>
+    </div>
 
     <div class="col-xs-2 form-group">
         {!! Form::label('Sucursal de Entrega') !!}
         {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','placeholder'=>'Seleccionar...']) !!}
     </div>
 
-
+    <div class="col-xs-2 form-group">
+        {!! Form::label('Tipo de Operación') !!}
+        {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
+    </div>
 
     <div class="col-xs-1 form-group" style="padding-top: 1.5%">
         <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
@@ -250,59 +235,50 @@
 @endsection
 
 
-@section('modal')
-    <div class="modal  bs-example-modal-lg" id="modalBudgetClients" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
 
-                <div class="modal-body  modal-content">
-
-                    <div id="app">
-                        @{{ message }}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="aceptar" class="btn btn-default">Aceptar</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-@endsection
 
 
 
 @section('js')
-
+@if(isset($models))
+    <script src="js/aside2.js"></script>
     <script>
-
-        var app = angular.module("app", []);
-        app.controller("ctl", function ($scope, $http) {
-
-            $scope.ver =  function(){
-                $http.get("moto/budgets/budget/"+$('#budgets_id').val() )
-                        .then(function (response) {
-                            $scope.budgets = response.data;
-                            console.table(response.data);
-                        });
-            };
+        $(".editItems").aside2({
+            title: 'EDITAR PRODUCTO',
+            routeAjax: "{!! route('moto.'.$section.'.showAside') !!}",
+            hidden: {
+                sales_id: "{!! $models->id !!}",
+                branches_confirm_id: "{!! $models->branches_confirm_id !!}"
+            },
+            typeForm: "items",
+            edit: true
         });
 
-        $('#ver').on('click',function()
-        {
-            $.get("moto/budgets/budget/"+$('#budgets_id').val() ,function(res)
-            {
-
-            });
+        $("#agregarItem").aside2({
+            title: 'AGREGAR PRODUCTO',
+            routeAjax: "{!! route('moto.'.$section.'.showAside') !!}",
+            route: "{!! route('moto.'.$section.'.addItems',$models->id) !!}",
+            hidden: {
+                sales_id: "{!! $models->id !!}",
+                branches_confirm_id: "{!! $models->branches_confirm_id !!}"
+            },
+            typeForm: "items"
         });
 
-        $('#budgets_id').on('change',function()
-        {
-            $.get("moto/budgets/budgetsClients/"+$(this).val() ,function(res)
-            {
-                $("#clients_id ").val(res).trigger("change");
-            });
+        $("#agregarPago").aside2({
+            title: 'METODOS DE PAGO',
+            routeAjax: "{!! route('moto.'.$section.'.showAside') !!}",
+            route: "{!! route('moto.'.$section.'.addPayment',$models->id) !!}",
+            hidden: {
+                sales_id: "{!! $models->id !!}",
+                date: "{!! Date('Y-m-d') !!}"
+            },
+            typeForm: "pays"
         });
+
+    </script>
+@endif
+    <script>
 
 
 
@@ -315,24 +291,21 @@
             $.ajax({
                 method: 'GET',
                 url: 'moto/budgetsByClients/' + id,
-                success: function (data)
-                {
-                    $.each(data, function (i, y)
-                    {
+                success: function (data) {
+
+                    $.each(data, function (i, y) {
                         budgets.append("<option value=" + y.id + ">#" + y.id + " | " + y.created_at + "</option>")
                     });
                 }
             })
         });
 
-
         $("#show_budget").on('click', function () {
+
             var id = $('#budgets_id').val();
-            //window.open('moto/budgets/pdf/' + id, '_blank');
+            window.open('moto/budgets/pdf/' + id, '_blank');
 
-            //$('#modalBudgetClients .modal-content').load('{{route('moto.budgets.index')}}');
 
-            $('#modalBudgetClients').modal(open);
         });
 
     </script>

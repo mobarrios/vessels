@@ -6,6 +6,7 @@ use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
+use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
@@ -27,7 +28,7 @@ class SalesController extends Controller
 
     public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
-                                BranchesRepo $branchesRepo, FinancialsRepo $financialsRepo)
+                                BranchesRepo $branchesRepo, FinancialsRepo $financialsRepo, BudgetsRepo $budgetsRepo)
     {
 
         $this->request = $request;
@@ -48,6 +49,7 @@ class SalesController extends Controller
 
         $this->data['brands'] = $brandsRepo->getAllWithModels();
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
+        $this->data['budgets'] = $budgetsRepo->ListsData('id','id');
 
 
         $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();

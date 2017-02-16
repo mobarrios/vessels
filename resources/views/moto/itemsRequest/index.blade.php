@@ -27,7 +27,7 @@
     @section('footTable')
 
 <hr>
-            <button class="btn" title="Enviar Reparto"><span class="fa fa-truck" ></span></button>
+            <a href="{{route('moto.itemsRequest.notaPedido')}}" target="_blank" class="btn btn-default" title="Enviar Reparto"><span class="fa fa-truck" ></span></a>
 
     @endsection
 

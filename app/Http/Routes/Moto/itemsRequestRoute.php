@@ -21,6 +21,11 @@ Route::group(['prefix'=>'itemsRequest'],function(){
         Route::get('/postReject/{idItemR?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.reject','uses'=>'Moto\ItemsRequestController@Reject']);
 
 
+
+        //repos
+
+        Route::get('/notaPedido',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.notaPedido','uses'=>'Moto\ItemsRequestController@notaPedido']);
+
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.itemsRequest.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 });
 

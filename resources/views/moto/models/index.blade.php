@@ -34,14 +34,7 @@
                     <label class="label label-success">{{$model->stock}}</label>
                 @endif
 
-
             </td>
-
-
-
-                <td class="btn-group btn-group-sm">
-                    <button  class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" title="Editar" ><i class="fa fa-truck"></i></button>
-                </td>
 
         </tr>
     @endforeach

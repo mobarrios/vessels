@@ -274,4 +274,21 @@ class BudgetsController extends Controller
 
     }
 
+    // ajax
+
+    public function budgetsClients()
+    {
+        $id = $this->route->getParameter('id');
+        $data = $this->repo->find($id)->clients_id;
+
+        return response()->json($data);
+    }
+
+    public function budget()
+    {
+        $id = $this->route->getParameter('id');
+        $data = $this->repo->getModel()->with('allItems')->find($id);
+
+        return response()->json($data);
+    }
 }
