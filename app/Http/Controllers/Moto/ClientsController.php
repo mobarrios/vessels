@@ -47,7 +47,7 @@ class ClientsController extends Controller
         //si request de busqueda
         if( isset($this->request->search) && !is_null($this->request->filter))
         {
-            if(str_contains(URL::previous(),$this->section))
+            if(\Illuminate\Support\Facades\Request::segment(2) == $this->section)
                 $model = $this->repo->searchWhere($this->request,['prospecto' => 0]);
             else
                 $model = $this->repo->searchWhere($this->request,['prospecto' => 1]);
@@ -55,7 +55,7 @@ class ClientsController extends Controller
             if(is_null($model) || $model->count() == 0){
 
                 //si paso la seccion
-                if(str_contains(URL::previous(),$this->section))
+                if(\Illuminate\Support\Facades\Request::segment(2) == $this->section)
                     $model = $this->repo->listAllWhere($this->section,['prospecto' => 0]);
                 else
                     $model = $this->repo->listAllWhere($this->section,['prospecto' => 1]);
@@ -63,7 +63,7 @@ class ClientsController extends Controller
             }
 
         }else{
-            if(str_contains(URL::previous(),$this->section))
+            if(\Illuminate\Support\Facades\Request::segment(2) == $this->section)
                 $model = $this->repo->listAllWhere($this->section,['prospecto' => 0]);
             else
                 $model = $this->repo->listAllWhere($this->section,['prospecto' => 1]);
@@ -75,7 +75,7 @@ class ClientsController extends Controller
         //pagina el query
         $this->data['models'] = $model->paginate(config('models.'.$this->section.'.paginate'));
 
-        if(str_contains(URL::previous(),$this->section)){
+        if(\Illuminate\Support\Facades\Request::segment(2) == $this->section){
             //return view($this->getConfig()->indexRoute)->with($this->data);
             return view(config('models.'.$this->section.'.indexRoute'))->with($this->data);
 
@@ -138,7 +138,7 @@ class ClientsController extends Controller
                 return redirect()->route(config('models.technicalServices.createRoute'),$technicalService->id);
             }else{
 
-                $budget = $this->budgetsRepo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $model->id]));
+                $budget = $this->externalRepo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $model->id]));
 
                 return redirect()->route(config('models.budgets.createRoute'),$budget->id);
             }

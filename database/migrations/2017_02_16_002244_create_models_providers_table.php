@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDispatchesTable extends Migration
+class CreateModelsProvidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,17 @@ class CreateDispatchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dispatches', function (Blueprint $table) {
-
+        Schema::create('models_providers', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->date('date');
-            $table->string('number');
+            $table->integer('models_id')->unsigned();
+            $table->integer('providers_id')->unsigned();
 
-            $table->integer('providers_id')->unsigned()->nulleable();
+            $table->foreign('models_id')->references('id')->on('models');
             $table->foreign('providers_id')->references('id')->on('providers');
+
         });
     }
 
@@ -33,6 +33,6 @@ class CreateDispatchesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dispatches');
+        Schema::drop('models_providers');
     }
 }

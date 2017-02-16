@@ -19,7 +19,7 @@ return [
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
     'postStoreRoute'  => 'moto.'.$model.'.index',
-    'postUpdateRoute' => 'moto.'.$model.'.index',
+    'postUpdateRoute' => 'moto.'.$model.'.edit',
 
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
@@ -48,28 +48,17 @@ return [
 
     'validationsStore' => [
 
-        'dni' => 'unique:clients,dni',
         'name' => 'required',
         'last_name' => 'required',
-        'phone1' => 'required',
-        'email' => 'unique:clients,email|required',
-
-
-        //'address' => 'required',
-
+        'email' => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-        // 'dni' => 'required',
         'name' => 'required',
         'last_name' => 'required',
-        'phone1' => 'required',
         'email' => 'required',
-
-
-        //'address' => 'required',
 
     ],
 

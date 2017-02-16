@@ -28,6 +28,11 @@ class Models extends Entity
         return $this->belongsToMany(Categories::class, 'models_categories');
     }
 
+    public function Providers()
+    {
+        return $this->belongsToMany(Providers::class);
+    }
+
     public function getCategoriesIdAttribute()
     {
         return $this->Categories()->lists('categories_id')->toArray();
