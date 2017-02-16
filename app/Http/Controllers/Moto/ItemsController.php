@@ -73,4 +73,12 @@ class ItemsController extends Controller
             return response()->json(false);
     }
 
+
+    //modal
+    public function modal()
+    {
+        $this->data['activeBread'] = 'Agregar Item';
+
+        return view('moto.sales.modalItemsForm')->with($this->data);
+    }
 }

@@ -56,8 +56,6 @@
         @else
             <select id="budgets_id" name="budgets_id" class="form-control select2">
             </select>
-
-
         @endif
     </div>
 

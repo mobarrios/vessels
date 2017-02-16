@@ -4,61 +4,69 @@ $model = 'models';
 
 return [
 
-    'paginate'      => '50',
+    'paginate' => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Modelos',
+    'sectionName' => 'Modelos',
 
     //routes
-    'indexRoute'    => 'moto.'.$model.'.index',
-    'storeRoute'    => 'moto.'.$model.'.store',
-    'createRoute'   => 'moto.'.$model.'.create',
-    'showRoute'     => 'moto.'.$model.'.show',
-    'editRoute'     => 'moto.'.$model.'.edit',
-    'updateRoute'   => 'moto.'.$model.'.update',
-    'destroyRoute'  => 'moto.'.$model.'.destroy',
+    'indexRoute' => 'moto.' . $model . '.index',
+    'storeRoute' => 'moto.' . $model . '.store',
+    'createRoute' => 'moto.' . $model . '.create',
+    'showRoute' => 'moto.' . $model . '.show',
+    'editRoute' => 'moto.' . $model . '.edit',
+    'updateRoute' => 'moto.' . $model . '.update',
+    'destroyRoute' => 'moto.' . $model . '.destroy',
 
-    'postStoreRoute'  => 'moto.'.$model.'.index',
-    'postUpdateRoute' => 'moto.'.$model.'.index',
+    'postStoreRoute' => 'moto.' . $model . '.index',
+    'postUpdateRoute' => 'moto.' . $model . '.index',
 
     //urls
-    'destroyUrl' => 'moto/'.$model.'/destroy/',
+    'destroyUrl' => 'moto/' . $model . '/destroy/',
 
     //views
-    'storeView' =>  'moto.'.$model.'.form',
-    'editView'  =>  'moto.'.$model.'.form',
+    'storeView' => 'moto.' . $model . '.form',
+    'editView' => 'moto.' . $model . '.form',
 
     //path
-    'imagesPath' => 'uploads/'.$model.'/images/',
+    'imagesPath' => 'uploads/' . $model . '/images/',
 
     //polymorphic
-    'is_logueable'      => true,
-    'is_imageable'      => true,
-    'is_brancheable'    => false,
-    
+    'is_logueable' => true,
+    'is_imageable' => true,
+    'is_brancheable' => false,
+
 
     //column search
     'search' => [
-        
-            'Nombre'    => 'name',
-            //'Direccion'  => 'address' ,
-            //'Email'     => 'email'
+
+        'Nombre' => 'name',
+        //'Direccion'  => 'address' ,
+        //'Email'     => 'email'
     ],
 
     'validationsStore' => [
 
-            'name'          => 'required',
-            'categories_id'     => 'required',
-            'providers_id'     => 'required',
+        'name' => 'required',
+        'categories_id' => 'required',
+        'providers_id' => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'name'          => 'required',
-            'categories_id'     => 'required',
-            'providers_id'     => 'required',
+        'name' => 'required',
+        'categories_id' => 'required',
+        'providers_id' => 'required',
 
     ],
 
+
+    'types' => [
+        1 => 'Motos',
+        2 => 'Accesorios',
+        3 => 'Repuestos',
+        4 => 'Marina',
+        5 => 'Productos de Fuerza',
+    ]
 ];

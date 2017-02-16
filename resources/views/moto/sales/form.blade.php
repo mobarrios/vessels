@@ -12,102 +12,100 @@
     @endif
 
     {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
-
-    <div class="col-xs-2 form-group">
-        {!! Form::label('Tipo de Operación') !!}
-        {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
-    </div>
-
-    <div class="col-xs-5 form-group">
-        {!! Form::label('Cliente') !!}
-
-        @if(isset($models))
-            <input type="text" disabled value="{{$models->Clients->fullName}}" class="form-control">
-        @else
-
-            <select id="clients_id" name="clients_id" class="select2 form-control ">
-                <option value="">Seleccionar</option>
-                @foreach($clients  as $client)
-                    <option value="{{$client->id}}">
-                        {{$client->fullName}}
-                        |<strong> {{$client->email}}</strong>
-                        | {{$client->dni}}
-                    </option>
-                @endforeach
-            </select>
-
-        @endif
-    </div>
-
-    {{--
-    <div class="col-xs-12 form-group">
-        {!! Form::label('Presupuestos ') !!}
-        @if(isset($models))
-            <input  type="text" disabled value=" # {{$models->budgets_id}}" class="form-control">
-        @else
-            <select id="budgets_id" name="budgets_id" class="form-control select2">
-                <option value=""></option>
-            </select>
-        @endif
-    </div>
-    --}}
-        <div ng-app="app">
-        <div ng-controller="ctl">
-            <div class="col-xs-4 form-group">
-                {!! Form::label('Presupuestos ') !!}
-                {!! Form::select('budgets_id', $budgets, null, ['class'=>'form-control select2','id'=>'budgets_id']) !!}
-                <button ng-click="ver()" type="button" id="ver">Ver</button>
+    <div class="col-xs-12 content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Cabecera
             </div>
-            <div class="col-xs-12">
-                <table class="table">
-                        <tr ng-repeat="items in budgets.all_items">
-                            <td>@{{ items.brands.name }} @{{ items.name }}</td>
-                            <td> $ @{{ items.pivot.price_budget }}</td>
+            <div class="panel-body">
+                <div class="col-xs-2 form-group">
+                    {!! Form::label('Tipo de Operación') !!}
+                    {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
+                </div>
 
-                        </tr>
-                </table>
+                <div class="col-xs-5 form-group">
+                    {!! Form::label('Cliente') !!}
+
+                    @if(isset($models))
+                        <input type="text" disabled value="{{$models->Clients->fullName}}" class="form-control">
+                    @else
+
+                        <select id="clients_id" name="clients_id" class="select2 form-control ">
+                            <option value="">Seleccionar</option>
+                            @foreach($clients  as $client)
+                                <option value="{{$client->id}}">
+                                    {{$client->fullName}}
+                                    |<strong> {{$client->email}}</strong>
+                                    | {{$client->dni}}
+                                </option>
+                            @endforeach
+                        </select>
+
+                    @endif
+                </div>
+
+                <div ng-app="app">
+                    <div ng-controller="ctl">
+                        <div class="col-xs-4 form-group">
+                            {!! Form::label('Presupuestos ') !!}
+                            {!! Form::select('budgets_id', $budgets, null, ['class'=>'form-control select2','id'=>'budgets_id']) !!}
+                        </div>
+                        <div class="col-xs-1">
+                            <button class="btn btn-default" ng-click="ver()" type="button" id="ver">Ver</button>
+                        </div>
+                        <div class="col-xs-12">
+                            <table class="table">
+                                <tr ng-repeat="items in budgets.all_items">
+                                    <td>@{{ items.brands.name }} @{{ items.name }}</td>
+                                    <td> $ @{{ items.pivot.price_budget }}</td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-2  form-group">
+                    {!! Form::label('Fecha Pactada') !!}
+                    {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
+                </div>
+
+                <div class="col-xs-1 form-group" style="padding-top: 1.5%">
+                    <a href="{{route("moto.clients.create")}}" target="_blank" class="btn btn-default"><span
+                                class="fa fa-plus"></span></a>
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    {!! Form::label('Sucursal de Entrega') !!}
+                    {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','placeholder'=>'Seleccionar...']) !!}
+                </div>
+
+
+                <div class="col-xs-1 form-group" style="padding-top: 1.5%">
+                    <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                </div>
+
+
+                {!! Form::close() !!}
             </div>
         </div>
-        </div>
-
-
-    <div class="col-xs-2  form-group">
-        {!! Form::label('Fecha Pactada') !!}
-        {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
     </div>
-
-
-    <div class="col-xs-1 form-group" style="padding-top: 1.5%">
-        <a href="{{route("moto.clients.create")}}" target="_blank" class="btn btn-default"><span
-                    class="fa fa-plus"></span></a>
-    </div>
-
-
-    <div class="col-xs-2 form-group">
-        {!! Form::label('Sucursal de Entrega') !!}
-        {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','placeholder'=>'Seleccionar...']) !!}
-    </div>
-
-
-
-    <div class="col-xs-1 form-group" style="padding-top: 1.5%">
-        <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
-    </div>
-
-
-
-    {!! Form::close() !!}
 
 
     <div class="col-xs-12 content">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Artículos
-
                 <div class="pull-right">
                     @if(isset($models))
                         <a href="#" id="agregarItem" data-action="{!! route("moto.sales.addItems") !!}"
                            class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                        <a href="{{route('moto.items.modal')}}" type="button" class="btn btn-default">
+                            modal Items
+                        </a>
+
+
                     @endif
                 </div>
 
@@ -119,15 +117,12 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <th>Cod.</th>
-
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>Color</th>
                         <th>N Motor</th>
                         <th>N Cuadro</th>
                         <th>Importe Articulo</th>
-                        <th>Patentamiento</th>
-                        <th>Pack Service</th>
                         <th colspan="2" class="text-left">S. Total</th>
                         </thead>
                         <tbody>
@@ -148,20 +143,12 @@
                                     $ {{number_format($item->price_actual ,2)}}
                                 </td>
                                 <td>
-                                    $ {{number_format($item->patentamiento ,2)}}
-                                </td>
-                                <td>
-                                    $ {{number_format($item->pack_service ,2)}}
-                                </td>
-                                <td>
-                                    $ {{number_format(($item->price_actual +$item->patentamiento+$item->pack_service),2)}}
-                                </td>
-                                <td>
                                     <a class="btn btn-xs btn-default"
                                        href="{{route('moto.sales.deleteItems',[$item->id,$models->id])}}"><span
                                                 class="text-danger fa fa-trash"></span></a>
                                     <a class="btn btn-xs btn-default editItems"
-                                       href="{{route('moto.sales.editItems',[$item->id,$models->id])}}" data-id="{!! $item->id !!}"><span
+                                       href="{{route('moto.sales.editItems',[$item->id,$models->id])}}"
+                                       data-id="{!! $item->id !!}"><span
                                                 class="text-success fa fa-edit"></span></a>
                                 </td>
                             </tr>
@@ -187,7 +174,8 @@
                     Formas de Pago
                     <div class="pull-right">
                         @if(isset($models))
-                            <a href="#" id="agregarPago" data-action="{!! route("moto.sales.addItems") !!}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                            <a href="#" id="agregarPago" data-action="{!! route("moto.sales.addItems") !!}"
+                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                         @endif
                     </div>
                 </div>
@@ -210,30 +198,38 @@
                                         <td>{{$payment->date}}</td>
                                         <td>{{$payment->Financials->name}}</td>
                                         <td> $ {{number_format($payment->amount, 2)}}</td>
-                                        <?php  $pago += $payment->amount ;?>
+                                        <?php  $pago += $payment->amount;?>
                                     </tr>
                                 @endforeach
                             @endif
                             </tbody>
                             <tfoot>
-                            <td colspan="4" align="right">TOTAL ABONADO :  <b class="text-success"> $ {{number_format($pago,2)}}</b> </td>
+                            <td colspan="4" align="right">TOTAL ABONADO : <b class="text-success">
+                                    $ {{number_format($pago,2)}}</b></td>
                             </tfoot>
                         </table>
 
-                        <h5 class="pull-right">TOTAL A PAGAR :  <b class="text-danger"> $ {{number_format(($total - $pago),2)}}</b>
+                        <h5 class="pull-right">TOTAL A PAGAR : <b class="text-danger">
+                                $ {{number_format(($total - $pago),2)}}</b>
                         </h5>
 
-                        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="pull-left" title="Exportar PDF">
+                        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}"
+                           class="pull-left"
+                           title="Exportar PDF">
                     <span class="btn btn-danger">
                         <i class="fa fa-file-pdf-o"></i>
                     </span>
                         </a>
-                        <a target="_blank" href="{!! route('moto.'.$section.'.recibo') !!}" class="pull-left" title="Recibo PDF">
+                        <a target="_blank" href="{!! route('moto.'.$section.'.recibo') !!}"
+                           class="pull-left"
+                           title="Recibo PDF">
                     <span class="btn btn-success">
                         <i class="fa fa-file-pdf-o"></i>
                     </span>
                         </a>
-                        <a target="_blank" href="{!! route('moto.'.$section.'.factura') !!}" class="pull-left" title="Factura PDF">
+                        <a target="_blank" href="{!! route('moto.'.$section.'.factura') !!}"
+                           class="pull-left"
+                           title="Factura PDF">
                     <span class="btn btn-warning">
                         <i class="fa fa-file-pdf-o"></i>
                     </span>
@@ -251,23 +247,7 @@
 
 
 @section('modal')
-    <div class="modal  bs-example-modal-lg" id="modalBudgetClients" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-body  modal-content">
-
-                    <div id="app">
-                        @{{ message }}
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" id="aceptar" class="btn btn-default">Aceptar</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    @include('moto.partials.modalItems')
 @endsection
 
 
@@ -279,8 +259,8 @@
         var app = angular.module("app", []);
         app.controller("ctl", function ($scope, $http) {
 
-            $scope.ver =  function(){
-                $http.get("moto/budgets/budget/"+$('#budgets_id').val() )
+            $scope.ver = function () {
+                $http.get("moto/budgets/budget/" + $('#budgets_id').val())
                         .then(function (response) {
                             $scope.budgets = response.data;
                             console.table(response.data);
@@ -288,22 +268,17 @@
             };
         });
 
-        $('#ver').on('click',function()
-        {
-            $.get("moto/budgets/budget/"+$('#budgets_id').val() ,function(res)
-            {
+        $('#ver').on('click', function () {
+            $.get("moto/budgets/budget/" + $('#budgets_id').val(), function (res) {
 
             });
         });
 
-        $('#budgets_id').on('change',function()
-        {
-            $.get("moto/budgets/budgetsClients/"+$(this).val() ,function(res)
-            {
+        $('#budgets_id').on('change', function () {
+            $.get("moto/budgets/budgetsClients/" + $(this).val(), function (res) {
                 $("#clients_id ").val(res).trigger("change");
             });
         });
-
 
 
         $('#clients_id').on('change', function () {
@@ -315,10 +290,8 @@
             $.ajax({
                 method: 'GET',
                 url: 'moto/budgetsByClients/' + id,
-                success: function (data)
-                {
-                    $.each(data, function (i, y)
-                    {
+                success: function (data) {
+                    $.each(data, function (i, y) {
                         budgets.append("<option value=" + y.id + ">#" + y.id + " | " + y.created_at + "</option>")
                     });
                 }
