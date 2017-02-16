@@ -17,14 +17,14 @@ class ItemsPruebaSeeders extends Seeder
 
         $faker = Faker\Factory::create();
 
-        for($a = 0;$a < 3;$a++){
-            for($i = 1;$i < 7;$i++){
+        for($a = 0;$a < 5;$a++){
+            for($i = 1;$i < 11;$i++){
                 $datos = [
                     [
                         'id' => $b,
                         'n_motor' => $faker->regexify('[0-9]{12}'),
                         'n_cuadro' => $faker->regexify('[A-Z0-9]{12}'),
-                        'year' => rand(2015,2017),
+                        'year' => 2017,
                         'status' => 1,
                         'models_id' => $i,
                         'colors_id' => rand(1,3),
