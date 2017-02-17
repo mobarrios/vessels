@@ -109,8 +109,11 @@ class ClientsController extends Controller
             if (config('models.' . $this->data['section'] . '.is_brancheable'))
                 $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
+            if(str_contains(URL::previous(),'sales'))
+                return redirect()->back()->withErrors(['Cliente creado Correctamente']);
+            else
+                return redirect()->route(config('models.' . $this->data['section'] . '.postStoreRoute'), $model->id)->withErrors(['Regitro Agregado Correctamente']);
 
-            return redirect()->route(config('models.' . $this->data['section'] . '.postStoreRoute'), $model->id)->withErrors(['Regitro Agregado Correctamente']);
         }else{
 
             //validar los campos
@@ -168,9 +171,11 @@ class ClientsController extends Controller
             //si va a una sucursal
             if (config('models.' . $this->data['section'] . '.is_brancheable'))
                 $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
-    
-    
-            return redirect()->route(config('models.' . $this->data['section'] . '.postUpdateRoute'), $model->id)->withErrors(['Regitro Editado Correctamente']);
+
+            if(str_contains(URL::previous(),'sales'))
+                return redirect()->back()->with('client',$model)->withErrors(['Cliente creado Correctamente']);
+            else
+                return redirect()->route(config('models.' . $this->data['section'] . '.postUpdateRoute'), $model->id)->withErrors(['Regitro Editado Correctamente']);
         }else{
             //validar los campos
             $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
