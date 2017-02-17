@@ -78,10 +78,7 @@
                     @endforelse
                 </select>
             </div>
-<<<<<<< HEAD
-            <div class="panel-body">
 
-=======
         @endif
 
         <div>
@@ -167,21 +164,12 @@
 
                 {!! Form::close() !!}
 
->>>>>>> da4cc30c2cb05e1df544af01b8482b3d40c578dc
             </div>
         </div>
 
 
-<<<<<<< HEAD
-    <div class="col-xs-12 content">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Artículos
-                <div class="pull-right">
-                    @if(isset($model))
-                        <a href="{{route('sales.addItems',$model->id)}}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
-                    @endif
-=======
+ 
+
 
         @if(isset($models))
             {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
@@ -199,7 +187,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Cabecera
->>>>>>> da4cc30c2cb05e1df544af01b8482b3d40c578dc
                 </div>
                 <div class="panel-body">
                     <div class="col-xs-2 form-group">
