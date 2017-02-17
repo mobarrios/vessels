@@ -606,6 +606,9 @@
             templateResult: formatState
         });
     </script>
+
+
+
     @if(isset($models))
         <script>
             {{--$("#agregarItem").aside2({--}}

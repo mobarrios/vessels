@@ -1,5 +1,60 @@
 @extends('template.model_form')
 
+@section('css')
+    <style>
+        .autocompletedemoCustomTemplate .autocomplete-custom-template li {
+            border-bottom: 1px solid #ccc;
+            height: auto;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            white-space: normal; }
+
+        .autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {
+            border-bottom-width: 0; }
+
+        .autocompletedemoCustomTemplate .autocomplete-custom-template .item-title,
+        .autocompletedemoCustomTemplate .autocomplete-custom-template .item-metadata {
+            display: block;
+            line-height: 2; }
+
+        .autocompletedemoCustomTemplate .autocomplete-custom-template .item-title md-icon {
+            height: 18px;
+            width: 18px; }
+
+        .search{
+            color: rgba(0,0,0,0.87);
+            background-color: rgb(250,250,250);
+            padding: 16px;
+
+        }
+
+        .select2-template-title{
+            font-size: 12px;
+            font-weight: bold;
+            display: block;
+            width:100%;
+        }
+
+        .select2-template-text{
+            font-size: 12px;
+            display: block;
+            width:100%;
+            padding-left:5px;
+        }
+
+        .select2-template-container{
+            border-bottom: 1px solid #ddd;
+        }
+
+        .select2-container--default .select2-results__option[aria-selected=true]{
+            background-color: rgba(162,162,162,0.21);
+
+        }
+
+    </style>
+@endsection
+
+
 @section('form_title')
     Venta
 @endsection
@@ -12,7 +67,120 @@
     @endif
 
     {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
-    <div class="col-xs-12 content">
+
+    <div ng-app="app" ng-controller="ctl" >
+
+        @if(!isset($models))
+            <div class="search">
+
+                <p>Antes de crear un prospecto, busque si ya existe.</p>
+                <select id="search" class="select2 form-control">
+                    <option value="seleccione">Seleccione... ~  ~ </option>
+                    @forelse($clients as $client)
+                        <option value="{!! $client->id !!}">
+                            {!! $client->fullname !!} ~ {!! $client->dni !!} ~ {!! $client->email !!} ~ {!! $client->phone !!}
+
+                        </option>
+                    @empty
+
+                    @endforelse
+                </select>
+            </div>
+        @endif
+
+        <div>
+            @if(isset($client))
+                {!! Form::model($client,['route'=> [config('models.clients.updateRoute')],  'title' =>"Actualizar cliente",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
+            @else
+                {!! Form::open(['route'=> [config('models.clients.storeRoute')],  'title' =>"Crear cliente",'ngApp' => 'buscador','ng-controller' => 'buscadorController', 'id' => 'formClient']) !!}
+            @endif
+
+            {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('last_name', "APELLIDO") !!}
+                {!! Form::text('last_name', null, ['class'=>'form-control', 'required' => 'required','ng-model' => 'last_name']) !!}
+            </div>
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('name', "NOMBRE") !!}
+                {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
+            </div>
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('dni', "DNI") !!}
+                {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
+            </div>
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('sexo', "SEXO") !!}
+                {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],'masculino', ['class'=>'form-control','ng-model' => 'sexo']) !!}
+            </div>
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('email', "EMAIL") !!}
+                {!! Form::text('email', null, ['class'=>'form-control','ng-model' => 'email']) !!}
+            </div>
+
+
+
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('nacionality', "NACIONALIDAD") !!}
+                {!! Form::text('nacionality', null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
+            </div>
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('phone1', "TELÉFONO") !!}
+                {!! Form::text('phone1', null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
+            </div>
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('address', "DIRECCIÓN") !!}
+                {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
+            </div>
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('city', "CIUDAD") !!}
+                {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
+            </div>
+
+
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('location', "LOCALIDAD") !!}
+                {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
+            </div>
+
+
+
+
+            <div class="col-xs-12 col-lg-3 form-group">
+                {!! Form::label('province', "PROVINCIA") !!}
+                {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
+            </div>
+
+
+
+            <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
+                @if(!isset($models))
+                    {{--                        {!! Form::hidden('clients_id', $client->id) !!}--}}
+                    <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                    <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+                @endif
+
+                {!! Form::close() !!}
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-xs-12 content">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Cabecera
@@ -44,8 +212,8 @@
                     @endif
                 </div>
 
-                <div ng-app="app">
-                    <div ng-controller="ctl">
+                <div>
+                    <div>
                         <div class="col-xs-4 form-group">
                             {!! Form::label('Presupuestos ') !!}
                             {!! Form::select('budgets_id', $budgets, null, ['class'=>'form-control select2','id'=>'budgets_id']) !!}
@@ -91,7 +259,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 
     <div class="col-xs-12 content">
         <div class="panel panel-default">
@@ -256,8 +424,112 @@
 
     <script>
 
+        $("#sendForm").on('click',function (ev) {
+            ev.preventDefault();
+
+            $('#formPresupuesto').submit();
+        })
+
+
+        function formatState (state) {
+
+            var datos = state.text.split("~");
+
+            if (!state.id) { return state.text; }
+            var span;
+            for(var i = 1;i < datos.length; i++) {
+                if(i==1)
+                    span = '<span class="select2-template-text">' + datos[i] + '</span>';
+                else
+                    span += '<span class="select2-template-text">' + datos[i] + '</span>';
+            }
+
+
+            var $state = $(
+                    '<span class="select2-template-container">' +
+                    '<span class="select2-template-title">' +
+                    datos[0]
+                    + '</span>' +
+
+                    span
+
+                    +'</span>'
+            );
+            return $state;
+        };
+
+        $("#search").select2({
+            templateResult: formatState
+        });
+
+
+        var routeBase = window.location.href.split('moto/')[0]
+        var rutaEdit;
+
+        $("#reset").on('click', function () {
+            $('#modelId').val("")
+            $('#formClient').attr('action',routeBase+'moto/clients/store')
+        })
+
         var app = angular.module("app", []);
+
+
         app.controller("ctl", function ($scope, $http) {
+            $scope.model = ""
+            $scope.last_name = ""
+            $scope.name = ""
+            $scope.dni = ""
+            $scope.email = ""
+            $scope.sexo = ""
+            $scope.nacionality = ""
+            $scope.phone1 = ""
+            $scope.address = ""
+            $scope.city = ""
+            $scope.location = ""
+            $scope.province = ""
+
+
+            @if(isset($client) || $errors->any())
+                    $scope.model = "{!! $client->id or ""!!}"
+            $scope.last_name = "{!! $client->last_name or old('last_name')!!}"
+            $scope.name = "{!! $client->name or old('name') !!}"
+            $scope.dni = "{!! $client->dni or old('dni')!!}"
+            $scope.email = "{!! $client->email or old('email')!!}"
+            $scope.sexo = "{!! $client->sexo or old('sexo')!!}"
+            $scope.nacionality = "{!! $client->nacionality or old('nacionality')!!}"
+            $scope.phone1 = "{!! $client->phone1 or old('phone1')!!}"
+            $scope.address = "{!! $client->address or old('address')!!}"
+            $scope.city = "{!! $client->city or old('city')!!}"
+            $scope.location = "{!! $client->location or old('location')!!}"
+            $scope.province = "{!! $client->province or old('province')!!}"
+            @endif
+
+            $('#search').on('change', function (ev) {
+                $("#search>option[value='seleccione']").remove();
+                var select = $(this);
+                var option = select.find('option:selected');
+
+                $('#modelId').val(option.val());
+
+                $http.get("moto/clientsSearch/" + option.val())
+                        .then(function (response) {
+                            $('#formClient').attr('action', routeBase + 'moto/clients/update/' + option.val())
+                            $scope.model = option.val()
+                            $scope.last_name = response.data['last_name']
+                            $scope.name = response.data['name']
+                            $scope.dni = response.data['dni']
+                            $scope.email = response.data['email']
+                            $scope.sexo = response.data['sexo']
+                            $scope.nacionality = response.data['nacionality']
+                            $scope.phone1 = response.data['phone1']
+                            $scope.address = response.data['address']
+                            $scope.city = response.data['city']
+                            $scope.location = response.data['location']
+                            $scope.province = response.data['province']
+                        });
+
+            });
+
 
             $scope.ver = function () {
                 $http.get("moto/budgets/budget/" + $('#budgets_id').val())
@@ -267,6 +539,25 @@
                         });
             };
         });
+
+
+
+
+//        app.controller("ctl", function ($scope, $http) {
+//
+//            $scope.ver = function () {
+//                $http.get("moto/budgets/budget/" + $('#budgets_id').val())
+//                        .then(function (response) {
+//                            $scope.budgets = response.data;
+//                            console.table(response.data);
+//                        });
+//            };
+//        });
+
+
+
+
+
 
         $('#ver').on('click', function () {
             $.get("moto/budgets/budget/" + $('#budgets_id').val(), function (res) {
@@ -308,5 +599,11 @@
             $('#modalBudgetClients').modal(open);
         });
 
+
+
+
+
+
     </script>
+
 @endsection
