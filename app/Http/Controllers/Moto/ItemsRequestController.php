@@ -63,6 +63,7 @@ class ItemsRequestController extends Controller
         $this->data['activeBread'] = 'Asignar';
         $this->data['branchesTo'] = $this->route->getParameter('branchesTo');
         $this->data['myRequestId'] = $this->route->getParameter('myRequestId');
+        $this->data['itemsRequestId'] = $this->route->getParameter('itemsRequestId');
 
 
         $items = $this->itemsRepo->getModel()->where('models_id', $this->route->getParameter('modelsId'))->get();
@@ -81,10 +82,16 @@ class ItemsRequestController extends Controller
         $branchesFrom = $item->Brancheables->first()->branches_id;
         $myRequestId = $this->route->getParameter('myRequestId');
 
+        //$new = ['items_id' => $newId, 'status' => 4, 'branches_from_id' => $branchesFrom, 'branches_to_id' => $branchesTo, 'my_request_id'=> $myRequestId];
 
-        $new = ['items_id' => $newId, 'status' => 4, 'branches_from_id' => $branchesFrom, 'branches_to_id' => $branchesTo, 'my_request_id'=> $myRequestId];
+        $model = $this->repo->find($this->route->getParameter('itemsRequestId'));
+        $model->items_id = $newId;
+        $model->status = 4;
+        $model->branches_from_id = $branchesFrom;
+        $model->branches_to_id = $branchesTo;
+        $model->my_request_id = $myRequestId;
+        $model->save();
 
-        $model = $this->repo->create($new);
 
 
         return redirect()->back()->withErrors('Articulo Asignado correctamente.');
@@ -105,6 +112,8 @@ class ItemsRequestController extends Controller
 
     public function NotaPedido(PDF $pdf)
     {
+
+        dd($this->request);
         $pdf->setPaper('a5', 'portrait')->loadView('moto.itemsRequest.repo.nota');
         return $pdf->stream();
     }

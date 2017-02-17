@@ -27,19 +27,18 @@
 
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                <div class="row">
-
-                    <!-- /.col -->
-                    <div class="col-xs-12">
-                        <button type="submit" class="btn btn-primary btn-block"> Ingresar </button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            <hr>
-
             <div class="icheck">
                 {!! Form::checkbox('remember') !!} Recordarme
             </div>
+            <hr>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-default btn-block"> Ingresar</button>
+                </div>
+                <!-- /.col -->
+            </div>
+
             @include('template.messages')
 
             {!! Form::close() !!}

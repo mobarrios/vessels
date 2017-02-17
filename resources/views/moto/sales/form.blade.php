@@ -18,76 +18,7 @@
                 Cabecera
             </div>
             <div class="panel-body">
-                <div class="col-xs-2 form-group">
-                    {!! Form::label('Tipo de Operación') !!}
-                    {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
-                </div>
 
-                <div class="col-xs-5 form-group">
-                    {!! Form::label('Cliente') !!}
-
-                    @if(isset($models))
-                        <input type="text" disabled value="{{$models->Clients->fullName}}" class="form-control">
-                    @else
-
-                        <select id="clients_id" name="clients_id" class="select2 form-control ">
-                            <option value="">Seleccionar</option>
-                            @foreach($clients  as $client)
-                                <option value="{{$client->id}}">
-                                    {{$client->fullName}}
-                                    |<strong> {{$client->email}}</strong>
-                                    | {{$client->dni}}
-                                </option>
-                            @endforeach
-                        </select>
-
-                    @endif
-                </div>
-
-                <div ng-app="app">
-                    <div ng-controller="ctl">
-                        <div class="col-xs-4 form-group">
-                            {!! Form::label('Presupuestos ') !!}
-                            {!! Form::select('budgets_id', $budgets, null, ['class'=>'form-control select2','id'=>'budgets_id']) !!}
-                        </div>
-                        <div class="col-xs-1">
-                            <button class="btn btn-default" ng-click="ver()" type="button" id="ver">Ver</button>
-                        </div>
-                        <div class="col-xs-12">
-                            <table class="table">
-                                <tr ng-repeat="items in budgets.all_items">
-                                    <td>@{{ items.brands.name }} @{{ items.name }}</td>
-                                    <td> $ @{{ items.pivot.price_budget }}</td>
-
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-xs-2  form-group">
-                    {!! Form::label('Fecha Pactada') !!}
-                    {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
-                </div>
-
-                <div class="col-xs-1 form-group" style="padding-top: 1.5%">
-                    <a href="{{route("moto.clients.create")}}" target="_blank" class="btn btn-default"><span
-                                class="fa fa-plus"></span></a>
-                </div>
-
-                <div class="col-xs-2 form-group">
-                    {!! Form::label('Sucursal de Entrega') !!}
-                    {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','placeholder'=>'Seleccionar...']) !!}
-                </div>
-
-
-                <div class="col-xs-1 form-group" style="padding-top: 1.5%">
-                    <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
-                </div>
-
-
-                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -98,14 +29,8 @@
             <div class="panel-heading">
                 Artículos
                 <div class="pull-right">
-                    @if(isset($models))
-                        <a href="#" id="agregarItem" data-action="{!! route("moto.sales.addItems") !!}"
-                           class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
-                        <a href="{{route('moto.items.modal')}}" type="button" class="btn btn-default">
-                            modal Items
-                        </a>
-
-
+                    @if(isset($model))
+                        <a href="{{route('sales.addItems',$model->id)}}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                     @endif
                 </div>
 

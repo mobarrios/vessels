@@ -648,6 +648,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //mis pedidos de mercaderia
+                [
+                    'id'    => 100,
+                    'name' => 'Listar Mis Pedidos',
+                    'slug' => 'myrequest.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 101,
+                    'name' => 'Crear Mis Pedidos',
+                    'slug' => 'myrequest.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 102,
+                    'name' => 'Editar Mis Pedidos',
+                    'slug' => 'myrequest.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 103,
+                    'name' => 'Borrar Mis Pedidos',
+                    'slug' => 'myrequest.destroy',
+                    'model' => '',
+                ],
+
             ]);
     }
 }

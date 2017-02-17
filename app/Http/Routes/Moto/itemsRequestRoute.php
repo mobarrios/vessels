@@ -15,8 +15,8 @@ Route::group(['prefix'=>'itemsRequest'],function(){
 
         Route::get('/reasign/{id?}/{newId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.reasign','uses'=>'Moto\ItemsRequestController@reasign']);
 
-        Route::get('/asign/{modelsId?}/{branchesTo?}/{myRequestId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.asign','uses'=>'Moto\ItemsRequestController@asign']);
-        Route::get('/postAsign/{itemId?}/{branchesTo?}/{myRequestId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.postAsign','uses'=>'Moto\ItemsRequestController@postAsign']);
+        Route::get('/asign/{itemsRequestId?}/{modelsId?}/{branchesTo?}/{myRequestId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.asign','uses'=>'Moto\ItemsRequestController@asign']);
+        Route::get('/postAsign/{itemsRequestId?}/{itemId?}/{branchesTo?}/{myRequestId?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.postAsign','uses'=>'Moto\ItemsRequestController@postAsign']);
 
         Route::get('/postReject/{idItemR?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.reject','uses'=>'Moto\ItemsRequestController@Reject']);
 
@@ -24,7 +24,7 @@ Route::group(['prefix'=>'itemsRequest'],function(){
 
         //repos
 
-        Route::get('/notaPedido',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.notaPedido','uses'=>'Moto\ItemsRequestController@notaPedido']);
+        Route::post('/notaPedido',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.notaPedido','uses'=>'Moto\ItemsRequestController@notaPedido']);
 
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.itemsRequest.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 });
@@ -34,14 +34,14 @@ Route::group(['prefix'=>'myRequest'],function(){
 
         $section =  'myrequest';
 
-        Route::get('/destroy/{id?}',    ['as'=>'moto.myRequest.destroy','uses'=>'Moto\MyRequestController@destroy']);
-        Route::get('/edit/{id?}',       ['as'=>'moto.myRequest.edit','uses'=>'Moto\MyRequestController@edit']);
-        Route::post('/update/{id?}',    ['as'=>'moto.myRequest.update','uses'=>'Moto\MyRequestController@update']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.myRequest.destroy','uses'=>'Moto\MyRequestController@destroy']);
+        Route::get('/edit/{id?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.myRequest.edit','uses'=>'Moto\MyRequestController@edit']);
+        Route::post('/update/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.myRequest.update','uses'=>'Moto\MyRequestController@update']);
 
-        Route::get('/create',           ['as'=>'moto.myRequest.create','uses'=>'Moto\MyRequestController@create']);
-        Route::post('/store',           ['as'=>'moto.myRequest.store','uses'=>'Moto\MyRequestController@store']);
-        Route::get('/show',             ['as'=>'moto.myRequest.show','uses'=>'Moto\MyRequestController@show']);
-        Route::get('/index/{search?}',  ['as'=>'moto.myRequest.index','uses'=>'Moto\MyRequestController@index']);
+        Route::get('/create',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.myRequest.create','uses'=>'Moto\MyRequestController@create']);
+        Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.myRequest.store','uses'=>'Moto\MyRequestController@store']);
+        Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.myRequest.show','uses'=>'Moto\MyRequestController@show']);
+        Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.myRequest.index','uses'=>'Moto\MyRequestController@index']);
 
 
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.myRequest.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);

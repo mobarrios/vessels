@@ -38,10 +38,10 @@
                 @endforeach
             </select>
         </div>
-
         <div class="col-xs-5 form-group">
             {!! Form::label('Color') !!}
             {!! Form::select('colors_id',$colors, null, ['class'=>'select2 form-control']) !!}
+
         </div>
     </div>
 

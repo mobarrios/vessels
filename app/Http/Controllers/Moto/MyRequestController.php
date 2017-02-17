@@ -7,6 +7,7 @@ use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\MyRequestRepo as Repo;
+use Collective\Html\FormBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
@@ -29,6 +30,7 @@ class MyRequestController extends Controller
         $this->data['colors']       = $colorsRepo->ListsData('name','id');
 
         $this->data['brands']   = $brandsRepo->getAllWithModels();
+        
     }
     
 

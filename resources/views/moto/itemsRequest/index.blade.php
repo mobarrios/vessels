@@ -1,9 +1,11 @@
 @extends('template.model_index')
 @section('table')
 
+    {!! Form::open(['route'=>'moto.itemsRequest.notaPedido']) !!}
+
     @foreach($models->where('status',4) as $model)
         <tr>
-            <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
+            <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"> </td>
             <td>{{$model->id}}</td>
             <td>{{$model->created_at}}</td>
             <td>
@@ -27,8 +29,8 @@
     @section('footTable')
 
 <hr>
-            <a href="{{route('moto.itemsRequest.notaPedido')}}" target="_blank" class="btn btn-default" title="Enviar Reparto"><span class="fa fa-truck" ></span></a>
-
+        <button id="send" type="button">enviar</button>
+        {!! Form::close() !!}
     @endsection
 
 @endsection
@@ -56,6 +58,7 @@
                     <tbody>
                     @foreach($models->where('status',1) as $pending)
                         <tr>
+
                             <td>{{$pending->MyRequest->id}}</td>
                             <td><label class="label label-default">{{$pending->MyRequest->Types}}</label></td>
                             <td>{{date('d-m-Y',strtotime($pending->created_at))}}</td>
@@ -63,7 +66,7 @@
                             <td>{{$pending->MyRequest->Brancheables->first()->Branches->name}}</td>
                             <td>{{$pending->MyRequest->Users->fullName}}</td>
                             <td>
-                                <a href="{{route('moto.itemsRequest.asign',[ $pending->MyRequest->models_id , $pending->Brancheables->first()->branches_id, $pending->my_request_id ] )}}"
+                                <a href="{{route('moto.itemsRequest.asign',[ $pending->id , $pending->MyRequest->models_id , $pending->Brancheables->first()->branches_id, $pending->my_request_id ] )}}"
                                    class="btn btn-xs btn-primary"> Aceptar</a>
                             </td>
                             <td>
@@ -126,6 +129,13 @@
         </div>
     </div>
 
+@endsection
 
+@section('js')
+    <script>
+        $('#send').on('click',function () {
 
+            
+        });
+    </script>
 @endsection
