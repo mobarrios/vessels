@@ -492,17 +492,17 @@
 
             @if(Session::has('client') || $errors->any())
                 $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
-                $scope.last_name = "{!! Session::has('client') ? Session::get('last_name')->id :  old('last_name')!!}"
-                $scope.name = "{!! Session::has('client') ? Session::get('name')->id :  old('name') !!}"
-                $scope.dni = "{!! Session::has('client') ? Session::get('dni')->id :  old('dni')!!}"
-                $scope.email = "{!! Session::has('client') ? Session::get('email')->id : old('email')!!}"
-                $scope.sexo = "{!! Session::has('client') ? Session::get('sexo')->id : old('sexo')!!}"
-                $scope.nacionality = "{!! Session::has('client') ? Session::get('nacionality')->id : old('nacionality')!!}"
-                $scope.phone1 = "{!! Session::has('client') ? Session::get('phone1')->id : old('phone1')!!}"
-                $scope.address = "{!! Session::has('client') ? Session::get('address')->id : old('address')!!}"
-                $scope.city = "{!! Session::has('client') ? Session::get('city')->id : old('city')!!}"
-                $scope.location = "{!! Session::has('client') ? Session::get('location')->id : old('location')!!}"
-                $scope.province = "{!! Session::has('client') ? Session::get('province')->id : old('province')!!}"
+                $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
+                $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
+                $scope.dni = "{!! Session::has('client') ? Session::get('client')->dni :  old('dni')!!}"
+                $scope.email = "{!! Session::has('client') ? Session::get('client')->email : old('email')!!}"
+                $scope.sexo = "{!! Session::has('client') ? Session::get('client')->sexo : old('sexo')!!}"
+                $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
+                $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
+                $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
+                $scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
+                $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
+                $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
 
                 console.log($scope)
             @endif

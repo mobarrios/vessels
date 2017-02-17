@@ -110,7 +110,7 @@ class ClientsController extends Controller
                 $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
             if(str_contains(URL::previous(),'sales'))
-                return redirect()->back()->withErrors(['Cliente creado Correctamente']);
+                return redirect()->back()->with('client',$model)->withErrors(['Cliente creado Correctamente']);
             else
                 return redirect()->route(config('models.' . $this->data['section'] . '.postStoreRoute'), $model->id)->withErrors(['Regitro Agregado Correctamente']);
 
@@ -173,7 +173,7 @@ class ClientsController extends Controller
                 $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
             if(str_contains(URL::previous(),'sales'))
-                return redirect()->back()->with('client',$model)->withErrors(['Cliente creado Correctamente']);
+                return redirect()->back()->with('client',$model)->withErrors(['Cliente editado Correctamente']);
             else
                 return redirect()->route(config('models.' . $this->data['section'] . '.postUpdateRoute'), $model->id)->withErrors(['Regitro Editado Correctamente']);
         }else{
