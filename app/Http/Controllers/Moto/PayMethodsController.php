@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Moto;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\PayMethodsRepo as Repo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -12,7 +13,7 @@ use Illuminate\Routing\Route;
 class PayMethodsController extends Controller {
 
 
-    public function __construct(Request $request, Repo $repo, Route $route)
+    public function __construct(Request $request, Repo $repo, Route $route,FinancialsRepo $financialsRepo)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -20,9 +21,28 @@ class PayMethodsController extends Controller {
 
         $this->section          = 'payMethods';
         $this->data['section']  = $this->section;
+        $this->data['financials']  = $financialsRepo->ListsData('name','id');
 
     }
 
+
+    public function modal($section,$id,$payment = null){
+        $modelo = 'App\Entities\Moto\\'.ucfirst($section);
+
+        $modelo = new $modelo;
+
+
+        if($payment != null){
+            $this->data['models'] = $modelo->find($id)->SalesPayments()->where('id',$payment)->first();
+            $this->data['payment'] = $payment;
+        }
+
+        $this->data['section'] = $section;
+        $this->data['id'] = $id;
+        $this->data['activeBread'] = 'Métodos de pago';
+
+        return view('moto.payMethods.modalPayMethodsForm')->with($this->data);
+    }
 
 
 }

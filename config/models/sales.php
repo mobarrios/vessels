@@ -29,6 +29,11 @@ return [
     'updateItemsRoute'  => 'moto.'.$model.'.updateItems',
     'deleteItemsRoute'  => 'moto.'.$model.'.deleteItems',
 
+    'addPayMethodsRoute'  => 'moto.'.$model.'.addPayment',
+    'editPayMethodsRoute'  => 'moto.'.$model.'.editPayment',
+    'updatePayMethodsRoute'  => 'moto.'.$model.'.updatePayment',
+    'deletePayMethodsRoute'  => 'moto.'.$model.'.deletePayment',
+
 
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
