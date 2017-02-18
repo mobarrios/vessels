@@ -83,9 +83,7 @@
 
         <div>
             @if(Session::has('client'))
-                {!! Form::model(Session::get('client'),['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
-            @elseif(isset($models))
-                {!! Form::model($models->clients,['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
+                {!! Form::model(Session::get('client'),['route'=> [config('models.prospectos.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
             @else
                 {!! Form::open(['route'=> [config('models.prospectos.storeRoute')],  'title' =>"Crear cliente", 'id' => 'formClient']) !!}
             @endif
@@ -185,51 +183,74 @@
 
 
 
-        <div class="col-xs-12 content">
+            <div class="col-xs-12 content">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Cabecera
                 </div>
                 <div class="panel-body">
-                    <div class="col-xs-12 col-md-6 form-group">
+                    <div class="col-xs-2 form-group">
                         {!! Form::label('Tipo de Operación') !!}
                         {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
                     </div>
 
-                    {!! Form::hidden('clients_id',null,['id'=>'clients_id']) !!}
+                    <div class="col-xs-5 form-group">
+                        {!! Form::label('Cliente') !!}
 
-                    <div class="col-xs-12 col-md-5 form-group">
-                        {!! Form::label('Presupuestos ') !!}
-                        {!! Form::select('budgets_id', $budgets, null, ['class'=>'form-control select2','id'=>'budgets_id']) !!}
+                        @if(isset($models))
+                            <input type="text" disabled value="{{$models->Clients->fullName}}" class="form-control">
+                        @else
+
+                            <select id="clients_id" name="clients_id" class="select2 form-control ">
+                                <option value="">Seleccionar</option>
+                                @foreach($clients  as $c)
+                                    <option value="{{$c->id}}">
+                                        {{$c->fullName}}
+                                        |<strong> {{$c->email}}</strong>
+                                        | {{$c->dni}}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                        @endif
                     </div>
 
-                    <div class="col-xs-12 col-md-1 form-group">
-                        <br>
-                        <button class="btn btn-default" ng-click="ver()" type="button" id="ver" >Ver</button>
+                    <div>
+                        <div>
+                            <div class="col-xs-4 form-group">
+                                {!! Form::label('Presupuestos ') !!}
+                                {!! Form::select('budgets_id', $budgets, null, ['class'=>'form-control select2','id'=>'budgets_id']) !!}
+                            </div>
+                            <div class="col-xs-1">
+                                <button class="btn btn-default" ng-click="ver()" type="button" id="ver">Ver</button>
+                            </div>
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tr ng-repeat="items in budgets.all_items">
+                                        <td>@{{ items.brands.name }} @{{ items.name }}</td>
+                                        <td> $ @{{ items.pivot.price_budget }}</td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tr ng-repeat="items in budgets.all_items">
-                                <td>@{{ items.brands.name }} @{{ items.name }}</td>
-                                <td> $ @{{ items.pivot.price_budget }}</td>
-                            </tr>
-                        </table>
-                    </div>
 
-
-                    <div class="col-xs-6  form-group">
+                    <div class="col-xs-2  form-group">
                         {!! Form::label('Fecha Pactada') !!}
                         {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
                     </div>
 
+                    <div class="col-xs-1 form-group" style="padding-top: 1.5%">
+                        <a href="{{route("moto.clients.create")}}" target="_blank" class="btn btn-default"><span
+                                    class="fa fa-plus"></span></a>
+                    </div>
 
-                    <div class="col-xs-6 form-group">
+                    <div class="col-xs-2 form-group">
                         {!! Form::label('Sucursal de Entrega') !!}
                         {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','placeholder'=>'Seleccionar...']) !!}
                     </div>
-
-
 
 
                     <div class="col-xs-1 form-group" style="padding-top: 1.5%">
@@ -249,7 +270,11 @@
                     Artículos
                     <div class="pull-right">
                         @if(isset($models))
-                            <a href="{{route('moto.items.modal',[$section, $models->id])}}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                            <a href="#" id="agregarItem" data-action="{!! route("moto.sales.addItems") !!}"
+                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                            <a href="{{route('moto.items.modal')}}" type="button" class="btn btn-default">
+                                modal Items
+                            </a>
 
 
                         @endif
@@ -292,8 +317,8 @@
                                         <a class="btn btn-xs btn-default"
                                            href="{{route('moto.sales.deleteItems',[$item->id,$models->id])}}"><span
                                                     class="text-danger fa fa-trash"></span></a>
-                                        <a class="btn btn-xs btn-default"
-                                           href="{{route('moto.items.modal',[$section,$models->id,$item->id])}}"
+                                        <a class="btn btn-xs btn-default editItems"
+                                           href="{{route('moto.sales.editItems',[$item->id,$models->id])}}"
                                            data-id="{!! $item->id !!}"><span
                                                     class="text-success fa fa-edit"></span></a>
                                     </td>
@@ -466,8 +491,6 @@
             $scope.city = ""
             $scope.location = ""
             $scope.province = ""
-            $scope.province = ""
-
 
 
             @if(Session::has('client') || $errors->any())
@@ -486,30 +509,11 @@
 
             @endif
 
-            @if(isset($models))
-                $scope.model = "{!! $models->clients->id !!}"
-                $scope.last_name = "{!! $models->clients->last_name!!}"
-                $scope.name = "{!! $models->clients->name !!}"
-                $scope.dni = "{!! $models->clients->dni !!}"
-                $scope.email = "{!! $models->clients->email !!}"
-                $scope.sexo = "{!! $models->clients->sexo !!}"
-                $scope.nacionality = "{!! $models->clients->nacionality !!}"
-                $scope.phone1 = "{!! $models->clients->phone1 !!}"
-                $scope.address = "{!! $models->clients->address !!}"
-                $scope.city = "{!! $models->clients->city !!}"
-                $scope.location = "{!! $models->clients->location!!}"
-                $scope.province = "{!! $models->clients->province !!}"
-
-            @endif
-
 
             $('#search').on('change', function (ev) {
-
                 $("#search>option[value='seleccione']").remove();
                 var select = $(this);
                 var option = select.find('option:selected');
-
-                $('#clients_id').val(option.val())
 
                 $('#modelId').val(option.val());
 
@@ -528,23 +532,8 @@
                             $scope.city = response.data['city']
                             $scope.location = response.data['location']
                             $scope.province = response.data['province']
-
                         });
 
-
-                var budgets = $('#budgets_id');
-
-                budgets.html("");
-
-                $.ajax({
-                    method: 'GET',
-                    url: 'moto/budgetsByClients/' + option.val(),
-                    success: function (data) {
-                        $.each(data, function (i, y) {
-                            budgets.append("<option value=" + y.id + ">#" + y.id + " | " + y.created_at + "</option>")
-                        });
-                    }
-                })
             });
 
 
@@ -588,6 +577,23 @@
             });
         });
 
+
+        $('#clients_id').on('change', function () {
+            var id = $(this).val();
+            var budgets = $('#budgets_id');
+
+            budgets.html("");
+
+            $.ajax({
+                method: 'GET',
+                url: 'moto/budgetsByClients/' + id,
+                success: function (data) {
+                    $.each(data, function (i, y) {
+                        budgets.append("<option value=" + y.id + ">#" + y.id + " | " + y.created_at + "</option>")
+                    });
+                }
+            })
+        });
 
 
         $("#show_budget").on('click', function () {

@@ -158,6 +158,9 @@ class ClientsController extends Controller
             $id = $this->route->getParameter('id');
     
             //edita a traves del repo
+            if(str_contains(URL::previous(),'sales'))
+                $this->request['prospecto'] = 0;
+
             $model = $this->repo->update($id, $this->request);
     
             //guarda imagenes
