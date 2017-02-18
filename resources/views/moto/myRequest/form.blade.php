@@ -21,8 +21,8 @@
             {!! Form::number('quantity', null, ['class'=>'form-control']) !!}
         </div>
 
-            {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id) !!}
-             {!! Form::hidden('types_id',1) !!}
+        {!! Form::hidden('users_id', \Illuminate\Support\Facades\Auth::user()->id) !!}
+        {!! Form::hidden('types_id',1) !!}
 
 
         <div class="col-xs-6 form-group">
@@ -49,21 +49,31 @@
 
 
 @if(isset($models))
-    @section('box')
-            <div class="box">
-                <div class="box-body">
-                    <table class="table">
-                        <?php $count=0;?>
-                        @foreach($models->ItemsRequests as $itemsRequest)
-                               <tr>
-                                   <td><?php $count++ ?>{{$count}} </td>
-                                   <td>{{$itemsRequest->MyRequest->Models->Brands->name}} {{$itemsRequest->MyRequest->Models->name}}</td>
-                                   <td><label>{{$itemsRequest->MyRequest->Colors->name}}</label> </td>
-                                   <td><label class="label label-default">{{$itemsRequest->statusName}}</label> </td>
-                               </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-    @endsection
+@section('box')
+    <div class="box">
+        <div class="box-body">
+            <table class="table">
+                <?php $count = 0;?>
+                @foreach($models->ItemsRequests as $itemsRequest)
+                    @if($itemsRequest->status != 3)
+                    <tr>
+                        <td><?php $count++ ?>{{$count}} </td>
+                        <td>{{$itemsRequest->MyRequest->Models->Brands->name}} {{$itemsRequest->MyRequest->Models->name}}</td>
+                        <td><label>{{$itemsRequest->MyRequest->Colors->name}}</label></td>
+                        <td>Codigo <a
+                                    href="{{route('moto.items.edit',$itemsRequest->items_id)}}">{{$itemsRequest->items_id}}</a>
+                        </td>
+                        <td><label class="label label-default">{{$itemsRequest->statusName}}</label></td>
+                        <td>
+                            @if($itemsRequest->status == 2 )
+                                <a href="{{route('moto.itemsRequest.getIn',$itemsRequest->id)}} " class="btn btn-xs btn-default">RECIBIR</a>
+                            @endif
+                        </td>
+                    </tr>
+                    @endif
+                @endforeach
+            </table>
+        </div>
+    </div>
+@endsection
 @endif

@@ -21,9 +21,9 @@ Route::group(['prefix'=>'itemsRequest'],function(){
         Route::get('/postReject/{idItemR?}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.reject','uses'=>'Moto\ItemsRequestController@Reject']);
 
 
+        Route::get('/getIn/{idItemR?}',['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.getIn','uses'=>'Moto\ItemsRequestController@getIn']);
 
         //repos
-
         Route::post('/notaPedido',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.itemsRequest.notaPedido','uses'=>'Moto\ItemsRequestController@notaPedido']);
 
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.itemsRequest.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);

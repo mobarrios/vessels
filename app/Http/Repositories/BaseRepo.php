@@ -61,7 +61,12 @@ abstract class BaseRepo {
         {
             return $this->model->whereHas('Brancheables',function($q){
 
-                    $q->whereIn('branches_id',Auth::user()->branches_id );
+                    // lista todos los branches del usuario
+                    //$q->whereIn('branches_id',Auth::user()->branches_id );\
+
+                // lista en el branch actual del usuario
+                $q->where('branches_id',Auth::user()->branches_active_id);
+
             });
 
         }else
