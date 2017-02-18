@@ -84,7 +84,7 @@ class SalesController extends Controller
 
         }
 
-        return redirect()->route('moto.sales.edit', $this->request->sales_id);
+        return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó correctamente el item');
 
 
     }
