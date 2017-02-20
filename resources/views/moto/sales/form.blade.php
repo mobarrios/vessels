@@ -320,7 +320,7 @@
                         Formas de Pago
                         <div class="pull-right">
                             @if(isset($models))
-                                <a href="#" id="agregarPago" data-action="{!! route("moto.sales.addItems") !!}"
+                                <a href="{!! route("moto.paymethods.modal",[$section, $models->id]) !!}" id="agregarPago"
                                    class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                             @endif
                         </div>
@@ -344,6 +344,15 @@
                                             <td>{{$payment->date}}</td>
                                             <td>{{$payment->Financials->name}}</td>
                                             <td> $ {{number_format($payment->amount, 2)}}</td>
+                                            <td>
+                                                <a class="btn btn-xs btn-default"
+                                                   href="{{route('moto.sales.deletePayment',[$payment->id,$models->id])}}"><span
+                                                            class="text-danger fa fa-trash"></span></a>
+                                                <a class="btn btn-xs btn-default"
+                                                   href="{{route('moto.paymethods.modal',[$section,$models->id,$payment->id])}}"
+                                                   data-id="{!! $payment->id !!}"><span
+                                                            class="text-success fa fa-edit"></span></a>
+                                            </td>
                                             <?php  $pago += $payment->amount;?>
                                         </tr>
                                     @endforeach

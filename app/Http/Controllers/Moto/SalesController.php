@@ -118,7 +118,7 @@ class SalesController extends Controller
     {
         $salesPaymentsRepo->create($this->request);
 
-        return redirect()->route('moto.sales.edit', $this->request->sales_id);
+        return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó el método de pago');
     }
 
     public function editPayment(SalesPaymentsRepo $salesPaymentsRepo)

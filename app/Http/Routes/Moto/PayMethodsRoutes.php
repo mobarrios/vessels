@@ -19,6 +19,9 @@ Route::group(['prefix' => 'payMethods'], function () {
     Route::get('/deleteItem/{id}/{item}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.' . $section . '.deleteItem', 'uses' => 'Moto\PayMethodsController@deleteItems']);
 
 
+    Route::get('/add/{section}/{id}/{item?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.' . $section . '.modal','uses'=>'Moto\PayMethodsController@modal']);
+
+
     Route::get('/pdf/{id}', ['middleware' => 'permission:' . $section . '.list', 'as' => 'moto.payMethods.pdf', 'uses' => 'Utilities\UtilitiesController@exportToPdf']);
 
 });
