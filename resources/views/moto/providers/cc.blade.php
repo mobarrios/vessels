@@ -2,9 +2,8 @@
 
 @section('sectionContent')
 
-
         <div class="box box-primary">
-            <div class="box-header">Honda</div>
+            <div class="box-header">{{$models->name}}</div>
             <div class="box-body">
 
                 <table class="table table-bordered">
@@ -18,38 +17,26 @@
                     <th>Haber</th>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>01-23-2017</td>
-                        <td>Deuda</td>
-                        <td>Pedido de Mercadería # 19</td>
-                        <td></td>
-                        <td class="text-danger">$ 50.000</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>01-23-2017</td>
-                        <td>Pago</td>
-                        <td>Pedido de Mercadería # 19</td>
-                        <td>
-                            Cheque # 123445567 <br>
-                            Banco Nacion <br>
-                            Fecha Cobro 25-02-2017
-                        </td>
-                        <td></td>
-                        <td>$ 25.000</td>
-                    </tr>
-                    <tr>
-                        <td>01-23-2017</td>
-                        <td>Pago</td>
-                        <td>Pedido de Mercadería # 19</td>
-                        <td>
-                            Cheque # 12344312 <br>
-                            Banco Nacion <br>
-                            Fecha Cobro 15-03-2017
-                        </td>
-                        <td></td>
-                        <td>$ 25.000</td>
-                    </tr>
+                        @foreach($models->PurchasesOrders as $purchase)
+                        <tr>
+                            <td>{{$purchase->date}}</td>
+                            <td>Deuda</td>
+                            <td>Pedido de Mercadería # {{$purchase->id}}</td>
+                            <td></td>
+                            <td class="text-danger">$ {{$purchase->PurchasesOrdersItems->sum('price')}}</td>
+                            <td></td>
+                        </tr>
+                        @endforeach
+                        @foreach($models->PurchasesOrders as $purchase)
+                            <tr>
+                                <td>{{$purchase->date}}</td>
+                                <td>Deuda</td>
+                                <td>Pedido de Mercadería # {{$purchase->id}}</td>
+                                <td></td>
+                                <td class="text-danger">$ {{$purchase->PurchasesOrdersItems->sum('price')}}</td>
+                                <td></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <td colspan="5">Total</td>
