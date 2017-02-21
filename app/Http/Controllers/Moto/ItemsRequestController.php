@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Brancheables;
+use App\Entities\Configs\Branches;
+use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
@@ -113,9 +116,40 @@ class ItemsRequestController extends Controller
     public function NotaPedido(PDF $pdf)
     {
 
-        dd($this->request);
-        $pdf->setPaper('a5', 'portrait')->loadView('moto.itemsRequest.repo.nota');
+        $models = $this->repo->find($this->request->id);
+
+        foreach($models as $model )
+        {
+            $model->status = 2;
+            $model->save();
+        }
+
+
+
+        $data['destino'] = $models->first()->BranchesTo;
+        $data['date'] = date('d-m-Y');
+        $data['models'] =  $models;
+
+        $pdf->setPaper('a5', 'portrait')->loadView('moto.itemsRequest.repo.nota', $data);
         return $pdf->stream();
     }
+
+    public function getIn()
+    {
+        $id = $this->route->getParameter('idItemR');
+
+        $model = $this->repo->find($id);
+        $model->status = 3;
+        $model->save();
+
+
+        // cambia el branch del item
+        $branch = Brancheables::where('entities_type',Items::class)->where('entities_id',$model->items_id)->first();
+        $branch->branches_id = $model->branches_to_id;
+        $branch->save();
+
+        return redirect()->back()->withErrors('Articulo Ingresado Correctamente.');
+    }
+
 
 }

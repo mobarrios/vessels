@@ -168,4 +168,10 @@ class PurchasesOrdersController extends Controller
     }
 
 
+    public function addPayment()
+    {
+        dd('asdad');
+    }
+
+
 }

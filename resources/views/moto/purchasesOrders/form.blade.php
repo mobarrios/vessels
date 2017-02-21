@@ -11,7 +11,7 @@
                     <h3 class="box-title">Pedido de Mercaderia</h3>
                 </div>
                 @if(isset($models) && $models->status == 3)
-                        @include('moto.purchasesOrders.detail')
+                    @include('moto.purchasesOrders.detail')
                 @else
                     <div class="box-body">
 
@@ -23,6 +23,8 @@
                         @endif
 
                         {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
+                        {!! Form::hidden('branches_id',\Illuminate\Support\Facades\Auth::user()->branches_active_id) !!}
+
 
                         <div class="col-xs-3 form-group">
                             {!! Form::label('Fecha') !!}
@@ -32,10 +34,6 @@
                         <div class="col-xs-3 form-group">
                             {!! Form::label('Proveedor') !!}
                             {!! Form::select('providers_id', $providers, null, ['class'=>'select2 form-control']) !!}
-                        </div>
-                        <div class="col-xs-3 form-group">
-                            {!! Form::label('Sucursal') !!}
-                            {!! Form::select('branches_id[]',\Illuminate\Support\Facades\Auth::user()->getBranchName() , null, ['class'=>' select2  form-control']) !!}
                         </div>
                         <div class="col-xs-3 form-group" style="padding-top: 2%">
                             <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
@@ -182,7 +180,7 @@
 @section('js')
     <script>
 
-        $("select[name='models_id']").on('change', function(ev){
+        $("select[name='models_id']").on('change', function (ev) {
 
             $("#select_model>option").remove();
 
@@ -192,10 +190,9 @@
 
             $.ajax({
                 method: 'GET',
-                url: 'moto/modelActualCost/'+id,
+                url: 'moto/modelActualCost/' + id,
 
-                success: function(data)
-                {
+                success: function (data) {
                     $('#actualPrice').val(data.price_list);
                 }
             })

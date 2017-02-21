@@ -1,8 +1,13 @@
 @extends('template.model_index')
 @section('table')
 
-    {!! Form::open(['route'=>'moto.itemsRequest.notaPedido']) !!}
+    {!! Form::open(['route'=>'moto.itemsRequest.notaPedido','id'=>'formSend']) !!}
 
+    @if($models->where('status',4)->count() == 0)
+        <tr>
+            <td><p>SIN PEDIDOS PENDIENTES DE PROCESO</p></td>
+        </tr>
+    @endif
     @foreach($models->where('status',4) as $model)
         <tr>
             <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"> </td>
@@ -27,9 +32,8 @@
 
 
     @section('footTable')
-
-<hr>
-        <button id="send" type="button">enviar</button>
+<br>
+        <a target="_blank"  class="btn btn-default" id="send" type="button"><span class="fa fa-truck"></span></a>
         {!! Form::close() !!}
     @endsection
 
@@ -39,7 +43,7 @@
 @section('box')
 
     <div class="col-xs-12">
-        <div class="box box-danger">
+        <div class="box ">
             <div class="box-header with-border">
                 <span class="text-bold">PENDIENTES DE APROBACIÓN</span>
             </div>
@@ -67,11 +71,11 @@
                             <td>{{$pending->MyRequest->Users->fullName}}</td>
                             <td>
                                 <a href="{{route('moto.itemsRequest.asign',[ $pending->id , $pending->MyRequest->models_id , $pending->Brancheables->first()->branches_id, $pending->my_request_id ] )}}"
-                                   class="btn btn-xs btn-primary"> Aceptar</a>
+                                   class="btn btn-xs btn-default"> Aceptar</a>
                             </td>
                             <td>
                                 <a href="{{route('moto.itemsRequest.reject', $pending->id )}}"
-                                   class="reject btn btn-xs btn-danger"> Rechazar</a>
+                                   class="reject btn btn-xs btn-default"> Rechazar</a>
                             </td>
 
                         </tr>
@@ -83,7 +87,7 @@
     </div>
 
     <div class="col-xs-12">
-        <div class="box box-warning">
+        <div class="box ">
             <div class="box-header with-border">
                 <span class="text-bold">EN TRANSITO</span>
             </div>
@@ -96,12 +100,11 @@
                     <th>Artículo</th>
                     <th>Sucursal</th>
                     <th>Usuario</th>
-                    <th></th>
 
                     </thead>
                     <tbody>
 
-                    @foreach($models->where('status',4) as $model)
+                    @foreach($models->where('status',2) as $model)
                         <tr>
                             <td>{{$model->id}}</td>
                             <td>{{$model->created_at}}</td>
@@ -135,7 +138,12 @@
     <script>
         $('#send').on('click',function () {
 
+            $(".id_destroy:checkbox:checked").each(function() {
+                var id = $(this).val();
+                $('#formSend').append("<input type='hidden' name='id[]' value='"+id+"' >");
+            });
 
+            $('#formSend').submit();
         });
     </script>
 @endsection
