@@ -26,7 +26,7 @@ class CreateSmallBoxesTable extends Migration
             $table->foreign('providers_id')->references('id')->on('providers');
 
             $table->integer('types_small_boxes_id')->unsigned();
-            $table->foreign('types_small_boxes_id')->references('id')->on('types_small_boxes');
+//            $table->foreign('types_small_boxes_id')->references('id')->on('types_small_boxes');
 
         });
     }
