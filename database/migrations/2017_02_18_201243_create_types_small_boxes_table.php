@@ -12,8 +12,9 @@ class CreateTypesSmallBoxesTable extends Migration
      */
     public function up()
     {
-        Schema::table('types_small_boxes', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+
+        Schema::create('types_small_boxes', function (Blueprint $table) {
+            $table->increments('id');
             $table->timestamps();
             $table->softDeletes();
 

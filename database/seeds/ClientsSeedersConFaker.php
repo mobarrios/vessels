@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ClientsSeeders extends Seeder
+class ClientsSeedersConFaker extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class ClientsSeeders extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
+        $faker = Faker\Factory::create('es_AR');
 
         for ($i = 1; $i < 65; $i++){
             DB::table('clients')->insert([
@@ -20,15 +20,16 @@ class ClientsSeeders extends Seeder
                     'name' => $faker->firstName,
                     'last_name' => $faker->lastName,
                     'email' => $faker->freeEmail,
-                    'dni' => rand(11111111,99999999),
+                    'dni' => Faker\Provider\es_Es\Person::dni(),
                     'sexo' => $faker->randomElement(['masculino','femenino']),
-                    'dob' => '1971-05-01',
+                    'dob' => $faker->dateTimeThisCentury->format('Y-m-d'),
                     'address' => $faker->address,
                     'prospecto' => $faker->boolean,
                     'phone1' => $faker->phoneNumber,
-                    'nacionality' => 'Argentino',
-                    'city' => 'Caba',
-                    'province' => 'Buenos Aires',
+                    'nacionality' => Faker\Provider\es_Ar\Address::country(),
+                    'city' => $faker->city,
+                    'location' => Faker\Provider\es_Ar\Address::community(),
+                    'province' => Faker\Provider\es_Ar\Address::state(),
 
                 ]
 

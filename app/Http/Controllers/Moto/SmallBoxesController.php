@@ -89,7 +89,6 @@ class SmallBoxesController extends Controller
         if(config('models.'.$this->section.'.is_brancheable'))
             $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
-
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),[$this->request['entry'],$model->id])->withErrors(['Regitro Agregado Correctamente']);
     }
 
