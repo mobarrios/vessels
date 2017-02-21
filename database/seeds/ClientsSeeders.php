@@ -11,7 +11,7 @@ class ClientsSeeders extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create('es_AR');
+        $faker = Faker\Factory::create();
 
         for ($i = 1; $i < 65; $i++){
             DB::table('clients')->insert([
@@ -20,16 +20,15 @@ class ClientsSeeders extends Seeder
                     'name' => $faker->firstName,
                     'last_name' => $faker->lastName,
                     'email' => $faker->freeEmail,
-                    'dni' => Faker\Provider\es_Es\Person::dni(),
+                    'dni' => rand(11111111,99999999),
                     'sexo' => $faker->randomElement(['masculino','femenino']),
-                    'dob' => $faker->dateTimeThisCentury->format('Y-m-d'),
+                    'dob' => '1971-05-01',
                     'address' => $faker->address,
                     'prospecto' => $faker->boolean,
                     'phone1' => $faker->phoneNumber,
-                    'nacionality' => Faker\Provider\es_Ar\Address::country(),
-                    'city' => $faker->city,
-                    'location' => Faker\Provider\es_Ar\Address::community(),
-                    'province' => Faker\Provider\es_Ar\Address::state(),
+                    'nacionality' => 'Argentino',
+                    'city' => 'Caba',
+                    'province' => 'Buenos Aires',
 
                 ]
 
