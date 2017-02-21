@@ -18,11 +18,11 @@ class CreatePurchasesOrdersPaymentsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->integer('purchases_orders_id')->unsigned();
-            $table->foreign('purchases_orders_id')->references('id')->on('purchases_orders');
+           // $table->integer('purchases_orders_id')->unsigned();
+           // $table->foreign('purchases_orders_id')->references('id')->on('purchases_orders');
 
-            $table->integer('payments_id')->unsigned();
-            $table->foreign('payments')->references('id')->on('payments');
+            //$table->integer('payments_id')->unsigned();
+            //$table->foreign('payments')->references('id')->on('payments');
 
         });
     }

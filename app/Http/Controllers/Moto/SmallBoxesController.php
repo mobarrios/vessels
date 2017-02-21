@@ -8,6 +8,7 @@ use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\TypesSmallBoxesRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
