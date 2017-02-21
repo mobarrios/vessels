@@ -8,6 +8,7 @@ use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\TypesSmallBoxesRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
@@ -87,7 +88,6 @@ class SmallBoxesController extends Controller
         //si va a una sucursal
         if(config('models.'.$this->section.'.is_brancheable'))
             $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
-
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),[$this->request['entry'],$model->id])->withErrors(['Regitro Agregado Correctamente']);
     }

@@ -37,7 +37,7 @@
 
     <script>
         $(document).ready(function(){
-            $('#btn-nuevo').attr('href',"{!! route('moto.smallBoxes.index', $entry) !!}")
+            $('#btn-nuevo').attr('href',"{!! route('moto.smallBoxes.create', $entry) !!}")
 
             $('#btn-destroy').attr('href',"{!! route('moto.smallBoxes.destroy', $entry) !!}")
 

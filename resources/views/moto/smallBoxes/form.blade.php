@@ -16,7 +16,7 @@
 
     <div class="col-xs-3 form-group">
         {!! Form::label('Tipo de caja') !!}
-        {!! Form::select('entry', [0 => 'Entrada',1 => 'Salida'] , null ,['class'=>'select2 form-control ']) !!}
+        {!! Form::select('entry', [1 => 'Entrada',0 => 'Salida'] , null ,['class'=>'select2 form-control ']) !!}
     </div>
 
     <div class="col-xs-3 form-group">
