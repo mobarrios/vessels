@@ -674,6 +674,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //caja chica
+                [
+                    'id'    => 104,
+                    'name' => 'Listar Caja chica',
+                    'slug' => 'smallboxes.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 105,
+                    'name' => 'Crear Caja chica',
+                    'slug' => 'smallboxes.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 106,
+                    'name' => 'Editar Caja chica',
+                    'slug' => 'smallboxes.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 107,
+                    'name' => 'Borrar Caja chica',
+                    'slug' => 'smallboxes.destroy',
+                    'model' => '',
+                ],
+
             ]);
     }
 }

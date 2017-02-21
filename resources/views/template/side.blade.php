@@ -129,6 +129,25 @@
             </li>
             @endpermission
 
+            @permission('smallboxes.list')
+            <li class="treeview {{ in_array(Request::segment(2), ["smallBoxes"]) ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-money"></i> <span>Caja chica</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+      </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
+                                href="{{route('moto.smallBoxes.index',1)}}"><span>Entradas</span></a></li>
+
+                    <li class={{ Request::segment(3) == 0 ? 'active' : '' }}><a
+                                href="{{route('moto.smallBoxes.index',0)}}"><span>Salidas</span></a></li>
+
+                </ul>
+            </li>
+            @endpermission
+
 
             <li class="treeview {{ in_array(Request::segment(2), ["itemsRequest","myRequest"]) ? 'active' : '' }}">
                 <a href="#">
