@@ -33,6 +33,11 @@ class Models extends Entity
         return $this->belongsToMany(Providers::class);
     }
 
+    public function getProvidersIdAttribute()
+    {
+        return $this->Providers->lists('id')->toArray();
+    }
+
     public function getProvidersByModelsAttribute()
     {
         return $this->Providers->lists("name","id");

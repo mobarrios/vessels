@@ -27,8 +27,10 @@
     <div class="col-xs-3 form-group">
         {!! Form::label('Proveedores') !!}
 
+        {{--{!! dd($models->providers->lists('id')) !!}--}}
+
         @if(isset($models))
-            {!! Form::select('providers_id[]', $providers , $models->providers->lists('id'),['class'=>'select2 form-control','multiple'=>'']) !!}
+            {!! Form::select('providers_id[]', $providers , $models->providers_id,['class'=>'select2 form-control','multiple'=>'']) !!}
         @else
             {!! Form::select('providers_id[]', $providers , null ,['class'=>'select2 form-control','multiple'=>'']) !!}
         @endif

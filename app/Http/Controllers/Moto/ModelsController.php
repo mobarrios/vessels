@@ -70,7 +70,6 @@ class ModelsController extends Controller
         $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
 
         $id = $this->route->getParameter('id');
-
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request);
 
