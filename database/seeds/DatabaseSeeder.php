@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ModelsListsPricesPruebaSeeders::class);
         $this->call(ModelsListsPricesItemsPruebaSeeders::class);
         $this->call(TypesSmallBoxesPruebaSeeders::class);
+        $this->call(BanksTableSeeder::class);
 
 
         Model::reguard();
