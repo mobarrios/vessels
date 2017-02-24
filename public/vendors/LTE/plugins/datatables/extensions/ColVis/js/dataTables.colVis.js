@@ -229,7 +229,7 @@ ColVis.prototype = {
 		this._fnAddGroups();
 		this._fnAddButtons();
 
-		/* Update the checkboxes */
+		/* Update the checkbooks */
 		this._fnDrawCallback();
 	},
 
@@ -345,7 +345,7 @@ ColVis.prototype = {
 
 
 	/**
-	 * On each table draw, check the visibility checkboxes as needed. This allows any process to
+	 * On each table draw, check the visibility checkbooks as needed. This allows any process to
 	 * update the table's column visibility and ColVis will still be accurate.
 	 *  @method  _fnDrawCallback
 	 *  @returns void

@@ -700,6 +700,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //chequera
+                [
+                    'id'    => 108,
+                    'name' => 'Listar Chequera',
+                    'slug' => 'checkbooks.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 109,
+                    'name' => 'Crear Chequera',
+                    'slug' => 'checkbooks.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 110,
+                    'name' => 'Editar Chequera',
+                    'slug' => 'checkbooks.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 111,
+                    'name' => 'Borrar Chequera',
+                    'slug' => 'checkbooks.destroy',
+                    'model' => '',
+                ],
+
             ]);
     }
 }

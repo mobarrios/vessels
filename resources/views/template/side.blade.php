@@ -172,7 +172,7 @@
 
 
             @permission('roles.list|permissions.list|users.list|logs.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["branches","roles","permissions","users","logs"]) ? 'active' : '' }}">
+            <li class="treeview {{ in_array(Request::segment(2), ["branches","roles","permissions","users","logs", "checkbooks"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-gear"></i> <span>Configuración</span>
         <span class="pull-right-container">
@@ -221,11 +221,16 @@
                     @endpermission
 
                     @permission('financials.list')
-                    <li><a href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
+                    <li class={{ Request::segment(2) == "financials" ? 'active' : '' }}><a href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
                     @endpermission
 
                     @permission('paymethods.list')
-                    <li><a href="{{route('moto.payMethods.index')}}"><span>Metodos de Pago</span></a></li>
+                    <li class={{ Request::segment(2) == "payMethods" ? 'active' : '' }}><a href="{{route('moto.payMethods.index')}}"><span>Metodos de Pago</span></a></li>
+                    @endpermission
+
+
+                    @permission('checkbooks.list')
+                    <li class={{ Request::segment(2) == "checkbooks" ? 'active' : '' }}><a href="{{route('moto.checkbooks.index')}}"><span>Chequera</span></a></li>
                     @endpermission
 
 

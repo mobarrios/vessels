@@ -54,7 +54,7 @@
       // Normalize method's name
       options = options.toLowerCase();
 
-      // Find checkboxes and radio buttons
+      // Find checkbooks and radio buttons
       walker(this);
 
       return stack.each(function() {
