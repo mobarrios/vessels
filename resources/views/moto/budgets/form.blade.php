@@ -267,7 +267,7 @@
                             </div>
 
                             <div class="col-xs-2 form-group">
-                                <label>Total a Financiar</label>
+                                <label>Modo de Financiamiento</label>
 
                                 <select name="modo_financiamiento" class="form-control" id="financials">
                                     @foreach($financials as $i => $financial)
@@ -504,7 +504,6 @@
             $("#financials option").each(function(ind, val){
                 if($(val).attr('data-id') == $(coef).attr('data-id'))
                     $(val).attr('selected',false);
-
             });
 
 //                $(option).attr("selected","selected");
@@ -526,7 +525,7 @@
                         $scope.seguro = {!! $models->seguro or '0' !!}
                                 $scope.flete = {!! $models->flete or '0' !!}
                                 $scope.formularios = {!! $models->formularios or '0' !!}
-                                $scope.gastosAdministrativos = {!! $models->gastros_administrativos or '0' !!}
+                                $scope.gastosAdministrativos = {!! $models->gastos_administrativos or '0' !!}
                                 $scope.descuento = {!! $models->descuento or '0' !!}
                                 $scope.anticipo = {!! $models->anticipo or '0' !!}
                                 $scope.importeCuota = {!! $models->importe_cuota or '0' !!}
@@ -554,9 +553,10 @@
 
                     $scope.calcular = function()
             {
-                if( $scope.descuento != null && $scope.descuento != 0) {
-                    var total = parseFloat(($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) * $scope.descuento / 100).toFixed(2);
+                if( ($scope.descuento != null) && (parseFloat($scope.descuento) != 0)) {
+                    var total = parseFloat((($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) * $scope.descuento) / 100).toFixed(2);
                     $scope.total = parseFloat(($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) - total).toFixed(2);
+
 
                 }else
                     $scope.total =  parseFloat($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos).toFixed(2);
