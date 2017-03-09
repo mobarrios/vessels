@@ -14,10 +14,12 @@
 
     {!! Form::hidden('branches_id',\Illuminate\Support\Facades\Auth::user()->branches_active_id) !!}
 
-    <div class="col-xs-3 form-group">
-        {!! Form::label('Tipo de caja') !!}
-        {!! Form::select('entry', [1 => 'Entrada',0 => 'Salida'] , null ,['class'=>'select2 form-control ']) !!}
-    </div>
+    {{--<div class="col-xs-3 form-group">--}}
+        {{--{!! Form::label('Tipo de caja') !!}--}}
+        {{--{!! Form::select('entry', [1 => 'Entrada',0 => 'Salida'] , null ,['class'=>'select2 form-control ']) !!}--}}
+    {{--</div>--}}
+
+    {!! Form::hidden('entry',$entry) !!}
 
     <div class="col-xs-3 form-group">
         {!! Form::label('Fecha') !!}
@@ -42,7 +44,7 @@
     <div class="col-xs-3 form-group">
         {!! Form::label('Proveedores') !!}
 
-        {!! Form::select('providers_id', $providers , null ,['class'=>'select2 form-control','multiple'=>'']) !!}
+        {!! Form::select('providers_id', $providers , null ,['class'=>'select2 form-control']) !!}
 
     </div>
 
