@@ -27,7 +27,7 @@ class SmallBoxesController extends Controller
         // data
         $this->data['providers'] = $providersRepo->ListsData('name','id');
         $this->data['typesSmallBoxes'] = $typesSmallBoxesRepo->ListsData('name','id');
-
+        $this->data['entry'] = $route->getParameter('type');
     }
 
 

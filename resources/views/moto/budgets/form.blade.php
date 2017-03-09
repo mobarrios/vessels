@@ -293,20 +293,37 @@
                                 <label>Total</label>
                                 <div class="col-xs-12 input-group">
                                     {!! Form::text('total',null,['class' => 'form-control','readonly','ng-model' => 'total','ng-change' => 'calcular()']) !!}
-                                    <a id="sendForm" class="input-group-btn" title="Exportar PDF">
-                                        <span class="btn btn-danger">
-                                            <i class="fa fa-file-pdf-o"></i>
-                                        </span>
-                                    </a>
-
                                 </div>
                             </div>
 
 
+
                         </div>
+
                     </div>
 
+
+
                 {!! Form::close() !!}
+
+                        <div class="col-xs-12">
+
+                            <div class="btn-group" role="group" aria-label="...">
+                                <a id="sendForm" class="btn btn-danger" title="Exportar PDF"><i class="fa fa-file-pdf-o"></i></a>
+                                <a class="btn btn-success" title="Vender" id="sendVenderPresupuestado">
+                                    <i class="fa fa-money"></i>
+                                </a>
+
+                                {!! Form::open(['route'=> 'moto.sales.store', 'id' => 'venderPresupuestado']) !!}
+                                    {!! Form::hidden('clients_id',$models->Clients->id) !!}
+                                    {!! Form::hidden('budgets_id',$models->id) !!}
+                                    {!! Form::hidden('users_id',Auth::user()->id) !!}
+                                    {!! Form::hidden('branches_confirm_id',Auth::user()->branches_active_id) !!}
+                                    {!! Form::hidden('date_confirm',date('Y-m-d',time())) !!}
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+
 
             @endif
             </div>
@@ -476,6 +493,12 @@
             ev.preventDefault();
 
             $('#formPresupuesto').submit();
+        })
+
+        $("#sendVenderPresupuestado").on('click',function (ev) {
+            ev.preventDefault();
+
+            $('#venderPresupuestado').submit();
         })
 
 

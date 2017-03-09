@@ -63,6 +63,7 @@ class SalesController extends Controller
 
     public function store()
     {
+
         // cambia el estado del prospecto a cliente
         $this->clientsRepo->prospectoToClient($this->request->clients_id);
 

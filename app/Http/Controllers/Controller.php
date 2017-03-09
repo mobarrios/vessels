@@ -25,6 +25,9 @@ abstract class Controller extends BaseController
     
     public function index()
     {
+
+
+
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
 
