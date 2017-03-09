@@ -10,6 +10,7 @@ use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
+use App\Http\Repositories\Moto\PayMethodsRepo;
 use App\Http\Repositories\Moto\SalesItemsRepo;
 use App\Http\Repositories\Moto\SalesPaymentsRepo;
 
@@ -28,7 +29,7 @@ class SalesController extends Controller
 
     public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
-                                BranchesRepo $branchesRepo, FinancialsRepo $financialsRepo, BudgetsRepo $budgetsRepo)
+                                BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo)
     {
 
         $this->request = $request;
@@ -44,7 +45,7 @@ class SalesController extends Controller
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
         $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
 //        $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
-        $this->data['financials'] = $financialsRepo->ListsData('name','id');
+        //$this->data['financials'] = $payMethodsRepo->ListsData('name','id');
 
 
         $this->data['brands'] = $brandsRepo->getAllWithModels();

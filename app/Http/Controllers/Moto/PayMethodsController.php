@@ -13,7 +13,7 @@ use Illuminate\Routing\Route;
 class PayMethodsController extends Controller {
 
 
-    public function __construct(Request $request, Repo $repo, Route $route,FinancialsRepo $financialsRepo)
+    public function __construct(Request $request, Repo $repo, Route $route)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -21,7 +21,7 @@ class PayMethodsController extends Controller {
 
         $this->section          = 'payMethods';
         $this->data['section']  = $this->section;
-        $this->data['financials']  = $financialsRepo->ListsData('name','id');
+        $this->data['financials']  = $repo->ListsData('name','id');
 
     }
 
