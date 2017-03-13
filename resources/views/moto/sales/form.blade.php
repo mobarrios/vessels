@@ -226,7 +226,7 @@
 
                     <div class="col-xs-6 form-group">
                         {!! Form::label('Sucursal de Entrega') !!}
-                        {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','placeholder'=>'Seleccionar...']) !!}
+                        {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','id'=>'branches_confirm_id']) !!}
                     </div>
 
 
@@ -411,6 +411,7 @@
 
     <script>
 
+
         $("#sendForm").on('click',function (ev) {
             ev.preventDefault();
 
@@ -561,9 +562,46 @@
                 $http.get("moto/budgets/budget/" + $('#budgets_id').val())
                         .then(function (response) {
                             $scope.budgets = response.data;
-                            console.table(response.data);
+
+
                         });
             };
+
+            @if(isset($models))
+                @if($models->SalesItems->count() > 0)
+                    $http.get("moto/budgets/budget/" + $('#budgets_id').val())
+                        .then(function (response) {
+                            $scope.budgets = response.data;
+
+                            var modelos = [];
+
+
+                            for(var m in $scope.budgets.all_items) {
+                                var obj = {
+                                    modelo : $scope.budgets.all_items[m].id,
+                                    color : $scope.budgets.all_items[m].pivot.colors_id
+                                }
+
+                                modelos.push(obj)
+                            }
+                            
+                            $.ajax({
+                                method: 'get',
+                                data: $.extend({},modelos),
+                                url: 'moto/branchesWithStockByModels',
+                                success: function(data){
+                                    $("#branches_confirm_id option").remove();
+
+                                    for(var i in data){
+                                        $("#branches_confirm_id").append($("<option value='"+i+"'>"+data[i]+"<option>"))
+                                    }
+
+                                }
+                            })
+
+                        });
+                @endif
+            @endif
         });
 
 

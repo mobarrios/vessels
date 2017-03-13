@@ -61,6 +61,8 @@ class SalesController extends Controller
     }
 
 
+
+
     public function store()
     {
 

@@ -42,7 +42,8 @@ Route::get('/clientsSearch/{id?}', 'Moto\ClientsController@show');
 Route::get('/dispatchesItems/{id?}', 'Moto\DispatchesController@findItems');
 
 
-
+//Branches con stock de productos a vender
+Route::get('/branchesWithStockByModels/', 'Moto\AjaxController@branchesWithStockByModels');
 
 
 

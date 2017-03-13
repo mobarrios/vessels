@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Branches;
 use App\Entities\Moto\Budgets;
 use App\Entities\Moto\BudgetsItems;
 use App\Entities\Moto\Clients;
 use App\Entities\Moto\Colors;
 use App\Entities\Moto\Models;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\BudgetsItemsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo as Repo;
@@ -26,7 +28,7 @@ class BudgetsController extends Controller
     protected $budgets;
     protected $models;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models, BranchesRepo $branchesRepo)
     {
 
         $this->request  = $request;
@@ -38,6 +40,8 @@ class BudgetsController extends Controller
 
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['financials']   = $financialsRepo->getAllWithDues() ;
+        $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
+
 
         $this->clients = $clients;
         $this->models = $models;

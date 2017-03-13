@@ -46,6 +46,10 @@
             border-bottom: 1px solid #ddd;
         }
 
+        .select2-container{
+            width:100% !important;
+        }
+
         .select2-container--default .select2-results__option[aria-selected=true]{
             background-color: rgba(162,162,162,0.21);
 
@@ -310,17 +314,11 @@
 
                             <div class="btn-group" role="group" aria-label="...">
                                 <a id="sendForm" class="btn btn-danger" title="Exportar PDF"><i class="fa fa-file-pdf-o"></i></a>
-                                <a class="btn btn-success" title="Vender" id="sendVenderPresupuestado">
+                                <a class="btn btn-success" title="Vender" id="sendVenderPresupuestado"  data-toggle="modal" data-target="#modalVender">
                                     <i class="fa fa-money"></i>
                                 </a>
 
-                                {!! Form::open(['route'=> 'moto.sales.store', 'id' => 'venderPresupuestado']) !!}
-                                    {!! Form::hidden('clients_id',$models->Clients->id) !!}
-                                    {!! Form::hidden('budgets_id',$models->id) !!}
-                                    {!! Form::hidden('users_id',Auth::user()->id) !!}
-                                    {!! Form::hidden('branches_confirm_id',Auth::user()->branches_active_id) !!}
-                                    {!! Form::hidden('date_confirm',date('Y-m-d',time())) !!}
-                                {!! Form::close() !!}
+
                             </div>
                         </div>
 
@@ -335,7 +333,54 @@
 
 @endsection
 
+
+
 @if(isset($models))
+    @section('modal')
+        <div class="modal fade" id="modalVender" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    {!! Form::open(['route'=> 'moto.sales.store']) !!}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Generar venta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    {!! Form::hidden('clients_id',$models->Clients->id) !!}
+                                    {!! Form::hidden('budgets_id',$models->id) !!}
+                                    {!! Form::hidden('users_id',Auth::user()->id) !!}
+
+                                    <div class="col-xs-12 col-md-6 form-group">
+                                        {!! Form::label('Fecha Pactada') !!}
+                                        {!! Form::text('date_confirm', null, ['class'=>'datePicker form-control']) !!}
+                                    </div>
+
+
+                                    <div class="col-xs-12 col-md-6 form-group">
+                                        {!! Form::label('Sucursal de Entrega') !!}
+                                        {!! Form::select('branches_confirm_id',[] ,null, ['class'=>' form-control select2','id'=>'branches']) !!}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default">
+                                Enviar
+                            </button>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+
+    @endsection
+
+
+
 @section('formAside')
     @include('moto.partials.asideOpenForm')
                 @if(isset($modelItems))
@@ -495,12 +540,6 @@
             $('#formPresupuesto').submit();
         })
 
-        $("#sendVenderPresupuestado").on('click',function (ev) {
-            ev.preventDefault();
-
-            $('#venderPresupuestado').submit();
-        })
-
 
                 @if(isset($models))
         var coef;
@@ -555,22 +594,35 @@
                                 $scope.aFinanciar = {!! $models->a_financiar or '0' !!}
                         $scope.calcular();
 
-                        {{--$scope.guardarRuta('moto/budgets/editItem/{{ $models->id }}')--}}
-                    });
+                        var modelos = [];
 
-            {{--$scope.guardarRuta = function(ruta){--}}
-                    {{--$(".editItems").aside2({--}}
-                    {{--title: 'EDITAR PRODUCTO',--}}
-                    {{--route: ruta+'/'+$scope.data.pivot.id,--}}
-                    {{--routeAjax: "{!! route('moto.budgets.formItems') !!}",--}}
-                    {{--hidden: {--}}
-                    {{--budgets_id: "{!! $models->id !!}",--}}
-                    {{--price_actual: null--}}
-                    {{--},--}}
-                    {{--state: 'open',--}}
-                    {{--edit: $scope.data.pivot.id--}}
-                    {{--})--}}
-                    {{--}--}}
+                        for(var m in $scope.data) {
+                            var obj = {
+                                modelo : $scope.data[m].id,
+                                color : $scope.data[m].pivot.colors_id
+                            }
+
+                            modelos.push(obj)
+                        }
+
+
+
+                        $.ajax({
+                            method: 'get',
+                            data: $.extend({},modelos),
+                            url: 'moto/branchesWithStockByModels',
+                            success: function(data){
+                                $("#branches option").remove();
+
+                                for(var i in data){
+                                    $("#branches").append($("<option value='"+i+"'>"+data[i]+"<option>"))
+                                }
+
+                            }
+                        })
+
+
+                    });
 
 
 
@@ -628,6 +680,10 @@
         $("#search").select2({
             templateResult: formatState
         });
+
+
+
+
     </script>
 
 
