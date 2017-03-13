@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Brancheables;
+use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo;
@@ -65,9 +67,46 @@ class AjaxController extends Controller
 //        $data = $budgetsRepo->find($id)->allItems()->with('brands')->get();
         $data = collect();
         $data->push(['price' => $budgetsRepo->find($id)->allItems()->with('brands')->get()->sum('pivot.price_budget'),'patentamiento' => $budgetsRepo->find($id)->allItems()->with('brands')->get()->sum('patentamiento'),'pack_service' => $budgetsRepo->find($id)->allItems()->with('brands')->get()->sum('pack_service')]);
+
         $data->push($budgetsRepo->find($id)->allItems()->with('brands')->get());
 
         return response()->json($data);
+    }
+
+
+    public function branchesWithStockByModels(){
+//        dd($this->request->all());
+
+        $branches = [];
+
+        foreach ($this->request->all() as $articulos){
+
+            $items = Items::where('models_id', $articulos["modelo"])->where('colors_id',$articulos['color'])->get()->lists('id');
+
+            $branches[] = Brancheables::where('entities_type', 'App\Entities\Moto\Items')->with('Branches')->whereIn('entities_id', $items)->get()->groupBy('branches_id');
+
+
+        }
+
+        $list = [];
+
+        foreach ($branches as $branch){
+            foreach ($branch as $b){
+                if(count($list) > 0){
+                    foreach($list as $id => $sucursal){
+                        if($b->first()->Branches->id != $id){
+                            $list[$b->first()->Branches->id] = $b->first()->Branches->name;
+                        }
+
+                    }
+                }else{
+                    $list[$b->first()->Branches->id] = $b->first()->Branches->name;
+                }
+            }
+        }
+
+        return $list;
+
     }
 
 
