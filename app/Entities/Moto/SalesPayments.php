@@ -31,6 +31,11 @@
          return $this->belongsTo(Financials::class);
      }
 
+     public function PayMethods()
+     {
+         return $this->belongsTo(PayMethods::class, 'financials_id');
+     }
+
     
  }
 

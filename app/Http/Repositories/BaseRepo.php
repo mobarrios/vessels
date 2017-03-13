@@ -37,8 +37,28 @@ abstract class BaseRepo {
 
     public function update($id,$data)
     {
+
+
         $model = $this->model->find($id);
         $model->fill($data->all());
+
+        dd($model);
+
+        $a = $model['original'];
+        $c = $model['attributes'];
+
+        $diffs = array_diff($c, $a);
+
+        dd($diffs);
+        foreach ($diffs as $diff =>  $a)
+        {
+            echo $diff , $a;
+        }
+
+
+        dd('das');
+
+
         $model->save();
 
         return $model;

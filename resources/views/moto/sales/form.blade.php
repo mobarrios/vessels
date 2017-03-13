@@ -342,9 +342,9 @@
                                         <tr>
                                             <td>{{$payment->id}}</td>
                                             <td>{{$payment->date}}</td>
-                                            <td>{{$payment->Financials->name}}</td>
+                                            <td>{{$payment->PayMethods->name}}</td>
                                             <td> $ {{number_format($payment->amount, 2)}}</td>
-                                            <td>
+                                            <td class="col-xs-1">
                                                 <a class="btn btn-xs btn-default"
                                                    href="{{route('moto.sales.deletePayment',[$payment->id,$models->id])}}"><span
                                                             class="text-danger fa fa-trash"></span></a>
