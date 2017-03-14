@@ -56,6 +56,15 @@
         </div>
 
 
+        @foreach($models->Updateables as $update)
+
+            {{date('d-m-Y h:i',strtotime($update->created_at))}}
+
+            {{$update->column}}
+            {{$update->data_old}}
+
+            <br>
+        @endforeach
 
 
 

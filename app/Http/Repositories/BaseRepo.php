@@ -14,7 +14,8 @@ use App\Entities\Configs\Logs;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 
-abstract class BaseRepo {
+abstract class BaseRepo
+{
 
     protected $model;
 
@@ -35,29 +36,29 @@ abstract class BaseRepo {
     }
 
 
-    public function update($id,$data)
+    public function update($id, $data)
     {
 
 
         $model = $this->model->find($id);
         $model->fill($data->all());
 
-        dd($model);
 
-        $a = $model['original'];
-        $c = $model['attributes'];
-
-        $diffs = array_diff($c, $a);
-
-        dd($diffs);
-        foreach ($diffs as $diff =>  $a)
-        {
-            echo $diff , $a;
-        }
+            // valida si el dato nuevo es diferente al original y lo guarda en updateables
+                $a = $model['original'];
+                $c = $model['attributes'];
 
 
-        dd('das');
+                $diffs = array_diff($c, $a);
 
+
+                foreach ($diffs as $diff => $a) {
+                    $col = $diff;
+                    $data = $a;
+
+                    $model->Updateables()->create(['column' => $col, 'data_old' => $data]);
+                }
+            //---
 
         $model->save();
 
@@ -70,32 +71,30 @@ abstract class BaseRepo {
         $model = $this->model->find($id);
 
         $model->delete();
-        
+
         return $model;
     }
 
 
     public function ListAll($section = null)
     {
-        if(config('models.'.$section.'.is_brancheable'))
-        {
-            return $this->model->whereHas('Brancheables',function($q){
+        if (config('models.' . $section . '.is_brancheable')) {
+            return $this->model->whereHas('Brancheables', function ($q) {
 
-                    // lista todos los branches del usuario
-                    //$q->whereIn('branches_id',Auth::user()->branches_id );\
+                // lista todos los branches del usuario
+                //$q->whereIn('branches_id',Auth::user()->branches_id );\
 
                 // lista en el branch actual del usuario
-                $q->where('branches_id',Auth::user()->branches_active_id);
+                $q->where('branches_id', Auth::user()->branches_active_id);
 
             });
 
-        }else
-        {
-             return $this->model;
+        } else {
+            return $this->model;
         }
     }
 
-    public function ListAllWhere($section = null,$columnAndValue = [])
+    public function ListAllWhere($section = null, $columnAndValue = [])
     {
         $model = $this->model;
 
@@ -103,22 +102,20 @@ abstract class BaseRepo {
             $model = $model->where($colum, $value);
 
 
-        if(config('models.'.$section.'.is_brancheable'))
-        {
-            return $model->whereHas('Brancheables',function($q){
+        if (config('models.' . $section . '.is_brancheable')) {
+            return $model->whereHas('Brancheables', function ($q) {
 
-                    $q->whereIn('branches_id',Auth::user()->branches_id );
+                $q->whereIn('branches_id', Auth::user()->branches_id);
             });
 
-        }else
-        {
-             return $model;
+        } else {
+            return $model;
         }
     }
 
     public function ListsData($data, $id)
     {
-       // para agregar un campo adelatnte return $this->model->lists($data, $id)->prepend('Seleccionar...','');
+        // para agregar un campo adelatnte return $this->model->lists($data, $id)->prepend('Seleccionar...','');
         return $this->model->lists($data, $id);
     }
 
@@ -129,7 +126,7 @@ abstract class BaseRepo {
         foreach ($columnAndValue as $colum => $value)
             $model = $model->where($colum, $value);
 
-       // para agregar un campo adelatnte return $this->model->lists($data, $id)->prepend('Seleccionar...','');
+        // para agregar un campo adelatnte return $this->model->lists($data, $id)->prepend('Seleccionar...','');
         return $model->lists($data, $id);
     }
 
@@ -148,70 +145,56 @@ abstract class BaseRepo {
         $columns = $data->filter;
 
 
-
-        $q = $this->model->where('id','like','%'.$data->search.'%');
-
-
-            foreach ($columns as $column => $k)
-            {
-                $ex = explode(',',$k);
+        $q = $this->model->where('id', 'like', '%' . $data->search . '%');
 
 
-                if(isset($ex[1]))
-                {
-                    if($ex[0] == "branches")
-                    {
-                        $q->orWhereHas('Brancheables',function($r) use ($ex , $data)
-                        {
-                            $r->whereHas('Branches',function($b) use ($ex , $data)
-                            {
-                                $b->where($ex[1],'like','%'.$data->search.'%');
-                            });
+        foreach ($columns as $column => $k) {
+            $ex = explode(',', $k);
+
+
+            if (isset($ex[1])) {
+                if ($ex[0] == "branches") {
+                    $q->orWhereHas('Brancheables', function ($r) use ($ex, $data) {
+                        $r->whereHas('Branches', function ($b) use ($ex, $data) {
+                            $b->where($ex[1], 'like', '%' . $data->search . '%');
                         });
+                    });
 
 
-                    }else{
+                } else {
 
-                        $q->orWhereHas($ex[0], function($q) use ($ex , $data)
-                        {
-                            $q->where($ex[1] ,'like','%'.$data->search.'%');
-                        });
-                    }
+                    $q->orWhereHas($ex[0], function ($q) use ($ex, $data) {
+                        $q->where($ex[1], 'like', '%' . $data->search . '%');
+                    });
                 }
-                else
-                {
+            } else {
 
-                        $q->orWhere($ex[0] ,'like','%'.$data->search.'%');
+                $q->orWhere($ex[0], 'like', '%' . $data->search . '%');
 
-                }
-
-
-
-
-
-
-                /*
-                if(is_array($k))
-                {
-
-
-                    foreach ($k as $relation => $col)
-                    {
-                        $q->orWhereHas($relation, function($q) use ($col , $data){
-                            $q->where($col ,'like','%'.$data->search.'%');
-                        });
-                    }
-                } else
-                {
-
-                    $q->orWhere($k ,'like','%'.$data->search.'%');
-                }
-                */
             }
 
 
-       // dd($q->first()->Brancheables()->first()->Branches()->first()->name);
+            /*
+            if(is_array($k))
+            {
 
+
+                foreach ($k as $relation => $col)
+                {
+                    $q->orWhereHas($relation, function($q) use ($col , $data){
+                        $q->where($col ,'like','%'.$data->search.'%');
+                    });
+                }
+            } else
+            {
+
+                $q->orWhere($k ,'like','%'.$data->search.'%');
+            }
+            */
+        }
+
+
+        // dd($q->first()->Brancheables()->first()->Branches()->first()->name);
 
 
         //no hago get pq lo hace en el controller para paginar
@@ -219,7 +202,7 @@ abstract class BaseRepo {
     }
 
     // searchWhere
-    public function searchWhere($data,$columnAndValue = [])
+    public function searchWhere($data, $columnAndValue = [])
     {
 
         $q = $this->model;
@@ -228,63 +211,60 @@ abstract class BaseRepo {
             $q = $q->where($colum, $value);
 
 
-
         //get column to search in model repo
         //$columns = $this->getColumnSearch();
         $columns = $data->filter;
 
-        $q->where('id','like','%'.$data->search.'%');
+        $q->where('id', 'like', '%' . $data->search . '%');
 
-            foreach ($columns as $column => $k){
+        foreach ($columns as $column => $k) {
 
-                if(is_array($k)){
+            if (is_array($k)) {
 
-                    foreach ($k as $relation => $col){
+                foreach ($k as $relation => $col) {
 
-                        $q->orWhereHas($relation, function($q) use ($col , $data){
-                            $q->where($col ,'like','%'.$data->search.'%');
-                        });
-                    }
-                } else {
-
-                    $q->orWhere($k ,'like','%'.$data->search.'%');
+                    $q->orWhereHas($relation, function ($q) use ($col, $data) {
+                        $q->where($col, 'like', '%' . $data->search . '%');
+                    });
                 }
+            } else {
+
+                $q->orWhere($k, 'like', '%' . $data->search . '%');
             }
+        }
 
         //no hago get pq lo hace en el controller para paginar
         return $q;
     }
 
 
-    public function createLog($model , $log)
+    public function createLog($model, $log)
     {
-        $logData = config('logs.'.$log);
-        $model->logs()->create(['user_id'=> Auth::user()->id, 'log'=> $logData]);
+        $logData = config('logs.' . $log);
+        $model->logs()->create(['user_id' => Auth::user()->id, 'log' => $logData]);
     }
 
 
-    public function createBrancheables( $model , $branches_id)
+    public function createBrancheables($model, $branches_id)
     {
         $model->brancheables()->delete();
 
-        if(!is_array($branches_id)){
-            $model->brancheables()->create(['branches_id' => $branches_id] );
-        }
-        else{
+        if (!is_array($branches_id)) {
+            $model->brancheables()->create(['branches_id' => $branches_id]);
+        } else {
             foreach ($branches_id as $id) {
-                $model->brancheables()->create(['branches_id' => $id] );
+                $model->brancheables()->create(['branches_id' => $id]);
             }
         }
 
 
-
     }
 
 
-    public function createImageables( $model , $image)
+    public function createImageables($model, $image)
     {
 
-        if($model->images)
+        if ($model->images)
             $model->images()->delete();
 
         $model->images()->create(['path' => $image]);

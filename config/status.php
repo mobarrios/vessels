@@ -17,9 +17,10 @@ return [
 
     'items' =>
         [
-            1 => 'En Stock',
+            1 => 'Disponible',
             2 => 'Reservado',
             3 => 'Vendido',
+            4 => 'Solicitado',
         ],
 
     'items_request' =>

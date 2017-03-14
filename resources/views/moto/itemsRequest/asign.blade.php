@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
 @section('form_title')
-    Asignar Artículo
+   <span class="text-muted"> Solicitud de : </span>{{$myRequest->Models->Brands->name}} <strong>{{$myRequest->Models->name}}</strong> {{$myRequest->Colors->name}}
 @endsection
 
 @section('form_inputs')
@@ -33,7 +33,7 @@
                         <td>{{$item->Branches}}</td>
                         <td>{{$item->created_at}}</td>
                         <td><label class="label label-info">{{$item->statusName}}</label></td>
-                        <td><a href="{{route('moto.itemsRequest.postAsign', [$itemsRequestId, $item->id , $branchesTo, $myRequestId] )}}" class="reasignar btn btn-xs btn-default"><strong>Asignar</strong></a></td>
+                        <td><a href="{{route('moto.itemsRequest.postAsign', [$itemsRequestId, $item->id , $branchesTo, $myRequest->id] )}}" class="reasignar btn btn-xs btn-default"><strong>Asignar</strong></a></td>
                    </tr>
                 @endforeach
                 </tbody>

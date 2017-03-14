@@ -1,7 +1,7 @@
 @extends('template.model_index')
 @section('table')
 
-    {!! Form::open(['route'=>'moto.itemsRequest.notaPedido','id'=>'formSend']) !!}
+    {!! Form::open(['route'=>'moto.itemsRequest.notaPedido','id'=>'formSend', 'target'=>'_blank' ]) !!}
 
     @if($models->where('status',4)->count() == 0)
         <tr>
@@ -66,7 +66,13 @@
                             <td>{{$pending->MyRequest->id}}</td>
                             <td><label class="label label-default">{{$pending->MyRequest->Types}}</label></td>
                             <td>{{date('d-m-Y',strtotime($pending->created_at))}}</td>
-                            <td><strong>{{$pending->MyRequest->Models->Brands->name}} <span class="text-blue">{{$pending->MyRequest->Models->name}}</span></strong></td>
+                            <td>
+                                <strong>{{$pending->MyRequest->Models->Brands->name}}
+                                    <span class="text-blue">{{$pending->MyRequest->Models->name}}</span>
+                                    <span class="text-red">{{$pending->MyRequest->Colors->name}}</span>
+
+                                </strong>
+                            </td>
                             <td>{{$pending->MyRequest->Brancheables->first()->Branches->name}}</td>
                             <td>{{$pending->MyRequest->Users->fullName}}</td>
                             <td>

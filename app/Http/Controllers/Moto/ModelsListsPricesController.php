@@ -10,29 +10,32 @@ use App\Http\Repositories\Moto\ProvidersRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Excel;
 
 
 class ModelsListsPricesController extends Controller
 {
     protected $modelsRepo;
     protected $modelsListsPricesRepo;
+    protected $providersRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo, ModelsRepo $modelsRepo, ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
+    public function __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo, ModelsRepo $modelsRepo, ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
     {
 
-        $this->request  = $request;
-        $this->repo     = $repo;
-        $this->route    = $route;
+        $this->request = $request;
+        $this->repo = $repo;
+        $this->route = $route;
 
-        $this->section          = 'modelsListsPrices';
-        $this->data['section']  = $this->section;
+        $this->section = 'modelsListsPrices';
+        $this->data['section'] = $this->section;
 
         //data
-        $this->data['providers'] = $providersRepo->ListsData('name','id');
-        $this->data['models_lists'] = $modelsRepo->ListsData('name','id');
+        $this->data['providers'] = $providersRepo->ListsData('name', 'id');
+        $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
 
-        $this->modelsRepo =  $modelsRepo;
-        $this->modelsListsPricesRepo =  $modelsListsPricesItemsRepo;
+        $this->modelsRepo = $modelsRepo;
+        $this->modelsListsPricesRepo = $modelsListsPricesItemsRepo;
+        $this->providersRepo = $providersRepo;
     }
 
     public function edit()
@@ -44,7 +47,7 @@ class ModelsListsPricesController extends Controller
     {
         $modelsListsPricesItemsRepo->create($this->request);
 
-        return redirect()->route('moto.modelsListsPrices.edit',$this->request->models_lists_prices_id);
+        return redirect()->route('moto.modelsListsPrices.edit', $this->request->models_lists_prices_id);
     }
 
     public function editItems(ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
@@ -54,9 +57,9 @@ class ModelsListsPricesController extends Controller
         return parent::edit();
     }
 
-    public function updateItems(ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo,$id)
+    public function updateItems(ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo, $id)
     {
-        $modelsListsPricesItemsRepo->update($id,$this->request);
+        $modelsListsPricesItemsRepo->update($id, $this->request);
 
         return parent::edit();
     }
@@ -67,6 +70,59 @@ class ModelsListsPricesController extends Controller
 
         return parent::edit();
     }
+
+
+    // bajar lista de precios
+
+    public function download(Excel $excel)
+    {
+        $providersId = $this->route->getParameter('providersId');
+
+        $data['providers'] = $this->providersRepo->getModel()->with('Models')->find($providersId);
+
+
+        $excel->create('Exportación', function ($ex) use ($data) {
+
+            $ex->sheet('Excel sheet', function ($sheet) use ($data) {
+
+                $sheet->loadView('moto.modelsListsPrices.xls', $data);
+            });
+
+        })->download('xls');
+
+    }
+
+    public function upload()
+    {
+        $this->data['activeBread'] = 'modelsListsPrices';
+        $this->data['section'] = 'modelsListsPrices';
+        $this->data['modelsListsPricesId'] = $this->route->getParameter('modelsListsPricesId');
+        return view('moto.modelsListsPrices.upload')->with($this->data);
+    }
+
+    public function postUpload(Excel $excel, ModelsListsPricesItemsRepo $modelsListsPricesItemsRepo)
+    {
+
+        $data = $excel->load($this->request->file)->get();
+        $id = $this->route->getParameter('modelsListsPricesId');
+
+
+        foreach ($data as $d => $b) {
+
+            $data =
+                [   'models_lists_prices_id' => $id,
+                    'models_id' => intval($b->cod),
+                    'price_list' => (double)$b->precio_lista,
+                    'price_net' => (double)$b->precio_contado
+                ];
+
+            $modelsListsPricesItemsRepo->createParam($data);
+        }
+
+
+        return redirect()->route('moto.modelsListsPrices.edit', $id);
+    }
+
 
     /*
     public function addItems()

@@ -34,7 +34,7 @@ return [
     //polymorphic
     'is_logueable'      => true,
     'is_imageable'      => false,
-    'is_brancheable'    => true,
+    'is_brancheable'    => false,
     
 
     //column search

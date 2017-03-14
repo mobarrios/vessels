@@ -20,4 +20,10 @@ Route::group(['prefix' => 'modelsListsPrices'], function () {
     Route::post('/editItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.modelsListsPrices.updateItems', 'uses' => 'Moto\ModelsListsPricesController@updateItems']);
     Route::get('/deleteItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.modelsListsPrices.deleteItems', 'uses' => 'Moto\ModelsListsPricesController@deleteItems']);
 
+    //download listsprices
+    Route::get('/download/{providersId?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.modelsListsPrices.download', 'uses' => 'Moto\ModelsListsPricesController@download']);
+    Route::get('/upload/{modelsListsPricesId?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.modelsListsPrices.upload', 'uses' => 'Moto\ModelsListsPricesController@upload']);
+    Route::post('/upload/{modelsListsPricesId?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.modelsListsPrices.postUpload', 'uses' => 'Moto\ModelsListsPricesController@postUpload']);
+
+
 });

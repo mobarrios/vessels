@@ -25,7 +25,13 @@
         <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
         @if(isset($models))
             <a href="#" data-action="{!! route("moto.modelsListsPrices.addItems") !!}" data-toggle="control-sidebar" class="btn btn-default"><span class="fa fa-plus"></span></a>
+
+            <a href="{{route('moto.modelsListsPrices.download',$models->providers_id)}}" type="button" class="btn btn-success" title="descargar Lista"><span class="fa fa-download"></span></a>
+            <a href="{{route('moto.modelsListsPrices.upload',$models->id)}}" type="button" class="btn btn-default"><span class="fa fa-upload"></span></a>
         @endif
+
+
+
     </div>
 
     {!! Form::close() !!}

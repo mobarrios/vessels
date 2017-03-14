@@ -72,8 +72,13 @@ class ItemsRepo extends BaseRepo
     public function changeStatus($id, $status)
     {
         $item = $this->find($id);
+
+            // guarda el update en updateables
+            $item->Updateables()->create(['column'=>'status','data_old'=>$item->status]);
+
         $item->status = $status;
         $item->save();
+
 
     }
 

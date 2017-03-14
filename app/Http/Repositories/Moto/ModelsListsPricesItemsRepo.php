@@ -13,6 +13,14 @@ class ModelsListsPricesItemsRepo extends BaseRepo {
         return new ModelsListsPricesItems();
     }
 
+    public function createParam($data)
+    {
+        $model = new $this->model();
+        $model->fill($data);
+        $model->save();
+
+        return $model;
+    }
 
 
 }

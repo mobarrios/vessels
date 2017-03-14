@@ -28,6 +28,7 @@ class ItemsPruebaSeeders extends Seeder
                         'status' => 1,
                         'models_id' => $i,
                         'colors_id' => rand(1,3),
+                        'created_at' => date('Y-m-d')
 
                     ]
                 ];

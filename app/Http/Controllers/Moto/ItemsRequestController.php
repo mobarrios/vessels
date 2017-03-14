@@ -61,15 +61,15 @@ class ItemsRequestController extends Controller
         return redirect()->back()->withErrors('Articulo Reasignado correctamente.');
     }
 
-    public function asign()
+    public function asign(MyRequestRepo $myRequestRepo)
     {
         $this->data['activeBread'] = 'Asignar';
         $this->data['branchesTo'] = $this->route->getParameter('branchesTo');
-        $this->data['myRequestId'] = $this->route->getParameter('myRequestId');
+        $this->data['myRequest'] = $myRequestRepo->find($this->route->getParameter('myRequestId'));
         $this->data['itemsRequestId'] = $this->route->getParameter('itemsRequestId');
 
+        $items = $this->itemsRepo->getModel()->where('models_id', $this->route->getParameter('modelsId'))->where('status','!=',4)->get();
 
-        $items = $this->itemsRepo->getModel()->where('models_id', $this->route->getParameter('modelsId'))->get();
 
         $this->data['items'] = $items;
 
@@ -90,12 +90,16 @@ class ItemsRequestController extends Controller
         $model = $this->repo->find($this->route->getParameter('itemsRequestId'));
         $model->items_id = $newId;
         $model->status = 4;
+
         $model->branches_from_id = $branchesFrom;
         $model->branches_to_id = $branchesTo;
         $model->my_request_id = $myRequestId;
         $model->save();
 
 
+        // cambia estado del item a solicitado
+        $this->itemsRepo->changeStatus($item->id, 4);
+        
 
         return redirect()->back()->withErrors('Articulo Asignado correctamente.');
     }
@@ -118,17 +122,15 @@ class ItemsRequestController extends Controller
 
         $models = $this->repo->find($this->request->id);
 
-        foreach($models as $model )
-        {
+        foreach ($models as $model) {
             $model->status = 2;
             $model->save();
         }
 
 
-
         $data['destino'] = $models->first()->BranchesTo;
         $data['date'] = date('d-m-Y');
-        $data['models'] =  $models;
+        $data['models'] = $models;
 
         $pdf->setPaper('a5', 'portrait')->loadView('moto.itemsRequest.repo.nota', $data);
         return $pdf->stream();
@@ -142,9 +144,12 @@ class ItemsRequestController extends Controller
         $model->status = 3;
         $model->save();
 
+        // vuelve el estado del item a disponible
+        $this->itemsRepo->changeStatus($model->items_id, 1);
+
 
         // cambia el branch del item
-        $branch = Brancheables::where('entities_type',Items::class)->where('entities_id',$model->items_id)->first();
+        $branch = Brancheables::where('entities_type', Items::class)->where('entities_id', $model->items_id)->first();
         $branch->branches_id = $model->branches_to_id;
         $branch->save();
 
