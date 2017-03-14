@@ -75,9 +75,8 @@ class AjaxController extends Controller
 
 
     public function branchesWithStockByModels(){
-//        dd($this->request->all());
 
-        $branches = [];
+        $branches  = [];
 
         foreach ($this->request->all() as $articulos){
 
@@ -87,6 +86,7 @@ class AjaxController extends Controller
 
 
         }
+
 
         $list = [];
 

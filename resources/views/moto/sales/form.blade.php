@@ -375,14 +375,14 @@
                             <i class="fa fa-file-pdf-o"></i>
                         </span>
                             </a>
-                            <a target="_blank" href="{!! route('moto.'.$section.'.recibo') !!}"
+                            <a target="_blank" href="{!! route('moto.'.$section.'.recibo',$models->id) !!}"
                                class="pull-left"
                                title="Recibo PDF">
                         <span class="btn btn-success">
                             <i class="fa fa-file-pdf-o"></i>
                         </span>
                             </a>
-                            <a target="_blank" href="{!! route('moto.'.$section.'.factura') !!}"
+                            <a target="_blank" href="{!! route('moto.'.$section.'.factura',$models->id) !!}"
                                class="pull-left"
                                title="Factura PDF">
                         <span class="btn btn-warning">
@@ -584,7 +584,7 @@
 
                                 modelos.push(obj)
                             }
-                            
+
                             $.ajax({
                                 method: 'get',
                                 data: $.extend({},modelos),
@@ -593,7 +593,10 @@
                                     $("#branches_confirm_id option").remove();
 
                                     for(var i in data){
-                                        $("#branches_confirm_id").append($("<option value='"+i+"'>"+data[i]+"<option>"))
+                                        if(i == {!! $models->branches_confirm_id !!})
+                                           $("#branches_confirm_id").append($("<option value='"+i+"' selected>"+data[i]+"<option>"))
+                                        else
+                                           $("#branches_confirm_id").append($("<option value='"+i+"'>"+data[i]+"<option>"))
                                     }
 
                                 }

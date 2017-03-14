@@ -53,28 +53,28 @@ class UtilitiesController extends Controller
         return $pdf->stream();
     }
 
-    public function reciboPdf(Request $request,Route $route , PDF $pdf){
+    public function reciboPdf($id,Request $request,Route $route , PDF $pdf){
 
-//        $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
-//
-//        $model = new $entidad;
-//
-//        $model = $model->find($id);
+        $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
 
-        $pdf->setPaper('a5', 'landscape')->loadView('moto.'.$request->segment(2).'.reciboPdf');
+        $model = new $entidad;
+
+        $model = $model->find($id);
+
+        $pdf->setPaper('a5', 'landscape')->loadView('moto.'.$request->segment(2).'.reciboPdf',compact('model'));
 
         return $pdf->stream();
     }
 
-    public function facturaPdf(Request $request,Route $route , PDF $pdf){
+    public function facturaPdf($id,Request $request,Route $route , PDF $pdf){
 
-//        $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
+        $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
 
-//        $model = new $entidad;
+        $model = new $entidad;
 
-//        $model = $model->find($id);
+        $model = $model->find($id);
 
-        $pdf->setPaper('a5', 'portrait')->loadView('moto.'.$request->segment(2).'.facturaPdf');
+        $pdf->setPaper('a5', 'portrait')->loadView('moto.'.$request->segment(2).'.facturaPdf',compact('model'));
 
         return $pdf->stream();
     }
