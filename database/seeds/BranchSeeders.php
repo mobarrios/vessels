@@ -18,6 +18,12 @@ class BranchSeeders extends Seeder
         ],[
             'id'    => 2,
             'name'=>'Logistica',
+        ],[
+            'id'    => 3,
+            'name'=>'San Miguel',
+        ],[
+            'id'    => 4,
+            'name'=>'Morón',
         ]]
         );
     }

@@ -618,6 +618,7 @@
                                     $("#branches").append($("<option value='"+i+"'>"+data[i]+"<option>"))
                                 }
 
+
                             }
                         })
 

@@ -35,7 +35,7 @@ class ItemsPruebaSeeders extends Seeder
 
                 Items::insert($datos);
 
-                Items::find($b)->brancheables()->create(['branches_id' => 1]);
+                Items::find($b)->brancheables()->create(['branches_id' => rand(1,4)]);
 
                 $b++;
             }
