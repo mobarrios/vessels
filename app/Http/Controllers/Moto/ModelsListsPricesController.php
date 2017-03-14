@@ -88,7 +88,7 @@ class ModelsListsPricesController extends Controller
                 $sheet->loadView('moto.modelsListsPrices.xls', $data);
             });
 
-        })->download('xls');
+        })->export('xls');
 
     }
 
@@ -97,6 +97,8 @@ class ModelsListsPricesController extends Controller
         $this->data['activeBread'] = 'modelsListsPrices';
         $this->data['section'] = 'modelsListsPrices';
         $this->data['modelsListsPricesId'] = $this->route->getParameter('modelsListsPricesId');
+
+
         return view('moto.modelsListsPrices.upload')->with($this->data);
     }
 

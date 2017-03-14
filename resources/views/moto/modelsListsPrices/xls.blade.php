@@ -1,10 +1,4 @@
 <table>
-
-    <tr>
-        <td colspan="5">{{$providers->name}} </td>
-
-    </tr>
-
     <tr>
         <td>Cod.</td>
         <td>Marca</td>
