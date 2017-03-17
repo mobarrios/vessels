@@ -567,44 +567,44 @@
                         });
             };
 
-            @if(isset($models))
-                @if($models->SalesItems->count() > 0)
-                    $http.get("moto/budgets/budget/" + $('#budgets_id').val())
-                        .then(function (response) {
-                            $scope.budgets = response.data;
+            {{--@if(isset($models))--}}
+                {{--@if($models->SalesItems->count() > 0)--}}
+                    {{--$http.get("moto/budgets/budget/" + $('#budgets_id').val())--}}
+                        {{--.then(function (response) {--}}
+                            {{--$scope.budgets = response.data;--}}
 
-                            var modelos = [];
+                            {{--var modelos = [];--}}
 
 
-                            for(var m in $scope.budgets.all_items) {
-                                var obj = {
-                                    modelo : $scope.budgets.all_items[m].id,
-                                    color : $scope.budgets.all_items[m].pivot.colors_id
-                                }
+                            {{--for(var m in $scope.budgets.all_items) {--}}
+                                {{--var obj = {--}}
+                                    {{--modelo : $scope.budgets.all_items[m].id,--}}
+                                    {{--color : $scope.budgets.all_items[m].pivot.colors_id--}}
+                                {{--}--}}
 
-                                modelos.push(obj)
-                            }
+                                {{--modelos.push(obj)--}}
+                            {{--}--}}
 
-                            $.ajax({
-                                method: 'get',
-                                data: $.extend({},modelos),
-                                url: 'moto/branchesWithStockByModels',
-                                success: function(data){
-                                    $("#branches_confirm_id option").remove();
+                            {{--$.ajax({--}}
+                                {{--method: 'get',--}}
+                                {{--data: $.extend({},modelos),--}}
+                                {{--url: 'moto/branchesWithStockByModels',--}}
+                                {{--success: function(data){--}}
+                                    {{--$("#branches_confirm_id option").remove();--}}
 
-                                    for(var i in data){
-                                        if(i == {!! $models->branches_confirm_id !!})
-                                           $("#branches_confirm_id").append($("<option value='"+i+"' selected>"+data[i]+"<option>"))
-                                        else
-                                           $("#branches_confirm_id").append($("<option value='"+i+"'>"+data[i]+"<option>"))
-                                    }
+                                    {{--for(var i in data){--}}
+                                        {{--if(i == {!! $models->branches_confirm_id !!})--}}
+                                           {{--$("#branches_confirm_id").append($("<option value='"+i+"' selected>"+data[i]+"<option>"))--}}
+                                        {{--else--}}
+                                           {{--$("#branches_confirm_id").append($("<option value='"+i+"'>"+data[i]+"<option>"))--}}
+                                    {{--}--}}
 
-                                }
-                            })
+                                {{--}--}}
+                            {{--})--}}
 
-                        });
-                @endif
-            @endif
+                        {{--});--}}
+                {{--@endif--}}
+            {{--@endif--}}
         });
 
 
