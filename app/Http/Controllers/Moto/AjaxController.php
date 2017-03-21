@@ -116,7 +116,7 @@ class AjaxController extends Controller
     {
         $entity = 'App\Entities\Moto\\'.ucfirst($request->entity);
         $modelo = new $entity;
-        $model = $modelo->find($request->id);
+        $model = $modelo->find($request->models_id);
 
         $additional = $additionals->find($request->additionals_id);
 
@@ -134,7 +134,7 @@ class AjaxController extends Controller
         $entity = 'App\Entities\Moto\\'.ucfirst($request->entity);
         $modelo = new $entity;
 
-        $model = $modelo->find($request->id);
+        $model = $modelo->find($request->models_id);
 
         $additional = $additionals->find($request->additionals_id);
 
