@@ -11,7 +11,7 @@
  {
      protected $fillable    = ['additionals_id','amount'];
 
-     public function entities(){
+     public function additionable(){
 
          return $this->morphTo();
      }

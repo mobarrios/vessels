@@ -98,17 +98,11 @@
                 </div><!-- /input-group -->
 
                 <table class="table adicionales">
-                        <tr>
-                            <td class="text-center">Adicional</td>
-                            <td>
-                                <div class="btn-group pull-right">
-                                    <a href="" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+
                         @foreach($models->additionables as $additionals)
                             <tr>
-                                <td class="text-center">{{$additionals->name}}</td>
+                                <td class="text-center">{{$additionals->Additionals->name or ''}}</td>
+                                <td class="text-center"> $ {{$additionals->amount or ''}}</td>
                                 <td>
                                     <div class="btn-group pull-right">
                                         <a href="{!! url('moto/removeAdditionals',$additionals->id) !!}" class="btn btn-xs btn-danger" data-id="{!! $additionals->id !!}"><i class="fa fa-trash"></i></a>
@@ -155,6 +149,7 @@
                     data: data,
                     method: 'POST',
                     success: function(response){
+                        console.log(response);
                         $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a></div></td></tr>'))
                     },
                     error: function (error) {
