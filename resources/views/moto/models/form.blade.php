@@ -83,7 +83,6 @@
             <div class="col-xs-12 col-md-6" id="adicionales">
                 <h4>Adicionales</h4>
                 <div class="input-group">
-
                     <div class="input-group-btn" style="font-size: 12px !important;">
                         {!! Form::select('additionals_id',$additionals,null,['class' => 'btn btn-default select2']) !!}
                     </div><!-- /btn-group -->
@@ -95,8 +94,9 @@
                             <i class="fa fa-floppy-o"></i>
                         </button>
                     </div>
-                </div><!-- /input-group -->
 
+                </div><!-- /input-group -->
+                <br>
                 <table class="table adicionales">
 
                         @foreach($models->additionables as $additionals)
