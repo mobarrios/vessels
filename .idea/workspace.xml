@@ -46,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/resources/views/moto/models/form.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="206">
-              <caret line="173" column="12" selection-start-line="173" selection-start-column="12" selection-end-line="173" selection-end-column="12" />
+              <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
               <folding>
                 <element signature="e#3105#3140#0#HTML" expanded="true" />
               </folding>
@@ -700,16 +700,16 @@
       <workItem from="1489708868066" duration="7386000" />
       <workItem from="1489755682140" duration="609000" />
       <workItem from="1489778356462" duration="59000" />
-      <workItem from="1490037937274" duration="26286000" />
+      <workItem from="1490037937274" duration="26358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72350000" />
+    <option name="totallyTimeSpent" value="72422000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26431718" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1142,7 +1142,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/moto/models/form.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
-          <caret line="173" column="12" selection-start-line="173" selection-start-column="12" selection-end-line="173" selection-end-column="12" />
+          <caret line="173" column="0" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
           <folding>
             <element signature="e#3105#3140#0#HTML" expanded="true" />
           </folding>
