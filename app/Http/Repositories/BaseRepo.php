@@ -29,7 +29,12 @@ abstract class BaseRepo
     public function create($data)
     {
         $model = new $this->model();
-        $model->fill($data->all());
+
+        if(is_object($data))
+            $model->fill($data->all());
+        else
+            $model->fill($data);
+        
         $model->save();
 
         return $model;
@@ -38,8 +43,6 @@ abstract class BaseRepo
 
     public function update($id, $data)
     {
-
-
         $model = $this->model->find($id);
         $model->fill($data->all());
 

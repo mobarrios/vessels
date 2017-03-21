@@ -9,7 +9,7 @@
 
      protected $table = 'sales_payments';
 
-     protected $fillable = ['sales_id','date','financials_id','ccn','ccc','cce','amount'];
+     protected $fillable = ['date','amount','banks_id','number','check_date','check_pay_date','check_types_id','term','transf_date','financials_id','sales_id','pay_methods_id'];
 
      public function Sales()
      {
@@ -26,14 +26,10 @@
          $this->attributes['date'] = date('Y-m-d',strtotime($value));
      }
 
-     public function Financials()
-     {
-         return $this->belongsTo(Financials::class);
-     }
 
      public function PayMethods()
      {
-         return $this->belongsTo(PayMethods::class, 'financials_id');
+         return $this->belongsTo(PayMethods::class, 'pay_methods_id');
      }
 
     

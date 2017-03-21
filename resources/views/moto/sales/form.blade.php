@@ -249,9 +249,7 @@
                     Artículos
                     <div class="pull-right">
                         @if(isset($models))
-                            <a href="{{route('moto.items.modal',[$section, $models->id])}}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
-
-
+                            <a href="{{route('moto.sales.addItems', $models->id )}}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                         @endif
                     </div>
 
@@ -293,7 +291,7 @@
                                            href="{{route('moto.sales.deleteItems',[$item->id,$models->id])}}"><span
                                                     class="text-danger fa fa-trash"></span></a>
                                         <a class="btn btn-xs btn-default"
-                                           href="{{route('moto.items.modal',[$section,$models->id,$item->id])}}"
+                                           href="{{route('moto.sales.editItems',[$item->id,$models->id,])}}"
                                            data-id="{!! $item->id !!}"><span
                                                     class="text-success fa fa-edit"></span></a>
                                     </td>
@@ -320,7 +318,7 @@
                         Formas de Pago
                         <div class="pull-right">
                             @if(isset($models))
-                                <a href="{!! route("moto.paymethods.modal",[$section, $models->id]) !!}" id="agregarPago"
+                                <a href="{!! route("moto.sales.createPayment", $models->id) !!}" id="agregarPago"
                                    class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                             @endif
                         </div>

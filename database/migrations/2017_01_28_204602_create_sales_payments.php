@@ -20,15 +20,27 @@ class CreateSalesPayments extends Migration
 
             $table->date('date');
             $table->double('amount',10.2);
-            $table->string('ccn');
-            $table->string('ccc');
-            $table->string('cce');
+
+            $table->integer('banks_id');
+            $table->string('number');
+
+            $table->date('check_date');
+            $table->date('check_pay_date');
+            $table->integer('check_types_id');
+
+            $table->string('term');
+
+            $table->date('transf_date');
+            $table->integer('financials_id');
+
+
+
 
             $table->integer('sales_id')->unsigned()->nulleable();
             $table->foreign('sales_id')->references('id')->on('sales');
 
-            $table->integer('financials_id')->unsigned()->nulleable();
-            $table->foreign('financials_id')->references('id')->on('financials');
+            $table->integer('pay_methods_id')->unsigned()->nulleable();
+            $table->foreign('pay_methods_id')->references('id')->on('pay_methods');
 
 
         });

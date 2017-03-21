@@ -73,7 +73,7 @@
 
                                 </strong>
                             </td>
-                            <td>{{$pending->MyRequest->Brancheables->first()->Branches->name}}</td>
+                            <td>{{$pending->MyRequest->Brancheables->first()->Branches->name or ''}}</td>
                             <td>{{$pending->MyRequest->Users->fullName}}</td>
                             <td>
                                 <a href="{{route('moto.itemsRequest.asign',[ $pending->id , $pending->MyRequest->models_id , $pending->Brancheables->first()->branches_id, $pending->my_request_id ] )}}"

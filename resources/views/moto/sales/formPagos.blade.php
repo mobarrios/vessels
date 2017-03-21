@@ -67,7 +67,7 @@
                             <tr>
                                 <td>{{$payment->id}}</td>
                                 <td>{{$payment->date}}</td>
-                                <td>{{$payment->Financials->name}}</td>
+                                <td>{{$payment->PayMethods->name}}</td>
                                 <td> $ {{number_format($payment->amount, 2)}}</td>
                                 <?php  $pago += $payment->amount ;?>
                             </tr>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Moto\Banks;
+use App\Entities\Moto\Financials;
 use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
@@ -50,7 +52,7 @@ class SalesController extends Controller
 
         $this->data['brands'] = $brandsRepo->getAllWithModels();
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
-        $this->data['budgets'] = $budgetsRepo->ListsData('id','id');
+        $this->data['budgets'] = $budgetsRepo->ListsData('id', 'id');
 
 
         $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
@@ -59,8 +61,6 @@ class SalesController extends Controller
         $this->clientsRepo = $clientsRepo;
 
     }
-
-
 
 
     public function store()
@@ -73,12 +73,27 @@ class SalesController extends Controller
     }
 
 
+
+    //addItems
+    public function addItems(ModelsRepo $modelsRepo)
+    {
+        $this->data['sales'] =  $this->repo->find($this->route->getParameter('sales_id'));
+
+
+        // $this->data['id'] = $id;
+        $this->data['activeBread'] = 'Agregar Item';
+
+        return view('moto.sales.modalItemsForm')->with($this->data);
+    }
+
     // items
-    public function addItems(SalesItemsRepo $salesItemsRepo, ItemsRepo $itemsRepo)
+    public function createItems(SalesItemsRepo $salesItemsRepo, ItemsRepo $itemsRepo)
     {
 
+        $sale = $this->repo->find($this->request->sales_id);
+
         // asigna items a la venta
-        $item = $itemsRepo->asignItem($this->request->models_id, $this->request->branches_confirm_id, $this->request->sales_id, $this->request->colors_id);
+        $item = $itemsRepo->asignItem($this->request->models_id, $sale->branches_confirm_id, $sale->id, $this->request->colors_id);
 
         if ($item != false) {
 
@@ -95,17 +110,23 @@ class SalesController extends Controller
 
     public function editItems(SalesItemsRepo $salesItemsRepo)
     {
-        $this->data['modelItems'] = $salesItemsRepo->find($this->route->getParameter('item'));
-        $this->data['route'] = ['moto.sales.updateItems', $this->route->getParameter('item'),$this->route->getParameter('id')];
+        $this->data['activeBread'] = 'Agregar Item';
 
-        return parent::edit();
+        $this->data['salesItems'] = $salesItemsRepo->find($this->route->getParameter('item'));
+        $this->data['sales'] = $this->repo->find($this->route->getParameter('salesId'));
+
+
+        //$this->data['route'] = ['moto.sales.updateItems', $this->route->getParameter('item'), $this->route->getParameter('id')];
+
+        return view('moto.sales.modalItemsForm')->with($this->data);
+
     }
 
-    public function updateItems(SalesItemsRepo $salesItemsRepo, $id)
+    public function updateItems(SalesItemsRepo $salesItemsRepo)
     {
-        $salesItemsRepo->update($id, $this->request);
+        $salesItemsRepo->update($this->request->sales_items_id , $this->request);
 
-        return parent::edit();
+        return redirect()->route('moto.sales.edit',$this->request->sales_id);
     }
 
     public function deleteItems(SalesItemsRepo $salesItemsRepo)
@@ -117,9 +138,28 @@ class SalesController extends Controller
 
 
     //payemnts
+    public function createPayment(SalesPaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
+    {
+        $this->data['salesId'] = $this->route->getParameter('item');
 
+        $this->data['salesPayment'] = $salesPaymentsRepo->getModel()->where('sales_id',$this->route->getParameter('item'))->get();
+
+        $this->data['banks']= Banks::Lists('name','id');
+        $this->data['financials']= Financials::Lists('name','id');
+
+
+        $this->data['checkTypes']= [1=>'Portador', 2=>'Cruzado'];
+
+
+        $this->data['payments']= $payMethodsRepo->ListsData('name','id');
+        $this->data['activeBread']= 'Agregar Pago';
+
+
+        return view('moto.sales.modalPayMethodsForm')->with($this->data);
+    }
     public function addPayment(SalesPaymentsRepo $salesPaymentsRepo)
     {
+
         $salesPaymentsRepo->create($this->request);
 
         return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó el método de pago');
@@ -147,15 +187,16 @@ class SalesController extends Controller
         return parent::edit();
     }
 
-    public function showAside(Request $request,SalesItemsRepo $salesItemsRepo,SalesPaymentsRepo $salesPaymentsRepo){
+    public function showAside(Request $request, SalesItemsRepo $salesItemsRepo, SalesPaymentsRepo $salesPaymentsRepo)
+    {
         $this->data['route'] = $request->get('route');
 
-        if($request->get('edit') != 'false'){
-            if($request->get('type') == 'items'){
+        if ($request->get('edit') != 'false') {
+            if ($request->get('type') == 'items') {
                 $this->data['model'] = $salesItemsRepo->find($request->get('edit'));
             }
 
-            if($request->get('type') == 'pays'){
+            if ($request->get('type') == 'pays') {
                 $this->data['model'] = $salesPaymentsRepo->find($request->get('edit'));
             }
 
@@ -165,9 +206,11 @@ class SalesController extends Controller
         $this->data['hidden'] = $request->hidden;
         $this->data['type'] = $request->type;
 
-        return view('moto.sales.aside'.ucfirst($this->data['type']))->with($this->data);
+        return view('moto.sales.aside' . ucfirst($this->data['type']))->with($this->data);
 
     }
+
+
 
 
 }

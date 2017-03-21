@@ -74,23 +74,5 @@ class ItemsController extends Controller
     }
 
 
-    //modal
-    public function modal($section,$id, $item = null)
-    {
-        $modelo = 'App\Entities\Moto\\'.ucfirst($section);
-
-        $modelo = new $modelo;
-
-
-        if($item != null){
-            $this->data['models'] = $modelo->find($id)->salesItems()->where('id',$item)->first();
-            $this->data['item'] = $item;
-        }
-
-        $this->data['section'] = $section;
-        $this->data['id'] = $id;
-        $this->data['activeBread'] = 'Agregar Item';
-
-        return view('moto.items.modalItemsForm')->with($this->data);
-    }
+    
 }
