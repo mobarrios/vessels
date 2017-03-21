@@ -270,4 +270,16 @@ abstract class BaseRepo
         $model->images()->create(['path' => $image]);
     }
 
+
+    public function createAdditionables($model, $addition_id)
+    {
+        $model->additionables()->attach($addition_id);
+    }
+
+    public function deleteAdditionables($model, $addition_id)
+    {
+        $model->additionables()->detach($addition_id);
+    }
+
+
 }

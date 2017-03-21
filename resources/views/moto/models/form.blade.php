@@ -62,20 +62,143 @@
     </div>
 
     <div class="col-xs-12">
-        <h4>Stock Actual</h4>
-        <table class="table">
-            @if(isset($models))
-                @foreach($models->StockByBranches as $branch)
-                    <tr>
-                        <td> {{$branch->first()->Branches->name}}</td>
-                        <td><span class="label label-primary">{{$branch->count()}}</span></td>
-                    </tr>
-                @endforeach
-            @endif
-        </table>
+        <div class="col-xs-12 col-md-6">
+            <h4>Stock Actual</h4>
+            <table class="table">
+                @if(isset($models))
+                    @forelse($models->StockByBranches as $branch)
+                        <tr>
+                            <td> {{$branch->first()->Branches->name}}</td>
+                            <td><span class="label label-primary">{{$branch->count()}}</span></td>
+                        </tr>
+                    @empty
+                            <p class="text-muted">Sin stock por el momento.</p>
+                    @endforelse
+                @endif
+            </table>
+        </div>
+
+
+        @if(isset($models))
+            <div class="col-xs-12 col-md-6" id="adicionales">
+                <h4>Adicionales</h4>
+                <div class="input-group">
+
+                    <div class="input-group-btn" style="font-size: 12px !important;">
+                        {!! Form::select('additionals_id',$additionals,null,['class' => 'btn btn-default select2']) !!}
+                    </div><!-- /btn-group -->
+                    {!! Form::number('amount',null,['class' => 'form-control','placeholder' => '$']) !!}
+                    {!! Form::hidden('entity',$section) !!}
+                    {!! Form::hidden('id',$models->id) !!}
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default saveAdicionales">
+                            <i class="fa fa-floppy-o"></i>
+                        </button>
+                    </div>
+                </div><!-- /input-group -->
+
+                <table class="table adicionales">
+                        <tr>
+                            <td class="text-center">Adicional</td>
+                            <td>
+                                <div class="btn-group pull-right">
+                                    <a href="" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        @foreach($models->additionables as $additionals)
+                            <tr>
+                                <td class="text-center">{{$additionals->name}}</td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <a href="{!! url('moto/removeAdditionals',$additionals->id) !!}" class="btn btn-xs btn-danger" data-id="{!! $additionals->id !!}"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                </table>
+            </div>
+        @endif
     </div>
 
 @endsection
 
+@section('js')
+    <script>
+        var contenedor = $("#adicionales")
+        var save = $(".saveAdicionales")
+        var remove = $(".adicionales a[btn-danger]")
 
 
+        var select = contenedor.find('select[name=additionals_id]')
+        var amount = contenedor.find('input[name=amount]')
+        var entity = contenedor.find('input[name=entity]')
+        var id = contenedor.find('input[name=id]')
+
+        save.on('click',function(ev){
+            ev.preventDefault()
+
+            if(select.val() == "" && mount.val() == "")
+                return false
+            else{
+                var data = {
+                    additionals_id : select.val(),
+                    amount : amount.val(),
+                    entity: entity.val(),
+                    _token: "{!! csrf_token() !!}",
+                    id: id.val()
+                }
+
+
+                $.ajax({
+                    url: 'moto/addAdditionals',
+                    data: data,
+                    method: 'POST',
+                    success: function(response){
+                        $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a></div></td></tr>'))
+                    },
+                    error: function (error) {
+                        console.log("Error: "+error)
+                    }
+                })
+
+            }
+        })
+
+
+
+        remove.on('click',function(ev){
+            ev.preventDefault()
+
+            $(this).attr('disabled',true)
+            
+            var contenedor = $(this).parent().parent().parent()
+
+            var data = {
+                id: $(this).attr('data-id')
+            }
+
+
+            $.ajax({
+                url: 'moto/addAdditionals',
+                data: data,
+                method: 'POST',
+                success: function(response){
+                    $(contenedor).remove()
+                },
+                error: function (error) {
+                    console.log("Error: "+error)
+                }
+            })
+
+        })
+
+
+
+
+
+
+    </script>
+
+
+@endsection

@@ -48,6 +48,16 @@ Route::get('/branchesWithStockByModels/', 'Moto\AjaxController@branchesWithStock
 
 
 
+//Agregar adicionales a una entidad
+Route::post('/addAdditionals/', 'Moto\AjaxController@addAdditionals');
+
+
+//Eliminar adicionales a una entidad
+Route::get('/removeAdditionals/', 'Moto\AjaxController@removeAdditionals');
+
+
+
+
 
 
 

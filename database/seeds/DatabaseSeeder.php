@@ -41,6 +41,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TypesSmallBoxesPruebaSeeders::class);
         $this->call(BanksTableSeeder::class);
 
+        $this->call(AdditionalsTableSeeder::class);
+
 
         Model::reguard();
     }

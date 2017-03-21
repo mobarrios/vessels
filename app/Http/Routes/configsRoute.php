@@ -107,6 +107,22 @@ Route::group(['prefix'=>'configs'],function(){
     });
 
 
+    Route::group(['prefix'=>'additionals'],function(){
+
+        Route::get('/destroy/{id?}',   ['as'=>'configs.additionals.destroy','uses'=>'Configs\AdditionalsController@destroy']);
+        Route::get('/edit/{id?}',      ['as'=>'configs.additionals.edit','uses'=>'Configs\AdditionalsController@edit']);
+        Route::post('/update/{id?}',   ['as'=>'configs.additionals.update','uses'=>'Configs\AdditionalsController@update']);
+
+        Route::get('/create',           ['as'=>'configs.additionals.create','uses'=>'Configs\AdditionalsController@create']);
+        Route::post('/store',           ['as'=>'configs.additionals.store','uses'=>'Configs\AdditionalsController@store']);
+        Route::get('/show',             ['as'=>'configs.additionals.show','uses'=>'Configs\AdditionalsController@show']);
+        Route::get('/index/{search?}',  ['as'=>'configs.additionals.index','uses'=>'Configs\AdditionalsController@index']);
+
+
+        Route::get('/pdf',  ['as'=>'configs.additionals.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+    });
+
+
     //Route::get('permissions/{search?}',['as'=>'configs.permissions.index','uses'=>'Configs\PermissionsController@index']);
 
 

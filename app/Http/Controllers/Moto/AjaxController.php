@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Additionals;
 use App\Entities\Configs\Brancheables;
 use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
@@ -109,6 +111,42 @@ class AjaxController extends Controller
 
     }
 
+    public function addAdditionals(Request $request,Additionals $additionals){
+//        dd($request->all());
+        $entity = 'App\Entities\Moto\\'.ucfirst($request->entity);
+        $modelo = new $entity;
+
+        $model = $modelo->find($request->id);
+
+        $additional = $additionals->find($request->additionals_id);
+
+
+
+        if($model->additionables()->create(['amount' => $request->amount]))
+//        if($model->additionables()->save($additional,['amount' => $request->amount]))
+            return response()->json($additional,200);
+        else
+            return response()->json([],404);
+
+    }
+
+    public function removeAdditionals(Request $request,Additionals $additionals){
+//        dd($request->all());
+        $entity = 'App\Entities\Moto\\'.ucfirst($request->entity);
+        $modelo = new $entity;
+
+        $model = $modelo->find($request->id);
+
+        $additional = $additionals->find($request->additionals_id);
+
+
+
+        if($model->additionables()->remove($additional))
+            return response()->json($additional,200);
+        else
+            return response()->json([],404);
+
+    }
 
 
 }

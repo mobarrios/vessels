@@ -171,8 +171,8 @@
             </li>
 
 
-            @permission('roles.list|permissions.list|users.list|logs.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["branches","roles","permissions","users","logs", "checkbooks"]) ? 'active' : '' }}">
+            @permission('roles.list|permissions.list|users.list|logs.list|additionals.list')
+            <li class="treeview {{ in_array(Request::segment(2), ["branches","roles","permissions","users","logs", "checkbooks","additionals","company"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-gear"></i> <span>Configuración</span>
         <span class="pull-right-container">
@@ -180,16 +180,19 @@
       </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ Request::segment(2) == "branches" ? 'active' : '' }}">
+                    <li class="{{ in_array(Request::segment(2), ["branches","additionals","company"]) ? 'active' : '' }}">
                         <a href="#"><span>Empresa</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
           </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{route('configs.company.index')}}"><span>Datos</span> </a></li>
+                            <li class="{{ Request::segment(2) == "company" ? 'active' : '' }}"><a href="{{route('configs.company.index')}}"><span>Datos</span> </a></li>
                             <li class={{ Request::segment(2) == "branches" ? 'active' : '' }}><a
                                         href="{{route('configs.branches.index')}}"><span> Sucursales</span></a></li>
+
+                            <li class={{ Request::segment(2) == "additionals" ? 'active' : '' }}><a
+                                        href="{{route('configs.additionals.index')}}"><span> Adicionales</span></a></li>
 
                         </ul>
                     </li>

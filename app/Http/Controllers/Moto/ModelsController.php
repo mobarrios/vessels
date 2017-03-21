@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Moto;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\CategoriesRepo;
 use App\Http\Repositories\Moto\ModelsRepo as Repo;
@@ -13,7 +14,7 @@ use Illuminate\Routing\Route;
 
 class ModelsController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, CategoriesRepo $categoriesRepo,ProvidersRepo $providersRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, CategoriesRepo $categoriesRepo,ProvidersRepo $providersRepo, AdditionalsRepo $additionalsRepo)
     {
 
         $this->request  = $request;
@@ -30,6 +31,7 @@ class ModelsController extends Controller
         $this->data['status'] = config('status.models');
 
 
+        $this->data['additionals'] = $additionalsRepo->ListsData('name','id');
 
     }
 

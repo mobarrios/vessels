@@ -29,9 +29,9 @@ class CreateFilesTable extends Migration
             $table->integer('form_01')->unsigned()->nullable();
             $table->string('form_01_file')->nullable();
             $table->integer('form_12')->unsigned()->nullable();
-            $table->string('form_12_file')->unsigned()->nullable();
+            $table->string('form_12_file')->nullable();
             $table->integer('form_59')->unsigned()->nullable();
-            $table->string('form_59_file')->unsigned()->nullable();
+            $table->string('form_59_file')->nullable();
 
 
 
