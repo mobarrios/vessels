@@ -360,7 +360,7 @@
 
                                     <div class="col-xs-12 col-md-6 form-group">
                                         {!! Form::label('Sucursal de Entrega') !!}
-                                        {!! Form::select('branches_confirm_id',[] ,null, ['class'=>' form-control select2','id'=>'branches']) !!}
+                                        {!! Form::select('branches_confirm_id',$branches ,null, ['class'=>' form-control select2','id'=>'branches']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -594,33 +594,33 @@
                                 $scope.aFinanciar = {!! $models->a_financiar or '0' !!}
                         $scope.calcular();
 
-                        var modelos = [];
-
-                        for(var m in $scope.data) {
-                            var obj = {
-                                modelo : $scope.data[m].id,
-                                color : $scope.data[m].pivot.colors_id
-                            }
-
-                            modelos.push(obj)
-                        }
-
-
-
-                        $.ajax({
-                            method: 'get',
-                            data: $.extend({},modelos),
-                            url: 'moto/branchesWithStockByModels',
-                            success: function(data){
-                                $("#branches option").remove();
-
-                                for(var i in data){
-                                    $("#branches").append($("<option value='"+i+"'>"+data[i]+"<option>"))
-                                }
-
-
-                            }
-                        })
+//                        var modelos = [];
+//
+//                        for(var m in $scope.data) {
+//                            var obj = {
+//                                modelo : $scope.data[m].id,
+//                                color : $scope.data[m].pivot.colors_id
+//                            }
+//
+//                            modelos.push(obj)
+//                        }
+//
+//
+//
+//                        $.ajax({
+//                            method: 'get',
+//                            data: $.extend({},modelos),
+//                            url: 'moto/branchesWithStockByModels',
+//                            success: function(data){
+//                                $("#branches option").remove();
+//
+//                                for(var i in data){
+//                                    $("#branches").append($("<option value='"+i+"'>"+data[i]+"<option>"))
+//                                }
+//
+//
+//                            }
+//                        })
 
 
                     });

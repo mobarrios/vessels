@@ -44,7 +44,11 @@ abstract class BaseRepo
     public function update($id, $data)
     {
         $model = $this->model->find($id);
-        $model->fill($data->all());
+
+        if(is_object($data))
+            $model->fill($data->all());
+        else
+            $model->fill($data);
 
 
             // valida si el dato nuevo es diferente al original y lo guarda en updateables
@@ -52,10 +56,10 @@ abstract class BaseRepo
                 $c = $model['attributes'];
 
 
-                $diffs = array_diff($c, $a);
+                $diffs = array_diff($a, $c);
 
-
-                foreach ($diffs as $diff => $a) {
+                foreach ($diffs as $diff => $a)
+                {
                     $col = $diff;
                     $data = $a;
 

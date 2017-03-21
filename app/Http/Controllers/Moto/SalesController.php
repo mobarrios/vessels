@@ -165,19 +165,32 @@ class SalesController extends Controller
         return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó el método de pago');
     }
 
-    public function editPayment(SalesPaymentsRepo $salesPaymentsRepo)
+    public function editPayment(SalesPaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
     {
-        $this->data['modelPays'] = $salesPaymentsRepo->find($this->route->getParameter('item'));
-        $this->data['routePays'] = ['moto.sales.addPayment', $this->route->getParameter('item')];
 
-        return parent::edit();
+        $this->data['banks']= Banks::Lists('name','id');
+        $this->data['financials']= Financials::Lists('name','id');
+
+        $this->data['checkTypes']= [1=>'Portador', 2=>'Cruzado'];
+
+        $this->data['payments']= $payMethodsRepo->ListsData('name','id');
+        $this->data['activeBread']= 'Agregar Pago';
+
+        $this->data['modelPays'] = $salesPaymentsRepo->find($this->route->getParameter('item'));
+       // $this->data['routePays'] = ['moto.sales.addPayment', $this->route->getParameter('item')];
+
+        return view('moto.sales.modalPayMethodsForm')->with($this->data);
     }
 
-    public function updatePayment(SalesPaymentsRepo $salesPaymentsRepo, $id)
+    public function updatePayment(SalesPaymentsRepo $salesPaymentsRepo)
     {
-        $salesPaymentsRepo->update($id, $this->request);
 
-        return parent::edit();
+        $salesPaymentsRepo->update($this->request->sales_payments_id , $this->request);
+
+        return redirect()->back()->withErrors('Se Editó el método de pago');
+
+
+        //return parent::edit();
     }
 
     public function deletePayment(SalesPaymentsRepo $salesPaymentsRepo)

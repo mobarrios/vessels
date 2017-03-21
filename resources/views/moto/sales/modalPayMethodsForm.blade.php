@@ -9,13 +9,15 @@
                     <h3 class="box-title">Agregar Pago</h3>
                 </div>
 
-                @if(isset($models))
-                    {!! Form::model($models,['route' => [config('models.'.$section.'.updatePayMethodsRoute')],'method' => 'post']) !!}
+                @if(isset($modelPays))
+                    {!! Form::model($modelPays,['route' => 'moto.sales.updatePayment','method' => 'post']) !!}
+                    {!! Form::hidden('sales_payments_id', $modelPays->id , ['id'=>'model']) !!}
                 @else
                     {!! Form::open(['route' => 'moto.sales.addPayment','method' => 'post']) !!}
+                    {!! Form::hidden('sales_id', $salesId) !!}
                 @endif
 
-                {!! Form::hidden('sales_id', $salesId) !!}
+
 
                 {!! Form::hidden('date', Date('Y-m-d')) !!}
 
@@ -30,7 +32,6 @@
                 </div>
 
 
-
                 <div id="number" class="hidden col-xs-3 form-group">
                     {!! Form::label('Nro.') !!}
                     {!! Form::text('number', null, ['class'=>' form-control']) !!}
@@ -40,7 +41,7 @@
                     {!! Form::select('banks_id', $banks,null,  ['class'=>' form-control']) !!}
                 </div>
 
-                <div id="cheques" class="hidden" >
+                <div id="cheques" class="hidden">
                     <div class="col-xs-3 form-group">
                         {!! Form::label('Fecha Cheque') !!}
                         {!! Form::text('check_date', null, ['class'=>'datePicker form-control']) !!}
@@ -80,7 +81,8 @@
                 <div class="box-footer clearfix">
                     <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
                         <button type="submit" class="btn btn-default">Agregar</button>
-                        <a href="{!! \Illuminate\Support\Facades\URL::previous() !!}" class="btn btn-danger">Cancelar</a>
+                        <a href="{!! \Illuminate\Support\Facades\URL::previous() !!}"
+                           class="btn btn-danger">Cancelar</a>
                     </div>
                 </div>
                 {!! Form::close() !!}
@@ -95,15 +97,20 @@
 
     <script>
 
-
-        $('#payMethods').on('change', function()
-        {
-
-            var id  = $(this).val();
+        if ($('#model').length)
+            show({!! $modelPays->pay_methods_id !!});
 
 
+        $('#payMethods').on('change', function () {
+            var id = $(this).val();
 
-            if(id == 1){
+            show(id);
+        });
+
+
+        function show(id) {
+
+            if (id == 1) {
                 $('#cheques').addClass('hidden');
                 $('#tarjetas').addClass('hidden');
                 $('#depositos').addClass('hidden');
@@ -114,7 +121,7 @@
 
 
             }
-            if(id == 2){
+            if (id == 2) {
                 $('#number').removeClass('hidden');
                 $('#bank').removeClass('hidden');
                 $('#cheques').removeClass('hidden');
@@ -125,7 +132,7 @@
                 $('#creditos').addClass('hidden');
 
             }
-            if(id == 3 || id == 4 ){
+            if (id == 3 || id == 4) {
 
                 $('#tarjetas').removeClass('hidden');
                 $('#number').removeClass('hidden');
@@ -137,7 +144,7 @@
                 $('#depositos').addClass('hidden');
                 $('#creditos').addClass('hidden');
             }
-            if(id == 5 || id == 6){
+            if (id == 5 || id == 6) {
 
                 $('#depositos').removeClass('hidden');
                 $('#bank').removeClass('hidden');
@@ -148,9 +155,9 @@
                 $('#tarjetas').addClass('hidden');
                 $('#creditos').addClass('hidden');
             }
-            if(id == 7){
+            if (id == 7) {
                 $('#creditos').removeClass('hidden');
-;
+                ;
                 $('#bank').addClass('hidden');
                 $('#number').removeClass('hidden');
                 $('#plazo').removeClass('hidden');
@@ -161,7 +168,8 @@
                 $('#depositos').addClass('hidden');
             }
 
-        });
+        }
+        ;
 
     </script>
 

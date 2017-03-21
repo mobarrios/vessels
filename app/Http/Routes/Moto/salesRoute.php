@@ -27,8 +27,8 @@ Route::group(['prefix'=>'sales'],function(){
     Route::get('/createPayment/{item?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.sales.createPayment', 'uses' => 'Moto\SalesController@createPayment']);
 
     Route::post('/addPayment/{item?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.sales.addPayment', 'uses' => 'Moto\SalesController@addPayment']);
-    Route::get('/editPayment{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.sales.editPayment', 'uses' => 'Moto\SalesController@editPayment']);
-    Route::post('/editPayment/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.sales.updatePayment', 'uses' => 'Moto\SalesController@updatePayment']);
+    Route::get('/editPayment/{item?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.sales.editPayment', 'uses' => 'Moto\SalesController@editPayment']);
+    Route::post('/editPayment', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.sales.updatePayment', 'uses' => 'Moto\SalesController@updatePayment']);
     Route::get('/deletePayment/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.sales.deletePayment', 'uses' => 'Moto\SalesController@deletePayment']);
 
 
