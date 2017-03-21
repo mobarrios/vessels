@@ -15,8 +15,6 @@ Route::group(['prefix'=>'items'],function(){
 
         Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.items.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
-
-        Route::get('/add/{section}/{id}/{item?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.items.modal','uses'=>'Moto\ItemsController@modal']);
 });
 
 Route::group(['prefix'=>'certificates'],function(){

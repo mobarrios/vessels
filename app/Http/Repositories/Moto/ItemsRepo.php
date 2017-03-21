@@ -29,12 +29,13 @@ class ItemsRepo extends BaseRepo
 
         //busca items con estatus ingresado
         $items = Items::where('status', 1)->where('models_id', $models_id)->where('colors_id', $colors_id)->get()->lists('id');
+
         if ($items->count() != 0) {
+
             // valida si el producto esta en la sucursal de destino
             $qBranch = Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->where('branches_id', $branches_id)->first();
 
-            if (!is_null($qBranch))
-            {
+            if (!is_null($qBranch)) {
                 $item = $qBranch;
 
             } else {
@@ -42,8 +43,20 @@ class ItemsRepo extends BaseRepo
                 // si no esta en la sucursal de destino envia la mas antigua
                 $item = Brancheables::where('entities_type', 'App\Entities\Moto\Items')->whereIn('entities_id', $items)->first();
 
+
                 //pide a logistica el envio del item sucA a sucB
-                $this->itemsRequest($item->entities_id, $item->branches_id, $branches_id, $sales_id);
+                //$this->itemsRequest($item->entities_id, $item->branches_id, $branches_id, $sales_id);
+
+                $data = [
+                    'quantity' => 1,
+                    'types_id' => 1,
+                    'models_id' => $models_id,
+                    'colors_id' => $colors_id,
+                    'users_id' => Auth::user()->id,
+                    'items_id' => $item->entities_id,
+                ];
+
+                $this->myRequest($data);
 
             }
 
@@ -59,6 +72,12 @@ class ItemsRepo extends BaseRepo
     }
 
 
+    public function myRequest($data)
+    {
+        $myRequestRepo = new MyRequestRepo();
+        $myRequestRepo->createFromSales($data);
+    }
+
     public function itemsRequest($items_id, $branches_id_from, $branches_id_to, $sales_id = null)
     {
         $itemsRequestRepo = new ItemsRequestRepo();
@@ -73,8 +92,8 @@ class ItemsRepo extends BaseRepo
     {
         $item = $this->find($id);
 
-            // guarda el update en updateables
-            $item->Updateables()->create(['column'=>'status','data_old'=>$item->status]);
+        // guarda el update en updateables
+        $item->Updateables()->create(['column' => 'status', 'data_old' => $item->status]);
 
         $item->status = $status;
         $item->save();

@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ProvidersTableSeeder::class);
 
+        $this->call(PayMethodsTableSeeder::class);
+
         //testing
         $this->call(BrandsSeeders::class);
         $this->call(CategoriesSeeders::class);

@@ -1,5 +1,5 @@
 @extends('template')
-]
+
 @section('sectionContent')
     <div class="row">
         <!-- Default box -->
@@ -16,9 +16,9 @@
                     {!! Form::open(['route' => (config('models.'.$section.'.addItemsRoute')),'method' => 'post']) !!}
                 @endif
 
-
+                {!! Form::hidden('branches_confirm_id', $models->branches_confirm_id) !!}
                 {!! Form::hidden($section.'_id', $id) !!}
-                {!! Form::hidden('branches_confirm_id', 1) !!}
+
 
                 <div class="box-body">
                     <div class="col-xs-6 col-md-3  form-group">
