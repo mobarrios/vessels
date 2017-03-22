@@ -79,7 +79,6 @@ class SalesController extends Controller
     {
         $this->data['sales'] =  $this->repo->find($this->route->getParameter('sales_id'));
 
-
         // $this->data['id'] = $id;
         $this->data['activeBread'] = 'Agregar Item';
 
@@ -95,13 +94,26 @@ class SalesController extends Controller
         // asigna items a la venta
         $item = $itemsRepo->asignItem($this->request->models_id, $sale->branches_confirm_id, $sale->id, $this->request->colors_id);
 
-        if ($item != false) {
-
+        if ($item != false)
+        {
             $this->request['items_id'] = $item;
-
             $salesItemsRepo->create($this->request->all());
 
+
+            // agrega los adicionales del modelo con los nuevos importes o no
+            if($this->request->has('additionals')){
+                foreach ($this->request->additionals as $amount => $id )
+                {
+                    $sale->additionables()->create(['additionals_id'=>$id , 'amount' => $amount]);
+                }
+            };
+
+        }else{
+
+            return redirect()->back()->withErrors('El Articulo no se pudo Asignar!');
+
         }
+
 
         return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó correctamente el item');
 

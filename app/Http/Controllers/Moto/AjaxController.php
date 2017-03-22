@@ -114,6 +114,7 @@ class AjaxController extends Controller
 
     public function addAdditionals(Request $request,Additionals $additionals)
     {
+
         $entity = 'App\Entities\Moto\\'.ucfirst($request->entity);
         $modelo = new $entity;
         $model = $modelo->find($request->id);

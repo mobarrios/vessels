@@ -9,6 +9,7 @@ use App\Entities\Moto\Clients;
 use App\Entities\Moto\Colors;
 use App\Entities\Moto\Models;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\BudgetsItemsRepo;
@@ -28,7 +29,7 @@ class BudgetsController extends Controller
     protected $budgets;
     protected $models;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models, BranchesRepo $branchesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models, BranchesRepo $branchesRepo, AdditionalsRepo $additionalsRepo)
     {
 
         $this->request  = $request;
@@ -42,6 +43,7 @@ class BudgetsController extends Controller
         $this->data['financials']   = $financialsRepo->getAllWithDues() ;
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
 
+        $this->data['additionals'] = $additionalsRepo->ListsData('name','id');
 
         $this->clients = $clients;
         $this->models = $models;

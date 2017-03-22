@@ -54,6 +54,8 @@ class ModelsRepo extends BaseRepo {
             ->whereNull('deleted_at')
             ->with('Brands')
             ->with('activeListPrice')
+            ->with('additionables')
+            ->with('additionables.additionals')
             ->orderBy('brands_id', 'ASC')->orderBy('name', 'ASC')
             ->find($id);
 //            ->get());

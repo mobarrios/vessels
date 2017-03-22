@@ -97,8 +97,10 @@
 
     <script>
 
-        if ($('#model').length)
-            show({!! $modelPays->pay_methods_id !!});
+
+        if ($('#model').length){
+            show({!! $modelPays->pay_methods_id  or ''!!});
+        }
 
 
         $('#payMethods').on('change', function () {

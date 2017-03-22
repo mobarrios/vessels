@@ -221,6 +221,14 @@
                             </div>
 
 
+                            <span class="clearfix"></span>
+                            <hr>
+
+
+                            @if($models->allItems)
+                                @include('moto.partials.additionals',['modelos' => $models->modelsList()])
+                            @endif
+
 
                             <span class="clearfix"></span>
                             <hr>
@@ -687,21 +695,6 @@
 
     </script>
 
-
-
-    @if(isset($models))
-        <script>
-            {{--$("#agregarItem").aside2({--}}
-            {{--title: 'AGREGAR PRODUCTO',--}}
-            {{--routeAjax: "{!! route('moto.'.$section.'.formItems') !!}",--}}
-            {{--route: "{!! route('moto.budgets.addItem',$models->id) !!}",--}}
-            {{--hidden: {--}}
-            {{--budgets_id: "{!! $models->id !!}",--}}
-            {{--price_actual: null--}}
-            {{--}--}}
-            {{--})--}}
-
-        </script>
-    @endif
+    <script src="js/additionals.js"></script>
 
 @endsection

@@ -10,21 +10,21 @@
     @else
         {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
     @endif
-    <div class="col-xs-12 form-group">
+    <div class="col-xs-6 form-group">
         {!! Form::label('Nombre Modelo') !!}
         {!! Form::text('name', null, ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-6 form-group">
         {!! Form::label('Marca') !!}
         {!! Form::select('brands_id', $brands , null ,['class'=>'select2 form-control ']) !!}
     </div>
-    <div class="col-xs-4 form-group">
+    <div class="col-xs-6 form-group">
         {!! Form::label('Categorias') !!}
         {!! Form::select('categories_id[]', $categories , null ,['class'=>'selectMulti form-control' ,'multiple'=>'']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
+    <div class="col-xs-6 form-group">
         {!! Form::label('Proveedores') !!}
 
         {{--{!! dd($models->providers->lists('id')) !!}--}}
@@ -36,27 +36,20 @@
         @endif
     </div>
 
-    <div class="col-xs-2 form-group">
+    <div class="col-xs-3 form-group">
         {!! Form::label('Estado') !!}
         {!! Form::select('status', $status ,null, ['class'=>'select2 form-control']) !!}
     </div>
 
-    <div class="col-xs-3 form-group">
-        {!! Form::label('Patentamiento') !!}
-        {!! Form::text('patentamiento', null, ['class'=>'form-control']) !!}
-    </div>
-    <div class="col-xs-3 form-group">
-        {!! Form::label('Pack Service') !!}
-        {!! Form::text('pack_service', null, ['class'=>'form-control']) !!}
-    </div>
 
-    <div class="col-xs-1 form-group">
+
+    <div class="col-xs-3 form-group">
         {!! Form::label('Stock Min') !!}
         {!! Form::text('min_stock', null, ['class'=>'form-control']) !!}
     </div>
 
 
-    <div class="col-xs-6 form-group">
+    <div class="col-xs-3 form-group">
         {!! Form::label('Imagen') !!}
         {!! Form::file('image') !!}
     </div>
@@ -80,7 +73,7 @@
 
 
         @if(isset($models))
-            <div class="col-xs-12 col-md-6" id="adicionales">
+            <div class="col-xs-6 " id="adicionales">
                 <h4>Adicionales</h4>
                 <div class="input-group">
                     <div class="input-group-btn" style="font-size: 12px !important;">
@@ -97,6 +90,8 @@
 
                 </div><!-- /input-group -->
                 <br>
+
+
                 <table class="table adicionales">
 
                         @foreach($models->additionables as $additionals)

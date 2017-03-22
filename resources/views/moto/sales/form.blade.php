@@ -7,47 +7,51 @@
             height: auto;
             padding-top: 8px;
             padding-bottom: 8px;
-            white-space: normal; }
+            white-space: normal;
+        }
 
         .autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {
-            border-bottom-width: 0; }
+            border-bottom-width: 0;
+        }
 
         .autocompletedemoCustomTemplate .autocomplete-custom-template .item-title,
         .autocompletedemoCustomTemplate .autocomplete-custom-template .item-metadata {
             display: block;
-            line-height: 2; }
+            line-height: 2;
+        }
 
         .autocompletedemoCustomTemplate .autocomplete-custom-template .item-title md-icon {
             height: 18px;
-            width: 18px; }
+            width: 18px;
+        }
 
-        .search{
-            color: rgba(0,0,0,0.87);
-            background-color: rgb(250,250,250);
+        .search {
+            color: rgba(0, 0, 0, 0.87);
+            background-color: rgb(250, 250, 250);
             padding: 16px;
 
         }
 
-        .select2-template-title{
+        .select2-template-title {
             font-size: 12px;
             font-weight: bold;
             display: block;
-            width:100%;
+            width: 100%;
         }
 
-        .select2-template-text{
+        .select2-template-text {
             font-size: 12px;
             display: block;
-            width:100%;
-            padding-left:5px;
+            width: 100%;
+            padding-left: 5px;
         }
 
-        .select2-template-container{
+        .select2-template-container {
             border-bottom: 1px solid #ddd;
         }
 
-        .select2-container--default .select2-results__option[aria-selected=true]{
-            background-color: rgba(162,162,162,0.21);
+        .select2-container--default .select2-results__option[aria-selected=true] {
+            background-color: rgba(162, 162, 162, 0.21);
 
         }
 
@@ -60,14 +64,14 @@
 @endsection
 
 @section('form_inputs')
-    <div ng-app="app" ng-controller="ctl" >
+    <div ng-app="app" ng-controller="ctl">
 
         @if(!isset($models))
             <div class="search">
 
                 <p>Antes de crear un prospecto, busque si ya existe.</p>
                 <select id="search" class="select2 form-control">
-                    <option value="seleccione">Seleccione... ~  ~ </option>
+                    <option value="seleccione">Seleccione... ~ ~</option>
                     @forelse($clients as $c)
                         <option value="{!! $c->id !!}">
                             {!! $c->fullname !!} ~ {!! $c->dni !!} ~ {!! $c->email !!} ~ {!! $c->phone !!}
@@ -81,96 +85,96 @@
 
         @endif
 
-        <div>
-            @if(Session::has('client'))
-                {!! Form::model(Session::get('client'),['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
-            @elseif(isset($models))
-                {!! Form::model($models->clients,['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
-            @else
-                {!! Form::open(['route'=> [config('models.prospectos.storeRoute')],  'title' =>"Crear cliente", 'id' => 'formClient']) !!}
-            @endif
+        <div class="col-xs-12 content">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Datos Personales</h3>
+                </div>
 
-            {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
+                <div class="box-body">
+                    @if(Session::has('client'))
+                        {!! Form::model(Session::get('client'),['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
+                    @elseif(isset($models))
+                        {!! Form::model($models->clients,['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
+                    @else
+                        {!! Form::open(['route'=> [config('models.prospectos.storeRoute')],  'title' =>"Crear cliente", 'id' => 'formClient']) !!}
+                    @endif
 
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('last_name', "APELLIDO") !!}
-                {!! Form::text('last_name', null, ['class'=>'form-control', 'required' => 'required','ng-model' => 'last_name']) !!}
-            </div>
+                    {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
 
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('name', "NOMBRE") !!}
-                {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
-            </div>
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('last_name', "APELLIDO") !!}
+                        {!! Form::text('last_name', null, ['class'=>'form-control', 'required' => 'required','ng-model' => 'last_name']) !!}
+                    </div>
 
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('dni', "DNI") !!}
-                {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
-            </div>
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('name', "NOMBRE") !!}
+                        {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
+                    </div>
 
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('sexo', "SEXO") !!}
-                {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],'masculino', ['class'=>'form-control','ng-model' => 'sexo']) !!}
-            </div>
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('dni', "DNI") !!}
+                        {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
+                    </div>
 
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('email', "EMAIL") !!}
-                {!! Form::text('email', null, ['class'=>'form-control','ng-model' => 'email']) !!}
-            </div>
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('sexo', "SEXO") !!}
+                        {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],'masculino', ['class'=>'form-control','ng-model' => 'sexo']) !!}
+                    </div>
 
-
-
-
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('nacionality', "NACIONALIDAD") !!}
-                {!! Form::text('nacionality', null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
-            </div>
-
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('phone1', "TELÉFONO") !!}
-                {!! Form::text('phone1', null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
-            </div>
-
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('address', "DIRECCIÓN") !!}
-                {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
-            </div>
-
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('city', "CIUDAD") !!}
-                {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
-            </div>
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('email', "EMAIL") !!}
+                        {!! Form::text('email', null, ['class'=>'form-control','ng-model' => 'email']) !!}
+                    </div>
 
 
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('nacionality', "NACIONALIDAD") !!}
+                        {!! Form::text('nacionality', null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
+                    </div>
 
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('location', "LOCALIDAD") !!}
-                {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
-            </div>
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('phone1', "TELÉFONO") !!}
+                        {!! Form::text('phone1', null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('address', "DIRECCIÓN") !!}
+                        {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('city', "CIUDAD") !!}
+                        {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
+                    </div>
 
 
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('location', "LOCALIDAD") !!}
+                        {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
+                    </div>
 
 
-            <div class="col-xs-12 col-lg-3 form-group">
-                {!! Form::label('province', "PROVINCIA") !!}
-                {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
-            </div>
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('province', "PROVINCIA") !!}
+                        {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
+                    </div>
 
 
+                    <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
+                        @if(!isset($models))
+                            {{--{!! Form::hidden('clients_id', $client->id) !!}--}}
+                            <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
+                            <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span>
+                            </button>
+                        @endif
 
-            <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
-                @if(!isset($models))
-                    {{--{!! Form::hidden('clients_id', $client->id) !!}--}}
-                    <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
-                    <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span></button>
-                @endif
+                        {!! Form::close() !!}
 
-                {!! Form::close() !!}
-
+                    </div>
+                </div>
             </div>
         </div>
-
-
-
 
 
         @if(isset($models))
@@ -182,15 +186,12 @@
         {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
 
 
-
-
-
         <div class="col-xs-12 content">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Cabecera
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Cabecera</h3>
                 </div>
-                <div class="panel-body">
+                <div class="box-body">
                     <div class="col-xs-12 col-md-6 form-group">
                         {!! Form::label('Tipo de Operación') !!}
                         {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
@@ -205,7 +206,7 @@
 
                     <div class="col-xs-12 col-md-1 form-group">
                         <br>
-                        <button class="btn btn-default" ng-click="ver()" type="button" id="ver" >Ver</button>
+                        <button class="btn btn-default" ng-click="ver()" type="button" id="ver">Ver</button>
                     </div>
 
                     <div class="col-xs-12">
@@ -230,8 +231,6 @@
                     </div>
 
 
-
-
                     <div class="col-xs-1 form-group" style="padding-top: 1.5%">
                         <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
                     </div>
@@ -243,30 +242,25 @@
         </div>
 
         <div class="col-xs-12 content">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-
-                    Artículos
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Artículos</h3>
                     <div class="pull-right">
                         @if(isset($models))
-                            <a href="{{route('moto.sales.addItems', $models->id )}}" class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                            <a href="{{route('moto.sales.addItems', $models->id )}}"
+                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                         @endif
                     </div>
-
                 </div>
 
-                <div class="panel-body">
+
+                <div class="box-body">
                     @if(isset($models))
 
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-striped">
                             <thead>
                             <th>Cod.</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Color</th>
-                            <th>N Motor</th>
-                            <th>N Cuadro</th>
-                            <th>Importe Articulo</th>
+                            <th>Detalle</th>
                             <th colspan="2" class="text-left">S. Total</th>
                             </thead>
                             <tbody>
@@ -275,14 +269,17 @@
 
                                 <tr>
                                     <td>{{$item->items_id}}</td>
-
-                                    <td>{{$item->Items->Models->Brands->name}}</td>
                                     <td>
+
+                                        {{$item->Items->Models->Brands->name}}
+
                                         <a href="{{route('moto.items.edit',$item->Items->id)}}">{{$item->Items->Models->name}}</a>
+
+                                        | {{$item->Items->Colors->name}} <br>
+                                        <span class="text-muted"> Motor : </span> {{$item->Items->n_motor}}<br>
+                                        <span class="text-muted"> Motor : </span> {{$item->Items->n_cuadro}}<br>
+                                        <span class="pull-right label label-xs label-success">{{$item->Items->Branches}}</span>
                                     </td>
-                                    <td>{{$item->Items->Colors->name}}</td>
-                                    <td>{{$item->Items->n_motor}}</td>
-                                    <td>{{$item->Items->n_cuadro}}</td>
                                     <td>
                                         $ {{number_format($item->price_actual ,2)}}
                                     </td>
@@ -299,9 +296,52 @@
                                 <?php $total += $item->price_actual + $item->patentamiento + $item->pack_service; ?>
                             @endforeach
                             </tbody>
+                        </table>
+
+                    @endif
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 content">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Adicionales</h3>
+                    <div class="pull-right">
+                        @if(isset($models))
+                            <a href="{{route('moto.sales.addItems', $models->id )}}"
+                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                        @endif
+                    </div>
+                </div>
+
+
+                <div class="box-body">
+                    @if(isset($models))
+
+                        <table class="table table-striped">
+                            <thead>
+                            <th>Detalle</th>
+                            <th colspan="2" class="text-left">S. Total</th>
+                            </thead>
+                            <tbody>
+                            <?php $total2 = 0; ?>
+                            @foreach($models->Additionables as $item)
+
+                                <tr>
+                                    <td>{{$item->Additionals->name}}</td>
+                                    <td>
+                                        $ {{$item->amount}}
+                                    </td>
+
+                                </tr>
+                                <?php $total2 = $total2 + $item->amount?>
+                            @endforeach
+                            </tbody>
                             <tfoot>
                             <td colspan="11" align="right">TOTAL ADEUDADO : $ <b
-                                        class="text-primary">{{number_format($total,2)}}</b></td>
+                                        class="text-primary">{{number_format($total+$total2,2)}}</b></td>
                             </tfoot>
                         </table>
 
@@ -313,19 +353,18 @@
 
         @if(isset($models))
             <div class="col-xs-12 content">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Formas de Pago
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-pay"></i> Formas de Pago</h3>
                         <div class="pull-right">
-                            @if(isset($models))
-                                <a href="{!! route("moto.sales.createPayment", $models->id) !!}" id="agregarPago"
-                                   class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
-                            @endif
+
+                            <a href="{!! route("moto.sales.createPayment", $models->id) !!}" id="agregarPago"
+                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
                         </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="box-body">
                         <div class="col-xs-12">
-                            <table class="table table-bordered">
+                            <table class="table table-stripped">
                                 <thead>
                                 <th>#</th>
                                 <th>Fecha</th>
@@ -363,34 +402,30 @@
                             </table>
 
                             <h5 class="pull-right">TOTAL A PAGAR : <b class="text-danger">
-                                    $ {{number_format(($total - $pago),2)}}</b>
+                                    $ {{number_format((($total + $total2) - $pago),2)}}</b>
                             </h5>
 
-                            <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}"
-                               class="pull-left"
-                               title="Exportar PDF">
-                        <span class="btn btn-danger">
-                            <i class="fa fa-file-pdf-o"></i>
-                        </span>
-                            </a>
+
                             <a target="_blank" href="{!! route('moto.'.$section.'.recibo',$models->id) !!}"
                                class="pull-left"
                                title="Recibo PDF">
                         <span class="btn btn-success">
-                            <i class="fa fa-file-pdf-o"></i>
+                           Recibo
                         </span>
                             </a>
-                            <a target="_blank" href="{!! route('moto.'.$section.'.factura',$models->id) !!}"
-                               class="pull-left"
-                               title="Factura PDF">
-                        <span class="btn btn-warning">
-                            <i class="fa fa-file-pdf-o"></i>
-                        </span>
-                            </a>
+
                         </div>
                     </div>
 
                 </div>
+
+                <a target="_blank" href="{!! route('moto.'.$section.'.factura',$models->id) !!}" class="pull-left" title="Factura PDF">
+                        <span class="btn btn-default"><strong class="strong">Facturar</strong></span>
+                </a>
+
+                <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="pull-left" title="Exportar PDF">
+                    <span class="btn btn-danger">Remito</span>
+                </a>
             </div>
         @endif
 
@@ -410,21 +445,23 @@
     <script>
 
 
-        $("#sendForm").on('click',function (ev) {
+        $("#sendForm").on('click', function (ev) {
             ev.preventDefault();
 
             $('#formPresupuesto').submit();
         })
 
 
-        function formatState (state) {
+        function formatState(state) {
 
             var datos = state.text.split("~");
 
-            if (!state.id) { return state.text; }
+            if (!state.id) {
+                return state.text;
+            }
             var span;
-            for(var i = 1;i < datos.length; i++) {
-                if(i==1)
+            for (var i = 1; i < datos.length; i++) {
+                if (i == 1)
                     span = '<span class="select2-template-text">' + datos[i] + '</span>';
                 else
                     span += '<span class="select2-template-text">' + datos[i] + '</span>';
@@ -439,10 +476,11 @@
 
                     span
 
-                    +'</span>'
+                    + '</span>'
             );
             return $state;
-        };
+        }
+        ;
 
         $("#search").select2({
             templateResult: formatState
@@ -455,7 +493,7 @@
         $("#reset").on('click', function () {
             $('#modelId').val("")
 
-            $('#formClient').attr('action',routeBase+'moto/clients/store')
+            $('#formClient').attr('action', routeBase + 'moto/clients/store')
         })
 
         var app = angular.module("app", []);
@@ -477,36 +515,35 @@
             $scope.province = ""
 
 
-
             @if(Session::has('client') || $errors->any())
-                $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
-                $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
-                $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
-                $scope.dni = "{!! Session::has('client') ? Session::get('client')->dni :  old('dni')!!}"
-                $scope.email = "{!! Session::has('client') ? Session::get('client')->email : old('email')!!}"
-                $scope.sexo = "{!! Session::has('client') ? Session::get('client')->sexo : old('sexo')!!}"
-                $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
-                $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
-                $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
-                $scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
-                $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
-                $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
+                    $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
+            $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
+            $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
+            $scope.dni = "{!! Session::has('client') ? Session::get('client')->dni :  old('dni')!!}"
+            $scope.email = "{!! Session::has('client') ? Session::get('client')->email : old('email')!!}"
+            $scope.sexo = "{!! Session::has('client') ? Session::get('client')->sexo : old('sexo')!!}"
+            $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
+            $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
+            $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
+            $scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
+            $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
+            $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
 
             @endif
 
-            @if(isset($models))
-                $scope.model = "{!! $models->clients->id !!}"
-                $scope.last_name = "{!! $models->clients->last_name!!}"
-                $scope.name = "{!! $models->clients->name !!}"
-                $scope.dni = "{!! $models->clients->dni !!}"
-                $scope.email = "{!! $models->clients->email !!}"
-                $scope.sexo = "{!! $models->clients->sexo !!}"
-                $scope.nacionality = "{!! $models->clients->nacionality !!}"
-                $scope.phone1 = "{!! $models->clients->phone1 !!}"
-                $scope.address = "{!! $models->clients->address !!}"
-                $scope.city = "{!! $models->clients->city !!}"
-                $scope.location = "{!! $models->clients->location!!}"
-                $scope.province = "{!! $models->clients->province !!}"
+                    @if(isset($models))
+                    $scope.model = "{!! $models->clients->id !!}"
+            $scope.last_name = "{!! $models->clients->last_name!!}"
+            $scope.name = "{!! $models->clients->name !!}"
+            $scope.dni = "{!! $models->clients->dni !!}"
+            $scope.email = "{!! $models->clients->email !!}"
+            $scope.sexo = "{!! $models->clients->sexo !!}"
+            $scope.nacionality = "{!! $models->clients->nacionality !!}"
+            $scope.phone1 = "{!! $models->clients->phone1 !!}"
+            $scope.address = "{!! $models->clients->address !!}"
+            $scope.city = "{!! $models->clients->city !!}"
+            $scope.location = "{!! $models->clients->location!!}"
+            $scope.province = "{!! $models->clients->province !!}"
 
             @endif
 
@@ -566,62 +603,56 @@
             };
 
             {{--@if(isset($models))--}}
-                {{--@if($models->SalesItems->count() > 0)--}}
-                    {{--$http.get("moto/budgets/budget/" + $('#budgets_id').val())--}}
-                        {{--.then(function (response) {--}}
-                            {{--$scope.budgets = response.data;--}}
+            {{--@if($models->SalesItems->count() > 0)--}}
+            {{--$http.get("moto/budgets/budget/" + $('#budgets_id').val())--}}
+            {{--.then(function (response) {--}}
+            {{--$scope.budgets = response.data;--}}
 
-                            {{--var modelos = [];--}}
+            {{--var modelos = [];--}}
 
 
-                            {{--for(var m in $scope.budgets.all_items) {--}}
-                                {{--var obj = {--}}
-                                    {{--modelo : $scope.budgets.all_items[m].id,--}}
-                                    {{--color : $scope.budgets.all_items[m].pivot.colors_id--}}
-                                {{--}--}}
+            {{--for(var m in $scope.budgets.all_items) {--}}
+            {{--var obj = {--}}
+            {{--modelo : $scope.budgets.all_items[m].id,--}}
+            {{--color : $scope.budgets.all_items[m].pivot.colors_id--}}
+            {{--}--}}
 
-                                {{--modelos.push(obj)--}}
-                            {{--}--}}
+            {{--modelos.push(obj)--}}
+            {{--}--}}
 
-                            {{--$.ajax({--}}
-                                {{--method: 'get',--}}
-                                {{--data: $.extend({},modelos),--}}
-                                {{--url: 'moto/branchesWithStockByModels',--}}
-                                {{--success: function(data){--}}
-                                    {{--$("#branches_confirm_id option").remove();--}}
+            {{--$.ajax({--}}
+            {{--method: 'get',--}}
+            {{--data: $.extend({},modelos),--}}
+            {{--url: 'moto/branchesWithStockByModels',--}}
+            {{--success: function(data){--}}
+            {{--$("#branches_confirm_id option").remove();--}}
 
-                                    {{--for(var i in data){--}}
-                                        {{--if(i == {!! $models->branches_confirm_id !!})--}}
-                                           {{--$("#branches_confirm_id").append($("<option value='"+i+"' selected>"+data[i]+"<option>"))--}}
-                                        {{--else--}}
-                                           {{--$("#branches_confirm_id").append($("<option value='"+i+"'>"+data[i]+"<option>"))--}}
-                                    {{--}--}}
+            {{--for(var i in data){--}}
+            {{--if(i == {!! $models->branches_confirm_id !!})--}}
+            {{--$("#branches_confirm_id").append($("<option value='"+i+"' selected>"+data[i]+"<option>"))--}}
+            {{--else--}}
+            {{--$("#branches_confirm_id").append($("<option value='"+i+"'>"+data[i]+"<option>"))--}}
+            {{--}--}}
 
-                                {{--}--}}
-                            {{--})--}}
+            {{--}--}}
+            {{--})--}}
 
-                        {{--});--}}
-                {{--@endif--}}
+            {{--});--}}
+            {{--@endif--}}
             {{--@endif--}}
         });
 
 
-
-
-//        app.controller("ctl", function ($scope, $http) {
-//
-//            $scope.ver = function () {
-//                $http.get("moto/budgets/budget/" + $('#budgets_id').val())
-//                        .then(function (response) {
-//                            $scope.budgets = response.data;
-//                            console.table(response.data);
-//                        });
-//            };
-//        });
-
-
-
-
+        //        app.controller("ctl", function ($scope, $http) {
+        //
+        //            $scope.ver = function () {
+        //                $http.get("moto/budgets/budget/" + $('#budgets_id').val())
+        //                        .then(function (response) {
+        //                            $scope.budgets = response.data;
+        //                            console.table(response.data);
+        //                        });
+        //            };
+        //        });
 
 
         $('#ver').on('click', function () {
@@ -637,7 +668,6 @@
         });
 
 
-
         $("#show_budget").on('click', function () {
             var id = $('#budgets_id').val();
             //window.open('moto/budgets/pdf/' + id, '_blank');
@@ -646,10 +676,6 @@
 
             $('#modalBudgetClients').modal(open);
         });
-
-
-
-
 
 
     </script>

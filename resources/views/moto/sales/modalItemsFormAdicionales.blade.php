@@ -16,12 +16,12 @@
                 @else
                     {!! Form::open(['route' => config('models.'.$section.'.createItemsRoute'),'method' => 'post']) !!}
                 @endif
+                {!! Form::hidden('sales_id', $sales->id) !!}
 
-                    {!! Form::hidden('sales_id', $sales->id) !!}
 
 
                 <div class="box-body">
-                    <div class="col-xs-5 form-group">
+                    <div class="col-xs-6 col-md-3  form-group">
                         {!! Form::label('Modelo') !!}
                         <select id="select_model" name='models_id' class=" select2 form-control"
                                 placeholder="Seleccione un modelo">
@@ -40,7 +40,7 @@
                         </select>
                     </div>
 
-                    <div class="col-xs-5 form-group">
+                    <div class="col-xs-6 col-md-3 form-group">
                         {!! Form::label('Color') !!}
                         @if(isset($salesItems))
                             <select name="colors_id" id="colors" class="form-control select2">
@@ -57,17 +57,59 @@
                         @endif
                     </div>
 
-                    <div class="col-xs-2  form-group">
+                    <div class="col-xs-6 col-md-3 form-group">
                         {!! Form::label('Precio actual') !!}
-                        {!! Form::number('price_actual', null, ['class'=>'price_actual form-control']) !!}
+                        {!! Form::number('price_actual', null, ['class'=>'form-control']) !!}
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Patentamiento') !!}
+                        {!! Form::number('patentamiento', null, ['class'=>'form-control patentamiento']) !!}
                     </div>
 
 
-                    <div class="col-xs-12">
-                        <table id="additionals" class="table">
-
-                        </table>
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Pack service') !!}
+                        {!! Form::number('pack_service', null, ['class'=>'form-control']) !!}
                     </div>
+
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Cédula') !!}
+                        {!! Form::number('cedula', null, ['class'=>'form-control']) !!}
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Alta patente') !!}
+                        {!! Form::number('alta_patente', null, ['class'=>'form-control']) !!}
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Adic. Sucursal') !!}
+                        {!! Form::number('ad_suc', null, ['class'=>'form-control']) !!}
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('LoJack') !!}
+                        {!! Form::number('lojack', null, ['class'=>'form-control']) !!}
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Alta de seguro') !!}
+                        {!! Form::number('alta_seguro', null, ['class'=>'form-control']) !!}
+                    </div>
+
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Larga distancia') !!}
+                        {!! Form::number('larga_distancia', null, ['class'=>'form-control']) !!}
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 form-group">
+                        {!! Form::label('Formularios') !!}
+                        {!! Form::number('formularios', null, ['class'=>'form-control']) !!}
+                    </div>
+
 
                 </div>
 
@@ -86,41 +128,6 @@
 
 @section('js')
 
-    <script>
-
-        $('#select_model').on('change', function () {
-
-            var id = $(this).val();
-            $('#additionals').empty();
-            $('#colors').empty();
-
-            $.ajax({
-                method: 'GET',
-                url: 'moto/modelLists/' + id,
-
-                success: function (data) {
-
-                    $('.price_actual').val(data.active_list_price.price_list);
-
-                    //recorre los adicionales
-                    $.each(data.additionables, function (a, b) {
-                        $('#additionals').append('<tr><td>' + b.additionals.name + ' <input type="hidden" name="additionals['+ b.amount + ']" value="'+b.additionals.id+'"></td><td>$ <input type="text" value="'+ b.amount + '"</td></tr>');
-                    });
-
-                    // busca los colores disponibles
-                    $.ajax({
-                        method: 'GET',
-                        url: 'moto/modelAvailables/' + id,
-                        success: function (response) {
-
-                            $.each(response, function (x, y) {
-                                $('#colors').append('<option value=' + x + ' >' + y.color + ' ( ' + y.cantidad + ' ) </option>');
-                            });
-                        }
-                    })
-                }
-            })
-        });
-    </script>
+    <script src="js/asideModelsColors.js"></script>
 
 @endsection
