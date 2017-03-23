@@ -53,7 +53,7 @@ Route::post('/addAdditionals/', 'Moto\AjaxController@addAdditionals');
 
 
 //Eliminar adicionales a una entidad
-Route::get('/removeAdditionals/', 'Moto\AjaxController@removeAdditionals');
+Route::post('/removeAdditionals/', 'Moto\AjaxController@removeAdditionals');
 
 
 

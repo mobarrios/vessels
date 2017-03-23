@@ -7,7 +7,7 @@ var remove = $(".adicionales a[btn-danger]")
 var select = contenedor.find('select[name=additionals_id]')
 var amount = contenedor.find('input[name=amount]')
 var entity = contenedor.find('input[name=entity]')
-var models_id = contenedor.find('select[name=models_id]')
+var id = contenedor.find('input[name=id]')
 var token = contenedor.find('input[name=_token]')
 
 save.on('click',function(ev){
@@ -21,7 +21,7 @@ save.on('click',function(ev){
             amount : amount.val(),
             entity: entity.val(),
             _token: token.val(),
-            models_id: models_id.val()
+            id: id.val()
         }
 
 
@@ -31,7 +31,7 @@ save.on('click',function(ev){
             method: 'POST',
             success: function(response){
                 console.log(response);
-                $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td class="text-center">$ '+amount.val()+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a></div></td></tr>'))
+                $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td class="text-center">$ '+amount.val()+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger deleteAdicionales"><i class="fa fa-trash"></i></a></div></td></tr>'))
             },
             error: function (error) {
                 console.log("Error: "+error)
@@ -43,7 +43,7 @@ save.on('click',function(ev){
 
 
 
-remove.on('click',function(ev){
+contenedor.on('click','.deleteAdicionales',function(ev){
     ev.preventDefault()
 
     $(this).attr('disabled',true)
@@ -51,12 +51,16 @@ remove.on('click',function(ev){
     var contenedor = $(this).parent().parent().parent()
 
     var data = {
-        models_id: $(this).attr('data-id')
+        additionals_id : select.val(),
+        entity: entity.val(),
+        _token: token.val(),
+
+        id: id.val()
     }
 
 
     $.ajax({
-        url: 'moto/addAdditionals',
+        url: 'moto/removeAdditionals',
         data: data,
         method: 'POST',
         success: function(response){

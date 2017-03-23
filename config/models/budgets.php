@@ -25,8 +25,11 @@ return [
 
     //addItems
     'addItemsRoute'  => 'moto.'.$model.'.addItems',
+    'createItemsRoute'=> 'moto.'.$model.'.createItems',
     'editItemsRoute'  => 'moto.'.$model.'.editItems',
+    'updateItemsRoute'  => 'moto.'.$model.'.updateItems',
     'deleteItemsRoute'  => 'moto.'.$model.'.deleteItems',
+
 
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',

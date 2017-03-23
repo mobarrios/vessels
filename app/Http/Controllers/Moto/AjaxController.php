@@ -141,8 +141,8 @@ class AjaxController extends Controller
 
 
 
-        if($model->additionables()->remove($additional))
-            return response()->json($additional,200);
+        if($model->additionables()->delete($additional))
+            return response()->json([],200);
         else
             return response()->json([],404);
 

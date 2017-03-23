@@ -14,10 +14,19 @@ Route::group(['prefix'=>'budgets'],function(){
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.index','uses'=>'Moto\BudgetsController@index']);
         Route::get('/prospectos/{id}/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.indexProspectos','uses'=>'Moto\BudgetsController@indexProspectos']);
 
-         Route::post('/addItem/{id}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.addItem','uses'=>'Moto\BudgetsController@addItems']);
-         Route::get('/editItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.editItem','uses'=>'Moto\BudgetsController@editItems']);
-         Route::post('/editItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.editItem','uses'=>'Moto\BudgetsController@updateItems']);
-         Route::get('/deleteItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.'.$section.'.deleteItem','uses'=>'Moto\BudgetsController@deleteItems']);
+//         Route::post('/addItem/{id}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.addItem','uses'=>'Moto\BudgetsController@addItems']);
+//         Route::get('/editItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.editItem','uses'=>'Moto\BudgetsController@editItems']);
+//         Route::post('/editItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.editItem','uses'=>'Moto\BudgetsController@updateItems']);
+//         Route::get('/deleteItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.'.$section.'.deleteItem','uses'=>'Moto\BudgetsController@deleteItems']);
+
+    Route::get('/addItem/{budgetsId?}', ['middleware' => 'permission:' . $section . '.create', 'as' => 'moto.budgets.addItems', 'uses' => 'Moto\BudgetsController@addItems']);
+    Route::post('/createItems/{item?}', ['middleware' => 'permission:' . $section . '.create', 'as' => 'moto.budgets.createItems', 'uses' => 'Moto\BudgetsController@createItems']);
+
+    Route::get('/editItem/{item?}/{budgetsId?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.budgets.editItems', 'uses' => 'Moto\BudgetsController@editItems']);
+
+    Route::post('/updateItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.budgets.updateItems', 'uses' => 'Moto\BudgetsController@updateItems']);
+
+    Route::get('/deleteItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.budgets.deleteItems', 'uses' => 'Moto\BudgetsController@deleteItems']);
 
 
         Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.budgets.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);

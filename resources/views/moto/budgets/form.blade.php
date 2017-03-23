@@ -170,7 +170,7 @@
                         @endif
 
                             @if(isset($models))
-                                <a href="#" data-toggle="control-sidebar" data-action="{!! route("moto.".$section.".addItem", $models->id) !!}" id="agregarItem" class="btn btn-default"><span class="fa fa-plus"></span></a>
+                                <a href="{!! route("moto.".$section.".addItems", $models->id) !!}" class="btn btn-default"><span class="fa fa-plus"></span></a>
                             @endif
                         {!! Form::close() !!}
 
@@ -210,10 +210,10 @@
                                         <td class="text-danger" class="priceBudget">$ @{{ models.pivot.price_budget }}</td>
                                         <td class="text-danger">$ @{{ models.pivot.price_actual }}</td>
                                         <td>
-                                            <a href="moto/budgets/deleteItem/{{ $models->id }}/@{{ models.pivot.id }}"><span class="text-danger fa fa-trash"></span></a>
+                                            <a href="moto/budgets/deleteItem/@{{ models.pivot.id }}/{{ $models->id }}"><span class="text-danger fa fa-trash"></span></a>
                                         </td>
                                         <td>
-                                            <a href="moto/budgets/editItem/{{ $models->id }}/@{{ models.pivot.id }}" class="editItems" data-id="@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
+                                            <a href="moto/budgets/editItem/@{{ models.pivot.id }}/{{ $models->id }}" class="editItems" data-id="@{{ models.pivot.id }}"><span class="text-success fa fa-edit"></span></a>
                                         </td>
                                     </tr>
 
@@ -236,33 +236,33 @@
 
                             <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
 
-                            <div class="col-xs-2 form-group">
-                                <label>Patentamiento</label>
-                                {!! Form::number('patentamiento',null,['class' => 'form-control','ng-model' => 'patentamiento','ng-change' => 'calcular()']) !!}
+                            {{--<div class="col-xs-2 form-group">--}}
+                                {{--<label>Patentamiento</label>--}}
+                                {{--{!! Form::number('patentamiento',null,['class' => 'form-control','ng-model' => 'patentamiento','ng-change' => 'calcular()']) !!}--}}
 
-                            </div>
+                            {{--</div>--}}
 
-                            <div class="col-xs-2 form-group">
-                                <label>Pack Service</label>
-                                {!! Form::number('pack_service',null,['class' => 'form-control','ng-model' => 'packService','ng-change' => 'calcular()']) !!}
-                            </div>
+                            {{--<div class="col-xs-2 form-group">--}}
+                                {{--<label>Pack Service</label>--}}
+                                {{--{!! Form::number('pack_service',null,['class' => 'form-control','ng-model' => 'packService','ng-change' => 'calcular()']) !!}--}}
+                            {{--</div>--}}
 
-                            <div class="col-xs-2 form-group">
-                                <label>Seguro</label>
-                                {!! Form::number('seguro',null,['class' => 'form-control','ng-model' => 'seguro','ng-change' => 'calcular()']) !!}
-                            </div>
-                            <div class="col-xs-2 form-group">
-                                <label>Flete</label>
-                                {!! Form::number('flete',null,['class' => 'form-control','ng-model' => 'flete','ng-change' => 'calcular()']) !!}
-                            </div>
-                            <div class="col-xs-2 form-group">
-                                <label>Formularios</label>
-                                {!! Form::number('formularios',null,['class' => 'form-control','ng-model' => 'formularios','ng-change' => 'calcular()']) !!}
-                            </div>
-                            <div class="col-xs-2 form-group">
-                                <label>Gastos Administrativos</label>
-                                {!! Form::number('gastos_administrativos',null,['class' => 'form-control','ng-model' => 'gastosAdministrativos','ng-change' => 'calcular()']) !!}
-                            </div>
+                            {{--<div class="col-xs-2 form-group">--}}
+                                {{--<label>Seguro</label>--}}
+                                {{--{!! Form::number('seguro',null,['class' => 'form-control','ng-model' => 'seguro','ng-change' => 'calcular()']) !!}--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-2 form-group">--}}
+                                {{--<label>Flete</label>--}}
+                                {{--{!! Form::number('flete',null,['class' => 'form-control','ng-model' => 'flete','ng-change' => 'calcular()']) !!}--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-2 form-group">--}}
+                                {{--<label>Formularios</label>--}}
+                                {{--{!! Form::number('formularios',null,['class' => 'form-control','ng-model' => 'formularios','ng-change' => 'calcular()']) !!}--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-2 form-group">--}}
+                                {{--<label>Gastos Administrativos</label>--}}
+                                {{--{!! Form::number('gastos_administrativos',null,['class' => 'form-control','ng-model' => 'gastosAdministrativos','ng-change' => 'calcular()']) !!}--}}
+                            {{--</div>--}}
 
                             <div class="col-xs-2 form-group">
                                 <label>Descuento (%)</label>
@@ -304,7 +304,7 @@
                             <div class="col-xs-2 form-group">
                                 <label>Total</label>
                                 <div class="col-xs-12 input-group">
-                                    {!! Form::text('total',null,['class' => 'form-control','readonly','ng-model' => 'total','ng-change' => 'calcular()']) !!}
+                                    {!! Form::text('total',$models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount,['class' => 'form-control','readonly','ng-model' => 'total','ng-change' => 'calcular()']) !!}
                                 </div>
                             </div>
 
@@ -387,80 +387,6 @@
 
     @endsection
 
-
-
-@section('formAside')
-    @include('moto.partials.asideOpenForm')
-                @if(isset($modelItems))
-                    {!! Form::model($modelItems->models,['route'=> ['moto.'.$section.'.editItem', $models->id, $modelItems->id], 'files' =>'true', 'method' => 'post']) !!}
-                @else
-                    {!! Form::open(['route'=> ['moto.'.$section.'.addItem', $models->id], 'files' =>'true', 'method' => 'post']) !!}
-
-                @endif
-
-                {!! Form::hidden('budgets_id',$models->id) !!}
-                {!! Form::hidden('price_actual',null,['class' => 'price_actual']) !!}
-
-                <div class="col-xs-6  form-group">
-                    {!! Form::label('Modelo') !!}
-                    <select id="select_model" name='models_id' class=" select2 form-control" placeholder="Seleccione un modelo">
-                        <option>Seleccionar...</option>
-                        @foreach($brands as $br)
-                            <optgroup label="{{$br->name}}">
-                                @foreach($br->Models as $m)
-                                    @if($m->stock >= 1)
-                                        <option value="{{$m->id}}"
-                                                @if(isset($modelItems) && ($modelItems->models_id == $m->id)) selected="selected" @endif>{{$m->name}}</option>
-                                    @endif
-                                @endforeach
-                            </optgroup>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-xs-6 form-group">
-                    {!! Form::label('Color') !!}
-                    @if(isset($modelItems))
-                        @if(is_array($colors))
-                            <select name="colors_id" id="colors" class="form-control select2">
-                                @foreach($colors as $id => $color)
-                                    <option value=' {!! $id  !!} ' @if($id == $modelItems->colors_id) selected = "selected" @endif> {!! $color["color"] !!} ( {!! $color["cantidad"] !!} ) </option>
-                                @endforeach
-                            </select>
-                        @else
-                            {!! Form::select('colors_id', [],null, ['class'=>'form-control select2',"id" => "colors"]) !!}
-                        @endif
-
-                    @else
-                        {!! Form::select('colors_id', [],null, ['class'=>'form-control select2',"id" => "colors"]) !!}
-                    @endif
-                </div>
-
-
-                <div class="col-xs-6 col-lg-6 form-group">
-                    {!! Form::label('Patentamiento') !!}
-                    {!! Form::number('patentamiento', null, ['class'=>'form-control patentamiento', 'disabled' => 'disabled']) !!}
-                </div>
-
-                <div class="col-xs-6 col-lg-6 form-group">
-                    {!! Form::label('Subtotal') !!}
-                    {!! Form::number('price_budget', isset($modelItems) ? $modelItems->price_budget : null, ['class'=>'form-control sTotal']) !!}
-                </div>
-
-                <div class="col-xs-6 form-group">
-                    {!! Form::label('Pack service') !!}
-                    {!! Form::number('pack_service', null, ['class'=>'form-control packService', 'disabled' => 'disabled']) !!}
-                </div>
-
-                <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                    <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
-                </div>
-                {!! Form::close() !!}
-                <!-- /.control-sidebar-menu -->
-
-    @include('moto.partials.asideCloseForm')
-@endsection
 @endif
 
 
@@ -587,7 +513,7 @@
         app.controller("myCtrl", function ($scope, $http) {
             $http.get("moto/budgetsItems/{!! $models->id !!}")
                     .then(function (response) {
-                        $scope.total = parseFloat(response.data[0]['price'])
+
                         $scope.stotal = parseFloat(response.data[0]['price'])
                         $scope.patentamiento = parseFloat(response.data[0]['patentamiento'])
                         $scope.packService = parseFloat(response.data[0]['pack_service'])
@@ -643,7 +569,8 @@
 
 
                 }else
-                    $scope.total =  parseFloat($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos).toFixed(2);
+                    $scope.total =  parseFloat(parseFloat($('input[name=total]').attr('value'))+$scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos).toFixed(2);
+
 
                 $scope.financiar();
             };
@@ -652,6 +579,95 @@
             {
                 $scope.aFinanciar = parseFloat($scope.total -  $scope.anticipo).toFixed(2) ;
             };
+
+
+
+
+
+
+
+
+            var contenedor = $("#adicionales")
+            var save = $(".saveAdicionales")
+            var remove = $(".adicionales a[btn-danger]")
+
+
+            var select = contenedor.find('select[name=additionals_id]')
+            var amount = contenedor.find('input[name=amount]')
+            var entity = contenedor.find('input[name=entity]')
+            var id = contenedor.find('input[name=id]')
+            var token = contenedor.find('input[name=_token]')
+
+            save.on('click',function(ev){
+                ev.preventDefault()
+
+                if(select.val() == "" && mount.val() == "")
+                    return false
+                else{
+                    var data = {
+                        additionals_id : select.val(),
+                        amount : amount.val(),
+                        entity: entity.val(),
+                        _token: token.val(),
+                        id: id.val()
+                    }
+
+
+                    $.ajax({
+                        url: 'moto/addAdditionals',
+                        data: data,
+                        method: 'POST',
+                        success: function(response){
+                            $scope.stotal = parseFloat($scope.stotal) +parseFloat(amount.val());
+
+                            $scope.calcular();
+                            $scope.financiar();
+
+                            $('input[name=total]').val($scope.total)
+                            $('#aFinanciar').val($scope.aFinanciar)
+
+                            $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td class="text-center">$ '+amount.val()+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger deleteAdicionales"><i class="fa fa-trash"></i></a></div></td></tr>'))
+                        },
+                        error: function (error) {
+                            console.log("Error: "+error)
+                        }
+                    })
+
+                }
+            })
+
+
+
+            contenedor.on('click','.deleteAdicionales',function(ev){
+                ev.preventDefault()
+
+                $(this).attr('disabled',true)
+
+                var contenedor = $(this).parent().parent().parent()
+
+                var data = {
+                    additionals_id : select.val(),
+                    entity: entity.val(),
+                    _token: token.val(),
+
+                    id: id.val()
+                }
+
+
+                $.ajax({
+                    url: 'moto/removeAdditionals',
+                    data: data,
+                    method: 'POST',
+                    success: function(response){
+                        $(contenedor).remove()
+                    },
+                    error: function (error) {
+                        console.log("Error: "+error)
+                    }
+                })
+
+            })
+
         });
 
         @endif
@@ -692,9 +708,6 @@
 
 
 
-
     </script>
-
-    <script src="js/additionals.js"></script>
 
 @endsection

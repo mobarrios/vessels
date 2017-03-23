@@ -4,15 +4,12 @@
 
 
         <div class="input-group-btn" style="font-size: 12px !important;">
-            {!! Form::select('models_id',$modelos,null,['class' => 'btn btn-default select2']) !!}
-        </div>
-
-        <div class="input-group-btn" style="font-size: 12px !important;">
             {!! Form::select('additionals_id',$additionals,null,['class' => 'btn btn-default select2']) !!}
         </div><!-- /btn-group -->
         {!! Form::number('amount',null,['class' => 'form-control','placeholder' => '$']) !!}
         {!! Form::hidden('entity',$section) !!}
         {!! Form::hidden('_token',csrf_token()) !!}
+        {!! Form::hidden('id',$models->id) !!}
         <div class="input-group-btn">
             <button type="button" class="btn btn-default saveAdicionales">
                 <i class="fa fa-floppy-o"></i>
@@ -28,7 +25,7 @@
                 <td class="text-center"> $ {{$additionals->amount or ''}}</td>
                 <td>
                     <div class="btn-group pull-right">
-                        <a href="{!! url('moto/removeAdditionals',$additionals->id) !!}" class="btn btn-xs btn-danger" data-id="{!! $additionals->id !!}"><i class="fa fa-trash"></i></a>
+                        <a href="{!! url('moto/removeAdditionals',$additionals->id) !!}" class="btn btn-xs btn-danger deleteAdicionales" data-id="{!! $additionals->id !!}"><i class="fa fa-trash"></i></a>
                     </div>
                 </td>
             </tr>

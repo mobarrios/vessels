@@ -14,7 +14,9 @@ use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\BudgetsItemsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo as Repo;
+use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
+use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -29,7 +31,7 @@ class BudgetsController extends Controller
     protected $budgets;
     protected $models;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models, BranchesRepo $branchesRepo, AdditionalsRepo $additionalsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models, BranchesRepo $branchesRepo, AdditionalsRepo $additionalsRepo,ColorsRepo $colorsRepo)
     {
 
         $this->request  = $request;
@@ -42,6 +44,7 @@ class BudgetsController extends Controller
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['financials']   = $financialsRepo->getAllWithDues() ;
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
+        $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
 
         $this->data['additionals'] = $additionalsRepo->ListsData('name','id');
 
@@ -186,32 +189,63 @@ class BudgetsController extends Controller
 
 
 
-    public function addItems(BudgetsItemsRepo $budgetsItemsRepo)
+//    public function addItems(BudgetsItemsRepo $budgetsItemsRepo)
+//    {
+//        $budgetsItemsRepo->create($this->request);
+//
+//        $this->data['client'] = $this->repo->find($this->route->getParameter('id'))->clients;
+//
+//        return redirect()->route('moto.'.$this->section.'.create',$this->route->getParameter('id'));
+//    }
+
+    public function addItems(ModelsRepo $modelsRepo)
     {
-        $budgetsItemsRepo->create($this->request);
+        $this->data['budgets'] =  $this->repo->find($this->route->getParameter('budgetsId'));
 
-        $this->data['client'] = $this->repo->find($this->route->getParameter('id'))->clients;
+        // $this->data['id'] = $id;
+        $this->data['activeBread'] = 'Agregar Item';
 
-        return redirect()->route('moto.'.$this->section.'.create',$this->route->getParameter('id'));
+        return view('moto.budgets.modalItemsForm')->with($this->data);
     }
 
-    public function editItems($item = null,$id = null,BudgetsItemsRepo $budgetsItemsRepo, Colors $colors,ModelsRepo $modelsRepo)
+    public function createItems(BudgetsItemsRepo $budgetsItemsRepo, ModelsRepo $modelsRepo)
     {
+        $model = $modelsRepo->find($this->request->models_id);
 
-        $this->data['modelItems'] = $budgetsItemsRepo->find($id);
-        $this->data['activeBread'] = 'Editar';
-        $this->data['models'] = $this->repo->find($item);
+        $this->request['price_actual'] = $model->activeListPrice->price_list;
 
-        $this->data['items'] = $this->models->lists('name','id');
-        $this->data['colors'] = $this->data['modelItems']->models->modelsByColors;
+        $budget = $this->repo->find($this->request->budgets_id);
 
-//        dd($this->data['colors']);
-        $this->data['client'] = $this->data['models']->clients;
-        $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
+        $budgetsItemsRepo->create($this->request->all());
+
+        // agrega los adicionales del modelo con los nuevos importes o no
+        if($this->request->has('additionals')){
+            foreach ($this->request->additionals as $amount => $id )
+            {
+                $budget->additionables()->create(['additionals_id'=>$id , 'amount' => $amount]);
+            }
+        };
 
 
-        return view(config('models.'.$this->section.'.editView'))->with($this->data);
+        return redirect()->route('moto.budgets.edit', [$budget->clients->id,$this->request->budgets_id])->withErrors('Se agregó correctamente el item');
+
     }
+
+    public function editItems(BudgetsItemsRepo $budgetsItemsRepo)
+    {
+        $this->data['activeBread'] = 'Editar Item';
+
+        $this->data['budgetsItems'] = $budgetsItemsRepo->find($this->route->getParameter('item'));
+        $this->data['budgets'] = $this->repo->find($this->route->getParameter('budgetsId'));
+
+
+//        dd($this->data['budgetsItems']->models->modelsByColors);
+        //$this->data['route'] = ['moto.sales.updateItems', $this->route->getParameter('item'), $this->route->getParameter('id')];
+
+        return view('moto.budgets.modalItemsForm')->with($this->data);
+
+    }
+
 
     public function updateItems($item = null,$id,BudgetsItemsRepo $budgetsItemsRepo)
     {

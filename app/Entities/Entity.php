@@ -76,6 +76,13 @@ class Entity extends Model {
         return $this->Brancheables()->with('Branches')->get()->lists('Branches.name','Branches.id');
     }
 
+    public function getTotalAdditionalsAmountAttribute(){
+        $amount = 0;
 
+        foreach($this->additionables as $additionable)
+            $amount += $additionable->amount;
+
+        return $amount == 0 ? '0' : $amount;
+    }
 
 }
