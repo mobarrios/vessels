@@ -51,7 +51,7 @@ contenedor.on('click','.deleteAdicionales',function(ev){
     var contenedor = $(this).parent().parent().parent()
 
     var data = {
-        additionals_id : select.val(),
+        additionals_id : $(this).attr('data-id'),
         entity: entity.val(),
         _token: token.val(),
 

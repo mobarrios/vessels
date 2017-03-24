@@ -46,9 +46,6 @@
             border-bottom: 1px solid #ddd;
         }
 
-        .select2-container{
-            width:100% !important;
-        }
 
         .select2-container--default .select2-results__option[aria-selected=true]{
             background-color: rgba(162,162,162,0.21);
@@ -626,7 +623,7 @@
                             $('input[name=total]').val($scope.total)
                             $('#aFinanciar').val($scope.aFinanciar)
 
-                            $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td class="text-center">$ '+amount.val()+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger deleteAdicionales"><i class="fa fa-trash"></i></a></div></td></tr>'))
+                            $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td class="text-center">$ '+amount.val()+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger deleteAdicionales" data-id="'+select.val()+'"><i class="fa fa-trash"></i></a></div></td></tr>'))
                         },
                         error: function (error) {
                             console.log("Error: "+error)
@@ -646,7 +643,7 @@
                 var contenedor = $(this).parent().parent().parent()
 
                 var data = {
-                    additionals_id : select.val(),
+                    additionals_id : $(this).attr('data-id'),
                     entity: entity.val(),
                     _token: token.val(),
 
@@ -659,6 +656,16 @@
                     data: data,
                     method: 'POST',
                     success: function(response){
+
+                        $scope.stotal = parseFloat($scope.stotal) - parseFloat(response.amount);
+
+                        $scope.calcular();
+                        $scope.financiar();
+
+                        $('input[name=total]').val($scope.total)
+                        $('#aFinanciar').val($scope.aFinanciar)
+
+
                         $(contenedor).remove()
                     },
                     error: function (error) {

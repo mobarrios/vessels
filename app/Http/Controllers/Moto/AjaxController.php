@@ -137,12 +137,11 @@ class AjaxController extends Controller
 
         $model = $modelo->find($request->id);
 
-        $additional = $additionals->find($request->additionals_id);
+        $additional = $model->additionables->find($request->additionals_id);
 
 
-
-        if($model->additionables()->delete($additional))
-            return response()->json([],200);
+        if($model->additionables->find($request->additionals_id)->delete())
+            return response()->json($additional,200);
         else
             return response()->json([],404);
 
