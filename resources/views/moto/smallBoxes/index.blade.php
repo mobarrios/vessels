@@ -6,7 +6,6 @@
             <td>{{$model->id}}</td>
 
             <td>
-                {!! $model->entry !!}
             </td>
 
             <td>
@@ -18,15 +17,15 @@
             </td>
 
             <td>
-                {!! $model->detail !!}
+
             </td>
 
             <td>
-                {!! $model->TypesSmallBoxes->name !!}
+
             </td>
 
             <td>
-                {!! $model->Providers->name !!}
+
             </td>
 
         </tr>

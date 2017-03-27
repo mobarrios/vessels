@@ -54,6 +54,7 @@ class ItemsRepo extends BaseRepo
                     'colors_id' => $colors_id,
                     'users_id' => Auth::user()->id,
                     'items_id' => $item->entities_id,
+                    'branches_to_id' => $branches_id,
                 ];
 
                 $this->myRequest($data);
