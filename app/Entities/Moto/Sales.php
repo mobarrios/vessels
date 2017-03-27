@@ -35,6 +35,11 @@
          return $this->hasMany(SalesItems::class);
      }
 
+     public function Budgets()
+     {
+         return $this->belongsto(Budgets::class);
+     }
+
     public function Items(){
         return $this->belongsToMany(Items::class,'sales_items')->with('models','colors')->withPivot('price_actual','patentamiento','pack_service');
     }

@@ -281,7 +281,7 @@
                                         <span class="pull-right label label-xs label-success">{{$item->Items->Branches}}</span>
                                     </td>
                                     <td>
-                                        $ {{number_format($item->price_actual ,2)}}
+                                        $ {{ $item->sales->budgets ? number_format($item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget ,2) : number_format($item->price_actual ,2)}}
                                     </td>
                                     <td>
                                         <a class="btn btn-xs btn-default"
@@ -293,7 +293,9 @@
                                                     class="text-success fa fa-edit"></span></a>
                                     </td>
                                 </tr>
-                                <?php $total += $item->price_actual + $item->patentamiento + $item->pack_service; ?>
+
+                                <?php $total += $item->sales->budgets ? $item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget : $item->price_actual; //$total += $item->price_actual + $item->patentamiento + $item->pack_service; ?>
+
                             @endforeach
                             </tbody>
                         </table>
