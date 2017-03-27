@@ -56,15 +56,33 @@
         </div>
 
 
-        @foreach($models->Updateables as $update)
+        <div class="col-xs-6">
+            <h3>Movimientos</h3>
 
-            {{date('d-m-Y h:i',strtotime($update->created_at))}}
+            <table class="table">
+            <thead>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </thead>
+                <tr>
+                    <td>{{date('d-m-Y h:i',strtotime($models->created_at))}}</td>
+                    <td>Ingresó</td>
+                </tr>
+                    @foreach($models->Updateables as $update)
 
-            {{$update->column}}
-            {{$update->data_old}}
+                        @if($update->column == 'status')
+                            <tr>
+                            <td>{{date('d-m-Y h:i',strtotime($update->created_at))}}</td>
+                            <td>{{config('status.items.'.$update->data_old)}}</td>
+                            </tr>
+                        @endif
 
-            <br>
-        @endforeach
+                    @endforeach
+
+            </table>
+        </div>
+
+
 
 
 

@@ -58,7 +58,7 @@ class Entity extends Model {
 
     public function updateables()
     {
-        return $this->morphMany('App\Entities\Configs\Updateables','updateable');
+        return $this->morphMany('App\Entities\Configs\Updateables','updateable')->orderBy('created_at','DESC');
     }
 
     public function additionables()
