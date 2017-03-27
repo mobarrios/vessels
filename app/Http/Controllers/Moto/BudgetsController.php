@@ -220,7 +220,7 @@ class BudgetsController extends Controller
 
         // agrega los adicionales del modelo con los nuevos importes o no
         if($this->request->has('additionals')){
-            foreach ($this->request->additionals as $amount => $id )
+            foreach ($this->request->additionals as $id => $amount )
             {
                 $budget->additionables()->create(['additionals_id'=>$id , 'amount' => $amount]);
             }

@@ -274,6 +274,29 @@
 
     <span class="padding"></span>
 
+    <div class="espacio"></div>
+
+    <div class="inline">
+        <p>Adicionales</p>
+    </div>
+
+    @if($model->additionables)
+
+        <div class="inline">
+            <ul>
+                @foreach($model->additionables as $additional)
+                    <li>
+                        {!! ucfirst($additional->additionals->name) !!} : <b>$ {!! $additional->amount !!} </b>
+                    </li>
+
+                @endforeach
+            </ul>
+        </div>
+
+    @endif
+
+    <span class="padding"></span>
+
     <div class="footer">
 
         <div class="bottom">

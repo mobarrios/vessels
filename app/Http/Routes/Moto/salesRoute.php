@@ -10,6 +10,7 @@ Route::group(['prefix'=>'sales'],function(){
 
         Route::get('/create',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.sales.create','uses'=>'Moto\SalesController@create']);
         Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.sales.store','uses'=>'Moto\SalesController@store']);
+        Route::post('/storeFromBudgets',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.sales.storeFromBudgets','uses'=>'Moto\SalesController@storeFromBudgets']);
         Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.sales.show','uses'=>'Moto\SalesController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.index','uses'=>'Moto\SalesController@index']);
 

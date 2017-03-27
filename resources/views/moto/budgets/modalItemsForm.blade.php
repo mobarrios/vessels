@@ -108,7 +108,7 @@
 
                     //recorre los adicionales
                     $.each(data.additionables, function (a, b) {
-                        $('#additionals').append('<tr><td>' + b.additionals.name + ' <input type="hidden" name="additionals['+ b.amount + ']" value="'+b.additionals.id+'"></td><td>$ <input type="text" value="'+ b.amount + '"</td></tr>');
+                        $('#additionals').append('<tr><td>' + b.additionals.name + '</td><td>$ <input type="text" name="additionals['+b.additionals.id+']" value="'+ b.amount + '"</td></tr>');
                     });
 
                     // busca los colores disponibles

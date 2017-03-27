@@ -46,6 +46,10 @@
             border-bottom: 1px solid #ddd;
         }
 
+        #branches + span.select2-container{
+            width: 100% !important;
+        }
+
 
         .select2-container--default .select2-results__option[aria-selected=true]{
             background-color: rgba(162,162,162,0.21);
@@ -263,16 +267,16 @@
 
                             <div class="col-xs-2 form-group">
                                 <label>Descuento (%)</label>
-                                {!! Form::number('descuento',null,['class' => 'form-control','ng-model' => 'descuento','ng-change' => 'calcular()']) !!}
+                                {!! Form::number('descuento',null,['class' => 'form-control','ng-model' => 'descuento','ng-change' => 'calcular()','min' => '0']) !!}
                             </div>
 
                             <div class="col-xs-2 form-group">
                                 <label>Anticipo</label>
-                                {!! Form::number('anticipo',null,['class' => 'form-control','ng-model' => 'anticipo','ng-change' => 'calcular()']) !!}
+                                {!! Form::number('anticipo',null,['class' => 'form-control','ng-model' => 'anticipo','ng-change' => 'calcular()','min' => '0']) !!}
                             </div>
                             <div class="col-xs-2 form-group">
                                 <label>Total a Financiar</label>
-                                {!! Form::text('a_financiar',null,['class' => 'form-control','readonly','ng-model' => 'aFinanciar','ng-change' => 'calcular()','id' => 'aFinanciar']) !!}
+                                {!! Form::text('a_financiar',null,['class' => 'form-control','readonly','ng-model' => 'aFinanciar','ng-change' => 'calcular()','id' => 'aFinanciar','min' => '0']) !!}
                             </div>
 
                             <div class="col-xs-2 form-group">
@@ -346,7 +350,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    {!! Form::open(['route'=> 'moto.sales.store']) !!}
+                    {!! Form::open(['route'=> 'moto.sales.storeFromBudgets']) !!}
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Generar venta</h4>
                         </div>
@@ -512,17 +516,13 @@
                     .then(function (response) {
 
                         $scope.stotal = parseFloat(response.data[0]['price'])
-                        $scope.patentamiento = parseFloat(response.data[0]['patentamiento'])
-                        $scope.packService = parseFloat(response.data[0]['pack_service'])
+
+
                         $scope.data = response.data[1]
-                        $scope.seguro = {!! $models->seguro or '0' !!}
-                                $scope.flete = {!! $models->flete or '0' !!}
-                                $scope.formularios = {!! $models->formularios or '0' !!}
-                                $scope.gastosAdministrativos = {!! $models->gastos_administrativos or '0' !!}
-                                $scope.descuento = {!! $models->descuento or '0' !!}
-                                $scope.anticipo = {!! $models->anticipo or '0' !!}
-                                $scope.importeCuota = {!! $models->importe_cuota or '0' !!}
-                                $scope.aFinanciar = {!! $models->a_financiar or '0' !!}
+                        $scope.descuento = {!! $models->descuento or '0' !!}
+                        $scope.anticipo = {!! $models->anticipo or '0' !!}
+                        $scope.importeCuota = {!! $models->importe_cuota or '0' !!}
+                        $scope.aFinanciar = {!! $models->a_financiar or '0' !!}
                         $scope.calcular();
 
 //                        var modelos = [];
@@ -561,12 +561,12 @@
                     $scope.calcular = function()
             {
                 if( ($scope.descuento != null) && (parseFloat($scope.descuento) != 0)) {
-                    var total = parseFloat((($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) * $scope.descuento) / 100).toFixed(2);
-                    $scope.total = parseFloat(($scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos) - total).toFixed(2);
+                    var total = parseFloat(($scope.stotal  * $scope.descuento) / 100).toFixed(2);
+                    $scope.total = parseFloat($scope.stotal - total).toFixed(2);
 
 
                 }else
-                    $scope.total =  parseFloat(parseFloat($('input[name=total]').attr('value'))+$scope.stotal + $scope.seguro + $scope.patentamiento + $scope.packService + $scope.flete + $scope.formularios + $scope.gastosAdministrativos).toFixed(2);
+                    $scope.total =  parseFloat(parseFloat($('input[name=total]').attr('value'))+$scope.stotal).toFixed(2);
 
 
                 $scope.financiar();
