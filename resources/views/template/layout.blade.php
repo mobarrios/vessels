@@ -34,7 +34,9 @@
 
     </style>
 
-    <link rel="stylesheet" href="vendors/LTE/plugins/iCheck/all.css">
+    {{--<link rel="stylesheet" href="vendors/LTE/plugins/iCheck/all.css">--}}
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -90,14 +92,14 @@
         }
 
     </script>
-    <script src="vendors/LTE/plugins/iCheck/icheck.js"></script>
+    {{--<script src="vendors/LTE/plugins/iCheck/icheck.js"></script>--}}
     <script>
-        $(document).ready(function(){
-           $("input[type='checkbox']").iCheck({
-               checkboxClass: 'icheckbox_flat-blue',
-               radioClass: 'iradio_flat-blue'
-           });
-        });
+//        $(document).ready(function(){
+//            $("input[type='checkbox']").iCheck({
+//                checkboxClass: 'icheckbox_flat-blue',
+//                radioClass: 'iradio_flat-blue'
+//            });
+//        });
     </script>
 </body>
 </html>

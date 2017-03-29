@@ -294,7 +294,8 @@
                                     </td>
                                 </tr>
 
-                                <?php $total += $item->sales->budgets ? $item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget : $item->price_actual; //$total += $item->price_actual + $item->patentamiento + $item->pack_service; ?>
+
+                                <?php $total += $item->sales->budgets ? $item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget : $item->price_actual; ?>
 
                             @endforeach
                             </tbody>
@@ -308,42 +309,32 @@
 
         <div class="col-xs-12 content">
             <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"> Adicionales</h3>
-                    <div class="pull-right">
-                        @if(isset($models))
-                            <a href="{{route('moto.sales.addItems', $models->id )}}"
-                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
-                        @endif
-                    </div>
-                </div>
+                {{--<div class="box-header with-border">--}}
+                    {{--<h3 class="box-title"> Adicionales</h3>--}}
+                    {{--<div class="pull-right">--}}
+                        {{--@if(isset($models))--}}
+                            {{--<a href="{{route('moto.sales.addItems', $models->id )}}"--}}
+                               {{--class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>--}}
+                        {{--@endif--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
 
                 <div class="box-body">
                     @if(isset($models))
 
+                        @include('moto.partials.additionals')
+
+
                         <table class="table table-striped">
-                            <thead>
-                            <th>Detalle</th>
-                            <th colspan="2" class="text-left">S. Total</th>
-                            </thead>
-                            <tbody>
-                            <?php $total2 = 0; ?>
-                            @foreach($models->Additionables as $item)
+                            {{--<thead>--}}
+                            {{--<th>Detalle</th>--}}
+                            {{--<th colspan="2" class="text-left">S. Total</th>--}}
+                            {{--</thead>--}}
 
-                                <tr>
-                                    <td>{{$item->Additionals->name}}</td>
-                                    <td>
-                                        $ {{$item->amount}}
-                                    </td>
-
-                                </tr>
-                                <?php $total2 = $total2 + $item->amount?>
-                            @endforeach
-                            </tbody>
                             <tfoot>
                             <td colspan="11" align="right">TOTAL ADEUDADO : $ <b
-                                        class="text-primary">{{number_format($total+$total2,2)}}</b></td>
+                                        class="text-primary totalAdeudado" data-precio="{!! $total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount) !!}">{{number_format($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount),2)}}</b></td>
                             </tfoot>
                         </table>
 
@@ -398,13 +389,13 @@
                                 @endif
                                 </tbody>
                                 <tfoot>
-                                <td colspan="4" align="right">TOTAL ABONADO : <b class="text-success">
+                                <td colspan="4" align="right">TOTAL ABONADO : <b class="text-success pago" data-pago="{!! $pago !!}">
                                         $ {{number_format($pago,2)}}</b></td>
                                 </tfoot>
                             </table>
 
-                            <h5 class="pull-right">TOTAL A PAGAR : <b class="text-danger">
-                                    $ {{number_format((($total + $total2) - $pago),2)}}</b>
+                            <h5 class="pull-right">TOTAL A PAGAR : <b class="text-danger total" data-precio="{!! ($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount) ) - $pago !!}">
+                                    $ {{number_format(($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount)  - $pago),2)}}</b>
                             </h5>
 
 
@@ -518,34 +509,34 @@
 
 
             @if(Session::has('client') || $errors->any())
-                    $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
-            $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
-            $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
-            $scope.dni = "{!! Session::has('client') ? Session::get('client')->dni :  old('dni')!!}"
-            $scope.email = "{!! Session::has('client') ? Session::get('client')->email : old('email')!!}"
-            $scope.sexo = "{!! Session::has('client') ? Session::get('client')->sexo : old('sexo')!!}"
-            $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
-            $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
-            $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
-            $scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
-            $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
-            $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
+                $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
+                $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
+                $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
+                $scope.dni = "{!! Session::has('client') ? Session::get('client')->dni :  old('dni')!!}"
+                $scope.email = "{!! Session::has('client') ? Session::get('client')->email : old('email')!!}"
+                $scope.sexo = "{!! Session::has('client') ? Session::get('client')->sexo : old('sexo')!!}"
+                $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
+                $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
+                $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
+                $scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
+                $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
+                $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
 
             @endif
 
-                    @if(isset($models))
-                    $scope.model = "{!! $models->clients->id !!}"
-            $scope.last_name = "{!! $models->clients->last_name!!}"
-            $scope.name = "{!! $models->clients->name !!}"
-            $scope.dni = "{!! $models->clients->dni !!}"
-            $scope.email = "{!! $models->clients->email !!}"
-            $scope.sexo = "{!! $models->clients->sexo !!}"
-            $scope.nacionality = "{!! $models->clients->nacionality !!}"
-            $scope.phone1 = "{!! $models->clients->phone1 !!}"
-            $scope.address = "{!! $models->clients->address !!}"
-            $scope.city = "{!! $models->clients->city !!}"
-            $scope.location = "{!! $models->clients->location!!}"
-            $scope.province = "{!! $models->clients->province !!}"
+            @if(isset($models))
+                $scope.model = "{!! $models->clients->id !!}"
+                $scope.last_name = "{!! $models->clients->last_name!!}"
+                $scope.name = "{!! $models->clients->name !!}"
+                $scope.dni = "{!! $models->clients->dni !!}"
+                $scope.email = "{!! $models->clients->email !!}"
+                $scope.sexo = "{!! $models->clients->sexo !!}"
+                $scope.nacionality = "{!! $models->clients->nacionality !!}"
+                $scope.phone1 = "{!! $models->clients->phone1 !!}"
+                $scope.address = "{!! $models->clients->address !!}"
+                $scope.city = "{!! $models->clients->city !!}"
+                $scope.location = "{!! $models->clients->location!!}"
+                $scope.province = "{!! $models->clients->province !!}"
 
             @endif
 
@@ -642,6 +633,103 @@
             {{--});--}}
             {{--@endif--}}
             {{--@endif--}}
+
+
+
+            var contenedor = $("#adicionales")
+            var save = $(".saveAdicionales")
+            var remove = $(".adicionales a[btn-danger]")
+
+
+            var select = contenedor.find('select[name=additionals_id]')
+            var amount = contenedor.find('input[name=amount]')
+            var entity = contenedor.find('input[name=entity]')
+            var id = contenedor.find('input[name=id]')
+            var token = contenedor.find('input[name=_token]')
+
+            save.on('click',function(ev){
+                ev.preventDefault()
+
+                if(select.val() == "" && mount.val() == "")
+                    return false
+                else{
+                    var data = {
+                        additionals_id : select.val(),
+                        amount : amount.val(),
+                        entity: entity.val(),
+                        _token: token.val(),
+                        id: id.val()
+                    }
+
+
+                    $.ajax({
+                        url: 'moto/addAdditionals',
+                        data: data,
+                        method: 'POST',
+                        success: function(response){
+
+
+                            var totalAdeudado = $(".totalAdeudado");
+                            var total = $(".total");
+
+
+                            totalAdeudado.text((parseFloat(totalAdeudado.attr('data-precio')) + parseFloat(amount.val())).toLocaleString(undefined, {minimumFractionDigits: 2}))
+
+                            total.text('$'+((parseFloat(total.attr('data-precio')) + parseFloat(amount.val())).toLocaleString(undefined, {minimumFractionDigits: 2})))
+
+                            $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td class="text-center">$ '+amount.val()+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger deleteAdicionales" data-id="'+select.val()+'"><i class="fa fa-trash"></i></a></div></td></tr>'))
+                        },
+                        error: function (error) {
+                            console.log("Error: "+error)
+                        }
+                    })
+
+                }
+            })
+
+
+
+            contenedor.on('click','.deleteAdicionales',function(ev){
+                ev.preventDefault()
+
+                $(this).attr('disabled',true)
+
+                var contenedor = $(this).parent().parent().parent()
+
+                var data = {
+                    additionals_id : $(this).attr('data-id'),
+                    entity: entity.val(),
+                    _token: token.val(),
+
+                    id: id.val()
+                }
+
+
+                $.ajax({
+                    url: 'moto/removeAdditionals',
+                    data: data,
+                    method: 'POST',
+                    success: function(response){
+
+
+                        var totalAdeudado = $(".totalAdeudado");
+                        var total = $(".total");
+
+
+                        totalAdeudado.text((parseFloat(totalAdeudado.attr('data-precio')) - parseFloat(response.amount)).toLocaleString(undefined, {minimumFractionDigits: 2}))
+
+                        total.text('$'+((parseFloat(total.attr('data-precio')) - parseFloat(response.amount)).toLocaleString(undefined, {minimumFractionDigits: 2})))
+
+
+                        $(contenedor).remove()
+                    },
+                    error: function (error) {
+                        console.log("Error: "+error)
+                    }
+                })
+
+            })
+
         });
 
 
@@ -678,6 +766,7 @@
 
             $('#modalBudgetClients').modal(open);
         });
+
 
 
     </script>
