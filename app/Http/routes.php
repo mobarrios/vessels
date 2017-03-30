@@ -12,6 +12,7 @@
 */
 
 
+Route::get('fe','\App\Http\Controllers\Configs\VouchersController@store');
 
 Route::get('/constancia', function(\Illuminate\Http\Request $request,\Illuminate\Routing\Route $route , \Barryvdh\DomPDF\PDF $pdf){
 

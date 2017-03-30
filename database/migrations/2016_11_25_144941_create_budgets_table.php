@@ -23,7 +23,7 @@ class CreateBudgetsTable extends Migration
             $table->integer('users_id')->nullable();
             //$table->foreign('users_id')->references('id')->on('users');
             
-            $table->integer('clients_id')->unsigned()->nulleable();
+            $table->integer('clients_id')->unsigned()->nullable();
             $table->foreign('clients_id')->references('id')->on('clients');
 
             $table->integer('seguro')->nullable();

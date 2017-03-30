@@ -40,9 +40,10 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <span class="fa fa-map-marker"></span>
-                        {{\Illuminate\Support\Facades\Auth::user()->BranchesActive->name}}  . <span class="caret"></span>
+                    <a class="dropdown-toggle text-black" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <span class="fa fa-building"></span>
+                        {{\Illuminate\Support\Facades\Auth::user()->BranchesActive->name}}
+                       <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         @foreach(\Illuminate\Support\Facades\Auth::user()->Brancheables as $branch)

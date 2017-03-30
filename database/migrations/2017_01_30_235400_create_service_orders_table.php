@@ -18,10 +18,10 @@ class CreateServiceOrdersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->integer('clients_id')->unsigned()->nulleable();
+            $table->integer('clients_id')->unsigned()->nullable();
             $table->foreign('clients_id')->references('id')->on('clients');
 
-            $table->integer('items_id')->unsigned()->nulleable();
+            $table->integer('items_id')->unsigned()->nullable();
             $table->foreign('items_id')->references('id')->on('items');
 
             $table->string('patente');

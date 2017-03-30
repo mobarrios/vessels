@@ -24,20 +24,20 @@ class CreateSalesTable extends Migration
             $table->enum('type',['Reserva','Venta']);
 
 
-            $table->integer('users_id')->unsigned()->nulleable();
+            $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users');
 
-            $table->integer('clients_id')->unsigned()->nulleable();
+            $table->integer('clients_id')->unsigned()->nullable();
             $table->foreign('clients_id')->references('id')->on('clients');
 
-            $table->integer('budgets_id')->unsigned()->nulleable();
+            $table->integer('budgets_id')->unsigned()->nullable();
             //$table->foreign('budgets_id')->references('id')->on('budgets')->nulleable();
 
-            $table->integer('contacts_id')->unsigned()->nulleable();
+            $table->integer('contacts_id')->unsigned()->nullable();
 //            $table->foreign('contacts_id')->references('id')->on('contacts')->nulleable();
 
-            $table->integer('branches_confirm_id')->unsigned()->nulleable();
-            $table->foreign('branches_confirm_id')->references('id')->on('branches')->nulleable();
+            $table->integer('branches_confirm_id')->unsigned()->nullable();
+            $table->foreign('branches_confirm_id')->references('id')->on('branches')->nullable();
 
 
         });

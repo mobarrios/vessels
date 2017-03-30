@@ -36,10 +36,10 @@ class CreateSalesPayments extends Migration
 
 
 
-            $table->integer('sales_id')->unsigned()->nulleable();
+            $table->integer('sales_id')->unsigned()->nullable();
             $table->foreign('sales_id')->references('id')->on('sales');
 
-            $table->integer('pay_methods_id')->unsigned()->nulleable();
+            $table->integer('pay_methods_id')->unsigned()->nullable();
             $table->foreign('pay_methods_id')->references('id')->on('pay_methods');
 
 
