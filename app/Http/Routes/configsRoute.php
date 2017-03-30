@@ -107,6 +107,24 @@ Route::group(['prefix'=>'configs'],function(){
     });
 
 
+    Route::group(['prefix'=>'vouchers'],function(){
+
+        Route::get('/destroy/{id?}',   ['as'=>'configs.vouchers.destroy','uses'=>'Configs\VouchersController@destroy']);
+        Route::get('/edit/{id?}',      ['as'=>'configs.vouchers.edit','uses'=>'Configs\VouchersController@edit']);
+        Route::post('/update/{id?}',   ['as'=>'configs.vouchers.update','uses'=>'Configs\VouchersController@update']);
+
+        Route::get('/create',           ['as'=>'configs.vouchers.create','uses'=>'Configs\VouchersController@create']);
+        Route::post('/store',           ['as'=>'configs.vouchers.store','uses'=>'Configs\VouchersController@store']);
+        Route::get('/show',             ['as'=>'configs.vouchers.show','uses'=>'Configs\VouchersController@show']);
+        Route::get('/index/{search?}',  ['as'=>'configs.vouchers.index','uses'=>'Configs\VouchersController@index']);
+
+        Route::get('/createFromSales/{salesId?}',  ['as'=>'configs.vouchers.fromSales','uses'=>'Configs\VouchersController@fromSales']);
+
+
+
+        Route::get('/pdf',  ['as'=>'configs.vouchers.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+    });
+
     Route::group(['prefix'=>'additionals'],function(){
 
         Route::get('/destroy/{id?}',   ['as'=>'configs.additionals.destroy','uses'=>'Configs\AdditionalsController@destroy']);

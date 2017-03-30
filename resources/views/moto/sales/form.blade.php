@@ -421,8 +421,8 @@
 
                 </div>
 
-                <a target="_blank" href="{!! route('moto.'.$section.'.factura',$models->id) !!}" class="pull-left" title="Factura PDF">
-                        <span class="btn btn-default"><strong class="strong">Facturar</strong></span>
+                <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="pull-left" title="Factura PDF">
+                        <span class="btn btn-default"><strong class="strong">Realizar Comprobante</strong></span>
                 </a>
 
                 <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="pull-left" title="Exportar PDF">

@@ -23,13 +23,13 @@ class CreateMyRequestTable extends Migration
             $table->integer('types_id');
 
 
-            $table->integer('models_id')->unsigned()->nulleable();
+            $table->integer('models_id')->unsigned()->nullable();
             $table->foreign('models_id')->references('id')->on('models');
 
-            $table->integer('colors_id')->unsigned()->nulleable();
+            $table->integer('colors_id')->unsigned()->nullable();
             $table->foreign('colors_id')->references('id')->on('colors');
 
-            $table->integer('users_id')->unsigned()->nulleable();
+            $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users');
 
 

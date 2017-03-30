@@ -18,10 +18,10 @@ class CreateTechnicalServiceTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->integer('clients_id')->unsigned()->nulleable();
+            $table->integer('clients_id')->unsigned()->nullable();
             $table->foreign('clients_id')->references('id')->on('clients');
 
-            $table->integer('users_id')->unsigned()->nulleable();
+            $table->integer('users_id')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users');
 
             $table->string('diagnostic');

@@ -114,16 +114,21 @@
 
 
             @permission('sales.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["sales"]) ? 'active' : '' }}">
+            <li class="treeview {{ in_array(Request::segment(2), ["sales","vouchers"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-shopping-bag "></i> <span>Ventas</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-      </span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                  </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class={{ Request::segment(2) == "sales" ? 'active' : '' }}><a
                                 href="{{route('moto.sales.index')}}"><span>Ventas</span></a></li>
+
+                </ul>
+                <ul class="treeview-menu">
+                    <li class={{ Request::segment(2) == "vouchers" ? 'active' : '' }}><a
+                                href="{{route('configs.vouchers.index')}}"><span>Comprobantes</span></a></li>
 
                 </ul>
             </li>
@@ -132,10 +137,10 @@
             @permission('smallboxes.list')
             <li class="treeview {{ in_array(Request::segment(2), ["smallBoxes"]) ? 'active' : '' }}">
                 <a href="#">
-                    <i class="fa fa-money"></i> <span>Caja chica</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-      </span>
+                    <i class="fa fa-money"></i> <span>Caja</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                      </span>
                 </a>
                 <ul class="treeview-menu">
                     <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
@@ -187,7 +192,8 @@
           </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="{{ Request::segment(2) == "company" ? 'active' : '' }}"><a href="{{route('configs.company.index')}}"><span>Datos</span> </a></li>
+                            <li class="{{ Request::segment(2) == "company" ? 'active' : '' }}"><a
+                                        href="{{route('configs.company.index')}}"><span>Datos</span> </a></li>
                             <li class={{ Request::segment(2) == "branches" ? 'active' : '' }}><a
                                         href="{{route('configs.branches.index')}}"><span> Sucursales</span></a></li>
 
@@ -224,16 +230,19 @@
                     @endpermission
 
                     @permission('financials.list')
-                    <li class={{ Request::segment(2) == "financials" ? 'active' : '' }}><a href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
+                    <li class={{ Request::segment(2) == "financials" ? 'active' : '' }}><a
+                                href="{{route('moto.financials.index')}}"><span>Financiamientos</span></a></li>
                     @endpermission
 
                     @permission('paymethods.list')
-                    <li class={{ Request::segment(2) == "payMethods" ? 'active' : '' }}><a href="{{route('moto.payMethods.index')}}"><span>Metodos de Pago</span></a></li>
+                    <li class={{ Request::segment(2) == "payMethods" ? 'active' : '' }}><a
+                                href="{{route('moto.payMethods.index')}}"><span>Metodos de Pago</span></a></li>
                     @endpermission
 
 
                     @permission('checkbooks.list')
-                    <li class={{ Request::segment(2) == "checkbooks" ? 'active' : '' }}><a href="{{route('moto.checkbooks.index')}}"><span>Chequera</span></a></li>
+                    <li class={{ Request::segment(2) == "checkbooks" ? 'active' : '' }}><a
+                                href="{{route('moto.checkbooks.index')}}"><span>Chequera</span></a></li>
                     @endpermission
 
 
