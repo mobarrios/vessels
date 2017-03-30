@@ -6,6 +6,7 @@ use App\Entities\Moto\Banks;
 use App\Entities\Moto\Financials;
 use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo;
@@ -32,7 +33,7 @@ class SalesController extends Controller
 
     public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
-                                BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo)
+                                BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo,AdditionalsRepo $additionalsRepo)
     {
 
         $this->request = $request;
@@ -55,6 +56,7 @@ class SalesController extends Controller
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
         $this->data['budgets'] = $budgetsRepo->ListsData('id', 'id');
 
+        $this->data['additionals'] = $additionalsRepo->ListsData('name','id');
 
         $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
 

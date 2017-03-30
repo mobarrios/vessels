@@ -9,7 +9,7 @@
         <div class="col-xs-3">
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="{!! Auth::user()->images ? Auth::user()->images->path : "../public/vendors/LTE/dist/img/avatar5.png" !!}" alt="User profile picture">
+                    <img class="profile-user-img img-responsive img-circle" src="{!! Auth::user()->images ? Auth::user()->images->path : "../vendors/LTE/dist/img/avatar5.png"!!}" alt="User profile picture">
 
                     <h3 class="profile-username text-center"><a href="{!! route('moto.profiles.index') !!}">{{\Illuminate\Support\Facades\Auth::user()->fullName}}</a></h3>
 
