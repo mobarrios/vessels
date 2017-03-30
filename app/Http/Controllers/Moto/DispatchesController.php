@@ -106,17 +106,21 @@ class DispatchesController extends Controller
     public function findItems($purchasesOrdersItemsId, DispatchesItemsRepo $dispatchesItemsRepo)
     {
         // dispatches items where dispatches items is not asigned
-        
-            $items = $dispatchesItemsRepo->getModel()
-                ->whereHas('PurchasesOrdersItems',function($q) use ($purchasesOrdersItemsId){
+
+        //dd($dispatchesItemsRepo->getModel()->where('purchases_orders_items_id',$purchasesOrdersItemsId)->get());
+
+        $items = $dispatchesItemsRepo->getModel()
+                ->whereHas('PurchasesOrdersItems',function($q) use ($purchasesOrdersItemsId)
+               {
                     $q->where('purchases_orders_id',$purchasesOrdersItemsId);
                 })
+
                 ->with('PurchasesOrdersItems')
                 ->with('PurchasesOrdersItems.DispatchesItems')
                 ->with('PurchasesOrdersItems.Models')
                 ->with('PurchasesOrdersItems.Models.Brands')
                 ->with('PurchasesOrdersItems.Colors')
-                ->where('dispatches_id',0)
+               ->where('dispatches_id',null)
                 ->get();
 
             return response()->json($items);
