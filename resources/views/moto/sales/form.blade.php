@@ -98,6 +98,8 @@
                         {!! Form::model($models->clients,['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
                     @else
                         {!! Form::open(['route'=> [config('models.prospectos.storeRoute')],  'title' =>"Crear cliente", 'id' => 'formClient']) !!}
+
+
                     @endif
 
                     {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
