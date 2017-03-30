@@ -210,6 +210,7 @@ class BudgetsController extends Controller
 
     public function createItems(BudgetsItemsRepo $budgetsItemsRepo, ModelsRepo $modelsRepo)
     {
+
         $model = $modelsRepo->find($this->request->models_id);
 
         $this->request['price_actual'] = $model->activeListPrice->price_list;

@@ -109,4 +109,5 @@
         </div>
 
     {!! Form::close() !!}
+
 <script src="js/asideModelsColors.js"></script>

@@ -46,7 +46,8 @@
                             <select name="colors_id" id="colors" class="form-control select2">
                                 @foreach($salesItems->items->models->modelsByColors as $id => $color)
                                     <option value=' {!! $id  !!} '
-                                            @if($id == $salesItems->items->colors_id) selected="selected" @endif> {!! $color["color"] !!}
+                                            {!! $id == $budgetsItems->colors_id ? 'selected="selected"' : '' !!}>
+                                        {!! $color["color"] !!}
                                         ( {!! $color["cantidad"] !!} )
                                     </option>
                                 @endforeach
@@ -104,7 +105,7 @@
 
                     //recorre los adicionales
                     $.each(data.additionables, function (a, b) {
-                        $('#additionals').append('<tr><td>' + b.additionals.name + ' <input type="hidden" name="additionals['+ b.amount + ']" value="'+b.additionals.id+'"></td><td>$ <input type="text" value="'+ b.amount + '"</td></tr>');
+                        $('#additionals').append('<tr><td>' + b.additionals.name + '</td><td>$ <input type="text" name="additionals['+b.additionals.id+']" value="'+ b.amount + '"</td></tr>');
                     });
 
                     // busca los colores disponibles
