@@ -98,9 +98,9 @@
                         {!! Form::model($models->clients,['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
                     @else
                         {!! Form::open(['route'=> [config('models.prospectos.storeRoute')],  'title' =>"Crear cliente", 'id' => 'formClient']) !!}
-
-
                     @endif
+
+
 
                     {!! Form::hidden('model',null,['ng-model' => 'model','id' => 'modelId']) !!}
 
@@ -164,8 +164,10 @@
 
 
                     <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
+
+
                         @if(!isset($models))
-                            {{--{!! Form::hidden('clients_id', $client->id) !!}--}}
+
                             <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
                             <button type="reset" id="reset" class="btn btn-danger"><span class="fa fa-trash"></span>
                             </button>
@@ -187,6 +189,13 @@
 
         {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
 
+            @if(Session::has('client'))
+                {!! Form::hidden('clients_id', Session::get('client')->id) !!}
+            @elseif(isset($models))
+                {!! Form::hidden('clients_id', $models->clients->id) !!}
+            @else
+                {!! Form::hidden('clients_id',  null) !!}
+            @endif
 
         <div class="col-xs-12 content">
             <div class="box box-primary">
@@ -198,8 +207,7 @@
                         {!! Form::label('Tipo de Operación') !!}
                         {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
                     </div>
-
-                    {!! Form::hidden('clients_id',null,['id'=>'clients_id']) !!}
+                    
 
                     <div class="col-xs-12 col-md-5 form-group">
                         {!! Form::label('Presupuestos ') !!}
