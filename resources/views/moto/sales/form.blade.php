@@ -187,6 +187,8 @@
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
 
+
+
         {!! Form::hidden('users_id',\Illuminate\Support\Facades\Auth::user()->id) !!}
 
             @if(Session::has('client'))
@@ -207,7 +209,7 @@
                         {!! Form::label('Tipo de Operación') !!}
                         {!! Form::select('type',['Reserva'=>'Reserva', 'Venta' => 'Venta'], null, ['class'=>' form-control select2']) !!}
                     </div>
-                    
+
 
                     <div class="col-xs-12 col-md-5 form-group">
                         {!! Form::label('Presupuestos ') !!}
@@ -369,17 +371,19 @@
                         <div class="col-xs-12">
                             <table class="table table-stripped">
                                 <thead>
+                                <th></th>
                                 <th>#</th>
                                 <th>Fecha</th>
                                 <th>Forma de Pago</th>
                                 <th> $ Monto</th>
                                 </thead>
-                                <tbody>
+                                <tbody id="tablaPagos">
                                 <?php $pago = 0 ?>
                                 @if(isset($models->SalesPayments))
 
                                     @foreach($models->SalesPayments as $payment)
                                         <tr>
+                                            <td><input type="checkbox" value="{{$payment->id}}"></td>
                                             <td>{{$payment->id}}</td>
                                             <td>{{$payment->date}}</td>
                                             <td>{{$payment->PayMethods->name}}</td>
@@ -404,31 +408,34 @@
                                 </tfoot>
                             </table>
 
+
+                                <a target="_blank" href="{!! route('moto.'.$section.'.recibo',$models->id) !!}" id="generarRecibo"
+                                   class="pull-left btn btn-success disabled"
+                                   title="Recibo PDF">
+                                    Generar recibo
+                                </a>
+
+
+
                             <h5 class="pull-right">TOTAL A PAGAR : <b class="text-danger total" data-precio="{!! ($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount) ) - $pago !!}">
                                     $ {{number_format(($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount)  - $pago),2)}}</b>
                             </h5>
-
-
-                            <a target="_blank" href="{!! route('moto.'.$section.'.recibo',$models->id) !!}"
-                               class="pull-left"
-                               title="Recibo PDF">
-                        <span class="btn btn-success">
-                           Recibo
-                        </span>
-                            </a>
 
                         </div>
                     </div>
 
                 </div>
 
-                <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="pull-left" title="Factura PDF">
-                        <span class="btn btn-default"><strong class="strong">Realizar Comprobante</strong></span>
-                </a>
+                <div class="btn-group">
 
-                <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="pull-left" title="Exportar PDF">
-                    <span class="btn btn-danger">Remito</span>
-                </a>
+                    <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-default" title="Factura PDF">
+                            <span><strong class="strong">Realizar Comprobante</strong></span>
+                    </a>
+
+                    <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-danger" title="Exportar PDF">
+                        <span>Remito</span>
+                    </a>
+                </div>
             </div>
         @endif
 
@@ -777,6 +784,42 @@
             $('#modalBudgetClients').modal(open);
         });
 
+
+
+
+
+
+        var inputsPagos = $("#tablaPagos input[type=checkbox]");
+/*
+        $.each(inputsPagos,function (pos, input) {
+
+        })
+*/
+
+        $(inputsPagos).parent().on('click', function(ev){
+
+            var checkbox = new Array();
+
+            if($(this).prop('checked')){
+                $(this).prop('checked',false)
+            }else{
+                $(this).prop('checked',true)
+            }
+
+
+            $.each(inputsPagos,function (pos, input) {
+                checkbox[pos] = $(input).prop('checked');
+            })
+
+            for(var inputs in checkbox){
+                if(checkbox[inputs]){
+                    $("#generarRecibo").removeClass('disabled');
+                    return
+                }else{
+                    $("#generarRecibo").addClass('disabled');
+                }
+            }
+        });
 
 
     </script>
