@@ -165,13 +165,13 @@ class SalesController extends Controller
         if ($item != false)
         {
             $this->request['items_id'] = $item;
-            $salesItemsRepo->create($this->request->all());
+            $salesItems = $salesItemsRepo->create($this->request->all());
 
             // agrega los adicionales del modelo con los nuevos importes o no
             if($this->request->has('additionals')){
                 foreach ($this->request->additionals as $id => $amount )
                 {
-                    $sale->additionables()->create(['additionals_id'=>$id , 'amount' => $amount]);
+                    $sale->additionables()->create(['additionals_id'=>$id , 'amount' => $amount,'sales_items_id' => $salesItems->id]);
                 }
             };
 

@@ -9,7 +9,7 @@
 
  class Additionables extends Model
  {
-     protected $fillable    = ['additionals_id','amount'];
+     protected $fillable    = ['additionals_id','amount','sales_items_id'];
 
      public function additionable(){
 

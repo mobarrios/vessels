@@ -539,9 +539,7 @@
                 $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
                 $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
 
-            @endif
-
-            @if(isset($models))
+            @elseif(isset($models))
                 $scope.model = "{!! $models->clients->id !!}"
                 $scope.last_name = "{!! $models->clients->last_name!!}"
                 $scope.name = "{!! $models->clients->name !!}"
@@ -555,6 +553,7 @@
                 $scope.location = "{!! $models->clients->location!!}"
                 $scope.province = "{!! $models->clients->province !!}"
 
+            @else
             @endif
 
 

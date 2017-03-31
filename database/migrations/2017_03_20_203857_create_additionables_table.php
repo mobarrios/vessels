@@ -24,6 +24,9 @@ class CreateAdditionablesTable extends Migration
 
             $table->integer('additionals_id')->unsigned()->index();
             $table->foreign('additionals_id')->references('id')->on('additionals')->onDelete('cascade');
+
+            $table->integer('sales_items_id')->unsigned()->index()->nullable();
+            $table->foreign('sales_items_id')->references('id')->on('sales_items')->onDelete('cascade');
         });
     }
 
