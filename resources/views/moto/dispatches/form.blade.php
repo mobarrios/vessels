@@ -240,7 +240,8 @@
 
 
 
-            $scope.onCategoryChange = function (id) {
+            $scope.onCategoryChange = function (id)
+            {
                 $http.get("moto/dispatchesItems/" + id)
                         .then(function (response) {
                             $scope.purchases = response.data;
