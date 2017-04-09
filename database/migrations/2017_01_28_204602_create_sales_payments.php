@@ -33,6 +33,7 @@ class CreateSalesPayments extends Migration
             $table->date('transf_date');
             $table->integer('financials_id');
 
+            $table->tinyInteger('status')->unsigned()->nullable();
 
 
 

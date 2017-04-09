@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Moto;
 
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\VouchersRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\CategoriesRepo;
 use App\Http\Repositories\Moto\FilesRepo as Repo;
@@ -13,7 +14,7 @@ use Illuminate\Routing\Route;
 
 class FilesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route)
+    public function  __construct(Request $request, Repo $repo, Route $route,VouchersRepo $vouchersRepo)
     {
 
         $this->request  = $request;
@@ -23,6 +24,9 @@ class FilesController extends Controller
         $this->section          = 'files';
         $this->data['section']  = $this->section;
 
+        $this->data['invoices'] = $vouchersRepo->searchWhere('tipo','F')->list('numero','id');
+
+        $this->data['senders'] = $vouchersRepo->searchWhere('tipo','R')->list('numero','id');
 
 
 

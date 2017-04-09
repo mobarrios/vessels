@@ -18,6 +18,11 @@ return [
     'updateRoute'   => 'moto.'.$model.'.update',
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
+    'storeRecibosRoute'  => 'moto.'.$model.'.storeRecibos',
+    'deleteRecibosRoute'  => 'moto.'.$model.'.deleteRecibos',
+
+
+
     'postStoreRoute'  => 'moto.'.$model.'.edit',
     'postUpdateRoute' => 'moto.'.$model.'.edit',
 

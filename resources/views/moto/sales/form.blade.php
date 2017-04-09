@@ -55,6 +55,7 @@
 
         }
 
+
     </style>
 @endsection
 
@@ -380,26 +381,38 @@
                                 <tbody id="tablaPagos">
                                 <?php $pago = 0 ?>
                                 @if(isset($models->SalesPayments))
+                                    {!! Form::open(['route'=> config('models.'.$section.'.storeRecibosRoute'),'method' => 'post' , 'id' =>'formRecibos']) !!}
+                                        @foreach($models->SalesPayments as $payment)
+                                            <tr>
+                                                <td>
+                                                    @if($payment->status)
+                                                        <input type="checkbox" class="disabled input-red" disabled>
+                                                    @else
+                                                        <input type="checkbox" value="{{$payment->id}}" name="sales_payments_id[]">
+                                                    @endif
+                                                </td>
+                                                <td>{{$payment->id}}</td>
+                                                <td>{{$payment->date}}</td>
+                                                <td>{{$payment->PayMethods->name}}</td>
+                                                <td> $ {{number_format($payment->amount, 2)}}</td>
+                                                <td class="col-xs-1">
+                                                    @if(!$payment->status)
+                                                        <a class="btn btn-xs btn-default"
+                                                           href="{{route('moto.sales.deletePayment',[$payment->id,$models->id])}}"><span class="text-danger fa fa-trash"></span></a>
+                                                        <a class="btn btn-xs btn-default"
+                                                           href="{{route('moto.sales.editPayment',$payment->id )}}"
+                                                           data-id="{!! $payment->id !!}"><span
+                                                                    class="text-success fa fa-edit"></span></a>
+                                                    @else
+                                                        <span class="label label-success">Pagado <i class="glyphicon glyphicon-ok-sign"></i></span>
 
-                                    @foreach($models->SalesPayments as $payment)
-                                        <tr>
-                                            <td><input type="checkbox" value="{{$payment->id}}"></td>
-                                            <td>{{$payment->id}}</td>
-                                            <td>{{$payment->date}}</td>
-                                            <td>{{$payment->PayMethods->name}}</td>
-                                            <td> $ {{number_format($payment->amount, 2)}}</td>
-                                            <td class="col-xs-1">
-                                                <a class="btn btn-xs btn-default"
-                                                   href="{{route('moto.sales.deletePayment',[$payment->id,$models->id])}}"><span
-                                                            class="text-danger fa fa-trash"></span></a>
-                                                <a class="btn btn-xs btn-default"
-                                                   href="{{route('moto.sales.editPayment',$payment->id )}}"
-                                                   data-id="{!! $payment->id !!}"><span
-                                                            class="text-success fa fa-edit"></span></a>
-                                            </td>
-                                            <?php  $pago += $payment->amount;?>
-                                        </tr>
-                                    @endforeach
+                                                    @endif
+                                                </td>
+                                                <?php  $pago += $payment->amount;?>
+                                            </tr>
+                                        @endforeach
+
+                                    {!! Form::close() !!}
                                 @endif
                                 </tbody>
                                 <tfoot>
@@ -410,10 +423,12 @@
 
 
                                 <a target="_blank" href="{!! route('moto.'.$section.'.recibo',$models->id) !!}" id="generarRecibo"
-                                   class="pull-left btn btn-success disabled"
+                                   class="pull-left btn btn-primary disabled"
                                    title="Recibo PDF">
                                     Generar recibo
                                 </a>
+
+
 
 
 
@@ -426,17 +441,64 @@
 
                 </div>
 
-                <div class="btn-group">
-
-                    <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-default" title="Factura PDF">
-                            <span><strong class="strong">Realizar Comprobante</strong></span>
-                    </a>
-
-                    <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-danger" title="Exportar PDF">
-                        <span>Remito</span>
-                    </a>
-                </div>
             </div>
+
+            <div class="col-xs-12 content">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-pay"></i> Recibos</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-xs-12">
+                            <table class="table table-stripped">
+                                <thead>
+                                    <th>#</th>
+                                    <th>Fecha</th>
+                                    <th> $ Monto</th>
+                                    <th></th>
+                                </thead>
+
+                                <tbody id="tablaPagos">
+                                    @forelse($models->vouchers as $voucher)
+
+                                        <tr>
+                                            <td>
+                                                {!! $voucher->numero !!}
+                                            </td>
+                                            <td>{{$voucher->fecha}}</td>
+                                            <td> $ {{number_format($voucher->importe_total, 2)}}</td>
+                                            <td class="col-xs-1">
+
+                                                <a class="btn btn-xs btn-danger"
+                                                   href="{{route('moto.sales.deleteRecibos',$voucher->id)}}"><span class="fa fa-trash"></span></a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                    @endforelse
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-xs-12">
+                @if((($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount))  - $pago == 0) && $models->pagado === 1)
+                    <div class="btn-group">
+                        <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-default" title="Factura PDF">
+                            <span><strong class="strong">Realizar Comprobante</strong></span>
+                        </a>
+
+                        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-success" title="Exportar PDF">
+                            <span>Generar remito</span>
+                        </a>
+                    </div>
+                @endif
+            </div>
+
         @endif
 
 
@@ -510,19 +572,6 @@
 
 
         app.controller("ctl", function ($scope, $http) {
-            $scope.model = ""
-            $scope.last_name = ""
-            $scope.name = ""
-            $scope.dni = ""
-            $scope.email = ""
-            $scope.sexo = ""
-            $scope.nacionality = ""
-            $scope.phone1 = ""
-            $scope.address = ""
-            $scope.city = ""
-            $scope.location = ""
-            $scope.province = ""
-            $scope.province = ""
 
 
             @if(Session::has('client') || $errors->any())
@@ -539,7 +588,9 @@
                 $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
                 $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
 
-            @elseif(isset($models))
+            @endif
+
+            @if(isset($models))
                 $scope.model = "{!! $models->clients->id !!}"
                 $scope.last_name = "{!! $models->clients->last_name!!}"
                 $scope.name = "{!! $models->clients->name !!}"
@@ -554,6 +605,20 @@
                 $scope.province = "{!! $models->clients->province !!}"
 
             @else
+                    $scope.model = ""
+                $scope.last_name = ""
+                $scope.name = ""
+                $scope.dni = ""
+                $scope.email = ""
+                $scope.sexo = ""
+                $scope.nacionality = ""
+                $scope.phone1 = ""
+                $scope.address = ""
+                $scope.city = ""
+                $scope.location = ""
+                $scope.province = ""
+                $scope.province = ""
+
             @endif
 
 
@@ -583,6 +648,7 @@
                             $scope.location = response.data['location']
                             $scope.province = response.data['province']
 
+                            $('input[name=clients_id]').val(option.val())
                         });
 
 
@@ -819,6 +885,13 @@
                 }
             }
         });
+
+        $("#generarRecibo").on('click',function(ev){
+            ev.preventDefault()
+
+            $("#formRecibos").submit();
+
+        })
 
 
     </script>

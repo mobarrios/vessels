@@ -33,6 +33,12 @@ Route::group(['prefix'=>'sales'],function(){
     Route::get('/deletePayment/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.sales.deletePayment', 'uses' => 'Moto\SalesController@deletePayment']);
 
 
+    Route::post('/storeRecibos', ['middleware' => 'permission:' . $section . '.create', 'as' => 'moto.sales.storeRecibos', 'uses' => 'Moto\SalesController@storeRecibos']);
+
+    Route::get('/deleteRecibos/{recibo}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.sales.deleteRecibos', 'uses' => 'Moto\SalesController@deleteRecibos']);
+
+
+
     Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
 
 

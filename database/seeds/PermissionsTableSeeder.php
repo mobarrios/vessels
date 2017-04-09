@@ -726,6 +726,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //legajos
+                [
+                    'id'    => 112,
+                    'name' => 'Listar Legajo',
+                    'slug' => 'files.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 113,
+                    'name' => 'Crear Legajo',
+                    'slug' => 'files.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 114,
+                    'name' => 'Editar Legajo',
+                    'slug' => 'files.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 115,
+                    'name' => 'Borrar Legajo',
+                    'slug' => 'files.destroy',
+                    'model' => '',
+                ],
+
             ]);
     }
 }

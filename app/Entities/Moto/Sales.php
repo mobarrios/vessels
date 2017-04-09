@@ -4,6 +4,7 @@
 
  use App\Entities\Configs\Branches;
  use App\Entities\Configs\User;
+ use App\Entities\Configs\Vouchers;
  use App\Entities\Entity;
 
  class Sales extends Entity
@@ -44,6 +45,10 @@
         return $this->belongsToMany(Items::class,'sales_items')->with('models','colors')->withPivot('price_actual','patentamiento','pack_service');
     }
 
+    public function Vouchers(){
+        return $this->belongsToMany(Vouchers::class,'sales_vouchers');
+    }
+
 
      public function getDateConfirmAttribute($value)
      {
@@ -61,6 +66,26 @@
      }
 
 
+     public function getPagadoAttribute(){
+
+         if($this->SalesPayments->count() == 0){
+             return;
+         }
+
+         $pago = [];
+
+         foreach ($this->SalesPayments as $payment){
+             $pago[] = $payment->status;
+         }
+
+         if(in_array("",$pago)){
+             return 0;
+         }else{
+             return 1;
+         }
+
+
+     }
 
  }
 
