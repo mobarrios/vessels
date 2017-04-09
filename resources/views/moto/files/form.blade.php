@@ -11,7 +11,7 @@
         {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
     @endif
     <div class="col-xs-12 form-group">
-        {!! Form::label('Nombre Modelo') !!}
+        {!! Form::label('Fotocopia de Factura') !!}
         {!! Form::text('name', null, ['class'=>'form-control']) !!}
     </div>
 

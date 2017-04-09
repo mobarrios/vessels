@@ -8,6 +8,7 @@ use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
+use App\Http\Repositories\Configs\VouchersRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo;
@@ -236,6 +237,8 @@ class SalesController extends Controller
 
         return view('moto.sales.modalPayMethodsForm')->with($this->data);
     }
+
+
     public function addPayment(SalesPaymentsRepo $salesPaymentsRepo)
     {
 
@@ -303,6 +306,54 @@ class SalesController extends Controller
     }
 
 
+
+    public function storeRecibos(SalesPaymentsRepo $salesPaymentsRepo, VouchersRepo $vouchersRepo)
+    {
+        $sales_payments = collect();
+
+        foreach ($this->request->sales_payments_id as $sales_payments_id){
+            $sp = $salesPaymentsRepo->find($sales_payments_id);
+            $sp->status = 1;
+
+            $sp->save();
+
+            $sales_id = $sp->sales_id;
+
+            $sales_payments->push($salesPaymentsRepo->find($sales_payments_id));
+        }
+
+
+        if($vouchersRepo->ListAll()->where('tipo','R')->count() > 0){
+            $number = $vouchersRepo->ListAll()->where('tipo','R')->get()->last()->numero + 1;
+        }else{
+            $number = '1';
+        }
+
+        $voucher = $vouchersRepo->create(['tipo' => 'R','letra' => 'X', 'concepto' => 'Pago', 'fecha' => date('Y-m-d', time()), 'importe_total' => $sales_payments->sum('amount'),'numero' => $number]);
+
+        $voucher->Sales()->attach($sales_id);
+
+        return redirect()->route('moto.sales.edit',$sales_id)->withErrors('Se creó correctamente el recibo');
+    }
+
+    public function deleteRecibos(VouchersRepo $vouchersRepo, SalesPaymentsRepo $salesPaymentsRepo)
+    {
+        $voucher = $vouchersRepo->find($this->route->getParameter('recibo'));
+
+        foreach ($voucher->Sales as $sales){
+            dd($sales);
+            $sales->status = null;
+//            $sales->save();
+        }
+
+//        $voucher->Sales()->detach();
+
+//        $vouchersRepo->destroy($this->route->getParameter('recibo'));
+
+
+
+//        return parent::edit();
+    }
 
 
 }
