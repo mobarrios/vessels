@@ -16,16 +16,27 @@
 
             <td>
                 @if($model->activeListPrice)
-                    <div class="col-xs-6">
+                    <div class="col-xs-12">
                         <strong class="text-danger"> {{$model->activeListPrice->ModelsListsPrices->number }}</strong><br>
                         Lista : <strong class="text-success pull-right">$ {{ number_format($model->activeListPrice->price_list , 2 ) }}</strong><br>
                         Costo : <strong class="pull-right">$ {{ number_format($model->activeListPrice->price_net , 2)}}</strong><br>
-                        Pack : <i class="pull-right ">$ {{number_format($model->pack_service , 2)}}</i><br>
-                        Patentamiento : <i class="pull-right">$ {{number_format($model->patentamiento ,2 )}}</i>
+
+                        @foreach($model->Additionables as $additional)
+
+                                {{$additional->additionals->name}} : <span class=" pull-right">$ {{ number_format($additional->amount , 2 ) }}</span><br>
+
+                        @endforeach
                     </div>
                 @endif
 
             </td>
+            <td>
+
+
+
+            </td>
+
+
             <td>
                 @if($model->stock == 0 )
                     <label class="label label-danger">Sin Stock</label>
