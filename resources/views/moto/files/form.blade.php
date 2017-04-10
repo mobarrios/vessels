@@ -1,7 +1,9 @@
 @extends('template.model_form')
 
 @section('form_title')
+
     Nuevo Legajo
+
 @endsection
 
 @section('form_inputs')
