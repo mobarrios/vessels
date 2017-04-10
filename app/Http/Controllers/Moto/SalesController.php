@@ -112,12 +112,16 @@ class SalesController extends Controller
                 $item = $this->itemsRepo->asignItem($modelo->id, $model->branches_confirm_id, $model->id, $modelo->pivot->colors_id);
                 if ($item != false)
                 {
+
+                    // esto duplica en el asignar
+                    /*
                     $datos = [];
                     $datos['items_id'] = $item;
                     $datos['sales_id'] = $model->id;
                     $datos['price_actual'] = $modelo->pivot->price_actual;
 
                     $this->salesItemsRepo->create($datos);
+                    */
 
 
                     // agrega los adicionales del modelo con los nuevos importes o no
