@@ -10,6 +10,7 @@
      protected $table = 'models_lists_prices';
 
      protected $fillable = ['number','status','providers_id'];
+     protected $section = 'modelsListsPrices';
 
     public function ModelsListsPricesItems()
     {

@@ -11,6 +11,7 @@ namespace App\Http\Repositories;
 
 use App\Entities\Configs\Brancheables;
 use App\Entities\Configs\Logs;
+use App\Http\Helpers\ImagesHelper;
 use App\Http\Requests\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,39 @@ abstract class BaseRepo
 
     public abstract function getModel();
 
+
+    public function create($data)
+    {
+
+        $model = new $this->model();
+
+        if(is_object($data))
+            $model->fill($data->all());
+        else
+            $model->fill($data);
+
+        $model->save();
+
+
+        //guarda imagenes
+        if(config('models.'.$model->section.'.is_imageable'))
+            $this->createImage($model, $data);
+
+        //guarda log
+        if(config('models.'.$model->section.'.is_logueable'))
+            $this->createLog($model, 1);
+
+        //si va a una sucursal
+        if(config('models.'.$model->section.'.is_brancheable'))
+            $this->createBrancheables($model, Auth::user()->branches_active_id);
+
+
+        return $model;
+    }
+
+
+
+    /*
     public function create($data)
     {
         $model = new $this->model();
@@ -39,6 +73,7 @@ abstract class BaseRepo
 
         return $model;
     }
+    */
 
 
     public function update($id, $data)
@@ -109,13 +144,16 @@ abstract class BaseRepo
             $model = $model->where($colum, $value);
 
 
-        if (config('models.' . $section . '.is_brancheable')) {
-            return $model->whereHas('Brancheables', function ($q) {
+        if (config('models.' . $section . '.is_brancheable'))
+        {
 
+            return $model->whereHas('Brancheables', function ($q)
+            {
                 $q->whereIn('branches_id', Auth::user()->branches_id);
             });
 
-        } else {
+        } else
+        {
             return $model;
         }
     }
@@ -230,7 +268,8 @@ abstract class BaseRepo
 
                 foreach ($k as $relation => $col) {
 
-                    $q->orWhereHas($relation, function ($q) use ($col, $data) {
+                    $q->orWhereHas($relation, function ($q) use ($col, $data)
+                    {
                         $q->where($col, 'like', '%' . $data->search . '%');
                     });
                 }
@@ -288,5 +327,19 @@ abstract class BaseRepo
         $model->additionables()->detach($addition_id);
     }
 
+
+    public function createImage($model, $data )
+    {
+        $image = new ImagesHelper();
+
+        if(!is_null($data->image))
+        {
+            $time = time();
+            $name = $time.$data->image->getClientOriginalName();
+
+            $image->upload( $name , $data->file('image'), config('models.'.$model->Section.'.imagesPath'));
+            $this->createImageables($model, config('models.'.$section.'.imagesPath') . $name);
+        }
+    }
 
 }

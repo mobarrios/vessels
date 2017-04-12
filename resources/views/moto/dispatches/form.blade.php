@@ -113,7 +113,7 @@
 
                                     <table class="table">
                                         <thead>
-                                        <th><input type="checkbox"></th>
+                                        <th></th>
                                         <th>Marca</th>
                                         <th>Modelo</th>
                                         <th>Color</th>
@@ -125,7 +125,8 @@
                                         @foreach($models->DispatchesItems as $item)
                                             <tr>
                                                 <td><input class='invoice' type="checkbox" value="{{$item->Items->id}}"
-                                                           name="dispatchesInvoiced[{{$item->Items->id}}]"></td>
+                                                           name="dispatchesInvoiced[{{$item->Items->id}}]">
+                                                </td>
                                                 <td>{{$item->Items->Models->Brands->name}}</td>
                                                 <td>{{$item->Items->Models->name}}</td>
                                                 <td>{{$item->Items->Colors->name}}</td>
@@ -143,7 +144,6 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-
                                     <button class="btn btn-block" ng-click="asignarFactura()">Asignar Factura de
                                         Compra
                                     </button>
@@ -217,8 +217,6 @@
 
 @section('js')
     <script>
-
-
         var app = angular.module("myApp", []);
 
         app.controller("myCtrl", function ($scope, $http) {

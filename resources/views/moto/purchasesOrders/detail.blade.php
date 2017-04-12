@@ -140,9 +140,10 @@
                     </thead>
                     <tbody>
                     <?php $pago = 0 ?>
-                    @if(isset($models->PurchasesOrdersPayments))
 
-                        @foreach($models->PurchasesOrdersPayments as $payment)
+                    @if(isset($models->charges))
+
+                        @foreach($models->charges as $payment)
                             <tr>
                                 <td>{{$payment->id}}</td>
                                 <td>{{$payment->date}}</td>

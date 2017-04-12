@@ -11,6 +11,7 @@
 
      protected $fillable = ['clients_id','diagnostic','shifts_id','users_id'];
 
+     protected $section = 'technicalServices';
 
      public function Clients()
      {

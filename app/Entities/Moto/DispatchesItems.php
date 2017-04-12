@@ -11,6 +11,8 @@
 
      protected $fillable = ['dispatches_id','items_id','purchases_orders_items_id'];
 
+     protected $section = 'dispatchesItems';
+
      public function Items()
      {
          return $this->belongsTo(Items::class);

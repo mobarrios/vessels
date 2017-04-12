@@ -25,12 +25,8 @@ abstract class Controller extends BaseController
     
     public function index()
     {
-
-
-
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
-
 
         //si request de busqueda
         if( isset($this->request->search) && !is_null($this->request->filter))
@@ -81,7 +77,21 @@ abstract class Controller extends BaseController
     }
 
 
+
     // post de create
+
+    public function store()
+    {
+        //validar los campos
+        $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+
+        //crea a traves del repo con el request
+        $model = $this->repo->create($this->request);
+
+        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
+    }
+
+    /*
     public function store()
     {
         //validar los campos
@@ -106,7 +116,7 @@ abstract class Controller extends BaseController
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
-
+    */
     //post de editar
     public function update()
     {
@@ -118,6 +128,7 @@ abstract class Controller extends BaseController
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request);
 
+              /*
                 //guarda imagenes
                 if(config('models.'.$this->section.'.is_imageable'))
                     $this->createImage($model, $this->request);
@@ -130,6 +141,7 @@ abstract class Controller extends BaseController
                 if(config('models.'.$this->section.'.is_brancheable'))
                     $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
+              */
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
     }
@@ -151,7 +163,7 @@ abstract class Controller extends BaseController
             return "error";
     }
 
-
+/*
     public function createImage($model, $data )
     {
         $image = new ImagesHelper();
@@ -165,5 +177,6 @@ abstract class Controller extends BaseController
                 $this->repo->createImageables($model, config('models.'.$this->section.'.imagesPath') . $name);
         }
     }
+*/
 
 }

@@ -11,6 +11,8 @@
 
      protected $fillable = ['name','cuit','address','phone','email','providers_payments_id'];
 
+     protected $section = 'providers';
+
 
      public function PurchasesOrders()
      {

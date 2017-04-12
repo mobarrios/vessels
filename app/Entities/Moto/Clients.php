@@ -11,6 +11,8 @@
 
      protected $fillable = ['name','last_name','email','dni','sexo','marital_status','dob','nacionality','phone1','phone2','address', 'city','location','province','obs','prospecto'];
 
+     protected $section = 'clients';
+
 
      public function Budgets()
      {

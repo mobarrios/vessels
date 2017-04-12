@@ -14,6 +14,7 @@
 
      protected $fillable = ['nro','date','date_confirm','users_id','clients_id','budgets_id','contacts_id','type','branches_confirm_id'];
 
+     protected $section = 'sales';
 
 
      public function User()
@@ -60,21 +61,21 @@
           $this->attributes['date_confirm'] = date('Y-m-d',strtotime($value));
      }
 
-     public function SalesPayments()
+     public function Payments()
      {
-         return $this->hasMany(SalesPayments::class);
+         return $this->hasMany(Payments::class);
      }
 
 
      public function getPagadoAttribute(){
 
-         if($this->SalesPayments->count() == 0){
+         if($this->Payments->count() == 0){
              return;
          }
 
          $pago = [];
 
-         foreach ($this->SalesPayments as $payment){
+         foreach ($this->Payments as $payment){
              $pago[] = $payment->status;
          }
 

@@ -7,6 +7,9 @@ class Logs extends Model
 {
     protected $fillable = ['user_id','log'];
 
+    protected $section = 'logs';
+
+
     public function logeable()
     {
         return $this->morphTo();

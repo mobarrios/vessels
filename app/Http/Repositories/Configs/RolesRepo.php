@@ -11,7 +11,8 @@ class RolesRepo extends BaseRepo {
     protected $is_imageable     =  false;
     protected $is_logueable     =  true;
 
-    public function getModel(){
+    public function getModel()
+    {
         return new Role();
     }
 

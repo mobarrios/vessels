@@ -9,9 +9,11 @@
      protected $table = 'certificates';
 
      protected $fillable = ['number','items_id','date','year','status','tecnic_model','type'];
+     protected $section = 'certificates';
 
-     
-     
+
+
+
  }
 
 

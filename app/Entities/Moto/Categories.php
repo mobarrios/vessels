@@ -10,6 +10,8 @@
      protected $table = 'categories';
 
      protected $fillable = ['name'];
+     protected $section = 'categories';
+
 
      public function Models()
      {

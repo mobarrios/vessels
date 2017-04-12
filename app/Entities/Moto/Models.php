@@ -12,6 +12,8 @@ class Models extends Entity
 
     protected $fillable = ['name', 'status', 'brands_id', 'patentamiento', 'pack_service', 'min_stock'];
 
+    protected $section = 'models';
+
 
     public function Items()
     {

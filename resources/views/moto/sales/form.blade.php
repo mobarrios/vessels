@@ -380,9 +380,9 @@
                                 </thead>
                                 <tbody id="tablaPagos">
                                 <?php $pago = 0 ?>
-                                @if(isset($models->SalesPayments))
+                                @if(isset($models->Payments))
                                     {!! Form::open(['route'=> config('models.'.$section.'.storeRecibosRoute'),'method' => 'post' , 'id' =>'formRecibos']) !!}
-                                        @foreach($models->SalesPayments as $payment)
+                                        @foreach($models->Payments as $payment)
                                             <tr>
                                                 <td>
                                                     @if($payment->status)

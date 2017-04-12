@@ -12,6 +12,8 @@
 
      protected $fillable = ['users_id','colors_id','models_id','quantity','actual_status','types_id'];
 
+     protected $section = 'myRequest';
+
 
      public function Models()
      {

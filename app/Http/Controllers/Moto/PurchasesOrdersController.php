@@ -6,6 +6,7 @@ use App\Entities\Configs\Branches;
 use App\Entities\Moto\DispatchesItems;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
+use App\Http\Repositories\Moto\ChargesRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\DispatchesItemsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
@@ -168,9 +169,12 @@ class PurchasesOrdersController extends Controller
     }
 
 
-    public function addPayment()
+    public function addPayment(ChargesRepo $chargesRepo)
     {
-        dd('asdad');
+
+        $chargesRepo->create($this->request);
+
+        return redirect()->back();
     }
 
 

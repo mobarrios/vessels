@@ -11,6 +11,8 @@ class TypesSmallBoxes extends Entity
     protected $table = 'types_small_boxes';
 
     protected $fillable = ['name'];
+    
+    protected $section = 'typesSmallBoxes';
 
 
 

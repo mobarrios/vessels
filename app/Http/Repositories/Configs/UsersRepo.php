@@ -12,7 +12,6 @@ class UsersRepo extends BaseRepo {
         return new User;
     }
 
-
     public function create($data)
     {
         $model =  parent::create($data);

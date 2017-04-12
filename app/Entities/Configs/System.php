@@ -11,6 +11,9 @@
 
      protected $fillable = ['name', 'last_name','email', 'password'];
 
+     protected $section = 'system';
+
+
  }
 
 

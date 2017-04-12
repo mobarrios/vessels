@@ -11,6 +11,9 @@
 
      protected $fillable = ['quantity','price','discount','colors_id','models_id','purchases_orders_id'];
 
+     protected $section = 'purchasesOrdersItems';
+
+
      public function PurchasesOrders()
      {
         return $this->belongsTo(PurchasesOrders::class);

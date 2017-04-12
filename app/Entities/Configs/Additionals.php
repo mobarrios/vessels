@@ -9,6 +9,9 @@
 
      protected $table = 'additionals';
 
+     protected $section = 'additionals';
+
+
      protected $fillable = ['name'];
 
      public function additionable()

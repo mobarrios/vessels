@@ -12,6 +12,8 @@
 
      protected $fillable = ['tipo', 'letra','concepto','punto_venta','fecha','importe_total','numero','cae','vencimiento_cae'];
 
+     protected $section = 'vouchers';
+
      //Crear relacion con sales
 
      public function Sales(){

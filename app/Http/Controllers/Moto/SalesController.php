@@ -16,7 +16,7 @@ use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\PayMethodsRepo;
 use App\Http\Repositories\Moto\SalesItemsRepo;
-use App\Http\Repositories\Moto\SalesPaymentsRepo;
+use App\Http\Repositories\Moto\PaymentsRepo;
 
 use App\Http\Repositories\Moto\SalesRepo as Repo;
 use App\Http\Repositories\Moto\ItemsRepo;
@@ -222,7 +222,7 @@ class SalesController extends Controller
 
 
     //payemnts
-    public function createPayment(SalesPaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
+    public function createPayment(PaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
     {
         $this->data['salesId'] = $this->route->getParameter('item');
 
@@ -243,15 +243,14 @@ class SalesController extends Controller
     }
 
 
-    public function addPayment(SalesPaymentsRepo $salesPaymentsRepo)
+    public function addPayment(PaymentsRepo $PaymentsRepo)
     {
-
-        $salesPaymentsRepo->create($this->request);
+        $PaymentsRepo->create($this->request);
 
         return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó el método de pago');
     }
 
-    public function editPayment(SalesPaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
+    public function editPayment(PaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
     {
 
         $this->data['banks']= Banks::Lists('name','id');

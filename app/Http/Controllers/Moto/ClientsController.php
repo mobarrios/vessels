@@ -97,17 +97,6 @@ class ClientsController extends Controller
                 $model = $this->repo->create($this->request,0);
 
 
-            //guarda imagenes
-            if (config('models.' . $this->data['section'] . '.is_imageable'))
-                $this->createImage($model, $this->request);
-
-            //guarda log
-            if (config('models.' . $this->data['section'] . '.is_logueable'))
-                $this->repo->createLog($model, 1);
-
-            //si va a una sucursal
-            if (config('models.' . $this->data['section'] . '.is_brancheable'))
-                $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
             if(str_contains(URL::previous(),'sales'))
                 return redirect()->back()->with('client',$model)->withErrors(['Cliente creado Correctamente']);
@@ -122,17 +111,6 @@ class ClientsController extends Controller
             //crea a traves del repo con el request
             $model = $this->repo->create($this->request,1);
 
-            //guarda imagenes
-            if(config('models.'.$this->section.'.is_imageable'))
-                $this->createImage($model, $this->request);
-
-            //guarda log
-            if(config('models.'.$this->section.'.is_logueable'))
-                $this->repo->createLog($model, 1);
-
-            //si va a una sucursal
-            if(config('models.'.$this->section.'.is_brancheable'))
-                $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
             if($this->data['section'] == 'technicalServices'){
 
@@ -163,17 +141,7 @@ class ClientsController extends Controller
 
             $model = $this->repo->update($id, $this->request);
     
-            //guarda imagenes
-            if (config('models.' . $this->data['section'] . '.is_imageable'))
-                $this->createImage($model, $this->request);
-    
-            //guarda log
-            if (config('models.' . $this->data['section'] . '.is_logueable'))
-                $this->repo->createLog($model, 3);
-    
-            //si va a una sucursal
-            if (config('models.' . $this->data['section'] . '.is_brancheable'))
-                $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
+
 
             if(str_contains(URL::previous(),'sales'))
                 return redirect()->back()->with('client',$model)->withErrors(['Cliente editado Correctamente']);
@@ -188,17 +156,7 @@ class ClientsController extends Controller
             //edita a traves del repo
             $model = $this->repo->update($id,$this->request);
 
-            //guarda imagenes
-            if(config('models.'.$this->section.'.is_imageable'))
-                $this->createImage($model, $this->request);
-
-            //guarda log
-            if(config('models.'.$this->section.'.is_logueable'))
-                $this->repo->createLog($model, 3);
-
-            //si va a una sucursal
-            if(config('models.'.$this->section.'.is_brancheable'))
-                $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
+            
 
             if($this->data['section'] == 'technicalServices'){
 

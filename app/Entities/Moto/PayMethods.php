@@ -9,6 +9,7 @@ class PayMethods extends Entity{
 
     protected $fillable = ['name','method'];
 
+    protected $section = 'payMethods';
 
 
     

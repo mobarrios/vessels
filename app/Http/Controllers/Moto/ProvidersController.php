@@ -27,7 +27,7 @@ class ProvidersController extends Controller
     public function getCc()
     {
         $this->data['activeBread'] = 'Listar';
-        $this->data['models'] = $this->repo->find(1);
+        $this->data['models'] = $this->repo->find($this->route->getParameter('id'));
         return view('moto.providers.cc')->with($this->data);
     }
 }

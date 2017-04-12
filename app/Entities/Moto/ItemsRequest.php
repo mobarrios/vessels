@@ -12,6 +12,8 @@
 
      protected $fillable = ['items_id','branches_from_id','branches_to_id','sales_id','status','my_request_id'];
 
+     protected $section = 'itemsRequest';
+
 
      public function Items()
      {

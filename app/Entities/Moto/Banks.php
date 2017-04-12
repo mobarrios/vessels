@@ -11,6 +11,8 @@ class Banks extends Entity
     protected $table = 'banks';
 
     protected $fillable = ['name'];
+    protected $section = 'banks';
+
 
 
 

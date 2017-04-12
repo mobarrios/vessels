@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalesPayments extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSalesPayments extends Migration
      */
     public function up()
     {
-        Schema::create('sales_payments', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
 
             $table->increments('id')->unsigned();
             $table->timestamps();
@@ -35,13 +35,8 @@ class CreateSalesPayments extends Migration
 
             $table->tinyInteger('status')->unsigned()->nullable();
 
-
-
             $table->integer('sales_id')->unsigned()->nullable();
-            $table->foreign('sales_id')->references('id')->on('sales');
-
             $table->integer('pay_methods_id')->unsigned()->nullable();
-            $table->foreign('pay_methods_id')->references('id')->on('pay_methods');
 
 
         });
@@ -54,6 +49,6 @@ class CreateSalesPayments extends Migration
      */
     public function down()
     {
-        Schema::drop('sales_payments');
+        Schema::drop('payments');
     }
 }

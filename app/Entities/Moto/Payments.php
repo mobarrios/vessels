@@ -4,12 +4,14 @@
 
  use App\Entities\Entity;
 
- class SalesPayments extends Entity
+ class Payments extends Entity
  {
 
-     protected $table = 'sales_payments';
+     protected $table = 'payments';
 
      protected $fillable = ['date','amount','banks_id','number','check_date','check_pay_date','check_types_id','term','transf_date','financials_id','sales_id','pay_methods_id'];
+
+     protected $section = 'payments';
 
      public function Sales()
      {

@@ -9,6 +9,9 @@
  {
      protected $fillable    = ['branches_id'];
 
+     protected $section = 'brancheables';
+
+
      public function entities(){
 
          return $this->morphTo();

@@ -54,21 +54,11 @@ class UsersController extends Controller
         $this->request['branches_active_id'] =  $this->request->branches_id[0];
 
         //crea a traves del repo con el request
-        $model = $this->repo->create($this->request);
+
+        $model = $this->repo->create($this->request, $this->section);
 
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
-
-        //guarda log
-        if(config('models.'.$this->section.'.is_logueable'))
-            $this->repo->createLog($model, 1);
-
-        //si va a una sucursal
-
-            $this->repo->createBrancheables($model,$this->request->branches_id);
-
+       
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }

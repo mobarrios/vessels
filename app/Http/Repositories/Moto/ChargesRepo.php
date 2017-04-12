@@ -1,16 +1,15 @@
 <?php
 namespace App\Http\Repositories\Moto;
 
-use App\Entities\Moto\SalesPayments;
+use App\Entities\Moto\Charges;
 use App\Http\Repositories\BaseRepo;
 
 
-class SalesPaymentsRepo extends BaseRepo {
+class ChargesRepo extends BaseRepo {
     
     public function getModel()
     {
-        return new SalesPayments();
+        return new Charges();
     }
-  
 
 }

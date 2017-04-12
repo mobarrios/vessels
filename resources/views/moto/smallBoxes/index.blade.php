@@ -30,6 +30,23 @@
 
         </tr>
     @endforeach
+    @foreach($cashFromSales as $cash)
+        <tr>
+            <td>
+                {!! $cash->date !!}
+            </td>
+            <td>
+                  <a href="{{route('moto.sales.edit',$cash->sales_id)}}"> Venta # {{$cash->sales_id}}</a>
+            </td>
+            <td>
+                Efectivo
+            </td>
+
+            <td>
+                <b>${!! $cash->amount !!}</b>
+            </td>
+        </tr>
+    @endforeach
 @endsection
 
 @section('js')

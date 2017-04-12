@@ -8,10 +8,10 @@
  {
 
      protected $table = 'colors';
-
      protected $fillable = ['name'];
 
-     
+     protected $section = 'colors';
+
      
  }
 

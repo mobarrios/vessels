@@ -40,6 +40,11 @@ class Entity extends Model {
         return get_class(new static);
     }
 
+    public function getSectionAttribute()
+    {
+        return $this->section;
+    }
+
     //Polymorph
     public function logs()
     {

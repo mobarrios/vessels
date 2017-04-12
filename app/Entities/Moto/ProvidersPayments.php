@@ -10,7 +10,9 @@
      protected $table = 'providers_payments';
 
      protected $fillable = ['name'];
-     
+
+     protected $section = 'providersPayments';
+
 
  }
 

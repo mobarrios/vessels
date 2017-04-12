@@ -8,8 +8,9 @@
  {
 
      protected $table = 'brands';
-
      protected $fillable = ['name'];
+     protected $section = 'Brands';
+
 
      public function Models()
      {

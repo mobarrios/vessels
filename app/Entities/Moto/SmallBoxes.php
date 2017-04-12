@@ -12,6 +12,7 @@ class SmallBoxes extends Entity
 
     protected $fillable = ['entry', 'date', 'amount', 'detail', 'types_small_boxes_id','providers_id'];
 
+    protected $section = 'smallBoxes';
 
 
 

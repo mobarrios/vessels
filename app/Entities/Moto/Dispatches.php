@@ -11,6 +11,8 @@
 
      protected $fillable = ['purchases_orders_id','date','number','providers_id'];
 
+     protected $section = 'dispatches';
+
      public function Models()
      {
          return $this->hasMany(Models::class);

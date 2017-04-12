@@ -11,6 +11,9 @@
  {
      protected $fillable    = ['additionals_id','amount','sales_items_id'];
 
+     protected $section = 'additionables';
+
+
      public function additionable(){
 
          return $this->morphTo();

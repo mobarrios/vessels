@@ -14,11 +14,17 @@
 
      protected $fillable = ['date','models_id','colors_id','quantity','price','discount','providers_id','users_id','status'];
 
+     protected $section = 'purchasesOrders';
+
      public function Models()
      {
          return $this->belongsTo(Models::class);
      }
 
+     public function Charges()
+     {
+         return $this->hasMany(Charges::class);
+     }
 
      public function getDateAttribute($value)
      {

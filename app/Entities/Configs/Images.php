@@ -9,6 +9,9 @@ class Images extends Model
 
     protected $table = 'images';
 
+    protected $section = 'images';
+
+
     public function imageable()
     {
         return $this->morphTo();
