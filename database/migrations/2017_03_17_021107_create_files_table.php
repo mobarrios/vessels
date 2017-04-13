@@ -18,21 +18,17 @@ class CreateFilesTable extends Migration
             $table->softDeletes();
 
 //            FACTURAS Y REMITOS
-            $table->integer('invoices_copia1')->unsigned()->nullable();
-            $table->integer('invoices_copia2')->unsigned()->nullable();
-
-
+            $table->integer('invoices_id')->unsigned()->nullable();
             $table->integer('sender')->unsigned()->nullable();
 
 
 //            FORMULARIOS
-            $table->integer('form_01')->unsigned()->nullable();
+            $table->tinyInteger('form_01')->unsigned()->nullable();
             $table->string('form_01_file')->nullable();
-            $table->integer('form_12')->unsigned()->nullable();
+            $table->tinyInteger('form_12')->unsigned()->nullable();
             $table->string('form_12_file')->nullable();
-            $table->integer('form_59')->unsigned()->nullable();
+            $table->tinyInteger('form_59')->unsigned()->nullable();
             $table->string('form_59_file')->nullable();
-
 
 
 //            FÍSICOS

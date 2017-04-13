@@ -24,9 +24,9 @@ class FilesController extends Controller
         $this->section          = 'files';
         $this->data['section']  = $this->section;
 
-        $this->data['invoices'] = $vouchersRepo->searchWhere('tipo','F')->list('numero','id');
+        $this->data['invoices'] = $vouchersRepo->listsDataWhere('numero','id',['tipo' => 'F']);
 
-        $this->data['senders'] = $vouchersRepo->searchWhere('tipo','R')->list('numero','id');
+        $this->data['senders'] = $vouchersRepo->listsDataWhere('numero','id',['tipo' => 'R']);
 
 
 
