@@ -467,10 +467,13 @@
                                             </td>
                                             <td>{{$voucher->fecha}}</td>
                                             <td> $ {{number_format($voucher->importe_total, 2)}}</td>
-                                            <td class="col-xs-1">
+                                            <td class="col-xs-2">
+                                                <div class="btn-group">
+                                                    <a href="" class="btn btn-success btn-xs"><span class="fa fa-file-pdf-o"></span></a>
 
-                                                <a class="btn btn-xs btn-danger"
+                                                    <a class="btn btn-xs btn-danger"
                                                    href="{{route('moto.sales.deleteRecibos',$voucher->id)}}"><span class="fa fa-trash"></span></a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @empty
@@ -492,8 +495,12 @@
                             <span><strong class="strong">Realizar Comprobante</strong></span>
                         </a>
 
-                        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-success" title="Exportar PDF">
+                        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-success" title="Generar Remito">
                             <span>Generar remito</span>
+                        </a>
+
+                        <a target="_blank" href="{!! route('moto.files.create',$models->id) !!}" class="btn btn-warning" title="Crear legajo">
+                            <span>Crear legajo</span>
                         </a>
                     </div>
                 @endif

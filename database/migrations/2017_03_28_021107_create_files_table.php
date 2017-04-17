@@ -18,8 +18,14 @@ class CreateFilesTable extends Migration
             $table->softDeletes();
 
 //            FACTURAS Y REMITOS
+            $table->integer('sales_id')->unsigned()->nullable();
+            $table->foreign('sales_id')->references('id')->on('sales')->onDelete('cascade');
+
             $table->integer('invoices_id')->unsigned()->nullable();
-            $table->integer('sender')->unsigned()->nullable();
+            $table->foreign('invoices_id')->references('id')->on('vouchers')->onDelete('cascade');
+
+            $table->integer('senders_id')->unsigned()->nullable();
+            $table->foreign('senders_id')->references('id')->on('vouchers')->onDelete('cascade');
 
 
 //            FORMULARIOS

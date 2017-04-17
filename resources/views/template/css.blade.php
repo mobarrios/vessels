@@ -35,3 +35,10 @@
         font-size:12px !important;
     }
 </style>
+
+
+<link href="vendors/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+
+<link href="vendors/bootstrap-checkbox-x/css/checkbox-x.min.css" media="all" rel="stylesheet" type="text/css" />
+
+<link href="vendors/bootstrap-checkbox-x/css/theme-krajee-flatblue.min.css" media="all" rel="stylesheet" type="text/css" />

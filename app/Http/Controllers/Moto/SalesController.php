@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Moto;
 use App\Entities\Moto\Banks;
 use App\Entities\Moto\Financials;
 use App\Entities\Moto\Items;
+use App\Entities\Moto\Sales;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
@@ -222,11 +223,11 @@ class SalesController extends Controller
 
 
     //payemnts
-    public function createPayment(PaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
+    public function createPayment(PaymentsRepo $PaymentsRepo, PayMethodsRepo $payMethodsRepo)
     {
         $this->data['salesId'] = $this->route->getParameter('item');
 
-        $this->data['salesPayment'] = $salesPaymentsRepo->getModel()->where('sales_id',$this->route->getParameter('item'))->get();
+        $this->data['salesPayment'] = $PaymentsRepo->getModel()->where('sales_id',$this->route->getParameter('item'))->get();
 
         $this->data['banks']= Banks::Lists('name','id');
         $this->data['financials']= Financials::Lists('name','id');
@@ -250,7 +251,7 @@ class SalesController extends Controller
         return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó el método de pago');
     }
 
-    public function editPayment(PaymentsRepo $salesPaymentsRepo, PayMethodsRepo $payMethodsRepo)
+    public function editPayment(PaymentsRepo $PaymentsRepo, PayMethodsRepo $payMethodsRepo)
     {
 
         $this->data['banks']= Banks::Lists('name','id');
@@ -261,16 +262,16 @@ class SalesController extends Controller
         $this->data['payments']= $payMethodsRepo->ListsData('name','id');
         $this->data['activeBread']= 'Agregar Pago';
 
-        $this->data['modelPays'] = $salesPaymentsRepo->find($this->route->getParameter('item'));
+        $this->data['modelPays'] = $PaymentsRepo->find($this->route->getParameter('item'));
        // $this->data['routePays'] = ['moto.sales.addPayment', $this->route->getParameter('item')];
 
         return view('moto.sales.modalPayMethodsForm')->with($this->data);
     }
 
-    public function updatePayment(SalesPaymentsRepo $salesPaymentsRepo)
+    public function updatePayment(PaymentsRepo $PaymentsRepo)
     {
 
-        $salesPaymentsRepo->update($this->request->sales_payments_id , $this->request);
+        $PaymentsRepo->update($this->request->sales_payments_id , $this->request);
 
         return redirect()->back()->withErrors('Se Editó el método de pago');
 
@@ -278,14 +279,14 @@ class SalesController extends Controller
         //return parent::edit();
     }
 
-    public function deletePayment(SalesPaymentsRepo $salesPaymentsRepo)
+    public function deletePayment(PaymentsRepo $PaymentsRepo)
     {
-        $salesPaymentsRepo->destroy($this->route->getParameter('item'));
+        $PaymentsRepo->destroy($this->route->getParameter('item'));
 
         return parent::edit();
     }
 
-    public function showAside(Request $request, SalesItemsRepo $salesItemsRepo, SalesPaymentsRepo $salesPaymentsRepo)
+    public function showAside(Request $request, SalesItemsRepo $salesItemsRepo, PaymentsRepo $PaymentsRepo)
     {
         $this->data['route'] = $request->get('route');
 
@@ -295,7 +296,7 @@ class SalesController extends Controller
             }
 
             if ($request->get('type') == 'pays') {
-                $this->data['model'] = $salesPaymentsRepo->find($request->get('edit'));
+                $this->data['model'] = $PaymentsRepo->find($request->get('edit'));
             }
 
 
@@ -310,19 +311,19 @@ class SalesController extends Controller
 
 
 
-    public function storeRecibos(SalesPaymentsRepo $salesPaymentsRepo, VouchersRepo $vouchersRepo)
+    public function storeRecibos(PaymentsRepo $PaymentsRepo, VouchersRepo $vouchersRepo)
     {
         $sales_payments = collect();
 
         foreach ($this->request->sales_payments_id as $sales_payments_id){
-            $sp = $salesPaymentsRepo->find($sales_payments_id);
+            $sp = $PaymentsRepo->find($sales_payments_id);
             $sp->status = 1;
 
             $sp->save();
 
             $sales_id = $sp->sales_id;
 
-            $sales_payments->push($salesPaymentsRepo->find($sales_payments_id));
+            $sales_payments->push($PaymentsRepo->find($sales_payments_id));
         }
 
 
@@ -339,24 +340,22 @@ class SalesController extends Controller
         return redirect()->route('moto.sales.edit',$sales_id)->withErrors('Se creó correctamente el recibo');
     }
 
-    public function deleteRecibos(VouchersRepo $vouchersRepo, SalesPaymentsRepo $salesPaymentsRepo)
+    public function deleteRecibos(VouchersRepo $vouchersRepo, PaymentsRepo $PaymentsRepo)
     {
         $voucher = $vouchersRepo->find($this->route->getParameter('recibo'));
 
-        foreach ($voucher->Sales as $sales){
-            dd($sales);
-            $sales->status = null;
-//            $sales->save();
-        }
+        $voucher->Sales()->detach();
 
-//        $voucher->Sales()->detach();
+        $vouchersRepo->destroy($this->route->getParameter('recibo'));
 
-//        $vouchersRepo->destroy($this->route->getParameter('recibo'));
-
-
-
-//        return parent::edit();
+        return parent::edit();
     }
 
+
+    public function show(Sales $sales){
+        $sale = $sales->with('Items')->with('Clients')->with('BranchesConfirm')->with('Vouchers')->with('Payments')->find($this->route->getParameter('id'));
+
+        return response()->json($sale);
+    }
 
 }

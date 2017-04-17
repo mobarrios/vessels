@@ -29,7 +29,7 @@ class ClientsController extends Controller
 
         $this->section          = 'clients';
 
-        if(str_contains(URL::previous(),'prospectos'))
+        if(\Illuminate\Support\Facades\Request::segment(2) == 'prospectos')
             $this->data['section']  = 'prospectos';
         elseif(str_contains(URL::previous(),'technicalServices'))
             $this->data['section']  = 'technicalServices';

@@ -52,6 +52,20 @@
 <script src="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.min.js"></script>
 
 
+<!-- FILE.js -->
+<script src="vendors/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
+<!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview.
+     This must be loaded before fileinput.min.js -->
+<script src="vendors/bootstrap-fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>
+<!-- purify.min.js is only needed if you wish to purify HTML content in your preview for HTML files.
+     This must be loaded before fileinput.min.js -->
+<script src="vendors/bootstrap-fileinput/js/plugins/purify.min.js" type="text/javascript"></script>
+<!-- the main fileinput plugin file -->
+<script src="vendors/bootstrap-fileinput/js/fileinput.min.js"></script>
+
+<script src="vendors/bootstrap-fileinput/js/locales/es.js"></script>
+
+<script src="vendors/bootstrap-checkbox-x/js/checkbox-x.min.js" type="text/javascript"></script>
 
 
 @if(Auth::user())
@@ -93,11 +107,12 @@
     $('#check_all').on('click',function(){
 
         $("input:checkbox").each(function() {
-
             if($(this).prop('checked'))
                 $(this).prop('checked', false);
             else
                 $(this).prop('checked', true);
+
+
         });
 
     });
@@ -166,5 +181,50 @@ window.location.href = route +'/'+$('.id_destroy:checked').val();
 
 });
 
+
+    $("input[type=file]").fileinput({
+        language: 'es',
+        showUpload: false,
+        autoReplace: true,
+//        showRemove: false,
+//        showClose: false,
+    })
+
+
+//    $(".file-caption-main").on('hover',function(ev){
+//        ev.preventDefault();
+//
+//        $(this).parent().parent().parent().find('.file-preview').css('display','block');
+//    })
+
+
+    $(document).on("ready", function() {
+
+        $("input[type=file]").each(function (pos,el) {
+            var close = $($(event.target).context).parent().parent().parent().parent().find('.file-preview .fileinput-remove')
+
+
+            $(el).on('fileclear', function(event) {
+                event.preventDefault()
+
+                $($(event.target).context).parent().parent().parent().parent().find('.file-preview').css('display','none')
+            });
+
+            $(el).on('fileselect', function(event, numFiles, label) {
+                $($(event.target).context).parent().parent().parent().parent().find('.file-preview').css('display','block')
+            });
+
+
+            var btnDestroy = $(el).parent().parent().parent().parent().find('button.fileinput-remove');
+
+            btnDestroy.on('click', function (ev) {
+                $(el).fileinput('reset');
+                $(el).val('');
+                console.log($(el).val())
+            })
+
+
+        });
+    });
 </script>
 @endif

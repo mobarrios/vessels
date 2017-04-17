@@ -66,6 +66,11 @@
          return $this->hasMany(Payments::class);
      }
 
+     public function Files()
+     {
+         return $this->hasOne(Files::class);
+     }
+
 
      public function getPagadoAttribute(){
 

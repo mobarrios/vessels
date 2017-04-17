@@ -24,6 +24,24 @@
          return date('d-m-Y',strtotime($this->attributes['fecha']));
      }
 
+     public function getTipoAttribute(){
+         switch ($this->attributes['tipo']){
+             case 'R': return "Remito";
+                 break;
+             case 'F': return "Factura";
+                 break;
+             case 'R': return "Recibo";
+                 break;
+             case 'RM': return "Remito";
+                 break;
+             case 'NC': return "Nota de Credito";
+                 break;
+             case 'ND': return "Nota de Débito";
+                 break;
+         }
+
+     }
+
  }
 
 

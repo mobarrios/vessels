@@ -53,7 +53,7 @@ class SmallBoxesController extends Controller
 
         $pr = new PaymentsRepo();
 
-        $this->data['cashFromSales'] = $pr->ListAll();
+        $this->data['cashFromSales'] = $pr->ListAll()->get();
 
 
         //guarda en session lo que se busco para exportar
