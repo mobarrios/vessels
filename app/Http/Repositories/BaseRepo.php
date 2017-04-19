@@ -298,7 +298,8 @@ abstract class BaseRepo
         if (!is_array($branches_id)) {
             $model->brancheables()->create(['branches_id' => $branches_id]);
         } else {
-            foreach ($branches_id as $id) {
+            foreach ($branches_id as $id)
+            {
                 $model->brancheables()->create(['branches_id' => $id]);
             }
         }

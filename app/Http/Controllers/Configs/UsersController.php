@@ -55,10 +55,10 @@ class UsersController extends Controller
 
         //crea a traves del repo con el request
 
-        $model = $this->repo->create($this->request, $this->section);
+        $model = $this->repo->create($this->request);
 
 
-       
+
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
@@ -82,15 +82,14 @@ class UsersController extends Controller
         $model = $this->repo->update($id,$this->request);
 
         //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
+        //if(config('models.'.$this->section.'.is_imageable'))
+        //    $this->createImage($model, $this->request);
 
         //guarda log
-        if(config('models.'.$this->section.'.is_logueable'))
-            $this->repo->createLog($model, 3);
+        //if(config('models.'.$this->section.'.is_logueable'))
+        //    $this->repo->createLog($model, 3);
 
         //si va a una sucursal
-
         $this->repo->createBrancheables($model, $this->request->branches_id);
 
 

@@ -174,17 +174,18 @@ class SalesController extends Controller
             $salesItems = $salesItemsRepo->create($this->request->all());
 
             // agrega los adicionales del modelo con los nuevos importes o no
-            if($this->request->has('additionals')){
+            if($this->request->has('additionals'))
+            {
                 foreach ($this->request->additionals as $id => $amount )
                 {
                     $sale->additionables()->create(['additionals_id'=>$id , 'amount' => $amount,'sales_items_id' => $salesItems->id]);
                 }
             };
 
-        }else{
-
+        }
+        else
+        {
             return redirect()->back()->withErrors('El Articulo no se pudo Asignar!');
-
         }
 
 
@@ -327,9 +328,11 @@ class SalesController extends Controller
         }
 
 
-        if($vouchersRepo->ListAll()->where('tipo','R')->count() > 0){
+        if($vouchersRepo->ListAll()->where('tipo','R')->count() > 0)
+        {
             $number = $vouchersRepo->ListAll()->where('tipo','R')->get()->last()->numero + 1;
-        }else{
+        }else
+        {
             $number = '1';
         }
 

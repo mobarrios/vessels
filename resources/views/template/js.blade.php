@@ -83,6 +83,7 @@
     $('.datePicker').datepicker({
         format: 'dd-mm-yyyy',
         language: 'es',
+        startDate: '-3d'
     });
 
     //dateRange
