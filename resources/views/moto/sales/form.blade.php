@@ -294,7 +294,11 @@
                                         <span class="pull-right label label-xs label-success">{{$item->Items->Branches}}</span>
                                     </td>
                                     <td>
-                                        $ {{ $item->sales->budgets ? number_format($item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget ,2) : number_format($item->price_actual ,2)}}
+                                        @if(!is_null($item->sales->budgtes))
+                                             $ {{ $item->sales->budgets ? number_format($item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget ,2) : number_format($item->price_actual ,2)}}
+                                        @else
+                                            {{number_format($item->price_actual ,2)}}
+                                        @endif
                                     </td>
                                     <td>
                                         <a class="btn btn-xs btn-default"
@@ -307,9 +311,11 @@
                                     </td>
                                 </tr>
 
-
-                                <?php $total += $item->sales->budgets ? $item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget : $item->price_actual; ?>
-
+                                @if(!is_null($item->sales->budgtes))
+                                    <?php $total += $item->sales->budgets ? $item->sales->budgets->allItems->where('id',$item->items->models_id)->first()->pivot->price_budget : $item->price_actual; ?>
+                                @else
+                                    <?php $total += $item->price_actual ?>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

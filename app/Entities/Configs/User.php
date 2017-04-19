@@ -37,7 +37,7 @@ class User extends Entity implements AuthenticatableContract,  CanResetPasswordC
      * @var array
      */
 
-    protected $section = 'user';
+    protected $section = 'users';
 
     protected $hidden = ['password', 'remember_token'];
 
