@@ -315,6 +315,7 @@ class SalesController extends Controller
     {
         $sales_payments = collect();
 
+
         foreach ($this->request->sales_payments_id as $sales_payments_id){
             $sp = $PaymentsRepo->find($sales_payments_id);
             $sp->status = 1;
@@ -334,6 +335,8 @@ class SalesController extends Controller
         }
 
         $voucher = $vouchersRepo->create(['tipo' => 'R','letra' => 'X', 'concepto' => 'Pago', 'fecha' => date('Y-m-d', time()), 'importe_total' => $sales_payments->sum('amount'),'numero' => $number]);
+
+        $voucher->Payments()->attach($this->request->sales_payments_id);
 
         $voucher->Sales()->attach($sales_id);
 

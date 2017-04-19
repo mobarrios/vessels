@@ -2,6 +2,7 @@
  namespace App\Entities\Moto;
 
 
+ use App\Entities\Configs\Vouchers;
  use App\Entities\Entity;
 
  class Payments extends Entity
@@ -34,7 +35,13 @@
          return $this->belongsTo(PayMethods::class, 'pay_methods_id');
      }
 
-    
+
+     public function Vouchers()
+     {
+         return $this->belongsToMany(Vouchers::class);
+     }
+
+
  }
 
 

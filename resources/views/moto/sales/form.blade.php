@@ -107,60 +107,60 @@
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('last_name', "APELLIDO") !!}
-                        {!! Form::text('last_name', null, ['class'=>'form-control', 'required' => 'required','ng-model' => 'last_name']) !!}
+                        {!! Form::text('last_name', old('last_name') ? old('last_name') : null, ['class'=>'form-control', 'required' => 'required','ng-model' => 'last_name']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('name', "NOMBRE") !!}
-                        {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
+                        {!! Form::text('name', old('name') ? old('name') : null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('dni', "DNI") !!}
-                        {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
+                        {!! Form::text('dni', old('dni') ? old('dni') : null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('sexo', "SEXO") !!}
-                        {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],'masculino', ['class'=>'form-control','ng-model' => 'sexo']) !!}
+                        {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],old('sexo') ? old('sexo') : 'masculino', ['class'=>'form-control','ng-model' => 'sexo']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('email', "EMAIL") !!}
-                        {!! Form::text('email', null, ['class'=>'form-control','ng-model' => 'email']) !!}
+                        {!! Form::text('email', old('email') ? old('email') : null, ['class'=>'form-control','ng-model' => 'email']) !!}
                     </div>
 
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('nacionality', "NACIONALIDAD") !!}
-                        {!! Form::text('nacionality', null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
+                        {!! Form::text('nacionality', old('nacionality') ? old('nacionality') : null, ['class'=>'form-control','ng-model' => 'nacionality']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('phone1', "TELÉFONO") !!}
-                        {!! Form::text('phone1', null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
+                        {!! Form::text('phone1',  old('phone1') ? old('phone1') : null, ['class'=>'form-control','ng-model' => 'phone1']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('address', "DIRECCIÓN") !!}
-                        {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
+                        {!! Form::text('address',  old('address') ? old('address') : null, ['class'=>'form-control','ng-model' => 'address']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('city', "CIUDAD") !!}
-                        {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
+                        {!! Form::text('city',  old('city') ? old('city') : null, ['class'=>'form-control','ng-model' => 'city']) !!}
                     </div>
 
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('location', "LOCALIDAD") !!}
-                        {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
+                        {!! Form::text('location',  old('location') ? old('location') : null, ['class'=>'form-control','ng-model' => 'location']) !!}
                     </div>
 
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('province', "PROVINCIA") !!}
-                        {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
+                        {!! Form::text('province',  old('province') ? old('province') : null, ['class'=>'form-control','ng-model' => 'province']) !!}
                     </div>
 
 
@@ -376,7 +376,8 @@
                                 <th>#</th>
                                 <th>Fecha</th>
                                 <th>Forma de Pago</th>
-                                <th> $ Monto</th>
+                                <th colspan="2"> $ Monto</th>
+                                <th>Recibo</th>
                                 </thead>
                                 <tbody id="tablaPagos">
                                 <?php $pago = 0 ?>
@@ -408,6 +409,13 @@
 
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    @if($payment->Vouchers)
+                                                    {!! dd($payment->Vouchers->where('tipo',"R")) !!}
+                                                        dasdas
+                                                    @endif
+                                                </td>
+
                                                 <?php  $pago += $payment->amount;?>
                                             </tr>
                                         @endforeach
@@ -460,7 +468,6 @@
 
                                 <tbody id="tablaPagos">
                                     @forelse($models->vouchers as $voucher)
-
                                         <tr>
                                             <td>
                                                 {!! $voucher->numero !!}
@@ -579,7 +586,19 @@
 
 
         app.controller("ctl", function ($scope, $http) {
-
+            $scope.model = ""
+            $scope.last_name = ""
+            $scope.name = ""
+            $scope.dni = ""
+            $scope.email = ""
+            $scope.sexo = ""
+            $scope.nacionality = ""
+            $scope.phone1 = ""
+            $scope.address = ""
+            $scope.city = ""
+            $scope.location = ""
+            $scope.province = ""
+            $scope.province = ""
 
             @if(Session::has('client') || $errors->any())
                 $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
@@ -595,11 +614,12 @@
                 $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
                 $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
 
+
             @endif
 
             @if(isset($models))
                 $scope.model = "{!! $models->clients->id !!}"
-                $scope.last_name = "{!! $models->clients->last_name!!}"
+                $scope.last_name = "{!! $models->clients->last_name !!}"
                 $scope.name = "{!! $models->clients->name !!}"
                 $scope.dni = "{!! $models->clients->dni !!}"
                 $scope.email = "{!! $models->clients->email !!}"
@@ -608,23 +628,9 @@
                 $scope.phone1 = "{!! $models->clients->phone1 !!}"
                 $scope.address = "{!! $models->clients->address !!}"
                 $scope.city = "{!! $models->clients->city !!}"
-                $scope.location = "{!! $models->clients->location!!}"
+                $scope.location = "{!! $models->clients->location !!}"
                 $scope.province = "{!! $models->clients->province !!}"
 
-            @else
-                    $scope.model = ""
-                $scope.last_name = ""
-                $scope.name = ""
-                $scope.dni = ""
-                $scope.email = ""
-                $scope.sexo = ""
-                $scope.nacionality = ""
-                $scope.phone1 = ""
-                $scope.address = ""
-                $scope.city = ""
-                $scope.location = ""
-                $scope.province = ""
-                $scope.province = ""
 
             @endif
 

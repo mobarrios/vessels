@@ -3,6 +3,7 @@
 
 
  use App\Entities\Entity;
+ use App\Entities\Moto\Payments;
  use App\Entities\Moto\Sales;
 
  class Vouchers extends Entity
@@ -19,6 +20,12 @@
      public function Sales(){
          return $this->belongsToMany(Sales::getClass());
      }
+
+     public function Payments()
+     {
+         return $this->belongsToMany(Payments::class);
+     }
+
 
      public function getFechaAttribute(){
          return date('d-m-Y',strtotime($this->attributes['fecha']));
