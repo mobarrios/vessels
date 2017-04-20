@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Utilities;
 
+use App\Entities\Configs\Vouchers;
 use App\Http\Controllers\Controller;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
@@ -53,28 +54,20 @@ class UtilitiesController extends Controller
         return $pdf->stream();
     }
 
-    public function reciboPdf($id,Request $request,Route $route , PDF $pdf){
+    public function reciboPdf($id,Vouchers $vouchers,Request $request,Route $route , PDF $pdf){
 
-        $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
+        $model = $vouchers->with('sales')->find($id);
+        $client = $model->sales->first()->clients;
 
-        $model = new $entidad;
-
-        $model = $model->find($id);
-
-        $pdf->setPaper('a5', 'landscape')->loadView('moto.'.$request->segment(2).'.reciboPdf',compact('model'));
+        $pdf->setPaper('a5', 'landscape')->loadView('moto.vouchers.reciboPdf',compact('model','client'));
 
         return $pdf->stream();
     }
 
-    public function facturaPdf($id,Request $request,Route $route , PDF $pdf){
+    public function facturaPdf($id,Vouchers $vouchers,Request $request,Route $route , PDF $pdf){
 
-        $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
-
-        $model = new $entidad;
-
-        $model = $model->find($id);
-
-        $pdf->setPaper('a5', 'portrait')->loadView('moto.'.$request->segment(2).'.facturaPdf',compact('model'));
+        $model = $vouchers->with('sales')->find($id);
+        $pdf->setPaper('a5', 'portrait')->loadView('moto.vouchers.facturaPdf',compact('model'));
 
         return $pdf->stream();
     }

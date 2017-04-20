@@ -416,10 +416,17 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if($payment->Vouchers)
-                                                    {!! dd($payment->Vouchers->where('tipo',"R")) !!}
-                                                        dasdas
-                                                    @endif
+                                                    @forelse($payment->Vouchers->where('tipo','Remito') as $voucher)
+                                                        #{!! $voucher->numero !!}
+                                                        <div class="btn-group btn-group-xs pull-right">
+                                                            <a href="{!! route('moto.sales.recibo',$voucher->id) !!}" target="_blank" class="btn btn-primary"><span class="fa fa-file-pdf-o"></span></a>
+
+                                                            <a class="btn btn-danger"
+                                                               href="{{route('moto.sales.deleteRecibos',[$voucher->id,$models->id])}}"><span class="fa fa-trash"></span></a>
+                                                        </div>
+                                                    @empty
+
+                                                    @endforelse
                                                 </td>
 
                                                 <?php  $pago += $payment->amount;?>
@@ -457,49 +464,6 @@
 
             </div>
 
-            <div class="col-xs-12 content">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"><i class="fa fa-pay"></i> Recibos</h3>
-                    </div>
-                    <div class="box-body">
-                        <div class="col-xs-12">
-                            <table class="table table-stripped">
-                                <thead>
-                                    <th>#</th>
-                                    <th>Fecha</th>
-                                    <th> $ Monto</th>
-                                    <th></th>
-                                </thead>
-
-                                <tbody id="tablaPagos">
-                                    @forelse($models->vouchers as $voucher)
-                                        <tr>
-                                            <td>
-                                                {!! $voucher->numero !!}
-                                            </td>
-                                            <td>{{$voucher->fecha}}</td>
-                                            <td> $ {{number_format($voucher->importe_total, 2)}}</td>
-                                            <td class="col-xs-2">
-                                                <div class="btn-group">
-                                                    <a href="" class="btn btn-success btn-xs"><span class="fa fa-file-pdf-o"></span></a>
-
-                                                    <a class="btn btn-xs btn-danger"
-                                                   href="{{route('moto.sales.deleteRecibos',$voucher->id)}}"><span class="fa fa-trash"></span></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                    @endforelse
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
 
             <div class="col-xs-12">
                 @if((($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount))  - $pago == 0) && $models->pagado === 1)
@@ -751,6 +715,10 @@
             save.on('click',function(ev){
                 ev.preventDefault()
 
+                $(this).attr('disabled',true)
+                $(this).prop('disabled',true)
+
+
                 if(select.val() == "" && mount.val() == "")
                     return false
                 else{
@@ -763,12 +731,12 @@
                     }
 
 
+
                     $.ajax({
                         url: 'moto/addAdditionals',
                         data: data,
                         method: 'POST',
                         success: function(response){
-
 
                             var totalAdeudado = $(".totalAdeudado");
                             var total = $(".total");
@@ -776,12 +744,23 @@
 
                             totalAdeudado.text((parseFloat(totalAdeudado.attr('data-precio')) + parseFloat(amount.val())).toLocaleString(undefined, {minimumFractionDigits: 2}))
 
+                            totalAdeudado.attr('data-precio',(parseFloat(totalAdeudado.attr('data-precio')) + parseFloat(amount.val())))
+
                             total.text('$'+((parseFloat(total.attr('data-precio')) + parseFloat(amount.val())).toLocaleString(undefined, {minimumFractionDigits: 2})))
 
+                            total.attr('data-precio',parseFloat(total.attr('data-precio')) + parseFloat(amount.val()))
+
                             $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td class="text-center">$ '+amount.val()+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger deleteAdicionales" data-id="'+select.val()+'"><i class="fa fa-trash"></i></a></div></td></tr>'))
+
+
+                            $(save).attr('disabled',false)
+                            $(save).prop('disabled',false)
                         },
                         error: function (error) {
                             console.log("Error: "+error)
+
+                            $(save).attr('disabled',false)
+                            $(save).prop('disabled',false)
                         }
                     })
 
@@ -794,6 +773,7 @@
                 ev.preventDefault()
 
                 $(this).attr('disabled',true)
+                $(this).prop('disabled',true)
 
                 var contenedor = $(this).parent().parent().parent()
 
@@ -819,14 +799,24 @@
 
                         totalAdeudado.text((parseFloat(totalAdeudado.attr('data-precio')) - parseFloat(response.amount)).toLocaleString(undefined, {minimumFractionDigits: 2}))
 
+                        totalAdeudado.attr('data-precio',parseFloat(totalAdeudado.attr('data-precio')) - parseFloat(response.amount))
+
                         total.text('$'+((parseFloat(total.attr('data-precio')) - parseFloat(response.amount)).toLocaleString(undefined, {minimumFractionDigits: 2})))
 
+                        total.attr('data-precio',parseFloat(total.attr('data-precio')) - parseFloat(response.amount))
 
-                        $(contenedor).remove()
+
+                        $(contenedor).remove();
+
+                        $(this).attr('disabled',false)
+                        $(this).prop('disabled',false)
                     },
                     error: function (error) {
                         console.log("Error: "+error)
+                        $(this).attr('disabled',false)
+                        $(this).prop('disabled',false)
                     }
+
                 })
 
             })

@@ -30,9 +30,19 @@
      }
 
 
+     public function Banks()
+     {
+         return $this->belongsTo(Banks::class);
+     }
+
      public function PayMethods()
      {
          return $this->belongsTo(PayMethods::class, 'pay_methods_id');
+     }
+
+     public function Financials()
+     {
+         return $this->belongsTo(Financials::class);
      }
 
 
