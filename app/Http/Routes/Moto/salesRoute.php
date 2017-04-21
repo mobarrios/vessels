@@ -35,7 +35,7 @@ Route::group(['prefix'=>'sales'],function(){
 
     Route::post('/storeRecibos', ['middleware' => 'permission:' . $section . '.create', 'as' => 'moto.sales.storeRecibos', 'uses' => 'Moto\SalesController@storeRecibos']);
 
-    Route::get('/deleteRecibos/{recibo}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.sales.deleteRecibos', 'uses' => 'Moto\SalesController@deleteRecibos']);
+    Route::get('/deleteRecibos/{recibo}/{id}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.sales.deleteRecibos', 'uses' => 'Moto\SalesController@deleteRecibos']);
 
 
 

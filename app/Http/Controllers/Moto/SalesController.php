@@ -35,7 +35,7 @@ class SalesController extends Controller
 
     public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
-                                BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo,AdditionalsRepo $additionalsRepo)
+                                BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo,AdditionalsRepo $additionalsRepo,VouchersRepo $vouchersRepo)
     {
 
         $this->request = $request;
@@ -60,11 +60,12 @@ class SalesController extends Controller
 
         $this->data['budgets']->prepend("Seleccione presupuesto",0);
 
-
-
         $this->data['additionals'] = $additionalsRepo->ListsData('name','id');
 
         $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
+
+        $this->data['vouchers'] = $vouchersRepo->ListAllWhere($this->section,['tipo'=>'R'])->get();
+
 
         $this->modelsRepo = $modelsRepo;
         $this->clientsRepo = $clientsRepo;
@@ -316,6 +317,7 @@ class SalesController extends Controller
     {
         $sales_payments = collect();
 
+
         foreach ($this->request->sales_payments_id as $sales_payments_id){
             $sp = $PaymentsRepo->find($sales_payments_id);
             $sp->status = 1;
@@ -338,6 +340,8 @@ class SalesController extends Controller
 
         $voucher = $vouchersRepo->create(['tipo' => 'R','letra' => 'X', 'concepto' => 'Pago', 'fecha' => date('Y-m-d', time()), 'importe_total' => $sales_payments->sum('amount'),'numero' => $number]);
 
+        $voucher->Payments()->attach($this->request->sales_payments_id);
+
         $voucher->Sales()->attach($sales_id);
 
         return redirect()->route('moto.sales.edit',$sales_id)->withErrors('Se creó correctamente el recibo');
@@ -349,9 +353,22 @@ class SalesController extends Controller
 
         $voucher->Sales()->detach();
 
+        foreach($voucher->payments as $payment){
+            $payment->status = null;
+            $payment->save();
+        }
+
         $vouchersRepo->destroy($this->route->getParameter('recibo'));
 
-        return parent::edit();
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Editar';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+
+        $this->data['models'] = $this->repo->find($id);
+
+        return redirect()->back()->with($this->data);
     }
 
 

@@ -79,8 +79,8 @@
   }
 
   .leyendaTabla{
-     font-size: 55%;
-     line-height: 59%;
+     font-size: 55% !important;
+     line-height: 61% !important;
      text-align: center;
   }
 
@@ -88,15 +88,24 @@
          line-height: 20px !important;
      }
 
+     #barcode{
+         position: absolute;
+         top: 80px;
+         left: 35%;
+         display: block;
+     }
 
  </style>
 
 </head>
 
 <body class="padding-0 margin-0">
+    <div id="barcode">
+        <p class="text-center">{!!  DNS1D::getBarcodeHTML(1, "EAN13") !!}</p>
+    </div>
 
     <div>
-         <div class="col-xs-4 text-center">
+         <div class="col-xs-2 text-center">
              <div>
                  <img src="images/branches/logo.png" alt="Logo" class="img-responsive">
              </div>
@@ -107,15 +116,17 @@
              </div>
          </div>
 
-         <div class="col-xs-2 text-center">
-             <h1 class="logo">X</h1>
+         <div class="col-xs-2 col-xs-offset-2">
+             <h1 class="logo text-right">X</h1>
+
+
          </div>
 
-         <div class="col-xs-4 text-center">
+         <div class="col-xs-4 text-center pull-right">
              <p class="upper">Recibo provisorio</p>
              <p class="datosHeader">No válido como factura</p>
-             <p>N: 00001</p>
-             <p>Fecha 16/01/2017</p>
+             <p>N: {!! $model->numero !!}</p>
+             <p>Fecha {!! $model->fecha !!}</p>
              <br>
              <div class="datosHeader">
                 <p>C.U.I.T: 33-70964580-9</p>
@@ -132,48 +143,53 @@
     <div class="datos-cliente">
 
 
-      <div class="col-xs-12 border">
+      <div class="col-xs-4 border">
           <div class="contenedor-dato-cliente">
-             <span class="upper"><b>Nombre: </b></span> <span class="upper text-muted">{!! $model->Clients->fullname !!}</span>
+             <span class="upper"><b>Nombre: </b></span> <span class="upper text-muted">{!! $client->fullname !!}</span>
           </div>
       </div>
 
       <div class="separador"></div>
 
-      <div class="col-xs-12 border">
-          <div class="contenedor-dato-cliente">
-             <span class="upper"><b>Domicilio: </b></span> <span class="upper text-muted">{!! $model->Clients->address !!}</span>
-          </div>
-      </div>
 
-      <div class="separador border">
-
-         <div class="col-xs-6">
+          <div class="col-xs-4">
               <div class="contenedor-dato-cliente">
-                 <span class="upper"><b>Localidad: </b></span> <span class="upper text-muted">{!! $model->Clients->city !!}</span>
+                 <span class="upper"><b>Domicilio: </b></span> <span class="upper text-muted">{!! $client->address !!}</span>
               </div>
           </div>
 
-          <div class="col-xs-6">
+         <div class="col-xs-4">
               <div class="contenedor-dato-cliente">
-                 <span class="upper"><b>Teléfono: </b></span> <span class="upper text-muted">{!! $model->Clients->phone !!}</span>
+                 <span class="upper"><b>Localidad: </b></span> <span class="upper text-muted">{!! $client->city !!}</span>
               </div>
           </div>
-      </div>
+
+          <div class="col-xs-4">
+              <div class="contenedor-dato-cliente">
+                 <span class="upper"><b>Teléfono: </b></span> <span class="upper text-muted">{!! $client->phone !!}</span>
+              </div>
+          </div>
+
 
       <div class="col-xs-12 separador border"></div>
 
      <div class="separador border">
 
-         <div class="col-xs-6">
+         <div class="col-xs-4">
             <div class="contenedor-dato-cliente">
-               <span class="upper"><b>CUIT: </b></span> <span class="upper text-muted">{!! $model->Clients->dni !!}</span>
+               <span class="upper"><b>CUIT: </b></span> <span class="upper text-muted">{!! $client->dni !!}</span>
             </div>
          </div>
 
-         <div class="col-xs-6">
+         <div class="col-xs-4">
             <div class="contenedor-dato-cliente">
                <span class="upper"><b>iva: </b></span> <span class="upper text-muted">Cons. Final</span>
+            </div>
+         </div>
+
+         <div class="col-xs-4">
+            <div class="contenedor-dato-cliente">
+               <span class="upper"><b>N° venta: </b></span> <span class="upper text-muted">{!! $model->Sales->first()->id !!}</span>
             </div>
          </div>
     </div>
@@ -184,21 +200,24 @@
          <table class="table table-responsive">
              <tbody>
                  <tr>
-                    <th>Cantidad</th>
-                    <th>Código</th>
+                    <th>Fecha</th>
+                    <th>Medio</th>
+                    <th>Monto</th>
                     <th>Descripción</th>
                  </tr>
-                 @foreach($model->SalesItems as $salesItem)
+                 @foreach($model->Payments as $payments)
                      <tr>
-                         <td>1</td>
-                         <td>HFHGFH5453</td>
+                         <td>{!! $payments->date !!}</td>
+                         <td>{!! $payments->PayMethods->name !!}</td>
+                         <td>{!! $payments->amount !!}</td>
                          <td class="descripcion">
-                             <p>{!! $salesItem->Items->Models->Categories->first()->name !!}</p>
-                             <p>{!! $salesItem->Items->Models->Brands->name !!} {!! $salesItem->Items->Models->name !!}</p>
-                             <p>Motor N²: {!! $salesItem->Items->n_motor !!}</p>
-                             <p>Cuadro N²: {!! $salesItem->Items->n_cuadro !!}</p>
-                             <p>Año: {!! $salesItem->Items->year !!}</p>
-                             <p>Color: {!! $salesItem->Items->Colors->name !!}</p>
+                             {!! $payments->banks ? '<p>Banco: '.$payments->banks->name.'</p>' : '' !!}
+                             {!! $payments->check_date ? 'Fecha cheque: '.$payments->check_date.'</p>' : '' !!}
+                             {!! $payments->check_pay_date ? 'Fecha de cobro: '.$payments->check_pay_date.'</p>' : '' !!}
+                             {!! $payments->transf_date ? 'Fecha de transferencia: '.$payments->transf_date.'</p>' : '' !!}
+                             {!! $payments->term ? 'Plazo: '.$payments->term.'</p>' : '' !!}
+                             {!! $payments->Financials ? 'Financiera: '.$payments->Financials->name.'</p>' : '' !!}
+
                          </td>
                      </tr>
                  @endforeach
@@ -206,20 +225,15 @@
 
              <tfoot>
                  <tr>
-                     <td colspan="3"><p class="text-center upper">Recibí conforme la suma total de <strong>${!! $model->SalesPayments->sum('amount') !!}</strong></p></td>
+                     <td colspan="4"><p class="text-center upper">Recibí conforme la suma total de <strong>${!! $model->importe_total !!}</strong></p></td>
                  </tr>
 
                  <tr>
-                     <td colspan="3">
+                     <td colspan="4">
                          <p class="leyendaTabla">La mercadería viaja por cuenta y orden del destinatario haciendose responsable civil y criminalmente a partir de la fecha por cualquier accidente, daño o perjuicio que pudiera ocasionar el rodado referido.</p>
                      </td>
                  </tr>
 
-                 <tr>
-                     <td colspan="3">
-                          <p class="text-center">{!!  DNS1D::getBarcodeHTML(1, "EAN13") !!}</p>
-                     </td>
-                 </tr>
              </tfoot>
          </table>
     </div>

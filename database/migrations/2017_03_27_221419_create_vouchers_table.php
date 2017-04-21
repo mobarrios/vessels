@@ -30,6 +30,7 @@ class CreateVouchersTable extends Migration
             $table->string('cae');
             $table->date('vencimiento_cae');
 
+
         });
     }
 
