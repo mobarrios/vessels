@@ -49,17 +49,17 @@ class ModelsController extends Controller
 
 
 
-                //guarda imagenes
-                if(config('models.'.$this->section.'.is_imageable'))
-                    $this->createImage($model, $this->request);
-
-                //guarda log
-                if(config('models.'.$this->section.'.is_logueable'))
-                    $this->repo->createLog($model, 1);
-
-                //si va a una sucursal
-                if(config('models.'.$this->section.'.is_brancheable'))
-                    $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
+//                //guarda imagenes
+//                if(config('models.'.$this->section.'.is_imageable'))
+//                    $this->createImage($model, $this->request);
+//
+//                //guarda log
+//                if(config('models.'.$this->section.'.is_logueable'))
+//                    $this->repo->createLog($model, 1);
+//
+//                //si va a una sucursal
+//                if(config('models.'.$this->section.'.is_brancheable'))
+//                    $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
@@ -80,17 +80,17 @@ class ModelsController extends Controller
 
 
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
-
-        //guarda log
-        if(config('models.'.$this->section.'.is_logueable'))
-            $this->repo->createLog($model, 3);
-
-        //si va a una sucursal
-        if(config('models.'.$this->section.'.is_brancheable'))
-            $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
+//        //guarda imagenes
+//        if(config('models.'.$this->section.'.is_imageable'))
+//            $this->createImage($model, $this->request);
+//
+//        //guarda log
+//        if(config('models.'.$this->section.'.is_logueable'))
+//            $this->repo->createLog($model, 3);
+//
+//        //si va a una sucursal
+//        if(config('models.'.$this->section.'.is_brancheable'))
+//            $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
 
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);

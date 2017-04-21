@@ -128,17 +128,17 @@ class BudgetsController extends Controller
         $model = $this->repo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $this->request->get('clients_id')]));
 
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
-
-        //guarda log
-        if(config('models.'.$this->section.'.is_logueable'))
-            $this->repo->createLog($model, 1);
-
-        //si va a una sucursal
-        if(config('models.'.$this->section.'.is_brancheable'))
-            $this->repo->createBrancheables($model, $this->request->user()['branches_id']);
+//        //guarda imagenes
+//        if(config('models.'.$this->section.'.is_imageable'))
+//            $this->createImage($model, $this->request);
+//
+//        //guarda log
+//        if(config('models.'.$this->section.'.is_logueable'))
+//            $this->repo->createLog($model, 1);
+//
+//        //si va a una sucursal
+//        if(config('models.'.$this->section.'.is_brancheable'))
+//            $this->repo->createBrancheables($model, $this->request->user()['branches_id']);
 
         $this->data['models'] = $model;
 
@@ -159,17 +159,17 @@ class BudgetsController extends Controller
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request);
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
-
-        //guarda log
-        if(config('models.'.$this->section.'.is_logueable'))
-            $this->repo->createLog($model, 3);
-
-        //si va a una sucursal
-        if(config('models.'.$this->section.'.is_brancheable'))
-            $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
+//        //guarda imagenes
+//        if(config('models.'.$this->section.'.is_imageable'))
+//            $this->createImage($model, $this->request);
+//
+//        //guarda log
+//        if(config('models.'.$this->section.'.is_logueable'))
+//            $this->repo->createLog($model, 3);
+//
+//        //si va a una sucursal
+//        if(config('models.'.$this->section.'.is_brancheable'))
+//            $this->repo->createBrancheables($model, $this->request->all()['branches_id']);
 
         if($this->route->getParameter('id'))
             return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
@@ -255,13 +255,13 @@ class BudgetsController extends Controller
         $model = $budgetsItemsRepo->find($id);
         $model->update($this->request->all());
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
-
-        //guarda log
-        if(config('models.'.$this->section.'.is_logueable'))
-            $budgetsItemsRepo->createLog($model, 3);
+//        //guarda imagenes
+//        if(config('models.'.$this->section.'.is_imageable'))
+//            $this->createImage($model, $this->request);
+//
+//        //guarda log
+//        if(config('models.'.$this->section.'.is_logueable'))
+//            $budgetsItemsRepo->createLog($model, 3);
 
         //si va a una sucursal
 //        if(config('models.'.$this->section.'.is_brancheable'))

@@ -92,17 +92,17 @@ class SalesController extends Controller
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
-        //guarda imagenes
-        if(config('models.'.$this->section.'.is_imageable'))
-            $this->createImage($model, $this->request);
-
-        //guarda log
-        if(config('models.'.$this->section.'.is_logueable'))
-            $this->repo->createLog($model, 1);
-
-        //si va a una sucursal
-        if(config('models.'.$this->section.'.is_brancheable'))
-            $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
+//        //guarda imagenes
+//        if(config('models.'.$this->section.'.is_imageable'))
+//            $this->createImage($model, $this->request);
+//
+//        //guarda log
+//        if(config('models.'.$this->section.'.is_logueable'))
+//            $this->repo->createLog($model, 1);
+//
+//        //si va a una sucursal
+//        if(config('models.'.$this->section.'.is_brancheable'))
+//            $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
 
 
         if($model->budgets_id){
