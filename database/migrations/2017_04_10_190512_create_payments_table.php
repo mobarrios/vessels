@@ -21,17 +21,17 @@ class CreatePaymentsTable extends Migration
             $table->date('date');
             $table->double('amount',10.2);
 
-            $table->integer('banks_id');
-            $table->string('number');
+            $table->integer('banks_id')->nullable();;
+            $table->string('number')->nullable();;
 
-            $table->date('check_date');
-            $table->date('check_pay_date');
-            $table->integer('check_types_id');
+            $table->date('check_date')->nullable();;
+            $table->date('check_pay_date')->nullable();;
+            $table->integer('check_types_id')->nullable();;
 
-            $table->string('term');
+            $table->string('term')->nullable();;
 
-            $table->date('transf_date');
-            $table->integer('financials_id');
+            $table->date('transf_date')->nullable();;
+            $table->integer('financials_id')->nullable();;
 
             $table->tinyInteger('status')->unsigned()->nullable();
 
