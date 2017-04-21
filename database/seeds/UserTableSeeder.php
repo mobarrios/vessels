@@ -25,8 +25,6 @@ class UserTableSeeder extends Seeder
                 'email'=>'admin@admin.com',
                 'password'=> \Illuminate\Support\Facades\Hash::make('1234'),
                 'branches_active_id' => 1
-
-
             ]]);
     }
 }
