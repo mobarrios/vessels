@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBranchesTable extends Migration
+class CreateIvaConditionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,15 @@ class CreateBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
+
+        Schema::create('iva_conditions', function (Blueprint $table) {
 
             $table->increments('id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
             $table->string('name');
-            $table->string('address');
-            $table->string('phone');
-            $table->enum('type',['primary','secondary']);
-            $table->integer('company_id');
-            $table->string('punto_venta');
+
 
         });
     }
@@ -35,7 +32,6 @@ class CreateBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('branches');
-
+        Schema::drop('iva_conditions');
     }
 }

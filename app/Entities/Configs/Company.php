@@ -9,9 +9,15 @@
 
      protected $table = 'company';
 
-     protected $fillable = ['rs1_razon_social', 'r1_nombre_fantasia','r1_direccion', 'r1_telefono','r1_cuit','r1_condicion_iva','r1_inicio_actividad'];
+     protected $fillable = ['razon_social', 'nombre_fantasia','direccion', 'telefono','cuit','iva_conditions_id','inicio_actividades','ingresos_brutos'];
 
      protected $section = 'company';
+
+
+    public function IvaConditions()
+    {
+        return $this->belongsTo(IvaConditions::getClass());
+    }
 
  }
 

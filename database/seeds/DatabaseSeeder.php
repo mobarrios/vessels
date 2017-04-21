@@ -47,6 +47,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BanksTableSeeder::class);
         $this->call(AdditionalsTableSeeder::class);
+        $this->call(CompanySeeders::class);
+        $this->call(IvaConditionsSeeders::class);
+
+
+
+
 
 
         Model::reguard();

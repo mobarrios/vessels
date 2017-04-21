@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Session;
 
 class SmallBoxesController extends Controller
 {
-    public function __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo, TypesSmallBoxesRepo $typesSmallBoxesRepo)
+    protected  $paymentsRepo ;
+    public function __construct(Request $request, Repo $repo, Route $route, ProvidersRepo $providersRepo, TypesSmallBoxesRepo $typesSmallBoxesRepo, PaymentsRepo $paymentsRepo)
     {
-
+        $this->paymentsRepo =  $paymentsRepo;
         $this->request = $request;
         $this->repo = $repo;
         $this->route = $route;
@@ -51,9 +52,8 @@ class SmallBoxesController extends Controller
         }
 
 
-        $pr = new PaymentsRepo();
+        $this->data['cashFromSales'] = $this->paymentsRepo->ListAll()->get();
 
-        $this->data['cashFromSales'] = $pr->ListAll()->get();
 
 
         //guarda en session lo que se busco para exportar

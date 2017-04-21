@@ -36,7 +36,6 @@ abstract class Controller extends BaseController
             if(is_null($model) || $model->count() == 0)
                 //si paso la seccion
                 $model = $this->repo->listAll($this->section);
-
         }
         else
         {

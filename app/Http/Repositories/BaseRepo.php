@@ -338,8 +338,8 @@ abstract class BaseRepo
             $time = time();
             $name = $time.$data->image->getClientOriginalName();
 
-            $image->upload( $name , $data->file('image'), config('models.'.$model->Section.'.imagesPath'));
-            $this->createImageables($model, config('models.'.$section.'.imagesPath') . $name);
+            $image->upload( $name , $data->file('image'), config('models.'.$model->section.'.imagesPath'));
+            $this->createImageables($model, config('models.'.$model->section.'.imagesPath') . $name);
         }
     }
 
