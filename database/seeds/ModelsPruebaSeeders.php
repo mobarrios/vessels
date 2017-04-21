@@ -27,7 +27,7 @@ class ModelsPruebaSeeders extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'XR 250 TORNADO',
+                'name' => 'CG TITAN',
                 'brands_id' => 1,
                 'status' => 1,
 
