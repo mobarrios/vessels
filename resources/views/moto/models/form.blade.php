@@ -82,6 +82,7 @@
                     {!! Form::number('amount',null,['class' => 'form-control','placeholder' => '$']) !!}
                     {!! Form::hidden('entity',$section) !!}
                     {!! Form::hidden('id',$models->id) !!}
+                    {!! Form::hidden('_token',csrf_token()) !!}
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-default saveAdicionales">
                             <i class="fa fa-floppy-o"></i>
@@ -100,7 +101,7 @@
                                 <td class="text-center"> $ {{$additionals->amount or ''}}</td>
                                 <td>
                                     <div class="btn-group pull-right">
-                                        <a href="{!! url('moto/removeAdditionals',$additionals->id) !!}" class="btn btn-xs btn-danger" data-id="{!! $additionals->id !!}"><i class="fa fa-trash"></i></a>
+                                        <a href="{!! url('moto/removeAdditionals',$additionals->id) !!}" class="btn btn-xs btn-danger deleteAdicionales" data-id="{!! $additionals->id !!}"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -145,7 +146,7 @@
                     method: 'POST',
                     success: function(response){
                         console.log(response);
-                        $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a></div></td></tr>'))
+                        $(".adicionales").append($('<tr><td class="text-center">'+response.name+'</td><td><div class="btn-group pull-right"><a href="moto/removeAdditionals/'+response.id+'" class="btn btn-xs btn-danger deleteAdicionales"><i class="fa fa-trash"></i></a></div></td></tr>'))
                     },
                     error: function (error) {
                         console.log("Error: "+error)
@@ -157,27 +158,37 @@
 
 
 
-        remove.on('click',function(ev){
+        contenedor.on('click','.deleteAdicionales',function(ev){
             ev.preventDefault()
 
             $(this).attr('disabled',true)
+            $(this).prop('disabled',true)
 
             var contenedor = $(this).parent().parent().parent()
 
             var data = {
-                id: $(this).attr('data-id')
+                additionals_id : $(this).attr('data-id'),
+                entity: entity.val(),
+                _token: "{!! csrf_token() !!}",
+
+                id: id.val()
             }
 
 
             $.ajax({
-                url: 'moto/addAdditionals',
+                url: 'moto/removeAdditionals',
                 data: data,
                 method: 'POST',
                 success: function(response){
                     $(contenedor).remove()
+
+                    $(this).attr('disabled',false)
+                    $(this).prop('disabled',false)
                 },
                 error: function (error) {
                     console.log("Error: "+error)
+                    $(this).attr('disabled',false)
+                    $(this).prop('disabled',false)
                 }
             })
 
