@@ -92,58 +92,6 @@ class SalesController extends Controller
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
-//        //guarda imagenes
-//        if(config('models.'.$this->section.'.is_imageable'))
-//            $this->createImage($model, $this->request);
-//
-//        //guarda log
-//        if(config('models.'.$this->section.'.is_logueable'))
-//            $this->repo->createLog($model, 1);
-//
-//        //si va a una sucursal
-//        if(config('models.'.$this->section.'.is_brancheable'))
-//            $this->repo->createBrancheables($model, Auth::user()->branches_active_id);
-
-
-        if($model->budgets_id){
-            $budget = $this->budgetsRepo->find($model->budgets_id);
-
-            foreach($budget->allItems as $modelo){
-
-//                dd([$item->id, $model->branches_confirm_id, $model->id, $item->pivot->colors_id]);
-                $item = $this->itemsRepo->asignItem($modelo->id, $model->branches_confirm_id, $model->id, $modelo->pivot->colors_id);
-                if ($item != false)
-                {
-
-                    // esto duplica en el asignar
-                    /*
-                    $datos = [];
-                    $datos['items_id'] = $item;
-                    $datos['sales_id'] = $model->id;
-                    $datos['price_actual'] = $modelo->pivot->price_actual;
-
-                    $this->salesItemsRepo->create($datos);
-                    */
-
-
-                    // agrega los adicionales del modelo con los nuevos importes o no
-                    if($budget->additionables){
-                        foreach ($budget->additionables as $additionals)
-                        {
-                            $model->additionables()->create(['additionals_id' => $additionals->id , 'amount' => $additionals->amount]);
-                        }
-                    };
-
-                }else{
-
-                    return redirect()->back()->withErrors('El Articulo no se pudo Asignar!');
-
-                }
-            }
-
-
-        }
-
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
     }
 

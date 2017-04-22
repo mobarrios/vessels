@@ -28,6 +28,8 @@ class SalesRepo extends BaseRepo
 
             foreach ($budgetsItems as $budgetItem)
             {
+                $budget = $budgetItem->budgets;
+
                 $item = $itemsRepo->asignItem($budgetItem->models_id, $data->branches_confirm_id,$sales->id, $budgetItem->colors_id);
 
                 if($item != false)
@@ -37,6 +39,18 @@ class SalesRepo extends BaseRepo
                     $new->items_id = $item;
                     $new->price_actual = $budgetItem->price_actual;
                     $new->save();
+
+                    if($budget->additionables){
+                        foreach ($budget->additionables as $additionals)
+                        {
+                            $sales->additionables()->create(['additionals_id' => $additionals->id , 'amount' => $additionals->amount]);
+                        }
+                    };
+
+
+                }else{
+
+                    return redirect()->back()->withErrors('El Articulo no se pudo Asignar!');
 
                 }
             }

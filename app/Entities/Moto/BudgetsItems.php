@@ -16,7 +16,7 @@
 
      public function Budgets()
      {
-         return $this->hasMany(Budgets::class);
+         return $this->belongsTo(Budgets::class);
      }
 
      public function Models()
