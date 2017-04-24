@@ -27,11 +27,17 @@
      }
 
 
-     public function getFechaAttribute(){
+     public function getFechaAttribute()
+     {
          return date('d-m-Y',strtotime($this->attributes['fecha']));
      }
+     public function setFechaAttribute($value)
+     {
+         $this->attributes['fecha'] = date('Y-m-d',strtotime($value));
+     }
 
-     public function getTipoAttribute(){
+     public function getTipoAttribute()
+     {
          switch ($this->attributes['tipo']){
              case 'R': return "Remito";
                  break;

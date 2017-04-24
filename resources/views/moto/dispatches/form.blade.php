@@ -67,6 +67,7 @@
                             <div ng-show="purchases" class="col-xs-12 ">
                                 <table class="table ">
                                     <thead>
+                                    <th>#</th>
                                     <th>Marca</th>
                                     <th>Modelo</th>
                                     <th>Color</th>
@@ -81,7 +82,6 @@
                                         <td>@{{ purchase.purchases_orders_items.models.brands.name }}</td>
                                         <td>@{{ purchase.purchases_orders_items.models.name }}</td>
                                         <td>@{{ purchase.purchases_orders_items.colors.name }}</td>
-
                                         <td>
                                             <input class="form-control input-sm n_motor_@{{ purchase.id }}" type="text"
                                                    placeholder="N Motor">

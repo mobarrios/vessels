@@ -29,7 +29,7 @@ class ModelsController extends Controller
         $this->data['providers'] = $providersRepo->ListsData('name','id');
         $this->data['categories'] = $categoriesRepo->ListsData('name','id');
         $this->data['status'] = config('status.models');
-
+        $this->data['types'] = config('models.models.types');
 
         $this->data['additionals'] = $additionalsRepo->ListsData('name','id');
 

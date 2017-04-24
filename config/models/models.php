@@ -48,6 +48,7 @@ return [
     'validationsStore' => [
 
         'name' => 'required',
+        'types_id' => 'required',
         'categories_id' => 'required',
         'providers_id' => 'required',
 
@@ -56,6 +57,7 @@ return [
     'validationsUpdate' => [
 
         'name' => 'required',
+        'types_id' => 'required',
         'categories_id' => 'required',
         'providers_id' => 'required',
 
@@ -66,7 +68,6 @@ return [
         1 => 'Motos',
         2 => 'Accesorios',
         3 => 'Repuestos',
-        4 => 'Marina',
-        5 => 'Productos de Fuerza',
+        4 => 'Servicios',
     ]
 ];

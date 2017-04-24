@@ -19,7 +19,11 @@
         {!! Form::label('Marca') !!}
         {!! Form::select('brands_id', $brands , null ,['class'=>'select2 form-control ']) !!}
     </div>
-    <div class="col-xs-6 form-group">
+    <div class="col-xs-3 ">
+        {!! Form::label('Tipo') !!}
+        {!! Form::select('types_id', $types , null ,['class'=>'select2 form-control' ]) !!}
+    </div>
+    <div class="col-xs-3 ">
         {!! Form::label('Categorias') !!}
         {!! Form::select('categories_id[]', $categories , null ,['class'=>'selectMulti form-control' ,'multiple'=>'']) !!}
     </div>

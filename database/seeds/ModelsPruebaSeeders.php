@@ -117,7 +117,7 @@ class ModelsPruebaSeeders extends Seeder
             ],
             [
                 'id' => 18,
-                'name' => 'ROUSER 235',
+                'name' => 'ROUSER 135',
                 'brands_id' => 3,
                 'status' => 1,
             ],

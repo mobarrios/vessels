@@ -59,22 +59,30 @@ return [
 
     ],
 
+    'tiposDocumento' =>
+        [
+            'DNI' => 'DNI',
+            'CUIT' => 'CUIT',
+            'CUIL' => 'CUIL'
+        ],
 
-        'tipos' =>
+    'tipos' =>
         [
             'F' => 'Factura',
             'C' => 'Nota de Crédito',
             'D' => 'Nota de Débito',
-            'R'=> 'Recibo'
+            'R' => 'Recibo'
         ]
     ,
 
-        'letras' =>
-            [
-                'A' => 'A',
-                'B' => 'B',
-                'C' => 'C',
-            ]
+    'letras' =>
+        [
+            'A' => 'A',
+            'B' => 'B',
+            'C' => 'C',
+            'X' => 'X',
+            'R' => 'R',
+        ]
     ,
 
 ];
