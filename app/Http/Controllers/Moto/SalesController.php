@@ -75,6 +75,8 @@ class SalesController extends Controller
 
     }
 
+
+
     public function store()
     {
         if($this->request->budgets_id === 0){

@@ -19,8 +19,8 @@ class CreateItemsTable extends Migration
             $table->softDeletes();
 
             $table->string('name');
-            $table->string('n_motor');
-            $table->string('n_cuadro');
+            $table->string('n_motor')->nullable();
+            $table->string('n_cuadro')->nullable();
             $table->string('year');
             $table->integer('status');
             

@@ -96,4 +96,10 @@ class ModelsController extends Controller
         return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
     }
 
+
+    public function show($id){
+        $model = $this->repo->find($id);
+
+        return response()->json($model);
+    }
 }

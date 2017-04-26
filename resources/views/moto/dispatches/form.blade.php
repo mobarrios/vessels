@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('sectionContent')
-    <div class="row">
+    <div class="row" ng-app="myApp">
         <!-- Default box -->
         <div class="col-xs-12">
             <div class="box">
@@ -12,7 +12,7 @@
                 </div>
                 <div class="box-body">
 
-                    <div ng-app="myApp">
+                    <div>
                         <div ng-controller="myCtrl">
                             @if(isset($models))
                                 {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
@@ -173,20 +173,26 @@
 
                                 <div class="col-xs-12 form-group">
                                     {!! Form::label('Modelo') !!}
-                                    {!! Form::select('models_id', $models->Providers->ModelsByProviders, null, ['class'=>'form-control select2']) !!}
+                                    {!! Form::select('models_id', $modelos, null, ['class'=>'form-control select2','id' => 'models_id']) !!}
                                 </div>
                                 <div class="col-xs-12 form-group">
                                     {!! Form::label('Color') !!}
                                     {!! Form::select('colors_id', $colors, null, ['class'=>'form-control select2']) !!}
                                 </div>
 
-                                <div class="col-xs-12 form-group">
+                                <div class="col-xs-12 form-group motos">
                                     {!! Form::label('N Motor') !!}
                                     {!! Form::text('n_motor', null, ['class'=>'form-control']) !!}
                                 </div>
-                                <div class="col-xs-12 form-group">
+                                <div class="col-xs-12 form-group motos">
                                     {!! Form::label('N Cuadro') !!}
                                     {!! Form::text('n_cuadro', null, ['class'=>'form-control']) !!}
+                                </div>
+
+
+                                <div class="col-xs-12 form-group accesorios">
+                                    {!! Form::label('Talle') !!}
+                                    {!! Form::text('talle', null, ['class'=>'form-control']) !!}
                                 </div>
 
                                 <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
@@ -222,6 +228,30 @@
         app.controller("myCtrl", function ($scope, $http) {
 
 
+            $("#models_id").on('change',function(ev){
+                var id = ev.target.selectedOptions[0].value;
+
+                $http.get("moto/models/show/" + id)
+                        .then(function (response) {
+                            if(response.data.types_id == "1"){
+
+
+                                $(".motos input").attr('disabled',false).prop('disabled',false);
+                                $(".motos").stop().fadeIn(400, function(){
+                                    $(".accesorios input").attr('disabled',true).prop('disabled',true);
+                                    $(".accesorios").stop().fadeOut();
+                                });
+                            }else {
+                                $(".motos input").attr('disabled',true).prop('disabled',true);
+                                $(".motos").fadeOut(400,function(){
+                                    $(".accesorios").stop().fadeIn();
+                                    $(".accesorios input").attr('disabled',false).prop('disabled',false);
+                                });
+
+                            }
+
+                        });
+            });
 
             //$('.provider').on('change',function()
             //{
