@@ -46,15 +46,13 @@
               </span>
                 </a>
                 <ul class="treeview-menu">
+
                     @permission('items.list')
-                    <li class={{ Request::segment(2) == "items" ? 'active' : '' }}><a
+                        <li class={{ Request::segment(2) == "items" && Request::segment(4) == 1 ? 'active' : '' }}><a
                                 href="{{route('moto.items.index', 1)}}"><span>Motos</span></a></li>
-                    <li class={{ Request::segment(2) == "items" ? 'active' : '' }}><a
+                        <li class={{ Request::segment(2) == "items" && Request::segment(4) == 2 ? 'active' : '' }}><a
                                 href="{{route('moto.items.index', 2)}}"><span>Accesorios</span></a></li>
-                    <li class={{ Request::segment(2) == "items" ? 'active' : '' }}><a
-                                href="{{route('moto.items.index', 3)}}"><span>Repuestos</span></a></li>
-                    <li class={{ Request::segment(2) == "items" ? 'active' : '' }}><a
-                                href="{{route('moto.items.index', 4)}}"><span>Servicios</span></a></li>
+
                     @endpermission
                     @permission('modelslistsprices.list')
                     <li class={{ Request::segment(2) == "modelsListsPrices" ? 'active' : '' }}><a

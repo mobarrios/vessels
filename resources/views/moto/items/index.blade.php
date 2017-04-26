@@ -10,8 +10,17 @@
                 </td>
                 <td>{{$model->year}}</td>
                 <td>{{$model->Colors->name}}</td>
-                <td>Motor:  <strong >{{$model->n_motor}}</strong> <br>
-                    Cuadro:  <strong >{{$model->n_cuadro}}</strong></td>
+
+                @if($model->models->types_id === 1)
+                    <td>Motor:  <strong >{{$model->n_motor}}</strong> <br>
+                        Cuadro:  <strong >{{$model->n_cuadro}}</strong>
+                    </td>
+                @elseif($model->models->types_id === 2)
+                    <td>Talle:  <strong >{{$model->talle}}</strong>
+                    </td>
+                @else
+
+                @endif
                 <td>
                     @foreach($model->Brancheables as $branch)
                        <label class="label label-default"> {{$branch->branches->name}} </label>
