@@ -10,7 +10,7 @@
 
      protected $table = 'items';
 
-     protected $fillable = ['name','n_motor','n_cuadro','year','models_id','colors_id','status'];
+     protected $fillable = ['name','n_motor','n_cuadro','year','models_id','colors_id','status', 'talle'];
      protected $section = 'items';
 
 
