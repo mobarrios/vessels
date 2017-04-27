@@ -15,4 +15,10 @@ Route::group(['prefix'=>'files'],function(){
 
     Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.files.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
 
+
+        Route::get('/form12',  ['middleware'=>'permission:'.$section.'.create','as'=>'moto.files.form12','uses'=>'Moto\FilesController@form12']);
+
+        Route::get('/form59',  ['middleware'=>'permission:'.$section.'.create','as'=>'moto.files.form59','uses'=>'Moto\FilesController@form59']);
+
+
 });

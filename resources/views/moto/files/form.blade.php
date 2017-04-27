@@ -110,13 +110,16 @@
                     <div class="col-xs-12">
                         <div class="form-inline">
                             <div class="form-group">
-                                <label>
+                                <label class="checkbox">
                                     {!! Form::checkbox('form_12', null) !!}
                                      Formulario 12
                                 </label>
                             </div>
+                            <a href="{!! route('moto.files.form12') !!}" class="btn btn-success btn-sm pull-right">
+                                Crear formulario
+                            </a>
                         </div>
-                        {!! Form::file('form_12_file') !!}
+
                     </div>
                 </div>
 
@@ -127,13 +130,16 @@
                     <div class="col-xs-12">
                         <div class="form-inline">
                             <div class="form-group">
-                                <label>
+                                <label class="checkbox">
                                     {!! Form::checkbox('form_59', 1,null) !!}
                                      Formulario 59
                                 </label>
                             </div>
+                                <a href="{!! route('moto.files.form59') !!}" class="btn btn-success btn-sm pull-right">
+                                    Crear formulario
+                                </a>
                         </div>
-                    {!! Form::file('form_59_file') !!}
+
                     </div>
                 </div>
             </div>
