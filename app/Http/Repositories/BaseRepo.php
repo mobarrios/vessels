@@ -102,7 +102,22 @@ abstract class BaseRepo
                 }
             //---
 
-        $model->save();
+            $model->save();
+
+
+                //guarda imagenes
+                if(config('models.'.$model->section.'.is_imageable'))
+                    $this->createImage($model, $data);
+
+                //guarda log
+                if(config('models.'.$model->section.'.is_logueable'))
+                    $this->createLog($model, 3);
+
+                //si va a una sucursal
+                if(config('models.'.$model->section.'.is_brancheable'))
+                    $this->createBrancheables($model, Auth::user()->branches_active_id);
+
+
 
         return $model;
     }
@@ -114,7 +129,17 @@ abstract class BaseRepo
 
         $model->delete();
 
-        return $model;
+        //elimina images
+        if(config('models.'.$model->section.'.is_imageable'))
+            $model->images()->delete();
+
+        if($model){
+            //guarda log
+            $this->repo->createLog($model, 2);
+            return "ok";
+        }else
+            return "error";
+
     }
 
 
@@ -310,7 +335,6 @@ abstract class BaseRepo
 
     public function createImageables($model, $image)
     {
-
         if ($model->images)
             $model->images()->delete();
 

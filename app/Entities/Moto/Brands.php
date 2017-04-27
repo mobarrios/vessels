@@ -9,7 +9,7 @@
 
      protected $table = 'brands';
      protected $fillable = ['name'];
-     protected $section = 'Brands';
+     protected $section = 'brands';
 
 
      public function Models()

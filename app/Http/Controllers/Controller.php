@@ -150,16 +150,6 @@ abstract class Controller extends BaseController
     {
         $model = $this->repo->destroy($id);
         
-        //elimina images
-        if(config('models.'.$this->section.'.is_imageable'))
-            $model->images()->delete();
-
-        if($model){
-            //guarda log
-            $this->repo->createLog($model, 2);
-            return "ok";
-        }else
-            return "error";
     }
 
 /*

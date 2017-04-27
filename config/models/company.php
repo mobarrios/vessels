@@ -4,58 +4,60 @@ $model = 'company';
 
 return [
 
-    'paginate'      => '50',
+    'paginate' => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Empresa',
+    'sectionName' => 'Empresa',
 
     //routes
-    'indexRoute'    => 'configs.'.$model.'.index',
-    'storeRoute'    => 'configs.'.$model.'.store',
-    'createRoute'   => 'configs.'.$model.'.create',
-    'showRoute'     => 'configs.'.$model.'.show',
-    'editRoute'     => 'configs.'.$model.'.edit',
-    'updateRoute'   => 'configs.'.$model.'.update',
-    'destroyRoute'  => 'configs.'.$model.'.destroy',
+    'indexRoute' => 'configs.' . $model . '.index',
+    'storeRoute' => 'configs.' . $model . '.store',
+    'createRoute' => 'configs.' . $model . '.create',
+    'showRoute' => 'configs.' . $model . '.show',
+    'editRoute' => 'configs.' . $model . '.edit',
+    'updateRoute' => 'configs.' . $model . '.update',
+    'destroyRoute' => 'configs.' . $model . '.destroy',
 
-    'postStoreRoute'  => 'configs.'.$model.'.index',
-    'postUpdateRoute' => 'configs.'.$model.'.index',
+    'postStoreRoute' => 'configs.' . $model . '.index',
+    'postUpdateRoute' => 'configs.' . $model . '.index',
 
     //urls
-    'destroyUrl' => 'configs/'.$model.'/destroy/',
+    'destroyUrl' => 'configs/' . $model . '/destroy/',
 
     //views
-    'storeView' =>  'configs.'.$model.'.form',
-    'editView'  =>  'configs.'.$model.'.form',
+    'storeView' => 'configs.' . $model . '.form',
+    'editView' => 'configs.' . $model . '.form',
 
     //path
-    'imagesPath' => 'uploads/'.$model.'/images/',
+    'imagesPath' => 'uploads/' . $model . '/images/',
 
     //polymorphic
-    'is_logueable'      => true,
-    'is_imageable'      => false,
-    'is_brancheable'    => false,
-    
+    'is_logueable' => true,
+    'is_imageable' => false,
+    'is_brancheable' => false,
+
 
     //column search
     'search' => [
-        
-            'Nombre'    => 'name',
-            'Direccion'  => 'address' ,
-            //'Email'     => 'email',
+
+        'Nombre' => 'name',
+        'Direccion' => 'address',
+        //'Email'     => 'email',
     ],
 
     'validationsStore' => [
 
-            'name'          => 'required',
-            'address'     => 'required',
+        'nombre_fantasia' => 'required',
+        'direccion' => 'required',
+        'cuit' => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-            'name'          => 'required',
-            'address'     => 'required',
+        'nombre_fantasia' => 'required',
+        'direccion' => 'required',
+        'cuit' => 'required',
 
     ],
 
