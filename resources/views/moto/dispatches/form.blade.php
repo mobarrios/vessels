@@ -71,8 +71,8 @@
                                     <th>Marca</th>
                                     <th>Modelo</th>
                                     <th>Color</th>
-                                    <th>N Motor</th>
-                                    <th>N Cuadro</th>
+                                    <th>Datos</th>
+
                                     <th></th>
                                     </thead>
                                     <tbody>
@@ -82,16 +82,18 @@
                                         <td>@{{ purchase.purchases_orders_items.models.brands.name }}</td>
                                         <td>@{{ purchase.purchases_orders_items.models.name }}</td>
                                         <td>@{{ purchase.purchases_orders_items.colors.name }}</td>
+
+
                                         <td>
                                             <input class="form-control input-sm n_motor_@{{ purchase.id }}" type="text"
                                                    placeholder="N Motor">
                                             <small class="error_n_motor_@{{ purchase.id }} text-danger "></small>
-                                        </td>
-                                        <td>
+
                                             <input class="form-control input-sm n_cuadro_@{{ purchase.id }}" type="text"
                                                    placeholder="N Cuadro">
                                             <small class="error_n_cuadro_@{{ purchase.id }} text-danger"></small>
                                         </td>
+
                                         <td>
                                             <button class="btn" ng-click="addITem(purchase)"><span
                                                         class="fa fa-share"></span></button>
