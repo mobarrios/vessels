@@ -8,6 +8,8 @@ use App\Http\Repositories\Configs\VouchersRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\CategoriesRepo;
 use App\Http\Repositories\Moto\FilesRepo as Repo;
+use App\Http\Repositories\Moto\Form12Repo;
+use App\Http\Repositories\Moto\Form59Repo;
 use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\SalesRepo;
 use Barryvdh\DomPDF\PDF;
@@ -17,12 +19,14 @@ use Illuminate\Routing\Route;
 
 class FilesController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route,VouchersRepo $vouchersRepo, SalesRepo $salesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route,VouchersRepo $vouchersRepo, SalesRepo $salesRepo, Form12Repo $form12Repo, Form59Repo $form59Repo)
     {
 
         $this->request  = $request;
         $this->repo     = $repo;
         $this->route    = $route;
+        $this->form12Repo    = $form12Repo;
+        $this->form59Repo    = $form59Repo;
 
         $this->section          = 'files';
         $this->data['section']  = $this->section;
@@ -46,11 +50,16 @@ class FilesController extends Controller
     }
 
 
-    public function form12(PDF $pdf){
+
+    public function form12(PDF $pdf, Sales $sales){
+//        $sales = $sales->find($this->request('sales_id'));
+
+//        $form = $this->form12Repo->create($this->request);
 
         $pdf->setPaper('a4', 'portland')->loadView('moto.files.formulario.form12');
+//        $pdf->setPaper('a4', 'portland')->loadView('moto.files.formulario.form12',[$sales,$form]);
 
-        return $pdf->stream();
+        return $pdf->download();
 
     }
 

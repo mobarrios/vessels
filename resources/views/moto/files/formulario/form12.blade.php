@@ -12,6 +12,7 @@
         *{
             padding: 0;
             margin: 0;
+            text-transform: uppercase;
         }
 
         #contenedor{
@@ -27,7 +28,7 @@
 
 
         #chapa{
-            top: 4.8cm;
+            top: 4.6cm;
             left: 8cm;
         }
 
@@ -68,33 +69,41 @@
         }
 
 
+        #observaciones{
+            top: 20.2cm;
+            left: 4cm;
+            width: 16cm;
+            font-size: 7pt !important;
+        }
+
+
 
 
 
 
 
         #apellido_nombre{
-            top: 23.9cm;
+            top: 24.4cm;
             left: 9.3cm;
         }
 
         #dni{
-            top: 24.5cm;
+            top: 25cm;
             left: 10.3cm;
         }
 
         #calle{
-            top: 25.2cm;
+            top: 25.7cm;
             left: 7.5cm;
         }
 
         #numero{
-            top: 25.2cm;
+            top: 25.7cm;
             left: 13cm;
         }
 
         #localidad{
-            top: 25.2cm;
+            top: 25.7cm;
             left: 16cm;
         }
 
@@ -136,6 +145,9 @@
         </p>
 
 
+        <p id="observaciones">
+            HE VERIFICADO PERSONALMENTE LA AUTENTICIDAD DE LOS DATOS QUE FIGURAN EN E RESENTE FORMULARIO. ME HAGO RESPONSABLE CIVIL Y CRIMINALMENTE POR LOS ERRORE U OMISIONES DE LOS QUE A LA EMPRESA CORRESPONDAN.
+        </p>
 
 
         <p id="apellido_nombre">
