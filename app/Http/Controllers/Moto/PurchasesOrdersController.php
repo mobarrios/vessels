@@ -142,7 +142,10 @@ class PurchasesOrdersController extends Controller
 
     public function addItems(PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo)
     {
-        $purchasesOrdersItemsRepo->create($this->request);
+
+       
+            $purchasesOrdersItemsRepo->create($this->request);
+
 
         return redirect()->route('moto.purchasesOrders.edit', $this->request->purchases_orders_id);
     }

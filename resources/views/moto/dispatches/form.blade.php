@@ -30,319 +30,293 @@
                                 {!! Form::text('number', null, ['class'=>'form-control']) !!}
                             </div>
 
-                            <div class="col-xs-3 form-group">
+                            <div class="col-xs-4 form-group">
                                 {!! Form::label('Proveedor') !!}
                                 {!! Form::select('providers_id', $providers, null, ['class'=>'provider select2 form-control']) !!}
                             </div>
 
-                            <div class="col-xs-2 form-group">
+                            <div class="col-xs-3 form-group">
                                 {!! Form::label('Imagen Remito') !!}
                                 {!! Form::file('image',['class'=>'form-control']) !!}
                             </div>
 
                             {!! Form::hidden('branches_id', \Illuminate\Support\Facades\Auth::user()->BranchesActive->id ) !!}
 
-                            <div class="col-xs-2 form-group" style="padding-top: 2%">
-                                <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
-                                @if(isset($models))
-                                    <a href="#" data-action="{!! route("moto.dispatches.addItems") !!}"
-                                       data-toggle="control-sidebar"
-                                       class="btn btn-default"><span class="fa fa-plus"></span></a>
-                                @endif
+                            <div class="col-xs-12 form-group">
+                                <button type="submit" class="btn btn-xs btn-default"><span class="fa fa-save"></span>
+                                    Guardar
+                                </button>
                             </div>
-
                             {!! Form::close() !!}
 
-                            <div class=" col-xs-12 form-group">
-                                {!! Form::label('Pedido de Mercaderia') !!}
-                                <select class="form-control">
-                                    <option>Seleccionar...</option>
+                            @if(isset($models))
+                                <div class=" col-xs-12">
+                                    {!! Form::label('Pedido de Mercadería') !!}
+                                    <div class='input-group'>
+                                        {!! Form::select('dispatches', $providers_dispatches , null , ['class'=>'select2 form-control', 'id' => 'purchasesOrdersId']) !!}
+                                        <buton id="dispatches_items" class="btn btn-default input-group-addon">
+                                            <span class="fa fa-eye"></span>
+                                        </buton>
+                                    </div>
 
-                                        <option ng-repeat="a in data" ng-click="onCategoryChange(a.id)">
-                                            # @{{ a.id }}</option>
-
-                                </select>
-                            </div>
-
-                            <div ng-show="purchases" class="col-xs-12 ">
-                                <table class="table ">
-                                    <thead>
-                                    <th>#</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Color</th>
-                                    <th>Datos</th>
-
-                                    <th></th>
-                                    </thead>
-                                    <tbody>
-
-                                    <tr ng-repeat="purchase in purchases ">
-                                        <td>@{{ purchase.id }}</td>
-                                        <td>@{{ purchase.purchases_orders_items.models.brands.name }}</td>
-                                        <td>@{{ purchase.purchases_orders_items.models.name }}</td>
-                                        <td>@{{ purchase.purchases_orders_items.colors.name }}</td>
+                                </div>
+                            @endif
 
 
-                                        <td>
-                                            <input class="form-control input-sm n_motor_@{{ purchase.id }}" type="text"
-                                                   placeholder="N Motor">
-                                            <small class="error_n_motor_@{{ purchase.id }} text-danger "></small>
+                        </div>
 
-                                            <input class="form-control input-sm n_cuadro_@{{ purchase.id }}" type="text"
-                                                   placeholder="N Cuadro">
-                                            <small class="error_n_cuadro_@{{ purchase.id }} text-danger"></small>
+                    </div>
+
+                    <!-- Button trigger modal -->
+
+
+                    @if(isset($models))
+
+                        <div class="col-xs-12">
+                            <hr>
+                            <label>Articulos en el Remito</label>
+
+
+                            <button type="button" class="pull-right btn btn-xs btn-primary " data-toggle="modal"
+                                    data-target="#myModal"><span class="fa fa-plus"></span> Agregar Artículos
+                            </button>
+
+
+                            <table class="table">
+                                <thead>
+                                <th></th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Color</th>
+                                <th>Datos</th>
+                                <th></th>
+                                </thead>
+                                <tbody>
+                                @foreach($models->DispatchesItems as $item)
+                                    <tr>
+                                        <td><input class='invoice' type="checkbox" value="{{$item->Items->id}}"
+                                                   name="dispatchesInvoiced[{{$item->Items->id}}]">
                                         </td>
+                                        <td>{{$item->Items->Models->Brands->name}}</td>
+                                        <td>{{$item->Items->Models->name}}</td>
+                                        <td>{{$item->Items->Colors->name}}</td>
+
+                                        @if($item->Items->Models->types_id == 1)
+                                            <td>Motor : {{$item->Items->n_motor}} <br> Cuadro : {{$item->Items->n_cuadro}}</td>
+                                        @else
+                                            <td> Talle :  {{$item->Items->talle}}</td>
+                                        @endif
 
                                         <td>
-                                            <button class="btn" ng-click="addITem(purchase)"><span
-                                                        class="fa fa-share"></span></button>
+                                            <a class="btn btn-xs btn-default"
+                                               href="{{route('moto.dispatches.deleteItems',[$item->id,$models->id])}}">
+                                                <span class="text-danger fa fa-trash"></span></a>
+                                            <a class="btn btn-xs btn-default"
+                                               href="{{route('moto.dispatches.editItems',[$item->id,$models->id])}}">
+                                                <span class="text-success fa fa-edit"></span></a>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <button class="btn btn-block" ng-click="asignarFactura()">Asignar Factura de
+                                Compra
+                            </button>
 
-
-                            <!-- Button trigger modal -->
-
-
-                            @if(isset($models))
-
-                                <div class="col-xs-12">
-                                    <hr>
-                                    <label>Articulos en el Remito</label>
-
-                                    <table class="table">
-                                        <thead>
-                                        <th></th>
-                                        <th>Marca</th>
-                                        <th>Modelo</th>
-                                        <th>Color</th>
-                                        <th>N Motor</th>
-                                        <th>N Cuadro</th>
-                                        <th></th>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($models->DispatchesItems as $item)
-                                            <tr>
-                                                <td><input class='invoice' type="checkbox" value="{{$item->Items->id}}"
-                                                           name="dispatchesInvoiced[{{$item->Items->id}}]">
-                                                </td>
-                                                <td>{{$item->Items->Models->Brands->name}}</td>
-                                                <td>{{$item->Items->Models->name}}</td>
-                                                <td>{{$item->Items->Colors->name}}</td>
-                                                <td>{{$item->Items->n_motor}}</td>
-                                                <td>{{$item->Items->n_cuadro}}</td>
-                                                <td>
-                                                    <a class="btn btn-xs btn-default"
-                                                       href="{{route('moto.dispatches.deleteItems',[$item->id,$models->id])}}">
-                                                        <span class="text-danger fa fa-trash"></span></a>
-                                                    <a class="btn btn-xs btn-default"
-                                                       href="{{route('moto.dispatches.editItems',[$item->id,$models->id])}}">
-                                                        <span class="text-success fa fa-edit"></span></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                    <button class="btn btn-block" ng-click="asignarFactura()">Asignar Factura de
-                                        Compra
-                                    </button>
-
-                                </div>
-                                @endif
-
-                                @endsection
-
-
-                                @section('formAside')
-
-                                @include('moto.partials.asideOpenForm')
-
-                                @if(isset($models))
-
-                                        <!-- .control-sidebar-menu -->
-
-                                @if(isset($modelItems))
-                                    {!! Form::model($modelItems,['route'=> ['moto.dispatches.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
-                                @else
-                                    {!! Form::open(['route'=> ['moto.dispatches.addItems' ], 'files' =>'true']) !!}
-                                @endif
-
-                                {!! Form::hidden('dispatches_id',$models->id ,['class'=>'dispatches_id']) !!}
-                                {!! Form::hidden('branches_id',$models->Brancheables->first()->Branches->id) !!}
-
-                                <div class="col-xs-12 form-group">
-                                    {!! Form::label('Modelo') !!}
-                                    {!! Form::select('models_id', $modelos, null, ['class'=>'form-control select2','id' => 'models_id']) !!}
-                                </div>
-                                <div class="col-xs-12 form-group">
-                                    {!! Form::label('Color') !!}
-                                    {!! Form::select('colors_id', $colors, null, ['class'=>'form-control select2']) !!}
-                                </div>
-
-                                <div class="col-xs-12 form-group motos">
-                                    {!! Form::label('N Motor') !!}
-                                    {!! Form::text('n_motor', null, ['class'=>'form-control']) !!}
-                                </div>
-                                <div class="col-xs-12 form-group motos">
-                                    {!! Form::label('N Cuadro') !!}
-                                    {!! Form::text('n_cuadro', null, ['class'=>'form-control']) !!}
-                                </div>
-
-
-                                <div class="col-xs-12 form-group accesorios">
-                                    {!! Form::label('Talle') !!}
-                                    {!! Form::text('talle', null, ['class'=>'form-control']) !!}
-                                </div>
-
-                                <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
-                                    <button type="submit" class="btn btn-primary">Agregar</button>
-                                    <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
-                                </div>
-                                {!! Form::close() !!}
-                                        <!-- /.control-sidebar-menu -->
-                            @endif
-                            @include('moto.partials.asideCloseForm')
                         </div>
-                    </div>
-                </div>
+                    @endif
 
-            </div>
-            <div class="box-footer clearfix">
-                <button type="submit" class="btn btn-default">Guardar</button>
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
-    </div>
+                    @endsection
 
 
-
-@endsection
-
-
-@section('js')
-    <script>
-        var app = angular.module("myApp", []);
-
-        app.controller("myCtrl", function ($scope, $http) {
+                    @section('modal')
 
 
-            $("#models_id").on('change',function(ev){
-                var id = ev.target.selectedOptions[0].value;
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Seleccionar Artículo</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @if(isset($models))
+                                            @if(isset($modelItems))
+                                                {!! Form::model($modelItems,['route'=> ['moto.dispatches.updateItems', $modelItems->id,$models->id], 'files' =>'true']) !!}
+                                            @else
+                                                {!! Form::open(['route'=> ['moto.dispatches.addItems' ], 'files' =>'true']) !!}
+                                            @endif
 
-                $http.get("moto/models/show/" + id)
-                        .then(function (response) {
-                            if(response.data.types_id == "1"){
+                                            {!! Form::hidden('dispatches_id',$models->id ,['class'=>'dispatches_id']) !!}
+                                            {!! Form::hidden('branches_id',$models->Brancheables->first()->Branches->id) !!}
+
+                                            <div class="col-xs-12">
+                                                {!! Form::label('Modelo') !!}
+                                                {!! Form::select('models_id', $modelos, null, ['class'=>'form-control ','id' => 'models_id']) !!}
+                                            </div>
+                                            <div class="col-xs-12 ">
+                                                {!! Form::label('Color') !!}
+                                                {!! Form::select('colors_id', $colors, null, ['class'=>'form-control ']) !!}
+                                            </div>
+                                            <div class="col-xs-12  motos">
+                                                {!! Form::label('N Motor') !!}
+                                                {!! Form::text('n_motor', null, ['class'=>'form-control']) !!}
+                                            </div>
+                                            <div class="col-xs-12  motos">
+                                                {!! Form::label('N Cuadro') !!}
+                                                {!! Form::text('n_cuadro', null, ['class'=>'form-control']) !!}
+                                            </div>
+                                            <div class="col-xs-12 form-group accesorios">
+                                                {!! Form::label('Talle') !!}
+                                                {!! Form::text('talle', null, ['class'=>'form-control']) !!}
+                                            </div>
+                                        @endif
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a data-toggle="control-sidebar" class="btn btn-danger">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary">Agregar</button>
+                                    </div>
+
+                                    {!! Form::close() !!}
+
+                                </div>
+                            </div>
+                        </div>
 
 
-                                $(".motos input").attr('disabled',false).prop('disabled',false);
-                                $(".motos").stop().fadeIn(400, function(){
-                                    $(".accesorios input").attr('disabled',true).prop('disabled',true);
-                                    $(".accesorios").stop().fadeOut();
+
+
+                    @endsection
+
+
+
+
+
+                    @section('js')
+                        <script>
+
+                            $('#dispatches_items').on('click', function () {
+                                var purchasesOrdersId = $('#purchasesOrdersId').val();
+                                window.location.href = 'moto/dispatches/purchasesItems/' + purchasesOrdersId + '/' + '{{ isset($models)? $models->id : '' }}';
+                            });
+
+
+                            var app = angular.module("myApp", []);
+
+                            app.controller("myCtrl", function ($scope, $http) {
+
+
+                                $("#models_id").on('change', function (ev) {
+                                    var id = ev.target.selectedOptions[0].value;
+
+                                    $http.get("moto/models/show/" + id)
+                                            .then(function (response) {
+                                                if (response.data.types_id == "1") {
+
+
+                                                    $(".motos input").attr('disabled', false).prop('disabled', false);
+                                                    $(".motos").stop().fadeIn(400, function () {
+                                                        $(".accesorios input").attr('disabled', true).prop('disabled', true);
+                                                        $(".accesorios").stop().fadeOut();
+                                                    });
+                                                } else {
+                                                    $(".motos input").attr('disabled', true).prop('disabled', true);
+                                                    $(".motos").fadeOut(400, function () {
+                                                        $(".accesorios").stop().fadeIn();
+                                                        $(".accesorios input").attr('disabled', false).prop('disabled', false);
+                                                    });
+
+                                                }
+
+                                            });
                                 });
-                            }else {
-                                $(".motos input").attr('disabled',true).prop('disabled',true);
-                                $(".motos").fadeOut(400,function(){
-                                    $(".accesorios").stop().fadeIn();
-                                    $(".accesorios input").attr('disabled',false).prop('disabled',false);
-                                });
 
-                            }
+                                //$('.provider').on('change',function()
+                                //{
+                                var id = $('.provider').val();
+                                $http.get("moto/purchasesOrdersByProviders/" + id)
+                                        .then(function (response) {
+                                            $scope.data = response.data;
 
-                        });
-            });
-
-            //$('.provider').on('change',function()
-            //{
-                var id = $('.provider').val();
-                $http.get("moto/purchasesOrdersByProviders/" + id)
-                        .then(function (response) {
-                            $scope.data = response.data;
-
-                            console.table(response.data);
-                        });
-           // });
+                                            console.table(response.data);
+                                        });
+                                // });
 
 
+                                $scope.onCategoryChange = function (id) {
+                                    $http.get("moto/dispatchesItems/" + id)
+                                            .then(function (response) {
+                                                $scope.purchases = response.data;
+                                                console.log(response.data);
+                                            });
+                                };
+
+                                $scope.addITem = function (purchase) {
+
+                                    var n_motor = $('.n_motor_' + purchase.id).val();
+                                    var n_cuadro = $('.n_cuadro_' + purchase.id).val();
+                                    var dispatches_id = $('.dispatches_id').val();
 
 
+                                    if (n_motor == '' || n_cuadro == '') {
+                                        if (!n_motor == "") {
 
-            $scope.onCategoryChange = function (id)
-            {
-                $http.get("moto/dispatchesItems/" + id)
-                        .then(function (response) {
-                            $scope.purchases = response.data;
-                            console.log(response.data);
-                        });
-            };
+                                            //valida nmotor unique
+                                            $http.get("moto/items/findMotor/" + n_motor)
+                                                    .then(function (response) {
+                                                        if (response.data)
+                                                            $('.error_n_motor_' + purchase.id).text('El Nro. de MOTOR ya se encuentra ingresado');
+                                                    });
 
-            $scope.addITem = function (purchase) {
+                                        } else {
+                                            $('.error_n_motor_' + purchase.id).text('* Requerido');
 
-                var n_motor = $('.n_motor_' + purchase.id).val();
-                var n_cuadro = $('.n_cuadro_' + purchase.id).val();
-                var dispatches_id = $('.dispatches_id').val();
+                                        }
 
+                                        if (!n_cuadro == "") {
+                                            //valida nmotor unique
+                                            $http.get("moto/items/findCuadro/" + n_cuadro)
+                                                    .then(function (response) {
+                                                        if (response.data)
+                                                            $('.error_n_cuadro_' + purchase.id).text('El Nro. de CUADRO ya se encuentra ingresado');
+                                                    });
+                                        }
+                                        else {
+                                            $('.error_n_cuadro_' + purchase.id).text('* Requerido');
+                                        }
+                                    }
+                                    else {
 
-                if (n_motor == '' || n_cuadro == '') {
-                    if (!n_motor == "") {
+                                        $http.post("moto/dispatches/addNew", {
+                                            ajax: true,
+                                            n_motor: n_motor,
+                                            n_cuadro: n_cuadro,
+                                            models_id: purchase.purchases_orders_items.models_id,
+                                            colors_id: purchase.purchases_orders_items.colors_id,
+                                            dispatches_id: dispatches_id,
+                                            dispatches_items_id: purchase.id
 
-                        //valida nmotor unique
-                        $http.get("moto/items/findMotor/" + n_motor)
-                                .then(function (response) {
-                                    if (response.data)
-                                        $('.error_n_motor_' + purchase.id).text('El Nro. de MOTOR ya se encuentra ingresado');
-                                });
+                                        }).success(function (data) {
+                                            window.location.href = "moto/dispatches/edit/" + dispatches_id;
 
-                    } else {
-                        $('.error_n_motor_' + purchase.id).text('* Requerido');
+                                        });
+                                    }
 
-                    }
+                                };
 
-                    if (!n_cuadro == "") {
-                        //valida nmotor unique
-                        $http.get("moto/items/findCuadro/" + n_cuadro)
-                                .then(function (response) {
-                                    if (response.data)
-                                        $('.error_n_cuadro_' + purchase.id).text('El Nro. de CUADRO ya se encuentra ingresado');
-                                });
-                    }
-                    else {
-                        $('.error_n_cuadro_' + purchase.id).text('* Requerido');
-                    }
-                }
-                else {
+                                $scope.asignarFactura = function () {
 
-                    $http.post("moto/dispatches/addNew", {
-                        ajax: true,
-                        n_motor: n_motor,
-                        n_cuadro: n_cuadro,
-                        models_id: purchase.purchases_orders_items.models_id,
-                        colors_id: purchase.purchases_orders_items.colors_id,
-                        dispatches_id: dispatches_id,
-                        dispatches_items_id: purchase.id
+                                    $("input:checkbox").each(function () {
 
-                    }).success(function (data) {
-                        window.location.href = "moto/dispatches/edit/" + dispatches_id;
+                                        if ($(this).prop('checked'))
+                                            console.log($(this).val());
 
-                    });
-                }
+                                    });
 
-            };
+                                };
 
-            $scope.asignarFactura = function () {
-
-                $("input:checkbox").each(function () {
-
-                    if ($(this).prop('checked'))
-                        console.log($(this).val());
-
-                });
-
-            };
-
-        });
-    </script>
+                            });
+                        </script>
 @endsection

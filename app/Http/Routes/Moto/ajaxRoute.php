@@ -23,7 +23,7 @@ Route::get('/items/findMotor/{nMotor?}', 'Moto\ItemsController@itemsByMotor');
 Route::get('/items/findCuadro/{nCuadro?}', 'Moto\ItemsController@itemsByCuadro');
 
 //dispathces add item
-Route::post('/dispatches/addNew', 'Moto\DispatchesController@addItems');
+Route::get('/dispatches/addNew', 'Moto\DispatchesController@addItems');
 
 
 //buscar presupuestos x clientes

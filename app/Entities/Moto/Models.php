@@ -60,7 +60,8 @@ class Models extends Entity
         return $this->hasOne(PurchasesListsPricesItems::class)->with('PurchasesListsPrices')->orderBy('updated_at', 'DESC');
     }
 
-    public function getBrandName(){
+    public function getBrandName()
+    {
         return $this->belongsTo(Brands::class)->get()->name;
     }
 
@@ -68,6 +69,12 @@ class Models extends Entity
     {
         return config('status.models.' . $this->attributes['status']);
     }
+
+    public function getTypesNameAttribute()
+    {
+        return config('models.models.types.' . $this->attributes['types_id']);
+    }
+
 
     public function getStockAttribute()
     {
