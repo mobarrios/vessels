@@ -19,6 +19,7 @@ class CreateForm12Table extends Migration
 
 
             $table->string('observaciones')->nullable();
+            $table->smallInteger('municipio')->nullable();
 
             $table->integer('files_id')->unsigned();
             $table->foreign('files_id')->references('id')->on('files')->onDelete('cascade');;

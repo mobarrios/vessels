@@ -5,11 +5,8 @@
 @endsection
 
 @section('form_inputs')
-    @if(isset($models))
-        {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
-    @else
-        {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
-    @endif
+
+    {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
 
     <div class="col-xs-12 col-md-6">
         <div class="panel panel-primary">
@@ -18,15 +15,15 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-xs-12 col-md-4 form-group">
+                    <div class="col-xs-12 col-sm-6 form-group">
                         {!! Form::label('Venta #') !!}
                         <div class="btn-group">
                             <a id="verVenta" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                            {!! Form::select('sales_id',$sales, isset($sales_id) ? $sales_id : null, ['class'=>'form-control select2']) !!}
+                            {!! Form::select('sales_id',$sales, isset($models->sales_id) ? $models->sales_id : null, ['class'=>'form-control select2']) !!}
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-md-4 form-group">
+                    <div class="col-xs-12 col-sm-6 form-group">
                         {!! Form::label('Factura #') !!}
                         <div class="btn-group">
                             <a href="" class="btn btn-default"><i class="fa fa-eye"></i></a>
@@ -34,13 +31,13 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-md-4 form-group">
-                        {!! Form::label('Remito #') !!}
-                        <div class="btn-group">
-                            <a href="" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                            {!! Form::select('senders_id',$senders, null, ['class'=>'form-control select2']) !!}
-                        </div>
-                    </div>
+                    {{--<div class="col-xs-12 col-md-4 form-group">--}}
+                        {{--{!! Form::label('Remito #') !!}--}}
+                        {{--<div class="btn-group">--}}
+                            {{--<a href="" class="btn btn-default"><i class="fa fa-eye"></i></a>--}}
+                            {{--{!! Form::select('senders_id',$senders, null, ['class'=>'form-control select2']) !!}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                 </div>
 
@@ -115,9 +112,23 @@
                                      Formulario 12
                                 </label>
                             </div>
-                            <a href="{!! route('moto.files.form12') !!}" id="btnForm12" class="btn btn-success btn-sm pull-right">
-                                Crear formulario
-                            </a>
+
+
+                            @if(!$models->form12)
+                                <a href="{!! route('moto.files.form12') !!}" id="btnForm12" class="btn btn-success btn-sm pull-right">
+                                    Crear formulario
+                                </a>
+                            @else
+                                <div class="btn-group btn-group-sm pull-right">
+
+                                    <a href="#modalForm12Muestra" data-toggle="modal" data-target="#modalForm12Muestra" class="btn btn-default">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{!! route('moto.files.showForm12',$models->form12->id) !!}" class="btn btn-default">
+                                        <i class="fa fa-print"></i>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
 
                     </div>
@@ -169,6 +180,56 @@
     </div>
 
 
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm12Muestra" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Formulario N°12</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h4>DATOS DEL VEHÍCULO VERIFICADO</h4>
+                            @foreach($models->sales->SalesItems as $salesItem)
+                                <ul>
+                                    <li>N° de chapa: {!! $salesItem->Items->n_chapa !!}</li>
+                                    <li>Marca: {!! $salesItem->Items->models->brands->name !!}</li>
+                                    <li>Tipo: Moto</li>
+                                    <li>Modelo: {!! $salesItem->Items->models->name !!}</li>
+                                    <li>Marca del motor: {!! $salesItem->Items->models->name !!}</li>
+                                    <li>Marca del motor: {!! $salesItem->Items->models->name !!}</li>
+                                    <li>N° del motor: {!! $salesItem->Items->n_motor !!}</li>
+                                    <li>N° de cuadro: {!! $salesItem->Items->n_chapa !!}</li>
+                                </ul>
+                            @endforeach
+                        </div>
+                        <div class="col-xs-6">
+                            <h4>OBSERVACIONES Y CONSTANCIAS</h4>
+                            <p>{!! $models->form12->observaciones !!}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-xs-12">
+                            <h4>DATOS DEL SOLICITANTE</h4>
+                            <ul>
+                                <li>{!! $models->sales->clients->fullName  !!}</li>
+                                <li>{!! $models->sales->clients->dni !!}</li>
+                                <li>{!! $models->sales->clients->address !!}</li>
+                                <li>{!! $models->sales->clients->location !!}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Modal -->
     <div class="modal fade" id="modalForm12" tabindex="-1" role="dialog">
@@ -180,9 +241,9 @@
                 </div>
                 <div class="modal-body">
                     @if(isset($models->formulario12))
-                        {!! Form::model($models->formulario12,['route'=> 'moto'.$section.'updateform12', $models->formulario12->id , 'files' =>'true']) !!}
+                        {!! Form::model($models->formulario12,['route'=> 'moto'.$section.'updateform12', [$models->id,$models->formulario12->id]  , 'files' =>'true']) !!}
                     @else
-                        {!! Form::open(['route'=> 'moto.'.$section.'.form12' , 'files' =>'true']) !!}
+                        {!! Form::open(['route'=> ['moto.'.$section.'.form12', $models->id] , 'files' =>'true']) !!}
                     @endif
 
                         {!! Form::hidden('sales_id',null) !!}
@@ -190,7 +251,7 @@
                         <div class="row">
                             <div class="col-xs-12 form-group">
                                 {!! Form::label('Municipio:') !!}
-                                {!! Form::select('municipio', [],null, ['class'=>'select2 form-control']) !!}
+                                {!! Form::select('municipio', $municipios,null, ['class'=>'select2 form-control']) !!}
                             </div>
                         </div>
 
@@ -222,10 +283,24 @@
                 </div>
                 <div class="modal-body">
                     @if(isset($models->formulario59))
-                        {!! Form::model($models->formulario59,['route'=> 'moto'.$section.'updateForm59', $models->formulario12->id , 'files' =>'true']) !!}
+                        {!! Form::model($models->formulario59,['route'=> ['moto'.$section.'updateForm59', $models->formulario12->id ], 'files' =>'true']) !!}
                     @else
-                        {!! Form::open(['route'=> 'moto.'.$section.'.form59' , 'files' =>'true']) !!}
+                        {!! Form::open(['route'=> ['moto.'.$section.'.form59', $models->id ], 'files' =>'true']) !!}
                     @endif
+
+                        <div class="row">
+                            <p class="text-center">
+                                <b>"A" DATOS DEL PRESENTANTE, MANDATARIO/EMPLEADO DEL MANDATARIO/COMERCIANTE HABITUALISTA</b>
+                            </p>
+
+                            <div class="col-xs-12 form-group">
+                                {!! Form::label('Razón Social:') !!}
+                                {!! Form::select('razon_social',[], null, ['class'=>'form-control']) !!}
+                            </div>
+
+                        </div>
+
+                        <hr>
 
                         <div class="row">
                             <p class="text-center">
@@ -266,107 +341,13 @@
                                 {!! Form::text('n_control1', null, ['class'=>'form-control']) !!}
                             </div>
 
-                            <hr class="col-xs-4 col-xs-offset-3">
-                            <span class="clearfix"></span>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Dominio:') !!}
-                                {!! Form::text('dominio1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Trámite presentado:') !!}
-                                {!! Form::text('tramite1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Solicitud tipo:') !!}
-                                {!! Form::text('solicitud_tipo1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('N° de control:') !!}
-                                {!! Form::text('n_control1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <hr class="col-xs-4 col-xs-offset-3">
-                            <span class="clearfix"></span>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Dominio:') !!}
-                                {!! Form::text('dominio1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Trámite presentado:') !!}
-                                {!! Form::text('tramite1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Solicitud tipo:') !!}
-                                {!! Form::text('solicitud_tipo1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('N° de control:') !!}
-                                {!! Form::text('n_control1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <hr class="col-xs-4 col-xs-offset-3">
-                            <span class="clearfix"></span>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Dominio:') !!}
-                                {!! Form::text('dominio1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Trámite presentado:') !!}
-                                {!! Form::text('tramite1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Solicitud tipo:') !!}
-                                {!! Form::text('solicitud_tipo1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('N° de control:') !!}
-                                {!! Form::text('n_control1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-
-                            <hr class="col-xs-4 col-xs-offset-3">
-                            <span class="clearfix"></span>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Dominio:') !!}
-                                {!! Form::text('dominio1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Trámite presentado:') !!}
-                                {!! Form::text('tramite1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Solicitud tipo:') !!}
-                                {!! Form::text('solicitud_tipo1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('N° de control:') !!}
-                                {!! Form::text('n_control1', null, ['class'=>'form-control']) !!}
-                            </div>
-
-
                         </div>
 
 
                         <div class="row">
-                            <div class="col-xs-3 form-group">
+                            <div class="col-xs-12 form-group">
                                 {!! Form::label('Observaciones:') !!}
-                                {!! Form::textarea('observaciones', null, ['class'=>'form-control']) !!}
+                                {!! Form::textarea('observaciones', null, ['class'=>'form-control','rows' => '3']) !!}
                             </div>
                         </div>
 

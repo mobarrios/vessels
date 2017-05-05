@@ -114,60 +114,57 @@
 </head>
 <body>
     <div id="contenedor">
-        <p id="chapa">dsasad66551321355</p>
+        @foreach($sales->SalesItems as $salesItem)
+            <p id="chapa">{!! $salesItem->Items->n_chapa !!}</p>
 
-        <p id="marca">
-            Yamaha
-        </p>
+            <p id="marca">
+                {!! $salesItem->Items->models->brands->name !!}
+            </p>
 
-        <p id="tipo">
-            Moto
-        </p>
+            <p id="tipo">
+                Moto
+            </p>
 
-        <p id="modelo">
-            FZ150
-        </p>
+            <p id="modelo">
+                {!! $salesItem->Items->models->name !!}
+            </p>
 
-        <p id="marca_motor">
-            Yamaha
-        </p>
+            <p id="marca_motor">
+                {!! $salesItem->Items->models->name !!}
+            </p>
 
-        <p id="n_motor">
-            13515132132135135135
-        </p>
+            <p id="n_motor">
+                {!! $salesItem->Items->n_motor !!}
+            </p>
 
-        <p id="marca_cuadro">
-            Yamaha
-        </p>
+            <p id="marca_cuadro">
+                {!! $salesItem->Items->models->name !!}
+            </p>
 
-        <p id="n_cuadro">
-            151d3s13das153513
-        </p>
-
+            <p id="n_cuadro">
+                {!! $salesItem->Items->n_chapa !!}
+            </p>
+        @endforeach
 
         <p id="observaciones">
-            HE VERIFICADO PERSONALMENTE LA AUTENTICIDAD DE LOS DATOS QUE FIGURAN EN E RESENTE FORMULARIO. ME HAGO RESPONSABLE CIVIL Y CRIMINALMENTE POR LOS ERRORE U OMISIONES DE LOS QUE A LA EMPRESA CORRESPONDAN.
+            {!! $models->observaciones !!}
         </p>
 
 
         <p id="apellido_nombre">
-            Barrios Manuel
+            {!! $sales->clients->fullName !!}
         </p>
 
         <p id="dni">
-            27156488
+            {!! $sales->clients->dni !!}
         </p>
 
         <p id="calle">
-            Tu calle
-        </p>
-
-        <p id="numero">
-            222
+            {!! $sales->clients->address !!}
         </p>
 
         <p id="localidad">
-            Hurlingham
+            {!! $sales->clients->location !!}
         </p>
 
     </div>

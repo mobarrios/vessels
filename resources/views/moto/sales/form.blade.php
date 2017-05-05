@@ -467,19 +467,31 @@
 
             <div class="col-xs-12">
                 @if((($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount))  - $pago == 0) && $models->pagado === 1)
-                    <div class="btn-group">
-                        <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-default" title="Factura PDF">
-                            <span><strong class="strong">Realizar Comprobante</strong></span>
-                        </a>
 
-                        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-success" title="Generar Remito">
-                            <span>Generar remito</span>
-                        </a>
+                        <div class="btn-group">
+                            <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-default" title="Factura PDF">
+                                <span><strong class="strong">Realizar Comprobante</strong></span>
+                            </a>
 
-                        <a target="_blank" href="{!! route('moto.files.create',$models->id) !!}" class="btn btn-warning" title="Crear legajo">
-                            <span>Crear legajo</span>
-                        </a>
-                    </div>
+                            <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-success" title="Generar Remito">
+                                <span>Generar remito</span>
+                            </a>
+                        </div>
+
+                        <div class="btn-group">
+
+                            @if(!$models->files)
+                                {!! Form::open(['route'=> [config('models.files.storeRoute')]]) !!}
+
+                                        {!! Form::hidden('sales_id',$models->id) !!}
+
+                                        <button type="submit" class="btn btn-success">Crear legajo</button>
+
+                                {!! Form::close() !!}
+                            @else
+                                <a href="{!! route('moto.files.edit',$models->files->id) !!}" class="btn btn-primary">Ver legajo</a>
+                            @endif
+                        </div>
                 @endif
             </div>
 

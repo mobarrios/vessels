@@ -11,13 +11,13 @@ class Form12 extends Entity
 
     protected $table = 'form_12';
 
-    protected $fillable = ['observaciones'];
+    protected $fillable = ['observaciones','files_id','municipio'];
 
     protected $section = 'form12';
 
 
     public function files(){
-        return $this->belongsTo(Files::getClass());
+        return $this->belongsTo(Files::getClass(),'files_id');
     }
 
 }

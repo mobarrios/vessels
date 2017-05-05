@@ -18,7 +18,7 @@ return [
     'updateRoute' => 'moto.' . $model . '.update',
     'destroyRoute' => 'moto.' . $model . '.destroy',
 
-    'postStoreRoute' => 'moto.' . $model . '.index',
+    'postStoreRoute' => 'moto.' . $model . '.edit',
     'postUpdateRoute' => 'moto.' . $model . '.index',
 
     //urls
@@ -46,18 +46,7 @@ return [
     ],
 
     'validationsStore' => [
-        'invoices_id' => 'required|exists:vouchers,id',
-        'senders_id' => 'required|exists:vouchers,id',
-        'form_01' => 'boolean',
-        'form_01_file' => 'required_with:form_01',
-        'form_12' => 'boolean',
-        'form_12_file' => 'required_with:form_12',
-        'form_59' => 'boolean',
-        'form_59_file' => 'required_with:form_59',
-        'dni_photocopy' => 'boolean',
-        'dni_photocopy_file' => 'required_with:dni_photocopy',
-        'proof_of_cuil' => 'boolean',
-        'proof_of_cuil_file' => 'required_with:proof_of_cuil'
+        'sales_id' => 'required|exists:sales,id',
     ],
 
     'validationsUpdate' => [
