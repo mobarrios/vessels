@@ -179,7 +179,7 @@
         </div>
     </div>
 
-
+@if($models->form12)
     <!-- Modal -->
     <div class="modal fade" id="modalForm12Muestra" tabindex="-1" role="dialog">
         <div class="modal-dialog">
@@ -228,7 +228,7 @@
             </div>
         </div>
     </div>
-
+@endif
 
 
     <!-- Modal -->
