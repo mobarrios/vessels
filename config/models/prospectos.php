@@ -51,6 +51,8 @@ return [
         'name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
+        'address' => 'required',
+        'location' => 'required',
 
     ],
 
@@ -59,6 +61,8 @@ return [
         'name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
+        'address' => 'required',
+        'location' => 'required',
 
     ],
 

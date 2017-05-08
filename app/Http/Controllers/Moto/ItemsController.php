@@ -56,9 +56,10 @@ class ItemsController extends Controller
         {
             $type = $this->route->getParameter('types');
 
-            $model  = Items::whereHas('models',function($q) use ($type){
-                return $q->where('types_id',$type);
-            });
+            $model  = $this->repo->listAll($this->section)
+                        ->whereHas('models',function($q) use ($type){
+                            return $q->where('types_id',$type);
+                        });
 
         }
 

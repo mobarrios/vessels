@@ -50,18 +50,19 @@ return [
 
         'name' => 'required',
         'last_name' => 'required',
-        'email' => 'unique:clients,email|required',
-
+        'email' => 'required',
+        'address' => 'required',
+        'location' => 'required',
 
     ],
 
     'validationsUpdate' => [
 
-
         'name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
-
+        'address' => 'required',
+        'location' => 'required',
 
     ],
 
