@@ -33,7 +33,13 @@
                                             class="c{{$dispatchesItem->id}}" type="text" placeholder="N Cuadro">
                                 </td>
                             @else
-                                <td><input type="text" placeholder="Talle" class="t{{$dispatchesItem->id}}"></td>
+                                <td>
+
+
+                                    {!! Form::select('sizes_id',$sizes,null,['class'=>'t'.$dispatchesItem->id.' select2' , 'placeholder'=>'Talle']) !!}
+                                </td>
+
+
                             @endif
 
                             <td>
@@ -64,7 +70,10 @@
             var id = $(this).attr('data-id');
             var n_motor = $('.m' + id).val();
             var n_cuadro = $('.c' + id).val();
-            var talle = $('.t' + id).val();
+            var talle = $('.t' + id ).val();
+
+
+            return;
 
             var models_id = $(this).attr('data-models-id');
             var colors_id = $(this).attr('data-colors-id');

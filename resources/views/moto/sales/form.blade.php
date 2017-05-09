@@ -61,39 +61,43 @@
 
 
 @section('form_title')
-    Venta
+    {{ (isset($models)? 'Venta # '. $models->id : 'Nueva Venta' )  }}
 @endsection
 
 @section('form_inputs')
     <div ng-app="app" ng-controller="ctl">
 
-        @if(!isset($models))
-            <div class="search">
-
-                <p>Antes de crear un prospecto, busque si ya existe.</p>
-                <select id="search" class="select2 form-control">
-                    <option value="seleccione">Seleccione... ~ ~</option>
-                    @forelse($clients as $c)
-                        <option value="{!! $c->id !!}">
-                            {!! $c->fullname !!} ~ {!! $c->dni !!} ~ {!! $c->email !!} ~ {!! $c->phone !!}
-
-                        </option>
-                    @empty
-
-                    @endforelse
-                </select>
-            </div>
-
-        @endif
-
         <div class="col-xs-12 content">
-            <div class="box box-primary">
+            <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title"> Datos Personales</h3>
                 </div>
 
                 <div class="box-body">
-                    @if(Session::has('client'))
+
+
+                    @if(!isset($models))
+                        <div class="search">
+
+                            <p>Antes de crear un prospecto, busque si ya existe.</p>
+                            <select id="search" class="select2 form-control">
+                                <option value="seleccione">Seleccione... ~ ~</option>
+                                @forelse($clients as $c)
+                                    <option value="{!! $c->id !!}">
+                                        {!! $c->fullname !!} ~ {!! $c->dni !!} ~ {!! $c->email !!} ~ {!! $c->phone !!}
+
+                                    </option>
+                                @empty
+
+                                @endforelse
+                            </select>
+                        </div>
+
+                    @endif
+
+
+
+                @if(Session::has('client'))
                         {!! Form::model(Session::get('client'),['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
                     @elseif(isset($models))
                         {!! Form::model($models->clients,['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
@@ -201,7 +205,7 @@
             @endif
 
         <div class="col-xs-12 content">
-            <div class="box box-primary">
+            <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title"> Cabecera</h3>
                 </div>
@@ -219,7 +223,7 @@
 
                     <div class="col-xs-12 col-md-1 form-group">
                         <br>
-                        <button class="btn btn-default" ng-click="ver()" type="button" id="ver">Ver</button>
+                        <button class="btn btn0btn-default" ng-click="ver()" type="button" id="ver">Ver</button>
                     </div>
 
                     <div class="col-xs-12">
@@ -255,13 +259,13 @@
         </div>
 
         <div class="col-xs-12 content">
-            <div class="box box-primary">
+            <div class="box ">
                 <div class="box-header with-border">
                     <h3 class="box-title"> Artículos</h3>
                     <div class="pull-right">
                         @if(isset($models))
                             <a href="{{route('moto.sales.addItems', $models->id )}}"
-                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                               class="btn btn-sm btn-default"><span class="fa fa-plus"></span> Agregar Artículo</a>
                         @endif
                     </div>
                 </div>
@@ -289,8 +293,14 @@
                                         <a href="{{route('moto.items.edit',$item->Items->id)}}">{{$item->Items->Models->name}}</a>
 
                                         | {{$item->Items->Colors->name}} <br>
+
+                                        @if($item->Items->types_id == 1)
                                         <span class="text-muted"> Motor : </span> {{$item->Items->n_motor}}<br>
                                         <span class="text-muted"> Motor : </span> {{$item->Items->n_cuadro}}<br>
+                                        @else
+                                            <span class="text-muted"> Talle : </span> {{$item->Items->talle}}<br>
+
+                                        @endif
                                         <span class="pull-right label label-xs label-success">{{$item->Items->Branches}}</span>
                                     </td>
                                     <td>
@@ -327,7 +337,7 @@
         </div>
 
         <div class="col-xs-12 content">
-            <div class="box box-primary">
+            <div class="box">
                 {{--<div class="box-header with-border">--}}
                     {{--<h3 class="box-title"> Adicionales</h3>--}}
                     {{--<div class="pull-right">--}}
@@ -365,13 +375,13 @@
 
         @if(isset($models))
             <div class="col-xs-12 content">
-                <div class="box box-primary">
+                <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-pay"></i> Formas de Pago</h3>
                         <div class="pull-right">
 
                             <a href="{!! route("moto.sales.createPayment", $models->id) !!}" id="agregarPago"
-                               class="btn btn-xs btn-primary"><span class="fa fa-plus"></span></a>
+                               class="btn btn-sm btn-default"><span class="fa fa-plus"></span> Agregar Pago</a>
                         </div>
                     </div>
                     <div class="box-body">
@@ -444,9 +454,9 @@
 
 
                                 <a target="_blank" href="{!! route('moto.'.$section.'.recibo',$models->id) !!}" id="generarRecibo"
-                                   class="pull-left btn btn-primary disabled"
+                                   class="pull-left btn btn-sm btn-default disabled"
                                    title="Recibo PDF">
-                                    Generar recibo
+                                    Generar Recibo
                                 </a>
 
 
@@ -468,28 +478,25 @@
             <div class="col-xs-12">
                 @if((($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount))  - $pago == 0) && $models->pagado === 1)
 
-                        <div class="btn-group">
-                            <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-default" title="Factura PDF">
-                                <span><strong class="strong">Realizar Comprobante</strong></span>
+                            <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-sm btn-default" title="Factura PDF">
+                                <span>Realizar Comprobante</span>
                             </a>
 
-                            <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-success" title="Generar Remito">
+                            <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}" class="btn btn-sm btn-default" title="Generar Remito">
                                 <span>Generar remito</span>
                             </a>
-                        </div>
 
                         <div class="btn-group">
-
                             @if(!$models->files)
                                 {!! Form::open(['route'=> [config('models.files.storeRoute')]]) !!}
 
                                         {!! Form::hidden('sales_id',$models->id) !!}
 
-                                        <button type="submit" class="btn btn-success">Crear legajo</button>
+                                        <button type="submit" class="btn btn-sm btn-default">Crear legajo</button>
 
                                 {!! Form::close() !!}
                             @else
-                                <a href="{!! route('moto.files.edit',$models->files->id) !!}" class="btn btn-primary">Ver legajo</a>
+                                <a href="{!! route('moto.files.edit',$models->files->id) !!}" class="btn btn-sm btn-default">Ver legajo</a>
                             @endif
                         </div>
                 @endif
