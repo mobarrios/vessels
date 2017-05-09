@@ -76,26 +76,28 @@
                             <hr>
                             <label>Articulos en el Remito</label>
 
-
+                            {{--
                             <button type="button" class="pull-right btn btn-xs btn-primary " data-toggle="modal"
                                     data-target="#myModal"><span class="fa fa-plus"></span> Agregar Artículos
                             </button>
-
+                            --}}
 
                             <table class="table">
                                 <thead>
-                                <th></th>
+                                {{--<th></th>--}}
                                 <th>Marca</th>
                                 <th>Modelo</th>
                                 <th>Color</th>
                                 <th>Datos</th>
-                                <th></th>
+                                {{--<th></th>--}}
                                 </thead>
                                 <tbody>
                                 @foreach($models->DispatchesItems as $item)
                                     <tr>
+                                        {{--
                                         <td><input class='invoice' type="checkbox" value="{{$item->Items->id}}"
                                                    name="dispatchesInvoiced[{{$item->Items->id}}]">
+                                       --}}
                                         </td>
                                         <td>{{$item->Items->Models->Brands->name}}</td>
                                         <td>{{$item->Items->Models->name}}</td>
@@ -106,7 +108,7 @@
                                         @else
                                             <td> Talle :  {{$item->Items->talle}}</td>
                                         @endif
-
+                                        {{--
                                         <td>
                                             <a class="btn btn-xs btn-default"
                                                href="{{route('moto.dispatches.deleteItems',[$item->id,$models->id])}}">
@@ -115,6 +117,7 @@
                                                href="{{route('moto.dispatches.editItems',[$item->id,$models->id])}}">
                                                 <span class="text-success fa fa-edit"></span></a>
                                         </td>
+                                        --}}
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -15,6 +15,7 @@ use App\Http\Repositories\Moto\PayMethodsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersItemsRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo as Repo;
+use App\Http\Repositories\Moto\SizesRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,7 @@ class PurchasesOrdersController extends Controller
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
         $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
         $this->data['branches'] = $branchesRepo->ListsData('name', 'id');
-        $this->data['pay_methods'] = $payMethodsRepo->ListsData('name','id');
+        $this->data['pay_methods'] = $payMethodsRepo->ListsData('name', 'id');
 
         $this->data['total'] = 0;
 
@@ -51,7 +52,6 @@ class PurchasesOrdersController extends Controller
         $this->purchasesOrdersItemsRepo = $purchasesOrdersItemsRepo;
 
     }
-
 
 
     //find with items
@@ -121,8 +121,7 @@ class PurchasesOrdersController extends Controller
 
 
 //        return view('moto.emails.purchasesOrder',compact('repo','user'));
-        Mail::queue('moto.emails.purchasesOrder', ['repo'=>$repo,'user'=>$user] , function($message) use($proveedorMail,$user,$data)
-        {
+        Mail::queue('moto.emails.purchasesOrder', ['repo' => $repo, 'user' => $user], function ($message) use ($proveedorMail, $user, $data) {
             $message->from($data['from']);
             $message->to($proveedorMail)->subject('Pedido de mercadería MOTONET')
                 ->replyTo($user->email, $data['nombre']);
@@ -143,8 +142,8 @@ class PurchasesOrdersController extends Controller
     public function addItems(PurchasesOrdersItemsRepo $purchasesOrdersItemsRepo)
     {
 
-       
-            $purchasesOrdersItemsRepo->create($this->request);
+
+        $purchasesOrdersItemsRepo->create($this->request);
 
 
         return redirect()->route('moto.purchasesOrders.edit', $this->request->purchases_orders_id);
