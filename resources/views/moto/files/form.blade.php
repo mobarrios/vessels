@@ -115,7 +115,7 @@
 
 
                             @if(!$models->form12)
-                                <a href="{!! route('moto.files.form12') !!}" id="btnForm12" class="btn btn-success btn-sm pull-right">
+                                <a href="{!! route('moto.files.form12') !!}" id="btnForm12" data-toggle="modal" data-target="#modalForm12" class="btn btn-success btn-sm pull-right">
                                     Crear formulario
                                 </a>
                             @else
@@ -428,13 +428,11 @@
             });
 
 
-            $("#btnForm12").on('click',function (ev) {
-                ev.preventDefault();
-
-                $("#modalForm12 input[name=sales_id]").val($(selectSales).val());
-
-                $("#modalForm12").modal();
-            })
+//            $("#modalForm12").on("show.bs.modal",function (ev) {
+//                $("#modalForm12 input[name=sales_id]").val($(selectSales).val());
+//
+//                $("#modalForm12").modal();
+//            })
 
 
 
