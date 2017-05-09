@@ -9,11 +9,11 @@
     {!! Form::model($models,['route'=> [config('models.'.$section.'.updateRoute'), $models->id] , 'files' =>'true']) !!}
 
     <div class="col-xs-12 col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="box box-primary">
+            <div class="box-header">
                 Datos del Cliente
             </div>
-            <div class="panel-body">
+            <div class="box-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 form-group">
                         {!! Form::label('Venta #') !!}
@@ -81,11 +81,11 @@
     </div>
 
     <div class="col-xs-12 col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="box box-primary">
+            <div class="box-header">
                 Formularios
             </div>
-            <div class="panel-body">
+            <div class="box-body">
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-inline">

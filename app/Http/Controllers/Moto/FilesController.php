@@ -53,7 +53,6 @@ class FilesController extends Controller
 
         $sales = $models->files->sales;
 
-
         $pdf->setPaper('a4', 'portland')->loadView('moto.files.formulario.form12',compact('sales','models'));
 
         return $pdf->stream();
