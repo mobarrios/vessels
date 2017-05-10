@@ -72,9 +72,7 @@
             var n_cuadro = $('.c' + id).val();
             var talle = $('.t' + id ).val();
 
-
-            return;
-
+            
             var models_id = $(this).attr('data-models-id');
             var colors_id = $(this).attr('data-colors-id');
 
