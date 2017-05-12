@@ -47,23 +47,23 @@ return [
     ],
 
     'validationsStore' => [
-
         'name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
         'address' => 'required',
         'location' => 'required',
-
+        'city' => 'required',
+        'province' => 'required',
     ],
 
     'validationsUpdate' => [
-
         'name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
         'address' => 'required',
         'location' => 'required',
-
+        'city' => 'required',
+        'province' => 'required',
     ],
 
 ];

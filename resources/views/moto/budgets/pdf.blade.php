@@ -241,7 +241,7 @@
         </div>
 
         <div class="inline">
-            <p><b>Contado: </b> ${!! $item->activeListPrice->price_net or '0' !!}</p>
+            <p><b>Costo: </b> ${!! $item->activeListPrice->price_net or '0' !!}</p>
         </div>
 
         <div class="espacio"></div>
@@ -314,9 +314,9 @@
                 <div class="espacio"></div>
 
             </div>
-            <div class="inline">
-                <p><b>A financiar: </b> ${!! $model->a_financiar or '0' !!}</p>
-            </div>
+            {{--<div class="inline">--}}
+                {{--<p><b>A financiar: </b> ${!! $model->a_financiar or '0' !!}</p>--}}
+            {{--</div>--}}
 
             <div class="inline">
                 <p><b>Atendido por:</b> Manuel Barrios</p>

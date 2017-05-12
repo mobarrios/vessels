@@ -51,9 +51,6 @@ return [
         'name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
-        'address' => 'required',
-        'location' => 'required',
-
     ],
 
     'validationsUpdate' => [
@@ -61,9 +58,6 @@ return [
         'name' => 'required',
         'last_name' => 'required',
         'email' => 'required',
-        'address' => 'required',
-        'location' => 'required',
-
     ],
 
 ];

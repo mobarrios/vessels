@@ -100,17 +100,17 @@
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('last_name', "APELLIDO") !!}
-                        {!! Form::text('last_name', null, ['class'=>'form-control', 'required' => 'required','ng-model' => 'last_name']) !!}
+                        {!! Form::text('last_name', null, ['class'=>'form-control','ng-model' => 'last_name']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('name', "NOMBRE") !!}
-                        {!! Form::text('name', null, ['class'=>'form-control','required' => 'required','ng-model' => 'name']) !!}
+                        {!! Form::text('name', null, ['class'=>'form-control','ng-model' => 'name']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('dni', "DNI") !!}
-                        {!! Form::text('dni', null, ['class'=>'form-control','required' => 'required','ng-model' => 'dni']) !!}
+                        {!! Form::text('dni', null, ['class'=>'form-control','ng-model' => 'dni']) !!}
                     </div>
 
                     <div class="col-xs-12 col-lg-3 form-group">

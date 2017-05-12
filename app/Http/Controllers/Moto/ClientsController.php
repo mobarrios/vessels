@@ -128,8 +128,8 @@ class ClientsController extends Controller
 
     public function update()
     {
-
         if (!$this->request->get('budgets')){
+
             //validar los campos
             $this->validate($this->request, config('models.' . $this->data['section'] . '.validationsUpdate'));
 
@@ -149,7 +149,7 @@ class ClientsController extends Controller
                 return redirect()->route(config('models.' . $this->data['section'] . '.postUpdateRoute'), $model->id)->withErrors(['Regitro Editado Correctamente']);
         }else{
             //validar los campos
-            $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
+            $this->validate($this->request,config('models.prospectos.validationsUpdate'));
 
             $id = $this->route->getParameter('id');
 
