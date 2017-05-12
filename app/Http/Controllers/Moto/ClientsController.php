@@ -106,7 +106,7 @@ class ClientsController extends Controller
         }else{
 
             //validar los campos
-            $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
+            $this->validate($this->request,config('models.prospectos.validationsStore'));
 
             //crea a traves del repo con el request
             $model = $this->repo->create($this->request,1);
