@@ -9,7 +9,7 @@
 
      protected $table = 'financials';
 
-     protected $fillable = ['name'];
+     protected $fillable = ['name','extra_cost'];
 
      protected $section = 'financials';
 

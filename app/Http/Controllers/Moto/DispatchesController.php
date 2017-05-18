@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
+use App\Http\Repositories\Moto\DispatchesInvoicesRepo;
 use App\Http\Repositories\Moto\DispatchesItemsRepo;
 use App\Http\Repositories\Moto\DispatchesRepo as Repo;
 use App\Http\Repositories\Moto\ItemsRepo;
@@ -162,6 +163,19 @@ class DispatchesController extends Controller
 
         return response()->json($items);
     }
+
+
+    public function invoice(DispatchesInvoicesRepo $dispatchesInvoicesRepo)
+    {
+
+            $dispatchesInvoicesRepo->create($this->request);
+
+        return redirect()->back();
+        
+    }
+
+
+
 
 
 }

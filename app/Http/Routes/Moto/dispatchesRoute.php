@@ -23,4 +23,10 @@ Route::group(['prefix' => 'dispatches'], function () {
     Route::post('/editItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.edit', 'as' => 'moto.dispatches.updateItems', 'uses' => 'Moto\DispatchesController@updateItems']);
     Route::get('/deleteItem/{item?}/{id?}', ['middleware' => 'permission:' . $section . '.destroy', 'as' => 'moto.dispatches.deleteItems', 'uses' => 'Moto\DispatchesController@deleteItems']);
 
+
+
+    // asignar factura
+
+    Route::post('/invoice', ['middleware' => 'permission:' . $section . '.create', 'as' => 'moto.dispatches.invoice', 'uses' => 'Moto\DispatchesController@invoice']);
+
 });

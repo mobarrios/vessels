@@ -9,6 +9,7 @@ use App\Entities\Moto\Sales;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
+use App\Http\Repositories\Configs\LocalidadesRepo;
 use App\Http\Repositories\Configs\VouchersRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo;
@@ -35,7 +36,8 @@ class SalesController extends Controller
 
     public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
-                                BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo,AdditionalsRepo $additionalsRepo,VouchersRepo $vouchersRepo)
+                                BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo,
+                                AdditionalsRepo $additionalsRepo,VouchersRepo $vouchersRepo)
     {
 
         $this->request = $request;

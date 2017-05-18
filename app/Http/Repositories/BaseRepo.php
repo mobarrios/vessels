@@ -357,7 +357,7 @@ abstract class BaseRepo
     {
         $image = new ImagesHelper();
 
-        if(!isset($data->image) && !is_null($data->image))
+        if(isset($data->image) && !is_null($data->image) && is_null($data->files) )
         {
             $time = time();
             $name = $time.$data->image->getClientOriginalName();

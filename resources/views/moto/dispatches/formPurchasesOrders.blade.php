@@ -34,8 +34,6 @@
                                 </td>
                             @else
                                 <td>
-
-
                                     {!! Form::select('sizes_id',$sizes,null,['class'=>'t'.$dispatchesItem->id.' select2' , 'placeholder'=>'Talle']) !!}
                                 </td>
 
@@ -72,7 +70,6 @@
             var n_cuadro = $('.c' + id).val();
             var talle = $('.t' + id ).val();
 
-            
             var models_id = $(this).attr('data-models-id');
             var colors_id = $(this).attr('data-colors-id');
 
@@ -116,7 +113,9 @@
                     dispatches_id: dispatches_id,
                     dispatches_items_id: id,
 
-                }).success(function (data) {
+                }).success(function (data)
+                {
+
                     window.location.href = "moto/dispatches/edit/" + dispatches_id;
 
                 });

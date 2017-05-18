@@ -67,7 +67,8 @@ class UtilitiesController extends Controller
     public function facturaPdf($id,Vouchers $vouchers,Request $request,Route $route , PDF $pdf){
 
         $model = $vouchers->with('sales')->find($id);
-        $pdf->setPaper('a5', 'portrait')->loadView('moto.vouchers.facturaPdf',compact('model'));
+
+        $pdf->setPaper('A4', 'portrait')->loadView('moto.vouchers.facturaPdf',compact('model'));
 
         return $pdf->stream();
     }

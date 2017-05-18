@@ -24,9 +24,9 @@
   body{
      margin: 0 !important;
      padding: 5px !important;
-     border-radius: 5px;
+     border-radius: 0px;
      border: 1px solid rgb(0,0,0);
-   clear: both;
+     clear: both;
   }
 
   .upper{
@@ -36,7 +36,7 @@
   .logo{
      font-size: 30px;
      font-weight: bold;
-     border: 2px solid rgb(0,0,0);
+     border: 1px solid rgb(0,0,0);
      display: inline-block;
      text-align: center;
      width:30px;
@@ -85,7 +85,7 @@
   }
 
      .separador.border span{
-         line-height: 20px !important;
+         line-height: 10px !important;
      }
 
 
@@ -96,30 +96,31 @@
 <body class="padding-0 margin-0">
 
     <div>
-         <div class="col-xs-4 text-center">
+         <div class="col-xs-3 text-center">
              <div>
                  <img src="images/branches/logo.png" alt="Logo" class="img-responsive">
+                 <p>{!! $model->Brancheables->first()->Branches->Company->nombre_fantasia !!}</p>
              </div>
-             <div class="datosHeader">
-                 <p>Hipólito Yrigoyen 1467</p>
-                 <p>José C. Paz</p>
-                 <p>(02320) 433072</p>
-             </div>
-         </div>
-
-         <div class="col-xs-2 text-center">
-             <h1 class="logo">A</h1>
          </div>
 
          <div class="col-xs-4 text-center">
-             <p class="upper">Factura A</p>
-             <p>N: 00001</p>
-             <p>Fecha 16/01/2017</p>
+             <h1 class="logo">{!!  $model->letra !!}</h1>
+         </div>
+
+         <div class="col-xs-4 text-center">
+             <p class="upper"><strong>{!! $model->tipo !!} {!! $model->letra !!}</strong></p>
+             <p>Nro: {!! $model->numero !!}</p>
+             <p>Fecha {!! $model->fecha !!}</p>
              <br>
              <div class="datosHeader">
-                <p>C.U.I.T: 33-70964580-9</p>
-                <p>ING. BRUTOS: 33-70964580-9</p>
-                <p>INICIO ACTIVIDADES: 01-06-06</p>
+                <p>C.U.I.T: {!! $model->Brancheables->first()->Branches->Company->ciut !!}</p>
+                <p>ING. BRUTOS: {!! $model->Brancheables->first()->Branches->Company->ingresos_brutos !!} </p>
+                <p>INICIO ACTIVIDADES: {!! $model->Brancheables->first()->Branches->Company->inicio_actividades !!} </p>
+
+                     <p>{!! $model->Brancheables->first()->Branches->Company->razon_social !!}</p>
+                     <p>{!! $model->Brancheables->first()->Branches->Company->direccion !!}</p>
+                     <p>{!! $model->Brancheables->first()->Branches->Company->telefono !!}</p>
+
              </div>
          </div>
 
@@ -130,10 +131,9 @@
 
     <div class="datos-cliente">
 
-
       <div class="col-xs-12 border">
           <div class="contenedor-dato-cliente">
-             <span class="upper"><b>Nombre: </b></span> <span class="upper text-muted">{!! $model->Clients->fullname !!}</span>
+             <span class="upper"><b>Nombre: </b></span> <span class="upper text-muted">{!! $model->Sales->first()->Clients->fullname !!}</span>
           </div>
       </div>
 
@@ -141,7 +141,7 @@
 
       <div class="col-xs-12 border">
           <div class="contenedor-dato-cliente">
-             <span class="upper"><b>Domicilio: </b></span> <span class="upper text-muted">{!! $model->Clients->address !!}</span>
+             <span class="upper"><b>Domicilio: </b></span> <span class="upper text-muted">{!! $model->Sales->first()->Clients->address !!}</span>
           </div>
       </div>
 
@@ -149,13 +149,13 @@
 
          <div class="col-xs-6">
               <div class="contenedor-dato-cliente">
-                 <span class="upper"><b>Localidad: </b></span> <span class="upper text-muted">{!! $model->Clients->city !!}</span>
+                 <span class="upper"><b>Localidad: </b></span> <span class="upper text-muted">{!! $model->Sales->first()->Clients->city !!}</span>
               </div>
           </div>
 
           <div class="col-xs-6">
               <div class="contenedor-dato-cliente">
-                 <span class="upper"><b>Teléfono: </b></span> <span class="upper text-muted">{!! $model->Clients->phone !!}</span>
+                 <span class="upper"><b>Teléfono: </b></span> <span class="upper text-muted">{!! $model->Sales->first()->Clients->phone !!}</span>
               </div>
           </div>
       </div>
@@ -166,7 +166,7 @@
 
          <div class="col-xs-6">
             <div class="contenedor-dato-cliente">
-               <span class="upper"><b>CUIT: </b></span> <span class="upper text-muted">{!! $model->Clients->dni !!}</span>
+               <span class="upper"><b>CUIT: </b></span> <span class="upper text-muted">{!! $model->Sales->first()->Clients->dni !!}</span>
             </div>
          </div>
 
@@ -183,23 +183,26 @@
          <table class="table table-responsive">
              <tbody>
                  <tr>
-                    <th>Cantidad</th>
-                    <th>Código</th>
+                    <th>#</th>
+                    <th>Cant.</th>
                     <th>Descripción</th>
+                    <th>Precio Unitario</th>
                  </tr>
-                 @foreach($model->SalesItems as $salesItem)
-                     <tr>
-                         <td>1</td>
-                         <td>HFHGFH5453</td>
-                         <td class="descripcion">
-                             <p>{!! $salesItem->Items->Models->Categories->first()->name !!}</p>
-                             <p>{!! $salesItem->Items->Models->Brands->name !!} {!! $salesItem->Items->Models->name !!}</p>
-                             <p>Motor N²: {!! $salesItem->Items->n_motor !!}</p>
-                             <p>Cuadro N²: {!! $salesItem->Items->n_cuadro !!}</p>
-                             <p>Año: {!! $salesItem->Items->year !!}</p>
-                             <p>Color: {!! $salesItem->Items->Colors->name !!}</p>
-                         </td>
-                     </tr>
+                 @foreach($model->Sales->first()->SalesItems as $salesItem)
+                     @if($salesItem->Items->Models->types_id == 1)
+                         <tr>
+                             <td class="col-xs-1">{!! $salesItem->Items->id  !!}</td>
+                             <td class="col-xs-1">1</td>
+                             <td class="col-xs-5 descripcion">
+
+                                  Marca : {!! $salesItem->Items->Models->Brands->name !!}  Modelo :{!! $salesItem->Items->Models->name !!}
+                                  Color: {!! $salesItem->Items->Colors->name !!}
+                             </td>
+                             <td class="col-xs-1">
+                                $ {!! number_format($model->importe_total,2) !!}
+                             </td>
+                         </tr>
+                     @endif
                  @endforeach
              </tbody>
 
@@ -207,20 +210,28 @@
                  <tr>
                      <td></td>
                      <td class="text-right"><strong>Total:</strong></td>
-                     <td><p>${!! $model->SalesPayments->sum('amount') !!}</p></td>
+                     <td><p> $ {!!number_format($model->importe_total ,2)!!}</p></td>
+                     <td></td>
                  </tr>
 
                  <tr>
-                     <td colspan="3">
+                     <td colspan="4">
                          <p class="leyendaTabla">La mercadería viaja por cuenta y orden del destinatario haciendose responsable civil y criminalmente a partir de la fecha por cualquier accidente, daño o perjuicio que pudiera ocasionar el rodado referido.</p>
                      </td>
                  </tr>
 
                  <tr>
-                     <td colspan="3">
-                          <p class="text-center">{!!  DNS1D::getBarcodeHTML(1, "EAN13") !!}</p>
+                     <td colspan="4">
+                          <p class="text-center">{!!  DNS1D::getBarcodeHTML($model->id, "EAN13") !!} </p>
+                         <p class="text-center">{!!  $model->id !!} </p>
+
                      </td>
                  </tr>
+
+             <tr>
+                 <td>C.A.E. : {!! $model->cae !!}</td>
+                 <td>vto : {!! $model->vencimiento_cae !!}</td>
+             </tr>
              </tfoot>
          </table>
     </div>
