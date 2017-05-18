@@ -25,7 +25,7 @@
      margin: 0 !important;
      padding: 5px !important;
      border-radius: 5px;
-     border: 1px solid rgb(0,0,0);
+         border: 1px solid rgb(0,0,0);
    clear: both;
   }
 
