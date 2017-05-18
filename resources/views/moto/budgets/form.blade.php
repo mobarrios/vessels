@@ -191,6 +191,7 @@
                     {!! Form::hidden('clients_id',$client->id) !!}
                     {!! Form::hidden('id',$models->id) !!}
                     {!! Form::hidden('branches_id',Auth::user()->branches_active_id) !!}
+                    {!! Form::hidden('users_id',Auth::user()->id) !!}
 
                     <div>
                         <div ng-controller="myCtrl">

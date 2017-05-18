@@ -170,6 +170,7 @@
 </head>
 <body>
 <header>
+
     <table width="100%">
         <tr>
             <td>
@@ -187,26 +188,14 @@
 </header>
 
 <div class="container">
-    <div class="col-4">
+    <div>
         <p><b>Cliente: </b> {!! $model->Clients->fullName !!}</p>
-    </div>
-
-    <div class="col-4">
-        <p><b>DNI: </b> {!! $model->Clients->dni !!}</p>
-    </div>
-
-    <div class="col-4">
-        <p><b>Sexo: </b> {!! $model->Clients->sexo !!}</p>
     </div>
 
     <div class="espacio"></div>
 
     <div class="col-4">
         <p><b>Mail: </b> {!! $model->Clients->email !!}</p>
-    </div>
-
-    <div class="col-4">
-        <p><b>Nacionalidad: </b> {!! $model->Clients->nacionality !!}</p>
     </div>
 
     <div class="col-4">
@@ -280,20 +269,7 @@
         <p>Adicionales</p>
     </div>
 
-    @if($model->additionables)
 
-        <div class="inline">
-            <ul>
-                @foreach($model->additionables as $additional)
-                    <li>
-                        {!! ucfirst($additional->additionals->name) !!} : <b>$ {!! $additional->amount !!} </b>
-                    </li>
-
-                @endforeach
-            </ul>
-        </div>
-
-    @endif
 
     <span class="padding"></span>
 
@@ -304,7 +280,16 @@
             <div>
 
                 <div class="inline">
-                    <p><b>Total Final: </b> ${!! $model->total or '0' !!}</p>
+                    <?php $total = 0; ?>
+                        @if($model->additionables)
+
+                            @foreach($model->additionables as $additional)
+                                <?php $total = $total + $additional->amount; ?>
+                            @endforeach
+                        @else
+                            <?php $total = $model->total; ?>
+                        @endif
+                    <p><b>Total Final: </b> ${!! $total !!}</p>
                 </div>
 
                 <div class="inline">
@@ -319,19 +304,19 @@
             {{--</div>--}}
 
             <div class="inline">
-                <p><b>Atendido por:</b> Manuel Barrios</p>
+                <p><b>Atendido por:</b> {!! $model->users->fullName !!}</p>
             </div>
 
             {{--<span style="clear: both"></span>--}}
-            <div class="inline-b" style="margin-left: 40px !important;vertical-align: top;">
-                {!!  DNS2D::getBarcodeHTML($model->id, "QRCODE",3.3,3.3,'white') !!}
-            </div>
         </div>
 
 
     </div>
 
-        <div class="inline-b" style="position: absolute;left:150px;bottom:5px">
+            <div class="inline-b" style="margin-left: 40px !important;vertical-align: top;position: absolute;right:50px;bottom:5px">
+                {!!  DNS2D::getBarcodeHTML($model->id, "QRCODE",3.3,3.3,'white') !!}
+            </div>
+        <div class="inline-b" style="position: absolute;right:150px;bottom:5px">
             {!!  DNS1D::getBarcodeHTML($model->id, "EAN13",2,33, 'white') !!}
         </div>
 

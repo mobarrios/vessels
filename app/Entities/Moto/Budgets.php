@@ -2,13 +2,14 @@
  namespace App\Entities\Moto;
 
 
+ use App\Entities\Configs\User;
  use App\Entities\Entity;
 
  class Budgets extends Entity
  {
 
      protected $table = 'budgets';
-     protected $fillable = ['date', 'clients_id','seguro','flete','formularios','gastos_administrativos','descuento','anticipo','importe_cuota','a_financiar','total'];
+     protected $fillable = ['date', 'clients_id','users_id','seguro','flete','formularios','gastos_administrativos','descuento','anticipo','importe_cuota','a_financiar','total'];
      protected $section = 'budgets';
 
 
@@ -20,6 +21,11 @@
      public function Clients()
      {
          return $this->belongsTo(Clients::class);
+     }
+
+     public function Users()
+     {
+         return $this->belongsTo(User::class);
      }
 
      public function allItems(){
