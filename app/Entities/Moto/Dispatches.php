@@ -24,6 +24,12 @@
      }
 
 
+     public function Invoices()
+     {
+         return $this->hasOne(DispatchesInvoices::class);
+     }
+
+
      public function DispatchesItems()
      {
          return $this->hasMany(DispatchesItems::class);

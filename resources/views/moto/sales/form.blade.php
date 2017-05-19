@@ -477,6 +477,32 @@
 
 
             <div class="col-xs-12">
+
+              <table class="table">
+                  <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Comprobante</th>
+                        <th>Numero</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($models->Vouchers as $voucher)
+                    <tr>
+                        <td>{{$voucher->id}}</td>
+                        <td>{{$voucher->fecha}}</td>
+                        <td>{{$voucher->tipo}} : {{$voucher->letra}} </td>
+                        <td>{{$voucher->numero}}</td>
+                        <td>$ {{number_format($voucher->importe_total,2)}}</td>
+
+                    </tr>
+                  @endforeach
+                  </tbody>
+
+
+              </table>
+
                 @if((($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount))  - $pago == 0) && $models->pagado === 1)
 
                             <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-sm btn-default" title="Factura PDF">

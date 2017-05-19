@@ -19,7 +19,7 @@
 
     <div class="col-xs-4 col-lg-4 form-group">
         {!! Form::label('Tasa Extra') !!}
-        {!! Form::number('extra_cost', null, ['class'=>'form-control']) !!}
+        {!! Form::text('extra_cost', null, ['class'=>'form-control']) !!}
     </div>
 
     <div class="col-xs-4 col-lg-4  form-group" style="padding-top: 2%">
@@ -85,11 +85,11 @@
         </div>
         <div class="col-xs-12 form-group">
             {!! Form::label('Coeficiente') !!}
-            {!! Form::number('coef', null, ['class'=>'form-control']) !!}
+            {!! Form::text('coef', null, ['class'=>'form-control','step' => '0,1']) !!}
         </div>
         <div class="col-xs-12 form-group">
             {!! Form::label('Porcentaje') !!}
-            {!! Form::number('porcent', null, ['class'=>'form-control']) !!}
+            {!! Form::text('porcent', null, ['class'=>'form-control','step' => '0,1']) !!}
         </div>
 
 

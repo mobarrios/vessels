@@ -17,7 +17,8 @@
 
      //Crear relacion con sales
 
-     public function Sales(){
+     public function Sales()
+     {
          return $this->belongsToMany(Sales::getClass());
      }
 

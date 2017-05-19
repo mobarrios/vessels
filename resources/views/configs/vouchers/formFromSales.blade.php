@@ -22,7 +22,7 @@
             {!! Form::select('tipo_documento', $tipoDocumento,null,['class'=>'select2 form-control']) !!}
         </div>
             <div class="col-xs-6 form-group">
-                {!! Form::label('Nro. ') !!}
+                {!! Form::label('Nro. Documento ') !!}
                 {!! Form::text('dni', $sale->Clients->dni,['class'=>'form-control']) !!}
             </div>
 
@@ -51,6 +51,7 @@
                 {!! Form::text('punto_venta',\Illuminate\Support\Facades\Auth::user()->BranchesActive->punto_venta,['class'=>'form-control']) !!}
             </div>
 
+            {!! Form::hidden('sales_id',$sale->id) !!}
 
     @endsection
 

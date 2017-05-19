@@ -13,6 +13,10 @@
 
      protected $section = 'branches';
 
+     public function Company()
+     {
+         return $this->belongsTo(Company::getClass());
+     }
 
  }
 
