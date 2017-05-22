@@ -205,7 +205,7 @@
 
              <tfoot>
                  <tr>
-                     <td colspan="3"><p class="text-center upper">Recibí conforme la suma total de <strong>${!! $model->SalesPayments->sum('amount') !!}</strong></p></td>
+                     <td colspan="3"><p class="text-center upper">Recibí conforme la suma total de <strong>${!! $model->Payments->sum('amount') !!}</strong></p></td>
                  </tr>
 
                  <tr>

@@ -463,10 +463,6 @@
             });
 
 
-            $("#modalForm12 form").on("submit",function (ev) {
-
-                window.location.refresh;
-            })
 
 
 

@@ -46,8 +46,8 @@ return [
     ],
 
     'validationsStore' => [
-        'estado' => 'required',
-        'ubicacion' => 'required',
+//        'estado' => 'required',
+//        'ubicacion' => 'required',
         'sales_id' => 'required|exists:sales,id',
     ],
 

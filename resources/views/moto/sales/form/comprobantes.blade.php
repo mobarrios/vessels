@@ -21,6 +21,8 @@
                 <td>
                     @if($voucher->tipo == 'Factura')
                         <a target="_blank" class="btn btn-sm btn-default" href="{{route('moto.sales.factura', $voucher->id)}}"><span class="fa fa-file-o"></span></a>
+                    @elseif($voucher->tipo == 'Recibo')
+                        <a target="_blank" class="btn btn-sm btn-default" href="{{route('moto.sales.recibo', $voucher->id)}}"><span class="fa fa-file-o"></span></a>
                     @endif
                 </td>
             </tr>
