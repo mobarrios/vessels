@@ -157,6 +157,10 @@
                                 {!! Form::model($model,['route'=> [config('models.'.$section.'.updateRoute'), $model->id] , 'files' =>'true']) !!}
                                 {!! Form::hidden('roles_id',$model->Roles->first()->id) !!}
 
+                                <div class="col-xs-12 form-group">
+                                    {!! Form::label('Usuario') !!}
+                                    {!! Form::text('user_name', null, ['class'=>'form-control']) !!}
+                                </div>
                                     <div class="col-xs-6 form-group">
                                         {!! Form::label('Nombre') !!}
                                         {!! Form::text('name', null, ['class'=>'form-control']) !!}

@@ -90,8 +90,20 @@
              return 1;
          }
 
-
      }
+
+
+     public function getTotalAttribute()
+     {
+         return $this->SalesItems->sum('price_actual') +  $this->totalAdditionalsAmount ;
+     }
+
+     public function getAdeudadoAttribute()
+     {
+         return $this->getTotalAttribute() - $this->Payments->sum('amount') ;
+     }
+
+
 
  }
 

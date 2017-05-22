@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Moto;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\BranchesRepo;
 use App\Http\Repositories\Configs\RolesRepo;
-use App\Http\Repositories\Configs\UsersRepo as Repo;
+use App\Http\Repositories\Configs\ProfilesRepo as Repo;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -51,7 +51,7 @@ class ProfileController extends Controller
 
         if($this->request->get('password_old') != null){
             if(!password_verify($this->request->get('password_old'),Auth::user()->password)){
-                return redirect()->back()->withInput()->withErrors('La clave vieja no coincide con la actual');
+                return redirect()->back()->withInput()->withErrors('La clave Anterior no coincide con la actual');
             }
 
             if(!$this->request->get('password')){

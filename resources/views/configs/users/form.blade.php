@@ -10,7 +10,10 @@
         @else
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
-
+        <div class="col-xs-12 form-group">
+            {!! Form::label('Usuario') !!}
+            {!! Form::text('user_name', null, ['class'=>'form-control']) !!}
+        </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('Nombre') !!}
               {!! Form::text('name', null, ['class'=>'form-control']) !!}

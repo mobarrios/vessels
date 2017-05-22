@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'id'    => 1,
+                'user_name'=>'root',
                 'name'=>'root',
                 'email'=>'root@admin.com',
                 'password'=> \Illuminate\Support\Facades\Hash::make('yuna'),
@@ -21,6 +22,7 @@ class UserTableSeeder extends Seeder
 
             ],[
                 'id'    => 2,
+                'user_name'=>'admin',
                 'name'=>'admin',
                 'email'=>'admin@admin.com',
                 'password'=> \Illuminate\Support\Facades\Hash::make('1234'),

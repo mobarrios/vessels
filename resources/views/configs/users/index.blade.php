@@ -9,6 +9,7 @@
                     </div>
                 </td>
                 <td>{{$model->id}}</td>
+                <td><strong>{{$model->user_name }}</strong></td>
                 <td>{{$model->fullName }}</td>
                 <td>{{$model->email}}</td>
 

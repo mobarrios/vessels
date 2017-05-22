@@ -1,0 +1,56 @@
+@if(isset($models))
+<div class="content">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Comprobante</th>
+            <th>Numero</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($models->Vouchers as $voucher)
+            <tr>
+                <td>{{$voucher->id}}</td>
+                <td>{{$voucher->fecha}}</td>
+                <td>{{$voucher->tipo}} : {{$voucher->letra}} </td>
+                <td>{{$voucher->numero}}</td>
+                <td>$ {{number_format($voucher->importe_total,2)}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+
+    {{--@if((($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount))  - $pago == 0) && $models->pagado === 1)--}}
+
+    @if($models->Vouchers->count() && $models->pagado == 1)
+        <a href="{!! route('configs.vouchers.fromSales',$models->id) !!}" class="btn btn-sm btn-default"
+           title="Factura PDF">
+            <span>Realizar Comprobante</span>
+        </a>
+
+        <a target="_blank" href="{!! route('moto.'.$section.'.pdf',$models->id) !!}"
+           class="btn btn-sm btn-default" title="Generar Remito">
+            <span>Generar remito</span>
+        </a>
+
+        <div class="btn-group">
+            @if(!$models->files)
+                {!! Form::open(['route'=> [config('models.files.storeRoute')]]) !!}
+
+                {!! Form::hidden('sales_id',$models->id) !!}
+
+                <button type="submit" class="btn btn-sm btn-default">Crear legajo</button>
+
+                {!! Form::close() !!}
+            @else
+                <a href="{!! route('moto.files.edit',$models->files->id) !!}"
+                   class="btn btn-sm btn-default">Ver legajo</a>
+            @endif
+        </div>
+    @endif
+</div>
+@endif

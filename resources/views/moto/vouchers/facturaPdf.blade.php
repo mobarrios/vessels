@@ -176,6 +176,11 @@
          font-size: 15pt;
      }
 
+     .fs20
+     {
+         font-size: 20pt;
+     }
+
      .bold{
          font-weight: bold;
      }
@@ -288,10 +293,12 @@
         <div class="row">
             <table class="bloque1 no-border">
                 <tr>
-                    <td class="col-xs-3">
-                        <img src="images/branches/logo.png" alt="Logo" class="center-block" id="logo">
+                    <td class="col-xs-4">
+                        {{--<img src="images/branches/logo.png" alt="Logo" class="center-block" id="logo">--}}
+                     <span class="fs20 bold ">{!! $model->Brancheables->first()->Branches->Company->nombre_fantasia !!}</span>
+
                     </td>
-                    <td class="col-xs-5 text-center">
+                    <td class="col-xs-4 text-center">
                         <h1 class="logo bold">{!!  $model->letra !!}</h1>
                     </td>
                     <td class="col-xs-4">
@@ -303,7 +310,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <p class="ml20 ">{!! $model->Brancheables->first()->Branches->Company->nombre_fantasia !!}</p>
                         <p class="ml20">{!! $model->Brancheables->first()->Branches->Company->razon_social !!}</p>
                         <p class="ml20">{!! $model->Brancheables->first()->Branches->Company->direccion !!}</p>
                         <p class="ml20">Tel: {!! $model->Brancheables->first()->Branches->Company->telefono !!}</p>
@@ -329,9 +335,9 @@
         <table class="bloque1 no-border ml20 mb-20">
             <tr>
                 <td class="col-xs-6">
-                    <p><span class="upper"><b>CUIT: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->dni !!}</span></p>
-
+                    <p><span class="upper"><b>Cliente: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->fullName !!}</span></p>
                 </td>
+
 
                 <td class="col-xs-6">
                     <p><span class="upper"><b>iva: </b></span> <span class="upper">Cons. Final</span></p>
@@ -341,12 +347,12 @@
 
             <tr>
                 <td class="col-xs-6">
-                    <p><span class="upper"><b>Nombre: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->fullName !!}</span></p>
+                    <p><span class="upper"><b>CUIT: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->dni !!}</span></p>
 
                 </td>
 
                 <td class="col-xs-6">
-                    <p><span class="upper"><b>Dirección: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->Localidad !!}</span></p>
+                    <p><span class="upper"><b>Dirección: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->address !!}, {!! $model->Sales->first()->Clients->Localidad !!}</span></p>
                 </td>
 
             </tr>
@@ -359,9 +365,8 @@
 
         <div class="row">
             <table class="bloque1 table table-striped">
-                <thead>
-
-                    <tr>
+                <thead  >
+                    <tr bgcolor="#d3d3d3">
                         <th class="col-xs-2">#</th>
                         <th class="col-xs-2">Cant.</th>
                         <th class="col-xs-6">Descripción</th>

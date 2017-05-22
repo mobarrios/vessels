@@ -44,11 +44,14 @@ return [
         
             'Nombre'    => 'name',
             'Apellido'  => 'last_name' ,
-            'Email'     => 'email'
+            'Email'     => 'email',
+        'Usuario'     => 'user_name'
+
     ],
 
     'validationsStore' => [
 
+            'user_name'         => 'required|unique:users,user_name',
             'email'         => 'required|unique:users,email|email',
             'name'          => 'required',
             'last_name'     => 'required',

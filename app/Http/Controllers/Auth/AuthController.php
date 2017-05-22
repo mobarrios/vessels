@@ -53,6 +53,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'user_name' => 'required|max:255|unique:user_name',
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:email',
             'password' => 'required|confirmed|min:6',
@@ -64,13 +65,13 @@ class AuthController extends Controller
     public function validateLogin(Request $request){
 
 
-        if (! $request->has('email') || ! $request->has('_token'))
+        if (! $request->has('user_name') || ! $request->has('_token'))
                 return redirect()->back()->withErrors(['Completar Campos!']);
 
          // Reviso que el usuario exista y tenga acceso
          //$user = $this->usersRepo->searchByEmail($request->get('email'),$request->get('password'));
 
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember))
+        if (!Auth::attempt(['user_name' => $request->user_name, 'password' => $request->password], $request->remember))
            // if(empty($user) || is_null($user))
                 return redirect()->back()->withInput()->withErrors(['Usuario Inválido!']);
            // else

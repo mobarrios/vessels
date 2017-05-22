@@ -10,6 +10,8 @@
                 <td><a href="{{route('moto.clients.edit',$model->clients_id) }}" >{{$model->Clients->fullName}}</a></td>
                 <td>Sucursal de Entrega : {{$model->BranchesConfirm->name}}</td>
 
+                <td>Total : $ {{number_format($model->total,2)}}</td>
+
 
             </tr>
         @endforeach

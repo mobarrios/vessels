@@ -18,9 +18,9 @@
 
             {!! Form::open(['route'=>'auth.validate']) !!}
                 <div class="form-group has-feedback">
-                    {!! Form::email('email',null,['class'=>'form-control','placeholder'=>'Email']) !!}
+                    {!! Form::text('user_name',null,['class'=>'form-control','placeholder'=>'Usuario']) !!}
 
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <input  name="password" type="password" class="form-control" placeholder="Password">
