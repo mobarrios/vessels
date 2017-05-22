@@ -15,7 +15,7 @@
             </div>
             <div class="box-body">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 form-group">
+                    <div class="col-xs-12 col-md-4 form-group">
                         {!! Form::label('Venta #') !!}
                         <div class="btn-group">
                             <a id="verVenta" class="btn btn-default"><i class="fa fa-eye"></i></a>
@@ -23,22 +23,19 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-6 form-group">
-                        {!! Form::label('Factura #') !!}
-                        <div class="btn-group">
-                            <a href="" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                            {!! Form::select('invoices_id',$invoices, null, ['class'=>'form-control select2']) !!}
-                        </div>
+                    <div class="col-xs-12 col-md-4 form-group">
+                        {!! Form::label('Estado') !!}
+
+                        {!! Form::select('estado',$estado, $models->estadoValue or null, ['class'=>'form-control select2']) !!}
+
                     </div>
 
-                    {{--<div class="col-xs-12 col-md-4 form-group">--}}
-                        {{--{!! Form::label('Remito #') !!}--}}
-                        {{--<div class="btn-group">--}}
-                            {{--<a href="" class="btn btn-default"><i class="fa fa-eye"></i></a>--}}
-                            {{--{!! Form::select('senders_id',$senders, null, ['class'=>'form-control select2']) !!}--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="col-xs-12 col-md-4 form-group">
+                        {!! Form::label('Ubicación') !!}
 
+                        {!! Form::select('ubicacion',$ubicacion,  $models->ubicacionValue or null, ['class'=>'form-control select2']) !!}
+
+                    </div>
                 </div>
 
                 <hr>
@@ -173,7 +170,37 @@
                     <h4 class="modal-title">Venta</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="nav-tabs-custom">
 
+                                <ul class="nav nav-tabs pull-right">
+                                    <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Facturación</a></li>
+                                    <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="true">Pagos</a></li>
+                                    <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="true">Compra</a></li>
+                                    <li class="active"><a href="#tab_5" data-toggle="tab" aria-expanded="true">Cliente</a></li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_5">
+
+                                    </div>
+                                    <div class="tab-pane " id="tab_4">
+
+                                    </div>
+                                    <div class="tab-pane " id="tab_3">
+
+                                    </div>
+                                    <!-- /.tab-pane -->
+                                    <div class="tab-pane" id="tab_2">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,39 +401,47 @@
                 url: 'moto/sales/show/'+id,
                 success: function(data){
 
-                    var content = '<div class="row"><div class="col-xs-12"><h4>Cliente</h4></div><div class="col-xs-12 col-md-6"><p><b>Nombre:</b><span>' + data.clients.last_name + ', ' + data.clients.name + '</span></p><p><b>Dni:</b><span> ' + data.clients.dni +'</span></p><p><b>Sexo:</b><span> ' + data.clients.sexo + '</span></p></div><div class="col-xs-12 col-md-6"><p><b>Dirección:</b><span>  ' + data.clients.address + '</span></p><p><b>Localidad:</b><span> ' + data.clients.location + '(' + data.clients.province + ')' + '</span></p> </div></div><hr><div class="row"><div class="col-xs-12 col-md-6"><h4>Compra <small>Retira por ' + data.branches_confirm.name + '</small></h4>';
+                    var cliente = '<div class="row"><div class="col-xs-12"><h4>Cliente</h4></div><div class="col-xs-12"><p><b>Nombre:</b><span>' + data.clients.last_name + ', ' + data.clients.name + '</span></p><p><b>Dni:</b><span> ' + data.clients.dni +'</span></p><p><b>Sexo:</b><span> ' + data.clients.sexo + '</span></p></div><div class="col-xs-12"><p><b>Dirección:</b><span>  ' + data.clients.address + '</span></p><p><b>Localidad:</b><span> ' + data.clients.location + '(' + data.clients.province + ')' + '</span></p> </div>';
 
+                    $('#tab_5').append($(cliente));
 
+                    var compra = '<div class="row"><div class="col-xs-12"><h4>Compra - <small>Retira por ' + data.branches_confirm.name + '</small></h4></div>';
 
                     for(var item in data.items){
-                        content += '<div class="col-xs-12 col-md-6"><p><b>Modelo:</b><span> ' + data.items[item].models.name + '</span></p><p><b>N° cuadro:</b><span> ' + data.items[item].n_cuadro + '</span></p><p><b>N° motor:</b><span> ' + data.items[item].n_motor + '</span></p><p><b>Color:</b><span> ' + data.items[item].colors.name + '</span></p><p><b>Precio:</b><span> $' + data.items[item].pivot.price_actual + '</span></p></div>';
+                        compra += '<div class="col-xs-12"><p><b>Modelo:</b><span> ' + data.items[item].models.name + '</span></p><p><b>N° cuadro:</b><span> ' + data.items[item].n_cuadro + '</span></p><p><b>N° motor:</b><span> ' + data.items[item].n_motor + '</span></p><p><b>Color:</b><span> ' + data.items[item].colors.name + '</span></p><p><b>Precio:</b><span> $' + data.items[item].pivot.price_actual + '</span></p></div></div>';
 
                     }
 
+                    $('#tab_4').append($(compra));
 
-                    content += '</div><div class="col-xs-12 col-md-6"><h4>Pagos</h4><table class="table table-responsive"><tr><td>Fecha</td><td>Monto</td></tr>';
+                    var pagos = '<div calss="row"><div class="col-xs-12"><h4>Pagos</h4></div><table class="table table-responsive"><tr><td>Fecha</td><td>Monto</td></tr>';
 
 
 
                     for(var payment in data.payments){
-                        content += '<tr><td>' + data.payments[payment].date + '</td><td> $' + data.payments[payment].amount + '</td></tr>';
+                        pagos += '<tr><td>' + data.payments[payment].date + '</td><td> $' + data.payments[payment].amount + '</td></tr>';
                     }
 
-                    content += '</table></div></div><hr><div class="row"><div class="col-xs-12"><h4>Facturación</h4><table class="table table-responsive"><tr><td>Fecha</td><td>Tipo</td><td>Letra</td><td>#</td><td>Concepto</td><td>Pto. Venta</td><td>Importe total</td></tr>';
+                    pagos += '</table></div>';
+
+                    $('#tab_3').append($(pagos));
+
+                    var facturacion = '<div class="row"><div class="col-xs-12"><h4>Facturación</h4><table class="table table-responsive"><tr><td>Fecha</td><td>Tipo</td><td>Letra</td><td>#</td><td>Concepto</td><td>Pto. Venta</td><td>Importe total</td></tr>';
 
                     for(var voucher in data.vouchers){
-                        content += '<tr><td>' + data.vouchers[voucher].fecha + '</td><td> ' +  data.vouchers[voucher].tipo + '</td><td> ' +  data.vouchers[voucher].letra  + '</td><td>' +   data.vouchers[voucher].numero  + '</td><td> ' +  data.vouchers[voucher].concepto  + '</td><td>' +   data.vouchers[voucher].punto_venta  + '</td><td> $' +  data.vouchers[voucher].importe_total  + '</td></tr>';
+                        facturacion += '<tr><td>' + data.vouchers[voucher].fecha + '</td><td> ' +  data.vouchers[voucher].tipo + '</td><td> ' +  data.vouchers[voucher].letra  + '</td><td>' +   data.vouchers[voucher].numero  + '</td><td> ' +  data.vouchers[voucher].concepto  + '</td><td>' +   data.vouchers[voucher].punto_venta  + '</td><td> $' +  data.vouchers[voucher].importe_total  + '</td></tr>';
                     }
 
-                    content += '</table></div></div>';
+                    facturacion += '</table></div></div>';
 
 
-                    $("#modalVentas .modal-body").append($(content))
+                    $("#tab_2").append($(facturacion));
 
 
                 }
             })
         }
+
 
 
         $(document).on("ready", function() {
@@ -428,11 +463,10 @@
             });
 
 
-//            $("#modalForm12").on("show.bs.modal",function (ev) {
-//                $("#modalForm12 input[name=sales_id]").val($(selectSales).val());
-//
-//                $("#modalForm12").modal();
-//            })
+            $("#modalForm12 form").on("submit",function (ev) {
+
+                window.location.refresh;
+            })
 
 
 

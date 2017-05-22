@@ -33,9 +33,11 @@ class FilesController extends Controller
 
         $this->data['invoices'] = $vouchersRepo->listsDataWhere('numero','id',['tipo' => 'F']);
 
-        $this->data['senders'] = $vouchersRepo->listsDataWhere('numero','id',['tipo' => 'R']);
-
         $this->data['sales'] = $salesRepo->listsData('id','id');
+
+        $this->data['estado'] = config('models.files.estado');
+
+        $this->data['ubicacion'] = config('models.files.ubicacion');
 
         $this->data['municipios'] = [1 => "Moreno",2 => "Morón", 3 => "CABA"];
 

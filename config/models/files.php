@@ -46,12 +46,14 @@ return [
     ],
 
     'validationsStore' => [
+        'estado' => 'required',
+        'ubicacion' => 'required',
         'sales_id' => 'required|exists:sales,id',
     ],
 
     'validationsUpdate' => [
-        'invoices_id' => 'required|exists:vouchers,id',
-        'senders_id' => 'required|exists:vouchers,id',
+        'estado' => 'required',
+        'ubicacion' => 'required',
         'form_01' => 'boolean',
         'form_01_file' => 'required_with:form_01',
         'form_12' => 'boolean',
@@ -63,5 +65,13 @@ return [
         'proof_of_cuil' => 'boolean',
         'proof_of_cuil_file' => 'required_with:proof_of_cuil'
     ],
+
+
+    'estado' => ['iniciado','en proceso','finalizado'],
+
+    'ubicacion' => ['en sucursal','gestoría'],
+
+
+
 
 ];

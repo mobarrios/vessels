@@ -11,17 +11,10 @@ class Files extends Entity
 
     protected $table = 'files';
 
-    protected $fillable = ['invoices_id', 'senders_id', 'form_01', 'form_01_file', 'form_12', 'form_12_file', 'form_59', 'form_59_file', 'dni_photocopy', 'dni_photocopy_file', 'proof_of_cuil', 'proof_of_cuil_file','sales_id'];
+    protected $fillable = ['estado','ubicacion', 'form_01', 'form_01_file', 'form_12', 'form_12_file', 'form_59', 'form_59_file', 'dni_photocopy', 'dni_photocopy_file', 'proof_of_cuil', 'proof_of_cuil_file','sales_id'];
 
     protected $section = 'files';
 
-    public function invoice(){
-        return $this->belongsTo(Vouchers::getClass(),'invoices_id');
-    }
-
-    public function sender(){
-        return $this->belongsTo(Vouchers::getClass(),'senders_id');
-    }
 
     public function sales(){
         return $this->belongsTo(Sales::getClass());
@@ -33,6 +26,38 @@ class Files extends Entity
 
     public function form59(){
         return $this->hasOne(Form59::getClass());
+    }
+
+    public function getFacturaAttribute(){
+        return $this->sales->with('vouchers')->first()->vouchers->where('tipo',"Factura");
+    }
+
+    public function getRemitoAttribute(){
+        return $this->sales->with('vouchers')->first()->vouchers->where('tipo',"Remito");
+    }
+
+    public function getEstadoAttribute(){
+        return config('models.files.estado')[$this->attributes['estado']];
+    }
+
+    public function getUbicacionAttribute(){
+        return config('models.files.ubicacion')[$this->attributes['ubicacion']];
+    }
+
+    public function getEstadoValueAttribute(){
+        return $this->attributes['estado'];
+    }
+
+    public function getUbicacionValueAttribute(){
+        return $this->attributes['ubicacion'];
+    }
+
+    public function setEstadoAttribute($value){
+        $this->attributes['estado'] = config('models.files.estado')[$value];
+    }
+
+    public function setUbicacionAttribute($value){
+        $this->attributes['ubicacion'] = config('models.files.ubicacion')[$value];
     }
 
 }

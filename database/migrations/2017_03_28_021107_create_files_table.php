@@ -21,12 +21,14 @@ class CreateFilesTable extends Migration
             $table->integer('sales_id')->unsigned()->nullable();
             $table->foreign('sales_id')->references('id')->on('sales')->onDelete('cascade');
 
-            $table->integer('invoices_id')->unsigned()->nullable();
-            $table->foreign('invoices_id')->references('id')->on('vouchers')->onDelete('cascade');
+//            $table->integer('invoices_id')->unsigned()->nullable();
+//            $table->foreign('invoices_id')->references('id')->on('vouchers')->onDelete('cascade');
 
-            $table->integer('senders_id')->unsigned()->nullable();
-            $table->foreign('senders_id')->references('id')->on('vouchers')->onDelete('cascade');
+//            $table->integer('senders_id')->unsigned()->nullable();
+//            $table->foreign('senders_id')->references('id')->on('vouchers')->onDelete('cascade');
 
+            $table->tinyInteger('estado')->unsigned()->default('0');
+            $table->tinyInteger('ubicacion')->unsigned()->default('0');
 
 //            FORMULARIOS
             $table->tinyInteger('form_01')->unsigned()->nullable();
