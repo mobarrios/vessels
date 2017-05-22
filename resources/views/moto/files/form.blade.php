@@ -121,7 +121,7 @@
                                     <a href="#modalForm12Muestra" data-toggle="modal" data-target="#modalForm12Muestra" class="btn btn-default">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{!! route('moto.files.showForm12',$models->form12->id) !!}" class="btn btn-default">
+                                    <a href="{!! route('moto.files.showForm12',$models->form12->id) !!}" target="_blank" class="btn btn-default">
                                         <i class="fa fa-print"></i>
                                     </a>
                                 </div>
@@ -143,9 +143,23 @@
                                      Formulario 59
                                 </label>
                             </div>
+
+                            @if(!$models->form59)
                                 <a href="{!! route('moto.files.form59') !!}" id="btnForm59" data-toggle="modal" data-target="#modalForm59" class="btn btn-success btn-sm pull-right">
                                     Crear formulario
                                 </a>
+                            @else
+                                <div class="btn-group btn-group-sm pull-right">
+
+                                    <a href="#modalForm59Muestra" data-toggle="modal" data-target="#modalForm59Muestra" class="btn btn-default">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{!! route('moto.files.showForm59',$models->form59->id) !!}" target="_blank" class="btn btn-default">
+                                        <i class="fa fa-print"></i>
+                                    </a>
+                                </div>
+                            @endif
+
                         </div>
 
                     </div>
@@ -258,6 +272,52 @@
 @endif
 
 
+@if($models->form59)
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm59Muestra" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Formulario N°59</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h4>DATOS DEL COMERCIANTE HABITUALISTA</h4>
+
+                            <ul>
+                                <li>Apellido y nombre: {!! $models->sales->brancheables->first()->branches->company->razon_social !!}</li>
+                                <li>DNI/CUIT/CUIL: {!! $models->sales->brancheables->first()->branches->company->cuil !!}</li>
+                            </ul>
+
+                        </div>
+                        <div class="col-xs-6">
+                            <h4>COMERCIANTE HABITUALISTA</h4>
+                            <p>Código de inscripción:</p>{!! $models->form59->cod_inscripcion !!}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-xs-12">
+                            <h4>TRÁMITE PRESENTADO</h4>
+                            <ul>
+                                <li>Dominio: 0KM</li>
+                                <li>Solicitud tipo: 01 D</li>
+                                <li>Trámite presentado: INSCRIPCIÓN INICIAL</li>
+                                <li>N° de control: {!! $models->form59->n_control !!}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
+
     <!-- Modal -->
     <div class="modal fade" id="modalForm12" tabindex="-1" role="dialog">
         <div class="modal-dialog">
@@ -310,25 +370,11 @@
                 </div>
                 <div class="modal-body">
                     @if(isset($models->formulario59))
-                        {!! Form::model($models->formulario59,['route'=> ['moto'.$section.'updateForm59', $models->formulario12->id ], 'files' =>'true']) !!}
+                        {!! Form::model($models->formulario59,['route'=> ['moto'.$section.'updateForm59', $models->formulario59->id ], 'files' =>'true']) !!}
                     @else
                         {!! Form::open(['route'=> ['moto.'.$section.'.form59', $models->id ], 'files' =>'true']) !!}
                     @endif
-
-                        <div class="row">
-                            <p class="text-center">
-                                <b>"A" DATOS DEL PRESENTANTE, MANDATARIO/EMPLEADO DEL MANDATARIO/COMERCIANTE HABITUALISTA</b>
-                            </p>
-
-                            <div class="col-xs-12 form-group">
-                                {!! Form::label('Razón Social:') !!}
-                                {!! Form::select('razon_social',[], null, ['class'=>'form-control']) !!}
-                            </div>
-
-                        </div>
-
-                        <hr>
-
+                        {!! Form::hidden('sales_id',null) !!}
                         <div class="row">
                             <p class="text-center">
                                 <b>"C" COMERCIANTE HABITUALISTA</b>
@@ -348,24 +394,24 @@
                             </p>
 
 
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Dominio:') !!}
-                                {!! Form::text('dominio1', null, ['class'=>'form-control']) !!}
-                            </div>
+                            {{--<div class="col-xs-3 form-group">--}}
+                                {{--{!! Form::label('Dominio:') !!}--}}
+                                {{--{!! Form::text('dominio', null, ['class'=>'form-control']) !!}--}}
+                            {{--</div>--}}
 
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Trámite presentado:') !!}
-                                {!! Form::text('tramite1', null, ['class'=>'form-control']) !!}
-                            </div>
+                            {{--<div class="col-xs-3 form-group">--}}
+                                {{--{!! Form::label('Trámite presentado:') !!}--}}
+                                {{--{!! Form::text('tramite', null, ['class'=>'form-control']) !!}--}}
+                            {{--</div>--}}
 
-                            <div class="col-xs-3 form-group">
-                                {!! Form::label('Solicitud tipo:') !!}
-                                {!! Form::text('solicitud_tipo1', null, ['class'=>'form-control']) !!}
-                            </div>
+                            {{--<div class="col-xs-3 form-group">--}}
+                                {{--{!! Form::label('Solicitud tipo:') !!}--}}
+                                {{--{!! Form::text('solicitud_tipo', null, ['class'=>'form-control']) !!}--}}
+                            {{--</div>--}}
 
-                            <div class="col-xs-3 form-group">
+                            <div class="col-xs-12 form-group">
                                 {!! Form::label('N° de control:') !!}
-                                {!! Form::text('n_control1', null, ['class'=>'form-control']) !!}
+                                {!! Form::text('n_control', null, ['class'=>'form-control']) !!}
                             </div>
 
                         </div>
@@ -464,6 +510,11 @@
 
 
 
+            $("#modalForm59").on('show.bs.modal',function(ev){
+                var id = $('select[name=sales_id]').val();
+
+                $(ev.target).find('input[name=sales_id]').val(id);
+            });
 
 
 

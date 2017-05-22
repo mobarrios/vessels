@@ -79,16 +79,16 @@
 <div id="contenedor">
 
     <p id="nombreYapellido">
-        DE TITTA JORGE A.
+        {!! $sales->brancheables->first()->branches->company->razon_social !!}
     </p>
 
     <p id="dni">
-        11939136
+        {!! $sales->brancheables->first()->branches->company->cuit !!}
     </p>
 
 
     <p id="cod_inscripcion">
-        RCAM 2418
+        {!! $models->cod_inscripcion !!}
     </p>
 
 
@@ -108,32 +108,13 @@
     </p>
 
     <p id="n_control">
-       4393575
+       {!! $models->n_control !!}
     </p>
 
     <p id="observaciones">
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
-        asdasdmaskdma lkdlsak lkandn alsndlasd
-        asdnaslkdnalknds
+        {!! $models->observaciones !!}
     </p>
-\
+
 </div>
 
 

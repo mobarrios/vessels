@@ -62,6 +62,7 @@ class FilesController extends Controller
 
     public function form12(PDF $pdf, Sales $sales){
 
+
         $sales = $sales->with('salesItems','clients')->find($this->request->get('sales_id'));
 
         $this->request['files_id'] = $this->route->getParameter('id');
@@ -77,11 +78,39 @@ class FilesController extends Controller
     }
 
 
+    public function showForm59(PDF $pdf){
+        $models = $this->form59Repo->find($this->route->getParameter('form'));
+
+        $sales = $models->files->sales;
+
+        $pdf->setPaper('a4', 'portland')->loadView('moto.files.formulario.form59',compact('sales','models'));
+
+        return $pdf->stream();
+    }
+
+    public function form59(PDF $pdf, Sales $sales){
+
+        $sales = $sales->with('salesItems','clients')->find($this->request->get('sales_id'));
+
+        $this->request['files_id'] = $this->route->getParameter('id');
+
+        $this->request['razon_social'] = $sales->brancheables->first()->branches->company->razon_social;
+
+        $models = $this->form59Repo->create($this->request);
+
+        $pdf->setPaper('a4', 'portland')->loadView('moto.files.formulario.form59',compact('sales','models'));
+
+
+        return $pdf->download();
+
+    }
+
+/*
     public function form59(PDF $pdf){
 
         $pdf->setPaper('a4', 'portland')->loadView('moto.files.formulario.form59');
 
         return $pdf->stream();
     }
-
+*/
 }
