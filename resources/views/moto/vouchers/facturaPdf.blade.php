@@ -364,36 +364,86 @@
 
 
         <div class="row">
-            <table class="bloque1 table table-striped">
-                <thead  >
-                    <tr bgcolor="#d3d3d3">
-                        <th class="col-xs-2">#</th>
-                        <th class="col-xs-2">Cant.</th>
-                        <th class="col-xs-6">Descripción</th>
-                        <th class="col-xs-2">Precio Unitario</th>
-                    </tr>
-                </thead>
+            @if($model->letra == "B")
+                <table class="bloque1 table table-striped">
+                    <thead  >
+                        <tr bgcolor="#d3d3d3">
+                            <th class="col-xs-2">#</th>
+                            <th class="col-xs-2">Cant.</th>
+                            <th class="col-xs-6">Descripción</th>
+                            <th class="col-xs-2">Precio Unitario</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
+                    <tbody>
+                        @foreach($model->Sales->first()->SalesItems as $salesItem)
+                            @if($salesItem->Items->Models->types_id == 1)
+                                <tr>
+                                    <td class="col-xs-3">{!! $salesItem->Items->id  !!}</td>
+                                    <td class="col-xs-3">1</td>
+                                    <td class="col-xs-6">
+
+                                        Marca : {!! $salesItem->Items->Models->Brands->name !!}  Modelo :{!! $salesItem->Items->Models->name !!}
+                                        Color: {!! $salesItem->Items->Colors->name !!}
+                                    </td>
+                                    <td class="col-xs-1">
+                                        $ {!! number_format($model->importe_total,2) !!}
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+            @elseif($model->letra == "A")
+                <table class="bloque1 table table-striped">
+                    <thead  >
+                    <tr bgcolor="#d3d3d3">
+                        <th class="col-xs-1">Código</th>
+                        <th class="col-xs-4">Producto/Servicio</th>
+                        <th class="col-xs-1">Cant.</th>
+                        <th class="col-xs-2">U. medida</th>
+                        <th class="col-xs-2">Precio Unit.</th>
+                        <th class="col-xs-1">% Bonif.</th>
+                        <th class="col-xs-2">Subtotal</th>
+                        <th class="col-xs-1">Alicuota IVA</th>
+                        <th class="col-xs-3">Subtotal c/IVA</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
                     @foreach($model->Sales->first()->SalesItems as $salesItem)
                         @if($salesItem->Items->Models->types_id == 1)
                             <tr>
-                                <td class="col-xs-3">{!! $salesItem->Items->id  !!}</td>
-                                <td class="col-xs-3">1</td>
-                                <td class="col-xs-6">
+                                <td class="col-xs-1">{!! $salesItem->Items->id  !!}</td>
+                                <td class="col-xs-4">
 
                                     Marca : {!! $salesItem->Items->Models->Brands->name !!}  Modelo :{!! $salesItem->Items->Models->name !!}
                                     Color: {!! $salesItem->Items->Colors->name !!}
                                 </td>
+                                <td class="col-xs-1">1</td>
+                                <td class="col-xs-2">unidades</td>
+                                <td class="col-xs-2">$ {!! number_format($model->importe_total,2) !!}</td>
                                 <td class="col-xs-1">
+                                    %
+                                </td>
+                                <td class="col-xs-2">$ {!! number_format($model->importe_total,2) !!}</td>
+                                <td class="col-xs-1">21%</td>
+                                <td class="col-xs-3">
                                     $ {!! number_format($model->importe_total,2) !!}
                                 </td>
                             </tr>
                         @endif
                     @endforeach
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            @else
+
+
+            @endif
+
         </div>
 
 
