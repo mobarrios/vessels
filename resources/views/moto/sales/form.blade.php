@@ -97,15 +97,14 @@
                     <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
+                @if(isset($models))
                 <h5 class="pull-right">TOTAL A PAGAR :
                     <b class="text-danger total"
                        data-precio="{!! ($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount) ) - $pago !!}">
-
                         $ {{number_format($models->adeudado,2)}}
-
                     </b>
-
                 </h5>
+                @endif
             </div>
 
             <!-- nav-tabs-custom -->

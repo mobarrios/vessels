@@ -18,6 +18,11 @@
                 <td>{{$voucher->tipo}} : {{$voucher->letra}} </td>
                 <td>{{$voucher->numero}}</td>
                 <td>$ {{number_format($voucher->importe_total,2)}}</td>
+                <td>
+                    @if($voucher->tipo == 'Factura')
+                        <a target="_blank" class="btn btn-sm btn-default" href="{{route('moto.sales.factura', $voucher->id)}}"><span class="fa fa-file-o"></span></a>
+                    @endif
+                </td>
             </tr>
         @endforeach
         </tbody>

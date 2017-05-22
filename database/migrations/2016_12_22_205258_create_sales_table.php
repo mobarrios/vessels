@@ -22,6 +22,8 @@ class CreateSalesTable extends Migration
             $table->date('date_confirm');
             $table->string('number');
             $table->enum('type',['Reserva','Venta']);
+            $table->integer('status');
+
 
 
             $table->integer('users_id')->unsigned()->nullable();
