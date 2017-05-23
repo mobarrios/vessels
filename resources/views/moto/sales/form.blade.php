@@ -70,7 +70,9 @@
                     <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="true">Pagos</a></li>
                     <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="true">Artículos</a></li>
                     <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Operación</a></li>
-                    <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Datos del Cliente</a></li>
+                    <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Datos del Cliente</a></li>
+                    <li class="active"><a href="#tab_0" data-toggle="tab" aria-expanded="false">Info</a></li>
+
                     <li class="pull-left header"><i class="fa fa-file-o"></i>     {{ (isset($models)? 'Venta # '. $models->id : 'Nueva Venta' )  }}</li>
                 </ul>
                 <?php $total = 0; ?>
@@ -91,20 +93,15 @@
                         @include('moto.sales.form.operacion')
                     </div>
                     <!-- /.tab-pane -->
-                    <div class="tab-pane active" id="tab_1">
+                    <div class="tab-pane " id="tab_1">
                         @include('moto.sales.form.datos')
+                    </div>
+                    <div class="tab-pane active" id="tab_0">
+                        @include('moto.sales.form.info')
                     </div>
                     <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
-                @if(isset($models))
-                <h5 class="pull-right">TOTAL A PAGAR :
-                    <b class="text-danger total"
-                       data-precio="{!! ($total+($models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount) ) - $pago !!}">
-                        $ {{number_format($models->adeudado,2)}}
-                    </b>
-                </h5>
-                @endif
             </div>
 
             <!-- nav-tabs-custom -->
