@@ -58,7 +58,10 @@
     <script>
         $('.datepicker').datepicker({
             language: 'es',
-            format: 'dd-mm-yyyy'
+//            format: 'dd-mm-yyyy',
+//            startDate: 0
+
+
         })
     </script>
 

@@ -82,7 +82,7 @@
     //datePicker
     $('.datePicker').datepicker({
         format: 'dd-mm-yyyy',
-        language: 'es'
+        language: 'es',
     });
 
     //dateRange

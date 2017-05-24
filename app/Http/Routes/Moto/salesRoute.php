@@ -47,6 +47,11 @@ Route::group(['prefix'=>'sales'],function(){
 
 
 
+    Route::get('/r431/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.r431','uses'=>'Moto\SalesController@r431']);
+
+    Route::get('/hojaDeVenta/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.hojaDeVenta','uses'=>'Moto\SalesController@hojaDeVenta']);
+
+
     Route::get('/recibo/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.recibo','uses'=>'Utilities\UtilitiesController@reciboPdf']);
 
     Route::get('/factura/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.factura','uses'=>'Utilities\UtilitiesController@facturaPdf']);

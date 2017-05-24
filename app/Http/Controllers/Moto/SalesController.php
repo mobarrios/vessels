@@ -25,6 +25,7 @@ use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
 use App\Http\Repositories\Moto\ProvidersRepo;
 use App\Http\Repositories\Moto\PurchasesOrdersRepo;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -328,6 +329,26 @@ class SalesController extends Controller
         $sale = $sales->with('Items')->with('Clients')->with('BranchesConfirm')->with('Vouchers')->with('Payments')->find($this->route->getParameter('id'));
 
         return response()->json($sale);
+    }
+
+
+
+
+    public function r431(Sales $sales,PDF $pdf){
+        $model = $sales->with('Items')->with('Clients')->with('BranchesConfirm')->with('Brancheables')->with('Additionables')->find($this->route->getParameter('id'));
+
+        $pdf->setPaper('A4', 'portrait')->loadView('moto.sales.r431',compact('model'));
+
+        return $pdf->stream();
+    }
+
+
+    public function hojaDeVenta(Sales $sales,PDF $pdf){
+        $model = $sales->with('Items')->with('Clients')->with('BranchesConfirm')->with('Brancheables')->with('Additionables')->find($this->route->getParameter('id'));
+
+        $pdf->setPaper('A4', 'portrait')->loadView('moto.sales.hojaDeVenta',compact('model'));
+
+        return $pdf->stream();
     }
 
 }
