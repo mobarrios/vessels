@@ -66,13 +66,12 @@
             <div class="nav-tabs-custom">
 
                 <ul class="nav nav-tabs pull-right">
-                    <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="true">Comprobantes</a></li>
-                    <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="true">Pagos</a></li>
-                    <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="true">Artículos</a></li>
-                    <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Operación</a></li>
-                    <li class=""><a href="#tab_1" data-toggle="tab" aria-expanded="false">Datos del Cliente</a></li>
-                    <li class="active"><a href="#tab_0" data-toggle="tab" aria-expanded="false">Info</a></li>
-
+                    <li class="" id="5"><a class="tab" href="#tab_5" data-toggle="tab" aria-expanded="true">Comprobantes</a></li>
+                    <li class="" id="4"><a class="tab" href="#tab_4" data-toggle="tab" aria-expanded="true">Pagos</a></li>
+                    <li class="" id="3"><a class="tab" href="#tab_3" data-toggle="tab" aria-expanded="true">Artículos</a></li>
+                    <li class="" id="2"><a class="tab" href="#tab_2" data-toggle="tab" aria-expanded="false">Operación</a></li>
+                    <li class="" id="1"><a class="tab" href="#tab_1" data-toggle="tab" aria-expanded="false">Datos del Cliente</a></li>
+                    <li class="" id="0"><a class="tab" href="#tab_0" data-toggle="tab" aria-expanded="false">Info</a></li>
                     <li class="pull-left header"><i class="fa fa-file-o"></i>     {{ (isset($models)? 'Venta # '. $models->id : 'Nueva Venta' )  }}</li>
                 </ul>
                 <?php $total = 0; ?>
@@ -96,7 +95,7 @@
                     <div class="tab-pane " id="tab_1">
                         @include('moto.sales.form.datos')
                     </div>
-                    <div class="tab-pane active" id="tab_0">
+                    <div class="tab-pane" id="tab_0">
                         @include('moto.sales.form.info')
                     </div>
                     <!-- /.tab-pane -->
@@ -118,6 +117,21 @@
 @section('js')
 
     <script>
+
+
+
+        var tab = localStorage.getItem('tab');
+
+        $('#tab_'+tab).addClass('active');
+        $('#'+tab).addClass('active');
+
+        $('.tab').on('click',function(){
+            // Store
+            localStorage.setItem("tab", $(this).parent().attr('id'));
+        });
+
+
+
 
 
         $("#sendForm").on('click', function (ev) {

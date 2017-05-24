@@ -70,8 +70,11 @@
             @endif
             </tbody>
             <tfoot>
-            <td colspan="4" align="right">TOTAL ABONADO : <b class="text-success pago" data-pago="{!! $pago !!}">
+            <td colspan="2" align="right">TOTAL ABONADO : <b class="text-success pago" data-pago="{!! $pago !!}">
                     $ {{number_format($pago,2)}}</b>
+            </td>
+            <td colspan="2" align="right">TOTAL DEUDA : <b class="text-danger " >
+                    $ {{number_format($models->Adeudado,2)}}</b>
             </td>
             </tfoot>
         </table>
