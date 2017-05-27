@@ -37,7 +37,7 @@
             @endforeach
             <hr>
             <span class="text-muted">Adicionales </span><br>
-            @foreach($models->Additionables as  $item)
+                @foreach($models->Additionables as  $item)
                 - {!! $item->Additionals->name !!} <br>
             @endforeach
         </address>

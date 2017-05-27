@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Additionals;
 use App\Entities\Moto\Banks;
 use App\Entities\Moto\Financials;
 use App\Entities\Moto\Items;
@@ -344,9 +345,11 @@ class SalesController extends Controller
 
 
     public function hojaDeVenta(Sales $sales,PDF $pdf){
-        $model = $sales->with('Items')->with('Clients')->with('BranchesConfirm')->with('Brancheables')->with('Additionables')->find($this->route->getParameter('id'));
+        $model = $sales->with('Items')->with('Clients')->with('BranchesConfirm')->with('Brancheables')->with('SalesItems')->with('Additionables')->find($this->route->getParameter('id'));
 
-        $pdf->setPaper('A4', 'portrait')->loadView('moto.sales.hojaDeVenta',compact('model'));
+        $additionals = $this->data['additionals'];
+
+        $pdf->setPaper('A4', 'portrait')->loadView('moto.sales.hojaDeVenta',compact('model','additionals'));
 
         return $pdf->stream();
     }
