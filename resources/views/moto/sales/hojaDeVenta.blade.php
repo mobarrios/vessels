@@ -140,22 +140,22 @@
 
 
 
-   <table style="width:100%;border-spacing: 0;text-transform: uppercase;margin-top:20px;">
+   <table style="border-spacing: 0;text-transform: uppercase;margin-top:20px;">
        <tr>
-           <td style="border-top:1px solid black;border-bottom:1px solid black;margin:0; background-color:#d3d3d3;border-left:1px solid black;border-right: 1px solid black;padding:5px;">
+           <td style="width:4cm !important;border-top:1px solid black;margin:0; background-color:#d3d3d3;border-left:1px solid black;border-right: 1px solid black;padding:5px;">
                <b style="text-transform: none;margin-left:5px;">Adicionales</b>
            </td>
 
-           <td style="border-bottom:1px solid black;margin:0;" colspan="{!! count($additionals) !!}">
+           <td style="margin:0;" colspan="{!! $model->additionables->count() !!}">
 
            </td>
 
        </tr>
 
        <tr>
-       @foreach($additionals as $additional)
-           <td style="margin:0;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;padding:5px;text-align:center;line-height: 7pt;">
-               <b style="text-transform: none;margin-left:5px;font-size: 7pt;">{!! $additional !!}</b>
+       @foreach($model->additionables as $additionable)
+           <td style="border-top:1px solid black;margin:0;border-left:1px solid black;border-right:1px solid black;padding:5px;text-align:center;line-height: 7pt;">
+               <b style="text-transform: none;margin-left:5px;font-size: 7pt;">{!! $additionable->additionals->name !!}</b>
            </td>
 
        @endforeach
@@ -163,11 +163,11 @@
 
        <tr>
 
-       @foreach($additionals as $id => $additional)
+       @foreach($model->additionables as $additionable)
 
            <td style="border-top:1px solid black;border-bottom:1px solid black;margin:0;border-left:1px solid black;border-right: 1px solid black;padding:5px;">
 
-               $ {!! $model->additionables->where('additionals_id',$id)->first() ? $model->additionables->where('additionals_id',$id)->first()->amount : '0'!!}
+               $ {!! $additionable->amount!!}
            </td>
 
        @endforeach
