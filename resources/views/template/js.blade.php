@@ -81,8 +81,10 @@
 
     //datePicker
     $('.datePicker').datepicker({
+
         format: 'dd-mm-yyyy',
         language: 'es',
+        todayHighlight : 'true',
     });
 
     //dateRange

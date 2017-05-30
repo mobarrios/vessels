@@ -36,6 +36,8 @@ class SmallBoxesController extends Controller
 
     public function index()
     {
+        $type = $this->route->getParameter('type');
+
         //breadcrumb activo
         $this->data['activeBread'] = 'Listar';
 
@@ -52,7 +54,10 @@ class SmallBoxesController extends Controller
         }
 
 
-        $this->data['cashFromSales'] = $this->paymentsRepo->ListAll()->get();
+
+        if($type == 1)
+            $this->data['cashFromSales'] = $this->paymentsRepo->ListAll()->get();
+        
 
 
 

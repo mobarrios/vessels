@@ -52,7 +52,7 @@ return [
         'amount' => 'required',
         'detail' => 'required',
         'types_small_boxes_id' => 'required',
-        'providers_id' => 'required',
+        //'providers_id' => 'required',
 
 
     ],
@@ -65,7 +65,7 @@ return [
         'amount' => 'required',
         'detail' => 'required',
         'types_small_boxes_id' => 'required',
-        'providers_id' => 'required',
+        //'providers_id' => 'required',
     ],
 
     'entry' => [

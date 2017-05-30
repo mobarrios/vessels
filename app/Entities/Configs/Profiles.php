@@ -3,6 +3,7 @@
 
 
  use App\Entities\Entity;
+ use Illuminate\Support\Facades\Hash;
 
  class Profiles extends Entity
  {
@@ -11,6 +12,17 @@
 
      protected $section = 'profiles';
 
+     public function setPasswordAttribute($pass)
+     {
+         if(!empty($pass))
+             $this->attributes['password'] = Hash::make($pass);
+         else
+             $this->attributes['password']  = $this->attributes['password'] ;
+     }
+     public function images()
+     {
+         return $this->morphOne(Images::class,'imageable');
+     }
  }
 
 

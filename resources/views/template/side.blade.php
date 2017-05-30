@@ -48,9 +48,9 @@
                 <ul class="treeview-menu">
 
                     @permission('items.list')
-                        <li class={{ Request::segment(2) == "items" && Request::segment(4) == 1 ? 'active' : '' }}><a
+                    <li class={{ Request::segment(2) == "items" && Request::segment(4) == 1 ? 'active' : '' }}><a
                                 href="{{route('moto.items.index', 1)}}"><span>Motos</span></a></li>
-                        <li class={{ Request::segment(2) == "items" && Request::segment(4) == 2 ? 'active' : '' }}><a
+                    <li class={{ Request::segment(2) == "items" && Request::segment(4) == 2 ? 'active' : '' }}><a
                                 href="{{route('moto.items.index', 2)}}"><span>Accesorios</span></a></li>
 
                     @endpermission
@@ -82,7 +82,7 @@
             @permission('providers.list|modelslistsprices.list|purchasesorders.list|dispatches.list')
             <li class="treeview {{ in_array(Request::segment(2), ["providers","purchasesListsPrices","purchasesOrders","purchasesOrders","dispatches"]) ? 'active' : '' }}">
                 <a href="#">
-                    <i class="fa fa-shopping-bag "></i> <span>Compras</span>
+                    <i class="fa fa-industry "></i> <span>Compras</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
           </span>
@@ -120,7 +120,7 @@
             @permission('sales.list')
             <li class="treeview {{ in_array(Request::segment(2), ["sales","vouchers"]) ? 'active' : '' }}">
                 <a href="#">
-                    <i class="fa fa-shopping-bag "></i> <span>Ventas</span>
+                    <i class="fa fa-shopping-cart "></i> <span>Ventas</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                   </span>
@@ -161,9 +161,9 @@
             <li class="treeview {{ in_array(Request::segment(2), ["itemsRequest","myRequest"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-truck "></i> <span>Logística</span>
-        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-      </span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+              </span>
                 </a>
                 <ul class="treeview-menu">
                     @permission('itemsrequest.list')
@@ -175,7 +175,21 @@
                                 href="{{route('moto.myRequest.index')}}"><span>Mis Pedidos</span> </a></li>
                     @endpermission
                 </ul>
+            </li>
 
+            <li class="treeview {{ in_array(Request::segment(2), ["files"]) ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-book "></i> <span>Gestoría</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu">
+                    @permission('itemsrequest.list')
+                    <li class={{ Request::segment(2) == "files" ? 'active' : '' }}><a
+                                href="{{route('moto.files.index')}}"><span>Legajos</span></a></li>
+                    @endpermission
+                </ul>
 
             </li>
 

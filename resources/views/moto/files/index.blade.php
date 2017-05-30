@@ -6,7 +6,10 @@
                 <input class="id_destroy " value="{{$model->id}}" type="checkbox">
             </td>
             <td>
-                Venta #{!! $model->sales->id !!}
+               # {!! $model->id !!}
+            </td>
+            <td>
+                Venta Nro: {!! $model->sales->id !!}
             </td>
             <td>
 

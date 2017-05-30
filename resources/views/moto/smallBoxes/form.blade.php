@@ -23,7 +23,7 @@
 
     <div class="col-xs-3 form-group">
         {!! Form::label('Fecha') !!}
-        {!! Form::text('date', null ,['class'=>'datepicker form-control ']) !!}
+        {!! Form::text('date', null ,['class'=>'datePicker form-control ']) !!}
     </div>
 
     <div class="col-xs-3 form-group">
@@ -33,7 +33,7 @@
 
     <div class="col-xs-3 form-group">
         {!! Form::label('Tipo') !!}
-        {!! Form::select('types_small_boxes_id', $typesSmallBoxes , null ,['class'=>'select2 form-control ']) !!}
+        {!! Form::select('types_small_boxes_id', $typesSmallBoxes, null ,['class'=>'select2 form-control ']) !!}
     </div>
 
     <div class="col-xs-3 form-group">
@@ -44,7 +44,7 @@
     <div class="col-xs-3 form-group">
         {!! Form::label('Proveedores') !!}
 
-        {!! Form::select('providers_id', $providers , null ,['class'=>'select2 form-control']) !!}
+        {!! Form::select('providers_id', $providers , null ,['class'=>'select2 form-control', 'placeholder'=> 'Seleccionar']) !!}
 
     </div>
 
