@@ -97,8 +97,8 @@
                                         {{--
                                         <td><input class='invoice' type="checkbox" value="{{$item->Items->id}}"
                                                    name="dispatchesInvoiced[{{$item->Items->id}}]">
-                                       --}}
                                         </td>
+                                       --}}
                                         <td>{{$item->Items->Models->Brands->name}}</td>
                                         <td>{{$item->Items->Models->name}}</td>
                                         <td>{{$item->Items->Colors->name}}</td>
@@ -163,39 +163,56 @@
 
                                         {!! Form::open(['route'=>'moto.dispatches.invoice']) !!}
 
-                                        <div class="form-group">
 
                                             {!! isset($models) ? Form::hidden('dispatches_id', $models->id ) : '' !!}
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Fecha') !!}
                                             {!! Form::text('date', null, ['class'=>'datePicker form-control' ]) !!}
+                                        </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Nro. Factura') !!}
                                             {!! Form::text('number', null, ['class'=>'form-control' ]) !!}
 
+                                        </div>
+
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Total') !!}
                                             {!! Form::text('total', null, ['class'=>'form-control' ]) !!}
+                                        </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('SubTotal') !!}
                                             {!! Form::text('sub_total', null, ['class'=>'form-control' ]) !!}
+                                        </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Flete') !!}
                                             {!! Form::text('flete', null, ['class'=>'form-control' ]) !!}
+                                        </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Seguro') !!}
                                             {!! Form::text('seguro', null, ['class'=>'form-control' ]) !!}
+                                        </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('IVA 21%') !!}
                                             {!! Form::text('iva_total', null, ['class'=>'form-control' ]) !!}
+                                        </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Percepcion IVA') !!}
                                             {!! Form::text('iva_percepcion', null, ['class'=>'form-control' ]) !!}
+                                        </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Percepcion IIBB') !!}
                                             {!! Form::text('iibb_percepcion', null, ['class'=>'form-control' ]) !!}
-
-
                                         </div>
+
+
                                         <div class="modal-footer">
                                             <a data-toggle="control-sidebar" class="btn btn-default">Cancelar</a>
                                             {!! Form::submit('Agregar', ['class'=> 'btn btn-primary']) !!}
