@@ -15,41 +15,41 @@ class AdditionalsTableSeeder extends Seeder
 //            BUDGETS
             [
                 'id'    => 1,
-                'name'=>'patentamiento',
+                'name'=>'Patentamiento',
             ],[
                 'id'    => 2,
-                'name'=>'pack service',
+                'name'=>'Pack Service',
             ],
             [
                 'id'    => 3,
-                'name'=>'seguro',
+                'name'=>'Seguro',
             ],[
                 'id'    => 4,
-                'name'=>'flete',
+                'name'=>'Flete',
             ],
             [
                 'id'    => 5,
-                'name'=>'formularios',
+                'name'=>'Formularios',
             ],[
                 'id'    => 6,
-                'name'=>'gastos administrativos',
+                'name'=>'Gastos Administrativos',
             ],
             [
                 'id'    => 7,
-                'name'=>'cedula',
+                'name'=>'Cédula',
             ],[
                 'id'    => 8,
-                'name'=>'adicional por sucursal',
+                'name'=>'Adicional por Sucursal',
             ],
             [
                 'id'    => 9,
-                'name'=>'lo jack',
+                'name'=>'LoJack',
             ],[
                 'id'    =>10,
-                'name'=>'larga distancia',
+                'name'=>'Larga Distancia',
             ],[
                 'id'    =>11,
-                'name'=>'alta de patente',
+                'name'=>'Alta de Patente',
             ]
         ]);
     }

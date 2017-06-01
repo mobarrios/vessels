@@ -63,7 +63,6 @@ class DispatchesController extends Controller
         $this->data['dispatchesId'] =  $this->route->getParameter('dispatchesId');
 
         return view('moto.dispatches.formPurchasesOrders')->with($this->data);
-
     }
 
 

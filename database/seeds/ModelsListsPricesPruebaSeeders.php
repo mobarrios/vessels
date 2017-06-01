@@ -16,33 +16,43 @@ class  ModelsListsPricesPruebaSeeders extends Seeder
         DB::table('models_lists_prices')->insert([
             [
                 'id' => 1,
-                'number' => 'Honda Febrero 2017',
+                'number' => 'Honda Junio 2017',
                 'status' => 0,
                 'providers_id' => 1,
+                'updated_at' =>date('Y-m-d H:i:s'),
+
             ],
             [
                 'id' => 2,
-                'number' => 'Yamaha Febrero 2017',
+                'number' => 'Yamaha Junio 2017',
                 'status' => 0,
                 'providers_id' => 2,
+                'updated_at' =>date('Y-m-d H:i:s'),
+
             ],
             [
                 'id' => 3,
-                'number' => 'Bajaj Febrero 2017',
+                'number' => 'Bajaj Junio 2017',
                 'status' => 0,
                 'providers_id' => 3,
+                'updated_at' =>date('Y-m-d H:i:s'),
+
             ],
             [
                 'id' => 4,
-                'number' => 'Zanella Febrero 2017',
+                'number' => 'Zanella Junio 2017',
                 'status' => 0,
                 'providers_id' => 4,
+                'updated_at' =>date('Y-m-d H:i:s'),
+
             ],
             [
                 'id' => 5,
-                'number' => 'Motomel Febrero 2017',
+                'number' => 'Motomel Junio 2017',
                 'status' => 0,
                 'providers_id' => 5,
+                'updated_at' =>date('Y-m-d H:i:s'),
+
             ],
         ]);
 

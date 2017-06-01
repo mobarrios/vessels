@@ -26,11 +26,12 @@ class SalesRepo extends BaseRepo
 
             $budgetsItems = $budgetsItemsRepo->getModel()->where('budgets_id', $data->budgets_id)->get();
 
+
             foreach ($budgetsItems as $budgetItem)
             {
                 $budget = $budgetItem->budgets;
-
                 $item = $itemsRepo->asignItem($budgetItem->models_id, $data->branches_confirm_id,$sales->id, $budgetItem->colors_id);
+
 
                 if($item != false)
                 {
@@ -40,7 +41,9 @@ class SalesRepo extends BaseRepo
                     $new->price_actual = $budgetItem->price_actual;
                     $new->save();
 
-                    if($budget->additionables){
+                    if($budget->additionables->count() != 0)
+                    {
+
                         foreach ($budget->additionables as $additionals)
                         {
                             $sales->additionables()->create(['additionals_id' => $additionals->id , 'amount' => $additionals->amount]);

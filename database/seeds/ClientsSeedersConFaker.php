@@ -13,7 +13,7 @@ class ClientsSeedersConFaker extends Seeder
     {
         $faker = Faker\Factory::create('es_AR');
 
-        for ($i = 1; $i < 65; $i++){
+        for ($i = 1; $i <= 10; $i++){
             DB::table('clients')->insert([
                 [
                     'id' => $i,
