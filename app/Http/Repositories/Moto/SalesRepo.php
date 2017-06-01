@@ -35,6 +35,7 @@ class SalesRepo extends BaseRepo
 
                 if($item != false)
                 {
+
                     $new = new SalesItems();
                     $new->sales_id = $sales->id;
                     $new->items_id = $item;
@@ -46,7 +47,7 @@ class SalesRepo extends BaseRepo
 
                         foreach ($budget->additionables as $additionals)
                         {
-                            $sales->additionables()->create(['additionals_id' => $additionals->id , 'amount' => $additionals->amount]);
+                            $sales->additionables()->create(['additionals_id' => $additionals->additionals_id , 'amount' => $additionals->amount]);
                         }
                     };
 
