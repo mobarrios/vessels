@@ -34,6 +34,9 @@ class CreateClientsTable extends Migration
             $table->string('city');
             $table->string('location');
             $table->string('province');
+
+            $table->integer('iva_conditions_id')->unsigned()->index();
+            $table->foreign('iva_conditions_id')->references('id')->on('iva_conditions');
             
             $table->text('obs');
 

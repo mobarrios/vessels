@@ -30,6 +30,7 @@ class ClientsSeedersConFaker extends Seeder
                     'city' => $faker->city,
                     'location' => Faker\Provider\es_Ar\Address::community(),
                     'province' => Faker\Provider\es_Ar\Address::state(),
+                    'iva_conditions_id' => 2,
 
                 ]
 

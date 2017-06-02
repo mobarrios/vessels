@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Moto;
 use App\Entities\Moto\Budgets;
 use App\Entities\Moto\Clients;
 use App\Http\Controllers\Controller;
+use App\Http\Repositories\Configs\IvaConditionsRepo;
 use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo as Repo;
 use App\Http\Repositories\Moto\TechnicalServicesRepo;
@@ -18,7 +19,8 @@ class ClientsController extends Controller
 {
     protected $technicalServicesRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, BudgetsRepo $budgetsRepo,TechnicalServicesRepo $technicalServicesRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BudgetsRepo $budgetsRepo,TechnicalServicesRepo $technicalServicesRepo,
+IvaConditionsRepo $ivaConditionsRepo)
     {
 
         $this->request  = $request;
@@ -35,6 +37,8 @@ class ClientsController extends Controller
             $this->data['section']  = 'technicalServices';
         else
             $this->data['section']  = $this->section;
+
+        $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name','id');
 
     }
 

@@ -53,5 +53,9 @@
 
             {!! Form::hidden('sales_id',$sale->id) !!}
 
+
+
     @endsection
+
+
 
