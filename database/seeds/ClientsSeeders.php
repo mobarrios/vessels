@@ -27,7 +27,7 @@ class ClientsSeeders extends Seeder
                     'prospecto' => $faker->boolean,
                     'phone1' => $faker->phoneNumber,
                     'nacionality' => 'Argentino',
-                    'city' => 'Caba',
+                    'city' => 'CABA',
                     'province' => 'Buenos Aires',
 
                 ]

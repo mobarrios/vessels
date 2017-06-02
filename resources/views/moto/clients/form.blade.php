@@ -58,7 +58,11 @@
             {!! Form::text('phone2', null, ['class'=>'form-control']) !!}
         </div>
 
-        <div class="col-xs-6 form-group">
+        <div class="col-xs-3 form-group">
+            {!! Form::label('Condición IVA') !!}
+            {!! Form::select('iva_conditions_id', $ivaConditions,null,  ['class'=>'form-control select2', 'placeholder'=> 'Seleccionar']) !!}
+        </div>
+        <div class="col-xs-3 form-group">
             {!! Form::label('Imagen') !!}
             {!! Form::file('image') !!}
         </div>

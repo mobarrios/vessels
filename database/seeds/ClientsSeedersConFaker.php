@@ -13,7 +13,7 @@ class ClientsSeedersConFaker extends Seeder
     {
         $faker = Faker\Factory::create('es_AR');
 
-        for ($i = 1; $i < 65; $i++){
+        for ($i = 1; $i <= 10; $i++){
             DB::table('clients')->insert([
                 [
                     'id' => $i,
@@ -30,6 +30,7 @@ class ClientsSeedersConFaker extends Seeder
                     'city' => $faker->city,
                     'location' => Faker\Provider\es_Ar\Address::community(),
                     'province' => Faker\Provider\es_Ar\Address::state(),
+                    'iva_conditions_id' => 2,
 
                 ]
 

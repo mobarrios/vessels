@@ -16,7 +16,7 @@ class BanksTableSeeder extends Seeder
         DB::table('banks')->insert([
                 [
                     'id'    => 1,
-                    'name'=>'Banco de la Nación Argentina',
+                    'name'=>'BNA',
 
                 ]
                 ,[
@@ -37,6 +37,18 @@ class BanksTableSeeder extends Seeder
                 [
                     'id'    => 5,
                     'name'=>'Banco Hipotecario',
+                ],
+                [
+                    'id'    => 6,
+                    'name'=>'Banco Francés',
+                ],
+                [
+                    'id'    => 7,
+                    'name'=>'Banco Macro',
+                ],
+                [
+                    'id'    => 8,
+                    'name'=>'Banco Provincia de Buenos Aires',
                 ],
 
             ]

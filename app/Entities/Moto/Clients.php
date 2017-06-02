@@ -9,7 +9,7 @@
 
      protected $table = 'clients';
 
-     protected $fillable = ['name','last_name','email','dni','sexo','marital_status','dob','nacionality','phone1','phone2','address', 'city','location','province','obs','prospecto'];
+     protected $fillable = ['name','last_name','email','dni','sexo','marital_status','dob','nacionality','phone1','phone2','address', 'city','location','province','obs','prospecto','iva_conditions_id'];
 
      protected $section = 'clients';
 
