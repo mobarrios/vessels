@@ -9,7 +9,9 @@
             en {!! $models->branchesConfirm->name  !!}<br>
             <span class="text-muted"> Usuario : </span> {!! $models->User->fullName !!}
             en {!! $models->Brancheables->first()->Branches->name !!}<br>
-            <span class="text-muted"> Estado : </span> <span class="label label-success">{!! $models->status !!}</span><br>
+            <span class="text-muted"> Estado : </span>
+            <button class="btn btn-xs btn-danger">Finalizada</button>
+            <br>
 
         </address>
     </div>
@@ -64,8 +66,8 @@
         <span class="clearfix"></span>
     <div class="col-xs-12">
         <div class="btn-group btn-group-xs pull-right">
-            <a href="{!! route('moto.sales.r431',$models->id) !!}" class="btn btn-primary">R-431</a>
-            <a href="{!! route('moto.sales.hojaDeVenta',$models->id) !!}" class="btn btn-primary">Hoja de venta</a>
+            <a href="{!! route('moto.sales.r431',$models->id) !!}" class="btn btn-default">R-431</a>
+            <a href="{!! route('moto.sales.hojaDeVenta',$models->id) !!}" class="btn btn-default">Hoja de venta</a>
         </div>
     </div>
     @endif

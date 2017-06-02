@@ -33,7 +33,7 @@
 
             <div class="col-xs-6 form-group">
                 {!! Form::label('Letra ') !!}
-                {!! Form::select('letra',$letras,null,['class'=>'form-control']) !!}
+                {!! Form::select('letra',$letras,null,['class'=>'form-control', 'id'=>'letra']) !!}
             </div>
 
             <div class="col-xs-6 form-group">
@@ -57,5 +57,15 @@
 
     @endsection
 
+    @section('js')
+        <script>
+            var iva = {!! $sale->Clients->iva_conditions_id !!};
 
+            if(iva == 2)
+                $('#letra').val('B');
 
+            if(iva == 1)
+                $('#letra').val('A');
+
+        </script>
+    @endsection
