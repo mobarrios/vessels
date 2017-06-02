@@ -109,7 +109,6 @@
             show(id);
         });
 
-
         function show(id) {
 
             if (id == 1) {
@@ -121,7 +120,18 @@
                 $('#bank').addClass('hidden');
                 $('#plazo').addClass('hidden');
 
+                $("#cheques input").prop('disabled',true).attr('disabled',true);
+                $("#cheques select").prop('disabled',true).attr('disabled',true);
 
+                $("#depositos input").prop('disabled',true).attr('disabled',true);
+
+                $("#creditos select").prop('disabled',true).attr('disabled',true);
+
+                $("#number input").prop('disabled',true).attr('disabled',true);
+
+                $("#bank select").prop('disabled',true).attr('disabled',true);
+
+                $("#plazo input").prop('disabled',true).attr('disabled',true);
             }
             if (id == 2) {
                 $('#number').removeClass('hidden');
@@ -132,6 +142,21 @@
                 $('#tarjetas').addClass('hidden');
                 $('#depositos').addClass('hidden');
                 $('#creditos').addClass('hidden');
+
+
+                $("#cheques input").prop('disabled',false).attr('disabled',false);
+                $("#cheques select").prop('disabled',false).attr('disabled',false);
+
+                $("#depositos input").prop('disabled',true).attr('disabled',true);
+
+                $("#creditos select").prop('disabled',true).attr('disabled',true);
+
+                $("#number input").prop('disabled',false).attr('disabled',false);
+
+                $("#bank select").prop('disabled',false).attr('disabled',false);
+
+                $("#plazo input").prop('disabled',true).attr('disabled',true);
+
 
             }
             if (id == 3 || id == 4) {
@@ -145,6 +170,22 @@
                 $('#cheques').addClass('hidden');
                 $('#depositos').addClass('hidden');
                 $('#creditos').addClass('hidden');
+
+
+                $("#cheques input").prop('disabled',true).attr('disabled',true);
+                $("#cheques select").prop('disabled',true).attr('disabled',true);
+
+                $("#depositos input").prop('disabled',true).attr('disabled',true);
+
+                $("#creditos select").prop('disabled',true).attr('disabled',true);
+
+                $("#number input").prop('disabled',false).attr('disabled',false);
+
+                $("#bank select").prop('disabled',false).attr('disabled',false);
+
+                $("#plazo input").prop('disabled',false).attr('disabled',false);
+
+
             }
             if (id == 5 || id == 6) {
 
@@ -156,6 +197,19 @@
                 $('#cheques').addClass('hidden');
                 $('#tarjetas').addClass('hidden');
                 $('#creditos').addClass('hidden');
+
+                $("#cheques input").prop('disabled',true).attr('disabled',true);
+                $("#cheques select").prop('disabled',true).attr('disabled',true);
+
+                $("#depositos input").prop('disabled',false).attr('disabled',false);
+
+                $("#creditos select").prop('disabled',true).attr('disabled',true);
+
+                $("#number input").prop('disabled',false).attr('disabled',false);
+
+                $("#bank select").prop('disabled',false).attr('disabled',false);
+
+                $("#plazo input").prop('disabled',true).attr('disabled',true);
             }
             if (id == 7) {
                 $('#creditos').removeClass('hidden');
@@ -168,6 +222,19 @@
                 $('#cheques').addClass('hidden');
                 $('#tarjetas').addClass('hidden');
                 $('#depositos').addClass('hidden');
+
+                $("#cheques input").prop('disabled',true).attr('disabled',true);
+                $("#cheques select").prop('disabled',true).attr('disabled',true);
+
+                $("#depositos input").prop('disabled',true).attr('disabled',true);
+
+                $("#creditos select").prop('disabled',false).attr('disabled',false);
+
+                $("#number input").prop('disabled',false).attr('disabled',false);
+
+                $("#bank select").prop('disabled',true).attr('disabled',true);
+
+                $("#plazo input").prop('disabled',false).attr('disabled',false);
             }
 
         }

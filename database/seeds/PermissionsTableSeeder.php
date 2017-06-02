@@ -575,25 +575,25 @@ class PermissionsTableSeeder extends Seeder
                 [
                     'id'    => 88,
                     'name' => 'Listar Servicios Técnicos',
-                    'slug' => 'technicalservices.list',
+                    'slug' => 'technicalServices.list',
                     'model' => '',
                 ],
                 [
                     'id'    => 89,
                     'name' => 'Crear Servicios Técnicos',
-                    'slug' => 'technicalservices.create',
+                    'slug' => 'technicalServices.create',
                     'model' => '',
                 ],
                 [
                     'id'    => 90,
                     'name' => 'Editar Servicios Técnicos',
-                    'slug' => 'technicalservices.edit',
+                    'slug' => 'technicalServices.edit',
                     'model' => '',
                 ],
                 [
                     'id'    => 91,
                     'name' => 'Borrar Servicios Técnicos',
-                    'slug' => 'technicalservices.destroy',
+                    'slug' => 'technicalServices.destroy',
                     'model' => '',
                 ],
                 //ordenes de servicio
