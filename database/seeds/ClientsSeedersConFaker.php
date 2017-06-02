@@ -13,14 +13,16 @@ class ClientsSeedersConFaker extends Seeder
     {
         $faker = Faker\Factory::create('es_AR');
 
-        for ($i = 1; $i <= 10; $i++){
+
+        for ($i = 1; $i <= 20; $i++){
             DB::table('clients')->insert([
                 [
                     'id' => $i,
                     'name' => $faker->firstName,
                     'last_name' => $faker->lastName,
                     'email' => $faker->freeEmail,
-                    'dni' => Faker\Provider\es_Es\Person::dni(),
+                    //'dni' => Faker\Provider\es_Es\Person::dni(),
+                    'dni' => substr(str_shuffle("0123456789"), 0, 8),
                     'sexo' => $faker->randomElement(['masculino','femenino']),
                     'dob' => $faker->dateTimeThisCentury->format('Y-m-d'),
                     'address' => $faker->address,
