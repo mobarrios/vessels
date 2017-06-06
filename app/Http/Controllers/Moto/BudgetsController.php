@@ -103,7 +103,7 @@ class BudgetsController extends Controller
         }
 
         $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
-
+               
         return parent::create();
     }
 
@@ -115,7 +115,7 @@ class BudgetsController extends Controller
         }
 
         $this->data['client'] = $this->clients->find($cliente);
-
+        
         return parent::edit();
     }
 
@@ -127,6 +127,7 @@ class BudgetsController extends Controller
         //crea a traves del repo con el request
         $model = $this->repo->create(collect(['date' => date('Y-m-d H:i:s',time()),'clients_id' => $this->request->get('clients_id')]));
 
+        $model->FinancialsDues()->attach($this->request->get('financials_dues_id'));
 
 //        //guarda imagenes
 //        if(config('models.'.$this->section.'.is_imageable'))
@@ -147,6 +148,8 @@ class BudgetsController extends Controller
 
     public function update()
     {
+
+
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
 
@@ -158,7 +161,10 @@ class BudgetsController extends Controller
 
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request);
+        
+        $model->FinancialsDues()->sync($this->request->get('financials_dues_id'));
 
+        
 //        //guarda imagenes
 //        if(config('models.'.$this->section.'.is_imageable'))
 //            $this->createImage($model, $this->request);

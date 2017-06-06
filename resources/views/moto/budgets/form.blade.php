@@ -1,6 +1,7 @@
 @extends('template.model_form')
 
 @section('css')
+
     <style>
         .autocompletedemoCustomTemplate .autocomplete-custom-template li {
             border-bottom: 1px solid #ccc;
@@ -55,6 +56,118 @@
             background-color: rgba(162,162,162,0.21);
 
         }
+
+/*
+        .badgebox
+        {
+            opacity: 0;
+        }
+
+        .badgebox + .badge
+        {
+            text-indent: -999999px;
+            width: 27px;
+        }
+
+        .badgebox:focus + .badge
+        {
+            box-shadow: inset 0px 0px 5px;
+        
+        }
+
+        .badgebox:checked + .badge
+        {
+        
+            text-indent: 0;
+        }
+        */
+
+/* Checkbox and Radio buttons */
+.form-group input[type="radio"],
+.form-group input[type="checkbox"]{
+	display: none !important;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label,
+.form-group input[type="radio"] + .btn-group > label{
+	white-space: normal !important;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label.btn-default,
+.form-group input[type="radio"] + .btn-group > label.btn-default{
+	color: #333 !important;
+	background-color: #fff !important;
+	border-color: #ccc !important;
+}
+.form-group input[type="checkbox"] + .btn-group > label.btn-primary,
+.form-group input[type="radio"] + .btn-group > label.btn-primary{
+	color: #fff !important;
+	background-color: #428bca !important;
+	border-color: #357ebd !important;
+}
+.form-group input[type="checkbox"] + .btn-group > label.btn-success,
+.form-group input[type="radio"] + .btn-group > label.btn-success{
+	color: #fff !important;
+	background-color: #5cb85c !important;
+	border-color: #4cae4c !important;
+}
+.form-group input[type="checkbox"] + .btn-group > label.btn-info,
+.form-group input[type="radio"] + .btn-group > label.btn-info{
+	color: #fff !important;
+	background-color: #5bc0de !important;
+	border-color: #46b8da !important;
+}
+.form-group input[type="checkbox"] + .btn-group > label.btn-warning,
+.form-group input[type="radio"] + .btn-group > label.btn-warning{
+	color: #fff !important;
+	background-color: #f0ad4e !important;
+	border-color: #eea236 !important;
+}
+.form-group input[type="checkbox"] + .btn-group > label.btn-danger,
+.form-group input[type="radio"] + .btn-group > label.btn-danger{
+	color: #fff !important;
+	background-color: #d9534f !important;
+	border-color: #d43f3a !important;
+}
+.form-group input[type="checkbox"] + .btn-group > label.btn-link,
+.form-group input[type="radio"] + .btn-group > label.btn-link {
+	font-weight: normal !important;
+	color: #428bca !important;
+	border-radius: 0 !important;
+}
+
+.form-group input[type="radio"] + .btn-group > label span:first-child,
+.form-group input[type="checkbox"] + .btn-group > label span:first-child{
+	display: none !important;
+}
+
+.form-group input[type="radio"] + .btn-group > label span:first-child + span,
+.form-group input[type="checkbox"] + .btn-group > label span:first-child + span{
+	display: inline-block !important;
+}
+
+.form-group input[type="radio"]:checked + .btn-group > label span:first-child,
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child{
+	display: inline-block !important;
+}
+
+.form-group input[type="radio"]:checked + .btn-group > label span:first-child + span,
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child + span{
+	display: none !important;  
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span[class*="fa-"],
+.form-group input[type="radio"] + .btn-group > label span[class*="fa-"]{
+	width: 15px !important;
+	float: left !important;
+	margin: 4px 0 2px -2px !important;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span.content,
+.form-group input[type="radio"] + .btn-group > label span.content{
+	margin-left: 10px !important;
+}
+/* End::Checkbox and Radio buttons */
 
     </style>
 @endsection
@@ -233,7 +346,51 @@
 
 
                             <span class="clearfix"></span>
+
                             <hr>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h4>Métodos de pago</h4>
+                                </div>    
+                            </div>    
+
+
+                            <div class="row">
+                                @foreach($financials as $financial)
+                                    <div class="col-xs-6 col-md-3">
+                                        <div class="form-group">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">{!! $financial->name !!}</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    @forelse($financial->FinancialsDues as $financialsDue)
+                                                        <div class="col-xs-12" style="margin-top:10px;">
+                                                            {!! Form::checkbox('financials_dues_id[]',$financialsDue->id,$models->CheckFinancialsDue($financialsDue->id) or null,['id' => "financials-$financialsDue->id"]) !!}
+                                                            
+                                                            <div class="btn-group">
+                                                                <label for="financials-{!! $financialsDue->id !!}" class="btn btn-default">
+                                                                    <span class="fa fa-check-square-o fa-lg"></span>
+                                                                    <span class="fa fa-square-o fa-lg"></span>
+                                                                    <span class="content">{!! $financialsDue->due !!} cuotas de </span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                        
+                                                    @endforelse
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                
+                            </div>
+
+        
+
+        
+	
 
 
                             <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
@@ -309,8 +466,6 @@
                                     {!! Form::text('total',$models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount,['class' => 'form-control','readonly','ng-model' => 'total','ng-change' => 'calcular()']) !!}
                                 </div>
                             </div>
-
-
 
                         </div>
 

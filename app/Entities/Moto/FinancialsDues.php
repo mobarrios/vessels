@@ -18,6 +18,11 @@
          return $this->belongsTo(Financials::getClass());
      }
 
+     public function Budgets()
+     {
+         return $this->belongsToMany(Budgets::getClass())->withPivot('id');
+     }
+
  }
 
 
