@@ -174,31 +174,48 @@
                                         <div class="form-group col-xs-6 col-md-4">
                                             {!! Form::label('Nro. Factura') !!}
                                             {!! Form::text('number', null, ['class'=>'form-control' ]) !!}
-
                                         </div>
 
                                         <div class="form-group col-xs-6 col-md-4">
-                                            {!! Form::label('Total') !!}
-                                            {!! Form::text('total', null, ['class'=>'form-control' ]) !!}
+                                            {!! Form::label('Tipo Comprobante') !!}
+                                            {!! Form::text('number', null, ['class'=>'form-control' ]) !!}
                                         </div>
 
-                                        <div class="form-group col-xs-6 col-md-4">
+                                        <div class="form-group col-xs-6 col-md-6">
                                             {!! Form::label('SubTotal') !!}
                                             {!! Form::text('sub_total', null, ['class'=>'form-control' ]) !!}
                                         </div>
 
-                                        <div class="form-group col-xs-6 col-md-4">
+                                        <div class="form-group col-xs-6 col-md-6">
+                                            {!! Form::label('Total') !!}
+                                            {!! Form::text('total', null, ['class'=>'form-control' ]) !!}
+                                        </div>
+
+                                        <div class="form-group col-xs-6 col-md-6">
                                             {!! Form::label('Flete') !!}
                                             {!! Form::text('flete', null, ['class'=>'form-control' ]) !!}
                                         </div>
 
-                                        <div class="form-group col-xs-6 col-md-4">
+                                        <div class="form-group col-xs-6 col-md-6">
                                             {!! Form::label('Seguro') !!}
                                             {!! Form::text('seguro', null, ['class'=>'form-control' ]) !!}
                                         </div>
 
-                                        <div class="form-group col-xs-6 col-md-4">
+                                        <div class="form-group col-xs-6 col-md-3">
                                             {!! Form::label('IVA 21%') !!}
+                                            {!! Form::text('iva_total', null, ['class'=>'form-control' ]) !!}
+                                        </div>
+                                        <div class="form-group col-xs-6 col-md-3">
+                                            {!! Form::label('IVA 10,5%') !!}
+                                            {!! Form::text('iva_total', null, ['class'=>'form-control' ]) !!}
+                                        </div>
+
+                                        <div class="form-group col-xs-6 col-md-3">
+                                            {!! Form::label('Total Gravado 21%') !!}
+                                            {!! Form::text('iva_total', null, ['class'=>'form-control' ]) !!}
+                                        </div>
+                                        <div class="form-group col-xs-6 col-md-3">
+                                            {!! Form::label('Total Gravado 10,5%') !!}
                                             {!! Form::text('iva_total', null, ['class'=>'form-control' ]) !!}
                                         </div>
 
@@ -212,6 +229,10 @@
                                             {!! Form::text('iibb_percepcion', null, ['class'=>'form-control' ]) !!}
                                         </div>
 
+                                        <div class="form-group col-xs-6 col-md-4">
+                                            {!! Form::label('Impuestos Internos ') !!}
+                                            {!! Form::text('iibb_percepcion', null, ['class'=>'form-control' ]) !!}
+                                        </div>
 
                                         <div class="modal-footer">
                                             <a data-toggle="control-sidebar" class="btn btn-default">Cancelar</a>

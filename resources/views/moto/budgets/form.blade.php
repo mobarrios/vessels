@@ -356,12 +356,27 @@
 
 
                             <div class="row">
+
+                                <div class="col-xs-6 col-md-4">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">EFECTIVO</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                    <div class="col-xs-12">
+
+                                                        <strong class="content"> $ {{ number_format(($models->allItems->first()->activeListPrice()->first()->price_net), 2)}}</strong>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                </div>
+
                                 @foreach($financials as $financial)
-                                    <div class="col-xs-6 col-md-3">
+                                    <div class="col-xs-6 col-md-4">
                                         <div class="form-group">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <h4 class="panel-title">{!! $financial->name !!}</h3>
+                                                    <h3 class="panel-title">{!! $financial->name !!}</h3>
                                                 </div>
                                                 <div class="panel-body">
                                                     @forelse($financial->FinancialsDues as $financialsDue)
@@ -372,7 +387,14 @@
                                                                 <label for="financials-{!! $financialsDue->id !!}" class="btn btn-default">
                                                                     <span class="fa fa-check-square-o fa-lg"></span>
                                                                     <span class="fa fa-square-o fa-lg"></span>
-                                                                    <span class="content">{!! $financialsDue->due !!} cuotas de </span>
+
+                                                                    @if($financialsDue->porcent != 0)
+                                                                        <span class="content">{!! $financialsDue->due !!} cuotas de $ {{ number_format(  (($models->total ) + (($models->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2)}}</span>
+
+                                                                    @else
+                                                                        <span class="content">{!! $financialsDue->due !!} cuotas de $ {{ number_format(($models->total * $financialsDue->coef) / $financialsDue->due, 2)}}</span>
+                                                                    @endif
+
                                                                 </label>
                                                             </div>
                                                         </div>
