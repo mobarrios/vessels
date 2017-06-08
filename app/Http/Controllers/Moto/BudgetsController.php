@@ -18,6 +18,7 @@ use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
+use App\Http\Repositories\Configs\IvaConditionsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class BudgetsController extends Controller
     protected $budgets;
     protected $models;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models, BranchesRepo $branchesRepo, AdditionalsRepo $additionalsRepo,ColorsRepo $colorsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BrandsRepo $brandsRepo, FinancialsRepo $financialsRepo, Clients $clients, Budgets $budgets, Models $models, BranchesRepo $branchesRepo, AdditionalsRepo $additionalsRepo,ColorsRepo $colorsRepo,IvaConditionsRepo $ivaConditionsRepo)
     {
 
         $this->request  = $request;
@@ -47,6 +48,8 @@ class BudgetsController extends Controller
         $this->data['colors'] = $colorsRepo->ListsData('name', 'id');
 
         $this->data['additionals'] = $additionalsRepo->ListsData('name','id');
+
+        $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name','id');
 
         $this->clients = $clients;
         $this->models = $models;

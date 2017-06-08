@@ -254,14 +254,14 @@
                         {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
                     </div>
 
-                    <div class="col-xs-12 col-lg-3 form-group">
+                    <div class="col-xs-12 col-lg-2 form-group">
                         {!! Form::label('city', "CIUDAD") !!}
                         {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
                     </div>
 
 
 
-                    <div class="col-xs-12 col-lg-3 form-group">
+                    <div class="col-xs-12 col-lg-2 form-group">
                         {!! Form::label('location', "LOCALIDAD") !!}
                         {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
                     </div>
@@ -269,14 +269,21 @@
 
 
 
-                    <div class="col-xs-12 col-lg-3 form-group">
+                    <div class="col-xs-12 col-lg-2 form-group">
                         {!! Form::label('province', "PROVINCIA") !!}
                         {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
                     </div>
 
 
+                    <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('iva_conditions_id', "CONDICIÓN DEL IVA") !!}
+                        {!! Form::select('iva_conditions_id', $ivaConditions,null, ['required' => 'required','class'=>'form-control','ng-model' => 'iva_conditions_id']) !!}
+                    </div>
 
-                    <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">
+
+
+
+                    <div class="col-xs-12 col-lg-2 form-group" style="padding-top: 2%;">
                         @if(!isset($models))
     {{--                        {!! Form::hidden('clients_id', $client->id) !!}--}}
                             <button type="submit" class="btn btn-default"><span class="fa fa-save"></span></button>
@@ -365,13 +372,13 @@
                                             <div class="panel-body">
                                                     <div class="col-xs-12">
 
-                                                        <strong class="content"> $ {{ number_format(($models->allItems->first()->activeListPrice()->first()->price_net), 2)}}</strong>
+                                                        <strong class="content"> $ {{ $models->allItems->count() > 0 ? number_format(($models->allItems->first()->activeListPrice()->first()->price_net), 2) : "0"}}</strong>
                                                     </div>
                                             </div>
                                         </div>
                                 </div>
 
-                                @foreach($financials as $financial)
+                                @foreach($financials as $indice => $financial)
                                     <div class="col-xs-6 col-md-4">
                                         <div class="form-group">
                                             <div class="panel panel-default">
@@ -379,7 +386,8 @@
                                                     <h3 class="panel-title">{!! $financial->name !!}</h3>
                                                 </div>
                                                 <div class="panel-body">
-                                                    @forelse($financial->FinancialsDues as $financialsDue)
+                                                    @forelse($financial->FinancialsDues as $ind => $financialsDue)
+
                                                         <div class="col-xs-12" style="margin-top:10px;">
                                                             {!! Form::checkbox('financials_dues_id[]',$financialsDue->id,$models->CheckFinancialsDue($financialsDue->id) or null,['id' => "financials-$financialsDue->id"]) !!}
                                                             
@@ -389,10 +397,11 @@
                                                                     <span class="fa fa-square-o fa-lg"></span>
 
                                                                     @if($financialsDue->porcent != 0)
-                                                                        <span class="content">{!! $financialsDue->due !!} cuotas de $ {{ number_format(  (($models->total ) + (($models->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2)}}</span>
+                                                                        <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-porcent='{!! $financialsDue->porcent !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(  (($models->total ) + (($models->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2)}}  </span>
 
                                                                     @else
-                                                                        <span class="content">{!! $financialsDue->due !!} cuotas de $ {{ number_format(($models->total * $financialsDue->coef) / $financialsDue->due, 2)}}</span>
+                                                                    {{$models->total}}
+                                                                        <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-coef='{!! $financialsDue->coef !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(($models->total * $financialsDue->coef) / $financialsDue->due, 2)}}</span>
                                                                     @endif
 
                                                                 </label>
@@ -574,6 +583,14 @@
     <script src="js/asideModelsColors.js"></script>
 
     <script>
+
+    
+
+       
+
+    
+
+
         var routeBase = window.location.href.split('moto/')[0]
         var rutaEdit;
 
@@ -599,6 +616,7 @@
             $scope.city = ""
             $scope.location = ""
             $scope.province = ""
+            $scope.iva_conditions_id = ""
 
 
 
@@ -615,8 +633,11 @@
                 $scope.city = "{!! $client->city or old('city')!!}"
                 $scope.location = "{!! $client->location or old('location')!!}"
                 $scope.province = "{!! $client->province or old('province')!!}"
+                $scope.iva_conditions_id = "{!! $client->iva_conditions_id or old('iva_conditions_id')!!}"
             @endif
 
+
+            
             $('#search').on('change',function(ev){
                 $("#search>option[value='seleccione']").remove();
                 var select = $(this);
@@ -639,6 +660,7 @@
                             $scope.city = response.data['city']
                             $scope.location = response.data['location']
                             $scope.province = response.data['province']
+                            $scope.iva_conditions_id = response.data['iva_conditions_id']
                         });
 
             });
@@ -702,35 +724,7 @@
                         $scope.importeCuota = {!! $models->importe_cuota or '0' !!}
                         $scope.aFinanciar = {!! $models->a_financiar or '0' !!}
                         $scope.calcular();
-
-//                        var modelos = [];
-//
-//                        for(var m in $scope.data) {
-//                            var obj = {
-//                                modelo : $scope.data[m].id,
-//                                color : $scope.data[m].pivot.colors_id
-//                            }
-//
-//                            modelos.push(obj)
-//                        }
-//
-//
-//
-//                        $.ajax({
-//                            method: 'get',
-//                            data: $.extend({},modelos),
-//                            url: 'moto/branchesWithStockByModels',
-//                            success: function(data){
-//                                $("#branches option").remove();
-//
-//                                for(var i in data){
-//                                    $("#branches").append($("<option value='"+i+"'>"+data[i]+"<option>"))
-//                                }
-//
-//
-//                            }
-//                        })
-
+                        $scope.financiamientos();
 
                     });
 
@@ -754,6 +748,28 @@
             {
                 $scope.aFinanciar = parseFloat($scope.total -  $scope.anticipo).toFixed(2) ;
             };
+
+            $scope.financiamientos = function(){
+                var total = $scope.total;
+                var financiamientos = $(".financiamiento");
+
+                financiamientos.each(function(ind,val){
+                    var due = $(val).attr("data-due");
+                        
+                    if($(val).attr("data-porcent")){
+                        var porcent = $(val).attr("data-porcent");
+                        var valor = ((total) + ((total * porcent) / 100 )) / due;
+                    }
+                                                                            
+                    if($(val).attr("data-coef")){
+                        var coef = $(val).attr("data-coef");
+                        var valor = (total * coef) / due;
+                    }
+
+                    
+                    $(this).text(due+" cuotas de $ "+valor.toLocaleString("Es-Ar",{maximumFractionDigits: 2}));
+                })
+            }    
 
 
 

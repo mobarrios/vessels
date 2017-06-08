@@ -34,6 +34,6 @@ class BudgetsFinancialsDues extends Migration
      */
     public function down()
     {
-        Schema::drop('budgets_payments');
+        Schema::drop('budgets_financials_dues');
     }
 }
