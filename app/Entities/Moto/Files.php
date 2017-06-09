@@ -51,14 +51,7 @@ class Files extends Entity
     public function getUbicacionValueAttribute(){
         return $this->attributes['ubicacion'];
     }
-
-    public function setEstadoAttribute($value){
-        $this->attributes['estado'] = config('models.files.estado')[$value];
-    }
-
-    public function setUbicacionAttribute($value){
-        $this->attributes['ubicacion'] = config('models.files.ubicacion')[$value];
-    }
+    
 
 }
 

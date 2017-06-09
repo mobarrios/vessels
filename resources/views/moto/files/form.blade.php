@@ -15,6 +15,7 @@
             </div>
             <div class="box-body">
                 <div class="row">
+                    {{-- 
                     <div class="col-xs-12 col-md-4 form-group">
                         {!! Form::label('Venta #') !!}
                         <div class="btn-group">
@@ -22,15 +23,16 @@
                             {!! Form::select('sales_id',$sales, isset($models->sales_id) ? $models->sales_id : null, ['class'=>'form-control select2']) !!}
                         </div>
                     </div>
+                    --}}
 
-                    <div class="col-xs-12 col-md-4 form-group">
+                    
+                    <div class="col-xs-12 col-md-6 form-group">
                         {!! Form::label('Estado') !!}
-
-                        {!! Form::select('estado',$estado, $models->estadoValue or null, ['class'=>'form-control select2']) !!}
+                        {!! Form::select('estado',$estado, $models->estadoValue, ['class'=>'form-control select2']) !!}
 
                     </div>
 
-                    <div class="col-xs-12 col-md-4 form-group">
+                    <div class="col-xs-12 col-md-6 form-group">
                         {!! Form::label('Ubicación') !!}
 
                         {!! Form::select('ubicacion',$ubicacion,  $models->ubicacionValue or null, ['class'=>'form-control select2']) !!}

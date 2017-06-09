@@ -425,34 +425,6 @@
 
                             <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
 
-                            {{--<div class="col-xs-2 form-group">--}}
-                                {{--<label>Patentamiento</label>--}}
-                                {{--{!! Form::number('patentamiento',null,['class' => 'form-control','ng-model' => 'patentamiento','ng-change' => 'calcular()']) !!}--}}
-
-                            {{--</div>--}}
-
-                            {{--<div class="col-xs-2 form-group">--}}
-                                {{--<label>Pack Service</label>--}}
-                                {{--{!! Form::number('pack_service',null,['class' => 'form-control','ng-model' => 'packService','ng-change' => 'calcular()']) !!}--}}
-                            {{--</div>--}}
-
-                            {{--<div class="col-xs-2 form-group">--}}
-                                {{--<label>Seguro</label>--}}
-                                {{--{!! Form::number('seguro',null,['class' => 'form-control','ng-model' => 'seguro','ng-change' => 'calcular()']) !!}--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-2 form-group">--}}
-                                {{--<label>Flete</label>--}}
-                                {{--{!! Form::number('flete',null,['class' => 'form-control','ng-model' => 'flete','ng-change' => 'calcular()']) !!}--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-2 form-group">--}}
-                                {{--<label>Formularios</label>--}}
-                                {{--{!! Form::number('formularios',null,['class' => 'form-control','ng-model' => 'formularios','ng-change' => 'calcular()']) !!}--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-2 form-group">--}}
-                                {{--<label>Gastos Administrativos</label>--}}
-                                {{--{!! Form::number('gastos_administrativos',null,['class' => 'form-control','ng-model' => 'gastosAdministrativos','ng-change' => 'calcular()']) !!}--}}
-                            {{--</div>--}}
-
                             <div class="col-xs-2 form-group">
                                 <label>Descuento (%)</label>
                                 {!! Form::number('descuento',null,['class' => 'form-control','ng-model' => 'descuento','ng-change' => 'calcular()','min' => '0']) !!}
