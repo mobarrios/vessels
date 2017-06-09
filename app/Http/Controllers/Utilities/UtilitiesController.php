@@ -43,13 +43,14 @@ class UtilitiesController extends Controller
 
     public function exportToPdf($id,Request $request,Route $route , PDF $pdf){
 
+        
         $entidad = 'App\Entities\Moto\\'.ucfirst($request->segment(2));
 
         $model = new $entidad;
 
         $model = $model->find($id);
 
-        $pdf->setPaper('a5', 'portrait')->loadView(config('models.'.$request->segment(2).'.exportPdfRoute'),compact('model'));
+        $pdf->setPaper('a4', 'portrait')->loadView(config('models.'.$request->segment(2).'.exportPdfRoute'),compact('model'));
 
         return $pdf->stream();
     }

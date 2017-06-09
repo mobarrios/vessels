@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Moto;
 
 use App\Entities\Configs\Branches;
+use App\Entities\Moto\Files;
 use App\Entities\Moto\Budgets;
 use App\Entities\Moto\BudgetsItems;
 use App\Entities\Moto\Clients;
@@ -124,6 +125,7 @@ class BudgetsController extends Controller
 
     public function store()
     {
+        
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
@@ -147,6 +149,7 @@ class BudgetsController extends Controller
         $this->data['models'] = $model;
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),[$this->request->get('clients_id'),$model->id])->withErrors(['Registro Agregado Correctamente']);
+        
     }
 
     public function update()
