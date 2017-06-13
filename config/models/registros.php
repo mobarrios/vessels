@@ -1,13 +1,13 @@
 <?php
 
-$model = 'clients';
+$model = 'registros';
 
 return [
 
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Clientes',
+    'sectionName'   => 'Registros',
 
     //routes
     'indexRoute'    => 'moto.'.$model.'.index',
@@ -19,8 +19,8 @@ return [
     'destroyRoute'  => 'moto.'.$model.'.destroy',
 
     'postStoreRoute'  => 'moto.'.$model.'.index',
-    'postUpdateRoute' => 'moto.'.$model.'.edit',
-    
+    'postUpdateRoute' => 'moto.'.$model.'.index',
+
     //urls
     'destroyUrl' => 'moto/'.$model.'/destroy/',
 
@@ -39,35 +39,24 @@ return [
 
     //column search
     'search' => [
-
-        'Dni' => 'dni',
-        'Nombre' => 'name',
-        'Apellido' => 'last_name',
-        'Email' => 'email',
+        
+            'Nombre'    => 'name',
+            //'Direccion'  => 'address' ,
+            //'Email'     => 'email'
     ],
 
     'validationsStore' => [
-        'dni'=> 'required|unique:clients,dni|digits_between:7,8',
-        'name' => 'required',
-        'last_name' => 'required',
-        'email' => 'required|email',
-        'address' => 'required',
-        'localidades_id' => 'required',
-        'iva_conditions_id'=>'required',
-        //'city' => 'required',
-        //'province' => 'required',
+
+            'name'          => 'required',
+            'localidades_id'     => 'required',
+
     ],
 
     'validationsUpdate' => [
-        'name' => 'required',
-        'last_name' => 'required',
-        'email' => 'required',
-        'address' => 'required',
-        'localidades_id' => 'required',
-        'iva_conditions_id'=>'required',
 
-        //'city' => 'required',
-        //'province' => 'required',
+            'name'          => 'required',
+            'localidades_id'     => 'required',
+
     ],
 
 ];

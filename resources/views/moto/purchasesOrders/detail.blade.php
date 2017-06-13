@@ -28,7 +28,6 @@
             <tbody>
             <?php $t = 0;?>
             @foreach($models->PurchasesOrdersItems as $item)
-
                 <tr>
                     <td>{{$item->Models->Brands->name}}</td>
                     <td>{{$item->Models->name}}</td>
@@ -57,7 +56,7 @@
 </div>
 
 
-<div class="col-xs-12 content">
+<div class="col-xs-7 content">
     <div class=" box box-primary">
         <div class="box-header">
             Formas de Pago
@@ -73,11 +72,11 @@
                 {!! Form::open(['route'=> 'moto.purchasesOrders.editPayment' , 'files' =>'true']) !!}
             @endif
 
-            <div class="col-xs-2 form-group">
+            <div class="col-xs-3 form-group">
                 {!! Form::label('Fecha') !!}
                 {!! Form::text('date', null, ['class'=>'datePicker form-control']) !!}
             </div>
-            <div class="col-xs-5 form-group">
+            <div class="col-xs-4 form-group">
                 {!! Form::label('Monto') !!}
                 {!! Form::number('amount' ,null, ['class'=>' form-control']) !!}
             </div>
@@ -172,6 +171,44 @@
     </div>
 </div>
 
+<div class="col-xs-5 content">
+    <div class=" box box-primary">
+        <div class="box-header with-border">
+            <span class="box-title">Remitos</span>
+        </div>
+        <div class="box-body">
+            <table class="table">
+                <thead>
+                    <th>Item Solicitado</th>
+                    <th>Remito</th>
+                    <th>Item Asignado</th>
+                </thead>
+                @foreach($models->PurchasesOrdersItems as $items)
+
+                    @foreach($items->DispatchesItems as $dis)
+                        <tr>
+                            <td> {{$items->Models->name}} : {{$items->Colors->name}}</td>
+                            <td>
+                                @if(!is_null($dis->dispatches_id))
+                                    <a href="{{route('moto.dispatches.edit',$dis->dispatches_id)}}" >#{{$dis->Dispatches->number or ''}}</a>
+                                @endif
+                            </td>
+                            <td>
+                                @if(!is_null($dis->Items))
+                                    <a href="{{route('moto.items.edit',$dis->Items->id)}}"> {{$dis->Items->Models->name or '' }}
+                                    : {{$dis->Items->Colors->name or '' }}</a>
+                                @endif
+                            </td>
+                        </tr>
+
+                    @endforeach
+                @endforeach
+
+            </table>
+        </div>
+
+    </div>
+</div>
 
 @section('js')
     <script>
@@ -181,12 +218,12 @@
                 $('#cheques_form').hide();
                 $('#deposito_form').hide();
             }
-            else if(valor == 2){
+            else if (valor == 2) {
                 $('#cheques_form').show('hidden');
                 $('#deposito_form').hide();
 
             }
-            else if(valor == 3){
+            else if (valor == 3) {
                 $('#deposito_form').show();
                 $('#cheques_form').hide();
 

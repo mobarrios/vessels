@@ -6,6 +6,7 @@ use App\Entities\Moto\Budgets;
 use App\Entities\Moto\Clients;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\IvaConditionsRepo;
+use App\Http\Repositories\Configs\ProvinciasRepo;
 use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo as Repo;
 use App\Http\Repositories\Moto\TechnicalServicesRepo;
@@ -19,8 +20,8 @@ class ClientsController extends Controller
 {
     protected $technicalServicesRepo;
 
-    public function  __construct(Request $request, Repo $repo, Route $route, BudgetsRepo $budgetsRepo,TechnicalServicesRepo $technicalServicesRepo,
-IvaConditionsRepo $ivaConditionsRepo)
+    public function  __construct(Request $request, Repo $repo, Route $route, BudgetsRepo $budgetsRepo,
+                                 TechnicalServicesRepo $technicalServicesRepo, IvaConditionsRepo $ivaConditionsRepo, ProvinciasRepo $provinciasRepo)
     {
 
         $this->request  = $request;
@@ -28,6 +29,8 @@ IvaConditionsRepo $ivaConditionsRepo)
         $this->externalRepo     = $budgetsRepo;
         $this->technicalServicesRepo     = $technicalServicesRepo;
         $this->route    = $route;
+
+
 
         $this->section          = 'clients';
 
@@ -39,6 +42,8 @@ IvaConditionsRepo $ivaConditionsRepo)
             $this->data['section']  = $this->section;
 
         $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name','id');
+
+        $this->data['provincias'] = $provinciasRepo->listAll()->get();
 
     }
 

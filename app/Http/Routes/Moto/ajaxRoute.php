@@ -51,6 +51,10 @@ Route::post('/addAdditionals/', 'Moto\AjaxController@addAdditionals');
 Route::post('/removeAdditionals/', 'Moto\AjaxController@removeAdditionals');
 
 
+// LOCATIONS
+
+
+
 
 
 

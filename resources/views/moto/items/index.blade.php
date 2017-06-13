@@ -8,7 +8,7 @@
                 <td>{{$model->Models->Brands->name }} <strong>{{$model->Models->name }}</strong><br>
 
                 </td>
-                <td>{{$model->year}}</td>
+                <td>{{$model->Certificates->year or ''}}</td>
                 <td>{{$model->Colors->name}}</td>
 
                 @if($model->models->types_id === 1)

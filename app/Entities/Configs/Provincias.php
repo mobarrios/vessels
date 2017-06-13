@@ -14,5 +14,10 @@ class Provincias extends Entity
     protected $section = 'provincias';
 
 
+    public function Municipios()
+    {
+        return $this->hasMany(Municipios::class,'provincia_id');
+    }
+
 
 }

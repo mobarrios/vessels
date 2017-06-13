@@ -15,8 +15,9 @@ class Localidades extends Entity
 
     public function Municipios()
     {
-        return $this->belongsTo(Municipios::class, 'municipio_id');
+        return $this->belongsTo(Municipios::class,'municipio_id');
     }
+
 
 
 }

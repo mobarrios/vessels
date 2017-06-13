@@ -20,6 +20,7 @@ class CreateCertificatesTable extends Migration
 
             $table->string('number');
             $table->date('date');
+            $table->string('year');
             $table->string('status');
             $table->string('tecnic_model');
             $table->enum('type',['Digital','Papel']);
