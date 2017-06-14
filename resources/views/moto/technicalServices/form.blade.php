@@ -161,14 +161,14 @@
                                 {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
                             </div>
 
-                            <div class="col-xs-12 col-lg-3 form-group">
+                            <div class="col-xs-12 col-lg-2 form-group">
                                 {!! Form::label('city', "CIUDAD") !!}
                                 {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
                             </div>
 
 
 
-                            <div class="col-xs-12 col-lg-3 form-group">
+                            <div class="col-xs-12 col-lg-2 form-group">
                                 {!! Form::label('location', "LOCALIDAD") !!}
                                 {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
                             </div>
@@ -176,11 +176,15 @@
 
 
 
-                            <div class="col-xs-12 col-lg-3 form-group">
+                            <div class="col-xs-12 col-lg-2 form-group">
                                 {!! Form::label('province', "PROVINCIA") !!}
                                 {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
                             </div>
 
+                            <div class="col-xs-12 col-lg-3 form-group">
+                                {!! Form::label('iva_conditions_id', "CONDICIÓN DEL IVA") !!}
+                                {!! Form::select('iva_conditions_id', $ivaConditions,null, ['required' => 'required','class'=>'form-control','ng-model' => 'iva_conditions_id']) !!}
+                            </div>
 
 
                             <div class="col-xs-12 col-lg-3 form-group" style="padding-top: 2%;">

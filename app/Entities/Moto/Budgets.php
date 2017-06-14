@@ -66,6 +66,17 @@
 
      }
 
+     public function getTotalEfectivoAttribute(){
+        $price = collect();
+
+        foreach($this->allItems as $item){
+            $price->push($item->activeListPrice->price_net);
+        }
+
+        return $price->sum();
+
+     }
+
  }
 
 

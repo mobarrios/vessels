@@ -22,13 +22,13 @@ use App\Http\Repositories\Moto\PurchasesOrdersRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Repositories\Configs\IvaConditionsRepo;
 
 class TechnicalServicesController extends Controller
 {
     protected $technicalServicesRepo;
 
-    public function __construct(Request $request, Repo $repo, Route $route,ModelsRepo $modelsRepo, Clients $clients,BrandsRepo $brandsRepo,Items $items)
+    public function __construct(Request $request, Repo $repo, Route $route,ModelsRepo $modelsRepo, Clients $clients,BrandsRepo $brandsRepo,Items $items, IvaConditionsRepo $ivaConditionsRepo)
     {
 
         $this->request = $request;
@@ -42,7 +42,8 @@ class TechnicalServicesController extends Controller
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
 
         $this->data['brands']       = $brandsRepo->getAllWithModels();
-//        $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
+        $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name','id');
+
 
         $this->modelsRepo = $modelsRepo;
         $this->clients = $clients;

@@ -372,7 +372,7 @@
                                             <div class="panel-body">
                                                     <div class="col-xs-12">
 
-                                                        <strong class="content"> $ {{ $models->allItems->count() > 0 ? number_format(($models->allItems->first()->activeListPrice()->first()->price_net), 2) : "0"}}</strong>
+                                                        <strong class="content"> $ {{ $models->allItems->count() > 0 ? number_format(($models->totalEfectivo ), 2) : "0"}}</strong>
                                                     </div>
                                             </div>
                                         </div>

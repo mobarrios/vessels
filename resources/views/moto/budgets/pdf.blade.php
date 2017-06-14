@@ -364,19 +364,16 @@
     
     <div class="row">
 
-        <table class="bloque1 no-border table table-striped">
+        <table class="bloque1 no-border table table-striped col-xs-9" style="float:left;margin: 5px;">
             <tr bgcolor="#d3d3d3">
-                <th class="col-xs-4">
+                <th class="col-xs-6">
                     Producto
                 </th>
-                <th class="col-xs-2">
+                <th class="col-xs-3">
                     Marca
                 </th>
-                <th class="col-xs-2">
+                <th class="col-xs-3">
                     Precio de lista
-                </th>
-                <th class="col-xs-4">
-                    Adicionales
                 </th>
                 
             </tr>
@@ -385,24 +382,35 @@
                 <tr>
                     <td>{!! $item->name !!}</td>
                     <td>{!! $item->brands->name !!}</td>
-                    <td>$ {!! number_format($item->activeListPrice->price_list,2) or '0' !!}</td>
-                    <td>
-                        <ul>
-                            @forelse($model->additionables as $additionable)
-                                <li>{!! $additionable->additionals->name !!}: $ {!! number_format($additionable->amount,2) !!}</li>
-                            @empty
-
-                            @endforelse
-                        </ul>
-                    </td>
+                    <td>$ {!! number_format($item->activeListPrice->price_list,2) !!}</td>
+                    <!-- <td>$ {!! number_format($item->activeListPrice->price_list,2) or '0' !!}</td> -->
                 </tr>
 
             @endforeach
         </table>
+    
+        <table class="bloque1 no-border table table-striped col-xs-3"  style="float:right;margin: 5px;">
+            <tr bgcolor="#d3d3d3">
+                <th>
+                    Adicionales
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        @forelse($model->additionables as $additionable)
+                            <li>{!! $additionable->additionals->name !!}: $ {!! number_format($additionable->amount,2) !!}</li>
+                        @empty
+                            No hay adicionales
+                        @endforelse
+                    </ul>
+                </td>
+            </tr>
+        </table>
     </div>
     
     
-    <div class="separador"></div>
+    <div class="separador" style="clear: both;"></div>
     
     <div class="row">
 
@@ -422,7 +430,7 @@
                     @endforelse
                 </tr>
                 <tr>
-                    <td style="border: 1px solid black; padding:5px !important;">$ {!!number_format( $model->allItems->first()->activeListPrice->price_net,2)!!}</td>
+                    <td style="border: 1px solid black; padding:5px !important;">$ {!!number_format( $model->totalEfectivo,2)!!}</td>
 
                 @forelse($model->financialsDues as $financialsDue)
                     <td style="border: 1px solid black; padding:5px !important;">{!! $financialsDue->due !!} cuotas de $ {!! 
