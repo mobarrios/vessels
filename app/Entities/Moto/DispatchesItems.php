@@ -17,6 +17,11 @@
      {
          return $this->belongsTo(Items::class);
      }
+     
+     public function Dispatches()
+     {
+         return $this->belongsTo(Dispatches::class);
+     }
 
      public function PurchasesOrdersItems()
      {

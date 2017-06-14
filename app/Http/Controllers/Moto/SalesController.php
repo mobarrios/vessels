@@ -6,10 +6,12 @@ use App\Entities\Configs\Additionals;
 use App\Entities\Moto\Banks;
 use App\Entities\Moto\Financials;
 use App\Entities\Moto\Items;
+use App\Entities\Moto\Registros;
 use App\Entities\Moto\Sales;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\AdditionalsRepo;
 use App\Http\Repositories\Configs\BranchesRepo;
+use App\Http\Repositories\Configs\IvaConditionsRepo;
 use App\Http\Repositories\Configs\LocalidadesRepo;
 use App\Http\Repositories\Configs\VouchersRepo;
 use App\Http\Repositories\Moto\BrandsRepo;
@@ -18,6 +20,7 @@ use App\Http\Repositories\Moto\ClientsRepo;
 use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\PayMethodsRepo;
+use App\Http\Repositories\Moto\RegistrosRepo;
 use App\Http\Repositories\Moto\SalesItemsRepo;
 use App\Http\Repositories\Moto\PaymentsRepo;
 
@@ -39,7 +42,7 @@ class SalesController extends Controller
     public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
                                 BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo,
-                                AdditionalsRepo $additionalsRepo,VouchersRepo $vouchersRepo)
+                                AdditionalsRepo $additionalsRepo,VouchersRepo $vouchersRepo, IvaConditionsRepo $ivaConditionsRepo)
     {
 
         $this->request = $request;
@@ -69,6 +72,8 @@ class SalesController extends Controller
         $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
 
         $this->data['vouchers'] = $vouchersRepo->ListAllWhere($this->section,['tipo'=>'R'])->get();
+
+        $this->data['ivaConditions'] = $ivaConditionsRepo->listsData('name','id');
 
 
         $this->modelsRepo = $modelsRepo;
@@ -104,10 +109,13 @@ class SalesController extends Controller
 
 
     //addItems
-    public function addItems(ModelsRepo $modelsRepo)
+    public function addItems(ModelsRepo $modelsRepo , RegistrosRepo $registrosRepo)
     {
-        $this->data['sales'] =  $this->repo->find($this->route->getParameter('sales_id'));
+        $sale = $this->repo->find($this->route->getParameter('sales_id'));
+        $this->data['sales'] =  $sale;
 
+
+        $this->data['registros'] = $registrosRepo->getModel()->where('localidades_id', $sale->Clients->localidades_id)->get();
         // $this->data['id'] = $id;
         $this->data['activeBread'] = 'Agregar Item';
 

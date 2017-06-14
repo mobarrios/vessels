@@ -11,7 +11,8 @@
                     </div>
                 </td>
                 <td>{{$model->last_name}} {{$model->name }}</td>
-                <td>{{$model->address}}</td>
+
+                <td>{{$model->address}}, {{$model->Localidades->name or ''}} , {{$model->Localidades->Municipios->name or ''}} , {{$model->Localidades->Municipios->Provincias->name or ''}}</td>
                 <td>tel. {{$model->phone1}} <br> tel. {{$model->phone2}}</td>
                 <td>{{$model->email}}</td>
                 <td>

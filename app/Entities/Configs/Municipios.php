@@ -13,9 +13,14 @@ class Municipios extends Entity
 
     protected $section = 'municipios';
 
-    public function Provincias()
+
+    public function Localidades()
     {
-        return $this->belongsTo(Provincias::class, 'provincia_id');
+        return $this->hasMany(Localidades::class,'municipio_id');
     }
 
+    public function Provincias()
+    {
+        return $this->belongsTo(Provincias::class,'provincia_id');
+    }
 }

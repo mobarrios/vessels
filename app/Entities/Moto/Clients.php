@@ -2,6 +2,7 @@
  namespace App\Entities\Moto;
 
 
+ use App\Entities\Configs\Localidades;
  use App\Entities\Entity;
 
  class Clients extends Entity
@@ -9,7 +10,9 @@
 
      protected $table = 'clients';
 
-     protected $fillable = ['name','last_name','email','dni','sexo','marital_status','dob','nacionality','phone1','phone2','address', 'city','location','province','obs','prospecto','iva_conditions_id'];
+     protected $fillable = ['name','last_name','email','dni','sexo','marital_status','dob','nacionality','phone1',
+                            'phone2','address', 'city','location','province','obs','prospecto','iva_conditions_id',
+                            'localidades_id'];
 
      protected $section = 'clients';
 
@@ -40,6 +43,13 @@
      public function getLocalidadAttribute(){
          return ucfirst(strtolower($this->attributes['city'])).', '.ucfirst(strtolower($this->attributes['location'])).', '.ucfirst(strtolower($this->attributes['province']));
      }
+
+     public function Localidades()
+     {
+         return $this->belongsTo(Localidades::class);
+     }
+
+
  }
 
 

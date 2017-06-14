@@ -1,4 +1,4 @@
-<div class="content">
+<div class="row">
     @if(!isset($models))
         <div class="search">
 
@@ -32,23 +32,28 @@
     {!! Form::hidden('validation','Sales') !!}
 
 
-    <div class="form-group col-xs-3">
+    <div class="form-group col-xs-6">
         {!! Form::label('last_name', "APELLIDO") !!}
         {!! Form::text('last_name', old('last_name') ? old('last_name') : null, ['class'=>'form-control','ng-model' => 'last_name']) !!}
     </div>
 
 
-    <div class="form-group col-xs-3">
+    <div class="form-group col-xs-6">
         {!! Form::label('name', "NOMBRE") !!}
         {!! Form::text('name', old('name') ? old('name') : null, ['class'=>'form-control','ng-model' => 'name']) !!}
     </div>
 
-    <div class="form-group col-xs-3">
+    <div class="form-group col-xs-4">
         {!! Form::label('dni', "DNI") !!}
         {!! Form::text('dni', old('dni') ? old('dni') : null, ['class'=>'form-control','ng-model' => 'dni']) !!}
     </div>
 
-    <div class="form-group col-xs-3">
+    <div class="col-xs-4 form-group">
+        {!! Form::label('Condición IVA') !!}
+        {!! Form::select('iva_conditions_id', $ivaConditions,null,  ['class'=>'form-control select2', 'placeholder'=> 'Seleccionar']) !!}
+    </div>
+
+    <div class="form-group col-xs-4">
 
         {!! Form::label('sexo', "SEXO") !!}
         {!! Form::select('sexo', ['masculino' => 'masculino','femenino' => 'femenino'],old('sexo') ? old('sexo') : 'masculino', ['class'=>'form-control','ng-model' => 'sexo']) !!}
@@ -79,27 +84,29 @@
             {!! Form::text('address',  old('address') ? old('address') : null, ['class'=>'form-control','ng-model' => 'address']) !!}
     </div>
 
+    {{--
     <div class="form-group col-xs-3">
             {!! Form::label('city', "CIUDAD") !!}
             {!! Form::text('city',  old('city') ? old('city') : null, ['class'=>'form-control','ng-model' => 'city']) !!}
     </div>
-
-
-    <div class="form-group col-xs-3">
-            {!! Form::label('location', "LOCALIDAD") !!}
-            {!! Form::text('location',  old('location') ? old('location') : null, ['class'=>'form-control','ng-model' => 'location']) !!}
-    </div>
-
-    <div class="form-group col-xs-3">
+     <div class="form-group col-xs-3">
             {!! Form::label('province', "PROVINCIA") !!}
             {!! Form::text('province',  old('province') ? old('province') : null, ['class'=>'form-control','ng-model' => 'province']) !!}
     </div>
-            @if(!isset($models))
-                <button type="submit" class="btn btn-sm btn-default"><span class="fa fa-save"></span> Guardar</button>
-                <button type="reset" id="reset" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span> Limpiar
-                </button>
+ --}}
 
-            @endif
+    <div class="form-group col-xs-3">
+            {!! Form::label('location', "LOCALIDAD") !!}
+            {!! Form::text('localidades_id',  old('location') ? old('location') : null, ['class'=>'form-control','ng-model' => 'location']) !!}
+    </div>
+
+
+        @if(!isset($models))
+            <button type="submit" class="btn btn-sm btn-default"><span class="fa fa-save"></span> Guardar</button>
+            <button type="reset" id="reset" class="btn btn-sm btn-danger"><span class="fa fa-trash"></span> Limpiar
+            </button>
+        @endif
+
 
         {!! Form::close() !!}
 

@@ -752,6 +752,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //registros
+                [
+                    'id'    => 116,
+                    'name' => 'Listar Regisros',
+                    'slug' => 'registros.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 117,
+                    'name' => 'Crear Registros',
+                    'slug' => 'registros.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 118,
+                    'name' => 'Editar Registross',
+                    'slug' => 'registros.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 119,
+                    'name' => 'Borrar Registros',
+                    'slug' => 'registros.destroy',
+                    'model' => '',
+                ],
+
             ]);
     }
 }

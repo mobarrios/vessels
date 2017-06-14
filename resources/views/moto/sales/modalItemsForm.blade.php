@@ -58,11 +58,30 @@
                         @endif
                     </div>
 
+
                     <div class="col-xs-2  form-group">
                         {!! Form::label('Precio actual') !!}
                         {!! Form::number('price_actual', null, ['class'=>'price_actual form-control']) !!}
                     </div>
 
+                    <div class="col-xs-3">
+
+                        {!! Form::label('Patenta Cliente') !!}
+                        {!! Form::checkbox('patenta_cliente') !!}
+
+                        {!! Form::label('Registro') !!}
+
+                        <table class="table">
+                            @foreach($registros as $registro)
+                                <tr>
+                                    <td><input type="radio" name="registros_id " value="{{$registro->id}}"></td>
+                                    <td>{{$registro->name}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+
+
+                    </div>
 
                     <div class="col-xs-12">
                         <table id="additionals" class="table">

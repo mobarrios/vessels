@@ -70,7 +70,7 @@
                     <li class="" id="4"><a class="tab" href="#tab_4" data-toggle="tab" aria-expanded="true">Pagos</a></li>
                     <li class="" id="3"><a class="tab" href="#tab_3" data-toggle="tab" aria-expanded="true">Artículos</a></li>
                     <li class="" id="2"><a class="tab" href="#tab_2" data-toggle="tab" aria-expanded="false">Operación</a></li>
-                    <li class="" id="1"><a class="tab" href="#tab_1" data-toggle="tab" aria-expanded="false">Datos del Cliente</a></li>
+                    <li class="active" id="1"><a class="tab" href="#tab_1" data-toggle="tab" aria-expanded="false">Datos del Cliente</a></li>
                     <li class="" id="0"><a class="tab" href="#tab_0" data-toggle="tab" aria-expanded="false">Info</a></li>
                     <li class="pull-left header"><i class="fa fa-file-o"></i>     {{ (isset($models)? 'Venta # '. $models->id : 'Nueva Venta' )  }}</li>
                 </ul>
@@ -92,12 +92,14 @@
                         @include('moto.sales.form.operacion')
                     </div>
                     <!-- /.tab-pane -->
-                    <div class="tab-pane " id="tab_1">
+                    <div class="tab-pane active " id="tab_1">
                         @include('moto.sales.form.datos')
                     </div>
                     <div class="tab-pane" id="tab_0">
                         @include('moto.sales.form.info')
                     </div>
+
+
                     <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
@@ -120,6 +122,7 @@
 
 
 
+        /*
         var tab = localStorage.getItem('tab');
 
         $('#tab_'+tab).addClass('active');
@@ -129,6 +132,7 @@
             // Store
             localStorage.setItem("tab", $(this).parent().attr('id'));
         });
+        */
 
 
 
@@ -213,9 +217,10 @@
             $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
             $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
             $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
-            $scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
+            //$scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
+           // $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
+            //$scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
             $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
-            $scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
 
 
             @endif
@@ -230,9 +235,10 @@
             $scope.nacionality = "{!! $models->clients->nacionality !!}"
             $scope.phone1 = "{!! $models->clients->phone1 !!}"
             $scope.address = "{!! $models->clients->address !!}"
-            $scope.city = "{!! $models->clients->city !!}"
-            $scope.location = "{!! $models->clients->location !!}"
-            $scope.province = "{!! $models->clients->province !!}"
+            //$scope.city = "{!! $models->clients->city !!}"
+            //$scope.location = "{!! $models->clients->location !!}"
+            //$scope.province = "{!! $models->clients->province !!}"
+            $scope.location = "{!! $models->clients->localidades_id!!}"
 
 
             @endif
@@ -261,7 +267,7 @@
                             $scope.phone1 = response.data['phone1']
                             $scope.address = response.data['address']
                             $scope.city = response.data['city']
-                            $scope.location = response.data['location']
+                            $scope.location = response.data['localidades_id']
                             $scope.province = response.data['province']
 
                             $('input[name=clients_id]').val(option.val())
