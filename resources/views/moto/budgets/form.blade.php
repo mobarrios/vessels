@@ -423,13 +423,13 @@
 	
 
 
-                            <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
-
+                            <!-- <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
+                            
                             <div class="col-xs-2 form-group">
                                 <label>Descuento (%)</label>
                                 {!! Form::number('descuento',null,['class' => 'form-control','ng-model' => 'descuento','ng-change' => 'calcular()','min' => '0']) !!}
                             </div>
-
+                            
                             <div class="col-xs-2 form-group">
                                 <label>Anticipo</label>
                                 {!! Form::number('anticipo',null,['class' => 'form-control','ng-model' => 'anticipo','ng-change' => 'calcular()','min' => '0']) !!}
@@ -438,10 +438,10 @@
                                 <label>Total a Financiar</label>
                                 {!! Form::text('a_financiar',null,['class' => 'form-control','readonly','ng-model' => 'aFinanciar','ng-change' => 'calcular()','id' => 'aFinanciar','min' => '0']) !!}
                             </div>
-
+                            
                             <div class="col-xs-2 form-group">
                                 <label>Modo de Financiamiento</label>
-
+                            
                                 <select name="modo_financiamiento" class="form-control" id="financials">
                                     @foreach($financials as $i => $financial)
                                         <optgroup label="{{$financial->name}}">
@@ -454,20 +454,20 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            
                             <div class="col-xs-2 form-group">
                                 <label>Importe Cuota</label>
                                 {!! Form::text('importe_cuota',null,['class' => 'form-control','readonly','ng-model' => 'importeCuota','ng-change' => 'calcular()', 'id' => 'importeCuota']) !!}
                             </div>
-
-
-
+                            
+                            
+                            
                             <div class="col-xs-2 form-group">
                                 <label>Total</label>
                                 <div class="col-xs-12 input-group">
                                     {!! Form::text('total',$models->totalAdditionalsAmount == '0' ? 0 : $models->totalAdditionalsAmount,['class' => 'form-control','readonly','ng-model' => 'total','ng-change' => 'calcular()']) !!}
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
 

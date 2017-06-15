@@ -414,31 +414,27 @@
     
     <div class="row">
 
-        <table class="bloque1 no-border table table-striped">
+        <table class="bloque1 no-border table table-striped col-xs-8">
             <thead>
                 <tr>
-                    <th colspan="{!! $model->financialsDues->count() + 1 !!}" class="text-center">FINANCIAMIENTO</th>
+                    <th bgcolor="#d3d3d3" colspan="{!! $model->financialsDues->count() + 1 !!}" class="text-center">FINANCIAMIENTO</th>
                 </tr>
             </thead>
             <tbody>
-                <tr bgcolor="#d3d3d3">
-                    <td>Efectivo</td>
-                    @forelse($model->financialsDues as $financialsDue)
-                        <td style="border: 1px solid black; padding:5px !important;">{!! $financialsDue->financials->name !!}</td>
-                    @empty
-
-                    @endforelse
-                </tr>
                 <tr>
+                    <td>Efectivo</td>
                     <td style="border: 1px solid black; padding:5px !important;">$ {!!number_format( $model->totalEfectivo,2)!!}</td>
-
+                </tr>
                 @forelse($model->financialsDues as $financialsDue)
-                    <td style="border: 1px solid black; padding:5px !important;">{!! $financialsDue->due !!} cuotas de $ {!! 
-                    $financialsDue->porcent != 0 ? number_format(  (($model->total ) + (($model->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2) : number_format(($model->total * $financialsDue->coef) / $financialsDue->due, 2) !!}</td>
+                    
+                    <tr>
+                        <td>{!! $financialsDue->financials->name !!}</td>
+                        <td style="border: 1px solid black; padding:5px !important;">{!! $financialsDue->due !!} cuotas de $ {!! 
+                        $financialsDue->porcent != 0 ? number_format(  (($model->total ) + (($model->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2) : number_format(($model->total * $financialsDue->coef) / $financialsDue->due, 2) !!}</td>
+                    </tr>   
                 @empty
 
                 @endforelse
-                </tr>
             </tbody>
 
         </table>
