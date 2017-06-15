@@ -30,8 +30,8 @@ class SalesRepo extends BaseRepo
             foreach ($budgetsItems as $budgetItem)
             {
                 $budget = $budgetItem->budgets;
-                $item = $itemsRepo->asignItem($budgetItem->models_id, $data->branches_confirm_id,$sales->id, $budgetItem->colors_id);
 
+                $item = $itemsRepo->asignItem($budgetItem->models_id, $data->branches_confirm_id,$sales->id, $budgetItem->colors_id);
 
                 if($item != false)
                 {
@@ -54,7 +54,8 @@ class SalesRepo extends BaseRepo
 
                 }else{
 
-                    return redirect()->back()->withErrors('El Articulo no se pudo Asignar!');
+                    return false;
+                    //return redirect()->back()->withErrors('El Articulo no se pudo Asignar!');
 
                 }
             }

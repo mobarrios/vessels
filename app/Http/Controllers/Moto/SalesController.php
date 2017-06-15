@@ -100,10 +100,19 @@ class SalesController extends Controller
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
 
+
+        
+
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
-        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
+        if($model != false)
+
+            return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
+        else
+
+            return redirect()->back()->withErrors(['Se produjo un error en la asignación de productos.']);
+
     }
 
 

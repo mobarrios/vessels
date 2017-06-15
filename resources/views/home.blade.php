@@ -43,6 +43,18 @@
                     <i class="ion ion-android-bookmark"></i>
                 </div>
                 <a href="{{route('moto.budgets.create')}}" class="small-box-footer">Nuevo Presupuesto <i class="fa fa-arrow-circle-right"></i></a>
+
+            </div>
+            <div class="box-footer">
+                {!! Form::open(['route'=>('moto.budgets.index'),'method'=>'GET']) !!}
+                    <div class="input-group">
+                        <input name="search" placeholder="Buscar Presupuesto..." class="form-control" type="text">
+                        <input  type="hidden" name="filter[]" value="id">
+                          <span class="input-group-btn">
+                            <button type="submit" class="btn bg-aqua btn-flat"><span class="fa fa-search"></span></button>
+                          </span>
+                    </div>
+                {!! Form::close() !!}
             </div>
         </div>
 
