@@ -99,6 +99,7 @@
 
 </div>
 
+@if(isset($models))
 @section('js')
     <script>
         $("#mechanics_id").on('click',function(ev){
@@ -122,3 +123,4 @@
 
     </script>
 @endsection
+@endif
