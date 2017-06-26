@@ -73,8 +73,8 @@
                 <span class="text-muted">Asignar mecánico: </span>
 
                 <div class="input-group">
-                    {!! Form::select('mecanico_id',$mecanicos,null,['id' => 'mecanico_id','class' => 'form-control']) !!}
-                    <a href="" class="btn btn-primary input-group-addon">
+                    {!! Form::select('mechanics_id',$mecanicos,null,['class' => 'form-control']) !!}
+                    <a class="btn btn-primary input-group-addon" id="mechanics_id">
                         <i class="fa fa-cogs"></i>
                     </a>
                 </div>
@@ -98,3 +98,27 @@
 
 
 </div>
+
+@section('js')
+    <script>
+        $("#mechanics_id").on('click',function(ev){
+
+            var mechanic = $('select[name=mechanics_id]').val();
+
+            $.ajax({
+                method: 'get',
+                url: 'moto/sales/asignMechanic/{!! $models->id !!}/'+mechanic,
+                success: function(data){
+                    $(".breadcrumb").after('<div class="alert bg-warning  alert-dismissible" id="messages"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+data+'</div>');
+                },
+                error: function (error) {
+                    $(".breadcrumb").after('<div class="alert bg-warning  alert-dismissible" id="messages"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+data+'</div>');
+                }
+            });
+
+
+        })
+
+
+    </script>
+@endsection

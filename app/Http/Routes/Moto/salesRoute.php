@@ -58,4 +58,9 @@ Route::group(['prefix'=>'sales'],function(){
 
     Route::get('/add/{id?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.sales.modal','uses'=>'Moto\SalesController@modal']);
 
+
+    Route::get('/asignMechanic/{id}/{mechanic}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.sales.asignMechanic','uses'=>'Moto\SalesController@asignMechanic']);
+
+
+
 });

@@ -379,4 +379,23 @@ class SalesController extends Controller
         return $pdf->stream();
     }
 
+
+    public function asignMechanic($id, $mechanic, User $user){
+        if($user->find($mechanic)){
+
+            $model = $this->repo->find($id);
+
+            $model->mechanics_id = $mechanic;
+            $model->save();
+
+            $data = "Mecánico asignado correctamente.";
+            $estado = 200;
+        }else{
+            $data = "El mecánico seleccionado no se pudo asignar a esta venta.";
+            $estado = 404;
+        }
+
+        return response()->json($data,$estado);
+
+    }
 }

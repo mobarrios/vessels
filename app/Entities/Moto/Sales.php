@@ -12,7 +12,7 @@
 
      protected $table = 'sales';
 
-     protected $fillable = ['nro','date','date_confirm','users_id','clients_id','budgets_id','contacts_id','type','branches_confirm_id'];
+     protected $fillable = ['nro','date','date_confirm','users_id','clients_id','budgets_id','contacts_id','type','branches_confirm_id','mechanics_id'];
 
      protected $section = 'sales';
 
