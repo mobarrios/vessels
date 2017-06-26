@@ -398,7 +398,6 @@
 
                                                                     @if($financialsDue->porcent != 0)
                                                                         <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-porcent='{!! $financialsDue->porcent !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(  (($models->total ) + (($models->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2)}}  </span>
-
                                                                     @else
                                                                         <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-coef='{!! $financialsDue->coef !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(($models->total * $financialsDue->coef) / $financialsDue->due, 2)}}</span>
                                                                     @endif

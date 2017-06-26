@@ -383,8 +383,12 @@
                                     <td class="col-xs-3">1</td>
                                     <td class="col-xs-6">
 
-                                        Marca : {!! $salesItem->Items->Models->Brands->name !!}  Modelo :{!! $salesItem->Items->Models->name !!}
-                                        Color: {!! $salesItem->Items->Colors->name !!}
+                                        Marca : {!! $salesItem->Items->Models->Brands->name !!}<br>
+                                        Modelo :{!! $salesItem->Items->Models->name !!}<br>
+                                        Color: {!! $salesItem->Items->Colors->name !!}<br>
+                                        N Motor: {!! $salesItem->Items->n_motor or '' !!}<br>
+                                        N Cuadro: {!! $salesItem->Items->n_cuadro or ''!!}
+
                                     </td>
                                     <td class="col-xs-1">
                                         $ {!! number_format($model->importe_total,2) !!}
