@@ -4,6 +4,8 @@
 
  use App\Entities\Configs\Localidades;
  use App\Entities\Entity;
+ use App\Entities\Configs\IvaConditions;
+
 
  class Clients extends Entity
  {
@@ -44,9 +46,9 @@
          return ucfirst(strtolower($this->attributes['city'])).', '.ucfirst(strtolower($this->attributes['location'])).', '.ucfirst(strtolower($this->attributes['province']));
      }
 
-     public function Localidades()
+     public function IvaConditions()
      {
-         return $this->belongsTo(Localidades::class);
+         return $this->BelongsTo(IvaConditions::class);
      }
 
 

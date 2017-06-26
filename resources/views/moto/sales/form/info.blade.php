@@ -75,7 +75,7 @@
                 <div class="input-group">
                     {!! Form::select('mecanico_id',$mecanicos,null,['id' => 'mecanico_id','class' => 'form-control']) !!}
                     <a href="" class="btn btn-primary input-group-addon">
-
+                        <i class="fa fa-cogs"></i>
                     </a>
                 </div>
             

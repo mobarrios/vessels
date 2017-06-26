@@ -589,7 +589,7 @@
             $scope.location = ""
             $scope.province = ""
             $scope.iva_conditions_id = ""
-            $scope.stotal = {!! number_format(($models->total), 2) or intval(0) !!}
+            $scope.stotal = {!! isset($models) ? number_format(($models->total), 2) : intval(0) !!}
 
 
 
