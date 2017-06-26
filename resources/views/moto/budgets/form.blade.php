@@ -315,7 +315,7 @@
 
                     <div>
                         <div ng-controller="myCtrl">
-
+                            
                             <div class="table-responsive">
                                 <table class="table">
                                     <tr>
@@ -405,6 +405,8 @@
                                                                 </label>
                                                             </div>
                                                         </div>
+
+                                                        
                                                     @empty
                                                         
                                                     @endforelse
@@ -587,6 +589,7 @@
             $scope.location = ""
             $scope.province = ""
             $scope.iva_conditions_id = ""
+            $scope.stotal = {!! number_format(($models->total), 2) or intval(0) !!}
 
 
 
@@ -721,8 +724,9 @@
             };
 
             $scope.financiamientos = function(){
-                var total = $scope.total;
+                var total = $scope.stotal;
                 var financiamientos = $(".financiamiento");
+                
 
                 financiamientos.each(function(ind,val){
                     var due = $(val).attr("data-due");

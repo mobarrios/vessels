@@ -62,6 +62,30 @@
             </b>
         </address>
 
+        <hr>
+        <address>
+            <strong>Puesta en marcha</strong>
+            
+            <br>
+            
+            <div class="form-group">
+            
+                <span class="text-muted">Asignar mecánico: </span>
+
+                <div class="input-group">
+                    {!! Form::select('mecanico_id',$mecanicos,null,['id' => 'mecanico_id','class' => 'form-control']) !!}
+                    <a href="" class="btn btn-primary input-group-addon">
+
+                    </a>
+                </div>
+            
+            </div>
+            
+        </address>
+
+        
+
+
     </div>
         <span class="clearfix"></span>
     <div class="col-xs-12">

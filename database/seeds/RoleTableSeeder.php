@@ -25,6 +25,12 @@ class RoleTableSeeder extends Seeder
                 'slug' => 'admin',
                 'description' => '', // optional
                 'level' => 1, // optional, set to 1 by default
+            ],[
+                'id'    => 3,
+                'name' => 'mecanico',
+                'slug' => 'mecanico',
+                'description' => '', // optional
+                'level' => 1, // optional, set to 1 by default
             ]
         ]);
 

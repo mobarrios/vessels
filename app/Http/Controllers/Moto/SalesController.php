@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Moto;
 
+use Bican\Roles\Models\Role;
+use App\Entities\Configs\User;
 use App\Entities\Configs\Additionals;
 use App\Entities\Moto\Banks;
 use App\Entities\Moto\Financials;
@@ -76,6 +78,7 @@ class SalesController extends Controller
         $this->data['ivaConditions'] = $ivaConditionsRepo->listsData('name','id');
 
 
+
         $this->modelsRepo = $modelsRepo;
         $this->clientsRepo = $clientsRepo;
         $this->budgetsRepo = $budgetsRepo;
@@ -85,6 +88,11 @@ class SalesController extends Controller
     }
 
 
+    public function edit(){
+        $this->data['mecanicos'] = Role::find(3)->users->lists('user_name','id');
+
+        return parent::edit();
+    }
 
     public function store()
     {
