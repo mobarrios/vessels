@@ -1,7 +1,8 @@
 <div class="row">
+    <div class="col-xs-12">
     @if(!isset($models))
-        <div class="search">
 
+        <div class="search">
             <p>Antes de crear un Cliente, busque si ya existe.</p>
             <select style="width: 100%" id="search" class="select2">
                 <option value="seleccione">Seleccione... ~ ~</option>
@@ -18,6 +19,7 @@
     <hr>
     @endif
 
+    </div>
 
     @if(Session::has('client'))
         {!! Form::model(Session::get('client'),['route'=> [config('models.clients.updateRoute')],  'title' =>"Editar cliente", 'id' => 'formClient']) !!}
@@ -50,7 +52,12 @@
 
     <div class="col-xs-4 form-group">
         {!! Form::label('Condición IVA') !!}
-        {!! Form::select('iva_conditions_id', $ivaConditions,null,  ['class'=>'form-control select2', 'placeholder'=> 'Seleccionar']) !!}
+        @if(isset($models))
+            {!! Form::select('iva_conditions_id', $ivaConditions, $models->clients->iva_conditions,  ['class'=>'form-control select2', 'placeholder'=> 'Seleccionar', 'ng-model' => 'iva']) !!}
+        @else
+            {!! Form::select('iva_conditions_id', $ivaConditions, null ,  ['class'=>'form-control select2', 'placeholder'=> 'Seleccionar' ,'ng-model' => 'iva']) !!}
+
+        @endif
     </div>
 
     <div class="form-group col-xs-4">
@@ -95,11 +102,24 @@
     </div>
  --}}
 
-    <div class="form-group col-xs-3">
-            {!! Form::label('location', "LOCALIDAD") !!}
-            {!! Form::text('localidades_id',  old('location') ? old('location') : null, ['class'=>'form-control','ng-model' => 'location']) !!}
-    </div>
 
+
+    <div class="col-xs-3 form-group">
+        {!! Form::label('Localidad') !!}
+        <select name="localidades_id" class="select2 form-control">
+            @foreach($provincias as $provincia)
+                <optgroup label="{{$provincia->name}}">
+                    @foreach($provincia->Municipios as $municipio)
+                        <optgroup  label="{{$municipio->name}}">
+                            @foreach($municipio->Localidades as $localidad)
+                                <option value="{{$localidad->id}}">{{$localidad->name}}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                </optgroup>
+            @endforeach
+        </select>
+    </div>
 
         @if(!isset($models))
             <button type="submit" class="btn btn-sm btn-default"><span class="fa fa-save"></span> Guardar</button>

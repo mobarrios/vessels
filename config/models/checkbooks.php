@@ -47,14 +47,14 @@ return [
 
     'validationsStore' => [
 
-        'n_cheque' => 'required',
-        'type' => 'required',
+       // 'n_cheque' => 'required',
+       // 'type' => 'required',
 
     ],
 
     'validationsUpdate' => [
-        'n_cheque' => 'required',
-        'type' => 'required',
+       // 'n_cheque' => 'required',
+      //  'type' => 'required',
 
     ],
 

@@ -12,6 +12,7 @@
     @endforeach
     @if(isset($cashFromSales))
         @foreach($cashFromSales as $cash)
+            @if($cash->status == 1)
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$cash->id}}" type="checkbox"></td>
                 <td>{!! $cash->date !!}</td>
@@ -21,6 +22,7 @@
                 <td><span class="label label-lg label-warning">{!! $cash->Brancheables->first()->Branches->name  !!}</span></td>
 
             </tr>
+            @endif
         @endforeach
     @endif
 @endsection

@@ -10,9 +10,10 @@ Route::group(['prefix'=>'checkbooks'],function(){
 
         Route::get('/create',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.checkbooks.create','uses'=>'Moto\CheckbooksController@create']);
         Route::post('/store',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.checkbooks.store','uses'=>'Moto\CheckbooksController@store']);
-        Route::get('/show',             ['middleware'=>'permission:'.$section.'.show','as'=>'moto.checkbooks.show','uses'=>'Moto\CheckbooksController@show']);
+        Route::get('/show/{id?}',        ['as'=>'moto.checkbooks.show','uses'=>'Moto\CheckbooksController@show']);
         Route::get('/index/{search?}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.checkbooks.index','uses'=>'Moto\CheckbooksController@index']);
 
     Route::get('/pdf',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.checkbooks.pdf','uses'=>'Utilities\UtilitiesController@exportListToPdf']);
+
 
 });

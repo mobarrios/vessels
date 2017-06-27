@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
 @section('form_title')
-    Nueva Chequera
+    Nuevo Cheque
 @endsection
 
 @section('form_inputs')
@@ -16,23 +16,12 @@
     </div>
 
     <div class="col-xs-4 form-group">
-        {!! Form::label('Desde') !!}
-        {!! Form::text('from', null ,['class'=>'datepicker form-control ']) !!}
-    </div>
-
-    <div class="col-xs-4 form-group">
-        {!! Form::label('Hasta') !!}
-        {!! Form::text('to', null ,['class'=>'datepicker form-control ']) !!}
-    </div>
-
-
-    <div class="col-xs-4 form-group">
         {!! Form::label('Monto') !!}
         {!! Form::number('amount', null, ['class'=>'form-control']) !!}
     </div>
 
     <div class="col-xs-4 form-group">
-        {!! Form::label('Fecha de cobro') !!}
+        {!! Form::label('Fecha de pago') !!}
         {!! Form::text('payment_date', null ,['class'=>'datepicker form-control ']) !!}
     </div>
 

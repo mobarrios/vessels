@@ -17,16 +17,23 @@ class CreateCheckbooksTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->string('n_chequera');
             $table->string('n_cheque');
-            $table->date('from')->nullable();
-            $table->date('to')->nullable();
+
             $table->double('amount')->nullable();
+            
             $table->date('payment_date')->nullable();
+            $table->date('charge_date')->nullable();
+
             $table->date('due_date')->nullable();
+
             $table->tinyInteger('type');
 
-            $table->integer('banks_id')->unsigned();
+            $table->integer('banks_id')->nullable()->unsigned();
             $table->foreign('banks_id')->references('id')->on('banks');
+
+            $table->integer('company_id')->nullable()->unsigned();
+            $table->foreign('company_id')->references('id')->on('company');
         });
     }
 

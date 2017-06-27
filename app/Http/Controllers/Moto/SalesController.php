@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Http\Repositories\Configs\ProvinciasRepo;
 use Bican\Roles\Models\Role;
 use App\Entities\Configs\User;
 use App\Entities\Configs\Additionals;
@@ -44,7 +45,7 @@ class SalesController extends Controller
     public function __construct(Request $request, Repo $repo, Route $route, PurchasesOrdersRepo $purchasesOrdersRepo,
                                 ModelsRepo $modelsRepo, ColorsRepo $colorsRepo, BrandsRepo $brandsRepo, ClientsRepo $clientsRepo,
                                 BranchesRepo $branchesRepo, BudgetsRepo $budgetsRepo,ItemsRepo $itemsRepo, SalesItemsRepo $salesItemsRepo,
-                                AdditionalsRepo $additionalsRepo,VouchersRepo $vouchersRepo, IvaConditionsRepo $ivaConditionsRepo)
+                                AdditionalsRepo $additionalsRepo,VouchersRepo $vouchersRepo, IvaConditionsRepo $ivaConditionsRepo, ProvinciasRepo $provinciasRepo)
     {
 
         $this->request = $request;
@@ -77,6 +78,9 @@ class SalesController extends Controller
 
         $this->data['ivaConditions'] = $ivaConditionsRepo->listsData('name','id');
 
+        $this->data['provincias'] = $provinciasRepo->listAll()->get();
+
+        $this->data['mecanicos'] = Role::find(3)->users->lists('user_name','id');
 
 
         $this->modelsRepo = $modelsRepo;
@@ -88,11 +92,7 @@ class SalesController extends Controller
     }
 
 
-    public function edit(){
-        $this->data['mecanicos'] = Role::find(3)->users->lists('user_name','id');
-
-        return parent::edit();
-    }
+   
 
     public function store()
     {
