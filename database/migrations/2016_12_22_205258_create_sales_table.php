@@ -41,6 +41,9 @@ class CreateSalesTable extends Migration
             $table->integer('branches_confirm_id')->unsigned()->nullable();
             $table->foreign('branches_confirm_id')->references('id')->on('branches')->nullable();
 
+            $table->integer('mechanics_id')->unsigned()->nullable();
+            $table->foreign('mechanics_id')->references('id')->on('users');
+
 
         });
     }
