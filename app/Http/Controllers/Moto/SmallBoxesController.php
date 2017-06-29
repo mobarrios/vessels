@@ -54,7 +54,6 @@ class SmallBoxesController extends Controller
         }
 
 
-
         if($type == 1)
             $this->data['cashFromSales'] = $this->paymentsRepo->ListAll()->get();
         

@@ -10,7 +10,7 @@
             <span class="text-muted"> Usuario : </span> {!! $models->User->fullName !!}
             en {!! $models->Brancheables->first()->Branches->name !!}<br>
             <span class="text-muted"> Estado : </span>
-            <button class="btn btn-xs btn-danger">Finalizada</button>
+                {!! Form::select('status',$status,$models->status,['class'=>'select2', 'id' => 'changeStatus'] ) !!}
             <br>
 
         </address>
@@ -65,11 +65,11 @@
         <hr>
         <address>
             <strong>Puesta en marcha</strong>
-            
+
             <br>
-            
+
             <div class="form-group">
-            
+
                 <span class="text-muted">Asignar mecánico: </span>
 
                 <div class="input-group">
@@ -78,49 +78,43 @@
                         <i class="fa fa-cogs"></i>
                     </a>
                 </div>
-            
+
             </div>
-            
+
         </address>
 
-        
+
 
 
     </div>
         <span class="clearfix"></span>
-    <div class="col-xs-12">
-        <div class="btn-group btn-group-xs pull-right">
-            <a href="{!! route('moto.sales.r431',$models->id) !!}" class="btn btn-default">R-431</a>
-            <a href="{!! route('moto.sales.hojaDeVenta',$models->id) !!}" class="btn btn-default">Hoja de venta</a>
-        </div>
     </div>
+
+        <div class="box-footer">
+            <div class="">
+                <div class="btn-group">
+                    @if(!$models->files)
+                        {!! Form::open(['route'=> [config('models.files.storeRoute')]]) !!}
+
+                        {!! Form::hidden('sales_id',$models->id) !!}
+
+                        <button type="submit" class="btn btn-sm btn-default">Crear legajo</button>
+
+                        {!! Form::close() !!}
+                    @else
+                        <a href="{!! route('moto.files.edit',$models->files->id) !!}"
+                           class="btn btn-sm btn-default">Ver legajo</a>
+                    @endif
+                </div>
+
+                <div class="btn-group btn-group-md pull-right">
+                    <a href="{!! route('moto.sales.r431',$models->id) !!}" class="btn btn-default">R-431</a>
+                    <a href="{!! route('moto.sales.hojaDeVenta',$models->id) !!}" class="btn btn-default">Hoja de venta</a>
+                </div>
+            </div>
+
+        </div>
+
     @endif
 
 
-</div>
-
-@if(isset($models))
-@section('js')
-    <script>
-        $("#mechanics_id").on('click',function(ev){
-
-            var mechanic = $('select[name=mechanics_id]').val();
-
-            $.ajax({
-                method: 'get',
-                url: 'moto/sales/asignMechanic/{!! $models->id !!}/'+mechanic,
-                success: function(data){
-                    $(".breadcrumb").after('<div class="alert bg-warning  alert-dismissible" id="messages"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+data+'</div>');
-                },
-                error: function (error) {
-                    $(".breadcrumb").after('<div class="alert bg-warning  alert-dismissible" id="messages"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'+data+'</div>');
-                }
-            });
-
-
-        })
-
-
-    </script>
-@endsection
-@endif

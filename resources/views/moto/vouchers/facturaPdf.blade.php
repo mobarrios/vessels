@@ -310,18 +310,18 @@
                 </tr>
                 <tr>
                     <td>
-                        <p class="ml20">{!! $model->Brancheables->first()->Branches->Company->razon_social !!}</p>
-                        <p class="ml20">{!! $model->Brancheables->first()->Branches->Company->direccion !!}</p>
-                        <p class="ml20">Tel: {!! $model->Brancheables->first()->Branches->Company->telefono !!}</p>
+                        <p class="ml20">Razón Social : <strong>{!! $model->Brancheables->first()->Branches->Company->razon_social !!}</strong></p>
+                        <p class="ml20">Domicilio Comercial : <strong>{!! $model->Brancheables->first()->Branches->Company->direccion !!}</strong></p>
+                        <p class="ml20">Condición IVA: <strong>{!! $model->Brancheables->first()->Branches->Company->IvaConditions->name !!}</strong></p>
                     </td>
                     <td>
 
                     </td>
                     <td>
                         <div class="datosHeader">
-                            <p>C.U.I.T: {!! $model->Brancheables->first()->Branches->Company->ciut !!}</p>
-                            <p>ING. BRUTOS: {!! $model->Brancheables->first()->Branches->Company->ingresos_brutos !!} </p>
-                            <p>INICIO ACTIVIDADES: {!! $model->Brancheables->first()->Branches->Company->inicio_actividades !!} </p>
+                            <p>C.U.I.T: <strong>{!! $model->Brancheables->first()->Branches->Company->cuit !!}</strong></p>
+                            <p>ING. BRUTOS: <strong>{!! $model->Brancheables->first()->Branches->Company->ingresos_brutos !!} </strong> </p>
+                            <p>INICIO ACTIVIDADES: <strong> {!! $model->Brancheables->first()->Branches->Company->inicio_actividades !!} </strong> </p>
                         </div>
                     </td>
                 </tr>
@@ -335,24 +335,24 @@
         <table class="bloque1 no-border ml20 mb-20">
             <tr>
                 <td class="col-xs-6">
-                    <p><span class="upper"><b>Cliente: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->fullName !!}</span></p>
+                    <p><span >Apellido y Nombre / Razón Social : </span> <strong >{!! $model->Sales->first()->Clients->fullName !!}</strong></p>
                 </td>
 
 
                 <td class="col-xs-6">
-                    <p><span class="upper"><b>iva: </b></span> <span class="upper">Cons. Final</span></p>
+                    <p><span >Condición IVA: </span> <strong >{!! $model->Sales->first()->Clients->ivaConditions->name !!}</strong></p>
                 </td>
 
             </tr>
 
             <tr>
                 <td class="col-xs-6">
-                    <p><span class="upper"><b>CUIT: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->dni !!}</span></p>
+                    <p><span>DNI / CUIT / CUIL: </span> <strong >{!! $model->Sales->first()->Clients->dni !!}</strong></p>
 
                 </td>
 
                 <td class="col-xs-6">
-                    <p><span class="upper"><b>Dirección: </b></span> <span class="upper">{!! $model->Sales->first()->Clients->address !!}, {!! $model->Sales->first()->Clients->Localidad !!}</span></p>
+                    <p><span>Dirección: </span> <strong >{!! $model->Sales->first()->Clients->address !!}, {!! $model->Sales->first()->Clients->Localidad !!}</strong></p>
                 </td>
 
             </tr>
@@ -368,9 +368,9 @@
                 <table class="bloque1 table table-striped">
                     <thead  >
                         <tr bgcolor="#d3d3d3">
-                            <th class="col-xs-2">#</th>
-                            <th class="col-xs-2">Cant.</th>
-                            <th class="col-xs-6">Descripción</th>
+                            <th class="col-xs-1">#</th>
+                            <th class="col-xs-1">Cant.</th>
+                            <th class="col-xs-8">Descripción</th>
                             <th class="col-xs-2">Precio Unitario</th>
                         </tr>
                     </thead>
@@ -379,18 +379,17 @@
                         @foreach($model->Sales->first()->SalesItems as $salesItem)
                             @if($salesItem->Items->Models->types_id == 1)
                                 <tr>
-                                    <td class="col-xs-3">{!! $salesItem->Items->id  !!}</td>
-                                    <td class="col-xs-3">1</td>
-                                    <td class="col-xs-6">
-
-                                        Marca : {!! $salesItem->Items->Models->Brands->name !!}<br>
-                                        Modelo :{!! $salesItem->Items->Models->name !!}<br>
-                                        Color: {!! $salesItem->Items->Colors->name !!}<br>
-                                        N Motor: {!! $salesItem->Items->n_motor or '' !!}<br>
-                                        N Cuadro: {!! $salesItem->Items->n_cuadro or ''!!}
-
+                                    <td class="col-xs-1">{!! $salesItem->Items->id  !!}</td>
+                                    <td class="col-xs-1">1</td>
+                                    <td class="col-xs-8">
+                                       <span> Marca : </span><strong>{!! $salesItem->Items->Models->Brands->name !!} </strong>
+                                       <span> Modelo : </span><strong>{!! $salesItem->Items->Models->name !!}</strong>
+                                       <span> Color : </span><strong>{!! $salesItem->Items->Colors->name !!}</strong><br>
+                                       <span> N Motor : </span><strong>{!! $salesItem->Items->n_motor or '' !!}</strong><br>
+                                       <span> N Cuadro : </span><strong>{!! $salesItem->Items->n_cuadro or ''!!}</strong><br>
+                                       <span> Año : </span><strong>{!! $salesItem->Items->Certificates->year or '' !!}</strong>
                                     </td>
-                                    <td class="col-xs-1">
+                                    <td class="col-xs-2">
                                         $ {!! number_format($model->importe_total,2) !!}
                                     </td>
                                 </tr>
@@ -404,15 +403,13 @@
                 <table class="bloque1 table table-striped">
                     <thead  >
                     <tr bgcolor="#d3d3d3">
-                        <th class="col-xs-1">Código</th>
-                        <th class="col-xs-4">Producto/Servicio</th>
+                        <th class="col-xs-1">#</th>
                         <th class="col-xs-1">Cant.</th>
-                        <th class="col-xs-2">U. medida</th>
-                        <th class="col-xs-2">Precio Unit.</th>
-                        <th class="col-xs-1">% Bonif.</th>
-                        <th class="col-xs-2">Subtotal</th>
+                        <th class="col-xs-6">Producto/Servicio</th>
+                        <th class="col-xs-1">Precio Unit.</th>
+                        <th class="col-xs-1">Subtotal</th>
                         <th class="col-xs-1">Alicuota IVA</th>
-                        <th class="col-xs-3">Subtotal c/IVA</th>
+                        <th class="col-xs-1">Subtotal c/IVA</th>
                     </tr>
                     </thead>
 
@@ -421,22 +418,19 @@
                         @if($salesItem->Items->Models->types_id == 1)
                             <tr>
                                 <td class="col-xs-1">{!! $salesItem->Items->id  !!}</td>
-                                <td class="col-xs-4">
-
-                                    Marca : {!! $salesItem->Items->Models->Brands->name !!}  Modelo :{!! $salesItem->Items->Models->name !!}
-                                    Color: {!! $salesItem->Items->Colors->name !!}
-                                </td>
                                 <td class="col-xs-1">1</td>
-                                <td class="col-xs-2">unidades</td>
-                                <td class="col-xs-2">$ {!! number_format($model->importe_total,2) !!}</td>
-                                <td class="col-xs-1">
-                                    %
+                                <td class="col-xs-3">
+                                    <span> Marca : </span><strong>{!! $salesItem->Items->Models->Brands->name !!} </strong>
+                                    <span> Modelo : </span><strong>{!! $salesItem->Items->Models->name !!}</strong>
+                                    <span> Color : </span><strong>{!! $salesItem->Items->Colors->name !!}</strong><br>
+                                    <span> N Motor : </span><strong>{!! $salesItem->Items->n_motor or '' !!}</strong><br>
+                                    <span> N Cuadro : </span><strong>{!! $salesItem->Items->n_cuadro or ''!!}</strong><br>
+                                    <span> Año : </span><strong>{!! $salesItem->Items->Certificates->year or '' !!}</strong>
                                 </td>
+                                <td class="col-xs-2">$ {!! number_format($model->importe_total,2) !!}</td>
                                 <td class="col-xs-2">$ {!! number_format($model->importe_total,2) !!}</td>
                                 <td class="col-xs-1">21%</td>
-                                <td class="col-xs-3">
-                                    $ {!! number_format($model->importe_total,2) !!}
-                                </td>
+                                <td class="col-xs-2">$ {!! number_format(($model->importe_total * 1.21),2) !!}</td>
                             </tr>
                         @endif
                     @endforeach
@@ -452,34 +446,76 @@
 
 
         <div class="cierre">
-            <table class="bloque1 table table-striped no-border">
-                <tr>
-                    <td></td>
-                    <td class="text-right"><strong>Total:</strong></td>
-                    <td><p> $ {!!number_format($model->importe_total ,2)!!}</p></td>
-                    <td></td>
-                </tr>
+            @if($model->letra == 'B')
+                <table class="bloque1 table table-striped no-border">
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>SubTotal:</strong></td>
+                        <td><p> $ {!!number_format($model->importe_total ,2)!!}</p></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>Importe Otros Tributos:</strong></td>
+                        <td><p> $ {!!number_format(0 ,2)!!}</p></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>Importe Total:</strong></td>
+                        <td><strong> $ {!!number_format($model->importe_total ,2)!!}</strong></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="col-xs-6 text-center">
+                            <p class="text-center">{!!  DNS1D::getBarcodeHTML($model->id, "EAN13") !!}</p>
+                        </td>
+                        <td class="col-xs-3">CAE N.: {!! $model->cae !!}</td>
+                        <td class="col-xs-3">CAE Vto. : {!! $model->vencimiento_cae !!}</td>
+                    </tr>
+                </table>
+            @elseif($model->letra == "A")
+                <table class="bloque1 table table-striped no-border">
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>Importe Neto Gravado:</strong></td>
+                        <td><p> $ {!!number_format($model->importe_total ,2)!!}</p></td>
+                        <td></td>
+                    </tr>
 
-                <tr>
-                    <td colspan="4" class="col-xs-12">
-                        <p>La mercadería viaja por cuenta y orden del destinatario haciendose responsable civil y criminalmente a partir de la fecha por cualquier accidente, daño o perjuicio que pudiera ocasionar el rodado referido.</p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="4" class="col-xs-12">
-                        <p class="text-center">{!!  $model->id !!}</p>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="2" class="col-xs-6 text-center">
-                        <p class="text-center">{!!  DNS1D::getBarcodeHTML($model->id, "EAN13") !!}</p>
-                    </td>
-                    <td class="col-xs-3">C.A.E. : {!! $model->cae !!}</td>
-                    <td class="col-xs-3">vto : {!! $model->vencimiento_cae !!}</td>
-                </tr>
-            </table>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>IVA 21%:</strong></td>
+                        <td><p> $ {!!number_format(($model->importe_total * 1.21)-$model->importe_total ,2)!!}</p></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>IVA 10.5%:</strong></td>
+                        <td><p> $ {!!number_format(0 ,2)!!}</p></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>Importe Otros Tributos:</strong></td>
+                        <td><strong> $ {!!number_format(0 ,2)!!}</strong></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-right"><strong>Importe Total:</strong></td>
+                        <td><strong> $ {!!number_format($model->importe_total ,2)!!}</strong></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="col-xs-6 text-center">
+                            <p class="text-center">{!!  DNS1D::getBarcodeHTML($model->id, "EAN13") !!}</p>
+                        </td>
+                        <td class="col-xs-3">CAE N.: {!! $model->cae !!}</td>
+                        <td class="col-xs-3">CAE Vto. : {!! $model->vencimiento_cae !!}</td>
+                    </tr>
+                </table>
+            @endif
         </div>
 
 </body>

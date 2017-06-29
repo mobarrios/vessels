@@ -135,6 +135,19 @@
         */
 
 
+        $('#changeStatus').on('change',function()
+        {
+
+            $.ajax({
+                url: 'moto/sales/changeStatus',
+                data: {status: $(this).val(), salesId : '{!!  (isset($models)?  $models->id : '' ) !!}'},
+                method: 'GET',
+                success: function() {
+                    alert('Estado Cambiado Correctamente.');
+                },
+            });
+        });
+
 
 
 
@@ -192,7 +205,8 @@
         var app = angular.module("app", []);
 
 
-        app.controller("ctl", function ($scope, $http) {
+        app.controller("ctl", function ($scope, $http)
+        {
             $scope.model = ""
             $scope.last_name = ""
             $scope.name = ""
@@ -205,11 +219,12 @@
             $scope.iva = ""
 
             //$scope.city = ""
-            $scope.location = ""
+            //$scope.location = ""
            // $scope.province = ""
            // $scope.province = ""
 
             @if(Session::has('client') || $errors->any())
+
             $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
             $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
             $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
@@ -223,9 +238,7 @@
            // $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
             //$scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
             $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
-            $scope.iva = "{!! Session::has('client') ? Session::get('client')->iva : old('location')!!}"
-
-
+            //$scope.iva = "{!! Session::has('client') ? Session::get('client')->iva : old('location')!!}"
 
             @endif
 

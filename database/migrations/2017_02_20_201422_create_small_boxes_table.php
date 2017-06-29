@@ -22,10 +22,10 @@ class CreateSmallBoxesTable extends Migration
             $table->double('amount',10,2);
             $table->string('detail');
 
-            $table->integer('providers_id')->unsigned();
+            $table->integer('providers_id')->unsigned()->nullable();
             $table->foreign('providers_id')->references('id')->on('providers');
 
-            $table->integer('types_small_boxes_id')->unsigned();
+            $table->integer('types_small_boxes_id')->unsigned()->nullable();
             $table->foreign('types_small_boxes_id')->references('id')->on('types_small_boxes');
 
         });

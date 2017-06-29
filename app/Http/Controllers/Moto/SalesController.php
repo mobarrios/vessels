@@ -82,6 +82,8 @@ class SalesController extends Controller
 
         $this->data['mecanicos'] = Role::find(3)->users->lists('user_name','id');
 
+        $this->data['status'] = config('status.sales') ;
+
 
         $this->modelsRepo = $modelsRepo;
         $this->clientsRepo = $clientsRepo;
@@ -91,6 +93,20 @@ class SalesController extends Controller
 
     }
 
+
+    //cambio de Estado
+
+    public function changeStatus()
+    {
+        $status = $this->request->status;
+        $salesId = $this->request->salesId;
+
+        $sale = $this->repo->find($salesId);
+        $sale->status =  $status;
+        $sale->save();
+
+        return response($sale,200);
+    }
 
    
 

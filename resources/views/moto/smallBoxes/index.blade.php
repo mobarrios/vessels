@@ -1,5 +1,6 @@
 @extends('template.model_index')
 @section('table')
+
     @foreach($models as $model)
         <tr>
             <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
@@ -16,7 +17,7 @@
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$cash->id}}" type="checkbox"></td>
                 <td>{!! $cash->date !!}</td>
-                <td>{{$cash->pay_methods_id}}</td>
+                <td>{{$cash->PayMethods->name}}</td>
                 <td><a href="{{route('moto.sales.edit',$cash->sales_id)}}"> Venta # {{$cash->sales_id}}</a></td>
                 <td><b>${!! $cash->amount !!}</b></td>
                 <td><span class="label label-lg label-warning">{!! $cash->Brancheables->first()->Branches->name  !!}</span></td>

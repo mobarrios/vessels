@@ -20,6 +20,7 @@
                 {!! Form::text('slug', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
+
                 {!! Form::label('Descripción') !!}
                 {!! Form::text('description', null, ['class'=>'form-control']) !!}
             </div>

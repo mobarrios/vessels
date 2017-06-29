@@ -62,5 +62,9 @@ Route::group(['prefix'=>'sales'],function(){
     Route::get('/asignMechanic/{id}/{mechanic}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.sales.asignMechanic','uses'=>'Moto\SalesController@asignMechanic']);
 
 
+    //change status
+
+    Route::get('/changeStatus',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.sales.changeStatus','uses'=>'Moto\SalesController@changeStatus']);
+
 
 });

@@ -31,7 +31,13 @@ return [
             4 => 'Aceptado',
             5 => 'Rechazado',
         ],
-        
-     
+
+    'sales' =>
+        [
+            1 => 'Iniciada',
+            2 => 'En curso',
+            3 => 'Finalizada',
+        ]
+
 
 ];

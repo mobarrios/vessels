@@ -44,20 +44,6 @@
             <span>Generar remito</span>
         </a>
 
-        <div class="btn-group">
-            @if(!$models->files)
-                {!! Form::open(['route'=> [config('models.files.storeRoute')]]) !!}
-
-                {!! Form::hidden('sales_id',$models->id) !!}
-
-                <button type="submit" class="btn btn-sm btn-default">Crear legajo</button>
-
-                {!! Form::close() !!}
-            @else
-                <a href="{!! route('moto.files.edit',$models->files->id) !!}"
-                   class="btn btn-sm btn-default">Ver legajo</a>
-            @endif
-        </div>
     @endif
 </div>
 @endif
