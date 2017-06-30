@@ -15,29 +15,18 @@
             </div>
             <div class="box-body">
                 <div class="row">
-                    {{-- 
-                    <div class="col-xs-12 col-md-4 form-group">
-                        {!! Form::label('Venta #') !!}
-                        <div class="btn-group">
-                            <a id="verVenta" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                            {!! Form::select('sales_id',$sales, isset($models->sales_id) ? $models->sales_id : null, ['class'=>'form-control select2']) !!}
-                        </div>
-                    </div>
-                    --}}
-
                     
                     <div class="col-xs-12 col-md-6 form-group">
                         {!! Form::label('Estado') !!}
                         {!! Form::select('estado',$estado, $models->estadoValue, ['class'=>'form-control select2']) !!}
-
                     </div>
 
                     <div class="col-xs-12 col-md-6 form-group">
                         {!! Form::label('Ubicación') !!}
 
                         {!! Form::select('ubicacion',$ubicacion,  $models->ubicacionValue or null, ['class'=>'form-control select2']) !!}
-
                     </div>
+
                 </div>
 
                 <hr>
@@ -48,13 +37,26 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>
-                                    {!! Form::checkbox('dni_photocopy', null) !!}
                                      Fotocopia de dni
                                 </label>
                             </div>
 
                         </div>
                         {!! Form::file('dni_photocopy_file') !!}
+                        @if($models->dni_photocopy_file)
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon text-success">{!! $models->imageDni !!}</span>
+                                    <span class="input-group-btn">
+                                        <a href="{!! route("moto.files.downloadDni",$models->id) !!}"  class="btn btn-default"><i class="fa fa-file-image-o"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        @endif
                     </div>
                 </div>
 
@@ -66,12 +68,26 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>
-                                    {!! Form::checkbox('proof_of_cuil', null) !!}
                                      Constancia de cuil
                                 </label>
                             </div>
                         </div>
                         {!! Form::file('proof_of_cuil_file') !!}
+                        
+                        @if($models->proof_of_cuil_file)
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon text-success">{!! $models->imageCuil !!}</span>
+                                    <span class="input-group-btn">
+                                        <a href="{!! route("moto.files.downloadCuil",$models->id) !!}"  class="btn btn-default"><i class="fa fa-file-image-o"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        @endif
                     </div>
                 </div>
             </div>
@@ -90,12 +106,26 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>
-                                    {!! Form::checkbox('form_01', null) !!}
                                     Formulario 01
                                 </label>
                             </div>
                         </div>
                         {!! Form::file('form_01_file') !!}
+                        
+                        @if($models->form_01_file)
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="input-group">
+                                    <span class="input-group-addon text-success">{!! $models->imageForm01 !!}</span>
+                                    <span class="input-group-btn">
+                                        <a href="{!! route("moto.files.downloadForm01",$models->id) !!}"  class="btn btn-default"><i class="fa fa-file-image-o"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        @endif
                     </div>
                 </div>
 
@@ -107,7 +137,7 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label class="checkbox">
-                                    {!! Form::checkbox('form_12', null) !!}
+
                                      Formulario 12
                                 </label>
                             </div>
@@ -141,7 +171,6 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label class="checkbox">
-                                    {!! Form::checkbox('form_59', 1,null) !!}
                                      Formulario 59
                                 </label>
                             </div>
@@ -523,25 +552,6 @@
 
             
 
-
-            //console.log(selectSales.val())
-
-
-
-
-
-
-
-            // with plugin options
-            $("input[type=checkbox]").checkboxX({
-                threeState: false,
-                size: 'xs',
-                theme: 'krajee-flatblue',
-                enclosedLabel: true
-            });
-
-
-            
 
         })
     </script>

@@ -53,6 +53,42 @@ class Files extends Entity
     }
     
 
+    public function getImageDniAttribute()
+    {
+        $arr = explode("/",$this->attributes["dni_photocopy_file"]);
+        
+        krsort($arr);
+
+        $arr = current($arr);
+        
+        return $arr;
+    }
+
+    public function getImageCuilAttribute()
+    {
+        $arr = explode("/",$this->attributes["proof_of_cuil_file"]);
+        
+        krsort($arr);
+
+        $arr = current($arr);
+        
+        return $arr;
+    }
+
+    public function getImageForm01Attribute()
+    {
+        $arr = explode("/",$this->attributes["form_01_file"]);
+        
+        krsort($arr);
+
+        $arr = current($arr);
+        
+        return $arr;
+    }
+
+
+
+
 }
 
 

@@ -31,6 +31,10 @@ return [
     //path
     'imagesPath' => 'uploads/' . $model . '/images/',
 
+    'dni_photocopy_file_path' => 'uploads/' . $model . '/dni/',
+    'proof_of_cuil_file_path' => 'uploads/' . $model . '/cuil/',
+    'form_01_file_path' => 'uploads/' . $model . '/form01/',
+
     //polymorphic
     'is_logueable' => true,
     'is_imageable' => true,
