@@ -37,7 +37,14 @@ return [
             1 => 'Iniciada',
             2 => 'En curso',
             3 => 'Finalizada',
+        ],
+
+        'forms' => [
+                1 => 'Ingresado',
+                2 => 'Utilizado',
+                3 => 'Cancelado',
         ]
+
 
 
 ];
