@@ -31,19 +31,19 @@ class CreateFilesTable extends Migration
             $table->tinyInteger('ubicacion')->unsigned()->default('0');
 
 //            FORMULARIOS
-            $table->tinyInteger('form_01')->unsigned()->nullable();
+
             $table->string('form_01_file')->nullable();
-            $table->tinyInteger('form_12')->unsigned()->nullable();
+
             $table->string('form_12_file')->nullable();
-            $table->tinyInteger('form_59')->unsigned()->nullable();
+
             $table->string('form_59_file')->nullable();
 
 
 //            FÍSICOS
-            $table->tinyInteger('dni_photocopy')->nullable();
+
             $table->string('dni_photocopy_file')->nullable();
 
-            $table->tinyInteger('proof_of_cuil')->nullable();
+
             $table->string('proof_of_cuil_file')->nullable();
 
         });

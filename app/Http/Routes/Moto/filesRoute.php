@@ -24,4 +24,10 @@ Route::group(['prefix'=>'files'],function(){
 
         Route::get('/form59/{form}',  ['middleware'=>'permission:'.$section.'.create','as'=>'moto.files.showForm59','uses'=>'Moto\FilesController@showForm59']);
 
+        Route::get('{id}/downloadDni',  ['middleware'=>'permission:'.$section.'.create','as'=>'moto.files.downloadDni','uses'=>'Moto\FilesController@downloadDni']);
+        
+        Route::get('{id}/downloadCuil',  ['middleware'=>'permission:'.$section.'.create','as'=>'moto.files.downloadCuil','uses'=>'Moto\FilesController@downloadCuil']);
+
+        Route::get('{id}/downloadForm01',  ['middleware'=>'permission:'.$section.'.create','as'=>'moto.files.downloadForm01','uses'=>'Moto\FilesController@downloadForm01']);
+
 });
