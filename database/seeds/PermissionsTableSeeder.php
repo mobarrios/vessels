@@ -332,25 +332,25 @@ class PermissionsTableSeeder extends Seeder
                 //PROVIDERS
                 [
                     'id'    => 50,
-                    'name' => 'List Poveedores',
+                    'name' => 'List Proveedores',
                     'slug' => 'providers.list',
                     'model' => '',
                 ],
                 [
                     'id'    => 51,
-                    'name' => 'Crear Poveedores',
+                    'name' => 'Crear Proveedores',
                     'slug' => 'providers.create',
                     'model' => '',
                 ],
                 [
                     'id'    => 52,
-                    'name' => 'Edit Poveedores',
+                    'name' => 'Edit Proveedores',
                     'slug' => 'providers.edit',
                     'model' => '',
                 ],
                 [
                     'id'    => 53,
-                    'name' => 'Delete Poveedores',
+                    'name' => 'Delete Proveedores',
                     'slug' => 'providers.destroy',
                     'model' => '',
                 ],
@@ -775,6 +775,32 @@ class PermissionsTableSeeder extends Seeder
                     'id'    => 119,
                     'name' => 'Borrar Registros',
                     'slug' => 'registros.destroy',
+                    'model' => '',
+                ],
+
+                //formularios
+                [
+                    'id'    => 120,
+                    'name' => 'Listar Formularios',
+                    'slug' => 'forms.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 121,
+                    'name' => 'Crear Formularios',
+                    'slug' => 'forms.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 122,
+                    'name' => 'Editar Formularios',
+                    'slug' => 'forms.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 123,
+                    'name' => 'Borrar Formularios',
+                    'slug' => 'forms.destroy',
                     'model' => '',
                 ],
 
