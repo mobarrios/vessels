@@ -1,4 +1,92 @@
 @extends('template.model_index')
+
+@section('css')
+<style>
+    /* Preloader */
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f5f5;
+  /* change if the mask should have another color then white */
+  z-index: 99;
+  /* makes sure it stays on top */
+}
+
+#status {
+  position: absolute;
+  left: 50%;
+  /* centers the loading animation horizontally one the screen */
+  top: 50%;
+  /* centers the loading animation vertically one the screen */
+  /* is width and height divided by two */
+}
+
+.spinner-sm {
+  width: 50px;
+  height: 50px;
+  /*background-image: url(http://www.lumavi.de/templates/automobile_darmas/images/icon_darmas_white.png);*/
+  background-size: 40%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #ffaf4b;
+  border-radius: 50%;
+}
+
+.spinner-sm i{
+    font-size: 27px;
+    line-height: 44px !important;
+    color: white !important;
+    text-shadow: -3px 3px 5px rgba(0, 0, 0, 0.21);
+    top:4px;
+    left: 2px;
+}
+
+.spinner-sm:after,
+.spinner-sm:before {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.spinner-sm-1:after {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  border: 4px solid transparent;
+  border-top-color: #dc9741;
+  border-bottom-color: #dc9741;
+  animation: spinny 0.8s linear infinite;
+}
+@keyframes spinny {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(90deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+@keyframes spinny {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(90deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+</style>
+@endsection
+
 @section('table')
     @foreach($models as $model)
         <tr>
@@ -78,6 +166,8 @@
         btn.on('click',function(ev){
             ev.preventDefault();
 
+            showPreload();
+
             var data = [];
 //            var data = [];
             {{--data["_token"] = "{!! csrf_token() !!}";--}}
@@ -96,7 +186,7 @@
                 url: "{!! route('moto.files.remito') !!}",
                 data: 'files_id='+data+'&_token={!! csrf_token() !!}',
                 success: function(data){
-
+                    hidePreload();
                     window.location.href = 'moto/files/remito/'+data;
                 }
 
@@ -106,6 +196,15 @@
         })
 
 
+        function showPreload(){
+            $( "body" ).prepend( '<div id="preloader"><div class="spinner-sm spinner-sm-1" id="status"> <i class="fa  fa-shekel fa-stack-1x "></i> </div></div>' );
+        }
+
+        function hidePreload(elem){
+            $('#status').fadeOut(); // will first fade out the loading animation 
+            $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+            $('body').delay(350).css({'overflow':'visible'});
+        }
 
     </script>
 @endsection
