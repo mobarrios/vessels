@@ -208,8 +208,8 @@ class FilesController extends Controller
 
 
     public function getRemito($id,PDF $pdf,Vouchers $vouchers){
-        $model = $vouchers->with("Sales","Brancheables")->find($id);
-        dd($model);
+        $model = $vouchers->with("Files","Brancheables")->find($id);
+
         $pdf->setPaper('A4', 'portrait')->loadView('moto.files.remito',compact('model'));
 
         return $pdf->stream();

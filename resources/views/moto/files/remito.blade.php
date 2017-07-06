@@ -282,8 +282,14 @@
         border:1px solid #ddd;
     }
 
+     .pt50{
+         padding-top: 50px !important;
+     }
 
-
+    .pab0{
+        position: absolute;
+        bottom: 0;
+    }
 
  </style>
 
@@ -310,7 +316,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td style="margin-top:15px !important;">
                         <p class="ml20">Razón Social : <strong>{!! $model->Brancheables->first()->Branches->Company->razon_social !!}</strong></p>
                         <p class="ml20">Domicilio Comercial : <strong>{!! $model->Brancheables->first()->Branches->Company->direccion !!}</strong></p>
                         <p class="ml20">Condición IVA: <strong>{!! $model->Brancheables->first()->Branches->Company->IvaConditions->name !!}</strong></p>
@@ -335,11 +341,11 @@
 
             <table class="bloque1 mb-20 table">
                 <tr>
-                    <th style="background-color: #dddddd;" colspan="10" class="text-center">Descripción</th>
+                    <th style="background-color: #dddddd;" colspan="9" class="text-center">Descripción</th>
                 </tr>
 
                 <tr>
-                    <th>N°1</th>
+                    {{--<th>N°1</th>--}}
                     <th>Unidad</th>
                     <th>Sucursal</th>
                     <th>Vendedor</th>
@@ -351,11 +357,30 @@
                     <th>Total</th>
                 </tr>
 
-                <tr>
-                    <td>{!! dd($model) !!}</td>
+                @foreach($model->Files as $files)
+                    <tr>
+                        <td>{!! $files->Sales->first()->Items->first()->models->name!!}</td>
+                        <td>{!! $files->Brancheables->first()->Branches->Company->nombre_fantasia !!}</td>
+                        <td>{!! $files->Sales->first()->User->fullName !!}</td>
+                        <td>{!! $files->Sales->first()->Clients->fullName !!}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
 
+
+        <div class="row pab0">
+            <table class="bloque1 mb-20 table">
+                <tr>
+                    <td style="width:40%;padding-top: 70px;">Firma</td>
+                    <td style="width:40%; padding-top: 70px;">Aclaración</td>
+                    <td style="width:20%;padding-top: 50px;">
+                        <p>Total registros: <b>{!! $model->Files->count() !!}</b></p>
+                        <p>Total acumulado: <b></b></p>
+                    </td>
                 </tr>
             </table>
+
 
         </div>
 </body>
