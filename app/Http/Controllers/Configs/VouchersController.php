@@ -41,7 +41,7 @@ class VouchersController extends Controller
     {
         $api = new ApiFEHelper();
 
-       // dd($this->request);
+
         $data =
             [
                 'punto_venta' => $this->request->punto_venta,
@@ -58,7 +58,6 @@ class VouchersController extends Controller
                 "importe_total_otros_tributos" => 0.0,
                 "importe_total_iva" => ($this->request->importe_total) - ($this->request->importe_total / 1.21),
                 "iva" => [["base_imponible" => $this->request->importe_total / 1.21, "alicuota" => 21.00, "importe" => ($this->request->importe_total) - ($this->request->importe_total / 1.21)]],
-
             ];
 
         $api->call('POST', $data);

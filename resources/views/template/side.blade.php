@@ -177,7 +177,7 @@
                 </ul>
             </li>
 
-            <li class="treeview {{ in_array(Request::segment(2), ["files","registros"]) ? 'active' : '' }}">
+            <li class="treeview {{ in_array(Request::segment(2), ["files","registros","forms"]) ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-book "></i> <span>Gestoría</span>
                 <span class="pull-right-container">
@@ -189,9 +189,13 @@
                     <li class={{ Request::segment(2) == "files" ? 'active' : '' }}><a
                                 href="{{route('moto.files.index')}}"><span>Legajos</span></a></li>
                     @endpermission
-                    @permission('itemsrequest.list')
+                    @permission('registros.list')
                     <li class={{ Request::segment(2) == "registros" ? 'active' : '' }}><a
                                 href="{{route('moto.registros.index')}}"><span>Registros</span></a></li>
+                    @endpermission
+                    @permission('forms.list')
+                    <li class={{ Request::segment(2) == "forms" ? 'active' : '' }}><a
+                                href="{{route('moto.forms.index')}}"><span>Formularios</span></a></li>
                     @endpermission
                 </ul>
 
