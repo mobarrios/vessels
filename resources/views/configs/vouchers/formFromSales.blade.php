@@ -24,32 +24,25 @@
         {!! Form::label('Nro. Documento ') !!}
         {!! Form::text('dni', $sale->Clients->dni,['class'=>'form-control']) !!}
         </div>
-
         <div class="col-xs-4 form-group">
         {!! Form::label('Tipo de Comprobante ') !!}
         {!! Form::select('tipo',$tipos, null,['class'=>'form-control']) !!}
         </div>
-
         <div class="col-xs-4 form-group">
         {!! Form::label('Letra ') !!}
         {!! Form::select('letra',$letras,null,['class'=>'form-control', 'id'=>'letra']) !!}
         </div>
-
         <div class="col-xs-4 form-group">
         {!! Form::label('Punto de Venta ') !!}
         {!! Form::text('punto_venta',\Illuminate\Support\Facades\Auth::user()->BranchesActive->punto_venta,['class'=>'form-control']) !!}
         </div>
-
         <div class="col-xs-12 form-group">
         {!! Form::label('Concepto ') !!}
-        {!! Form::text('concepto', $sale->Items->first()->models->brands->name .' '. $sale->Items->first()->models->name .', Motor : (' .$sale->Items->first()->n_motor.') , Cuadro : ('. $sale->Items->first()->n_cuadro.') , Color : ('.$sale->Items->first()->colors->name .' )   Año : ('.$sale->Items->first()->certificates->year.')' ,['class'=>'form-control']) !!}
+        {!! Form::text('concepto', $sale->Items->first()->models->brands->name  or '' .' '. $sale->Items->first()->models->name or ''.', Motor : (' .$sale->Items->first()->n_motor or ''.') , Cuadro : ('. $sale->Items->first()->n_cuadro or ''.') , Color : ('.$sale->Items->first()->colors->name or ''.' )   Año : ('.$sale->Items->first()->certificates->year or ''.')' ,['class'=>'form-control']) !!}
         </div>
-
-
-
         <div class="col-xs-3 form-group">
         {!! Form::label('Total ') !!}
-        {!! Form::text('importe_total', number_format($sale->SalesItems->first()->price_actual, 2) ,['class'=>'form-control']) !!}
+        {!! Form::text('importe_total', $sale->SalesItems->first()->price_actual ,['class'=>'form-control']) !!}
         </div>
         <div class="col-xs-3 form-group">
         {!! Form::label('Total No Gravado') !!}

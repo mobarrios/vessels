@@ -98,11 +98,13 @@
                     <li class={{ Request::segment(2) == "providers" ? 'active' : '' }}><a
                                 href="{{route('moto.providers.index')}}"><span> Proveedores</span></a></li>
                     @endpermission
+                    {{--
                     @permission('modelslistsprices.list')
                     <li class={{ Request::segment(2) == "purchasesListsPrices" ? 'active' : '' }}><a
                                 href="{{route('moto.purchasesListsPrices.index')}}"><span> Listas de Precios Compra</span></a>
                     </li>
                     @endpermission
+                    --}}
                     @permission('purchasesorders.list')
                     <li class={{ Request::segment(2) == "purchasesOrders" ? 'active' : '' }}><a
                                 href="{{route('moto.purchasesOrders.index')}}"><span>Perdidos de Mercaderias</span></a>

@@ -159,28 +159,24 @@
 
                     <div class="box-body">
 
-                        @if(isset($model))
-                            {!! Form::model($model,['route'=> [config('models.'.$section.'.postUpdateRoute'), $models->id] , 'files' =>'true']) !!}
-                        @else
-                            {!! Form::open(['route'=> config('models.'.$section.'.postStoreRoute') , 'files' =>'true']) !!}
-                        @endif
+
                             <div class="section border">
                                 <div class="row">
                                     <div class="col-xs-7">
                                         <div class="titulo">
-                                            Sucursal: {!! $branch->name !!}
+                                            Sucursal:
                                         </div>
 
                                         <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>Dirección:</b> {!! $branch->address !!}</p>
-                                            <p class="col-xs-12"><b>Cuit: </b>{!! $branch->cuit !!}</p>
-                                            <p class="col-xs-12"><b>Provincia: </b>{!! $branch->province !!}</p>
-                                            <p class="col-xs-12"><b>Localidad:</b> {!! $branch->location !!}</p>
+                                            <p class="col-xs-12"><b>Dirección:</b></p>
+                                            <p class="col-xs-12"><b>Cuit: </b></p>
+                                            <p class="col-xs-12"><b>Provincia: </b></p>
+                                            <p class="col-xs-12"><b>Localidad:</b> </p>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>C.P: </b>{!! $branch->cp !!}</p>
-                                            <p class="col-xs-12"><b>Tel.: </b>{!! $branch->phone !!}</p>
-                                            <p class="col-xs-12"><b>E-mail.: </b>{!! $branch->email !!}</p>
+                                            <p class="col-xs-12"><b>C.P: </b></p>
+                                            <p class="col-xs-12"><b>Tel.: </b></p>
+                                            <p class="col-xs-12"><b>E-mail.: </b></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-5">
@@ -197,14 +193,14 @@
                                             <b>Datos del cliente</b>
                                         </div>
                                         <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>Nombre y Apellido:</b> {!! $client->fullName !!}</p>
-                                            <p class="col-xs-12"><b>Dirección:</b> {!! $client->address !!}</p>
-                                            <p class="col-xs-12"><b>Localidad:</b> {!! $client->localion !!}</p>
+                                            <p class="col-xs-12"><b>Nombre y Apellido:</b> </p>
+                                            <p class="col-xs-12"><b>Dirección:</b> </p>
+                                            <p class="col-xs-12"><b>Localidad:</b> </p>
 
                                         </div>
                                         <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>E-mail:</b> {!! $client->email !!}</p>
-                                            <p class="col-xs-12"><b>Teléfono:</b> {!! $client->phone1 !!}</p>
+                                            <p class="col-xs-12"><b>E-mail:</b> </p>
+                                            <p class="col-xs-12"><b>Teléfono:</b></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-5">
@@ -212,9 +208,9 @@
                                             <b>Datos del vehículo</b>
                                         </div>
                                         <div class="col-xs-12">
-                                            <p><b>Patente:</b> {!! Form::text('patente',null,['class' => 'form-control']) !!}</p>
-                                            <p><b>Modelo:</b> {!! $item->models->name !!}</p>
-                                            <p><b>Chasis:</b> {!! $item->n_cuadro !!}</p>
+                                            <p><b>Patente:</b></p>
+                                            <p><b>Modelo:</b> </p>
+                                            <p><b>Chasis:</b> </p>
                                         </div>
                                     </div>
                                 </div>
