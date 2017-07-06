@@ -351,6 +351,10 @@
                     <th>Total</th>
                 </tr>
 
+                <tr>
+                    <td>{!! dd($model) !!}</td>
+
+                </tr>
             </table>
 
         </div>

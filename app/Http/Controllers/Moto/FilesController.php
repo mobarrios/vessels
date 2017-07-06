@@ -51,8 +51,8 @@ class FilesController extends Controller
 
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
-
-        $this->repo->create($model);
+//
+//        $this->repo->create($model);
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
 
@@ -208,8 +208,8 @@ class FilesController extends Controller
 
 
     public function getRemito($id,PDF $pdf,Vouchers $vouchers){
-        $model = $vouchers->find($id);
-
+        $model = $vouchers->with("Sales","Brancheables")->find($id);
+        dd($model);
         $pdf->setPaper('A4', 'portrait')->loadView('moto.files.remito',compact('model'));
 
         return $pdf->stream();
