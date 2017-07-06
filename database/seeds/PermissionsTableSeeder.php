@@ -804,6 +804,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //vouchers
+                [
+                    'id'    => 124,
+                    'name' => 'Listar Comprobantes',
+                    'slug' => 'vouchers.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 125,
+                    'name' => 'Crear Comprobantes',
+                    'slug' => 'vouchers.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 126,
+                    'name' => 'Editar Comprobantes',
+                    'slug' => 'vouchers.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 127,
+                    'name' => 'Borrar Comprobantes',
+                    'slug' => 'vouchers.destroy',
+                    'model' => '',
+                ],
+
             ]);
     }
 }
