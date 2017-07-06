@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Vouchers;
 use App\Entities\Moto\Sales;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\VouchersRepo;
@@ -158,4 +159,60 @@ class FilesController extends Controller
         return $pdf->stream();
     }
 */
+
+
+
+    public function remito(VouchersRepo $vouchersRepo)
+    {
+
+        $files = explode(',',$this->request->files_id);
+        $monto = collect();
+
+        foreach($files as $files_id){
+            $legajo = $this->repo->find($files_id);
+            $legajo->estado = 1;
+            $legajo->ubicacion = 1;
+
+            $monto->push($legajo->sales->total);
+            $legajo->save();
+
+        }
+
+        if($vouchersRepo->ListAll()->where('tipo','R')->count() > 0)
+        {
+            $number = $vouchersRepo->ListAll()->where('tipo','R')->get()->last()->numero + 1;
+        }else
+        {
+            $number = '1';
+        }
+
+
+
+        $voucher = $vouchersRepo->create(['tipo' => 'R','letra' => 'X', 'concepto' => 'Pago', 'fecha' => date('Y-m-d', time()), 'importe_total' => $monto->sum(),'numero' => $number]);
+
+
+
+        if($voucher){
+            foreach($files as $files_id) {
+                $voucher->Files()->attach($files_id);
+            }
+
+            return response()->json($voucher->id,200);
+
+        }else{
+            return response()->json('error',403);
+
+        }
+
+    }
+
+
+    public function getRemito($id,PDF $pdf,Vouchers $vouchers){
+        $model = $vouchers->find($id);
+
+        $pdf->setPaper('A4', 'portrait')->loadView('moto.files.remito',compact('model'));
+
+        return $pdf->stream();
+    }
+
 }

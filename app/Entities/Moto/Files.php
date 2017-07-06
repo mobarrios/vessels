@@ -20,6 +20,11 @@ class Files extends Entity
         return $this->belongsTo(Sales::getClass());
     }
 
+    public function Vouchers()
+    {
+        return $this->belongsToMany(Vouchers::class);
+    }
+
     public function form12(){
         return $this->hasOne(Form12::getClass());
     }

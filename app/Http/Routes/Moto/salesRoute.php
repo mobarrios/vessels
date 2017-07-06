@@ -67,4 +67,6 @@ Route::group(['prefix'=>'sales'],function(){
     Route::get('/changeStatus',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.sales.changeStatus','uses'=>'Moto\SalesController@changeStatus']);
 
 
+
+
 });

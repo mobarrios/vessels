@@ -3,6 +3,7 @@
 
 
  use App\Entities\Entity;
+ use App\Entities\Moto\Files;
  use App\Entities\Moto\Payments;
  use App\Entities\Moto\Sales;
 
@@ -25,6 +26,11 @@
      public function Payments()
      {
          return $this->belongsToMany(Payments::class);
+     }
+
+     public function Files()
+     {
+         return $this->belongsToMany(Files::class);
      }
 
 

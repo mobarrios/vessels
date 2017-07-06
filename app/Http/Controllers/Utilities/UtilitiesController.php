@@ -58,6 +58,7 @@ class UtilitiesController extends Controller
     public function reciboPdf($id,Vouchers $vouchers,Request $request,Route $route , PDF $pdf){
 
         $model = $vouchers->with('sales')->find($id);
+        dd($model);
         $client = $model->sales->first()->clients;
 
         $pdf->setPaper('a5', 'landscape')->loadView('moto.vouchers.reciboPdf',compact('model','client'));

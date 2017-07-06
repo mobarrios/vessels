@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Moto;
 
 use App\Http\Repositories\Configs\ProvinciasRepo;
+use App\Http\Repositories\Moto\FilesRepo;
 use Bican\Roles\Models\Role;
 use App\Entities\Configs\User;
 use App\Entities\Configs\Additionals;
@@ -414,4 +415,6 @@ class SalesController extends Controller
         return response()->json($data,$estado);
 
     }
+
+
 }
