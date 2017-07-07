@@ -31,6 +31,8 @@ class CreateForm59Table extends Migration
             $table->foreign('files_id')->references('id')->on('files')->onDelete('cascade');
 
 
+            $table->integer('forms_id')->unsigned();
+            $table->foreign('forms_id')->references('id')->on('forms')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -103,12 +103,26 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-xs-12">
+
+
                         <div class="form-inline">
                             <div class="form-group">
                                 <label>
                                     Formulario 01
                                 </label>
                             </div>
+
+                            <div class="input-group">
+                                <div class="input-group-btn">
+
+                                    <a href="{!! route('moto.files.form12') !!}" id="btnForm12" data-toggle="modal" data-target="#modalForm12" class="btn btn-success btn-sm pull-right">
+                                        Crear formulario
+                                    </a>
+                                </div>
+                                {!! Form::select('form_01',$forms01,null,["class" => 'form-control']) !!}
+
+                            </div>
+
                         </div>
                         {!! Form::file('form_01_file') !!}
                         
@@ -125,6 +139,16 @@
                             </div>
                         </div>
                     
+                        @endif
+
+                        @if($forms01->count() == 0)
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="alert bg-gray-light" style="margin-top:5px !important; padding:5px !important;">
+                                        <p class="text-red active"><i class="icon fa fa-warning"></i> No hay <b>formularios 01</b> cargados</p>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -147,6 +171,16 @@
                                 <a href="{!! route('moto.files.form12') !!}" id="btnForm12" data-toggle="modal" data-target="#modalForm12" class="btn btn-success btn-sm pull-right">
                                     Crear formulario
                                 </a>
+
+                                @if($forms12->count() == 0)
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="alert bg-gray-light" style="margin-top:5px !important; padding:5px !important;">
+                                                <p class="text-red active"><i class="icon fa fa-warning"></i> No hay <b>formularios 12</b> cargados</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @else
                                 <div class="btn-group btn-group-sm pull-right">
 
@@ -179,6 +213,16 @@
                                 <a href="{!! route('moto.files.form59') !!}" id="btnForm59" data-toggle="modal" data-target="#modalForm59" class="btn btn-success btn-sm pull-right">
                                     Crear formulario
                                 </a>
+
+                                @if($forms59->count() == 0)
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="alert bg-gray-light" style="margin-top:5px !important; padding:5px !important;">
+                                                <p class="text-red active"><i class="icon fa fa-warning"></i> No hay <b>formularios 59</b> cargados</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @else
                                 <div class="btn-group btn-group-sm pull-right">
 
@@ -368,6 +412,14 @@
 
                         <div class="row">
                             <div class="col-xs-12 form-group">
+                                {!! Form::label('Número de formulario:') !!}
+                                {!! Form::select('forms_id', $forms12,null, ['class'=>'select2 form-control']) !!}
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 form-group">
                                 {!! Form::label('Municipio:') !!}
                                 {!! Form::select('municipio', $municipios,null, ['class'=>'select2 form-control']) !!}
                             </div>
@@ -406,6 +458,16 @@
                         {!! Form::open(['route'=> ['moto.'.$section.'.form59', $models->id ], 'files' =>'true']) !!}
                     @endif
                         {!! Form::hidden('sales_id',null) !!}
+
+
+                        <div class="row">
+                            <div class="col-xs-12 form-group">
+                                {!! Form::label('Número de formulario:') !!}
+                                {!! Form::select('forms_id', $forms59,null, ['class'=>'select2 form-control']) !!}
+
+                            </div>
+                        </div>
+
                         <div class="row">
                             <p class="text-center">
                                 <b>"C" COMERCIANTE HABITUALISTA</b>

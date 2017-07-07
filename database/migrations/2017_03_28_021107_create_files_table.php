@@ -39,6 +39,8 @@ class CreateFilesTable extends Migration
             $table->string('form_59_file')->nullable();
 
 
+            $table->integer('form_01')->nullable()->unsigned();
+            $table->foreign('form_01')->references('id')->on('forms')->onDelete('cascade')->onUpdate('cascade');
 //            FÍSICOS
 
             $table->string('dni_photocopy_file')->nullable();

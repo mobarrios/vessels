@@ -33,6 +33,10 @@
 
         font-size:12px !important;
     }
+
+    .content-wrapper, .right-side{
+        min-height: 84vh;
+    }
 </style>
 
 
