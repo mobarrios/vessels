@@ -11,7 +11,7 @@ class Form12 extends Entity
 
     protected $table = 'form_12';
 
-    protected $fillable = ['observaciones','files_id','municipio'];
+    protected $fillable = ['observaciones','files_id','municipio','forms_id'];
 
     protected $section = 'form12';
 
@@ -20,6 +20,9 @@ class Form12 extends Entity
         return $this->belongsTo(Files::getClass(),'files_id');
     }
 
+    public function Forms(){
+        return $this->hasOne(Forms::getClass());
+    }
 }
 
 

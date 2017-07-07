@@ -22,7 +22,10 @@ class CreateForm12Table extends Migration
             $table->smallInteger('municipio')->nullable();
 
             $table->integer('files_id')->unsigned();
-            $table->foreign('files_id')->references('id')->on('files')->onDelete('cascade');;
+            $table->foreign('files_id')->references('id')->on('files')->onDelete('cascade');
+
+            $table->integer('forms_id')->unsigned();
+            $table->foreign('forms_id')->references('id')->on('forms')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
