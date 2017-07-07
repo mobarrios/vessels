@@ -60,9 +60,26 @@
         {!! Form::select('motocicleta_sin_averias', [], null, ['class'=>'form-control']) !!}
     </div>
 
-    <div class="col-xs-2 form-group">
+    <div class="col-xs-12 form-group">
         {!! Form::label('Observaciones') !!}
         {!! Form::text('observaciones', null, ['class'=>'form-control']) !!}
+    </div>
+
+    <div class="col-xs-12 form-group">
+        {!! Form::label('Descripción del Cliente') !!}
+        {!! Form::textArea('descripcion_cliente', null, ['class'=>'form-control']) !!}
+    </div>
+    <div class="col-xs-12 form-group">
+        {!! Form::label('Diagnostico ') !!}
+        {!! Form::textArea('diagnosticos', null, ['class'=>'form-control']) !!}
+    </div>
+    <div class="col-xs-12 form-group">
+        {!! Form::label('Servicios ') !!}
+        {!! Form::text('servicios', null, ['class'=>'form-control']) !!}
+    </div>
+    <div class="col-xs-12 form-group">
+        {!! Form::label('Repuestos Utilizados ') !!}
+        {!! Form::text('repuestos', null, ['class'=>'form-control']) !!}
     </div>
 
 @endsection

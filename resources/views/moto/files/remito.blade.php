@@ -341,24 +341,28 @@
 
             <table class="bloque1 mb-20 table">
                 <tr>
-                    <th style="background-color: #dddddd;" colspan="9" class="text-center">Descripción</th>
+                    <th style="background-color: #dddddd;" colspan="5" class="text-center">Descripción</th>
                 </tr>
 
                 <tr>
-                    {{--<th>N°1</th>--}}
+                    <th>N° 01</th>
                     <th>Unidad</th>
                     <th>Sucursal</th>
                     <th>Vendedor</th>
                     <th>Cliente</th>
+                    {{--
                     <th>H. Nacional</th>
                     <th>H. Imp.</th>
                     <th>Arancel</th>
                     <th>Registro</th>
                     <th>Total</th>
+                    --}}
                 </tr>
 
                 @foreach($model->Files as $files)
                     <tr>
+                        <td></td>
+
                         <td>{!! $files->Sales->first()->Items->first()->models->name!!}</td>
                         <td>{!! $files->Brancheables->first()->Branches->Company->nombre_fantasia !!}</td>
                         <td>{!! $files->Sales->first()->User->fullName !!}</td>
@@ -376,7 +380,7 @@
                     <td style="width:40%; padding-top: 70px;">Aclaración</td>
                     <td style="width:20%;padding-top: 50px;">
                         <p>Total registros: <b>{!! $model->Files->count() !!}</b></p>
-                        <p>Total acumulado: <b></b></p>
+                        {{--<p>Total acumulado: <b></b></p>--}}
                     </td>
                 </tr>
             </table>

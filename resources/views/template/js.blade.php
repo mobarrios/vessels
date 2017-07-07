@@ -48,7 +48,6 @@
 <script src="vendors/LTE/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 
 <!-- sweet alert 2 -->
-
 <script src="https://cdn.jsdelivr.net/sweetalert2/6.2.1/sweetalert2.min.js"></script>
 
 
