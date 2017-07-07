@@ -13,7 +13,6 @@ use App\Http\Repositories\Moto\ColorsRepo;
 use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\SalesItemsRepo;
 use App\Http\Repositories\Moto\SalesPaymentsRepo;
-
 use App\Http\Repositories\Moto\TechnicalServicesRepo as Repo;
 use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
@@ -43,6 +42,7 @@ class ServiceOrdersController extends Controller
 
         $this->data['brands']       = $brandsRepo->getAllWithModels();
 //        $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
+
 
         $this->modelsRepo = $modelsRepo;
         $this->clients = $clients;

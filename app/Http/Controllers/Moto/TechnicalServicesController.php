@@ -14,6 +14,7 @@ use App\Http\Repositories\Moto\FinancialsRepo;
 use App\Http\Repositories\Moto\SalesItemsRepo;
 use App\Http\Repositories\Moto\SalesPaymentsRepo;
 
+use App\Http\Repositories\Moto\ServicesRepo;
 use App\Http\Repositories\Moto\TechnicalServicesRepo as Repo;
 use App\Http\Repositories\Moto\ItemsRepo;
 use App\Http\Repositories\Moto\ModelsRepo;
@@ -28,7 +29,8 @@ class TechnicalServicesController extends Controller
 {
     protected $technicalServicesRepo;
 
-    public function __construct(Request $request, Repo $repo, Route $route,ModelsRepo $modelsRepo, Clients $clients,BrandsRepo $brandsRepo,Items $items, IvaConditionsRepo $ivaConditionsRepo)
+    public function __construct(Request $request, Repo $repo, Route $route,ModelsRepo $modelsRepo, Clients $clients,BrandsRepo $brandsRepo,Items $items, IvaConditionsRepo $ivaConditionsRepo
+    ,ServicesRepo $servicesRepo)
     {
 
         $this->request = $request;
@@ -43,6 +45,8 @@ class TechnicalServicesController extends Controller
 
         $this->data['brands']       = $brandsRepo->getAllWithModels();
         $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name','id');
+        $this->data['services'] = $servicesRepo->ListsData('name','id');
+
 
 
         $this->modelsRepo = $modelsRepo;
