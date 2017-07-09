@@ -58,11 +58,8 @@ return [
     'validationsUpdate' => [
         'estado' => 'required',
         'ubicacion' => 'required',
-        'form_01' => 'boolean',
-        'form_01_file' => 'required_with:form_01',
-        'form_12' => 'boolean',
+        'form_01' => 'exists:forms,id',
         'form_12_file' => 'required_with:form_12',
-        'form_59' => 'boolean',
         'form_59_file' => 'required_with:form_59',
         'dni_photocopy' => 'boolean',
         'dni_photocopy_file' => 'required_with:dni_photocopy',

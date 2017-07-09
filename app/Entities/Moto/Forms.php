@@ -21,7 +21,18 @@
      {
          return config('status.forms')[$this->attributes['status']];
      }
-     
+
+     public function listadoPrepend($type){
+         $datos = $this->where('forms_types',$type)->where('status',1)->get();
+
+         $val = (array('Seleccione...'));
+
+         foreach($datos as $d){
+             $val[$d->number] = $d->id;
+         }
+
+        return collect($val);
+     }
  }
 
 

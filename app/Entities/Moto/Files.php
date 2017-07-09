@@ -26,7 +26,7 @@ class Files extends Entity
     }
 
     public function form01(){
-        return $this->hasOne(Forms::getClass());
+        return $this->hasOne(Forms::getClass(),"form_01","id");
     }
 
     public function form12(){
@@ -95,7 +95,11 @@ class Files extends Entity
         return $arr;
     }
 
+    public function setForm01Attribute($val){
 
+        $this->attributes["form_01"] = $val === '0' ? null : $val;
+
+    }
 
 
 }
