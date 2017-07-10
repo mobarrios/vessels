@@ -112,20 +112,17 @@
                                 </label>
                             </div>
 
-                            <div class="input-group">
-                                <div class="input-group-btn">
+                            @if($forms01->count() != 0)
+                                <div class="input-group pull-right input-group-sm">
+                                    {!! Form::select('form_01',$forms01,null,["class" => 'form-control']) !!}
 
-                                    <a href="{!! route('moto.files.form12') !!}" id="btnForm12" data-toggle="modal" data-target="#modalForm12" class="btn btn-success btn-sm pull-right">
-                                        Crear formulario
-                                    </a>
                                 </div>
-                                {!! Form::select('form_01',$forms01,null,["class" => 'form-control']) !!}
-
-                            </div>
+                            @endif
 
                         </div>
+                        <br>
                         {!! Form::file('form_01_file') !!}
-                        
+
                         @if($models->form_01_file)
                         <br>
                         <div class="row">
@@ -137,9 +134,9 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                    
                         @endif
+                        </div>
+
 
                         @if($forms01->count() == 0)
                             <div class="row">
@@ -168,9 +165,11 @@
 
 
                             @if(!$models->form12)
+                                @if($forms12->count() != 0)
                                 <a href="{!! route('moto.files.form12') !!}" id="btnForm12" data-toggle="modal" data-target="#modalForm12" class="btn btn-success btn-sm pull-right">
                                     Crear formulario
                                 </a>
+                                @endif
 
                                 @if($forms12->count() == 0)
                                     <div class="row">
@@ -210,9 +209,11 @@
                             </div>
 
                             @if(!$models->form59)
-                                <a href="{!! route('moto.files.form59') !!}" id="btnForm59" data-toggle="modal" data-target="#modalForm59" class="btn btn-success btn-sm pull-right">
-                                    Crear formulario
-                                </a>
+                                @if($forms59->count() != 0)
+                                    <a href="{!! route('moto.files.form59') !!}" id="btnForm59" data-toggle="modal" data-target="#modalForm59" class="btn btn-success btn-sm pull-right">
+                                        Crear formulario
+                                    </a>
+                                @endif
 
                                 @if($forms59->count() == 0)
                                     <div class="row">
@@ -408,7 +409,7 @@
                         {!! Form::open(['route'=> ['moto.'.$section.'.form12', $models->id] , 'files' =>'true']) !!}
                     @endif
 
-                        {!! Form::hidden('sales_id',null) !!}
+                        {!! Form::hidden('sales_id',$models->sales->id) !!}
 
                         <div class="row">
                             <div class="col-xs-12 form-group">
@@ -457,7 +458,7 @@
                     @else
                         {!! Form::open(['route'=> ['moto.'.$section.'.form59', $models->id ], 'files' =>'true']) !!}
                     @endif
-                        {!! Form::hidden('sales_id',null) !!}
+                        {!! Form::hidden('sales_id',$models->sales->id) !!}
 
 
                         <div class="row">
@@ -601,18 +602,6 @@
                 crearModal();
             });
 
-
-
-            $("#modalForm59").on('show.bs.modal',function(ev){
-                var id = $('select[name=sales_id]').val();
-
-                $(ev.target).find('input[name=sales_id]').val(id);
-            });
-
-
-
-
-            
 
 
         })
