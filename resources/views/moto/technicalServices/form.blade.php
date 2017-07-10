@@ -75,15 +75,7 @@
     </div>
     <div class="col-xs-12 form-group">
         {!! Form::label('Servicios ') !!}
-        <div class="input-group">
-            {!! Form::select('servicios', $services ,null,  ['class'=>'select2 form-control']) !!}
-            <span class="input-group-addon" id="basic-addon2">
-                        <button class="btn btn-default" type="button">Go!</button>
-            </span>
-        </div>
-
-
-
+        {!! Form::select('servicios', $services ,null,  ['class'=>'selectMulti form-control' , 'multi'=>'multi' ]) !!}
     </div>
     <div class="col-xs-12 form-group">
         {!! Form::label('Repuestos Utilizados ') !!}
