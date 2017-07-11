@@ -15,8 +15,8 @@
                 </a>
             </li>
 
-            @permission('clients.list|budgets.list|technicalServices.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["clients","prospectos","budgets","technicalServices"]) ? 'active' : ''  }}">
+            @permission('clients.list|budgets.list')
+            <li class="treeview {{ in_array(Request::segment(2), ["clients","prospectos","budgets"]) ? 'active' : ''  }}">
                 <a href="#">
                     <i class="fa fa-group "></i> <span>Clientes</span>
                     <span class="pull-right-container">
@@ -34,13 +34,27 @@
                     <li class={{ Request::segment(2) == "budgets" ? 'active' : '' }}><a
                                 href="{{route('moto.budgets.create')}}"><span>Nuevo Presupuesto</span></a></li>
                     @endpermission
+                </ul>
+            </li>
+            @endpermission
+
+            @permission('technicalServices.list')
+            <li class="treeview {{ in_array(Request::segment(2), ["technicalServices"]) ? 'active' : ''  }}">
+                <a href="#">
+                    <i class="fa fa-wrench "></i> <span>Servicio Técnico</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
                     @permission('technicalServices.list')
                     <li class={{ Request::segment(2) == "technicalServices" ? 'active' : '' }}><a
-                                href="{{route('moto.technicalServices.index')}}"><span>Servcio técnico</span></a></li>
+                                href="{{route('moto.technicalServices.index')}}"><span>Ordenes de Servicio</span></a></li>
                     @endpermission
                 </ul>
             </li>
             @endpermission
+
 
 
             @permission('items.list|modelslistsprices.list|brands.list|categories.list|models.list|colors.list')

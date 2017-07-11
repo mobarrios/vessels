@@ -39,6 +39,14 @@ class UsersRepo extends BaseRepo {
     }
 
 
+    public function listMecanicos()
+    {
+        $data =  $this->model->whereHas('roles',function($q){
+           $q->where('slug','mecanico');
+        })->get();
+
+        return $data->lists('fullName','id');
+    }
     
 
 }

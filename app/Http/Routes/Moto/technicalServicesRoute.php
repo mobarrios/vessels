@@ -5,7 +5,7 @@ Route::group(['prefix'=>'technicalServices'],function(){
     $section =  'technicalServices';
 
     Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.'.$section.'.destroy','uses'=>'Moto\technicalServicesController@destroy']);
-    Route::get('/edit/{client?}/{id?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.edit','uses'=>'Moto\technicalServicesController@edit']);
+    Route::get('/edit/{id?}/{client?}',       ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.edit','uses'=>'Moto\technicalServicesController@edit']);
     Route::post('/update/{id?}',    ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.update','uses'=>'Moto\technicalServicesController@update']);
 
     Route::get('/create/{id?}',           ['middleware'=>'permission:'.$section.'.create','as'=>'moto.'.$section.'.create','uses'=>'Moto\technicalServicesController@create']);
@@ -22,7 +22,6 @@ Route::group(['prefix'=>'technicalServices'],function(){
 
 
     Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.'.$section.'.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
-
 
     Route::get('/recibo',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.'.$section.'.recibo','uses'=>'Utilities\UtilitiesController@reciboPdf']);
 

@@ -18,13 +18,27 @@ class CreateTechnicalServiceTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->string('diagnostico');
+            $table->string('patente');
+            $table->string('n_motor');
+            $table->string('n_cuadro');
+
+            $table->text('observaciones');
+            $table->text('descripcion_cliente');
+
+            $table->string('status');
+
             $table->integer('clients_id')->unsigned()->nullable();
             $table->foreign('clients_id')->references('id')->on('clients');
 
-            $table->integer('users_id')->unsigned()->nullable();
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->integer('clients_items_id')->unsigned()->nullable();
+            $table->foreign('clients_items_id')->references('id')->on('items');
 
-            $table->string('diagnostic');
+            $table->integer('models_id')->unsigned()->nullable();
+            $table->foreign('models_id')->references('id')->on('models');
+
+            $table->integer('mecanicos_id')->unsigned()->nullable();
+            $table->foreign('mecanicos_id')->references('id')->on('users');
 
         });
     }

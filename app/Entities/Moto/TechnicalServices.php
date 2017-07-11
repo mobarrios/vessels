@@ -9,7 +9,7 @@
 
      protected $table = 'technical_services';
 
-     protected $fillable = ['clients_id','diagnostic','shifts_id','users_id'];
+     protected $fillable = ['clients_id', 'patente','n_motor', 'n_cuadro','clients_items_id','observaciones','descripcion_cliente','diagnostico','models_id','mecanicos_id'];
 
      protected $section = 'technicalServices';
 
@@ -17,6 +17,7 @@
      {
          return $this->belongsTo(Clients::class);
      }
+
 
 
  }
