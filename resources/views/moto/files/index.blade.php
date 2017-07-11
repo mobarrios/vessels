@@ -186,7 +186,6 @@
                 url: "{!! route('moto.files.remito') !!}",
                 data: 'files_id='+data+'&_token={!! csrf_token() !!}',
                 success: function(data){
-                    hidePreload();
                     window.location.href = 'moto/files/remito/'+data;
                 }
 

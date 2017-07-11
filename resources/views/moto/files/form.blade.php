@@ -112,7 +112,11 @@
                                 </label>
                             </div>
 
-                            @if($forms01->count() != 0)
+                            @if($models->form_01)
+                                <div class="input-group pull-right input-group">
+                                    <span class="label label-default" style="font-size:12px;"> N° {!! $models->form01->number !!}</span>
+                                </div>
+                            @elseif($forms01->count() > 1)
                                 <div class="input-group pull-right input-group-sm">
                                     {!! Form::select('form_01',$forms01,null,["class" => 'form-control']) !!}
 
@@ -134,11 +138,11 @@
                                     </span>
                                 </div>
                             </div>
-                        @endif
                         </div>
+                        @endif
 
 
-                        @if($forms01->count() == 0)
+                        @if($forms01->count() == 1)
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="alert bg-gray-light" style="margin-top:5px !important; padding:5px !important;">
@@ -165,13 +169,13 @@
 
 
                             @if(!$models->form12)
-                                @if($forms12->count() != 0)
+                                @if($forms12->count() > 1)
                                 <a href="{!! route('moto.files.form12') !!}" id="btnForm12" data-toggle="modal" data-target="#modalForm12" class="btn btn-success btn-sm pull-right">
                                     Crear formulario
                                 </a>
                                 @endif
 
-                                @if($forms12->count() == 0)
+                                @if($forms12->count() == 1)
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="alert bg-gray-light" style="margin-top:5px !important; padding:5px !important;">
@@ -209,13 +213,13 @@
                             </div>
 
                             @if(!$models->form59)
-                                @if($forms59->count() != 0)
+                                @if($forms59->count() > 1)
                                     <a href="{!! route('moto.files.form59') !!}" id="btnForm59" data-toggle="modal" data-target="#modalForm59" class="btn btn-success btn-sm pull-right">
                                         Crear formulario
                                     </a>
                                 @endif
 
-                                @if($forms59->count() == 0)
+                                @if($forms59->count() == 1)
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="alert bg-gray-light" style="margin-top:5px !important; padding:5px !important;">

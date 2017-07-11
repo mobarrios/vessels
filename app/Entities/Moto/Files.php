@@ -26,7 +26,7 @@ class Files extends Entity
     }
 
     public function form01(){
-        return $this->hasOne(Forms::getClass(),"form_01","id");
+        return $this->belongsTo(Forms::getClass(),"form_01","id");
     }
 
     public function form12(){

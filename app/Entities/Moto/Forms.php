@@ -28,7 +28,7 @@
          $val = (array('Seleccione...'));
 
          foreach($datos as $d){
-             $val[$d->number] = $d->id;
+             $val[$d->id] = $d->number;
          }
 
         return collect($val);
