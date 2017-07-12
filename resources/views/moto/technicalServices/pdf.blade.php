@@ -2,14 +2,291 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Orden de servicio</title>
 
-    <base href="{!! asset('') !!}">
-    <link rel="stylesheet" href="vendors/LTE/plugins/iCheck/all.css">
     <style>
+        *{
+            padding:0;
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            font-size: 11px;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: Helvetica,Arial,sans-serif;
+            font-weight: 400;
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 100%;
+            margin: auto;
+
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 12px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+        }
+
+        body {
+            margin: 0;
+            margin-top:10px !important;
+        }
+
+        html {
+            font-size: 10px;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+
+        .img-responsive{
+            width: 100%;
+        }
+
+
+        .row {
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+
+        /*Tablas*/
+        .table {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        table {
+            background-color: transparent;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            float: left;
+        }
+
+        table.no-border {
+            border-spacing: 0;
+            border-collapse: collapse;
+            border: none;
+        }
+
+        .table>thead:first-child>tr:first-child>th {
+            border-top: 0;
+        }
+
+        .table>thead>tr>th {
+            border-bottom: 2px solid #f4f4f4;
+        }
+
+        .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+            border-top: 1px solid #f4f4f4;
+        }
+
+        .table>thead>tr>th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        td, th {
+            padding: 0;
+        }
+
+        .no-border>tbody>tr>td, .no-border>tbody>tr>th, .no-border>tfoot>tr>td, .no-border>tfoot>tr>th, .no-border>thead>tr>td, .no-border>thead>tr>th{
+            border: none !important;
+        }
+
+        .table-striped>thead>tr:nth-child(2) {
+            background-color: #f9f9f9;
+        }
+
+        .colorWhite{
+            color: white;
+        }
+
+        .bg-blue{
+            background-color: #3498db;
+        }
+
+        .blue{
+            color: #3498db;
+        }
+
+        #logo{
+            width:150px;
+        }
+
+
+        .center-block{
+            margin: auto;
+        }
+
+        .mb-40n{
+            margin-bottom: -40px;
+        }
+
+        .mb-20{
+            margin-bottom: 20px;
+        }
+
+
+        .text-danger{
+            color: #a94442;
+        }
+
+
+        .mt100{
+            margin-top: 100px;
+        }
+
+        .logo{
+            font-size: 25pt;
+            line-height: 110px;
+
+        }
+
+
+        .lh100{
+            margin-top: 40px;
+        }
+
+        .fs15{
+            font-size: 15pt;
+        }
+
+        .fs20
+        {
+            font-size: 20pt;
+        }
+
+        .bold{
+            font-weight: bold;
+        }
+
+        .upper{
+            text-transform: uppercase;
+        }
+
+        .ml20{
+            margin-left: 20px;
+        }
+
+        .separador{
+            width:100%;
+            height:1px;
+            background: #9a9c9a;
+            margin: 10px 0;
+        }
+
+        .border{
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
+        }
+
+        .border-bottom{
+            border-bottom: 1px solid rgb(190, 190, 190);
+
+        }
+
+        .bloque1{
+            width:100%;
+        }
+
+
+        .col-xs-12 {
+            width: 100%;
+        }
+        .col-xs-11 {
+            width: 91.66666667%;
+        }
+        .col-xs-10 {
+            width: 83.33333333%;
+        }
+        .col-xs-9 {
+            width: 75%;
+        }
+        .col-xs-8 {
+            width: 66.66666667%;
+        }
+        .col-xs-7 {
+            width: 58.33333333%;
+        }
+        .col-xs-6 {
+            width: 50%;
+        }
+        .col-xs-5 {
+            width: 41.66666667%;
+        }
+        .col-xs-4 {
+            width: 33.33333333%;
+        }
+        .col-xs-3 {
+            width: 25%;
+        }
+        .col-xs-2 {
+            width: 16.66666667%;
+        }
+        .col-xs-1 {
+            width: 8.33333333%;
+        }
+
+        .text-center{
+            text-align: center;
+        }
+
+        hr{
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;;
+        }
+
+        .ml20{
+            margin-left: 20px !important;
+        }
+
+        .mb-20{
+            margin-bottom: 20px !important;
+            margin-top: 20px !important;
+        }
+
+        .mb-10{
+            margin-bottom:10px;
+        }
+
+        .cierre{
+            position:absolute;
+            bottom: 30px;
+            margin-right: 20px;
+            margin-left: 20px;
+            border:1px solid #ddd;
+        }
+
+
+
+
+
         .titulo{
 
             background: #4e4e4e;
@@ -85,7 +362,7 @@
 
         .doble-check{
             position: absolute;
-            right: 2px;
+            right: 22px;
             top: 2px;
         }
 
@@ -98,666 +375,855 @@
         }
 
         input[type='radio']{
-            width: 20px;
-            height: 20px;
+            display: inline-block;
+            position: relative;
+            margin-left: -15px;
+            margin-bottom:-10px;
         }
 
         input[type='radio']:after {
-            width: 20px;
-            height: 20px;
-            border-radius: 15px;
-            top: -2px;
-            left: -1px;
-            position: relative;
-            background-color: #d1d3d1;
+            width: 15px;
+            height: 5px;
+            border-radius: 50%;
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            padding-top:10px;
+            background-color: #f8faf8;
             content: '';
             display: inline-block;
             visibility: visible;
-            border: 2px solid white;
+            border: 1px solid black;
         }
 
         input[type='radio']:checked:after {
-            width: 20px;
-            height: 20px;
-            border-radius: 15px;
-            top: -2px;
-            left: -1px;
-            position: relative;
+            width: 15px;
+            height: 5px;
+            border-radius: 50%;
+            padding-top:10px;
+            top: 0px;
+            left: 0px;
+            position: absolute;
             content: '';
             display: inline-block;
             visibility: visible;
-            border: 2px solid white;
+            border: 1px solid black;
+        }
+
+
+        input[type='checkbox']{
+            display: inline-block;
+            position: relative;
+            margin-left: -15px;
+            margin-bottom:-10px;
+        }
+
+        input[type='checkbox']:after {
+            width: 15px;
+            height: 5px;
+            border-radius: 10%;
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            padding-top:10px;
+            background-color: #f8faf8;
+            content: '';
+            display: inline-block;
+            visibility: visible;
+            border: 1px solid black;
+        }
+
+        input[type='checkbox']:checked:after {
+            width: 12px;
+            height: 5px;
+            border-radius: 10%;
+            padding-top:10px;
+            line-height: 2px;
+            padding-left: 3px;
+            top: 0px;
+            left: 0px;
+            position: absolute;
+            content: 'X';
+            display: inline-block;
+            visibility: visible;
+            border: 1px solid black;
         }
 
         input[type='radio']:checked:after {
             background-color: #595b59;
         }
 
+
+        .radio-green{
+            margin-left: 0px !important;
+            right: 25px;
+        }
+
+
         input[type='radio'].radio-green:checked:after {
             background-color: #f73100;
-            border: 2px solid #d72d00;
+            border: 1px solid #d72d00;
+            position:absolute;
         }
 
         input[type='radio'].radio-red:checked:after {
+            position:absolute;
             background-color: #29f100;
-            border: 2px solid #1a9800;
+            border: 1px solid #1a9800;
         }
 
+        label{
+            display: inline-block;
 
+        }
 
+        .clearfix{
+            clear: both;
+        }
+
+        .float-left{
+            float: left;
+        }
     </style>
 </head>
-<body class="hold-transition skin-purple-light sidebar-mini">
-    <div class="wrapper">
-        <div class="container">
-
-            <div class="row">
+<body>
+        <div class="row">
             <!-- Default box -->
+
+            <table class="col-xs-7 no-border table">
+                <tr class="titulo">
+                    <td colspan="4">Sucursal: {!! $model->brancheables->branches-> !!}</td>
+                </tr>
+
+                <tr>
+                    <td><b>Dirección:</b></td>
+                    <td>  </td>
+
+                    <td><b>C.P: </b></td>
+                    <td>  </td>
+                </tr>
+
+                <tr>
+                    <td><b>Cuit: </b></td>
+                    <td>  </td>
+
+                    <td><b>Tel.: </b></td>
+                    <td>  </td>
+                </tr>
+
+                <tr>
+                    <td><b>Provincia: </b></td>
+                    <td>  </td>
+
+                    <td><b>E-mail.: </b></td>
+                    <td>  </td>
+                </tr>
+
+                <tr>
+                    <td><b>Localidad:</b> </td>
+                    <td>  </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+
+            </table>
+
+            <table class="col-xs-5 table no-border" style="margin-left:10px;">
+                <tr class="titulo">
+                    <td colspan="2">Orden de servicio</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><b>N: 0000001</b></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+
+        <div class="row">
+            <table class="col-xs-7 no-border table">
+                <tr class="titulo">
+                    <td colspan="4">Datos del cliente</td>
+                </tr>
+
+                <tr>
+                    <td><b>Nombre y Apellido:</b></td>
+                    <td>  </td>
+
+                    <td><b>Dirección: </b></td>
+                    <td>  </td>
+                </tr>
+
+                <tr>
+                    <td><b>Localidad: </b></td>
+                    <td>  </td>
+
+                    <td><b>E-mail: </b></td>
+                    <td>  </td>
+                </tr>
+
+                <tr>
+                    <td><b>Teléfono: </b></td>
+                    <td>  </td>
+
+                    <td colspan="2"></td>
+                </tr>
+
+            </table>
+
+            <table class="col-xs-5 table no-border" style="margin-left:10px;">
+                <tr class="titulo">
+                    <td colspan="4">Datos del vehículo</td>
+                </tr>
+
+                <tr>
+                    <td><b>Patente:</b></td>
+                    <td></td>
+
+                    <td><b>Modelo:</b></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td><b>Chasis:</b></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="clearfix"></div>
+
+
+        <div class="row">
             <div class="col-xs-12">
-                <div class="box">
-
-                    <div class="box-body">
-
-
-                            <div class="section border">
-                                <div class="row">
-                                    <div class="col-xs-7">
-                                        <div class="titulo">
-                                            Sucursal:
-                                        </div>
-
-                                        <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>Dirección:</b></p>
-                                            <p class="col-xs-12"><b>Cuit: </b></p>
-                                            <p class="col-xs-12"><b>Provincia: </b></p>
-                                            <p class="col-xs-12"><b>Localidad:</b> </p>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>C.P: </b></p>
-                                            <p class="col-xs-12"><b>Tel.: </b></p>
-                                            <p class="col-xs-12"><b>E-mail.: </b></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-5">
-                                        <div class="titulo">
-                                            Orden de servicio
-                                        </div>
-                                        <p class="col-xs-12 font-21"><b>N: 0000001</b></p>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xs-7">
-                                        <div class="titulo">
-                                            <b>Datos del cliente</b>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>Nombre y Apellido:</b> </p>
-                                            <p class="col-xs-12"><b>Dirección:</b> </p>
-                                            <p class="col-xs-12"><b>Localidad:</b> </p>
-
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <p class="col-xs-12"><b>E-mail:</b> </p>
-                                            <p class="col-xs-12"><b>Teléfono:</b></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-5">
-                                        <div class="titulo">
-                                            <b>Datos del vehículo</b>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <p><b>Patente:</b></p>
-                                            <p><b>Modelo:</b> </p>
-                                            <p><b>Chasis:</b> </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="titulo">
-                                            <b>Estado general del vehículo</b>
-                                        </div>
-
-                                        <div class="col-xs-4 col-md-2 col-lg-1 mt15"><b>Kilometraje / Horas:</b> {!! Form::text('km_hs',null,['class' => 'form-control']) !!}</div>
-
-
-                                        <div class="col-xs-4 col-md-2 mt15">
-                                            <div class="border2">
-                                                <b class="text-center">Fluido Radiador</b>
-                                                <hr>
-                                                <div>
-                                                    <label for="fuido_radiador_max">Max. </label>{!! Form::radio('fluido_radiador',3,false,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_max']) !!}
-                                                </div>
-
-                                                <div>
-                                                <label for="fuido_radiador_med"> -</label>{!! Form::radio('fluido_radiador',2,true,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_med']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="fuido_radiador_min">Min. </label>{!! Form::radio('fluido_radiador',1,false,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_min']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-xs-4 col-md-2 mt15">
-                                            <div class="border2">
-                                                <b class="text-center">Fluido Frenos</b>
-                                                <hr>
-                                                <div>
-                                                    <label for="fluido_frenos_max">Max. </label>{!! Form::radio('fluido_frenos',1,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_max']) !!}
-                                                </div>
-
-                                                <div>
-                                                <label for="fluido_frenos_med"> -</label>{!! Form::radio('fluido_frenos',2,true,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_med']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="fluido_frenos_min">Min. </label>{!! Form::radio('fluido_frenos',3,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_min']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-xs-4 col-md-2 mt15">
-                                            <div class="border2">
-                                                <b class="text-center">Combustible</b>
-                                                <hr>
-                                                <div>
-                                                    <label for="combustible_full">F </label>{!! Form::radio('combustible',1,false,['class' => 'icheckbox_flat-red','id' => 'combustible_full']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="combustible_3_4">3/4 </label>{!! Form::radio('combustible',2,true,['class' => 'icheckbox_flat-red','id' => 'combustible_3_4']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="combustible_1_2">1/2 </label>{!! Form::radio('combustible',3,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_2']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="combustible_1_4">1/4 </label>{!! Form::radio('combustible',4,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_4']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="combustible_r">R </label>{!! Form::radio('combustible',5,false,['class' => 'icheckbox_flat-red','id' => 'combustible_r']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-xs-4 col-md-2 mt15">
-                                            <div class="border2 h154">
-                                                <b class="text-center">Nivel Aceite</b>
-                                                <hr>
-
-                                                <br>
-                                                <br>
-                                                <div>
-                                                    <label for="nivel_aceite_max">Max. </label>{!! Form::radio('nivel_aceite',1,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_max']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="nivel_aceite_med"> -</label>{!! Form::radio('nivel_aceite',2,true,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_med']) !!}
-                                                </div>
-
-                                                <div>
-                                                    <label for="nivel_aceite_min">Min. </label>{!! Form::radio('nivel_aceite',3,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_min']) !!}
-                                                </div>
-                                                <img src="images/aceite.png" alt="">
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="col-xs-4 col-md-2 mt15">
-                                            <div>
-                                                <label for="kit_herramientas">
-                                                    Kit de herramientas
-                                                 {!! Form::checkbox('kit_herramientas',1,false,['id' => 'kit_herramientas','class' => 'ml5 icheckbox_flat-red']) !!}
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label for="casco">
-                                                    Casco
-                                                 {!! Form::checkbox('casco',1,false,['id' => 'casco','class' => 'ml5 icheckbox_flat-red']) !!}
-                                                </label>
-                                            </div>
-                                            <div>
-                                                <label for="moto_sin_averias">
-                                                    Motocicleta sin averias
-                                                 {!! Form::checkbox('moto_sin_averias',1,false,['id' => 'moto_sin_averias','class' => 'ml5 icheckbox_flat-red']) !!}
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-xs-12 mt15">
-                                        <div class="col-xs-12 col-md-6">
-                                            <img src="images/moto1.png" alt="" class="img-responsive center-block">
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <img src="images/moto2.png" alt="" class="img-responsive center-block">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="titulo">
-                                            <b>Observaciones</b>
-                                        </div>
-
-                                        <div class="col-xs-12">
-                                            {!! Form::textarea('observaciones',null,['class' => 'form-control']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="titulo">
-                                            <b>INSPECCIÓN DE 24 ITEMS (CON LA PRESENCIA DEL CLIENTE)</b>
-                                        </div>
-                                        <div class="col-xs-12 text-center">
-                                            <input type="radio" class="radio-red" checked> <b style="vertical-align: top; line-height: 25px; margin-right: 10px;">OK</b>
-                                            <input type="radio" class="radio-green" checked><b style="vertical-align: top; line-height: 25px;; margin-left: 10px;">Recomendación de reemplazo</b>
-                                        </div>
-
-                                        <div class="col-xs-12">
-                                            <div class="col-xs-12 col-md-6 mt15">
-                                                <div class="relative">
-                                                    <label for="luces_tablero">
-                                                        Luces tablero (Iluminación, neutro, etc)
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('luces_tablero',1,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('luces_tablero',0,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label for="bocina">
-                                                        Bocina
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('bocina',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('bocina',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label for="giros">
-                                                        Giros
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('giros',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('giros',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Puños
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('punios',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('punios',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-
-                                                <div class="relative">
-                                                    <label>
-                                                        Luz Baja / Alta
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('luz_baja_alta',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('luz_baja_alta',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Palanca de embrague
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('palanca_de_embrague',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('palanca_de_embrague',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Cable de embrague
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('cable_de_embrague',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('cable_de_embrague',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Palanca de freno
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('palanca_de_freno',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('palanca_de_freno',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-
-                                                <div class="relative">
-                                                    <label>
-                                                        Cable de freno
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('cable_de_freno',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('cable_de_freno',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-
-                                                <div class="relative">
-                                                    <label>
-                                                        Luz de freno (Palanca: {!! Form::radio('luz_freno',0,false,['class' => 'ml5 icheckbox_flat-red']) !!} / Pedal: {!! Form::radio('luz_freno',1,false,['class' => 'ml5 icheckbox_flat-red']) !!})
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('luz_freno_opcion',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('luz_freno_opcion',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Cable de acelerador
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('cable_de_acelerador',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('cable_de_acelerador',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Espejos retrovisores
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('espejos_retrovisores',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('espejos_retrovisores',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-xs-01 col-md-6 mt05">
-                                                <div class="relative">
-                                                    <label for="luces_tablero">
-                                                        Amortiguadores delanteros
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('amortiguadores_delanteros',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('amortiguadores_delanteros',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label for="bocina">
-                                                        Cinta o pastilla freno delantero
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('cinta_o_pastilla_freno_delantero',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('cinta_o_pastilla_freno_delantero',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label for="giros">
-                                                        Disco/s freno delantero
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('disco_freno_delantero',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('disco_freno_delantero',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Neumático delantero
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('neumatico_delantero',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('neumatico_delantero',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Pedal freno trasero
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('pedal_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('pedal_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Amortiguadores traseros
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('amortiguadores_traseros',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('amortiguadores_traseros',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Cinta o pastilla freno trasero
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('cinta_o_pastilla_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('cinta_o_pastilla_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Disco/s freno trasero
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('disco_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('disco_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Neumático trasero
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('neumatico_trasero',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('neumatico_trasero',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Sistema de transmisión
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('sistema_de_transmision',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('sistema_de_transmision',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="relative">
-                                                    <label>
-                                                        Pedal de cambios
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('pedal_de_cambios',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('pedal_de_cambios',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-
-                                                <div class="relative">
-                                                    <label>
-                                                        Sostén lateral /Caballete/ Pedalines
-                                                        <div class="doble-check">
-                                                            {!! Form::radio('sosten_lateral_caballete_pedalines',0,false,['class' => 'ml5 radio-red']) !!}
-                                                            {!! Form::radio('sosten_lateral_caballete_pedalines',1,false,['class' => 'ml5 radio-green']) !!}
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="titulo">
-                                            <b></b>
-                                        </div>
-
-                                        <div class="col-xs-12">
-                                            <table class="table table-responsive">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="col-xs-1">ITEM</th>
-                                                        <th>DESCRIPCIÓN DEL PEDIDO DEL CLIENTE</th>
-                                                        <th>FECHA DE COMPROMISO DE ENTREGA: {!! Form::text('fecha_entrega',null,['class' => 'datePicker']) !!}</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('entrega_item1',null,['class' => 'form-control']) !!}</td>
-                                                        <td colspan="2">{!! Form::text('entrega_descripcion_item1',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('entrega_item2',null,['class' => 'form-control']) !!}</td>
-                                                        <td colspan="2">{!! Form::text('entrega_descripcion_item2',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('entrega_item3',null,['class' => 'form-control']) !!}</td>
-                                                        <td colspan="2">{!! Form::text('entrega_descripcion_item3',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <div class="col-xs-12">
-                                            <p>
-                                                Me declaro en conocimiento de la condicion en la que se encuentra la unidad, afirmando que los daños en la carrocería detectados en el momento de la recepción, son los indicados en la figura. Autorizo a realizar todos los trabajos descriptos a mi exclusiva cuenta y cargo, y a efectuar todas las pruebas necesarias (incluídas en ruta) de la unidad.
-                                            </p>
-                                            <br>
-
-                                            <div class="col-xs-4">
-                                                <p>22/02/2017</p>
-                                                <p class="mt15"><b>FECHA</b></p>
-                                            </div>
-
-                                            <div class="col-xs-4">
-                                                <br>
-                                                <p class="mt15"><b>FIRMA Y ACLARACIÓN DEL CLIENTE </b></p>
-                                            </div>
-
-                                            <div class="col-xs-4">
-                                                <br>
-                                                <p class="mt15"><b>FIRMA Y ACLARACIÓN DEL RECEPCIONISTA</b></p>
-                                            </div>
-
-
-
-                                            <table class="table table-responsive">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="col-xs-1">ITEM</th>
-                                                        <th>DIAGNÓSTICO Y REPARACIÓN REALIZADA</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('diagnostico_item1',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('diagnostico_descripcion_item1',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('diagnostico_item2',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('diagnostico_descripcion_item2',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('diagnostico_item3',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('diagnostico_descripcion_item3',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
-
-                                            <table class="table table-responsive">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="col-xs-1">CANT.</th>
-                                                        <th>REPUESTOS UTILIZADOS</th>
-                                                        <th> INSTRUMENTOS DE MEDICIÓN UTILIZADOS</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('repuestos_cantidad1',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('repuestos_descripcion1',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('instrumento_de_medicion1',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('repuestos_cantidad2',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('repuestos_descripcion2',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('instrumento_de_medicion2',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-xs-1">{!! Form::text('repuestos_cantidad3',null,['class' => 'form-control']) !!}</td>
-                                                        <td>{!! Form::text('repuestos_descripcion3',null,['class' => 'form-control']) !!}</td>
-                                                        <td>TIEMPO MANO DE OBRA: {!! Form::text('tiempo_mano_de_obra',null,['class' => 'form-control']) !!}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
-
-                                        </div>
-
-                                        <div class="col-xs-12">
-                                            <p>
-                                                Dejo expresa constancia que luego de haber sido probada, retiro la unidad antes mencionada con los trabajos de reparación realizados, declarando conocer y aceptar el estado en el que se encuentra la misma. La unidad será retirada por el titular. En caso de no poder asistir, el responsable deberá acreditar la titularidad de la misma (fotocopia de DNI).
-                                                <br>
-                                                <b>VEHICULO RETIRADO EL:</b>
-
-                                            </p>
-                                            <br>
-
-                                            <div class="col-xs-4">
-                                                <p>22/02/2017</p>
-                                                <p class="mt15"><b>FECHA</b></p>
-                                            </div>
-
-                                            <div class="col-xs-4">
-                                                <br>
-                                                <p class="mt15"><b>FIRMA Y ACLARACIÓN DEL CLIENTE </b></p>
-                                            </div>
-
-                                            <div class="col-xs-4">
-                                                <br>
-                                                <p class="mt15"><b>FIRMA Y ACLARACIÓN DEL RECEPCIONISTA</b></p>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-
-
-                            </div>
+                <div class="titulo">
+                    <b>Estado general del vehículo</b>
+                </div>
+
+                <div class="col-xs-1 mt15 float-left" style="margin: 5px;">
+                    <b>Kilometraje / Horas:</b>
+                    <div style="margin-top:10px;width:50px;height:30px;background: white;border:1px solid #c4c4c4;"></div>
+                </div>
+
+
+                <div class="col-xs-2 mt15 float-left" style="margin: 5px;">
+                    <div class="border2">
+                        <b class="text-center">Fluido Radiador</b>
+                        <hr>
+                        <div>
+                            <label for="fuido_radiador_max">Max. </label>{!! Form::radio('fluido_radiador',3,false,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_max']) !!}
+                        </div>
+
+                        <div>
+                            <label for="fuido_radiador_med"> -</label>{!! Form::radio('fluido_radiador',2,true,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_med']) !!}
+                        </div>
+
+                        <div>
+                            <label for="fuido_radiador_min">Min. </label>{!! Form::radio('fluido_radiador',1,false,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_min']) !!}
+                        </div>
                     </div>
-                    <div class="box-footer clearfix">
-                        <a href="{!! url(\Illuminate\Support\Facades\URL::previous()) !!}" class="btn btn-default">Volver</a>
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-file-pdf-o"></i>
-                        </button>
+                </div>
+
+
+                <div class="col-xs-2 mt15 float-left" style="margin: 5px;">
+                    <div class="border2">
+                        <b class="text-center">Fluido Frenos</b>
+                        <hr>
+                        <div>
+                            <label for="fluido_frenos_max">Max. </label>{!! Form::radio('fluido_frenos',1,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_max']) !!}
+                        </div>
+
+                        <div>
+                            <label for="fluido_frenos_med"> -</label>{!! Form::radio('fluido_frenos',2,true,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_med']) !!}
+                        </div>
+
+                        <div>
+                            <label for="fluido_frenos_min">Min. </label>{!! Form::radio('fluido_frenos',3,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_min']) !!}
+                        </div>
                     </div>
-                    {!! Form::close() !!}
+                </div>
+
+
+                <div class="col-xs-2 mt15 float-left" style="margin: 5px;">
+                    <div class="border2">
+                        <b class="text-center">Combustible</b>
+                        <hr>
+                        <div>
+                            <label for="combustible_full">F </label>{!! Form::radio('combustible',1,false,['class' => 'icheckbox_flat-red','id' => 'combustible_full']) !!}
+                        </div>
+
+                        <div>
+                            <label for="combustible_3_4">3/4 </label>{!! Form::radio('combustible',2,true,['class' => 'icheckbox_flat-red','id' => 'combustible_3_4']) !!}
+                        </div>
+
+                        <div>
+                            <label for="combustible_1_2">1/2 </label>{!! Form::radio('combustible',3,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_2']) !!}
+                        </div>
+
+                        <div>
+                            <label for="combustible_1_4">1/4 </label>{!! Form::radio('combustible',4,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_4']) !!}
+                        </div>
+
+                        <div>
+                            <label for="combustible_r">R </label>{!! Form::radio('combustible',5,false,['class' => 'icheckbox_flat-red','id' => 'combustible_r']) !!}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-2 float-left mt15" style="margin: 5px;">
+                    <div class="border2 h154" style="position: relative">
+                        <b class="text-center">Nivel Aceite</b>
+                        <hr>
+
+                        <br>
+                        <br>
+                        <div>
+                            <label for="nivel_aceite_max">Max. </label>{!! Form::radio('nivel_aceite',1,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_max']) !!}
+                        </div>
+
+                        <div>
+                            <label for="nivel_aceite_med"> -</label>{!! Form::radio('nivel_aceite',2,true,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_med']) !!}
+                        </div>
+
+                        <div>
+                            <label for="nivel_aceite_min">Min. </label>{!! Form::radio('nivel_aceite',3,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_min']) !!}
+                        </div>
+                        <img src="images/aceite.png" alt="" style="position: absolute;left: 55px;margin: auto;top:47px;">
+                    </div>
+                </div>
+
+
+
+                <div class="col-xs-2 float-left mt15" style="margin: 5px;">
+                    <div>
+                        <label for="kit_herramientas">
+                            Kit de herramientas
+                            {!! Form::checkbox('kit_herramientas',1,false,['id' => 'kit_herramientas','class' => 'ml5 icheckbox_flat-red']) !!}
+                        </label>
+                    </div>
+                    <div>
+                        <label for="casco">
+                            Casco
+                            {!! Form::checkbox('casco',1,true,['id' => 'casco','class' => 'ml5 icheckbox_flat-red']) !!}
+                        </label>
+                    </div>
+                    <div>
+                        <label for="moto_sin_averias">
+                            Motocicleta sin averias
+                            {!! Form::checkbox('moto_sin_averias',1,false,['id' => 'moto_sin_averias','class' => 'ml5 icheckbox_flat-red']) !!}
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-xs-12 mt15">
+                <div class="col-xs-6 float-left">
+                    <img src="images/moto1.png" alt="" style="max-width:100%;">
+                </div>
+                <div class="col-xs-6 float-left">
+                    <img src="images/moto2.png" alt="" style="max-width:100%;">
                 </div>
             </div>
         </div>
+
+        <div class="clearfix"></div>
+
+
+        <div class="row">
+            <table class="col-xs-12 table no-border">
+                <tr>
+                    <td class="titulo">
+                        <b>Observaciones</b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        {!! Form::textarea('observaciones',null,['class' => 'form-control','style' => 'min-height: 250px']) !!}
+                    </td>
+                </tr>
+            </table>
         </div>
-    </div>
 
 
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="titulo">
+                    <b>INSPECCIÓN DE 24 ITEMS (CON LA PRESENCIA DEL CLIENTE)</b>
+                </div>
+
+                <div class="col-xs-1 float-left" style="margin-left:300px;">
+                    <input type="radio" class="radio-red" checked> <b style="vertical-align: top; line-height: 25px; margin-left: 10px ;position:relative;">OK</b>
+                </div>
+                <div class="col-xs-4 float-left">
+                    <input type="radio" class="radio-green" checked><b style="vertical-align: top; line-height: 25px;; margin-left: 20px;position:relative;">Recomendación de reemplazo</b>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-xs-6 float-left mt15">
+                    <div class="relative">
+                        <label for="luces_tablero" class="col-xs-11">
+                            Luces tablero (Iluminación, neutro, etc)
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('luces_tablero',1,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('luces_tablero',0,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+
+                    <div class="relative">
+                        <label for="bocina" class="col-xs-11">
+                            Bocina
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('bocina',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('bocina',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label for="giros" class="col-xs-11">
+                            Giros
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('giros',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('giros',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Puños
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('punios',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('punios',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Luz Baja / Alta
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('luz_baja_alta',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('luz_baja_alta',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Palanca de embrague
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('palanca_de_embrague',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('palanca_de_embrague',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Cable de embrague
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('cable_de_embrague',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('cable_de_embrague',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Palanca de freno
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('palanca_de_freno',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('palanca_de_freno',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Cable de freno
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('cable_de_freno',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('cable_de_freno',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="col-xs-5">
+                            Luz de freno (Palanca:
+                        </div>
+
+                        <div class="col-xs-1" style="position:absolute;left:115px;top:5px;">
+                            {!! Form::radio('luz_freno',0,false,['class' => 'ml5']) !!}
+                        </div>
+
+                        <div class="col-xs-4" style="position:absolute;left:140px;top:5px;">
+                            / Pedal:
+                        </div>
+
+                        <div class="col-xs-1"style="position:absolute;left:175px;top:5px;">
+                            {!! Form::radio('luz_freno',1,false,['class' => 'ml5']) !!}
+                        </div>
+                        <div class="col-xs-1"style="position:absolute;left:200px;top:5px;">
+                            )
+                        </div>
+
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('luz_freno_opcion',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('luz_freno_opcion',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Cable de acelerador
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('cable_de_acelerador',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('cable_de_acelerador',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Espejos retrovisores
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('espejos_retrovisores',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('espejos_retrovisores',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-6 float-left mt05">
+                    <div class="relative">
+                        <label for="luces_tablero" class="col-xs-11">
+                            Amortiguadores delanteros
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('amortiguadores_delanteros',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('amortiguadores_delanteros',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label for="bocina" class="col-xs-11">
+                            Cinta o pastilla freno delantero
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('cinta_o_pastilla_freno_delantero',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('cinta_o_pastilla_freno_delantero',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label for="giros" class="col-xs-11">
+                            Disco/s freno delantero
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('disco_freno_delantero',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('disco_freno_delantero',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Neumático delantero
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('neumatico_delantero',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('neumatico_delantero',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Pedal freno trasero
+                        </label>
+                        <div class="doble-check  col-xs-1">
+                            {!! Form::radio('pedal_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('pedal_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Amortiguadores traseros
+                        </label>
+                        <div class="doble-check  col-xs-1">
+                            {!! Form::radio('amortiguadores_traseros',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('amortiguadores_traseros',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Cinta o pastilla freno trasero
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('cinta_o_pastilla_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('cinta_o_pastilla_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Disco/s freno trasero
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('disco_freno_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('disco_freno_trasero',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Neumático trasero
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('neumatico_trasero',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('neumatico_trasero',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Sistema de transmisión
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('sistema_de_transmision',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('sistema_de_transmision',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Pedal de cambios
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('pedal_de_cambios',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('pedal_de_cambios',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="col-xs-11">
+                            Sostén lateral /Caballete/ Pedalines
+                        </label>
+                        <div class="doble-check col-xs-1">
+                            {!! Form::radio('sosten_lateral_caballete_pedalines',0,false,['class' => 'ml5 radio-red']) !!}
+                            {!! Form::radio('sosten_lateral_caballete_pedalines',1,false,['class' => 'ml5 radio-green']) !!}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <table class="col-xs-12 table mt15">
+                <tr class="titulo">
+                    <td colspan="6"></td>
+                </tr>
+
+                <tr style="background: #ddd;">
+                    <th>ITEM</th>
+                    <th colspan="2">DESCRIPCIÓN DEL PEDIDO DEL CLIENTE</th>
+                    <th colspan="3">FECHA DE COMPROMISO DE ENTREGA: <span style="display:block;float:right;margin-top:-5px;width:70px;height:22px;background: white;border:1px solid #c4c4c4;"></span></th>
+                </tr>
+
+                <tr>
+                    <td><b>Localidad: </b></td>
+                    <td colspan="5">
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p style="font-size: 10px; margin-top:20px;">
+                    Me declaro en conocimiento de la condicion en la que se encuentra la unidad, afirmando que los daños en la carrocería detectados en el momento de la recepción, son los indicados en la figura. Autorizo a realizar todos los trabajos descriptos a mi exclusiva cuenta y cargo, y a efectuar todas las pruebas necesarias (incluídas en ruta) de la unidad.
+                </p>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+
+            <table class="col-xs-12 table no-border mt15">
+                <tr>
+                    <td colspan="2">22/02/2017</td>
+
+                    <td colspan="2">
+
+                    </td>
+
+                    <td colspan="2">
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="mt15" colspan="2"><b>FECHA</b></th>
+                    <th class="mt15" colspan="2"><b>FIRMA Y ACLARACIÓN DEL CLIENTE </b></th>
+                    <th class="mt15" colspan="2"><b>FIRMA Y ACLARACIÓN DEL RECEPCIONISTA</b></th>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+
+        <div class="row">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th class="col-xs-1">ITEM</th>
+                        <th>DIAGNÓSTICO Y REPARACIÓN REALIZADA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-xs-3" style="height:15px;">
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3" style="height:15px;">
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3" style="height:15px;">
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+
+        <div class="row">
+
+            <table class="table table-responsive mt15">
+                <thead>
+                    <tr>
+                        <th class="col-xs-1">CANT.</th>
+                        <th>REPUESTOS UTILIZADOS</th>
+                        <th> INSTRUMENTOS DE MEDICIÓN UTILIZADOS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-xs-1" style="height:15px;"></td>
+                        <td style="height:15px;"></td>
+                        <td style="height:15px;"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-xs-1" style="height:15px;"></td>
+                        <td style="height:15px;"></td>
+                        <td style="height:15px;"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-xs-1" style="height:15px;"></td>
+                        <td style="height:15px;"></td>
+                        <td style="height:15px;"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="3" >TIEMPO MANO DE OBRA:</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p style="font-size: 10px; margin-top:20px;">
+                    Dejo expresa constancia que luego de haber sido probada, retiro la unidad antes mencionada con los trabajos de reparación realizados, declarando conocer y aceptar el estado en el que se encuentra la misma. La unidad será retirada por el titular. En caso de no poder asistir, el responsable deberá acreditar la titularidad de la misma (fotocopia de DNI).
+                    <br>
+                    <b>VEHICULO RETIRADO EL: </b>22/02/2017
+                </p>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+
+            <table class="col-xs-12 table no-border mt15">
+                <tr>
+
+                    <td colspan="2">
+
+                    </td>
+
+                    <td colspan="2">
+
+                    </td>
+
+                    <td colspan="2">
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th class="mt15" colspan="2"></th>
+                    <th class="mt15" colspan="2"><b>FIRMA Y ACLARACIÓN DEL CLIENTE </b></th>
+                    <th class="mt15" colspan="2"><b>FIRMA Y ACLARACIÓN DEL RECEPCIONISTA</b></th>
+                </tr>
+
+            </table>
+
+        </div>
 </body>
 </html>

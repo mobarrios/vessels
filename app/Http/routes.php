@@ -22,6 +22,14 @@ Route::get('/constancia', function(\Illuminate\Http\Request $request,\Illuminate
 });
 
 
+Route::get('/ficha', function(){
+
+    //$pdf->setPaper('a5', 'landscape')->loadView('moto.constancia');
+    $data['section'] = 'Servicio técnico';
+    return view('moto.technicalServices.serviceOrder')->with($data);
+});
+
+
 
 
 Route::get('', function(){
