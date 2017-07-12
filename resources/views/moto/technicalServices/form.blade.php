@@ -114,7 +114,7 @@
             @foreach($repuestos as $repuesto)
                 <optgroup label="{{$repuesto->name}}">
                     @foreach($repuesto->Items as $item)
-                            <option value="{{$item->id}}" {{ in_array($item,[$models->Items]) ? 'selected' : '' }}>{{$item->serial_number}}</option>
+                            <option value="{{$item->id}}">{{$item->serial_number}}</option>
                     @endforeach
                 </optgroup>
             @endforeach
