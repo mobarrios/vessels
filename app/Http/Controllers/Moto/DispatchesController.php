@@ -88,7 +88,7 @@ class DispatchesController extends Controller
 
     public function addItems(DispatchesItemsRepo $dispatchesItemsRepo, ItemsRepo $itemsRepo)
     {
-        $item_data = ['models_id' => $this->request->models_id, 'n_motor' => $this->request->n_motor, 'n_cuadro' => $this->request->n_cuadro, 'talle' => $this->request->talle, 'colors_id' => $this->request->colors_id, 'status' => '1'];
+        $item_data = ['serial_number'=> $this->request->serial_number ,'models_id' => $this->request->models_id, 'n_motor' => $this->request->n_motor, 'n_cuadro' => $this->request->n_cuadro, 'talle' => $this->request->talle, 'colors_id' => $this->request->colors_id, 'status' => '1'];
 
         //$item = new Items();
         //$item->fill($item_data);

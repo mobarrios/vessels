@@ -492,7 +492,7 @@
 
             <table class="col-xs-7 no-border table">
                 <tr class="titulo">
-                    <td colspan="4">Sucursal: {!! $model->brancheables->branches-> !!}</td>
+                    <td colspan="4">Sucursal:</td>
                 </tr>
 
                 <tr>

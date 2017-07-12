@@ -10,10 +10,9 @@
 
      protected $table = 'items';
 
-     protected $fillable = ['name','n_motor','n_cuadro','year','models_id','colors_id','status', 'talle'];
+     protected $fillable = ['name','n_motor','n_cuadro','year','models_id','colors_id','status', 'talle','serial_number'];
      protected $section = 'items';
-
-
+     
 
      public function Certificates()
      {

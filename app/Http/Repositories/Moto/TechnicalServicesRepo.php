@@ -24,7 +24,7 @@ class TechnicalServicesRepo extends BaseRepo
 
             if(isset($data->repuestos))
             {
-                $model->Repuestos()->attach($data->repuestos);
+                $model->Items()->attach($data->repuestos);
             }
 
         return $model;
@@ -41,7 +41,7 @@ class TechnicalServicesRepo extends BaseRepo
 
          if(isset($data->repuestos))
          {
-             $model->Repuestos()->sync($data->repuestos);
+             $model->Items()->sync($data->repuestos);
          }
 
          return $model;

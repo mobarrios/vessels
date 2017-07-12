@@ -9,16 +9,19 @@
 
                 </td>
                 <td>{{$model->Certificates->year or ''}}</td>
-                <td>{{$model->Colors->name}}</td>
 
-                @if($model->models->types_id === 1)
+                @if($model->models->types_id == 1)
+                    <td>{{$model->Colors->name}}</td>
                     <td>Motor:  <strong >{{$model->n_motor}}</strong> <br>
                         Cuadro:  <strong >{{$model->n_cuadro}}</strong>
                     </td>
-                @elseif($model->models->types_id === 2)
+                @elseif($model->models->types_id == 2)
+                    <td>{{$model->Colors->name}}</td>
                     <td>Talle:  <strong >{{$model->talle}}</strong>
                     </td>
-                @else
+                @elseif($model->models->types_id == 3)
+                    <td>{{$model->serial_number}}</td>
+                    </td>
 
                 @endif
                 <td>

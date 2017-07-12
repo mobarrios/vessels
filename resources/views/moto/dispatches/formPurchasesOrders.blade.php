@@ -24,19 +24,24 @@
                             <td>{{$dispatchesItem->PurchasesOrdersItems->Models->TypesName}}</td>
                             <td>{{$dispatchesItem->PurchasesOrdersItems->Models->Brands->name}}
                                 : {{$dispatchesItem->PurchasesOrdersItems->Models->name}}
-                                </td>
-                            <td>{{$dispatchesItem->PurchasesOrdersItems->Colors->name}} </td>
-
-
+                            </td>
                             @if($dispatchesItem->PurchasesOrdersItems->Models->types_id == 1)
-                                <td><input class="m{{$dispatchesItem->id}}" type="text" placeholder="N Motor"> <input
+                                <td>{{$dispatchesItem->PurchasesOrdersItems->Colors->name}} </td>
+                                <td>
+                                    <input class="m{{$dispatchesItem->id}}" type="text" placeholder="N Motor"> <input
                                             class="c{{$dispatchesItem->id}}" type="text" placeholder="N Cuadro">
                                 </td>
-                            @else
+                            @elseif($dispatchesItem->PurchasesOrdersItems->Models->types_id == 2)
+                                <td>{{$dispatchesItem->PurchasesOrdersItems->Colors->name}} </td>
                                 <td>
                                     {!! Form::select('sizes_id',$sizes,null,['class'=>'t'.$dispatchesItem->id.' select2' , 'placeholder'=>'Talle']) !!}
                                 </td>
 
+                            @elseif($dispatchesItem->PurchasesOrdersItems->Models->types_id == 3)
+                                <td> </td>
+                                <td>
+                                    {!! Form::text('serial_number',null,['class'=> 'sn'.$dispatchesItem->id.' form-control', 'placeholder'=>'N Serie']) !!}
+                                </td>
 
                             @endif
 
@@ -69,6 +74,7 @@
             var n_motor = $('.m' + id).val();
             var n_cuadro = $('.c' + id).val();
             var talle = $('.t' + id ).val();
+            var serial = $('.sn' + id ).val();
 
             var models_id = $(this).attr('data-models-id');
             var colors_id = $(this).attr('data-colors-id');
@@ -108,6 +114,7 @@
                     n_motor: n_motor,
                     n_cuadro: n_cuadro,
                     talle : talle,
+                    serial_number : serial,
                     models_id: models_id,
                     colors_id: colors_id,
                     dispatches_id: dispatches_id,
