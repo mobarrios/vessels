@@ -105,25 +105,34 @@
         {!! Form::label('Servicios ') !!}
         {!! Form::select('servicios[]',  $services ,isset($models)? $models->servicios : '',  ['class'=>'select2 form-control' , 'multiple'=>'']) !!}
     </div>
+
+
     <div class="col-xs-12 form-group">
-        {!! Form::label('Repuestos Utilizados ') !!}
-        {!! Form::select('repuestos[]', $repuestos, isset($models)? $models->servicios : '', ['class'=>'select2 form-control' , 'multiple'=>'']) !!}
-    </div>
-
-
-    <div class="col-xs-6 form-group">
         {!! Form::label('Repuestos') !!}
 
-        <select name="repuestos[]" class="select2 form-control">
+        <select name="repuestos[]" class="select2 form-control"  >
             @foreach($repuestos as $repuesto)
                 <optgroup label="{{$repuesto->name}}">
                     @foreach($repuesto->Items as $item)
-
-                            <option value="{{$item->id}}">{{$item->code}}</option>
+                            <option value="{{$item->id}}">{{$item->serial_number}}</option>
                     @endforeach
                 </optgroup>
             @endforeach
         </select>
+
+        <hr>
+
+            @if(isset($models))
+                <table class="table table-bordered">
+                    @foreach($models->Items as $item)
+                    <tr>
+                        <td>{{$item->serial_number}}</td>
+                        <td>{{$item->Models->Brands->name}} : {{$item->Models->name}}</td>
+                    </tr>
+                    @endforeach
+                </table>
+
+            @endif
 
     </div>
 

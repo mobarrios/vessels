@@ -359,7 +359,9 @@
 
             <table class="col-xs-7 no-border table">
                 <tr class="titulo">
+
                     <td colspan="4">Sucursal: {!! $model->brancheables->first()->branches->company->nombre_fantasia !!}</td>
+
                 </tr>
 
                 <tr>

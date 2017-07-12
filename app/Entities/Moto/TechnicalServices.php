@@ -24,7 +24,7 @@
          return $this->belongsToMany(Services::class,'technical_services_services');
      }
 
-     public function Repuestos()
+     public function Items()
      {
          return $this->belongsToMany(Items::class,'technical_services_items');
      }
