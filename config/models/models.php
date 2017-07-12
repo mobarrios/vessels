@@ -68,6 +68,5 @@ return [
         1 => 'Motos',
         2 => 'Accesorios',
         3 => 'Repuestos',
-        4 => 'Servicios',
     ]
 ];

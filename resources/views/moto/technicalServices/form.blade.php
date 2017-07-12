@@ -17,7 +17,11 @@
         {!! Form::label('Cliente') !!}
         <select name="clients_id" class="select2 form-control">
             @foreach($clients as $client)
-                <option value="{{$client->id}}"> {{$client->dni}} : {{$client->FullName}}  </option>
+                @if(isset($models))
+                    <option value="{{$client->id}}" {!! ($models->clients_id == $client->id ) ? 'selected' : '' !!} > {{$client->dni}} : {{$client->FullName}}</option>
+                @else
+                    <option value="{{$client->id}}" > {{$client->dni}} : {{$client->FullName}}</option>
+                @endif
             @endforeach
         </select>
     </div>
@@ -27,11 +31,15 @@
     <div class="col-xs-6 form-group">
         {!! Form::label('Modelo') !!}
 
-        <select class="select2 form-control">
+        <select name="models_id" class="select2 form-control">
             @foreach($brands as $brand)
                 <optgroup label="{{$brand->name}}">
                     @foreach($brand->Models as $model)
-                         <option>{{$model->name}}</option>
+                        @if(isset($models))
+                         <option value="{{$model->id}}" {!! ($models->models_id == $model->id ) ? 'selected' : '' !!}>{{$model->name}}</option>
+                        @else
+                            <option value="{{$model->id}}">{{$model->name}}</option>
+                        @endif
                     @endforeach
                 </optgroup>
             @endforeach
@@ -95,12 +103,30 @@
     </div>
     <div class="col-xs-12 form-group">
         {!! Form::label('Servicios ') !!}
-        {!! Form::select('servicios', $services ,null,  ['class'=>'selectMulti form-control' , 'multi'=>'multi' ]) !!}
+        {!! Form::select('servicios[]',  $services ,isset($models)? $models->servicios : '',  ['class'=>'select2 form-control' , 'multiple'=>'']) !!}
     </div>
     <div class="col-xs-12 form-group">
         {!! Form::label('Repuestos Utilizados ') !!}
-        {!! Form::text('repuestos', null, ['class'=>'form-control']) !!}
+        {!! Form::select('repuestos[]', $repuestos, isset($models)? $models->servicios : '', ['class'=>'select2 form-control' , 'multiple'=>'']) !!}
     </div>
+
+
+    <div class="col-xs-6 form-group">
+        {!! Form::label('Repuestos') !!}
+
+        <select name="repuestos[]" class="select2 form-control">
+            @foreach($repuestos as $repuesto)
+                <optgroup label="{{$repuesto->name}}">
+                    @foreach($repuesto->Items as $item)
+
+                            <option value="{{$item->id}}">{{$item->code}}</option>
+                    @endforeach
+                </optgroup>
+            @endforeach
+        </select>
+
+    </div>
+
 
     <div class="col-xs-12 form-group">
         {!! Form::label('Mecanico Asignado ') !!}

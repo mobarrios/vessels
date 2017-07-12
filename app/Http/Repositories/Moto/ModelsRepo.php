@@ -86,4 +86,10 @@ class ModelsRepo extends BaseRepo {
     }
 
 
+    public function listRepuestos()
+    {
+        return $this->model->where('types_id', 3)->get();
+
+    }
+
 }

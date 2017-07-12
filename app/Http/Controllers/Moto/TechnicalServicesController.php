@@ -30,8 +30,8 @@ class TechnicalServicesController extends Controller
 {
     protected $technicalServicesRepo;
 
-    public function __construct(Request $request, Repo $repo, Route $route,ModelsRepo $modelsRepo, Clients $clients,BrandsRepo $brandsRepo,Items $items, IvaConditionsRepo $ivaConditionsRepo
-    ,ServicesRepo $servicesRepo, ClientsRepo $clientsRepo, UsersRepo $usersRepo)
+    public function __construct(Request $request, Repo $repo, Route $route, ModelsRepo $modelsRepo, Clients $clients, BrandsRepo $brandsRepo, Items $items, IvaConditionsRepo $ivaConditionsRepo
+        , ServicesRepo $servicesRepo, ClientsRepo $clientsRepo, UsersRepo $usersRepo)
     {
 
         $this->request = $request;
@@ -44,14 +44,14 @@ class TechnicalServicesController extends Controller
         $this->data['models_types'] = $modelsRepo->ListsData('name', 'id');
         $this->data['models_lists'] = $modelsRepo->ListsData('name', 'id');
 
-        $this->data['brands']       = $brandsRepo->getAllWithModels();
-        $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name','id');
-        $this->data['services'] = $servicesRepo->ListsData('name','id');
+        $this->data['brands'] = $brandsRepo->getAllWithModels();
+        $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name', 'id');
+        $this->data['services'] = $servicesRepo->ListsData('name', 'id');
 
         $this->data['clients'] = $clientsRepo->ListAll()->orderBy('last_name', 'ASC')->get();
-
         $this->data['mecanicos'] = $usersRepo->listMecanicos();
-        
+
+        $this->data['repuestos'] = $modelsRepo->listRepuestos();
 
         $this->modelsRepo = $modelsRepo;
         $this->clients = $clients;

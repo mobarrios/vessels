@@ -95,13 +95,14 @@
     //select2
     $('.select2').select2({
         placeholder: "Seleccionar...",
+        allowClear: true,
         language: "es"
     });
 
     //selectMult
     $('.selectMulti').attr('multiple','multiple').select2({
-        placeholder: "Seleccionar..."
-
+        placeholder: "Seleccionar...",
+        allowClear: true,
     });
 
     //check all items

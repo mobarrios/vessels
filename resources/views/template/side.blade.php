@@ -38,8 +38,8 @@
             </li>
             @endpermission
 
-            @permission('technicalServices.list')
-            <li class="treeview {{ in_array(Request::segment(2), ["technicalServices"]) ? 'active' : ''  }}">
+            @permission('technicalServices.list|services.list')
+            <li class="treeview {{ in_array(Request::segment(2), ["technicalServices","services"]) ? 'active' : ''  }}">
                 <a href="#">
                     <i class="fa fa-wrench "></i> <span>Servicio Técnico</span>
                     <span class="pull-right-container">
@@ -50,6 +50,10 @@
                     @permission('technicalServices.list')
                     <li class={{ Request::segment(2) == "technicalServices" ? 'active' : '' }}><a
                                 href="{{route('moto.technicalServices.index')}}"><span>Ordenes de Servicio</span></a></li>
+                    @endpermission
+                    @permission('services.list')
+                    <li class={{ Request::segment(2) == "services" ? 'active' : '' }}><a
+                                href="{{route('moto.services.index')}}"><span>Servicios</span></a></li>
                     @endpermission
                 </ul>
             </li>

@@ -19,6 +19,25 @@
      }
 
 
+     public function Services()
+     {
+         return $this->belongsToMany(Services::class,'technical_services_services');
+     }
+
+     public function Repuestos()
+     {
+         return $this->belongsToMany(Items::class,'technical_services_items');
+     }
+
+     public function getServiciosAttribute()
+     {
+         return $this->Services->lists('id')->toArray();
+     }
+
+     public function getRepuestosAttribute()
+     {
+         return $this->Repuestos->lists('id')->toArray();
+     }
 
  }
 

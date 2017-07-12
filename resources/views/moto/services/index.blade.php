@@ -1,0 +1,14 @@
+@extends('template.model_index')
+@section('table')
+    @foreach($models as $model)
+        <tr>
+            <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
+            <td>{{$model->id}}</td>
+
+            <td>{{$model->name}}</td>
+            <td>$ {{number_format($model->price,2 )}}</td>
+
+
+        </tr>
+    @endforeach
+@endsection

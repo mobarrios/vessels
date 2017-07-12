@@ -830,6 +830,32 @@ class PermissionsTableSeeder extends Seeder
                     'model' => '',
                 ],
 
+                //services
+                [
+                    'id'    => 128,
+                    'name' => 'Listar Servicios',
+                    'slug' => 'services.list',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 129,
+                    'name' => 'Crear Servicios',
+                    'slug' => 'services.create',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 130,
+                    'name' => 'Editar Servicios',
+                    'slug' => 'services.edit',
+                    'model' => '',
+                ],
+                [
+                    'id'    => 131,
+                    'name' => 'Borrar Servicios',
+                    'slug' => 'services.destroy',
+                    'model' => '',
+                ],
+
             ]);
     }
 }
