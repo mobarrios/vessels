@@ -60,6 +60,11 @@ class TechnicalServicesController extends Controller
     }
 
 
+    public function addServices()
+    {
+        return 'asdasdasd';
+    }
+
 //    public function create($id = null)
 //    {
 //        if($id)

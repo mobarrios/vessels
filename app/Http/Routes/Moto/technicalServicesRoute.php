@@ -21,6 +21,9 @@ Route::group(['prefix'=>'technicalServices'],function(){
     Route::get('/deleteItem/{id}/{item}',  ['middleware'=>'permission:'.$section.'.destroy','as'=>'moto.'.$section.'.deleteItem','uses'=>'Moto\technicalServicesController@deleteItems']);
 
 
+    Route::post('/addServices/{id}',  ['middleware'=>'permission:'.$section.'.edit','as'=>'moto.'.$section.'.addServices','uses'=>'Moto\technicalServicesController@addServices']);
+
+
     Route::get('/pdf/{id}',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.'.$section.'.pdf','uses'=>'Utilities\UtilitiesController@exportToPdf']);
 
     Route::get('/recibo',  ['middleware'=>'permission:'.$section.'.list','as'=>'moto.'.$section.'.recibo','uses'=>'Utilities\UtilitiesController@reciboPdf']);

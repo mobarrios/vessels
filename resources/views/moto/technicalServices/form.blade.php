@@ -98,16 +98,40 @@
         {!! Form::textArea('descripcion_cliente', null, ['class'=>'form-control']) !!}
     </div>
     <div class="col-xs-6 form-group">
+        {!! Form::label('Mecanico Asignado ') !!}
+        {!! Form::select('mecanicos_id', $mecanicos ,null,  ['class'=>'select2 form-control' ]) !!}
+    </div>
+
+    <div class="col-xs-12 form-group">
         {!! Form::label('Diagnostico ') !!}
         {!! Form::textArea('diagnosticos', null, ['class'=>'form-control']) !!}
     </div>
-    <div class="col-xs-12 form-group">
+    <div class="col-xs-6 form-group">
         {!! Form::label('Servicios ') !!}
-        {!! Form::select('servicios[]',  $services ,isset($models)? $models->servicios : '',  ['class'=>'select2 form-control' , 'multiple'=>'']) !!}
+        {!! Form::select('servicios[]',  $services ,null,  ['class'=>'select2 form-control' ]) !!}
+
+        <hr>
+
+        @if(isset($models))
+            <table class="table table-bordered">
+                @foreach($models->services as $servicio)
+                    <tr>
+                        <td>{{$servicio->name}}</td>
+                        <td>{{$servicio->price}}</td>
+                    </tr>
+                @endforeach
+                <tfoot>
+                    <td><b>Total Servicios</b></td>
+                    <td><b>$ {{$models->Services->SUM('price')}}</b></td>
+                </tfoot>
+            </table>
+
+        @endif
+
     </div>
 
 
-    <div class="col-xs-12 form-group">
+    <div class="col-xs-6 form-group">
         {!! Form::label('Repuestos') !!}
 
         <select name="repuestos[]" class="select2 form-control"  >
@@ -128,8 +152,15 @@
                     <tr>
                         <td>{{$item->serial_number}}</td>
                         <td>{{$item->Models->Brands->name}} : {{$item->Models->name}}</td>
+                        <td><b>$ {{$item->Models->activeListPrice->price_list or ''}}</b></td>
                     </tr>
                     @endforeach
+                        <tfoot>
+                        <td><b>Total Repuestos</b></td>
+                        <td></td>
+
+                        <td><b>$ {{$models->items->SUM('models.activeListPrice.price_list') }}</b></td>
+                        </tfoot>
                 </table>
 
             @endif
@@ -137,10 +168,7 @@
     </div>
 
 
-    <div class="col-xs-12 form-group">
-        {!! Form::label('Mecanico Asignado ') !!}
-        {!! Form::select('mecanicos_id', $mecanicos ,null,  ['class'=>'select2 form-control' ]) !!}
-    </div>
+
 
     @if(isset($models))
         <div class="col-xs-12 form-group">
