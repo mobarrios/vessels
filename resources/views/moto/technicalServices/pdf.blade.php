@@ -101,7 +101,7 @@
         }
 
         .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-            padding: 2px;
+            padding: 4px;
             line-height: 1.42857143;
             vertical-align: top;
             border-top: 1px solid #ddd;
@@ -225,6 +225,7 @@
             border-left: 1px solid #000;
             border-right: 1px solid #000;
             position:relative;
+            padding-left: 5px;
         }
 
         .doble-check{
@@ -411,8 +412,9 @@
 
         </div>
 
-        <div class="clearfix"></div>
 
+
+        <div class="clearfix"></div>
 
         <div class="row">
             <table class="col-xs-7 no-border table">
@@ -452,35 +454,33 @@
 
                 <tr>
                     <td><b>Patente: </b></td>
-                    <td></td>
+                    <td> {!! $model->patente !!}</td>
 
                     <td><b>Modelo:</b></td>
-                    <td></td>
+                    <td>{!! $model->models->name !!}</td>
 
                 </tr>
                 <tr>
                     <td><b>Chasis:</b></td>
-                    <td></td>
+                    <td>{!! $model->n_cuadro!!}</td>
                 </tr>
             </table>
         </div>
 
         <div class="clearfix"></div>
 
-        <div class="row">
+        <div class="row" style="position:relative;">
             <div class="col-xs-12 mt15">
                 <div class="col-xs-3 float-left">
-                    <img src="images/moto1.png" alt="" style="max-width:100%;position:absolute;top:320px;left:20px;">
+                    <img src="images/moto1.png" alt="" style="max-width:100%;position:absolute;top:105px;left:20px;">
                 </div>
                 <div class="col-xs-3 float-left">
-                    <img src="images/moto2.png" alt="" style="max-width:100%;position:absolute;top:320px;left:220px;">
+                    <img src="images/moto2.png" alt="" style="max-width:100%;position:absolute;top:105px;left:220px;">
                 </div>
             </div>
-        </div>
 
-        <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-        <div class="row">
             <div class="col-xs-12">
                 <div class="titulo">
                     <b>Estado general del vehículo</b>
@@ -501,7 +501,7 @@
                         </div>
 
                         <div>
-                            <label for="fuido_radiador_med"> -</label>{!! Form::radio('fluido_radiador',2,true,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_med']) !!}
+                            <label for="fuido_radiador_med"> -</label>{!! Form::radio('fluido_radiador',2,false,['class' => 'icheckbox_flat-red','id' => 'fuido_radiador_med']) !!}
                         </div>
 
                         <div>
@@ -520,7 +520,7 @@
                         </div>
 
                         <div>
-                            <label for="fluido_frenos_med"> -</label>{!! Form::radio('fluido_frenos',2,true,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_med']) !!}
+                            <label for="fluido_frenos_med"> -</label>{!! Form::radio('fluido_frenos',2,false,['class' => 'icheckbox_flat-red','id' => 'fluido_frenos_med']) !!}
                         </div>
 
                         <div>
@@ -539,15 +539,15 @@
                         </div>
 
                         <div>
-                            <label for="combustible_3_4">3/4 </label>{!! Form::radio('combustible',2,true,['class' => 'icheckbox_flat-red','id' => 'combustible_3_4']) !!}
+                            <label for="combustible_3_4">3/4 </label>{!! Form::radio('combustible',2,false,['class' => 'icheckbox_flat-red','id' => 'combustible_3_4']) !!}
                         </div>
 
                         <div>
-                            <label for="combustible_1_2">1/2 </label>{!! Form::radio('combustible',3,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_2']) !!}
+                            <label for="combustible_1_2">1/2 </label>{!! Form::radio('combustible',3,false,['class' => 'icheckbox_flat-red','id' => 'combustible_1_2']) !!}
                         </div>
 
                         <div>
-                            <label for="combustible_1_4">1/4 </label>{!! Form::radio('combustible',4,true,['class' => 'icheckbox_flat-red','id' => 'combustible_1_4']) !!}
+                            <label for="combustible_1_4">1/4 </label>{!! Form::radio('combustible',4,false,['class' => 'icheckbox_flat-red','id' => 'combustible_1_4']) !!}
                         </div>
 
                         <div>
@@ -569,7 +569,7 @@
                         </div>
 
                         <div>
-                            <label for="nivel_aceite_med"> -</label>{!! Form::radio('nivel_aceite',2,true,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_med']) !!}
+                            <label for="nivel_aceite_med"> -</label>{!! Form::radio('nivel_aceite',2,false,['class' => 'icheckbox_flat-red','id' => 'nivel_aceite_med']) !!}
                         </div>
 
                         <div>
@@ -591,7 +591,7 @@
                     <div>
                         <label for="casco">
                             Casco
-                            {!! Form::checkbox('casco',1,true,['id' => 'casco','style' => 'margin-left: 10px;']) !!}
+                            {!! Form::checkbox('casco',1,false,['id' => 'casco','style' => 'margin-left: 10px;']) !!}
                         </label>
                     </div>
                     <div>
@@ -742,7 +742,7 @@
                             Luz de freno (Palanca:
                         </div>
 
-                        <div class="col-xs-1" style="position:absolute;left:100px;top:2px;">
+                        <div class="col-xs-1" style="position:absolute;left:102px;top:2px;">
                             {!! Form::radio('luz_freno',0,false,['class' => 'ml5']) !!}
                         </div>
 
@@ -922,13 +922,13 @@
                 <tr style="background: #ddd;">
                     <th>ITEM</th>
                     <th colspan="2">DESCRIPCIÓN DEL PEDIDO DEL CLIENTE</th>
-                    <th colspan="3">FECHA DE COMPROMISO DE ENTREGA: <span style="display:block;float:right;margin-top:-5px;width:70px;height:16px;background: white;border:1px solid #c4c4c4;"></span></th>
+                    <th colspan="3">FECHA DE COMPROMISO DE ENTREGA: <span style="display:block;float:right;margin-top:-2px;width:70px;height:15px;background: white;border:1px solid #c4c4c4;"></span></th>
                 </tr>
 
                 <tr>
                     <td><b>Localidad: </b></td>
                     <td colspan="5">
-
+                        {!! $model->descripcion_cliente !!}
                     </td>
                 </tr>
 
@@ -951,7 +951,7 @@
 
             <table class="col-xs-12 table no-border">
                 <tr>
-                    <td colspan="2">22/02/2017</td>
+                    <td colspan="2">{!! $model->created_at !!}</td>
 
                     <td colspan="2">
 
@@ -984,31 +984,55 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="col-xs-3" style="height:7px;">
+                    @if($model->clients_items_id)
+                        {{--@forelse($model->client as $mod)--}}
+                            {{--<tr>--}}
+                                {{--<td class="col-xs-3" style="height:10px;">--}}
+                                    {{--{!! $mod->name !!}--}}
+                                {{--</td>--}}
+                                {{--<td>--}}
+                                    {{--{!! $model->diagnostico !!}--}}
+                                {{--</td>--}}
+                            {{--</tr>--}}
+                        {{--@empty--}}
 
-                        </td>
-                        <td>
+                        {{--@endforelse--}}
+                    @elseif($model->models_id)
+                        <tr>
+                            <td class="col-xs-3" style="height:10px;">
+                                {!! $model->Models->name !!}
+                            </td>
+                            <td>
+                                {!! $model->diagnostico !!}
+                            </td>
+                        </tr>
+                    @else
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-xs-3" style="height:7px;">
+                        <tr>
+                            <td class="col-xs-3" style="height:10px;">
 
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-xs-3" style="height:7px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3" style="height:10px;">
 
-                        </td>
-                        <td>
+                            </td>
+                            <td>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3" style="height:10px;">
 
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
 
@@ -1029,19 +1053,19 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="col-xs-1" style="height:7px;"></td>
+                        <td class="col-xs-1" style="height:10px;"></td>
                         <td style="height:7px;"></td>
                         <td style="height:7px;"></td>
                     </tr>
 
                     <tr>
-                        <td class="col-xs-1" style="height:7px;"></td>
+                        <td class="col-xs-1" style="height:10px;"></td>
                         <td style="height:7px;"></td>
                         <td style="height:7px;"></td>
                     </tr>
 
                     <tr>
-                        <td class="col-xs-1" style="height:7px;"></td>
+                        <td class="col-xs-1" style="height:10px;"></td>
                         <td style="height:7px;"></td>
                         <td style="height:7px;"></td>
                     </tr>
@@ -1061,7 +1085,7 @@
                 <p style="font-size: 7px; margin-top:5px;">
                     Dejo expresa constancia que luego de haber sido probada, retiro la unidad antes mencionada con los trabajos de reparación realizados, declarando conocer y aceptar el estado en el que se encuentra la misma. La unidad será retirada por el titular. En caso de no poder asistir, el responsable deberá acreditar la titularidad de la misma (fotocopia de DNI).
                     <br>
-                    <b>VEHICULO RETIRADO EL: </b>22/02/2017
+                    <b>VEHICULO RETIRADO EL:  {!! $model->created_at!!}</b>
                 </p>
             </div>
         </div>

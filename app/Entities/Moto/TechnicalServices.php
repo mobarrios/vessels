@@ -29,6 +29,11 @@
          return $this->belongsToMany(Items::class,'technical_services_items');
      }
 
+     public function Models()
+     {
+         return $this->belongsTo(Models::class);
+     }
+
      public function getServiciosAttribute()
      {
          return $this->Services->lists('id')->toArray();
@@ -38,6 +43,12 @@
      {
          return $this->Repuestos->lists('id')->toArray();
      }
+
+     public function getCreatedAtAttribute()
+     {
+         return date('d/m/Y',strtotime($this->attributes['created_at']));
+     }
+
 
  }
 
