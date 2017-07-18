@@ -1,5 +1,33 @@
 @extends('template.model_form')
 
+@section('css')
+    <style>
+        .posRelative{
+            position: relative;
+        }
+
+        #loc{
+            position: absolute;
+            z-index: 2;
+            background-color: white;
+            width: auto;
+            height: 100px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        #loc>p{
+            font-size: 12px;
+            text-align: left;
+        }
+
+        #loc>p:hover{
+            background: #ddd;
+        }
+
+    </style>
+@endsection
+
     @section('form_title')
         Nuevo Cliente
     @endsection
@@ -33,40 +61,19 @@
             {!! Form::text('email', null, ['class'=>'form-control']) !!}
         </div>
 
-        <div class="col-xs-3 form-group">
+        <div class="col-xs-3 form-group posRelative">
             {!! Form::label('Localidad') !!}
-            <select name="localidades_id" class="select2 form-control">
-                @foreach($provincias as $provincia)
-                    <optgroup label="{{$provincia->name}}">
-                        @foreach($provincia->Municipios as $municipio)
-                                <optgroup  label="{{$municipio->name}}">
-                                    @foreach($municipio->Localidades as $localidad)
-                                            <option value="{{$localidad->id}}">{{$localidad->name}}</option>
-                                    @endforeach
-                                </optgroup>
-                        @endforeach
-                    </optgroup>
-                @endforeach
-            </select>
-        </div>
 
+            {!! Form::select('localidades_id',$localidades,null,['class' => 'filter form-control']) !!}
+
+        </div>
 
 
         <div class="col-xs-3 form-group">
             {!! Form::label('Dirección') !!}
             {!! Form::text('address', null, ['class'=>'form-control']) !!}
         </div>
-        {{--
-        <div class="col-xs-3 form-group">
-            {!! Form::label('Ciudad') !!}
-            {!! Form::text('city', null, ['class'=>'form-control']) !!}
-        </div>
-        <div class="col-xs-3 form-group">
-            {!! Form::label('Localidad') !!}
-            {!! Form::text('location', null, ['class'=>'form-control']) !!}
-        </div>
 
-        --}}
 
         <div class="col-xs-3 form-group">
             {!! Form::label('Telefono') !!}
@@ -88,3 +95,6 @@
 
 @endsection
 
+@section('js')
+    <script src="js/buscadorLocalidades.js"></script>
+@endsection

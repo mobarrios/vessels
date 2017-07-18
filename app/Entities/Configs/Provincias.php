@@ -19,5 +19,4 @@ class Provincias extends Entity
         return $this->hasMany(Municipios::class,'provincia_id');
     }
 
-
 }

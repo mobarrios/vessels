@@ -12,7 +12,4 @@ class LocalidadesRepo extends BaseRepo {
     }
 
 
-   
-
-
 }

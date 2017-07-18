@@ -53,7 +53,12 @@ Route::post('/removeAdditionals/', 'Moto\AjaxController@removeAdditionals');
 
 // LOCATIONS
 
+//buscar localidades
+Route::get('/clientsSearch/{id?}', 'Moto\ClientsController@show');
 
+
+//Localidades por municipio y provincia
+Route::get('/findLocalidades', 'Moto\AjaxController@findLocalidades');
 
 
 
