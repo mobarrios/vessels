@@ -69,8 +69,7 @@
 
 @if(Auth::user())
 <script>
-
-
+    
     $('.table').addClass('table-striped  table-hover');
 
     $.fn.modal.Constructor.prototype.enforceFocus = function () {};
@@ -94,15 +93,12 @@
 
     //select2
     $('.select2').select2({
-        placeholder: "Seleccionar...",
-        allowClear: true,
-        language: "es"
+        language: "es",
     });
 
     //selectMult
     $('.selectMulti').attr('multiple','multiple').select2({
         placeholder: "Seleccionar...",
-        allowClear: true,
     });
 
     //check all items

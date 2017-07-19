@@ -35,6 +35,12 @@
 
         <div class="col-xs-3 form-group">
             {!! Form::label('Localidad') !!}
+            <select class="s form-control"></select>
+        </div>
+
+
+        <div class="col-xs-3 form-group">
+            {!! Form::label('Localidad') !!}
             <select name="localidades_id" class="select2 form-control">
                 @foreach($provincias as $provincia)
                     <optgroup label="{{$provincia->name}}">

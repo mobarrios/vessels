@@ -118,13 +118,13 @@
                     models_id: models_id,
                     colors_id: colors_id,
                     dispatches_id: dispatches_id,
-                    dispatches_items_id: id,
-
+                    dispatches_items_id: id
                 }).success(function (data)
                 {
-
                     window.location.href = "moto/dispatches/edit/" + dispatches_id;
 
+                }).error(function(data){
+                    alert('Error Inesperado!');
                 });
             }
 

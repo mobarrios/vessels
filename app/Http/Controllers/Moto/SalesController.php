@@ -314,14 +314,13 @@ class SalesController extends Controller
         $sales_payments = collect();
 
 
-        foreach ($this->request->sales_payments_id as $sales_payments_id){
+        foreach ($this->request->sales_payments_id as $sales_payments_id)
+        {
             $sp = $PaymentsRepo->find($sales_payments_id);
             $sp->status = 1;
-
             $sp->save();
 
             $sales_id = $sp->sales_id;
-
             $sales_payments->push($PaymentsRepo->find($sales_payments_id));
         }
 
@@ -329,7 +328,8 @@ class SalesController extends Controller
         if($vouchersRepo->ListAll()->where('tipo','R')->count() > 0)
         {
             $number = $vouchersRepo->ListAll()->where('tipo','R')->get()->last()->numero + 1;
-        }else
+        }
+            else
         {
             $number = '1';
         }
@@ -339,7 +339,7 @@ class SalesController extends Controller
         $voucher->Payments()->attach($this->request->sales_payments_id);
 
         $voucher->Sales()->attach($sales_id);
-
+        
         return redirect()->route('moto.sales.edit',$sales_id)->withErrors('Se creó correctamente el recibo');
     }
 

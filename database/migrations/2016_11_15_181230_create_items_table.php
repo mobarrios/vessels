@@ -22,6 +22,7 @@ class CreateItemsTable extends Migration
             $table->string('n_motor')->nullable();
             $table->string('n_cuadro')->nullable();
             $table->string('talle')->nullable();
+            $table->string('serial_number');
             $table->string('year');
             $table->integer('status');
             

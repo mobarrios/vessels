@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
 @section('form_title')
-    Nueva Orden de Servicio
+    {{ isset($models) ? 'Orden de Servicio # '.$models->id  : 'Nueva Orden de Servicio'  }}
 @endsection
 
 @section('form_inputs')
@@ -15,8 +15,9 @@
 
     <div class="col-xs-12 form-group">
         {!! Form::label('Cliente') !!}
-        <select name="clients_id" class="select2 form-control">
-            @foreach($clients as $client)
+        <select name="clients_id" class="select2 form-control" placeholder="Seleccionar...">
+            <option value="" disabled selected>Seleccionar...</option>
+        @foreach($clients as $client)
                 @if(isset($models))
                     <option value="{{$client->id}}" {!! ($models->clients_id == $client->id ) ? 'selected' : '' !!} > {{$client->dni}} : {{$client->FullName}}</option>
                 @else
@@ -32,7 +33,9 @@
         {!! Form::label('Modelo') !!}
 
         <select name="models_id" class="select2 form-control">
-            @foreach($brands as $brand)
+            <option value="" disabled selected>Seleccionar...</option>
+
+        @foreach($brands as $brand)
                 <optgroup label="{{$brand->name}}">
                     @foreach($brand->Models as $model)
                         @if(isset($models))
@@ -108,7 +111,7 @@
     </div>
     <div class="col-xs-6 form-group">
         {!! Form::label('Servicios ') !!}
-        {!! Form::select('servicios[]',  $services ,null,  ['class'=>'select2 form-control' ]) !!}
+        {!! Form::select('servicios[]',  $services ,null,  ['class'=>'select2 form-control', 'placeholder'=>"Seleccionar..."  ]) !!}
 
         <hr>
 
@@ -134,8 +137,9 @@
     <div class="col-xs-6 form-group">
         {!! Form::label('Repuestos') !!}
 
-        <select name="repuestos[]" class="select2 form-control"  >
-            @foreach($repuestos as $repuesto)
+        <select name="repuestos[]" class="select2 form-control" >
+            <option value="" disabled selected>Seleccionar...</option>
+        @foreach($repuestos as $repuesto)
                 <optgroup label="{{$repuesto->name}}">
                     @foreach($repuesto->Items as $item)
                             <option value="{{$item->id}}">{{$item->serial_number}}</option>
@@ -166,9 +170,6 @@
             @endif
 
     </div>
-
-
-
 
     @if(isset($models))
         <div class="col-xs-12 form-group">

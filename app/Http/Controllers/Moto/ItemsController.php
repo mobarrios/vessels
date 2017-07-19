@@ -13,6 +13,7 @@ use App\Http\Repositories\Moto\ModelsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Session;
+use League\Flysystem\Config;
 
 
 class ItemsController extends Controller
@@ -57,8 +58,9 @@ class ItemsController extends Controller
             $type = $this->route->getParameter('types');
 
             $model  = $this->repo->listAll($this->section)
-                        ->whereHas('models',function($q) use ($type){
-                            return $q->where('types_id',$type);
+                            ->whereHas('models',function($q) use ($type){
+
+                                return $q->where('types_id',$type);
                         });
 
         }
