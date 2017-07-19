@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Moto;
 use App\Entities\Configs\Additionables;
 use App\Entities\Configs\Additionals;
 use App\Entities\Configs\Brancheables;
+use App\Entities\Configs\Localidades;
 use App\Entities\Moto\Items;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\AdditionalsRepo;
@@ -147,5 +148,26 @@ class AjaxController extends Controller
 
     }
 
+    public function findLocalidades(){
+        $search = $this->request->q;
+
+        $localidades = Localidades::where('name','LIKE',"%$search%")->get();
+
+        $loc = [];
+
+        if(!empty($localidades)){
+
+            foreach ($localidades as $localidad):
+                $loc[] = ['id' => $localidad->id, 'text' => $localidad->Municipios->Provincias->name . " - " . $localidad->Municipios->name. " - " . $localidad->name];
+            endforeach;
+
+            return $loc;
+
+        }else{
+            return false;
+        }
+
+
+    }
 
 }

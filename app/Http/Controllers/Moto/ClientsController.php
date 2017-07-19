@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Localidades;
 use App\Entities\Moto\Budgets;
 use App\Entities\Moto\Clients;
 use App\Http\Controllers\Controller;
@@ -43,7 +44,7 @@ class ClientsController extends Controller
 
         $this->data['ivaConditions'] = $ivaConditionsRepo->ListsData('name','id');
 
-        $this->data['provincias'] = $provinciasRepo->listAll()->get();
+        $this->data['localidades'] = [];
 
     }
 
@@ -133,6 +134,29 @@ class ClientsController extends Controller
                 return redirect()->route(config('models.budgets.createRoute'),$budget->id);
             }
         }
+    }
+
+    public function edit()
+    {
+
+        dd($this->request->ip());
+            //breadcrumb activo
+        $this->data['activeBread'] = 'Editar';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+
+        $this->data['models'] = $this->repo->find($id);
+
+        if($this->data['models']->localidades_id){
+
+            $localidades = Localidades::find($this->data['models']->localidades_id);
+
+            $this->data['localidades'] = [$localidades->id => $localidades->Municipios->Provincias->name . ' - ' . $localidades->Municipios->name . ' - ' . $localidades->name];
+        }
+
+
+        return view(config('models.'.$this->section.'.editView'))->with($this->data);
     }
 
     public function update()
