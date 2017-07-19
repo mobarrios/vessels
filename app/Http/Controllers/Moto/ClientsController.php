@@ -139,7 +139,6 @@ class ClientsController extends Controller
     public function edit()
     {
 
-        dd($this->request->ip());
             //breadcrumb activo
         $this->data['activeBread'] = 'Editar';
 
