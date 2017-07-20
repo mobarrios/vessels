@@ -33,7 +33,7 @@
      {
          return $this->hasMany(Sales::class)->with('Items');
      }
-
+     
      public function SalesItems(){
          return $this->hasManyThrough(SalesItems::class,Sales::class)->with('items');
      }

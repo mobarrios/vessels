@@ -34,11 +34,9 @@
     {!! Form::hidden('validation','Sales') !!}
 
 
-
     <div class="form-group col-xs-6">
         {!! Form::label('last_name', "APELLIDO") !!}
         {!! Form::text('last_name', old('last_name') ? old('last_name') : null, ['class'=>'form-control','ng-model' => 'last_name']) !!}
-
     </div>
 
 
@@ -55,9 +53,9 @@
     <div class="col-xs-4 form-group">
         {!! Form::label('Condición IVA') !!}
         @if(isset($models))
-            {!! Form::select('iva_conditions_id', $ivaConditions, $models->Clients->iva_conditions,  ['class'=>'form-control', 'ng-model' => 'iva', 'id' => 'iva']) !!}
+            {!! Form::select('iva_conditions_id', $ivaConditions, $models->clients->iva_conditions,  ['class'=>'form-control select2', 'placeholder'=> 'Seleccionar', 'ng-model' => 'iva']) !!}
         @else
-            {!! Form::select('iva_conditions_id', $ivaConditions, null ,  ['class'=>'form-control' ,'ng-model' => 'iva' , 'id' => 'iva']) !!}
+            {!! Form::select('iva_conditions_id', $ivaConditions, null ,  ['class'=>'form-control select2', 'placeholder'=> 'Seleccionar' ,'ng-model' => 'iva']) !!}
 
         @endif
     </div>
@@ -93,7 +91,16 @@
             {!! Form::text('address',  old('address') ? old('address') : null, ['class'=>'form-control','ng-model' => 'address']) !!}
     </div>
 
-
+    {{--
+    <div class="form-group col-xs-3">
+            {!! Form::label('city', "CIUDAD") !!}
+            {!! Form::text('city',  old('city') ? old('city') : null, ['class'=>'form-control','ng-model' => 'city']) !!}
+    </div>
+     <div class="form-group col-xs-3">
+            {!! Form::label('province', "PROVINCIA") !!}
+            {!! Form::text('province',  old('province') ? old('province') : null, ['class'=>'form-control','ng-model' => 'province']) !!}
+    </div>
+ --}}
 
 
 

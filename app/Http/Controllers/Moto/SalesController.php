@@ -339,7 +339,11 @@ class SalesController extends Controller
         $voucher->Payments()->attach($this->request->sales_payments_id);
 
         $voucher->Sales()->attach($sales_id);
-        
+
+
+
+
+
         return redirect()->route('moto.sales.edit',$sales_id)->withErrors('Se creó correctamente el recibo');
     }
 

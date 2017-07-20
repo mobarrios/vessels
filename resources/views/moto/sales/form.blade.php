@@ -225,37 +225,37 @@
 
             @if(Session::has('client') || $errors->any())
 
-            $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
-            $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
-            $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
-            $scope.dni = "{!! Session::has('client') ? Session::get('client')->dni :  old('dni')!!}"
-            $scope.email = "{!! Session::has('client') ? Session::get('client')->email : old('email')!!}"
-            $scope.sexo = "{!! Session::has('client') ? Session::get('client')->sexo : old('sexo')!!}"
-            $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
-            $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
-            $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
-            //$scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"
-           // $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
-            //$scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"
-            $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
-            //$scope.iva = "{!! Session::has('client') ? Session::get('client')->iva : old('location')!!}"
+                $scope.model = "{!! Session::has('client') ? Session::get('client')->id : ""!!}"
+                $scope.last_name = "{!! Session::has('client') ? Session::get('client')->last_name :  old('last_name')!!}"
+                $scope.name = "{!! Session::has('client') ? Session::get('client')->name :  old('name') !!}"
+                $scope.dni = "{!! Session::has('client') ? Session::get('client')->dni :  old('dni')!!}"
+                $scope.email = "{!! Session::has('client') ? Session::get('client')->email : old('email')!!}"
+                $scope.sexo = "{!! Session::has('client') ? Session::get('client')->sexo : old('sexo')!!}"
+                $scope.nacionality = "{!! Session::has('client') ? Session::get('client')->nacionality : old('nacionality')!!}"
+                $scope.phone1 = "{!! Session::has('client') ? Session::get('client')->phone1 : old('phone1')!!}"
+                $scope.address = "{!! Session::has('client') ? Session::get('client')->address : old('address')!!}"
+                {{--//$scope.city = "{!! Session::has('client') ? Session::get('client')->city : old('city')!!}"--}}
+               {{--// $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"--}}
+                {{--//$scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"--}}
+                $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
+                {{--//$scope.iva = "{!! Session::has('client') ? Session::get('client')->iva : old('location')!!}"--}}
 
             @endif
 
             @if(isset($models))
-            $scope.model = "{!! $models->clients->id !!}"
-            $scope.last_name = "{!! $models->clients->last_name !!}"
-            $scope.name = "{!! $models->clients->name !!}"
-            $scope.dni = "{!! $models->clients->dni !!}"
-            $scope.email = "{!! $models->clients->email !!}"
-            $scope.sexo = "{!! $models->clients->sexo !!}"
-            $scope.nacionality = "{!! $models->clients->nacionality !!}"
-            $scope.phone1 = "{!! $models->clients->phone1 !!}"
-            $scope.address = "{!! $models->clients->address !!}"
-            //$scope.city = "{!! $models->clients->city !!}"
-            //$scope.location = "{!! $models->clients->location !!}"
-            //$scope.province = "{!! $models->clients->province !!}"
-            $scope.location = "{!! $models->clients->localidades_id!!}"
+                $scope.model = "{!! $models->clients->id !!}"
+                $scope.last_name = "{!! $models->clients->last_name !!}"
+                $scope.name = "{!! $models->clients->name !!}"
+                $scope.dni = "{!! $models->clients->dni !!}"
+                $scope.email = "{!! $models->clients->email !!}"
+                $scope.sexo = "{!! $models->clients->sexo !!}"
+                $scope.nacionality = "{!! $models->clients->nacionality !!}"
+                $scope.phone1 = "{!! $models->clients->phone1 !!}"
+                $scope.address = "{!! $models->clients->address !!}"
+                {{--//$scope.city = "{!! $models->clients->city !!}"--}}
+                {{--//$scope.location = "{!! $models->clients->location !!}"--}}
+                {{--//$scope.province = "{!! $models->clients->province !!}"--}}
+                $scope.location = "{!! $models->clients->localidades_id!!}"
             @endif
 
 
@@ -281,9 +281,13 @@
                             $scope.nacionality = response.data['nacionality']
                             $scope.phone1 = response.data['phone1']
                             $scope.address = response.data['address']
-                            $scope.city = response.data['city']
+                            //$scope.city = response.data['city']
                             $scope.location = response.data['localidades_id']
-                            $scope.province = response.data['province']
+                            //$scope.province = response.data['province']
+
+                            $scope.iva = response.data['iva_conditions_id']
+                            $('#iva').val(response.data['iva_conditions_id'])
+                           console.log(response.data['iva_conditions_id'])
 
                             $('input[name=clients_id]').val(option.val())
                         });

@@ -9,6 +9,7 @@
 namespace App\Entities;
 
 use App\Entities\Configs\Branches;
+use App\Entities\Configs\Localidades;
 use App\Entities\Configs\Logs;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -90,4 +91,8 @@ class Entity extends Model {
         return $amount == 0 ? '0' : $amount;
     }
 
+    public function Localidades()
+    {
+        return  $this->belongsTo(Localidades::class);
+    }
 }

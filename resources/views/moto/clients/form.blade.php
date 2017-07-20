@@ -1,32 +1,5 @@
 @extends('template.model_form')
 
-@section('css')
-    <style>
-        .posRelative{
-            position: relative;
-        }
-
-        #loc{
-            position: absolute;
-            z-index: 2;
-            background-color: white;
-            width: auto;
-            height: 100px;
-            overflow-y: auto;
-            text-align: left;
-        }
-
-        #loc>p{
-            font-size: 12px;
-            text-align: left;
-        }
-
-        #loc>p:hover{
-            background: #ddd;
-        }
-
-    </style>
-@endsection
 
     @section('form_title')
         Nuevo Cliente
@@ -64,9 +37,7 @@
         <div class="col-xs-3 form-group posRelative">
             {!! Form::label('Localidad') !!}
 
-
             {!! Form::select('localidades_id',$localidades,null,['class' => 'filter form-control']) !!}
-
         </div>
 
 

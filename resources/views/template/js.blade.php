@@ -67,6 +67,7 @@
 <script src="vendors/bootstrap-checkbox-x/js/checkbox-x.min.js" type="text/javascript"></script>
 
 
+
 @if(Auth::user())
 <script>
 
