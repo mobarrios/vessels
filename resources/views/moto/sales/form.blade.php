@@ -238,7 +238,33 @@
                {{--// $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"--}}
                 {{--//$scope.province = "{!! Session::has('client') ? Session::get('client')->province : old('province')!!}"--}}
                 $scope.location = "{!! Session::has('client') ? Session::get('client')->location : old('location')!!}"
+                $scope.iva_conditions_id = "{!! Session::has('client') ? Session::get('client')->location : old('iva_conditions_id')!!}"
+                $scope.localidades_id = "{!! Session::has('client') ? Session::get('client')->location : old('localidades_id')!!}"
                 {{--//$scope.iva = "{!! Session::has('client') ? Session::get('client')->iva : old('location')!!}"--}}
+
+                @if(\Illuminate\Support\Facades\Session::has('client'))
+                    $('.filter').select2({
+                        data: [
+                            {
+                                id: '{!! \Illuminate\Support\Facades\Session::get('client')->localidades_id !!}',
+                                text: '{!! \App\Entities\Configs\Localidades::find(\Illuminate\Support\Facades\Session::get('client')->localidades_id)->Municipios->Provincias->name . ' - ' . \App\Entities\Configs\Localidades::find(\Illuminate\Support\Facades\Session::get('client')->localidades_id)->Municipios->name . ' - ' . \App\Entities\Configs\Localidades::find(\Illuminate\Support\Facades\Session::get('client')->localidades_id)->name !!}'
+                            },
+                            // ... more data objects ...
+                        ]
+                    });
+                @elseif(old('localidades_id'))
+                   $('.filter').select2({
+                    data: [
+                        {
+                            id: '{!! old('localidades_id') !!}',
+
+                            text: '{!! \App\Entities\Configs\Localidades::find(old('localidades_id'))->Municipios->Provincias->name . ' - ' . \App\Entities\Configs\Localidades::find(old('localidades_id'))->Municipios->name . ' - ' . \App\Entities\Configs\Localidades::find(old('localidades_id'))->name !!}'
+                        },
+                        // ... more data objects ...
+                    ]
+                });
+                @endif
+
 
             @endif
 
@@ -256,6 +282,7 @@
                 {{--//$scope.location = "{!! $models->clients->location !!}"--}}
                 {{--//$scope.province = "{!! $models->clients->province !!}"--}}
                 $scope.location = "{!! $models->clients->localidades_id!!}"
+                $scope.iva = "{!! $models->clients->iva_conditions_id!!}"
             @endif
 
 
@@ -285,9 +312,16 @@
                             $scope.location = response.data['localidades_id']
                             //$scope.province = response.data['province']
 
-                            $scope.iva = response.data['iva_conditions_id']
+//                            $scope.iva = response.data['iva_conditions_id']
                             $('#iva').val(response.data['iva_conditions_id'])
-                           console.log(response.data['iva_conditions_id'])
+                            $('select[name=localidades_id]').val(response.data['localidades_id'])
+                            $('select[name=localidades_id]+.select2 span.select2-selection__rendered').html(response.data['localidades'])
+
+
+
+//                            $('#iva option[value='+response.data['iva_conditions_id']+']').attr('selected','selected');
+
+                           console.log(response.data['localidades_id'])
 
                             $('input[name=clients_id]').val(option.val())
                         });
@@ -557,4 +591,5 @@
 
     </script>
 
+    <script src="js/buscadorLocalidades.js"></script>
 @endsection

@@ -7,6 +7,7 @@ use App\Entities\Moto\Budgets;
 use App\Entities\Moto\Clients;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Configs\IvaConditionsRepo;
+use App\Http\Repositories\Configs\LocalidadesRepo;
 use App\Http\Repositories\Configs\ProvinciasRepo;
 use App\Http\Repositories\Moto\BudgetsRepo;
 use App\Http\Repositories\Moto\ClientsRepo as Repo;
@@ -206,9 +207,17 @@ class ClientsController extends Controller
         }
     }
 
-    public function show($id)
+    public function show($id, Localidades $localidades)
     {
-        return $this->repo->find($id);
+        $model = $this->repo->find($id);
+        if($model && $model->localidades_id){
+            $localidad = $localidades->find($model->localidades_id);
+//        dd($model->Municipios);
+            $model->localidades = $localidad->Municipios->Provincias->name .' - '. $localidad->Municipios->name . ' - '. $localidad->name;
+
+        }
+
+        return $model;
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Moto;
 
+use App\Entities\Configs\Localidades;
 use App\Http\Repositories\Configs\ProvinciasRepo;
 use App\Http\Repositories\Moto\FilesRepo;
 use Bican\Roles\Models\Role;
@@ -85,6 +86,8 @@ class SalesController extends Controller
 
         $this->data['status'] = config('status.sales') ;
 
+        $this->data['localidades'] = [];
+
 
         $this->modelsRepo = $modelsRepo;
         $this->clientsRepo = $clientsRepo;
@@ -94,6 +97,26 @@ class SalesController extends Controller
 
     }
 
+
+    public function edit()
+    {
+        //breadcrumb activo
+        $this->data['activeBread'] = 'Editar';
+
+        // id desde route
+        $id = $this->route->getParameter('id');
+
+        $this->data['models'] = $this->repo->find($id);
+
+        if($this->data['models']->Clients->localidades_id){
+
+            $localidades = Localidades::find($this->data['models']->Clients->localidades_id);
+
+            $this->data['localidades'] = [$localidades->id => $localidades->Municipios->Provincias->name . ' - ' . $localidades->Municipios->name . ' - ' . $localidades->name];
+        }
+
+        return view(config('models.'.$this->section.'.editView'))->with($this->data);
+    }
 
     //cambio de Estado
 
