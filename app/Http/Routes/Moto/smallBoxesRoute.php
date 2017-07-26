@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix'=>'smallBoxes/{type}'],function(){
+Route::group(['prefix'=>'smallBoxes'],function(){
 
         $section =  'smallboxes';
 

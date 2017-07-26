@@ -64,38 +64,14 @@
                         {!! Form::number('price_actual', null, ['class'=>'price_actual form-control']) !!}
                     </div>
 
-                    <div class="col-xs-3">
-
-                        {!! Form::label('Patenta Cliente') !!}
-                        {!! Form::checkbox('patenta_cliente') !!}
-
-                        {!! Form::label('Registro') !!}
-
-                        <table class="table">
-                            @foreach($registros as $registro)
-                                <tr>
-                                    <td><input type="radio" name="registros_id " value="{{$registro->id}}"></td>
-                                    <td>{{$registro->name}}</td>
-                                </tr>
-                            @endforeach
-                        </table>
-
-
-                    </div>
-
-                    <div class="col-xs-12">
-                        <table id="additionals" class="table">
-
-                        </table>
-                    </div>
 
                 </div>
 
-                <div class="box-footer clearfix">
-                    <div class="col-xs-12 text-center form-group" style="padding-top: 2%">
-                        <button type="submit" class="btn btn-primary">Agregar</button>
-                        <a href="{!! \Illuminate\Support\Facades\URL::previous() !!}"
-                           class="btn btn-danger">Cancelar</a>
+                <div class="box-footer">
+                    <div >
+                        <button type="submit" class="btn btn-default"> Agregar</button>
+                        {{--<a href="{!! \Illuminate\Support\Facades\URL::previous() !!}"--}}
+                           {{--class="btn btn-default"> Cancelar</a>--}}
                     </div>
                 </div>
                 {!! Form::close() !!}

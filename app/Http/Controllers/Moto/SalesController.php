@@ -246,6 +246,7 @@ class SalesController extends Controller
     //payemnts
     public function createPayment(PaymentsRepo $PaymentsRepo, PayMethodsRepo $payMethodsRepo)
     {
+
         $this->data['salesId'] = $this->route->getParameter('item');
 
         $this->data['salesPayment'] = $PaymentsRepo->getModel()->where('sales_id',$this->route->getParameter('item'))->get();
@@ -261,12 +262,14 @@ class SalesController extends Controller
         $this->data['activeBread']= 'Agregar Pago';
 
 
+
         return view('moto.sales.modalPayMethodsForm')->with($this->data);
     }
 
 
     public function addPayment(PaymentsRepo $PaymentsRepo)
     {
+
         $PaymentsRepo->create($this->request);
 
         return redirect()->route('moto.sales.edit', $this->request->sales_id)->withErrors('Se agregó el método de pago');
@@ -334,6 +337,7 @@ class SalesController extends Controller
 
     public function storeRecibos(PaymentsRepo $PaymentsRepo, VouchersRepo $vouchersRepo)
     {
+
         $sales_payments = collect();
 
 
@@ -352,7 +356,7 @@ class SalesController extends Controller
         {
             $number = $vouchersRepo->ListAll()->where('tipo','R')->get()->last()->numero + 1;
         }
-            else
+        else
         {
             $number = '1';
         }
@@ -364,6 +368,20 @@ class SalesController extends Controller
         $voucher->Sales()->attach($sales_id);
 
 
+
+
+        // si el modelo descuenta stock cambia de estado
+        $sales = $this->repo->find($sales_id);
+
+        foreach ($sales->Items as $item)
+        {
+            if($item->Models->stock_discount == 1)
+            {
+                //cambia  a estado vendido
+                $item->status = 3;
+                $item->save();
+            }
+        }
 
 
 

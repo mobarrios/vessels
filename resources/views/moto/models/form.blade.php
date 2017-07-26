@@ -52,6 +52,11 @@
         {!! Form::text('min_stock', null, ['class'=>'form-control']) !!}
     </div>
 
+    <div class="col-xs-3 form-group">
+        {!! Form::label('Descuenta Stock ') !!}
+        {!! Form::select('stock_discount',[ 1 => 'Si' , 0 => 'No' ],null, ['class'=>'form-control']) !!}
+    </div>
+
 
     <div class="col-xs-3 form-group">
         {!! Form::label('Imagen') !!}

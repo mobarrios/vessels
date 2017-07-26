@@ -178,10 +178,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class={{ Request::segment(3) == 1 ? 'active' : '' }}><a
-                                href="{{route('moto.smallBoxes.index',1)}}"><span>Entradas</span></a></li>
+                                href="{{route('moto.smallBoxes.index')}}"><span>Movimientos</span></a></li>
 
-                    <li class={{ Request::segment(3) == 0 ? 'active' : '' }}><a
-                                href="{{route('moto.smallBoxes.index',0)}}"><span>Salidas</span></a></li>
 
                 </ul>
             </li>
