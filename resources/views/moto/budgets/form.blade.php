@@ -254,30 +254,35 @@
                         {!! Form::text('address', null, ['class'=>'form-control','ng-model' => 'address']) !!}
                     </div>
 
-                    <div class="col-xs-12 col-lg-2 form-group">
-                        {!! Form::label('city', "CIUDAD") !!}
-                        {!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}
-                    </div>
+                    {{--<div class="col-xs-12 col-lg-2 form-group">--}}
+                        {{--{!! Form::label('city', "CIUDAD") !!}--}}
+                        {{--{!! Form::text('city', null, ['class'=>'form-control','ng-model' => 'city']) !!}--}}
+                    {{--</div>--}}
 
 
 
-                    <div class="col-xs-12 col-lg-2 form-group">
-                        {!! Form::label('location', "LOCALIDAD") !!}
-                        {!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}
-                    </div>
+                    {{--<div class="col-xs-12 col-lg-2 form-group">--}}
+                        {{--{!! Form::label('location', "LOCALIDAD") !!}--}}
+                        {{--{!! Form::text('location', null, ['class'=>'form-control','ng-model' => 'location']) !!}--}}
+                    {{--</div>--}}
 
 
 
 
-                    <div class="col-xs-12 col-lg-2 form-group">
-                        {!! Form::label('province', "PROVINCIA") !!}
-                        {!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}
-                    </div>
+                    {{--<div class="col-xs-12 col-lg-2 form-group">--}}
+                        {{--{!! Form::label('province', "PROVINCIA") !!}--}}
+                        {{--{!! Form::text('province', null, ['class'=>'form-control','ng-model' => 'province']) !!}--}}
+                    {{--</div>--}}
 
 
                     <div class="col-xs-12 col-lg-3 form-group">
+                        {!! Form::label('localidades_id', "Localidad") !!}
+                        {!! Form::select('localidades_id',$localidades,null,['class' => 'filter form-control']) !!}
+                    </div>
+
+                    <div class="col-xs-12 col-lg-3 form-group">
                         {!! Form::label('iva_conditions_id', "CONDICIÓN DEL IVA") !!}
-                        {!! Form::select('iva_conditions_id', $ivaConditions,null, ['required' => 'required','class'=>'form-control','ng-model' => 'iva_conditions_id']) !!}
+                        {!! Form::select('iva_conditions_id', $ivaConditions,null, ['required' => 'required','class'=>'form-control','id' => 'iva']) !!}
                     </div>
 
 
@@ -361,6 +366,23 @@
                                 </div>    
                             </div>    
 
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Total a financiar $</span>
+
+                                        @if($models->a_financiar)
+                                            {!! Form::number('a_financiar', null ,['class' => 'form-control','min' => '0','step' => '0.1','id' => 'a_financiar']) !!}
+                                        @else
+                                            {!! Form::number('a_financiar', $models->allItems->count() > 0 ? $models->totalEfectivo  : "0" ,['class' => 'form-control','min' => '0','step' => '0.1','id' => 'a_financiar']) !!}
+                                        @endif
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <br>
 
                             <div class="row">
 
@@ -397,9 +419,9 @@
                                                                     <span class="fa fa-square-o fa-lg"></span>
 
                                                                     @if($financialsDue->porcent != 0)
-                                                                        <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-porcent='{!! $financialsDue->porcent !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(  (($models->total ) + (($models->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2)}}  </span>
+                                                                        <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-porcent='{!! $financialsDue->porcent !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(  (($models->a_financiar != null ? $models->a_financiar : $models->total ) + (($models->a_financiar != null ? $models->a_financiar : $models->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2)}}  </span>
                                                                     @else
-                                                                        <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-coef='{!! $financialsDue->coef !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(($models->total * $financialsDue->coef) / $financialsDue->due, 2)}}</span>
+                                                                        <span class="content financiamiento" data-due='{!! $financialsDue->due !!}' data-coef='{!! $financialsDue->coef !!}' id='{!! $indice. $ind !!}'>{!! $financialsDue->due !!} cuotas de $ {{ number_format(($models->a_financiar != null ? $models->a_financiar : $models->total * $financialsDue->coef) / $financialsDue->due, 2)}}</span>
                                                                     @endif
 
                                                                 </label>
@@ -424,8 +446,9 @@
 	
 
 
-                            <!-- <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
-                            
+                            <h3 class="text-blue" ng-bind="modelName"><strong></strong></h3>
+
+                            <!--
                             <div class="col-xs-2 form-group">
                                 <label>Descuento (%)</label>
                                 {!! Form::number('descuento',null,['class' => 'form-control','ng-model' => 'descuento','ng-change' => 'calcular()','min' => '0']) !!}
@@ -435,11 +458,17 @@
                                 <label>Anticipo</label>
                                 {!! Form::number('anticipo',null,['class' => 'form-control','ng-model' => 'anticipo','ng-change' => 'calcular()','min' => '0']) !!}
                             </div>
+
+
                             <div class="col-xs-2 form-group">
-                                <label>Total a Financiar</label>
-                                {!! Form::text('a_financiar',null,['class' => 'form-control','readonly','ng-model' => 'aFinanciar','ng-change' => 'calcular()','id' => 'aFinanciar','min' => '0']) !!}
+                                <label>Total a Financiar <b>($)</b></label>
+                                @if($models->a_financiar)
+                                    {!! Form::number('a_financiar', $models->a_financiar,['class' => 'form-control','id' => 'aFinanciar','min' => '0','step' => '0.1']) !!}
+                                @else
+                                    {!! Form::number('a_financiar', $models->allItems->count() > 0 ? $models->totalEfectivo  : "0" ,['class' => 'form-control','id' => 'aFinanciar','min' => '0','step' => '0.1']) !!}
+                                @endif
                             </div>
-                            
+
                             <div class="col-xs-2 form-group">
                                 <label>Modo de Financiamiento</label>
                             
@@ -556,14 +585,40 @@
 
     <script>
 
-    
 
-       
+        $("#a_financiar").on('keyup', function() {
+            console.log($(this).val());
 
-    
+            var total = $(this).val();
+            var financiamientos = $(".financiamiento");
 
 
-        var routeBase = window.location.href.split('moto/')[0]
+            financiamientos.each(function (ind, val) {
+                var due = $(val).attr("data-due");
+
+                if ($(val).attr("data-porcent")) {
+                    var porcent = $(val).attr("data-porcent");
+                    var valor = ((total) + ((total * porcent) / 100 )) / due;
+                }
+
+                if ($(val).attr("data-coef")) {
+                    var coef = $(val).attr("data-coef");
+                    var valor = (total * coef) / due;
+                }
+
+
+                $(this).text(due + " cuotas de $ " + valor.toLocaleString("Es-Ar", {maximumFractionDigits: 2}));
+
+            })
+        })
+
+
+
+
+
+
+
+            var routeBase = window.location.href.split('moto/')[0]
         var rutaEdit;
 
         $("#reset").on('click', function () {
@@ -588,7 +643,6 @@
             $scope.city = ""
             $scope.location = ""
             $scope.province = ""
-            $scope.iva_conditions_id = ""
             $scope.stotal = {!! isset($models) ? number_format(($models->total), 2) : intval(0) !!}
 
 
@@ -606,12 +660,38 @@
                 $scope.city = "{!! $client->city or old('city')!!}"
                 $scope.location = "{!! $client->location or old('location')!!}"
                 $scope.province = "{!! $client->province or old('province')!!}"
-                $scope.iva_conditions_id = "{!! $client->iva_conditions_id or old('iva_conditions_id')!!}"
-            @endif
+                $scope.iva_conditions_id = "{!! Session::has('client') ? Session::get('client')->location : old('iva_conditions_id')!!}"
+                $scope.localidades_id = "{!! Session::has('client') ? Session::get('client')->location : old('localidades_id')!!}"
+
+                @if(\Illuminate\Support\Facades\Session::has('client'))
+                    $('.filter').select2({
+                        data: [
+                            {
+                                id: '{!! \Illuminate\Support\Facades\Session::get('client')->localidades_id !!}',
+                                text: '{!! \App\Entities\Configs\Localidades::find(\Illuminate\Support\Facades\Session::get('client')->localidades_id)->Municipios->Provincias->name . ' - ' . \App\Entities\Configs\Localidades::find(\Illuminate\Support\Facades\Session::get('client')->localidades_id)->Municipios->name . ' - ' . \App\Entities\Configs\Localidades::find(\Illuminate\Support\Facades\Session::get('client')->localidades_id)->name !!}'
+                            },
+                            // ... more data objects ...
+                        ]
+                    });
+                    @elseif(old('localidades_id'))
+                       $('.filter').select2({
+                        data: [
+                            {
+                                id: '{!! old('localidades_id') !!}',
+
+                                text: '{!! \App\Entities\Configs\Localidades::find(old('localidades_id'))->Municipios->Provincias->name . ' - ' . \App\Entities\Configs\Localidades::find(old('localidades_id'))->Municipios->name . ' - ' . \App\Entities\Configs\Localidades::find(old('localidades_id'))->name !!}'
+                            },
+                            // ... more data objects ...
+                        ]
+                    });
+                @endif
 
 
-            
-            $('#search').on('change',function(ev){
+        @endif
+
+
+
+        $('#search').on('change',function(ev){
                 $("#search>option[value='seleccione']").remove();
                 var select = $(this);
                 var option = select.find('option:selected');
@@ -633,7 +713,16 @@
                             $scope.city = response.data['city']
                             $scope.location = response.data['location']
                             $scope.province = response.data['province']
-                            $scope.iva_conditions_id = response.data['iva_conditions_id']
+
+
+                            $scope.location = response.data['localidades_id']
+                            //$scope.province = response.data['province']
+
+//                            $scope.iva = response.data['iva_conditions_id']
+                            $('#iva').val(response.data['iva_conditions_id'])
+                            $('select[name=localidades_id]').val(response.data['localidades_id'])
+                            $('select[name=localidades_id]+.select2 span.select2-selection__rendered').html(response.data['localidades'])
+
                         });
 
             });
@@ -714,7 +803,7 @@
                     $scope.total =  parseFloat(parseFloat($('input[name=total]').attr('value'))+$scope.stotal).toFixed(2);
 
 
-                $scope.financiar();
+//                $scope.financiar();
                 $scope.financiamientos();
             };
 
@@ -745,8 +834,6 @@
                     $(this).text(due+" cuotas de $ "+valor.toLocaleString("Es-Ar",{maximumFractionDigits: 2}));
                 })
             }    
-
-
 
 
 
@@ -885,5 +972,6 @@
 
 
     </script>
-
+    <script src="js/buscadorLocalidades.js"></script>
+>
 @endsection

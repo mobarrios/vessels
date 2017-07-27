@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Moto;
 
 use App\Entities\Configs\Branches;
+use App\Entities\Configs\Localidades;
 use App\Entities\Moto\Files;
 use App\Entities\Moto\Budgets;
 use App\Entities\Moto\BudgetsItems;
@@ -56,6 +57,7 @@ class BudgetsController extends Controller
 
         $this->clients = $clients;
         $this->models = $models;
+        $this->data['localidades'] = [];
 
 
     }
@@ -102,11 +104,19 @@ class BudgetsController extends Controller
 
     public function create($id = null)
     {
+
         if($id)
         {
             $this->data['models'] = $this->repo->find($id);
             $this->data['items'] = $this->models->lists('name','id');
             $this->data['client'] = $this->data['models']->clients;
+
+            if($this->data['client']->localidades_id){
+
+                $localidades = Localidades::find($this->data['client']->localidades_id);
+
+                $this->data['localidades'] = [$localidades->id => $localidades->Municipios->Provincias->name . ' - ' . $localidades->Municipios->name . ' - ' . $localidades->name];
+            }
         }
 
         $this->data['prospectos'] = $this->clients->where('prospecto',1)->get();
@@ -119,10 +129,20 @@ class BudgetsController extends Controller
         if($id){
             $this->data['models'] = $this->repo->find($id);
             $this->data['items'] = $this->models->lists('name','id');
+
+
         }
 
         $this->data['client'] = $this->clients->find($cliente);
-        
+
+        if($this->data['client']->localidades_id){
+
+            $localidades = Localidades::find($this->data['client']->localidades_id);
+
+            $this->data['localidades'] = [$localidades->id => $localidades->Municipios->Provincias->name . ' - ' . $localidades->Municipios->name . ' - ' . $localidades->name];
+        }
+
+
         return parent::edit();
     }
 
@@ -170,7 +190,8 @@ class BudgetsController extends Controller
 
         //edita a traves del repo
         $model = $this->repo->update($id,$this->request);
-        
+
+
         $model->FinancialsDues()->sync($this->request->get('financials_dues_id'));
 
         

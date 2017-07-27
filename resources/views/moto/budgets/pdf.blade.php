@@ -430,7 +430,7 @@
                     <tr>
                         <td>{!! $financialsDue->financials->name !!}</td>
                         <td style="border: 1px solid black; padding:5px !important;">{!! $financialsDue->due !!} cuotas de $ {!! 
-                        $financialsDue->porcent != 0 ? number_format(  (($model->total ) + (($model->total * $financialsDue->porcent)/100)) / $financialsDue->due, 2) : number_format(($model->total * $financialsDue->coef) / $financialsDue->due, 2) !!}</td>
+                        $financialsDue->porcent != 0 ? number_format(  (($model->a_financiar ) + (($model->a_financiar * $financialsDue->porcent)/100)) / $financialsDue->due, 2) : number_format(($model->a_financiar * $financialsDue->coef) / $financialsDue->due, 2) !!}</td>
                     </tr>   
                 @empty
 
