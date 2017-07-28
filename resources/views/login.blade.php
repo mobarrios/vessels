@@ -3,20 +3,15 @@
     @section('mainContent')
     <div class="login-box">
 
-        <div class="login-logo">
-            <a href=""> <span class="fa-stack ">
-                <i class="fa fa-shekel fa-stack-2x"></i>
-            </span></a>
-        </div>
         <div class="login-box-body">
 
             <div class="login-logo">
-                    SISTEMA DE GESTIÓN
+            Administración
             </div>
             <hr>
-            <p class="login-box-msg">Por Favor , coloque sus credenciales.</p>
 
             {!! Form::open(['route'=>'auth.validate']) !!}
+            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                 <div class="form-group has-feedback">
                     {!! Form::text('user_name',null,['class'=>'form-control','placeholder'=>'Usuario']) !!}
 
@@ -37,6 +32,7 @@
                     <button type="submit" class="btn btn-default btn-block"> Ingresar</button>
                 </div>
                 <!-- /.col -->
+
             </div>
 
             @include('template.messages')

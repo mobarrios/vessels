@@ -16,54 +16,6 @@ class BrancheablesSeeders extends Seeder
                     'entities_id' => 1,
                     'entities_type' => 'App\Entities\Configs\User',
                     'branches_id' => '1',
-                ],[
-                    'entities_id' => 1,
-                    'entities_type' => 'App\Entities\Configs\User',
-                    'branches_id' => '2',
-                ],[
-                    'entities_id' => 2,
-                    'entities_type' => 'App\Entities\Configs\User',
-                    'branches_id' => '1',
-                ]
-                ,[
-                    'entities_id' => 1,
-                    'entities_type' => 'App\Entities\Moto\PurchasesOrders',
-                    'branches_id' => '1',
-                ],
-                [
-                    'entities_id' => 2,
-                    'entities_type' => 'App\Entities\Moto\PurchasesOrders',
-                    'branches_id' => '1',
-                ],
-                [
-                    'entities_id' => 1,
-                    'entities_type' => 'App\Entities\Moto\Dispatches',
-                    'branches_id' => '1',
-                ],
-                [
-                    'entities_id' => 2,
-                    'entities_type' => 'App\Entities\Moto\Dispatches',
-                    'branches_id' => '1',
-                ],
-                [
-                    'entities_id' => 1,
-                    'entities_type' => 'App\Entities\Moto\Items',
-                    'branches_id' => '1',
-                ],
-                [
-                    'entities_id' => 2,
-                    'entities_type' => 'App\Entities\Moto\Items',
-                    'branches_id' => '1',
-                ],
-                [
-                    'entities_id' => 3,
-                    'entities_type' => 'App\Entities\Moto\Items',
-                    'branches_id' => '1',
-                ],
-                [
-                    'entities_id' => 4,
-                    'entities_type' => 'App\Entities\Moto\Items',
-                    'branches_id' => '1',
                 ]
             ]
         );

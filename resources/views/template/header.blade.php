@@ -3,19 +3,18 @@
     <a href="" class="logo">
 
 
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">
-            <span class="fa-stack fa-xs">
-                <i class="fa fa-shekel fa-stack-1x"></i>
-            </span>
-        </span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg">
-            <span class="fa-stack fa-lg">
-                <i class="fa  fa-shekel fa-stack-1x "></i>
-            </span>
-            Gestión
-        </span>
+        {{--<!-- mini logo for sidebar mini 50x50 pixels -->--}}
+        {{--<span class="logo-mini">--}}
+            {{--<span class="fa-stack fa-xs">--}}
+                {{--<i class="fa fa-shekel fa-stack-1x"></i>--}}
+            {{--</span>--}}
+        {{--</span>--}}
+        {{--<!-- logo for regular state and mobile devices -->--}}
+        {{--<span class="logo-lg">--}}
+            {{--<span class="fa-stack fa-lg">--}}
+                {{--<i class="fa  fa-shekel fa-stack-1x "></i>--}}
+            {{--</span>--}}
+        {{--</span>--}}
 
     </a>
     <!-- Header Navbar: style can be found in header.less -->
@@ -32,10 +31,10 @@
             <ul class="nav navbar-nav">
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
-                    <a class="dropdown-toggle" href="{!! route('moto.profiles.index') !!}">
-                        <span class="fa fa-user"></span>
-                        <span class="hidden-xs">{{\Illuminate\Support\Facades\Auth::user()->email}}</span>
-                    </a>
+                    {{--<a class="dropdown-toggle" href="{!! route('moto.profiles.index') !!}">--}}
+                        {{--<span class="fa fa-user"></span>--}}
+                        {{--<span class="hidden-xs">{{\Illuminate\Support\Facades\Auth::user()->email}}</span>--}}
+                    {{--</a>--}}
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle text-black" data-toggle="dropdown" href="#" aria-expanded="false">
