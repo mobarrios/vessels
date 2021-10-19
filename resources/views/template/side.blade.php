@@ -103,7 +103,7 @@
                 <li><a href="{{ route('vessels.operationsTypes.index') }}" class="menu"><span>Operations Types</span></a></li>
                 <li><a href="{{ route('vessels.locations.index') }}" class="menu"><span>Locations</span></a></li>
 
-                <li><a href="{{ route('vessels.sectors.index') }}" class="menu"><span>Sectors</span></a></li>
+                {{-- <li><a href="{{ route('vessels.sectors.index') }}" class="menu"><span>Sectors</span></a></li> --}}
                 <li><a href="{{ route('vessels.services.index') }}" class="menu"><span>Services</span></a></li>
 
                 {{-- <li><a href="{{route('admin.purcharses.index' )}}" class="menu"><span>Ordenes Compra</span></a></li>

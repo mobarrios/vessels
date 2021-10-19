@@ -15,8 +15,8 @@
                 <td>{{$model->total_berths}} </td>
                 <td>{{$model->pax_seats}} </td>
                 <td>
-                  <a class='btn btn-xs btn-default'>Sectors</a>
-                  <a href={{route('vessels.vessels.details',1)}} class='btn btn-xs btn-success'>Detail</a>
+                  <a href={{route('vessels.sectors.index',$model->id)}} class='btn btn-xs btn-default'>Sectors</a>
+                  <a href={{route('vessels.vessels.details',$model->id)}} class='btn btn-xs btn-success'>Detail</a>
                 </td>
 
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Entities\Vessels;
 use App\Entities\Entity;
-
+use Illuminate\Support\Facades\DB;
 class Vessels extends Entity
 {
 
@@ -10,7 +10,23 @@ class Vessels extends Entity
     protected $section = 'vessels';
 
 
+    public function Sectors()
+    {
+        return $this->hasMany(Sectors::class);
+    }
 
+    public function getTypesTotalCapcitiesAttribute()
+    {
+      $sector = DB::table('sectors')
+      ->join('sectors_cargo_types','sectors_cargo_types.sectors_id','=','sectors.id')
+      ->join('cargo_types','cargo_types.id','=','sectors_cargo_types.cargo_types_id')
+      ->select('cargo_types.name', DB::raw('sum(sectors.capacities) as total'))
+      ->where('vessels_id',$this->attributes['id'])
+      ->groupBy('cargo_types.id')
+      ->get();
+
+      return $sector;
+    }
 
 
 }

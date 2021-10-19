@@ -8,13 +8,19 @@ class Sectors extends Entity
     protected $fillable = ['name','capacities','um', 'vessels_id', 'sectors_types_id'];
     protected $section  = 'sectors';
 
+
+    public function Vessels()
+    {
+      return $this->belongsTo(Vessels::class);
+    }
+
     public function SectorTypes()
     {
         return $this->hasMany(SectorTypes::class);
     }
 
-    public function CargoTypes(){
-
+    public function CargoTypes()
+    {
         return $this->belongsToMany(CargoTypes::getClass(), 'sectors_cargo_types','sectors_id','cargo_types_id');
     }
 

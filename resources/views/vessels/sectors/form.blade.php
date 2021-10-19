@@ -12,7 +12,7 @@
         @endif
 
 
-          {!! Form::hidden('vessels_id',3) !!}
+          {!! Form::hidden('vessels_id',Session::get('vesselsId')) !!}
 
             <div class="col-xs-6 form-group">
               {!! Form::label('Name') !!}
@@ -33,7 +33,7 @@
             </div>
             <div class="col-xs-6 form-group">
                 {!! Form::label('Sector Cargo Types Availables') !!}
-                {!! Form::select('sector_cargo_types_id[]', $cargoTypes, null, ['class'=>'form-control selectMulti','multiple'=>'']) !!}
+                {!! Form::select('sector_cargo_types_id', $cargoTypes, null, ['class'=>'form-control select2 ']) !!}
             </div>
 
 

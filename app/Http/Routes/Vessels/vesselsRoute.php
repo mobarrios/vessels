@@ -91,17 +91,22 @@ Route::group(['prefix'=>'sectors'],function(){
 
         $section =  'sectors';
 
+        //Route::group(['prefix'=>'{vesselsId?}'],function() use ($section){
+
+            Route::get('/edit/{id?}',       ['as'=>'vessels.sectors.edit','uses'=>'Vessels\SectorsController@edit']);
+            Route::post('/update/{id?}',    ['as'=>'vessels.sectors.update','uses'=>'Vessels\SectorsController@update']);
+
+            Route::get('/create',           ['as'=>'vessels.sectors.create','uses'=>'Vessels\SectorsController@create']);
+            Route::post('/store',           ['as'=>'vessels.sectors.store','uses'=>'Vessels\SectorsController@store']);
+            Route::get('/show/{id}',        ['as'=>'vessels.sectors.show','uses'=>'Vessels\SectorsController@show']);
+            Route::get('/details/{id}',     ['as'=>'vessels.sectors.details','uses'=>'Vessels\SectorsController@details']);
+            Route::get('/index/{vesselsId?}/{search?}',  ['as'=>'vessels.sectors.index','uses'=>'Vessels\SectorsController@index']);
+
+       //  });
+
         Route::get('/destroy/{id?}',    ['as'=>'vessels.sectors.destroy','uses'=>'Vessels\SectorsController@destroy']);
-        Route::get('/edit/{id?}',       ['as'=>'vessels.sectors.edit','uses'=>'Vessels\SectorsController@edit']);
-        Route::post('/update/{id?}',    ['as'=>'vessels.sectors.update','uses'=>'Vessels\SectorsController@update']);
-
-        Route::get('/create',           ['as'=>'vessels.sectors.create','uses'=>'Vessels\SectorsController@create']);
-        Route::post('/store',           ['as'=>'vessels.sectors.store','uses'=>'Vessels\SectorsController@store']);
-        Route::get('/show/{id}',        ['as'=>'vessels.sectors.show','uses'=>'Vessels\SectorsController@show']);
-        Route::get('/details/{id}',     ['as'=>'vessels.sectors.details','uses'=>'Vessels\SectorsController@details']);
-        Route::get('/index/{search?}',  ['as'=>'vessels.sectors.index','uses'=>'Vessels\SectorsController@index']);
-
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.sectors.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
+
 
 });
 

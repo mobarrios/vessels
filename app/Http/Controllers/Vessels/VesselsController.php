@@ -27,6 +27,10 @@ class VesselsController extends Controller
 
     public function details()
     {
+      $id = $this->route->id;
+      $this->data['model'] = $this->repo->find($id);
+      $this->data['types'] = $this->repo->find($id);
+
       return view('vessels.vessels.detail')->with($this->data);
     }
 
