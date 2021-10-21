@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
 use App\Entities\Vessels\CargoTypes;
+use App\Entities\Vessels\SectorsTypes;
+
 use Illuminate\Support\Facades\Session;
 
 class SectorsController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, CargoTypes $cargoTypes)
+    public function  __construct(Request $request, Repo $repo, Route $route, CargoTypes $cargoTypes, SectorsTypes $sectorsTypes)
     {
         $this->request  = $request;
         $this->repo     = $repo;
@@ -21,6 +23,8 @@ class SectorsController extends Controller
         $this->section          = 'sectors';
         $this->data['section']  = $this->section;
         $this->data['cargoTypes'] = $cargoTypes->lists('name','id');
+        $this->data['sectorsTypes'] = $sectorsTypes->lists('name','id');
+
 
         if($this->route->hasParameter('vesselsId')){
             // $this->data['vesselsId'] = $this->route->getParameter('vesselsId');

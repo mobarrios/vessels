@@ -100,6 +100,8 @@
                 <li><a href="{{ route('vessels.vessels.index') }}" class="menu"><span>Vessels</span></a></li>
                 <li><a href="{{ route('vessels.vesselsTypes.index') }}" class="menu"><span>Vessels Types</span></a></li>
                 <li><a href="{{ route('vessels.cargoTypes.index') }}" class="menu"><span>Cargo Types</span></a></li>
+                <li><a href="{{ route('vessels.sectorsTypes.index') }}" class="menu"><span>Sectors Types</span></a></li>
+
                 <li><a href="{{ route('vessels.operationsTypes.index') }}" class="menu"><span>Operations Types</span></a></li>
                 <li><a href="{{ route('vessels.locations.index') }}" class="menu"><span>Locations</span></a></li>
 

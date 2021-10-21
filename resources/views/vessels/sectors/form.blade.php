@@ -20,7 +20,7 @@
             </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('Type') !!}
-              {!! Form::select('sectors_types_id', ['' => 'Seleccionar', 1 => 'TANK', 2 => 'CONTAINER' , 3 => 'BULK' ], null, ['class'=>'form-control select2']) !!}
+              {!! Form::select('sectors_types_id', $sectorsTypes, null, ['class'=>'form-control select2']) !!}
             </div>
             <div class="col-xs-6 form-group">
                 {!! Form::label('Capacities') !!}

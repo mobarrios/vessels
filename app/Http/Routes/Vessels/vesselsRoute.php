@@ -35,6 +35,23 @@ Route::group(['prefix'=>'vesselsTypes'],function(){
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.vesselsTypes.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 });
 
+Route::group(['prefix'=>'sectorsTypes'],function(){
+
+        $section =  'sectorsTypes';
+
+        Route::get('/destroy/{id?}',    ['as'=>'vessels.sectorsTypes.destroy','uses'=>'Vessels\SectorsTypesController@destroy']);
+        Route::get('/edit/{id?}',       ['as'=>'vessels.sectorsTypes.edit','uses'=>'Vessels\SectorsTypesController@edit']);
+        Route::post('/update/{id?}',    ['as'=>'vessels.sectorsTypes.update','uses'=>'Vessels\SectorsTypesController@update']);
+
+        Route::get('/create',           ['as'=>'vessels.sectorsTypes.create','uses'=>'Vessels\SectorsTypesController@create']);
+        Route::post('/store',           ['as'=>'vessels.sectorsTypes.store','uses'=>'Vessels\SectorsTypesController@store']);
+        Route::get('/show/{id}',        ['as'=>'vessels.sectorsTypes.show','uses'=>'Vessels\SectorsTypesController@show']);
+        Route::get('/details/{id}',     ['as'=>'vessels.sectorsTypes.details','uses'=>'Vessels\SectorsTypesController@details']);
+        Route::get('/index/{search?}',  ['as'=>'vessels.sectorsTypes.index','uses'=>'Vessels\SectorsTypesController@index']);
+
+        Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.sectorsTypes.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
+});
+
 Route::group(['prefix'=>'operationsTypes'],function(){
 
         $section =  'operationsTypes';
