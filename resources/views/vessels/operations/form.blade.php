@@ -13,7 +13,7 @@
 
 
           {!! Form::hidden('services_id',1) !!}
-          {!! Form::hidden('users_id',1 ) !!}
+          {!! Form::hidden('users_id',Auth::user()->id) !!}
           {!! Form::hidden('sectors_id',1 ) !!}
 
             <div class="col-xs-3 form-group">
@@ -40,19 +40,19 @@
               {!! Form::label('Location') !!}
               {!! Form::select('locations_id', $locations, null, ['class'=>'form-control select2']) !!}
             </div>
-            <div class="col-xs-3 form-group">
+            <div class="col-xs-2 form-group">
                 {!! Form::label('Quantity') !!}
                 {!! Form::number('quantity', null, ['class'=>'form-control']) !!}
             </div>
 
-            <div class="col-xs-3 form-group">
+            {{-- <div class="col-xs-3 form-group">
               {!! Form::label('UM') !!}
               {!! Form::select('um', ['' => 'Seleccionar', 1 => 'Cm3', 2 => 'Lt' , 3 => 'Mt3'] , null, ['class'=>'form-control select2']) !!}
-            </div>
+            </div> --}}
 
-            <div class="col-xs-6 form-group">
+            <div class="col-xs-10 form-group">
                 {!! Form::label('Cargo Types') !!}
-                {!! Form::select('cargo_types_id', [ 1 => 'MGO', 2 => 'FW' , 3 => 'DW/BW' , 4 => 'OTHER'] , null, ['class'=>'form-control select2']) !!}
+                {!! Form::select('cargo_types_id', $cargoTypes , null, ['class'=>'form-control select2']) !!}
             </div>
 
 

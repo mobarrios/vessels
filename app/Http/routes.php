@@ -20,6 +20,12 @@ Route::get('', function()
    return redirect()->intended('home');
 });
 
+// API
+Route::group(['middleware'=>'cors','prefix'=>'api'],function(){
+
+    require(__DIR__ . '/Routes/Vessels/apiRoute.php');
+});
+
 
 Route::group(['middleware'=>'auth'],function(){
 
@@ -29,7 +35,7 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::group(['prefix'=>'admin'],function() {
 
-        require(__DIR__ . '/Routes/Vessels/vesselsRoute.php');
+        // require(__DIR__ . '/Routes/Vessels/vesselsRoute.php');
 
         require(__DIR__ . '/Routes/Admin/budgetsRoute.php');
         require(__DIR__ . '/Routes/Admin/brandsRoute.php');

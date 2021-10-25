@@ -7,6 +7,8 @@ use App\Http\Repositories\Vessels\OperationsRepo as Repo;
 use App\Http\Repositories\Vessels\SectorsRepo;
 
 use App\Entities\Vessels\OperationsTypes;
+use App\Entities\Vessels\CargoTypes;
+
 use App\Entities\Vessels\Locations;
 
 use Illuminate\Http\Request;
@@ -14,7 +16,7 @@ use Illuminate\Routing\Route;
 
 class OperationsController extends Controller
 {
-    public function  __construct(Request $request, Repo $repo, Route $route, SectorsRepo $SectorsRepo, OperationsTypes $operationsTypes, Locations $locations)
+    public function  __construct(Request $request, Repo $repo, Route $route, SectorsRepo $SectorsRepo, OperationsTypes $operationsTypes, Locations $locations, CargoTypes $cargoTypes)
     {
 
         $this->request  = $request;
@@ -24,6 +26,8 @@ class OperationsController extends Controller
         $this->section          = 'operations';
         $this->data['section']  = $this->section;
         $this->data['sectors']  = $SectorsRepo->getModel()->where('vessels_id',5)->lists('name','id');
+
+        $this->data['cargoTypes'] = $cargoTypes->lists('name','id');
 
         $this->data['operationsTypes'] = $operationsTypes->lists('name','id');
         $this->data['locations'] = $locations->lists('name','id');
