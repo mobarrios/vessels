@@ -164,3 +164,21 @@ Route::group(['prefix'=>'operations'],function(){
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.operations.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 
 });
+
+Route::group(['prefix'=>'departureReport'],function(){
+
+        $section =  'departureReport';
+
+        Route::get('/destroy/{id?}',    ['as'=>'vessels.departureReport.destroy','uses'=>'Vessels\DepartureReportController@destroy']);
+        Route::get('/edit/{id?}',       ['as'=>'vessels.departureReport.edit','uses'=>'Vessels\DepartureReportController@edit']);
+        Route::post('/update/{id?}',    ['as'=>'vessels.departureReport.update','uses'=>'Vessels\DepartureReportController@update']);
+
+        Route::get('/create',           ['as'=>'vessels.departureReport.create','uses'=>'Vessels\DepartureReportController@create']);
+        Route::post('/store',           ['as'=>'vessels.departureReport.store','uses'=>'Vessels\DepartureReportController@store']);
+        Route::get('/show/{id}',        ['as'=>'vessels.departureReport.show','uses'=>'Vessels\DepartureReportController@show']);
+        Route::get('/details/{id}',     ['as'=>'vessels.departureReport.details','uses'=>'Vessels\DepartureReportController@details']);
+        Route::get('/index/{search?}',  ['as'=>'vessels.departureReport.index','uses'=>'Vessels\DepartureReportController@index']);
+
+        Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.departureReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
+
+});
