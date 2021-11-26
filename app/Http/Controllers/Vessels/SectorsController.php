@@ -39,7 +39,7 @@ class SectorsController extends Controller
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
-        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'), Session::get('vesselsId') )->withErrors(['Regitro Agregado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'), Session::get('vesselsId') )->withErrors(['Record successfully added']);
     }
 
 
@@ -67,7 +67,7 @@ class SectorsController extends Controller
 
               */
 
-        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),Session::get('vesselsId') )->withErrors(['Regitro Editado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),Session::get('vesselsId') )->withErrors(['Record successfully edited']);
     }
 
 

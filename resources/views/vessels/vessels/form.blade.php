@@ -40,7 +40,7 @@
                 {!! Form::text('dock_area', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-                {!! Form::label('Bollar Pull') !!}
+                {!! Form::label('Bollard Pull') !!}
                 {!! Form::text('bollar_pull', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">

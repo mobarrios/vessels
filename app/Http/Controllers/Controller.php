@@ -90,7 +90,7 @@ abstract class Controller extends BaseController
         //crea a traves del repo con el request
         $model = $this->repo->create($this->request);
 
-        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Regitro Agregado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postStoreRoute'),$model->id)->withErrors(['Record successfully added']);
     }
 
     /*
@@ -146,7 +146,7 @@ abstract class Controller extends BaseController
 
               */
 
-        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Regitro Editado Correctamente']);
+        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),$model->id)->withErrors(['Record successfully edited']);
     }
 
 

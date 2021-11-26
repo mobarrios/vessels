@@ -29,7 +29,7 @@
 
             <div class="col-xs-6 form-group">
               {!! Form::label('UM') !!}
-              {!! Form::select('un', ['' => 'Seleccionar', 1 => 'Cm3', 2 => 'Lt' , 3 => 'Mt3'] , null, ['class'=>'form-control select2']) !!}
+              {!! Form::select('un', ['' => 'Seleccionar', 1 => 'cm3', 2 => 'lt' , 3 => 'm3'] , null, ['class'=>'form-control select2']) !!}
             </div>
             <div class="col-xs-6 form-group">
                 {!! Form::label('Sector Cargo Types Availables') !!}

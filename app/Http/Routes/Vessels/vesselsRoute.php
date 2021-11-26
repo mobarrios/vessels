@@ -182,3 +182,41 @@ Route::group(['prefix'=>'departureReport'],function(){
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.departureReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 
 });
+
+Route::group(['prefix'=>'dmReport'],function(){
+
+        $section =  'dmReport';
+
+        Route::get('/destroy/{id?}',    ['as'=>'vessels.dmReport.destroy','uses'=>'Vessels\DmReportController@destroy']);
+        Route::get('/edit/{id?}',       ['as'=>'vessels.dmReport.edit','uses'=>'Vessels\DmReportController@edit']);
+        Route::post('/update/{id?}',    ['as'=>'vessels.dmReport.update','uses'=>'Vessels\DmReportController@update']);
+
+        Route::get('/create',           ['as'=>'vessels.dmReport.create','uses'=>'Vessels\DmReportController@create']);
+        Route::post('/store',           ['as'=>'vessels.dmReport.store','uses'=>'Vessels\DmReportController@store']);
+        Route::get('/show/{id}',        ['as'=>'vessels.dmReport.show','uses'=>'Vessels\DmReportController@show']);
+        Route::get('/details/{id}',     ['as'=>'vessels.dmReport.details','uses'=>'Vessels\DmReportController@details']);
+        Route::get('/index/{search?}',  ['as'=>'vessels.dmReport.index','uses'=>'Vessels\DmReportController@index']);
+
+        Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.dmReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
+
+});
+
+Route::group(['prefix'=>'surfersReport'],function(){
+
+        $section =  'surfersReport';
+
+        Route::get('/destroy/{id?}',    ['as'=>'vessels.surfersReport.destroy','uses'=>'Vessels\SurfersReportController@destroy']);
+        Route::get('/edit/{id?}',       ['as'=>'vessels.surfersReport.edit','uses'=>'Vessels\SurfersReportController@edit']);
+        Route::post('/update/{id?}',    ['as'=>'vessels.surfersReport.update','uses'=>'Vessels\SurfersReportController@update']);
+
+        Route::get('/create',           ['as'=>'vessels.surfersReport.create','uses'=>'Vessels\SurfersReportController@create']);
+        Route::post('/store',           ['as'=>'vessels.surfersReport.store','uses'=>'Vessels\SurfersReportController@store']);
+        Route::get('/show/{id}',        ['as'=>'vessels.surfersReport.show','uses'=>'Vessels\SurfersReportController@show']);
+        Route::get('/details/{id}',     ['as'=>'vessels.surfersReport.details','uses'=>'Vessels\SurfersReportController@details']);
+        Route::get('/index/{search?}',  ['as'=>'vessels.surfersReport.index','uses'=>'Vessels\SurfersReportController@index']);
+
+        Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.surfersReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
+
+});
+
+
