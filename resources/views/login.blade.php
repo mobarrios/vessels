@@ -9,7 +9,7 @@
                 BACK <strong>END</strong>
             </div>
             <hr>
-            <p class="login-box-msg">Por Favor!, coloque sus credenciales.</p>
+            <p class="login-box-msg">Please!, place credentials.</p>
 
             {!! Form::open(['route'=>'auth.validate']) !!}
             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
@@ -25,13 +25,13 @@
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
             <div class="icheck">
-                {!! Form::checkbox('remember') !!} Recordarme
+                {!! Form::checkbox('remember') !!} Remember me
             </div>
             <hr>
             <div class="row">
                 <!-- /.col -->
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-default btn-block"> Ingresar</button>
+                    <button type="submit" class="btn btn-default btn-block"> Login</button>
                 </div>
                 <!-- /.col -->
             </div>

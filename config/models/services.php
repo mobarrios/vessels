@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Servicios',
+    'sectionName'   => 'Services',
 
     //routes
     'indexRoute'    => 'vessels.'.$model.'.index',

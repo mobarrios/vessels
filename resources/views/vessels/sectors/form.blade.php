@@ -33,7 +33,7 @@
             </div>
             <div class="col-xs-6 form-group">
                 {!! Form::label('Sector Cargo Types Availables') !!}
-                {!! Form::select('sector_cargo_types_id', $cargoTypes, null, ['class'=>'form-control select2 ']) !!}
+                {!! Form::select('sector_cargo_types_id', $cargoTypes, null, ['class'=>'form-control select2 ','multiple']) !!}
             </div>
 
 

@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Usuarios',
+    'sectionName'   => 'Users',
 
     //routes
     'indexRoute'    => 'configs.'.$model.'.index',

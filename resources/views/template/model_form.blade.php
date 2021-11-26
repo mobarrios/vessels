@@ -12,7 +12,7 @@
                     @yield('form_inputs')
                 </div>
                 <div class="box-footer clearfix">
-                    <button type="submit" class="btn btn-default">Guardar</button>
+                    <button type="submit" class="btn btn-default">Save</button>
                 </div>
                 {!! Form::close() !!}
             </div>

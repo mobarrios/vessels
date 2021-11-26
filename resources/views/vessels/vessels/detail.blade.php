@@ -33,7 +33,7 @@
           <div class="progress" style="height:50px">
               <div class="progress-bar bg-red" style="width:40%; height:50px">
                 {{-- <strong>40 %</strong> --}}
-                {{$sector->capacities}} mt3
+                {{$sector->capacities}} m3
               </div>
               {{-- <div class="progress-bar " style="width:60%; height:50px">
                 <strong>60 %</strong>

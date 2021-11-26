@@ -17,7 +17,7 @@
             </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('Company') !!}
-              {!! Form::select('company_id', ['' => 'Seleccionar', 1 => 'Empresa 1', 2 => 'Empresa 2' , 3 => 'Empresa 3' ], null, ['class'=>'form-control']) !!}
+              {!! Form::select('company_id', $companies, null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('Vessel Type') !!}

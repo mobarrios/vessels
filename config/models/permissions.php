@@ -7,7 +7,7 @@ return [
     'paginate'      => '50',
 
     //nombre de la seccion
-    'sectionName'   => 'Permisos',
+    'sectionName'   => 'Permissions',
 
     //routes
     'indexRoute'    => 'configs.'.$model.'.index',

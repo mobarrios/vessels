@@ -45,7 +45,7 @@
         {!! Form::text('inicio_actividades', null, ['class'=>'form-control datePicker']) !!}
     </div>
 
-    <div class="col-xs-6 form-group">
+    {{-- <div class="col-xs-6 form-group">
         {!! Form::label('Logo') !!}
         {!! Form::file('image') !!}
 
@@ -54,6 +54,6 @@
             <img src="{!! $models->images->first()->path !!}" alt="logo" class="img-responsive img-thumbnail">
          </div>
         @endif
-    </div>
+    </div> --}}
 @endsection
 

@@ -30,7 +30,7 @@
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
 
-                                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtros <span class="caret"></span></button>
+                                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filters <span class="caret"></span></button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         @foreach(config('models.'.$section.'.search') as $filter => $v)
                                             @if(!is_array($v))
@@ -59,7 +59,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <h6 >Total de Registros : <strong>{{$models->count()}}</strong></h6>
+                    <h6 >Total Records : <strong>{{$models->count()}}</strong></h6>
 
                     <ul class="pagination pagination-md no-margin pull-right">
                         @if(isset($search))

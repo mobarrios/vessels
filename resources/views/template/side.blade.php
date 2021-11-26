@@ -4,7 +4,7 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <li class="header">MENU PRINCIPAL</li>
+            <li class="header">Main Menu</li>
 
             <li>
                 <a class="menu" href="{{route('home')}}">
@@ -157,19 +157,19 @@
 
             @permission('roles.list|permissions.list|users.list|logs.list|additionals.list|company.list|branches.list|additionals.list')
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-gear"></i> <span>Configuración</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
+                    <a href="#"><i class="fa fa-gear"></i> <span>Settings</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="#"><span>Empresa</span>
+                        <a href="#"><span>Company</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
 
                     <ul class="treeview-menu">
-                     <li><a href="{{route('configs.company.index')}}" class="menu"><span>Datos</span> </a></li>
+                     <li><a href="{{route('configs.company.index')}}" class="menu"><span>Data</span> </a></li>
                     {{-- <li><a href="{{route('configs.branches.index')}}" class="menu"><span> Sucursales</span></a></li> --}}
                     </ul>
                     </li>
-                    <li><a href="#"><span> Accesos </span>
+                    <li><a href="#"><span> Access </span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -179,10 +179,10 @@
                             <li><a href="{{route('configs.roles.index')}}" class="menu"><span>Roles</span> </a></li>
                         @endpermission
                         @permission('permissions.list')
-                            <li><a href="{{route('configs.permissions.index')}}" class="menu"><span> Permisos</span> </a></li>
+                            <li><a href="{{route('configs.permissions.index')}}" class="menu"><span> Permissions</span> </a></li>
                         @endpermission
                         @permission('users.list')
-                            <li ><a href="{{route("configs.users.index")}}" class="menu"><span> Usuarios</span> </a></li>
+                            <li ><a href="{{route("configs.users.index")}}" class="menu"><span> Users</span> </a></li>
                         @endpermission
                         </ul>
                     </li>
