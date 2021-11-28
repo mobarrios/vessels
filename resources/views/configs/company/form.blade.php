@@ -16,18 +16,18 @@
         {!! Form::text('razon_social', null, ['class'=>'form-control']) !!}
     </div>
     <div class="col-xs-6 form-group">
-        {!! Form::label('Nombre Fantasia') !!}
+        {!! Form::label('Company Name') !!}
         {!! Form::text('nombre_fantasia', null, ['class'=>'form-control']) !!}
     </div>
     <div class="col-xs-6 form-group">
-        {!! Form::label('Dirección') !!}
+        {!! Form::label('Address') !!}
         {!! Form::text('direccion', null, ['class'=>'form-control']) !!}
     </div>
     <div class="col-xs-6 form-group">
         {!! Form::label('Teléfono') !!}
         {!! Form::text('telefono', null, ['class'=>'form-control']) !!}
     </div>
-    <div class="col-xs-6 form-group">
+    {{-- <div class="col-xs-6 form-group">
         {!! Form::label('CUIT') !!}
         {!! Form::text('cuit', null, ['class'=>'form-control']) !!}
     </div>
@@ -43,7 +43,7 @@
     <div class="col-xs-6 form-group">
         {!! Form::label('Inicio Actividad') !!}
         {!! Form::text('inicio_actividades', null, ['class'=>'form-control datePicker']) !!}
-    </div>
+    </div> --}}
 
     {{-- <div class="col-xs-6 form-group">
         {!! Form::label('Logo') !!}
