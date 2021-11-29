@@ -10,90 +10,89 @@
         @else
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
-
             <div class="col-xs-6 form-group">
-              {!! Form::label('docker_area_loaded') !!}
+              {!! Form::label('Position/ Location	') !!}
+              {!! Form::select('locations_id', $locations,null, ['class'=>'form-control select2']) !!}
+            </div>
+            <div class="col-xs-6 form-group">
+              {!! Form::label('Deck Area loaded (%)') !!}
               {!! Form::text('docker_area_loaded', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('main_engine_hours') !!}
+              {!! Form::label('Main Engine Running hours') !!}
               {!! Form::text('main_engine_hours', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('thrusted_hours') !!}
+              {!! Form::label('Thrusters/ azymuthal Running hours') !!}
               {!! Form::text('thrusted_hours', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('drills_carried_out') !!}
+              {!! Form::label('Drills carried out') !!}
               {!! Form::text('drills_carried_out', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('fifi_monitor_test') !!}
+              {!! Form::label('Fi-Fi monitor test') !!}
               {!! Form::text('fifi_monitor_test', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('incidents_accidents') !!}
+              {!! Form::label('Incidents/ Accidents') !!}
               {!! Form::text('incidents_accidents', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('main_engines') !!}
+              {!! Form::label('Main Engines/ Gensets') !!}
               {!! Form::text('main_engines', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('propellers') !!}
+              {!! Form::label('Propellers/ Thrusters/ Azimuthals/ Jets') !!}
               {!! Form::text('propellers', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('dp') !!}
+              {!! Form::label('DP capability') !!}
               {!! Form::text('dp', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('ah') !!}
+              {!! Form::label('AH systems/ gears') !!}
               {!! Form::text('ah', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('mgo_trf_sys') !!}
+              {!! Form::label('MGO transfer system') !!}
               {!! Form::text('mgo_trf_sys', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('bulk_cargo_sys') !!}
+              {!! Form::label('Bulk/ Liquid cargo system') !!}
               {!! Form::text('bulk_cargo_sys', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('pax_capacity') !!}
+              {!! Form::label('Pax capacity') !!}
               {!! Form::text('pax_capacity', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('fifi_capability') !!}
+              {!! Form::label('Fi-Fi capability') !!}
               {!! Form::text('fifi_capability', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('oil_resp') !!}
+              {!! Form::label('Oil Response/ Recovery') !!}
               {!! Form::text('oil_resp', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('helideck') !!}
+              {!! Form::label('Helideck') !!}
               {!! Form::text('helideck', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('main_crane') !!}
+              {!! Form::label('Main Crane') !!}
               {!! Form::text('main_crane', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('rov') !!}
+              {!! Form::label('ROV') !!}
               {!! Form::text('rov', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('obs') !!}
+              {!! Form::label('Observations') !!}
               {!! Form::text('obs', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::label('services_id') !!}
-              {!! Form::text('services_id', null, ['class'=>'form-control']) !!}
+              {!! Form::hidden('services_id', 2, ['class'=>'form-control']) !!}
             </div>
-            <div class="col-xs-6 form-group">
-              {!! Form::label('locations_id') !!}
-              {!! Form::text('locations_id', null, ['class'=>'form-control']) !!}
-            </div>
+          
 
 @endsection

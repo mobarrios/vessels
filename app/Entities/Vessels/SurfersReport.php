@@ -6,7 +6,8 @@ class SurfersReport extends Entity
 {
 
     protected $table = 'surfers_report';
-    protected $fillable = ['*'];
+    //protected $fillable = ['*'];
+    protected $guarded = [];
     protected $section = 'surfers_report';
 
 }
