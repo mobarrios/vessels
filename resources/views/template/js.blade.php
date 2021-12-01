@@ -43,6 +43,7 @@
 <!-- bootstrap datepicker -->
 <script src="vendors/LTE/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="vendors/LTE/plugins/datepicker/locales/bootstrap-datepicker.es.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" ></script>
 
 <!-- bootstrap color picker -->
 <script src="vendors/LTE/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
@@ -88,6 +89,9 @@
         localStorage.setItem('menu',$(this).text());
     });
 
+    $('.datetimepicker').datetimepicker({
+        format: 'YYYY-MM-DD hh:mm'
+    });
 
 
 

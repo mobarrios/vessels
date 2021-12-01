@@ -36,6 +36,10 @@ class Operations extends Entity
         return $this->belongsTo(User::class,'users_id');
     }
 
+    public function Services()
+    {
+        return $this->belongsTo(Services::class, 'services_id');
+    }
 
 
 }

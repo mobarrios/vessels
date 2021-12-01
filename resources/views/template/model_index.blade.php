@@ -3,6 +3,7 @@
 
     <div class="row">
         <!-- Default box -->
+        @yield('otherBox')
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header">
@@ -14,16 +15,16 @@
                                 <button id="btn-destroy" class="destroy_btn btn btn-default" url_destroy = "{{ \Illuminate\Support\Facades\Request::segment(2) == 'budgets' ? route(config('models.'.$section.'.destroyRoute')) : route(config('models.'.$section.'.destroyRoute'))}}" title="Borrar"><i class="fa fa-minus-square-o"></i></button>
                                 <button id="edit_btn" route_edit="{{ \Illuminate\Support\Facades\Request::segment(2) == 'budgets' ? route(config('models.'.$section.'.createRoute')) : route(config('models.'.$section.'.editRoute'))}}" class="btn btn-default" title="Editar" ><i class="fa fa-edit"></i></button>
                             </div>
-                            <div class="btn-group btn-group-sm">
+                            {{-- <div class="btn-group btn-group-sm">
                                 <a href="{{route('utilities.exportToExcel')}}" class="btn btn-default" title="Exportar Excel"><i class="fa bg-success fa-file-excel-o"></i></a>
                                 <a href="{{ \Illuminate\Support\Facades\Request::segment(1) == 'admin' ? route('admin.'.$section.'.pdf') : route('configs.'.$section.'.pdf')}}" target="_blank" class="btn btn-default" title="Exportar PDF"><i class="fa bg-danger fa-file-pdf-o"></i></a>
                                 {{--<a href="{{ route('configs.customs',$section) }}" class="btn btn-default" title="Configurar" ><i class="fa fa-gear"></i></a>--}}
 
-                            </div>
+                            {{-- </div> --}} 
 
                         </div>
                     </div>
-                    <div class="col-xs-4 ">
+                    {{-- <div class="col-xs-4 ">
                         {!! Form::open(['route'=>\Illuminate\Support\Facades\Request::segment(2) == 'prospectos' ? 'admin.prospectos.index' : config('models.'.$section.'.indexRoute'),'method'=>'GET']) !!}
 
                         <div class="input-group input-group-sm" >
@@ -46,11 +47,11 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
-                    </div>
+                    </div> --}}
 
                 </div>
                 <div class="box-body table-responsive">
-                    <table class="table table-hover table-striped" id="tableIndex">
+                    <table class="table table-hover table-striped" id="dataTable">
                         {{-- <tbody> --}}
                             @yield('table')
                         {{-- </tbody> --}}

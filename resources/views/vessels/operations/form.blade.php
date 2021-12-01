@@ -18,20 +18,15 @@
 
             <div class="col-xs-3 form-group">
               {!! Form::label('Start Date') !!}
-              {!! Form::date('start_date', null, ['class'=>'form-control']) !!}
+              {!! Form::text('start_date', null, ['class'=>'form-control datetimepicker']) !!}
+
             </div>
-            <div class="col-xs-3 form-group">
-              {!! Form::label('Start Time') !!}
-              {!! Form::time('start_time', null, ['class'=>'form-control']) !!}
-            </div>
+          
             <div class="col-xs-3 form-group">
               {!! Form::label('End Date') !!}
-              {!! Form::date('end_date', null, ['class'=>'form-control']) !!}
+              {!! Form::text('end_date', null, ['class'=>'form-control datetimepicker']) !!}
             </div>
-            <div class="col-xs-3 form-group">
-              {!! Form::label('End Time') !!}
-              {!! Form::time('end_time', null, ['class'=>'form-control']) !!}
-            </div>
+            
             <div class="col-xs-6 form-group">
               {!! Form::label('Operation Type') !!}
               {!! Form::select('operations_types_id', $operationsTypes , null, ['class'=>'form-control select2']) !!}
