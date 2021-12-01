@@ -14,7 +14,7 @@
 
           {!! Form::hidden('services_id',1) !!}
           {!! Form::hidden('users_id',Auth::user()->id) !!}
-          {!! Form::hidden('sectors_id',1 ) !!}
+          {!! Form::hidden('sectors_id',7 ) !!}
 
             <div class="col-xs-3 form-group">
               {!! Form::label('Start Date') !!}
