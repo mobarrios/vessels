@@ -41,5 +41,12 @@ class Operations extends Entity
         return $this->belongsTo(Services::class, 'services_id');
     }
 
+    public function getDurationAttribute()
+    {
+      $start = \Carbon\Carbon::parse($this->attributes['start_date']) ;
+      $end = \Carbon\Carbon::parse($this->attributes['end_date']) ;
+      $totalDuration = $start->diff($end)->format('%H:%I:%S');
 
+      return $totalDuration;
+    }
 }

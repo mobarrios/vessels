@@ -1,7 +1,47 @@
 <?php
 
-// sucursales
+// users
+Route::group(['prefix' => 'users'], function () {
+
+    Route::post('login',function(\Illuminate\Http\Request $request){
+
+        $result = ['name' => $request->name];
+
+        if(!Auth::attempt(['user_name' => $request->username, 'password' => $request->password]))
+                return response()->json('false',200);
+        else
+                return response()->json(Auth::user() ,200);
+    });
+  });
+
+
+// services
 Route::group(['prefix' => 'services'], function () {
+
+  Route::get('all',function(){
+
+    $result = [];
+
+    $models = \App\Entities\Vessels\Services::all();
+
+    foreach ($models as $model)
+
+        array_push($result,
+            [
+                'id' => $model->id,
+                'start_date' => $model->start_date,
+                'end_date' => $model->end_date,
+                'vessels_name' => $model->Vessels->name,
+
+                // 'brands'=> $model->BrandsName,
+                // 'address' => $model->address,
+                // 'horarios' => $model->horarios,
+                // 'latitud' => $model->latitud,
+                // 'longitud' => $model->longitud,
+            ]);
+
+    return response()->json($result,200);
+  });
 
    Route::get('operationsTypes', function () {
 
@@ -69,6 +109,35 @@ Route::group(['prefix' => 'services'], function () {
        return response()->json($result,200);
    });
 
+   //activities
+   Route::get('operations', function (\Illuminate\Http\Request $request) {
+
+       $result = [];
+
+       $services_id = $request->services_id;
+
+       $models = \App\Entities\Vessels\Operations::where('services_id',$services_id)->get();
+
+       foreach ($models as $model)
+
+           array_push($result,
+               [
+                   'id' => $model->id,
+                   'start_date' => $model->start_date,
+                   'end_date' => $model->end_date,
+                   'duration' => $model->duration,
+                   'location_name' => $model->Locations->name,
+                   'operations_type' => $model->OperationsTypes->name
+                   // 'brands'=> $model->BrandsName,
+                   // 'address' => $model->address,
+                   // 'horarios' => $model->horarios,
+                   // 'latitud' => $model->latitud,
+                   // 'longitud' => $model->longitud,
+               ]);
+
+       return response()->json($result,200);
+   });
+
    Route::post('addActivity',function(\Illuminate\Http\Request $request)
        {
 
@@ -87,4 +156,23 @@ Route::group(['prefix' => 'services'], function () {
            return response()->json($operations,200);
        });
 
+     Route::post('departureReport',function(\Illuminate\Http\Request $request)
+     {
+       //dd($request->all());
+         $dr = new \App\Entities\Vessels\DepartureReport();
+         $dr->fill($request->all());
+         $dr->save();
+
+         return response()->json($dr,200);
+     });
+
+     Route::post('surfersReport',function(\Illuminate\Http\Request $request)
+     {
+       //dd($request->all());
+         $dr = new \App\Entities\Vessels\SurfersReport();
+         $dr->fill($request->all());
+         $dr->save();
+
+         return response()->json($dr,200);
+     });
 });
