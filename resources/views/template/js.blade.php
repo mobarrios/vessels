@@ -173,7 +173,6 @@
                     'method': 'get',
                     'success': function (data) {
                         window.location.href = "{!!  \Illuminate\Support\Facades\Request::segment(2) == 'budgets' ? route(config('models.'.$section.'.indexRoute'),\Illuminate\Support\Facades\Request::segment(4)) : route(config('models.'.$section.'.indexRoute')) !!}";
-
                     }
                 });
 

@@ -15,7 +15,7 @@
             <li>
                 <a href="{{route(config('models.'.$section.'.indexRoute'))}}">{{config('models.'.$section.'.sectionName')}}</a>
             </li>
-            <li class="active">{{$activeBread or ''}}</li>
+            {{-- <li class="active">{{$activeBread or ''}}</li> --}}
         </ol>
         @include('template.messages')
 

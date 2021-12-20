@@ -4,8 +4,6 @@
             <th></th>
             <th>Location</th>
             <th>Date</th>
-
-
         </thead>
         <tbody>
         @foreach($models as $model)
@@ -14,7 +12,6 @@
                 {{-- <td>{{$model->id}}</td> --}}
                 <td>{{$model->Locations->name }}</td>
                 <td>{{$model->created_at }}</td>
-
             </tr>
         @endforeach
         </tbody>

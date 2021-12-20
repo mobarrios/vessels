@@ -14,9 +14,9 @@ class Sectors extends Entity
       return $this->belongsTo(Vessels::class);
     }
 
-    public function SectorTypes()
+    public function SectorsTypes()
     {
-        return $this->hasMany(SectorTypes::class);
+        return $this->belongsTo(SectorsTypes::class);
     }
 
     public function CargoTypes()

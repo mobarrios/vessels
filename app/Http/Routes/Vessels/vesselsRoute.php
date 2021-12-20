@@ -4,7 +4,7 @@ Route::group(['prefix'=>'vessels'],function(){
 
         $section =  'vessels';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.vessels.destroy','uses'=>'Vessels\VesselsController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.vessels.destroy','uses'=>'Vessels\VesselsController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.vessels.edit','uses'=>'Vessels\VesselsController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.vessels.update','uses'=>'Vessels\VesselsController@update']);
 
@@ -22,7 +22,7 @@ Route::group(['prefix'=>'vesselsTypes'],function(){
 
         $section =  'vesselsTypes';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.vesselsTypes.destroy','uses'=>'Vessels\VesselsTypesController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.vesselsTypes.destroy','uses'=>'Vessels\VesselsTypesController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.vesselsTypes.edit','uses'=>'Vessels\VesselsTypesController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.vesselsTypes.update','uses'=>'Vessels\VesselsTypesController@update']);
 
@@ -39,7 +39,7 @@ Route::group(['prefix'=>'sectorsTypes'],function(){
 
         $section =  'sectorsTypes';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.sectorsTypes.destroy','uses'=>'Vessels\SectorsTypesController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.sectorsTypes.destroy','uses'=>'Vessels\SectorsTypesController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.sectorsTypes.edit','uses'=>'Vessels\SectorsTypesController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.sectorsTypes.update','uses'=>'Vessels\SectorsTypesController@update']);
 
@@ -56,7 +56,7 @@ Route::group(['prefix'=>'operationsTypes'],function(){
 
         $section =  'operationsTypes';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.operationsTypes.destroy','uses'=>'Vessels\OperationsTypesController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.operationsTypes.destroy','uses'=>'Vessels\OperationsTypesController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.operationsTypes.edit','uses'=>'Vessels\OperationsTypesController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.operationsTypes.update','uses'=>'Vessels\OperationsTypesController@update']);
 
@@ -73,7 +73,7 @@ Route::group(['prefix'=>'locations'],function(){
 
         $section =  'locations';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.locations.destroy','uses'=>'Vessels\LocationsController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.locations.destroy','uses'=>'Vessels\LocationsController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.locations.edit','uses'=>'Vessels\LocationsController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.locations.update','uses'=>'Vessels\LocationsController@update']);
 
@@ -90,7 +90,7 @@ Route::group(['prefix'=>'cargoTypes'],function(){
 
         $section =  'cargoTypes';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.cargoTypes.destroy','uses'=>'Vessels\CargoTypesController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.cargoTypes.destroy','uses'=>'Vessels\CargoTypesController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.cargoTypes.edit','uses'=>'Vessels\CargoTypesController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.cargoTypes.update','uses'=>'Vessels\CargoTypesController@update']);
 
@@ -121,7 +121,7 @@ Route::group(['prefix'=>'sectors'],function(){
 
        //  });
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.sectors.destroy','uses'=>'Vessels\SectorsController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.sectors.destroy','uses'=>'Vessels\SectorsController@destroy']);
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.sectors.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 
 
@@ -132,7 +132,7 @@ Route::group(['prefix'=>'services'],function(){
 
         $section =  'services';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.services.destroy','uses'=>'Vessels\ServicesController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.services.destroy','uses'=>'Vessels\ServicesController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.services.edit','uses'=>'Vessels\ServicesController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.services.update','uses'=>'Vessels\ServicesController@update']);
 
@@ -151,7 +151,7 @@ Route::group(['prefix'=>'operations'],function(){
 
         $section =  'operations';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.operations.destroy','uses'=>'Vessels\OperationsController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.operations.destroy','uses'=>'Vessels\OperationsController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.operations.edit','uses'=>'Vessels\OperationsController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.operations.update','uses'=>'Vessels\OperationsController@update']);
 
@@ -169,7 +169,7 @@ Route::group(['prefix'=>'departureReport'],function(){
 
         $section =  'departureReport';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.departureReport.destroy','uses'=>'Vessels\DepartureReportController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.departureReport.destroy','uses'=>'Vessels\DepartureReportController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.departureReport.edit','uses'=>'Vessels\DepartureReportController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.departureReport.update','uses'=>'Vessels\DepartureReportController@update']);
 
@@ -187,7 +187,7 @@ Route::group(['prefix'=>'dmReport'],function(){
 
         $section =  'dmReport';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.dmReport.destroy','uses'=>'Vessels\DmReportController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.dmReport.destroy','uses'=>'Vessels\DmReportController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.dmReport.edit','uses'=>'Vessels\DmReportController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.dmReport.update','uses'=>'Vessels\DmReportController@update']);
 
@@ -205,7 +205,7 @@ Route::group(['prefix'=>'surfersReport'],function(){
 
         $section =  'surfersReport';
 
-        Route::get('/destroy/{id?}',    ['as'=>'vessels.surfersReport.destroy','uses'=>'Vessels\SurfersReportController@destroy']);
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.surfersReport.destroy','uses'=>'Vessels\SurfersReportController@destroy']);
         Route::get('/edit/{id?}',       ['as'=>'vessels.surfersReport.edit','uses'=>'Vessels\SurfersReportController@edit']);
         Route::post('/update/{id?}',    ['as'=>'vessels.surfersReport.update','uses'=>'Vessels\SurfersReportController@update']);
 
@@ -218,5 +218,3 @@ Route::group(['prefix'=>'surfersReport'],function(){
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.surfersReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 
 });
-
-

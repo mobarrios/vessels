@@ -1,5 +1,18 @@
 @extends('template.model_index')
     @section('table')
+      <thead>
+          <th></th>
+          <th>ID</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+
+      </thead>
+      <tbody>
         @foreach($models as $model)
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
@@ -26,4 +39,6 @@
                 </td>
             </tr>
         @endforeach
+      </tbody>
+
     @endsection

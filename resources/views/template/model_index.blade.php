@@ -20,7 +20,7 @@
                                 <a href="{{ \Illuminate\Support\Facades\Request::segment(1) == 'admin' ? route('admin.'.$section.'.pdf') : route('configs.'.$section.'.pdf')}}" target="_blank" class="btn btn-default" title="Exportar PDF"><i class="fa bg-danger fa-file-pdf-o"></i></a>
                                 {{--<a href="{{ route('configs.customs',$section) }}" class="btn btn-default" title="Configurar" ><i class="fa fa-gear"></i></a>--}}
 
-                            {{-- </div> --}} 
+                            {{-- </div> --}}
 
                         </div>
                     </div>
@@ -51,7 +51,7 @@
 
                 </div>
                 <div class="box-body table-responsive">
-                    <table class="table table-hover table-striped" id="dataTable">
+                    <table class="table table-hover table-striped" id="tableIndex">
                         {{-- <tbody> --}}
                             @yield('table')
                         {{-- </tbody> --}}

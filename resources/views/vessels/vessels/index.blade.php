@@ -8,7 +8,7 @@
         <th>CLASS SOC.</th>
         <th>CALSS NOT.</th>
         <th>POWER</th>
-        <th>DOCK AREA</th>
+        <th>DECK AREA</th>
         <th>BOLLARD PULL</th>
         <th>FIFI</th>
         <th>TOTAL BERTHS</th>
