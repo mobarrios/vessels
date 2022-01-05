@@ -145,6 +145,10 @@ Route::group(['prefix' => 'services'], function () {
              $request->quantity = 0 ;
            }
 
+           if(is_null($request->cargo_types_id)){
+             $request->cargo_types_id = 1 ;
+           }
+
            $operations = new \App\Entities\Vessels\Operations();
            $operations->start_date = $request->start_date;
            $operations->end_date = $request->end_date;
