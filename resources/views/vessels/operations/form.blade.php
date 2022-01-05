@@ -12,21 +12,21 @@
         @endif
 
 
-          {!! Form::hidden('services_id',1) !!}
+          {!! Form::hidden('services_id',Session::get('servicesId')) !!}
           {!! Form::hidden('users_id',Auth::user()->id) !!}
-          {!! Form::hidden('sectors_id',7 ) !!}
+          {!! Form::hidden('sectors_id',3 ) !!}
 
             <div class="col-xs-3 form-group">
               {!! Form::label('Start Date') !!}
               {!! Form::text('start_date', null, ['class'=>'form-control datetimepicker']) !!}
 
             </div>
-          
+
             <div class="col-xs-3 form-group">
               {!! Form::label('End Date') !!}
               {!! Form::text('end_date', null, ['class'=>'form-control datetimepicker']) !!}
             </div>
-            
+
             <div class="col-xs-6 form-group">
               {!! Form::label('Operation Type') !!}
               {!! Form::select('operations_types_id', $operationsTypes , null, ['class'=>'form-control select2']) !!}

@@ -159,7 +159,7 @@ Route::group(['prefix'=>'operations'],function(){
         Route::post('/store',           ['as'=>'vessels.operations.store','uses'=>'Vessels\OperationsController@store']);
         Route::get('/show/{id}',        ['as'=>'vessels.operations.show','uses'=>'Vessels\OperationsController@show']);
         Route::get('/details/{id}',     ['as'=>'vessels.operations.details','uses'=>'Vessels\OperationsController@details']);
-        Route::get('/index/{search?}',  ['as'=>'vessels.operations.index','uses'=>'Vessels\OperationsController@index']);
+        Route::get('/index/{servicesId?}/{search?}',  ['as'=>'vessels.operations.index','uses'=>'Vessels\OperationsController@index']);
 
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.operations.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 

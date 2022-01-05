@@ -20,18 +20,21 @@
                 <td>{{$model->Vessels->name }} </td>
                 <td>{{$model->origin }} </td>
                 <td>{{$model->destiny}} </td>
-                
+
                 <td><label class='label label-default'>Iniciado</label></td>
-                
+
                 <td>
                     @if($model->Vessels->vessels_types_id != 2)
-                        <a href={{route('vessels.departureReport.index')}} class='btn btn-xs '>Departure Report</a>
-                        <a href={{route('vessels.operations.index')}} class='btn btn-xs'>Activities</a>
-                        <a href={{route('vessels.dmReport.index')}} class='btn btn-xs '>Daily Mid. Report</a>
+                        <a href={{route('vessels.operations.index',$model->id)}} class='btn btn-xs'>Activities</a>
+                        |
+                        <a href={{route('vessels.departureReport.index',$model->id)}} class='btn btn-xs '>Departure Report</a>
+                        |
+                        <a href={{route('vessels.dmReport.index',$model->id)}} class='btn btn-xs '>Daily Mid. Report</a>
                     @endif
                     @if($model->Vessels->vessels_types_id == 2)
-                        <a href={{route('vessels.departureReport.index')}} class='btn btn-xs '>Departure Report</a>
-                        <a href={{route('vessels.surfersReport.index')}} class='btn btn-xs '>Sufers Act. Report</a>
+                        <a href={{route('vessels.departureReport.index',$model->id)}} class='btn btn-xs '>Departure Report</a>
+                      |
+                        <a href={{route('vessels.surfersReport.index',$model->id)}} class='btn btn-xs '>Sufers Act. Report</a>
                     @endif
                 </td>
             </tr>

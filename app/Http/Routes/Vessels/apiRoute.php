@@ -141,6 +141,10 @@ Route::group(['prefix' => 'services'], function () {
    Route::post('addActivity',function(\Illuminate\Http\Request $request)
        {
 
+           if(is_null($request->quantity)){
+             $request->quantity = 0 ;
+           }
+
            $operations = new \App\Entities\Vessels\Operations();
            $operations->start_date = $request->start_date;
            $operations->end_date = $request->end_date;

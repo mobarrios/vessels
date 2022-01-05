@@ -6,7 +6,7 @@
             <div class="box-header"></div>
         </div>
     </div>
-            
+
     @endSection --}}
 
     @section('table')
@@ -25,13 +25,15 @@
         </thead>
         <tbody>
         @foreach($models as $model)
+          @if($model->services_id == Session::get('servicesId'))
+
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 <td>{{$model->Services->Vessels->name}}</td>
                 <td>{{$model->start_date}}</td>
                 <td>{{$model->end_date}}</td>
                 <td>
-                    <?php 
+                    <?php
                         $start = \Carbon\Carbon::parse($model->start_date) ;
                         $end = \Carbon\Carbon::parse($model->end_date) ;
                         $totalDuration = $start->diff($end)->format('%H:%I:%S');
@@ -49,6 +51,7 @@
                 <td>{{$model->User->user_name}}</td>
 
             </tr>
+          @endif
         @endforeach
         </tbody>
     @endsection
