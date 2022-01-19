@@ -25,14 +25,14 @@
               {!! Form::label('Vessel') !!}
               {!! Form::select('vessels_id', $vessels, null, ['class'=>'form-control']) !!}
             </div>
-            <div class="col-xs-6 form-group">
+            {{-- <div class="col-xs-6 form-group">
                 {!! Form::label('Origin') !!}
                 {!! Form::text('origin', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
                 {!! Form::label('Destiny') !!}
                 {!! Form::text('destiny', null, ['class'=>'form-control']) !!}
-            </div>
+            </div> --}}
 
             <div class="col-xs-6 form-group">
                 {!! Form::label('SAP') !!}

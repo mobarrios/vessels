@@ -2,7 +2,7 @@
     @section('table')
     <thead>
         <th></th>
-        <th>ID</th>
+        {{-- <th>ID</th> --}}
         <th>NAME</th>
         <th>TYPE</th>
         <th>CLASS SOC.</th>
@@ -19,7 +19,7 @@
         @foreach($models as $model)
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
-                <td>{{$model->id}}</td>
+                {{-- <td>{{$model->id}}</td> --}}
                 <td>{{$model->name }}</td>
                 <td>{{$model->vessels_types_id}}</td>
                 <td>{{$model->class_society}} </td>

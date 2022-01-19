@@ -51,7 +51,7 @@
 
                 </div>
                 <div class="box-body table-responsive">
-                    <table class="table table-hover table-striped" id="tableIndex">
+                    <table class="table table-hover table-striped" id="dataTable">
                         {{-- <tbody> --}}
                             @yield('table')
                         {{-- </tbody> --}}
