@@ -1,5 +1,9 @@
 <?php
 
+Route::get('reports',function(){
+  return view('vessels.reports.reports');
+});
+
 Route::group(['prefix'=>'vessels'],function(){
 
         $section =  'vessels';
@@ -177,7 +181,7 @@ Route::group(['prefix'=>'departureReport'],function(){
         Route::post('/store',           ['as'=>'vessels.departureReport.store','uses'=>'Vessels\DepartureReportController@store']);
         Route::get('/show/{id}',        ['as'=>'vessels.departureReport.show','uses'=>'Vessels\DepartureReportController@show']);
         Route::get('/details/{id}',     ['as'=>'vessels.departureReport.details','uses'=>'Vessels\DepartureReportController@details']);
-        Route::get('/index/{search?}',  ['as'=>'vessels.departureReport.index','uses'=>'Vessels\DepartureReportController@index']);
+        Route::get('/index/{servicesId?}/{search?}',  ['as'=>'vessels.departureReport.index','uses'=>'Vessels\DepartureReportController@index']);
 
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.departureReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 
