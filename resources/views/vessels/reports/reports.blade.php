@@ -5,9 +5,7 @@
 </head>
 <body>
 
-    <iframe  style="border:none;" src="http://redash.coders.com.ar:5000/public/dashboards/fw9JZibqKWVQNlmGyojTMur7F0YfiX04MhllUjMj?org_slug=default" width="100%" height="1500">
-    </iframe>
-
+    <iframe width="100%" height="1080" src="https://datastudio.google.com/embed/reporting/cff0a079-5e0c-4b21-8cb2-ba8ce31aea50/page/QH6jC" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 </body>
 </html>
