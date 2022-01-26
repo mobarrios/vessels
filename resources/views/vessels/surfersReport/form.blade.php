@@ -57,13 +57,13 @@
             </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('services_id') !!}
-              {!! Form::text('name', null, ['class'=>'form-control']) !!}
+              {!! Form::text('services_id', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('locations_id') !!}
-              {!! Form::text('name', null, ['class'=>'form-control']) !!}
+              {!! Form::text('locations_id', null, ['class'=>'form-control']) !!}
             </div>
 
-            
+
 
 @endsection

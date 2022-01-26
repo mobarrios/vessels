@@ -63,6 +63,7 @@
           <strong>Sectors</strong>
             <table class="table">
               <thead>
+                <th>#</th>
                 <th>Name</th>
                 <th>Cap.Max </th>
                 <th colspan="2">Types Available</th>
@@ -71,18 +72,24 @@
               <tbody>
               @foreach ($services->Vessels->Sectors as $sector)
                 <tr>
+                <td>{{$sector->id}}</td>
                 <td>{{$sector->name}}</td>
                 <td>{{$sector->capacities}} <small> {{$sector->um}} </small></td>
 
-                   @foreach($sector->CargoTypes as $type)
+
                       <td>
-                       <input type="radio" name="actualCapType[{{$sector->id}}]" value="{{$type->id}}" >  <strong style="margin-left: 10px">{{$type->name}} </strong>
+                       {{-- <input type="radio" name="actualCapType[{{$sector->id}}]" value="{{$type->id}}" >  <strong style="margin-left: 10px">{{$type->name}} </strong> --}}
+                         <select  name="actualCapType[{{$sector->id}}]">
+                              @foreach($sector->CargoTypes as $type)
+                                <option value={{$type->id}}>{{$type->name}}</option>
+                              @endforeach
+                        </select>
+
                       </td>
                       <td>
-                       <input type="text" name="actualCap[{{$sector->id}}]" max="{{$sector->capacities}}" >
+                       <input type="text" name="actualCap[{{$sector->id}}]"  >
                       </td>
-                   @endforeach
-                 
+
 
                </tr>
 

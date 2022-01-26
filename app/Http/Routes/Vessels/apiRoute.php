@@ -138,6 +138,8 @@ Route::group(['prefix' => 'services'], function () {
        return response()->json($result,200);
    });
 
+
+
    Route::post('addActivity',function(\Illuminate\Http\Request $request)
        {
 
@@ -174,11 +176,21 @@ Route::group(['prefix' => 'services'], function () {
          return response()->json($dr,200);
      });
 
+     Route::post('dmReport',function(\Illuminate\Http\Request $request)
+     {
+       //dd($request->all());
+         $dr = new \App\Entities\Vessels\DmReport();
+         $dr->fill($request->all());
+         $dr->save();
+
+         return response()->json($dr,200);
+     });
+
      Route::post('surfersReport',function(\Illuminate\Http\Request $request)
      {
        //dd($request->all());
          $dr = new \App\Entities\Vessels\SurfersReport();
-         $dr->fill($request->all());
+         $dr->fill($request->all() );
          $dr->save();
 
          return response()->json($dr,200);

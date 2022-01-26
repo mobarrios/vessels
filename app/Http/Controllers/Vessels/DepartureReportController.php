@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Vessels;
 use App\Http\Controllers\Controller;
 use App\Http\Repositories\Vessels\DepartureReportRepo as Repo;
 use App\Http\Repositories\Vessels\ServicesRepo;
+use App\Entities\Vessels\DepartureReportCargo;
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Entities\Vessels\Locations;
@@ -29,7 +31,7 @@ class DepartureReportController extends Controller
             // $this->data['vesselsId'] = $this->route->getParameter('vesselsId');
              Session::put('servicesId',$this->route->getParameter('servicesId'));
          }
-         $this->data['services'] =  $servicesRepo->getModel()->where('id', Session::get('servicesId'))->first();
+         $this->data['services'] =  $servicesRepo->getModel()->where('id', $this->route->getParameter('servicesId'))->first();
 
     }
 
@@ -39,8 +41,24 @@ class DepartureReportController extends Controller
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
         //crea a traves del repo con el request
 
-          dd( $this->request->actualCapType );
         $model = $this->repo->create($this->request);
+
+        foreach ($this->request->actualCapType as $act => $k) {
+
+          foreach($this->request->actualCap as $cap => $ck){
+
+              if($cap == $act )
+              {
+                $drc = DepartureReportCargo::create([
+                  'departure_report_id' => $model->id,
+                  'quantity' => $ck,
+                  'sectors_id' => $act,
+                  'cargo_types_id' => $k
+
+                ]);
+              }
+          }
+        }
 
 
         return redirect()->route(config('models.'.$this->section.'.postStoreRoute'), Session::get('servicesId') )->withErrors(['Record successfully added']);
