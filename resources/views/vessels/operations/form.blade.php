@@ -46,6 +46,11 @@
             </div> --}}
 
             <div class="col-xs-10 form-group">
+                {!! Form::label('Sector') !!}
+                {!! Form::select('sectors_id', $sectors , null, ['class'=>'form-control select2']) !!}
+            </div>
+
+            <div class="col-xs-10 form-group">
                 {!! Form::label('Cargo Types') !!}
                 {!! Form::select('cargo_types_id', $cargoTypes , null, ['class'=>'form-control select2']) !!}
             </div>

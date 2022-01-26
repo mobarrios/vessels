@@ -27,17 +27,20 @@ class OperationsController extends Controller
 
         $this->section          = 'operations';
         $this->data['section']  = $this->section;
-        $this->data['sectors']  = $SectorsRepo->getModel()->where('vessels_id',5)->lists('name','id');
 
         $this->data['cargoTypes'] = $cargoTypes->lists('name','id');
 
         $this->data['operationsTypes'] = $operationsTypes->lists('name','id');
         $this->data['locations'] = $locations->lists('name','id');
 
-        if($this->route->hasParameter('servicesId')){
+        if($this->route->hasParameter('servicesId') && $this->route->hasParameter('vesselsId') ){
             // $this->data['vesselsId'] = $this->route->getParameter('vesselsId');
              Session::put('servicesId',$this->route->getParameter('servicesId'));
+             Session::put('vesselsId',$this->route->getParameter('vesselsId'));
          }
+
+         $this->data['sectors']  = $SectorsRepo->getModel()->where('vessels_id',Session::get('vesselsId'))->lists('name','id');
+
     }
 
     public function store()

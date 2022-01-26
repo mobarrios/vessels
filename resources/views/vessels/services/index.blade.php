@@ -25,7 +25,7 @@
 
                 <td>
                     @if($model->Vessels->vessels_types_id != 2)
-                        <a href={{route('vessels.operations.index',$model->id)}} class='btn btn-xs'>Activities</a>
+                        <a href={{route('vessels.operations.index', [ $model->id , $model->vessels_id ] )}} class='btn btn-xs'>Activities</a>
                         |
                         <a href={{route('vessels.departureReport.index',$model->id)}} class='btn btn-xs '>Departure Report</a>
                         |
