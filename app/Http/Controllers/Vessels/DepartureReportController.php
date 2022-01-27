@@ -30,8 +30,9 @@ class DepartureReportController extends Controller
         if($this->route->hasParameter('servicesId')){
             // $this->data['vesselsId'] = $this->route->getParameter('vesselsId');
              Session::put('servicesId',$this->route->getParameter('servicesId'));
+
          }
-         $this->data['services'] =  $servicesRepo->getModel()->where('id', $this->route->getParameter('servicesId'))->first();
+         $this->data['services'] =  $servicesRepo->getModel()->where('id', Session::get('servicesId'))->first();
 
     }
 
