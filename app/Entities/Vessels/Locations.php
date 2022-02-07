@@ -6,7 +6,7 @@ class Locations extends Entity
 {
 
     protected $table = 'locations';
-    protected $fillable = ['name'];
+    protected $fillable = ['name','type'];
     protected $section = 'locations';
 
 }
