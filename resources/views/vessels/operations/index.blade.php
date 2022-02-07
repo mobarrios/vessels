@@ -36,8 +36,15 @@
                     <?php
                         $start = \Carbon\Carbon::parse($model->start_date) ;
                         $end = \Carbon\Carbon::parse($model->end_date) ;
-                        $totalDuration = $start->diff($end)->format('%H:%I:%S');
+                        $totalDuration = $end->diffInMinutes($start);
+
+                        $hours = floor($totalDuration / 60);
+                        $minutes = ($totalDuration % 60);
+
+                        $totalDuration =  $hours .':'. $minutes ;
+
                     ?>
+
                 {{$totalDuration}}
                 </td>
 
