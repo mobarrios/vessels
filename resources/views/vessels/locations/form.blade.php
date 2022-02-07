@@ -12,8 +12,8 @@
         @endif
 
         <div class="col-xs-6 form-group">
-          {!! Form::label('Type') !!}
-          {!! Form::select('type',['port'=>'Port','block_1'=>'Block 1','block_2'=>'Block 2','block_3'=>'Block 3','block_4'=>'Block 4'], null, ['class'=>'form-control select2']) !!}
+          {!! Form::label('Cost Centre') !!}
+          {!! Form::select('type',['port'=>'Port','block_1'=>'Block 1','block_2'=>'Block 2','block_3'=>'Block 3','block_4'=>'Block 4','other'=>'Other'], null, ['class'=>'form-control select2']) !!}
         </div>
 
             <div class="col-xs-6 form-group">

@@ -2,7 +2,7 @@
     @section('table')
       <thead>
           <th></th>
-          <th>TYPE</th>
+          <th>COST CENTRE</th>
           <th>NAME</th>
       </thead>
       <tbody>
