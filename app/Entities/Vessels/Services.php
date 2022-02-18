@@ -26,6 +26,7 @@ class Services extends Entity
         public function getRoAttribute()
         {
 
+          $m = [];
           $data['dr'] =  \DB::table('services')->where('services.id',$this->attributes['id'])
           ->join('departure_report','departure_report.services_id','=','services.id')
           ->join('departure_report_cargo','departure_report_cargo.departure_report_id','=','departure_report.id')
