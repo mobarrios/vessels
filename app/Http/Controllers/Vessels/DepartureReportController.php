@@ -72,9 +72,28 @@ class DepartureReportController extends Controller
         $this->validate($this->request,config('models.'.$this->section.'.validationsUpdate'));
         $id = $this->route->getParameter('id');
         //edita a traves del repo
-        $model = $this->repo->update($id,$this->request);
+        // $model = $this->repo->update($id,$this->request);
+        //
+        foreach ($this->request->actualCapType as $act => $k) {
 
-        return redirect()->route(config('models.'.$this->section.'.postUpdateRoute'),Session::get('servicesId') )->withErrors(['Record successfully edited']);
+          foreach($this->request->actualCap as $cap => $ck){
+
+              if($cap == $act )
+              {
+                 $drc = DepartureReportCargo::find($cap);
+                 $drc->quantity = $ck;
+                 $drc->cargo_types_id = $k;
+                 $drc->save();
+                // $drc = DepartureReportCargo::create([
+                //   'departure_report_id' => $model->id,
+                //   'quantity' => $ck,
+                //   'sectors_id' => $act,
+                //   'cargo_types_id' => $k
+                // ]);
+              }
+          }
+       }
+        return redirect()->back()->withErrors(['Record successfully edited']);
     }
 
 

@@ -10,6 +10,8 @@ class DepartureReportCargo extends Entity
     protected $guarded = [];
     protected $section = 'departure_report_cargo';
 
-
+    public function Sectors(){
+        return $this->belongsTo(Sectors::getClass());
+    }
 
 }

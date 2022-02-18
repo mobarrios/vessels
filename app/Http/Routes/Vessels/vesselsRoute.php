@@ -199,7 +199,7 @@ Route::group(['prefix'=>'dmReport'],function(){
         Route::post('/store',           ['as'=>'vessels.dmReport.store','uses'=>'Vessels\DmReportController@store']);
         Route::get('/show/{id}',        ['as'=>'vessels.dmReport.show','uses'=>'Vessels\DmReportController@show']);
         Route::get('/details/{id}',     ['as'=>'vessels.dmReport.details','uses'=>'Vessels\DmReportController@details']);
-        Route::get('/index/{search?}',  ['as'=>'vessels.dmReport.index','uses'=>'Vessels\DmReportController@index']);
+        Route::get('/index/{servicesId?}/{search?}',  ['as'=>'vessels.dmReport.index','uses'=>'Vessels\DmReportController@index']);
 
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.dmReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 
@@ -217,7 +217,7 @@ Route::group(['prefix'=>'surfersReport'],function(){
         Route::post('/store',           ['as'=>'vessels.surfersReport.store','uses'=>'Vessels\SurfersReportController@store']);
         Route::get('/show/{id}',        ['as'=>'vessels.surfersReport.show','uses'=>'Vessels\SurfersReportController@show']);
         Route::get('/details/{id}',     ['as'=>'vessels.surfersReport.details','uses'=>'Vessels\SurfersReportController@details']);
-        Route::get('/index/{search?}',  ['as'=>'vessels.surfersReport.index','uses'=>'Vessels\SurfersReportController@index']);
+        Route::get('/index/{servicesId?}/{search?}',  ['as'=>'vessels.surfersReport.index','uses'=>'Vessels\SurfersReportController@index']);
 
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.surfersReport.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 

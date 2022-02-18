@@ -13,4 +13,8 @@ class DmReport extends Entity
     public function Locations(){
         return $this->belongsTo(Locations::getClass());
     }
+
+    public function Services(){
+      return $this->belongsTo(Services::getClass());
+    }
 }

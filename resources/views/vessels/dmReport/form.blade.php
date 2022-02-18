@@ -91,8 +91,39 @@
               {!! Form::text('obs', null, ['class'=>'form-control']) !!}
             </div>
             <div class="col-xs-6 form-group">
-              {!! Form::hidden('services_id', 2, ['class'=>'form-control']) !!}
+              {!! Form::hidden('services_id', $services->id, ['class'=>'form-control']) !!}
             </div>
-          
+
+            <div class="col-xs-12">
+              <table class="table">
+                <th>Cargo</th>
+                <th>Total</th>
+
+                <th>Departure Report</th>
+                <th>Act. Received</th>
+                <th>Act. Delivered</th>
+
+                <?php
+                  $t = 0;
+                ?>
+                <tbody>
+                  @foreach ($services->Ro as $key => $value)
+                    <?php
+                    $t = ($value['dr'] + $value['sum'] ) - $value['res'] ;
+                    ?>
+                    <tr>
+                      <td>{{$key}}</td>
+                      <td><strong>{{$t}}</strong></td>
+                      <td>{{$value['dr']}}</td>
+                      <td>{{$value['sum']}}</td>
+                      <td>{{$value['res']}}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+
+            </div>
+
+
 
 @endsection

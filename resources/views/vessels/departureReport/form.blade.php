@@ -53,7 +53,7 @@
         </div>
         <div class="col-xs-6 form-group">
           {!! Form::label('Passengers transported Outbound Port') !!}
-          {!! Form::text('pax_inbound', null, ['class'=>'form-control']) !!}
+          {!! Form::text('pax_outbound', null, ['class'=>'form-control']) !!}
         </div>
          <div class="col-xs-6 form-group">
           {!! Form::hidden('services_id', Session::get('servicesId'), ['class'=>'form-control']) !!}
@@ -70,30 +70,45 @@
                 {{-- <th>Actual Cap.</th> --}}
               </thead>
               <tbody>
-              @foreach ($services->Vessels->Sectors as $sector)
-                <tr>
-                <td>{{$sector->id}}</td>
-                <td>{{$sector->name}}</td>
-                <td>{{$sector->capacities}} <small> {{$sector->um}} </small></td>
+              @if(isset($models))
+                @foreach ($models->DepartureReportCargo as $cargo)
+                  <tr>
+                  <td>{{$cargo->sectors_id}}</td>
+                  <td>{{$cargo->Sectors->name}}</td>
+                  <td>{{$cargo->Sectors->capacities}} <small> {{$cargo->Sectors->um}} </small></td>
+                  <td>
+                  <select  name="actualCapType[{{$cargo->id}}]">
+                       @foreach($cargo->Sectors->CargoTypes as $type)
+                         <option {{($cargo->cargo_types_id == $type->id ? 'Selected' : '')}} value={{$type->id}}>{{$type->name}}</option>
+                       @endforeach
+                 </select>
+                  </td>
+                  <td>
+                    <input type="text" name="actualCap[{{$cargo->id}}]" value="{{$cargo->quantity}}" >
+                  </td>
+                 </tr>
+                @endforeach
+              @else
+                @foreach ($services->Vessels->Sectors as $sector)
+                  <tr>
+                  <td>{{$sector->id}}</td>
+                  <td>{{$sector->name}}</td>
+                  <td>{{$sector->capacities}} <small> {{$sector->um}} </small></td>
+                        <td>
+                         {{-- <input type="radio" name="actualCapType[{{$sector->id}}]" value="{{$type->id}}" >  <strong style="margin-left: 10px">{{$type->name}} </strong> --}}
+                           <select  name="actualCapType[{{$sector->id}}]">
+                                @foreach($sector->CargoTypes as $type)
+                                  <option value={{$type->id}}>{{$type->name}}</option>
+                                @endforeach
+                          </select>
 
-
-                      <td>
-                       {{-- <input type="radio" name="actualCapType[{{$sector->id}}]" value="{{$type->id}}" >  <strong style="margin-left: 10px">{{$type->name}} </strong> --}}
-                         <select  name="actualCapType[{{$sector->id}}]">
-                              @foreach($sector->CargoTypes as $type)
-                                <option value={{$type->id}}>{{$type->name}}</option>
-                              @endforeach
-                        </select>
-
-                      </td>
-                      <td>
-                       <input type="text" name="actualCap[{{$sector->id}}]"  >
-                      </td>
-
-
-               </tr>
-
-              @endforeach
+                        </td>
+                        <td>
+                         <input type="text" name="actualCap[{{$sector->id}}]"  >
+                        </td>
+                 </tr>
+                @endforeach
+              @endif
               </tbody>
             </table>
       </ul>
