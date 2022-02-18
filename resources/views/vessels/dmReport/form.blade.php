@@ -82,10 +82,10 @@
               {!! Form::label('Main Crane') !!}
               {!! Form::text('main_crane', null, ['class'=>'form-control']) !!}
             </div>
-            <div class="col-xs-6 form-group">
+            {{-- <div class="col-xs-6 form-group">
               {!! Form::label('ROV') !!}
               {!! Form::text('rov', null, ['class'=>'form-control']) !!}
-            </div>
+            </div> --}}
             <div class="col-xs-6 form-group">
               {!! Form::label('Observations') !!}
               {!! Form::text('obs', null, ['class'=>'form-control']) !!}
@@ -97,7 +97,7 @@
             <div class="col-xs-12">
               <table class="table">
                 <th>Cargo</th>
-                <th>Total</th>
+                <th>RO</th>
 
                 <th>Departure Report</th>
                 <th>Act. Received</th>
