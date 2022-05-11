@@ -10,6 +10,9 @@ class Services extends Entity
     protected $section = 'services';
 
 
+        public function ServicesCargo(){
+            return $this->hasMany(ServicesCargo::getClass());
+        }
 
         public function Vessels(){
         	return $this->belongsTo(Vessels::getClass());
@@ -23,18 +26,55 @@ class Services extends Entity
           return $this->hasMany(DmReport::getClass() );
         }
 
+        public function Operations(){
+          return $this->hasMany(Operations::getClass());
+        }
+
+        public function ServicesCargoByType(){
+            return $this->hasMany(ServicesCargo::getClass())->groupBy('cargo_types_id');
+        }
+
+        public function bySectors($cargoTypesId)
+        {
+          // $data['m'] = \DB::table('services')->where('services.id',$this->attributes['id'])
+          // ->join('services_cargo','services_cargo.services_id','=','services.id')
+          // ->get();
+
+          // $data['m'] = \DB::table('operations')
+          // ->join('services','services.id','=','operations.services_id')
+          // ->where('services.id',$this->attributes['id'])
+          // ->groupBy('operations.sectors_id')
+          // ->get();
+
+
+          $data =  \DB::table('operations')
+          ->join('services','services.id','=','operations.services_id')
+          ->where('operations.services_id',$this->attributes['id'])
+          ->where('operations.cargo_types_id',$cargoTypesId)
+          ->where('operations.start_date','like',date('Y-m-d').'%')
+           ->select('cargo_types_id',\DB::raw('SUM(case when operations.operations_types_id in (29,27,26) then operations.quantity else 0 end) as sum'),
+          \DB::raw('SUM(case when operations.operations_types_id in (2,3,28) then operations.quantity else 0 end) as res'))
+          ->groupBy('operations.cargo_types_id')
+          ->get();
+
+        return $data;
+        }
+
+
+
         public function getRoAttribute()
         {
 
           $m = [];
           $data['dr'] =  \DB::table('services')->where('services.id',$this->attributes['id'])
-          ->join('departure_report','departure_report.services_id','=','services.id')
-          ->join('departure_report_cargo','departure_report_cargo.departure_report_id','=','departure_report.id')
-          ->join('cargo_types','cargo_types.id','=','departure_report_cargo.cargo_types_id')
-          ->select('cargo_types.name','cargo_types.id as ctid',\DB::raw('sum(departure_report_cargo.quantity) as q'))
-          ->groupBy('departure_report_cargo.cargo_types_id')
+          //->join('departure_report','departure_report.services_id','=','services.id')
+          //->join('departure_report_cargo','departure_report_cargo.departure_report_id','=','departure_report.id')
+          ->join('services_cargo','services_cargo.services_id','=','services.id')
+          //->join('cargo_types','cargo_types.id','=','departure_report_cargo.cargo_types_id')
+          ->join('cargo_types','cargo_types.id','=','services_cargo.cargo_types_id')
+          ->select('cargo_types.name','cargo_types.id as ctid',\DB::raw('sum(services_cargo.quantity) as q'))
+          ->groupBy('services_cargo.cargo_types_id')
           ->get();
-
 
           // $data['op'] =  \DB::table('operations')
           // ->join('cargo_types','cargo_types.id','=','operations.cargo_types_id')

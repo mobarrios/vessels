@@ -59,16 +59,16 @@
           {!! Form::hidden('services_id', Session::get('servicesId'), ['class'=>'form-control']) !!}
         </div>
 
-        <div class="col-xs-12">
+        {{-- <div class="col-xs-12">
           <strong>Sectors</strong>
             <table class="table">
               <thead>
                 <th>#</th>
                 <th>Name</th>
                 <th>Cap.Max </th>
-                <th colspan="2">Types Available</th>
+                <th colspan="2">Types Available</th> --}}
                 {{-- <th>Actual Cap.</th> --}}
-              </thead>
+              {{-- </thead>
               <tbody>
               @if(isset($models))
                 @foreach ($models->DepartureReportCargo as $cargo)
@@ -95,8 +95,8 @@
                   <td>{{$sector->name}}</td>
                   <td>{{$sector->capacities}} <small> {{$sector->um}} </small></td>
                         <td>
-                         {{-- <input type="radio" name="actualCapType[{{$sector->id}}]" value="{{$type->id}}" >  <strong style="margin-left: 10px">{{$type->name}} </strong> --}}
-                           <select  name="actualCapType[{{$sector->id}}]">
+                         {{-- <input type="radio" name="actualCapType[{{$sector->id}}]" value="{{$type->id}}" >  <strong style="margin-left: 10px">{{$type->name}} </strong> --}} 
+                           {{-- <select  name="actualCapType[{{$sector->id}}]">
                                 @foreach($sector->CargoTypes as $type)
                                   <option value={{$type->id}}>{{$type->name}}</option>
                                 @endforeach
@@ -111,6 +111,6 @@
               @endif
               </tbody>
             </table>
-      </ul>
-      </div>
+        </ul>
+        </div> --}}
 @endsection

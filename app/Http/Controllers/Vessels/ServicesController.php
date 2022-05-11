@@ -25,6 +25,11 @@ class ServicesController extends Controller
     }
 
 
+    public function resume()
+    {
+      return view('vessels.services.resume')->with($this->data);
+
+    }
 
 
 }

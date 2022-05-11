@@ -146,7 +146,27 @@ Route::group(['prefix'=>'services'],function(){
         Route::get('/details/{id}',     ['as'=>'vessels.services.details','uses'=>'Vessels\ServicesController@details']);
         Route::get('/index/{search?}',  ['as'=>'vessels.services.index','uses'=>'Vessels\ServicesController@index']);
 
+        Route::get('/resume/{search?}',  ['as'=>'vessels.services.resume','uses'=>'Vessels\ServicesController@resume']);
+
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.services.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
+
+});
+
+Route::group(['prefix'=>'servicesCargo'],function(){
+
+        $section =  'servicesCargo';
+
+        Route::get('/destroy/{id?}',    ['middleware'=>'permission:'.$section.'.destroy','as'=>'vessels.servicesCargo.destroy','uses'=>'Vessels\ServicesCargoController@destroy']);
+        Route::get('/edit/{servicesId?}',       ['as'=>'vessels.servicesCargo.edit','uses'=>'Vessels\ServicesCargoController@edit']);
+        Route::post('/update/{id?}',    ['as'=>'vessels.servicesCargo.update','uses'=>'Vessels\ServicesCargoController@update']);
+
+        Route::get('/create/{servicesId?}',           ['as'=>'vessels.servicesCargo.create','uses'=>'Vessels\ServicesCargoController@create']);
+        Route::post('/store',           ['as'=>'vessels.servicesCargo.store','uses'=>'Vessels\ServicesCargoController@store']);
+        Route::get('/show/{id}',        ['as'=>'vessels.servicesCargo.show','uses'=>'Vessels\ServicesCargoController@show']);
+        Route::get('/details/{id}',     ['as'=>'vessels.servicesCargo.details','uses'=>'Vessels\ServicesCargoController@details']);
+        Route::get('/index/{servicesId?}/{search?}',  ['as'=>'vessels.servicesCargo.index','uses'=>'Vessels\ServicesCargoController@index']);
+
+        Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.servicesCargo.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 
 });
 

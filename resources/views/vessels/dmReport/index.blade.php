@@ -2,7 +2,7 @@
     @section('table')
         <thead>
             <th></th>
-            <th>Location</th>
+            {{-- <th>Location</th> --}}
             <th>Date</th>
         </thead>
         <tbody>
@@ -11,7 +11,7 @@
             <tr>
                 <td style="width: 1%"><input class="id_destroy" value="{{$model->id}}" type="checkbox"></td>
                 {{-- <td>{{$model->id}}</td> --}}
-                <td>{{$model->Locations->name }}</td>
+                {{-- <td>{{$model->Locations->name }}</td> --}}
                 <td>{{$model->created_at }}</td>
             </tr>
           @endif

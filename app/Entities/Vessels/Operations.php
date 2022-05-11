@@ -49,4 +49,6 @@ class Operations extends Entity
 
       return $totalDuration;
     }
+
+    
 }
