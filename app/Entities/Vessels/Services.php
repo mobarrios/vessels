@@ -51,8 +51,8 @@ class Services extends Entity
           ->join('services','services.id','=','operations.services_id')
           ->where('operations.services_id',$this->attributes['id'])
           ->where('operations.cargo_types_id',$cargoTypesId)
-          // ->where('operations.start_date','like',date('Y-m-d').'%')
-          ->where('operations.start_date','like','2022-05-15%')
+           ->where('operations.start_date','like',date('Y-m-d').'%')
+          //->where('operations.start_date','like','2022-05-15%')
            ->select('cargo_types_id',\DB::raw('SUM(case when operations.operations_types_id in (29,27,26) then operations.quantity else 0 end) as sum'),
           \DB::raw('SUM(case when operations.operations_types_id in (2,3,28) then operations.quantity else 0 end) as res'))
           ->groupBy('operations.cargo_types_id')

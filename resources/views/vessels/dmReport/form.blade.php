@@ -158,7 +158,7 @@
                             }
                               else
                             {
-                              echo $key->cargo_types_id;
+                              //echo $key->cargo_types_id;
                               // $con = $services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->cons;
                             }
                         ?>
