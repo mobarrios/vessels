@@ -146,7 +146,7 @@ Route::group(['prefix'=>'services'],function(){
         Route::get('/details/{id}',     ['as'=>'vessels.services.details','uses'=>'Vessels\ServicesController@details']);
         Route::get('/index/{search?}',  ['as'=>'vessels.services.index','uses'=>'Vessels\ServicesController@index']);
 
-        Route::get('/resume/{search?}',  ['as'=>'vessels.services.resume','uses'=>'Vessels\ServicesController@resume']);
+        Route::get('/resume/{id?}',  ['as'=>'vessels.services.resume','uses'=>'Vessels\ServicesController@resume']);
 
         Route::get('/pdf',              ['middleware'=>'permission:'.$section.'.list','as'=>'configs.services.pdf','uses'=>'Tecnica\ToPrintController@exportListToPdf']);
 

@@ -140,7 +140,7 @@
                     @forelse ($services->ServicesCargoByType as $key )
 
                       <tr>
-                        <td>{{$key->CargoTypes->name}}</td>
+                        <td> {{$key->CargoTypes->name}}</td>
                         {{-- <td><input name=""  type='text'>
                              {{-- @foreach ($services->bySectors($key->CargoTypes->id) as $a)
                                   {{$a->cargo_types_id}}
@@ -152,11 +152,14 @@
                         <?php
                           $con = 0;
 
-                            if ( $services->bySectors($key->CargoTypes->id) != null )
+                            if ($services->bySectors($key->CargoTypes->id) != null )
                             {
                                $con = $key->quantity  + ($services->bySectors($key->CargoTypes->id)[0]->sum - $services->bySectors($key->CargoTypes->id)[0]->res );
-                            }else {
-                              $con = $services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->cons;
+                            }
+                              else
+                            {
+                              echo $key->cargo_types_id;
+                              // $con = $services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->cons;
                             }
                         ?>
 
@@ -167,7 +170,8 @@
                         <td><input class="cons" name="cons[{{$key->cargo_types_id}}]" value="{{$con }}"></td>
 
                         <td>
-                          @if($services->dmReport != null )
+                          {{-- {{dd($services->dmReport->count() == 0 ? $services->dmReport->count() : 'no')}} --}}
+                          @if($services->dmReport->count() != 0)
                             <input class="init" name="initial_stock[{{$key->cargo_types_id}}]" value="{{$services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->cons }}"  id="{{$key->cargo_types_id}}">
                           @else
                             <input class="init" name="initial_stock[{{$key->cargo_types_id}}]" value={{$key->quantity}} id="{{$key->cargo_types_id}}">

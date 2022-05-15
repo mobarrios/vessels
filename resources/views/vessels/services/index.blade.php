@@ -42,7 +42,7 @@
                         <a href={{route('vessels.surfersReport.index',$model->id)}} class='btn btn-xs '>Sufers Act. Report</a>
                     @endif
 
-                    {{-- <a href={{route('vessels.services.resume', [ $model->id , $model->vessels_id ] )}} class='btn btn-xs'>Resume</a> --}}
+                    <a href={{route('vessels.services.resume', [ $model->id  ] )}} class='btn btn-xs'>Resume</a>
 
                 </td>
             </tr>
