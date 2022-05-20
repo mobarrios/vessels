@@ -37,7 +37,7 @@ class DmReportController extends Controller
         //validar los campos
         $this->validate($this->request,config('models.'.$this->section.'.validationsStore'));
         //crea a traves del repo con el request
-        $model = $this->repo->create($this->request->except(['obs','rob','cons','initial_stock','ohstock','recieved','delievered','correction','types','services_cargo_id']));
+        $model = $this->repo->create($this->request->except(['obs','rob','cons','init','ohstock','recieved','delievered','correction','types','services_cargo_id']));
 
         foreach($this->request->types as $t)
         {
@@ -47,7 +47,7 @@ class DmReportController extends Controller
           $dmc->obs =  $this->request->obs[$t] ;
           $dmc->rob =  $this->request->rob[$t] ;
           $dmc->cons =  $this->request->cons[$t] ;
-          $dmc->initial_stock =  $this->request->initial_stock[$t] ;
+          $dmc->initial_stock =  $this->request->init[$t] ;
           $dmc->ohstock =  $this->request->ohstock[$t] ;
           $dmc->recieved =  $this->request->recieved[$t] ;
           $dmc->delievered =  $this->request->delievered[$t] ;
@@ -66,7 +66,7 @@ class DmReportController extends Controller
         $id = $this->route->getParameter('id');
 
         //edita a traves del repo
-        $model = $this->repo->update($id,$this->request->except(['obs','rob','cons','initial_stock','ohstock','recieved','delievered','correction','types','services_cargo_id']) );
+        $model = $this->repo->update($id,$this->request->except(['obs','rob','cons','init','ohstock','recieved','delievered','correction','types','services_cargo_id']) );
 
 
         foreach($this->request->types as $t)
@@ -78,7 +78,7 @@ class DmReportController extends Controller
           $dmc->obs =  $this->request->obs[$t] ;
           $dmc->rob =  $this->request->rob[$t] ;
           $dmc->cons =  $this->request->cons[$t] ;
-          $dmc->initial_stock =  $this->request->initial_stock[$t] ;
+          $dmc->initial_stock =  $this->request->init[$t] ;
           $dmc->ohstock =  $this->request->ohstock[$t] ;
           $dmc->recieved =  $this->request->recieved[$t] ;
           $dmc->delievered =  $this->request->delievered[$t] ;

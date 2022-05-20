@@ -124,14 +124,15 @@
                            <input type='hidden' name="services_cargo_id[{{$v->id}}]" value={{$v->id}}>
 
                            <td><input class="rob"  id="{{$v->id}}" name="rob[{{$v->id}}]" value={{$v->rob}}></td>
-                           <td><input class="cons" id="{{$v->id}}"  name="cons[{{$v->id}}]" value={{$v->cons}} ></td>
-                           <td><input class="init" id="init[{{$v->id}}]" name="initial_stock[{{$v->id}}]" value={{$v->initial_stock}}></td>
+                           <td><input readonly class="cons" id="{{$v->id}}"  name="cons[{{$v->id}}]" value={{$v->cons}} ></td>
+                           <td><input readonly class="init" id="init[{{$v->id}}]" name="init[{{$v->id}}]" value={{$v->initial_stock}}></td>
+
                            <input type='hidden' name="ohstock[{{$v->id}}]"value={{$v->ohstock}} >
 
-                           <td><input class="recieved" id="{{$v->cargo_types_id}}" name="recieved[{{$v->id}}]" value={{$v->recieved}}></td>
-                           <td><input class="delievered" id="{{$v->cargo_types_id}}" name="delievered[{{$v->id}}]" value={{$v->delievered}}></td>
+                           <td><input readonly class="recieved" id="{{$v->id}}" name="recieved[{{$v->id}}]" value={{$v->recieved}}></td>
+                           <td><input readonly class="delievered" id="{{$v->id}}" name="delievered[{{$v->id}}]" value={{$v->delievered}}></td>
 
-                           <td><input name="correction[{{$v->id}}]" value={{$v->correction}}></td>
+                           <td><input class="correction"  id="{{$v->id}}" name="correction[{{$v->id}}]" value={{$v->correction or 0}}></td>
                            <td><input name="obs[{{$v->id}}]" value="{{$v->obs}}"></td>
                          </tr>
 
@@ -140,7 +141,7 @@
                     @forelse ($services->ServicesCargoByType as $key )
 
                       <tr>
-                        <td> {{$key->CargoTypes->name}}</td>
+                        <td>  {{$key->CargoTypes->name}}</td>
                         {{-- <td><input name=""  type='text'>
                              {{-- @foreach ($services->bySectors($key->CargoTypes->id) as $a)
                                   {{$a->cargo_types_id}}
@@ -151,38 +152,51 @@
 
                         <?php
                           $con = 0;
-
+                          //si tiene actividades
                             if ($services->bySectors($key->CargoTypes->id) != null )
                             {
-                               $con = $key->quantity  + ($services->bySectors($key->CargoTypes->id)[0]->sum - $services->bySectors($key->CargoTypes->id)[0]->res );
+                              if($services->dmReport->count() == 0){
+                                $con = $key->quantity + ($services->bySectors($key->CargoTypes->id)[0]->sum - $services->bySectors($key->CargoTypes->id)[0]->res );
+                              } else {
+                                $con = $services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->rob + ($services->bySectors($key->CargoTypes->id)[0]->sum - $services->bySectors($key->CargoTypes->id)[0]->res );
+
+                                }
+
                             }
-                              else
-                            {
-                              //echo $key->cargo_types_id;
-                              // $con = $services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->cons;
-                            }
+                            //   else
+                            // {
+                            //
+                            //     echo "b";
+                            //   //echo $key->cargo_types_id;
+                            //   // $con = $services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->cons;
+                            //   //$con = 0;
+                            //   // $con = $key->quantity + ($services->bySectors($key->CargoTypes->id)[0]->sum - $services->bySectors($key->CargoTypes->id)[0]->res );
+                            //
+                            // }
                         ?>
 
                         <input type='hidden' name="types[{{$key->cargo_types_id}}]" value={{$key->cargo_types_id}}>
                         <input type='hidden' name="services_cargo_id[{{$key->cargo_types_id}}]" value={{$key->id}}>
 
                         <td><input class="rob"  name="rob[{{$key->cargo_types_id}}]" id="{{$key->cargo_types_id}}"></td>
-                        <td><input class="cons" name="cons[{{$key->cargo_types_id}}]" value="{{$con }}"></td>
+                        <td><input readonly class="cons" name="cons[{{$key->cargo_types_id}}]" value="{{$con }}"></td>
 
                         <td>
                           {{-- {{dd($services->dmReport->count() == 0 ? $services->dmReport->count() : 'no')}} --}}
                           @if($services->dmReport->count() != 0)
-                            <input class="init" name="initial_stock[{{$key->cargo_types_id}}]" value="{{$services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->cons }}"  id="{{$key->cargo_types_id}}">
+                            <input readonly class="init" name="init[{{$key->cargo_types_id}}]" value="{{$services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->rob }}"  id="{{$key->cargo_types_id}}">
+                            a
                           @else
-                            <input class="init" name="initial_stock[{{$key->cargo_types_id}}]" value={{$key->quantity}} id="{{$key->cargo_types_id}}">
+                            <input readonly class="init" name="init[{{$key->cargo_types_id}}]" value={{$key->quantity}} id="{{$key->cargo_types_id}}">
+b
                           @endif
                         </td>
 
                         <input type='hidden' name="ohstock[{{$key->cargo_types_id}}]" value="0">
 
-                        <td><input class="recieved" id="{{$key->cargo_types_id}}" name="recieved[{{$key->cargo_types_id}}]" value={{$services->bySectors($key->CargoTypes->id)[0]->sum or 0}}></td>
-                        <td><input class="delievered" id="{{$key->cargo_types_id}}" name="delievered[{{$key->cargo_types_id}}]" value={{$services->bySectors($key->CargoTypes->id)[0]->res or 0}}></td>
-                        <td><input name="correction[{{$key->cargo_types_id}}]"></td>
+                        <td><input readonly class="recieved"   id="{{$key->cargo_types_id}}" name="recieved[{{$key->cargo_types_id}}]" value={{$services->bySectors($key->CargoTypes->id)[0]->sum or 0}}></td>
+                        <td><input readonly class="delievered" id="{{$key->cargo_types_id}}" name="delievered[{{$key->cargo_types_id}}]" value={{$services->bySectors($key->CargoTypes->id)[0]->res or 0}}></td>
+                        <td><input class="correction" id="{{$key->cargo_types_id}}" name="correction[{{$key->cargo_types_id}}]" value="0"></td>
                         <td><input name="obs[{{$key->cargo_types_id}}]"></td>
                       </tr>
                     @endforeach
@@ -233,12 +247,15 @@
 
   $('.rob').focusout(function(){
       id = this.id
-      val = this.value
-      cons =$('[name="cons['+id+']"]').val();
+      rob = this.value
+      cons = parseInt($('[name="cons['+id+']"]').val());
+      cor =  parseInt($('[name="correction['+id+']"]').val() );
+      del =  parseInt($('[name="delievered['+id+']"]').val() );
+      rec =  parseInt($('[name="recieved['+id+']"]').val() );
+      ini =  parseInt($('[name="init['+id+']"]').val()  );
+      tt = ini + cor +rec - del - rob
 
-
-      $('[name="cons['+id+']"]').val( cons - val);
-
+      $('[name="cons['+id+']"]').val( tt );
   })
 
 </script>
