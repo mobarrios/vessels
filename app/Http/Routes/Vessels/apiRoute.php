@@ -162,7 +162,7 @@ Route::group(['prefix' => 'services'], function () {
            $operations->operations_types_id = $request->operations_types_id;
            $operations->locations_id = $request->locations_id;
            $operations->services_id = $request->services_id;
-           $operations->sectors_id = 7;
+           $operations->sectors_id = $request->sectors_id;
            $operations->save();
 
            return response()->json($operations,200);
