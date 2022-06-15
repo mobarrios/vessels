@@ -45,10 +45,10 @@
               {!! Form::select('um', ['' => 'Seleccionar', 1 => 'Cm3', 2 => 'Lt' , 3 => 'Mt3'] , null, ['class'=>'form-control select2']) !!}
             </div> --}}
 
-            <div class="col-xs-10 form-group">
-                {!! Form::label('Sector') !!}
-                {!! Form::select('sectors_id', $sectors , null, ['class'=>'form-control select2']) !!}
-            </div>
+            {{-- <div class="col-xs-10 form-group"> --}}
+                {{-- {!! Form::label('Sector') !!} --}}
+                {{-- {!! Form::select('sectors_id', $sectors , null, ['class'=>'form-control select2']) !!} --}}
+            {{-- </div> --}}
 
             <div class="col-xs-10 form-group">
                 {!! Form::label('Cargo Types') !!}

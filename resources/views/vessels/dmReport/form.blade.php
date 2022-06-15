@@ -155,12 +155,12 @@
                           //si tiene actividades
                             if ($services->bySectors($key->CargoTypes->id) != null )
                             {
-                              if($services->dmReport->count() == 0){
+                              if($services->dmReport->count() == 0)
+                              {
                                 $con = $key->quantity + ($services->bySectors($key->CargoTypes->id)[0]->sum - $services->bySectors($key->CargoTypes->id)[0]->res );
                               } else {
                                 $con = $services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->rob + ($services->bySectors($key->CargoTypes->id)[0]->sum - $services->bySectors($key->CargoTypes->id)[0]->res );
-
-                                }
+                              }
 
                             }
                             //   else

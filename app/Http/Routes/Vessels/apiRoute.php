@@ -32,6 +32,7 @@ Route::group(['prefix' => 'services'], function () {
                 'start_date' => $model->start_date,
                 'end_date' => $model->end_date,
                 'vessels_name' => $model->Vessels->name,
+                'vessels_sectors'=> $model->Vessels->Sectors()->get(['id','vessels_id','name','capacities','sectors_types_id'])
 
                 // 'brands'=> $model->BrandsName,
                 // 'address' => $model->address,
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'services'], function () {
 
     return response()->json($result,200);
   });
+
 
    Route::get('operationsTypes', function () {
 
