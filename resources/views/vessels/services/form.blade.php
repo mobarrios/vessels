@@ -46,11 +46,11 @@
 
             <div class="col-xs-6 form-group">
               {!! Form::label('STATUS') !!}
-              {!! Form::select('status', ['' => 'Seleccionar', 1 => 'Waiting', 2 => 'Started' , 3 => 'Finished'] , null, ['class'=>'form-control select2']) !!}
+              {!! Form::select('status', ['' => 'Seleccionar', 1 => 'Waiting', 2 => 'Started' ,3 => 'On Hire', 4=> 'Off Hire',5 => 'Finished'] , null, ['class'=>'form-control select2']) !!}
             </div>
 
 
-            
+
 
 
 

@@ -36,7 +36,7 @@
                      </select>
                       </td>
                       <td>
-                        <input type="text" name="actualCap[{{$cargo->id}}]" value="{{$cargo->quantity}}" >
+                        <input type="number" name="actualCap[{{$cargo->id}}]" value="{{$cargo->quantity}}" >
                       </td>
                      </tr>
                     @endforeach
@@ -55,7 +55,7 @@
 
                             </td>
                             <td>
-                             <input type="text" name="actualCap[{{$sector->id}}]"  >
+                             <input type="number" name="actualCap[{{$sector->id}}]" >
                             </td>
                      </tr>
                     @endforeach
