@@ -31,16 +31,27 @@ class ServicesController extends Controller
 
       $this->data['models'] = $this->repo->find($id);
 
+      $this->data['dmr'] = \DB::table('dmr_cargo')
+      ->join('dm_report','dm_report.id','=','dmr_cargo.dm_report_id')
+      ->join('services_cargo','services_cargo.id','=','dmr_cargo.services_cargo_id')
+      ->join('cargo_types','cargo_types.id','=','services_cargo.cargo_types_id')
+      ->select('cargo_types.name',\DB::raw('SUM(dmr_cargo.cons) as cons'))
+      ->groupBy('services_cargo.cargo_types_id')
+      ->get();
+
+
       $this->data['cc'] = \DB::table('operations')
       ->join('locations','locations.id','=','operations.locations_id')
       ->where('services_id',$id)
-      ->select('locations.type', \DB::raw('SUM(timediff(end_date,start_date)) as sum'))
+      ->select('locations.type', \DB::raw('SUM(timestampdiff(MINUTE,start_date,end_date)) as sum'))
       ->groupBy('locations.type')
       ->get();
 
+      // dd($this->data['cc']);
+
       $this->data['tt'] = \DB::table('operations')
       ->where('services_id',$id)
-      ->select(\DB::raw('SUM(timediff(end_date,start_date)) as total'))
+      ->select(\DB::raw('SUM(timestampdiff(MINUTE,start_date,end_date)) as total'))
       ->get();
 
       // $this->data['services'] = \DB::table('services')
