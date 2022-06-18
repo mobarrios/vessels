@@ -31,6 +31,18 @@ class ServicesController extends Controller
 
       $this->data['models'] = $this->repo->find($id);
 
+      $this->data['cc'] = \DB::table('operations')
+      ->join('locations','locations.id','=','operations.locations_id')
+      ->where('services_id',$id)
+      ->select('locations.type', \DB::raw('SUM(timediff(end_date,start_date)) as sum'))
+      ->groupBy('locations.type')
+      ->get();
+
+      $this->data['tt'] = \DB::table('operations')
+      ->where('services_id',$id)
+      ->select(\DB::raw('SUM(timediff(end_date,start_date)) as total'))
+      ->get();
+
       // $this->data['services'] = \DB::table('services')
       // ->join('dm_report','dm_report.services_id','=','services.id')
       // ->join('dmr_cargo','dmr_cargo.dm_report_id','=','dm_report.id')
@@ -41,8 +53,6 @@ class ServicesController extends Controller
       // //->groupBy('dm_report.created_at')
       // ->get();
 
-
- // dd($this->data['models']);
 
       return view('vessels.services.resume')->with($this->data);
 

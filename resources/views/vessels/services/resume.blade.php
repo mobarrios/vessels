@@ -18,7 +18,10 @@
                         <th>REC</th>
                         <th>DEL</th>
                         <th>CORR</th>
+                        @foreach($cc as $c)
+                            <th>{{$c->type}}</th>
 
+                        @endforeach
                     </thead>
                     <tbody>
                             {{-- @foreach($services as $service)
@@ -35,8 +38,6 @@
 
                               </tr>
                             @endforeach --}}
-
-
                             @foreach($models->dmReport as $service)
                               @foreach($service->dmrCargo as $cargo)
                                <tr>
@@ -48,12 +49,16 @@
                                 <td>{{$cargo->recieved}}</td>
                                 <td>{{$cargo->delievered}}</td>
                                 <td>{{$cargo->correction}}</td>
+                                  @foreach($cc as $c)
+                                      <th>{{  $cargo->cons * ( ($c->sum* 100)/$tt[0]->total) / 100 }} </th>
+                                  @endforeach
                                 </tr>
                                 @endforeach
                             @endforeach
                     </tbody>
                 </table>
             </div>
+
           </div>
         </div>
     </div>
