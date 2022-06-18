@@ -50,7 +50,7 @@
                                 <td>{{$cargo->delievered}}</td>
                                 <td>{{$cargo->correction}}</td>
                                   @foreach($cc as $c)
-                                      <th>{{  $cargo->cons * ( ($c->sum* 100)/$tt[0]->total) / 100 }} </th>
+                                      <th>{{  number_format( $cargo->cons * ( ($c->sum* 100)/$tt[0]->total) / 100 , 2 )}} </th>
                                   @endforeach
                                 </tr>
                                 @endforeach
