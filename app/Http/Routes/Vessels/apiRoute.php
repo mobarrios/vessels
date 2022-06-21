@@ -26,13 +26,16 @@ Route::group(['prefix' => 'services'], function () {
 
     foreach ($models as $model)
 
+     //dd($model->ServicesCargo);
+
         array_push($result,
             [
                 'id' => $model->id,
                 'start_date' => $model->start_date,
                 'end_date' => $model->end_date,
                 'vessels_name' => $model->Vessels->name,
-                'vessels_sectors'=> $model->Vessels->Sectors()->get(['id','vessels_id','name','capacities','sectors_types_id'])
+                'vessels_sectors'=> $model->Vessels->Sectors()->get(['id','vessels_id','name','capacities','sectors_types_id']),
+                'service_cargo' => $model->ServicesCargo()->get(['id','sectors_id','quantity','um','cargo_types_id']),
 
                 // 'brands'=> $model->BrandsName,
                 // 'address' => $model->address,
