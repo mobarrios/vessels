@@ -19,6 +19,6 @@ class ServicesCargo extends Entity
         return $this->belongsTo(CargoTypes::getClass(), 'cargo_types_id');
     }
 
-  
+
 
 }

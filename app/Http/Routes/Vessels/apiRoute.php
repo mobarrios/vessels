@@ -35,7 +35,7 @@ Route::group(['prefix' => 'services'], function () {
                 'end_date' => $model->end_date,
                 'vessels_name' => $model->Vessels->name,
                 'vessels_sectors'=> $model->Vessels->Sectors()->get(['id','vessels_id','name','capacities','sectors_types_id']),
-                'service_cargo' => $model->ServicesCargo()->get(['id','sectors_id','quantity','um','cargo_types_id']),
+                'service_cargo' => $model->ServicesCargo()->with('CargoTypes')->get(),
 
                 // 'brands'=> $model->BrandsName,
                 // 'address' => $model->address,
@@ -187,6 +187,17 @@ Route::group(['prefix' => 'services'], function () {
          $dr = new \App\Entities\Vessels\DmReport();
          $dr->fill($request->all());
          $dr->save();
+
+         foreach($request->dmrCargo as $cargo)
+         {
+           $drc = new \App\Entities\Vessels\DmrCargo();
+           $drc->dm_report_id = $dr->id;
+           $drc->services_cargo_id = $cargo->services_cargo_id;
+           $drc->rob = $request->rob;
+           $drc->correction = $cargo->correction;
+           $drc->obs = $cargo->obs;
+           $drc->save();
+         }
 
          return response()->json($dr,200);
      });
