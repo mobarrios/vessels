@@ -184,18 +184,19 @@ Route::group(['prefix' => 'services'], function () {
      Route::post('dmReport',function(\Illuminate\Http\Request $request)
      {
        //dd($request->all());
+         $data = $request->except(['dmrCargo']);
          $dr = new \App\Entities\Vessels\DmReport();
-         $dr->fill($request->all());
+         $dr->fill($data);
          $dr->save();
 
          foreach($request->dmrCargo as $cargo)
          {
            $drc = new \App\Entities\Vessels\DmrCargo();
            $drc->dm_report_id = $dr->id;
-           $drc->services_cargo_id = $cargo->services_cargo_id;
-           $drc->rob = $request->rob;
-           $drc->correction = $cargo->correction;
-           $drc->obs = $cargo->obs;
+           $drc->services_cargo_id = $cargo["services_cargo_id"];
+           $drc->rob = $cargo["rob"];
+           $drc->correction = $cargo["correction"];
+           $drc->obs = $cargo["obs"];
            $drc->save();
          }
 
