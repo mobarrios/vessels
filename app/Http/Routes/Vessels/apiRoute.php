@@ -195,8 +195,8 @@ Route::group(['prefix' => 'services'], function () {
 
         foreach($request->dmrCargo as $cargo)
          {
-
-           if($svc->dmReport->count() == 0){
+           //dd( $svc->dmReport->first()->DmrCargo->count());
+           if( $svc->dmReport->first()->DmrCargo->count() == 0){
 
              $init = \DB::table('services_cargo')
              ->where('cargo_types_id',$cargo["services_cargo_id"])
@@ -217,7 +217,7 @@ Route::group(['prefix' => 'services'], function () {
               if($init == null){
                   $initial = 0;
               }else{
-                  $initial = $init->cons;
+                  $initial = $init->rob;
               }
            }
 
@@ -233,19 +233,17 @@ Route::group(['prefix' => 'services'], function () {
            }
               $consumo = $initial + $sum - $res + $cargo["correction"] - $cargo["rob"] ;
 
-
-           $drc = new \App\Entities\Vessels\DmrCargo();
-           $drc->dm_report_id = $dr->id;
-           $drc->services_cargo_id = $cargo["services_cargo_id"];
-           $drc->recieved = $sum;
-           $drc->delievered = $res;
-           $drc->initial_stock = $initial;
-           $drc->cons = $consumo;
-           $drc->rob = $cargo["rob"];
-           $drc->correction = $cargo["correction"];
-           $drc->obs = $cargo["obs"];
-           $drc->save();
-
+             $drc = new \App\Entities\Vessels\DmrCargo();
+             $drc->dm_report_id = $dr->id;
+             $drc->services_cargo_id = $cargo["services_cargo_id"];
+             $drc->recieved = $sum;
+             $drc->delievered = $res;
+             $drc->initial_stock = $initial;
+             $drc->cons = $consumo;
+             $drc->rob = $cargo["rob"];
+             $drc->correction = $cargo["correction"];
+             $drc->obs = $cargo["obs"];
+             $drc->save();
          }
 
          return response()->json($dr,200);
