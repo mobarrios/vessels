@@ -189,15 +189,63 @@ Route::group(['prefix' => 'services'], function () {
          $dr->fill($data);
          $dr->save();
 
-         foreach($request->dmrCargo as $cargo)
+        $svc = new \App\Entities\Vessels\Services();
+        $svc = $svc->find($request->services_id);
+
+
+        foreach($request->dmrCargo as $cargo)
          {
+
+           if($svc->dmReport->count() == 0){
+
+             $init = \DB::table('services_cargo')
+             ->where('cargo_types_id',$cargo["services_cargo_id"])
+             ->where('services_id',$request->services_id)
+             ->first();
+             $initial = $init->quantity;
+
+           }else{
+
+             $init = \DB::table('dm_report')
+             ->join('dmr_cargo','dmr_cargo.dm_report_id','=','dm_report.id')
+             ->join('services_cargo','services_cargo.id','=','dmr_cargo.services_cargo_id')
+             ->where('dm_report.services_id',$request->services_id)
+             ->where('services_cargo.cargo_types_id',$cargo["services_cargo_id"])
+             ->latest('dm_report.created_at')
+             ->first();
+
+              if($init == null){
+                  $initial = 0;
+              }else{
+                  $initial = $init->cons;
+              }
+           }
+
+           $act  = $svc->bySectors($cargo["services_cargo_id"],$request->services_id);
+
+           if($act == null)
+           {
+             $sum = 0;
+             $res = 0;
+           }else{
+             $sum = $act[0]->sum ;
+             $res = $act[0]->res ;
+           }
+              $consumo = $initial + $sum - $res + $cargo["correction"] - $cargo["rob"] ;
+
+
            $drc = new \App\Entities\Vessels\DmrCargo();
            $drc->dm_report_id = $dr->id;
            $drc->services_cargo_id = $cargo["services_cargo_id"];
+           $drc->recieved = $sum;
+           $drc->delievered = $res;
+           $drc->initial_stock = $initial;
+           $drc->cons = $consumo;
            $drc->rob = $cargo["rob"];
            $drc->correction = $cargo["correction"];
            $drc->obs = $cargo["obs"];
            $drc->save();
+
          }
 
          return response()->json($dr,200);

@@ -34,7 +34,7 @@ class Services extends Entity
             return $this->hasMany(ServicesCargo::getClass())->groupBy('cargo_types_id');
         }
 
-        public function bySectors($cargoTypesId)
+        public function bySectors($cargoTypesId , $services_id = null)
         {
           // $data['m'] = \DB::table('services')->where('services.id',$this->attributes['id'])
           // ->join('services_cargo','services_cargo.services_id','=','services.id')
@@ -46,10 +46,16 @@ class Services extends Entity
           // ->groupBy('operations.sectors_id')
           // ->get();
 
+          if($services_id != null)
+          {
+              $id = $services_id;
+          }else{
+              $id = $this->attributes['id'];
+          }
 
           $data =  \DB::table('operations')
           ->join('services','services.id','=','operations.services_id')
-          ->where('operations.services_id',$this->attributes['id'])
+          ->where('operations.services_id',$id)
           ->where('operations.cargo_types_id',$cargoTypesId)
            ->where('operations.start_date','like',date('Y-m-d').'%')
           //->where('operations.start_date','like','2022-05-15%')
