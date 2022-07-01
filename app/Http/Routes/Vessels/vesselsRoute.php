@@ -1,7 +1,10 @@
 <?php
 
-Route::get('reports',function(){
-  return view('vessels.reports.reports');
+Route::get('reports/oper',function(){
+  return view('vessels.reports.oper');
+});
+Route::get('reports/cons',function(){
+  return view('vessels.reports.cons');
 });
 
 Route::group(['prefix'=>'vessels'],function(){

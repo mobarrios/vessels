@@ -109,7 +109,19 @@
 
                 {{-- <li><a href="{{ route('vessels.sectors.index') }}" class="menu"><span>Sectors</span></a></li> --}}
                 <li><a href="{{ route('vessels.services.index') }}" class="menu"><span>Services</span></a></li>
-                <li><a href="{{ url('vessels/reports') }}" class="menu"><span>Reports</span></a></li>
+                {{-- <li><a href="{{ url('vessels/reports') }}" class="menu"><span>Reports</span></a></li> --}}
+
+                <li><a href="#"><span> Reports </span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('vessels/reports/oper') }}" class="menu"><span>Operations</span> </a></li>
+                        <li><a href="{{ url('vessels/reports/cons') }}" class="menu"><span>Consumptions</span></a></li>
+
+                    </ul>
+                </li>
 
                 {{-- <li><a href="{{ route('vessels.departureReport.index') }}" class="menu"><span>Departure Report</span></a></li>
                 <li><a href="{{ route('vessels.dmReport.index') }}" class="menu"><span>Daily Midnight Report</span></a></li>
