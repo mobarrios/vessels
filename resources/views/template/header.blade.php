@@ -4,24 +4,23 @@
 
 
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini">
+        {{-- <span class="logo-mini">
             <span class="fa-stack fa-xs">
                 @if(auth()->user()->branchesActive->company->images->count() > 0)
                     <img src="{!! auth()->user()->branchesActive->company->images->first()->path !!}" alt="logo" class="img-responsive">
                 @endif
             </span>
-        </span>
+        </span> --}}
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
-            <span class="fa-stack fa-lg">
-                @if(auth()->user()->branchesActive->company->images->count() > 0)
-                    <img src="{!! auth()->user()->branchesActive->company->images->first()->path !!}" alt="logo" class="img-responsive">
-                @else
-                    <i class="fa fa-anchor"></i>
-                @endif
-            </span>
+            {{-- <span class="fa-stack fa-lg"> --}}
+                {{-- @if(auth()->user()->branchesActive->company->images->count() > 0) --}}
+                {{-- @else --}}
+                    {{-- <i class="fa fa-anchor"></i> --}}
+                {{-- @endif --}}
+            {{-- </span> --}}
 
-                <strong>Vessels</strong>
+                {{-- <strong>Queo</strong> --}}
 
         </span>
 

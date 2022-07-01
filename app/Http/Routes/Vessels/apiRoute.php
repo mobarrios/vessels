@@ -183,7 +183,6 @@ Route::group(['prefix' => 'services'], function () {
 
      Route::post('dmReport',function(\Illuminate\Http\Request $request)
      {
-
        //dd($request->all());
          $data = $request->except(['dmrCargo']);
          $dr = new \App\Entities\Vessels\DmReport();
@@ -203,7 +202,6 @@ Route::group(['prefix' => 'services'], function () {
              ->where('cargo_types_id',$cargo["services_cargo_id"])
              ->where('services_id',$request->services_id)
              ->first();
-             dd($init);
              $initial = $init->quantity;
 
            }else{
