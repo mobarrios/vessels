@@ -1,7 +1,7 @@
 @extends('template.model_form')
 
     @section('form_title')
-        New Service Cargo
+        New On Hire Stocks
     @endsection
 
     @section('form_inputs')

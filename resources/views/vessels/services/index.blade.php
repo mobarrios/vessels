@@ -24,9 +24,9 @@
                 <td><label class='label label-default'>Iniciado</label></td>
 
                 @if($model->ServicesCargo->count() > 0)
-                  <td><a href="{{route('vessels.servicesCargo.edit', $model->id)}}" >Services Cargo</a></td>
+                  <td><a href="{{route('vessels.servicesCargo.edit', $model->id)}}" >On Hire Stocks</a></td>
                 @else
-                  <td><a href="{{route('vessels.servicesCargo.create',$model->id)}}" >Services Cargo</a></td>
+                  <td><a href="{{route('vessels.servicesCargo.create',$model->id)}}" >On Hire Stocks</a></td>
                 @endif
                 <td>
                     @if($model->Vessels->vessels_types_id != 2)
