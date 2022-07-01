@@ -4,6 +4,8 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
+          <img src="../public/uploads/company/images/Logo.jpg" alt="logo" class="img-responsive">
+
             <li class="header">Main Menu</li>
 
             <li>
