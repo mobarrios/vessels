@@ -153,7 +153,11 @@ Route::group(['prefix' => 'services'], function () {
            }
 
            if(is_null($request->cargo_types_id)){
-             $request->cargo_types_id = 1 ;
+             $request->cargo_types_id = 16 ;
+           }
+
+           if(is_null($request->sectors_id)){
+             $request->sectors_id = 51 ;
            }
 
            $operations = new \App\Entities\Vessels\Operations();
