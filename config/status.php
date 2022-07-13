@@ -43,8 +43,15 @@ return [
                 1 => 'Ingresado',
                 2 => 'Utilizado',
                 3 => 'Cancelado',
-        ]
+        ],
 
+        'um'=>[
+          1 => 'Bbl',
+          2 => 'M3',
+          3 => 'Ltr',
+          4 => 'Ft3',
+          5 => 'MT'
+        ]
 
 
 ];

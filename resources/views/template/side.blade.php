@@ -117,8 +117,8 @@
                 </span>
                 </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('vessels/reports/oper') }}" class="menu"><span>Operations</span> </a></li>
-                        <li><a href="{{ url('vessels/reports/cons') }}" class="menu"><span>Consumptions</span></a></li>
+                        <li><a href="{{ url('vessels/reports/oper') }}" class="menu"><span>Activities Report</span> </a></li>
+                        <li><a href="{{ url('vessels/reports/cons') }}" class="menu"><span>Consumption Report</span></a></li>
 
                     </ul>
                 </li>

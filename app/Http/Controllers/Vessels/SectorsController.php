@@ -24,6 +24,8 @@ class SectorsController extends Controller
         $this->data['section']  = $this->section;
         $this->data['cargoTypes'] = $cargoTypes->lists('name','id');
         $this->data['sectorsTypes'] = $sectorsTypes->lists('name','id');
+        $this->data['um'] = config('status.um');
+
 
 
         if($this->route->hasParameter('vesselsId')){

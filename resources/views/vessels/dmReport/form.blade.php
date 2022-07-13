@@ -10,6 +10,10 @@
         @else
             {!! Form::open(['route'=> config('models.'.$section.'.storeRoute') , 'files' =>'true']) !!}
         @endif
+        <div class="col-xs-12 form-group">
+          {!! Form::label('Date') !!}
+          {!! Form::date('created_at',null, ['class'=>'form-control date']) !!}
+        </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('Position/ Location	') !!}
               {!! Form::select('locations_id', $locations,null, ['class'=>'form-control select2']) !!}
@@ -185,10 +189,8 @@
                           {{-- {{dd($services->dmReport->count() == 0 ? $services->dmReport->count() : 'no')}} --}}
                           @if($services->dmReport->count() != 0)
                             <input readonly class="init" name="init[{{$key->cargo_types_id}}]" value="{{$services->dmReport->last()->cargoByType($key->cargo_types_id)[0]->rob }}"  id="{{$key->cargo_types_id}}">
-                            a
                           @else
                             <input readonly class="init" name="init[{{$key->cargo_types_id}}]" value={{$key->quantity}} id="{{$key->cargo_types_id}}">
-b
                           @endif
                         </td>
 
@@ -236,6 +238,7 @@ b
 
 @section('js')
 <script>
+
   init = $('.init')
 
   $.map( init, function( val, i ) {

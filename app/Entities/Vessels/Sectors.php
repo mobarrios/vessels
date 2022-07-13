@@ -28,4 +28,9 @@ class Sectors extends Entity
     {
         return $this->CargoTypes->lists('id')->toArray();
     }
+
+    public function getUmAttribute()
+    {
+      return config('status.um.'.$this->attributes['um']);
+    }
 }

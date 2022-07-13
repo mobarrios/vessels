@@ -12,7 +12,7 @@ return [
     | application. If disabled, a simple generic error page is shown.
     |
     */
-    'version' => '291121',
+    'version' => '130722',
 
     'debug' => env('APP_DEBUG', false),
 
@@ -148,7 +148,7 @@ return [
 
         //images
         Intervention\Image\ImageServiceProvider::class,
-        
+
         //roles
         Bican\Roles\RolesServiceProvider::class,
 

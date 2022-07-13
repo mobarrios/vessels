@@ -49,11 +49,19 @@ return [
 
     'validationsStore' => [
 
-
+      'start_date'          => 'required',
+      'end_date'          => 'required',
+      'vessels_id'          => 'required',
+      'status'          => 'required',
 
     ],
 
     'validationsUpdate' => [
+
+            'start_date'          => 'required',
+            'end_date'          => 'required',
+            'vessels_id'          => 'required',
+            'status'          => 'required',
 
     ],
 

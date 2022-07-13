@@ -23,6 +23,11 @@ class DmReport extends Entity
       return $this->hasMany(DmrCargo::getClass());
     }
 
+    public function getCreatedAtAttribute($value){
+      $data =  $this->attributes['created_at']  = date('Y-m-d', strtotime($value));
+      return $data;
+    }
+
     public function cargoByType($cargoTypesId)
     {
 

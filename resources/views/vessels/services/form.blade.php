@@ -23,7 +23,7 @@
             </div>
             <div class="col-xs-6 form-group">
               {!! Form::label('Vessel') !!}
-              {!! Form::select('vessels_id', $vessels, null, ['class'=>'form-control']) !!}
+              {!! Form::select('vessels_id', $vessels, null, ['class'=>'form-control select2']) !!}
             </div>
             {{-- <div class="col-xs-6 form-group">
                 {!! Form::label('Origin') !!}

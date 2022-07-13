@@ -27,7 +27,7 @@
                       <tr>
                       {{-- <td>{{$cargo->sectors_id}}</td> --}}
                       <td>{{$cargo->Sectors->name}}</td>
-                      <td>{{$cargo->Sectors->capacities}} <small> {{$cargo->Sectors->um}} </small></td>
+                      <td>{{$cargo->Sectors->capacities}} {{$cargo->Sectors->um}}</td>
                       <td>
                       <select  name="actualCapType[{{$cargo->id}}]">
                            @foreach($cargo->Sectors->CargoTypes as $type)
@@ -36,7 +36,7 @@
                      </select>
                       </td>
                       <td>
-                        <input type="number" name="actualCap[{{$cargo->id}}]" value="{{$cargo->quantity}}" >
+                        <input type="number" class="actualCap"  max={{$cargo->Sectors->capacities}} name="actualCap[{{$cargo->id}}]"  value="{{$cargo->quantity}}" >
                       </td>
                      </tr>
                     @endforeach
@@ -64,7 +64,28 @@
                 </table>
           </ul>
           </div>
+@endsection
+
+@section('js')
+<script>
+
+init = $('.actualCap')
+
+$( "form" ).submit(function() {
+
+  $.map( init, function( val, i ) {
+    //id = val.id
+    //rec = $('.recieved')
+    if(val.value > val.max){
+      alert('Exceded Max. Cap.')
+      return false;
+   }
+
+  })
 
 
+});
 
+
+</script>
 @endsection

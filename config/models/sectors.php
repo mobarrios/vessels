@@ -48,6 +48,9 @@ return [
     'validationsStore' => [
 
             'name'        => 'required',
+            'sector_cargo_types_id'        => 'required',
+            'um'        => 'required',
+
             //'tipo'          => 'required',
             //'porcentaje'    => 'required',
             //'importe'       => 'required',
@@ -58,6 +61,9 @@ return [
     'validationsUpdate' => [
 
             'name'          => 'required',
+            'sector_cargo_types_id'        => 'required',
+            'um'        => 'required',
+
             //'tipo'          => 'required',
             //'porcentaje'          => 'required',
             //'importe'          => 'required',
