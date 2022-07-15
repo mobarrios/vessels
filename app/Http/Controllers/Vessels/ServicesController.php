@@ -36,6 +36,7 @@ class ServicesController extends Controller
       ->join('services_cargo','services_cargo.id','=','dmr_cargo.services_cargo_id')
       ->join('cargo_types','cargo_types.id','=','services_cargo.cargo_types_id')
       ->select('cargo_types.name',\DB::raw('SUM(dmr_cargo.cons) as cons'))
+      ->where('dm_report.services_id',$id)
       ->groupBy('services_cargo.cargo_types_id')
       ->get();
 
