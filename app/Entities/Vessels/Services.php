@@ -34,7 +34,7 @@ class Services extends Entity
             return $this->hasMany(ServicesCargo::getClass())->groupBy('cargo_types_id');
         }
 
-        public function bySectors($cargoTypesId , $services_id = null)
+        public function bySectors($cargoTypesId , $services_id = null, $date = null)
         {
           // $data['m'] = \DB::table('services')->where('services.id',$this->attributes['id'])
           // ->join('services_cargo','services_cargo.services_id','=','services.id')
@@ -45,6 +45,10 @@ class Services extends Entity
           // ->where('services.id',$this->attributes['id'])
           // ->groupBy('operations.sectors_id')
           // ->get();
+
+          if($date == null){
+            $date = date('Y-m-d');
+          }
 
           if($services_id != null)
           {
@@ -57,7 +61,7 @@ class Services extends Entity
           ->join('services','services.id','=','operations.services_id')
           ->where('operations.services_id',$id)
           ->where('operations.cargo_types_id',$cargoTypesId)
-           ->where('operations.start_date','like',date('Y-m-d').'%')
+           ->where('operations.start_date','like',$date.'%')
           //->where('operations.start_date','like','2022-05-15%')
            ->select('cargo_types_id',\DB::raw('SUM(case when operations.operations_types_id in (29,27,26) then operations.quantity else 0 end) as sum'),
           \DB::raw('SUM(case when operations.operations_types_id in (2,3,28) then operations.quantity else 0 end) as res'))

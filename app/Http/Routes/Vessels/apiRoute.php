@@ -190,10 +190,13 @@ Route::group(['prefix' => 'services'], function () {
      Route::post('dmReport',function(\Illuminate\Http\Request $request)
      {
        //dd($request->all());
+
+         $date = date('Y-m-d', strtotime($request->date));
+
          $data = $request->except(['dmrCargo']);
          $dr = new \App\Entities\Vessels\DmReport();
          $dr->fill($data);
-         $dr->save();
+         //$dr->save();
 
         $svc = new \App\Entities\Vessels\Services();
         $svc = $svc->find($request->services_id);
@@ -215,10 +218,12 @@ Route::group(['prefix' => 'services'], function () {
              $init = \DB::table('dm_report')
              ->join('dmr_cargo','dmr_cargo.dm_report_id','=','dm_report.id')
              ->join('services_cargo','services_cargo.id','=','dmr_cargo.services_cargo_id')
+             ->where('dm_report.created_at','like', $date.'%' )
              ->where('dm_report.services_id',$request->services_id)
              ->where('services_cargo.cargo_types_id',$cargo["services_cargo_id"])
              ->latest('dm_report.created_at')
              ->first();
+
 
               if($init == null){
                   $initial = 0;
@@ -227,7 +232,7 @@ Route::group(['prefix' => 'services'], function () {
               }
            }
 
-           $act  = $svc->bySectors($cargo["services_cargo_id"],$request->services_id);
+           $act  = $svc->bySectors($cargo["services_cargo_id"],$request->services_id, $date );
 
            if($act == null)
            {
